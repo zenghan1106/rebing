@@ -212,20 +212,31 @@ function renderResults(results) {
     }
   }
   
-  // 生成HTML
+  // 生成HTML（表格形式）
   var html = '';
   
   if (results.length === 0) {
-    html = '<div style="text-align:center;padding:40px;color:#94a3b8;">🔍 无匹配结果</div>';
+    html = '<div class="table-empty">🔍 无匹配结果</div>';
   } else {
+    // 表头
+    html = '<div class="results-table">' +
+           '<div class="table-header">' +
+             '<div class="table-cell cell-id">ID</div>' +
+             '<div class="table-cell cell-title">标题 / 关键词</div>' +
+             '<div class="table-cell cell-action">操作</div>' +
+           '</div>';
+    
+    // 数据行
     for (var i = 0; i < results.length; i++) {
       var item = results[i];
       var title = item.title || item.keywords.split(';')[0] || '未命名';
       var keywords = item.keywords || '';
+      var favClass = isFav(item.id) ? 'favorited' : '';
+      var favText = isFav(item.id) ? '★ 已收藏' : '☆ 收藏';
       
       // 截断过长的内容
-      if (title.length > 60) title = title.substring(0, 60) + '...';
-      if (keywords.length > 120) keywords = keywords.substring(0, 120) + '...';
+      if (title.length > 50) title = title.substring(0, 50) + '...';
+      if (keywords.length > 80) keywords = keywords.substring(0, 80) + '...';
       
       // 高亮关键词
       var query = document.getElementById('searchInput').value;
@@ -241,17 +252,19 @@ function renderResults(results) {
         }
       }
       
-      html += '<div class="result-card" onclick="openPage(' + item.id + ')">' +
-        '<span class="result-id">#' + item.id + '</span>' +
-        '<div class="result-title">' + title + '</div>' +
-        '<div class="result-keywords">' + keywords + '</div>' +
-        '<div class="result-actions">' +
-          '<button class="action-btn ' + (isFav(item.id) ? 'favorited' : '') + '" onclick="toggleFav(' + item.id + ')">' +
-            (isFav(item.id) ? '★ 已收藏' : '☆ 收藏') +
-          '</button>' +
+      html += '<div class="table-row" onclick="openPage(' + item.id + ')">' +
+        '<div class="table-cell cell-id"><span>#' + item.id + '</span></div>' +
+        '<div class="cell-title-wrap">' +
+          '<div class="cell-title">' + title + '</div>' +
+          '<div class="cell-keywords-text" title="' + (item.keywords || '') + '">' + keywords + '</div>' +
+        '</div>' +
+        '<div class="table-cell cell-action">' +
+          '<button class="' + favClass + '" onclick="event.stopPropagation();toggleFav(' + item.id + ')">' + favText + '</button>' +
         '</div>' +
       '</div>';
     }
+    
+    html += '</div>'; // 关闭 results-table
   }
   
   container.innerHTML = html;
@@ -350,23 +363,47 @@ function startVoice() {
   // 检查浏览器支持
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
-    alert('当前浏览器不支持语音输入\n请使用Chrome或Edge浏览器');
+    alert('当前浏览器不支持语音输入\n\n请使用以下浏览器：\n• Chrome (推荐)\n• Edge\n• Safari');
     return;
   }
   
   var btn = document.getElementById('voiceBtn');
   
+  // 如果正在识别，先停止
   if (isRecognizing) {
-    // 停止识别
-    if (recognition) recognition.stop();
+    try {
+      if (recognition) {
+        recognition.abort(); // 使用abort而不是stop，避免aborted错误
+      }
+    } catch(e) {}
+    isRecognizing = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤';
     return;
   }
   
   // 创建识别对象
-  recognition = new SpeechRecognition();
+  try {
+    recognition = new SpeechRecognition();
+  } catch(e) {
+    alert('创建语音识别对象失败');
+    return;
+  }
+  
   recognition.lang = 'zh-CN';
   recognition.continuous = false;
   recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  
+  // 设置超时（5秒无响应自动停止）
+  var timeoutId = setTimeout(function() {
+    if (isRecognizing) {
+      try {
+        recognition.stop();
+      } catch(e) {}
+      showToast('识别超时，请重试');
+    }
+  }, 5000);
   
   recognition.onstart = function() {
     isRecognizing = true;
@@ -376,37 +413,71 @@ function startVoice() {
   };
   
   recognition.onresult = function(event) {
-    var text = event.results[0][0].transcript;
-    var input = document.getElementById('searchInput');
-    input.value = input.value ? input.value + ' ' + text : text;
-    input.dispatchEvent(new Event('input'));
-    showToast('识别完成：' + text);
+    clearTimeout(timeoutId); // 清除超时
+    var text = '';
+    if (event.results && event.results.length > 0) {
+      text = event.results[0][0].transcript;
+    }
+    
+    if (text && text.trim()) {
+      var input = document.getElementById('searchInput');
+      input.value = input.value ? input.value + ' ' + text : text;
+      input.dispatchEvent(new Event('input'));
+      saveSearch(input.value); // 保存搜索
+      showToast('识别完成 ✓');
+    } else {
+      showToast('未识别到内容，请重试');
+    }
   };
   
   recognition.onerror = function(event) {
+    clearTimeout(timeoutId); // 清除超时
     console.error('语音识别错误:', event.error);
     isRecognizing = false;
     btn.classList.remove('recording');
     btn.textContent = '🎤';
     
-    if (event.error === 'not-allowed') {
-      alert('请允许麦克风权限');
-    } else if (event.error === 'network') {
-      alert('网络错误，请检查网络连接');
+    // 不显示错误提示的情况
+    if (event.error === 'aborted' || event.error === 'canceled') {
+      // 用户主动停止或取消，不显示错误
+      return;
     }
+    
+    // 显示友好的错误提示
+    var errorMsg = '';
+    switch(event.error) {
+      case 'not-allowed':
+        errorMsg = '请允许使用麦克风\n\n操作方法：\n点击浏览器地址栏左侧的🔒图标 → 允许麦克风权限';
+        break;
+      case 'network':
+        errorMsg = '网络错误，请检查网络连接\n\n语音识别需要联网使用';
+        break;
+      case 'no-speech':
+        errorMsg = '未检测到语音，请重试';
+        break;
+      case 'audio-capture':
+        errorMsg = '无法访问麦克风\n\n请检查：\n• 麦克风是否已连接\n• 其他程序是否正在使用麦克风';
+        break;
+      default:
+        errorMsg = '识别失败，请重试';
+    }
+    alert(errorMsg);
   };
   
   recognition.onend = function() {
+    clearTimeout(timeoutId); // 清除超时
     isRecognizing = false;
     btn.classList.remove('recording');
     btn.textContent = '🎤';
   };
   
+  // 启动识别
   try {
     recognition.start();
   } catch(e) {
+    clearTimeout(timeoutId);
     console.error('启动失败:', e);
-    alert('启动语音识别失败');
+    alert('启动失败，请重试');
   }
 }
 

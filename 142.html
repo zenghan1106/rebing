@@ -1,0 +1,471 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~全身发热综合征与急性风湿热诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background-color: #388E3C;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #0D47A1;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            border-left: 5px solid #1976D2;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-size: 12px;
+        }
+        
+        thead th {
+            background-color: #1565C0;
+            color: white;
+            padding: 12px 6px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        tbody td {
+            padding: 10px 6px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #E8F5E9;
+        }
+        
+        .section-header {
+            background-color: #FFF3E0 !important;
+            font-weight: bold;
+            color: #E65100;
+            font-size: 13px;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #B71C1C;
+            font-size: 13px;
+        }
+        
+        .pathogen {
+            color: #1B5E20;
+        }
+        
+        .treatment-first {
+            color: #0D47A1;
+            background-color: #E3F2FD;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .treatment-alt {
+            color: #6A1B9A;
+            background-color: #F3E5F5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            color: #BF360C;
+            font-size: 11px;
+        }
+        
+        .reference {
+            color: #546E7A;
+            font-style: italic;
+            font-size: 11px;
+        }
+        
+        .highlight-box {
+            background-color: #E8F5E9;
+            border-left: 4px solid #4CAF50;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .prevention-box {
+            background-color: #FFF8E1;
+            border-left: 4px solid #FFA000;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            border-bottom: 2px solid #E3F2FD;
+            padding-bottom: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+        
+        .tag-antibiotic {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .tag-virus {
+            background-color: #F3E5F5;
+            color: #7B1FA2;
+            border: 1px solid #CE93D8;
+        }
+        
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #1976D2;
+            border-radius: 6px;
+            font-size: 13px;
+            background-color: #FAFAFA;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background-color: #43A047;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2E7D32;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #F3E5F5;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #6A1B9A;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 8px 4px;
+            }
+            
+            tbody td {
+                padding: 6px 4px;
+            }
+            
+            .nav-btn, .page-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        <div class="page-nav">
+            <a href="141.html" class="nav-btn page-btn">上一页</a>
+            <a href="143.html" class="nav-btn page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~全身发热综合征与急性风湿热诊疗指南*****</h1>
+    <div class="subtitle">表1（64）临床抗微生物治疗的初始选择 — 全身综合征（发热/不发热）（续）</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 33%;">推荐治疗方案</th>
+                    <th style="width: 33%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="section-header">其他全身发热综合征</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">
+                        <span class="disease-name">旅行者返回后发热</span><br>
+                        致病原因暴露的地理环境和临床综合征而不同
+                    </td>
+                    <td class="pathogen">
+                        登革热（黄病毒）
+                    </td>
+                    <td>
+                        支持治疗；<span class="reference">表14A，223页</span>
+                    </td>
+                    <td>
+                        潜伏期平均为4天，依靠血清学诊断
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen">
+                        疟疾（疟原虫）
+                    </td>
+                    <td>
+                        诊断：外周血涂片
+                    </td>
+                    <td>
+                        <span class="reference">表13A，204页</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen">
+                        伤寒（沙门菌）
+                    </td>
+                    <td>
+                        <span class="reference">参见伤寒综合征</span>；耐药多于非伤寒沙门菌，使用阿奇霉素、美罗培南、亚胺培南或厄他培南治疗，直至获得药敏结果。已知对氟喹诺酮类广泛耐药
+                    </td>
+                    <td>
+                        潜伏期平均7～14天，腹泻发生率为45%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">急性风湿热</span>
+                    </td>
+                    <td class="pathogen">
+                        A族链球菌咽炎后（非B族、C族、G族）
+                    </td>
+                    <td colspan="2">
+                        <div class="highlight-box">
+                            ①缓解症状，阿司匹林 80～100mg/(kg·d)（儿童），4～8g/d（成人）；<br>
+                            ②清除A族链球菌，青霉素 × 10d（<span class="reference">咽炎，53页</span>）；<br>
+                            ③预防性治疗，<span class="reference">见下文</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="section-header">预防</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">一级预防：治疗化脓性链球菌咽炎</span>
+                    </td>
+                    <td class="pathogen" colspan="2">
+                        <div class="prevention-box">
+                            <span class="treatment-first">儿童：</span><br>
+                            苄星青霉素G 60万U（＜27kg）或120万U（＞27kg）im × 1剂，或头孢氨苄 25～50mg/(kg·d)，分2～4次 × 10天，或阿奇霉素 10mg/kg（最大剂量500mg）× 1剂，之后5mg/kg（最大剂量250mg）第2～5天
+                        </div>
+                        <div class="prevention-box">
+                            <span class="treatment-first">成人：</span><br>
+                            苄星青霉素G 120万U（＞27kg）im × 1剂或头孢氨苄 500mg po bid × 10天，或阿奇霉素 500mg × 1剂，之后250mg，第2～5天
+                        </div>
+                    </td>
+                    <td>
+                        <!-- 空白，原图无内容 -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease">旅行者发热</span>
+        <span class="tag tag-disease">登革热</span>
+        <span class="tag tag-disease">疟疾</span>
+        <span class="tag tag-disease">伤寒</span>
+        <span class="tag tag-disease">急性风湿热</span>
+        <span class="tag tag-disease">链球菌咽炎</span>
+        <span class="tag tag-virus">黄病毒</span>
+        <span class="tag tag-bacteria">疟原虫</span>
+        <span class="tag tag-bacteria">沙门菌</span>
+        <span class="tag tag-bacteria">A族链球菌</span>
+        <span class="tag tag-antibiotic">阿奇霉素</span>
+        <span class="tag tag-antibiotic">美罗培南</span>
+        <span class="tag tag-antibiotic">亚胺培南</span>
+        <span class="tag tag-antibiotic">厄他培南</span>
+        <span class="tag tag-antibiotic">青霉素</span>
+        <span class="tag tag-antibiotic">苄星青霉素G</span>
+        <span class="tag tag-antibiotic">头孢氨苄</span>
+        <span class="tag tag-antibiotic">阿司匹林</span>
+        <span class="tag tag-disease">化脓性链球菌咽炎</span>
+        <span class="tag tag-disease">一级预防</span>
+        <span class="tag tag-disease">氟喹诺酮耐药</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="全身发热综合征与急性风湿热诊疗指南；旅行者发热；登革热；疟疾；伤寒；急性风湿热；链球菌咽炎；阿奇霉素；美罗培南；亚胺培南；厄他培南；青霉素；苄星青霉素G；头孢氨苄；阿司匹林；A族链球菌；沙门菌；疟原虫；=142" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：142</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>旅行者发热 | 登革热 | 疟疾 | 伤寒 | 急性风湿热 | A族链球菌 | 化脓性链球菌咽炎 | 黄病毒 | 疟原虫 | 沙门菌 | 阿奇霉素 | 美罗培南 | 亚胺培南 | 厄他培南 | 青霉素 | 苄星青霉素G | 头孢氨苄 | 阿司匹林 | 一级预防 | 氟喹诺酮耐药
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+    </script>
+</body>
+</html>

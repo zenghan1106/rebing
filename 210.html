@@ -1,0 +1,578 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表9A抗菌药物药理学特点-氨基糖苷类*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 20px;
+            margin: 10px 0 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        
+        thead {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+            border: 1px solid #1a5276;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #d5d8dc;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        .category-header {
+            background: #d6eaf8;
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 12px;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #2e75b6;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: #2e75b6;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .tag.antibiotic {
+            background: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.antibiotic:hover {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            color: #2e75b6;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        #copyBtn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        #copyBtn.copied {
+            background: #27ae60;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            line-height: 2;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            thead th {
+                font-size: 11px;
+                padding: 8px 5px;
+            }
+            
+            tbody td {
+                padding: 6px 5px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .back-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="209.html" class="nav-btn">上一页</a>
+            <a href="211.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表9A抗菌药物药理学特点-氨基糖苷类*****</h1>
+    
+    <div class="subtitle">药效学见表9B，细胞色素P450相互作用见表9C。</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 8%;">药物</th>
+                    <th style="width: 7%;">PK/PD<br>指数</th>
+                    <th style="width: 10%;">药物剂型</th>
+                    <th style="width: 7%;">食物影响/<br>口服制剂¹</th>
+                    <th style="width: 6%;">口服<br>吸收率<br>（%）</th>
+                    <th style="width: 6%;">达峰<br>时间/<br>Tmax<br>（h）</th>
+                    <th style="width: 8%;">血浆峰<br>值浓度²<br>（μg/ml）</th>
+                    <th style="width: 6%;">尿峰<br>值浓度<br>（μg/ml）</th>
+                    <th style="width: 6%;">蛋白结<br>合率<br>（%）</th>
+                    <th style="width: 7%;">分布容积³/<br>Vd</th>
+                    <th style="width: 6%;">平均血清<br>半衰期⁴<br>（h）</th>
+                    <th style="width: 5%;">清除</th>
+                    <th style="width: 6%;">胆汁<br>排泄率⁵<br>（%）</th>
+                    <th style="width: 7%;">脑脊液/<br>血药<br>浓度比⁶<br>（%）</th>
+                    <th style="width: 5%;">脑脊<br>液穿<br>透⁷</th>
+                    <th style="width: 8%;">AUC⁸<br>（μg·h/ml）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="16" class="category-header">抗细菌药物</td>
+                </tr>
+                <tr>
+                    <td colspan="16" class="category-header" style="background: #e8f4f8;">氨基糖苷类</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿米卡星</td>
+                    <td>24h<br>AUC/MIC</td>
+                    <td>注射液<br>脂质吸入悬液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>41～49<br>（15mg/kg iv，<br>SD）</td>
+                    <td>ND</td>
+                    <td>0～10</td>
+                    <td>0.26L/kg</td>
+                    <td>2～3</td>
+                    <td>肾脏</td>
+                    <td>10～60</td>
+                    <td>0～30</td>
+                    <td>否</td>
+                    <td>110～145<br>（15mg/kg，<br>0-inf）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">庆大霉素</td>
+                    <td>24h<br>AUC/MIC</td>
+                    <td>注射液，0.1%乳剂，<br>0.1%软膏，0.3%软<br>膏，0.3%滴眼液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>4～6<br>（1.7mg/kg iv，<br>SD）</td>
+                    <td>ND</td>
+                    <td>0～10</td>
+                    <td>0.26L/kg</td>
+                    <td>2～3</td>
+                    <td>肾脏</td>
+                    <td>10～60</td>
+                    <td>0～30</td>
+                    <td>否</td>
+                    <td>70～100<br>（7mg/kg，0-inf）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">新霉素</td>
+                    <td>ND</td>
+                    <td>片剂（500mg）</td>
+                    <td>片剂±<br>食物</td>
+                    <td>&lt;3</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>基本不<br>吸收</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">奈替米星</td>
+                    <td>24h<br>AUC/MIC</td>
+                    <td>注射液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>4～8（2mg/kg<br>iv，SD）</td>
+                    <td>ND</td>
+                    <td>0～10</td>
+                    <td>0.26L/kg</td>
+                    <td>2～3</td>
+                    <td>肾脏</td>
+                    <td>10～60</td>
+                    <td>0～30</td>
+                    <td>否</td>
+                    <td>ND</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">普拉佐米星</td>
+                    <td>24h<br>AUC/MIC</td>
+                    <td>注射液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>51～74<br>（15mg/kg iv，<br>SD）</td>
+                    <td>ND</td>
+                    <td>20</td>
+                    <td>18～31L</td>
+                    <td>3.5</td>
+                    <td>肾脏</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>226～257<br>（15mg/kg，<br>0-inf）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">大观霉素</td>
+                    <td>ND</td>
+                    <td>注射液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>1</td>
+                    <td>100（2g im，<br>SD）</td>
+                    <td>ND</td>
+                    <td>低</td>
+                    <td>ND</td>
+                    <td>1.5～2.0</td>
+                    <td>肾脏</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>否</td>
+                    <td>ND</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">妥布霉素</td>
+                    <td>24h<br>AUC/MIC</td>
+                    <td>注射液，0.3%眼膏，<br>0.3%滴眼液，吸<br>入剂</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>4～6<br>（1.7mg/kg iv，<br>SD）</td>
+                    <td>ND</td>
+                    <td>0～10</td>
+                    <td>0.26L/kg</td>
+                    <td>2～3</td>
+                    <td>肾脏</td>
+                    <td>10～60</td>
+                    <td>0～30</td>
+                    <td>否</td>
+                    <td>70～100<br>（7mg/kg，0-inf）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag antibiotic">氨基糖苷类</span>
+            <span class="tag">阿米卡星</span>
+            <span class="tag">庆大霉素</span>
+            <span class="tag">新霉素</span>
+            <span class="tag">奈替米星</span>
+            <span class="tag">普拉佐米星</span>
+            <span class="tag">大观霉素</span>
+            <span class="tag">妥布霉素</span>
+            <span class="tag">PK/PD</span>
+            <span class="tag">AUC/MIC</span>
+            <span class="tag">AUC</span>
+            <span class="tag">Tmax</span>
+            <span class="tag">Vd</span>
+            <span class="tag">ND</span>
+            <span class="tag">iv</span>
+            <span class="tag">im</span>
+            <span class="tag">SD</span>
+            <span class="tag">肾脏</span>
+            <span class="tag">FDA</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="表9A抗菌药物药理学特点-氨基糖苷类；抗菌药物；药理学特点；氨基糖苷类；阿米卡星；庆大霉素；新霉素；奈替米星；普拉佐米星；大观霉素；妥布霉素；PK/PD；AUC/MIC；AUC；Tmax；Vd；肾脏清除；脑脊液穿透；=210" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">第 210 页</div>
+    
+    <div class="keywords">
+        <span>关键词：</span>
+        <span>抗菌药物</span>
+        <span>药理学特点</span>
+        <span>氨基糖苷类</span>
+        <span>阿米卡星</span>
+        <span>庆大霉素</span>
+        <span>新霉素</span>
+        <span>奈替米星</span>
+        <span>普拉佐米星</span>
+        <span>大观霉素</span>
+        <span>妥布霉素</span>
+        <span>PK/PD</span>
+        <span>AUC/MIC</span>
+        <span>药物剂型</span>
+        <span>口服吸收率</span>
+        <span>达峰时间</span>
+        <span>血浆峰值浓度</span>
+        <span>蛋白结合率</span>
+        <span>分布容积</span>
+        <span>半衰期</span>
+        <span>清除</span>
+        <span>胆汁排泄率</span>
+        <span>脑脊液穿透</span>
+        <span>AUC</span>
+        <span>肾脏清除</span>
+        <span>细胞色素P450</span>
+    </div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            const btn = document.getElementById('copyBtn');
+            
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(function() {
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand('copy');
+                btn.textContent = '已复制!';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

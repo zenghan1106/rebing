@@ -1,0 +1,607 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>头孢菌素类抗生素用药参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(90,108,125,0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btns a:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c5282;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 12px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 12px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 15px;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            margin: 0 15px 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 分类行样式 */
+        .category-row td {
+            background: #edf2f7;
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 14px;
+            padding: 12px;
+        }
+        
+        /* 子分类行样式 */
+        .subcategory-row td {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 13px;
+            padding: 10px 12px;
+            border-left: 3px solid #4a90d9;
+        }
+        
+        /* 单元格 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(even):not(.category-row):not(.subcategory-row) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover:not(.category-row):not(.subcategory-row) {
+            background: #edf2f7;
+        }
+        
+        /* 药品名称列 */
+        td:first-child {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 180px;
+        }
+        
+        /* 剂量列 */
+        td:nth-child(2) {
+            color: #4a5568;
+            min-width: 220px;
+            line-height: 1.8;
+        }
+        
+        /* 不良反应列 */
+        td:nth-child(3) {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        /* 注释 */
+        .note {
+            margin: 0 15px 25px;
+            padding: 15px 20px;
+            background: #fffbeb;
+            border-left: 4px solid #f6ad55;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #744210;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+            margin-right: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72,187,120,0.3);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #edf2f7;
+            border-radius: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 20px;
+                padding-top: 70px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btns a {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="309.html">← 上一页</a>
+        <a href="311.html">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">头孢菌素类抗生素用药参考表</h1>
+    <p class="subtitle">第一至第三代头孢菌素肠道外给药剂量与不良反应</p>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">头孢菌素类（先是肠道外给药药物，然后是口服药物）。注意：前瞻性资料证实使用头孢菌素（尤其是第三代）与艰难梭菌毒素相关性腹泻的危险性上升相关。也可能增加万古霉素耐药肠球菌定植的风险。对交叉过敏反应，见口服头孢菌素，154页</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">第一代，肠道外给药</td>
+                </tr>
+                <tr>
+                    <td>头孢唑啉（Ancef, Kefzol）</td>
+                    <td>1.0～1.5g iv或im q8h，对严重感染如MSSA菌血症可用至2g q8h（最大剂量12g/d）</td>
+                    <td>禁忌侧脑室内给药——可致癫痫！对MRSA无活性。与其他头孢菌素或β-内酰胺类出现交叉过敏的风险很低</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">第二代，肠道外给药（头霉素）：体外可能对产ESBL的需氧革兰阴性杆菌有活性。缺乏证实其有效性的临床资料，不要应用</td>
+                </tr>
+                <tr>
+                    <td>头孢替坦（Cefotan）</td>
+                    <td>1～3g iv或im q12h（最大剂量不能＞6g qd）</td>
+                    <td>对脆弱拟杆菌、二路普雷沃菌和解糖胨普雷沃菌（在盆腔感染中最常见）的耐药性逐渐增加。不能用于治疗腹腔感染。甲基硫四氮唑（MTT）的侧链能够抑制维生素K的活性，避免饮酒引起双硫仑样反应</td>
+                </tr>
+                <tr>
+                    <td>头孢西丁（Mefoxin）</td>
+                    <td>1g q8h～2g iv或im q6～8h</td>
+                    <td>脆弱拟杆菌的耐药性在增加</td>
+                </tr>
+                <tr>
+                    <td>头孢呋辛（Kefurox, Ceftin, Zinacef）</td>
+                    <td>0.75～1.50g iv或im q8h</td>
+                    <td>与第一代头孢菌素相比对流感嗜血杆菌的活性增加。口服制剂见头孢呋辛酯</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">第三代，肠道外给药——第三代头孢菌素肠道外给药与发生艰难梭菌毒素导致的腹泻相关；大多数可被需氧革兰阴性杆菌产生的ESBL和AmpC头孢菌素酶灭活</td>
+                </tr>
+                <tr>
+                    <td>头孢哌酮－舒巴坦（Sulperazon）</td>
+                    <td>常规剂量：（按头孢哌酮计算）1～2g iv q12h；如加大剂量，舒巴坦勿超过4g/d</td>
+                    <td>在东南亚和其他地方，用于治疗腹腔内、胆道和妇科感染。由于抗菌谱广，可用于其他感染。侧链可能导致凝血问题</td>
+                </tr>
+                <tr>
+                    <td>头孢噻肟（Claforan）</td>
+                    <td>1g q8～12h至2g iv q4h</td>
+                    <td>最大剂量：12g/d，可予4g iv q8h。与头孢曲松相似，但每天需要多次给药</td>
+                </tr>
+                <tr>
+                    <td>头孢唑肟（Cefizox）</td>
+                    <td>从1～2g iv q8～12h至2g iv q4h</td>
+                    <td>最大剂量：12g/d，可予4g iv q8h</td>
+                </tr>
+                <tr>
+                    <td>头孢比普<br>与头孢洛林抗菌活性相似，包括MRSA</td>
+                    <td>0.5g iv q8h，输注2小时以上</td>
+                    <td>与焦糖样味觉障碍相关。参见Clin Microbiol Infections 13（Suppl 2）：17 & 25，2007。可被ESBL和AmpC头孢菌素酶水解</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。<br>
+        ‡ 缩略词缩写见第2页。
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病 -->
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">艰难梭菌毒素相关性腹泻</span>
+            <span class="tag tag-disease">菌血症</span>
+            <span class="tag tag-disease">癫痫</span>
+            <span class="tag tag-disease">盆腔感染</span>
+            <span class="tag tag-disease">腹腔感染</span>
+            <span class="tag tag-disease">胆道感染</span>
+            <span class="tag tag-disease">妇科感染</span>
+            <span class="tag tag-disease">凝血问题</span>
+            <span class="tag tag-disease">味觉障碍</span>
+            <!-- 药物 -->
+            <span class="tag tag-drug">头孢唑啉</span>
+            <span class="tag tag-drug">Ancef</span>
+            <span class="tag tag-drug">Kefzol</span>
+            <span class="tag tag-drug">头孢替坦</span>
+            <span class="tag tag-drug">Cefotan</span>
+            <span class="tag tag-drug">头孢西丁</span>
+            <span class="tag tag-drug">Mefoxin</span>
+            <span class="tag tag-drug">头孢呋辛</span>
+            <span class="tag tag-drug">Kefurox</span>
+            <span class="tag tag-drug">Ceftin</span>
+            <span class="tag tag-drug">Zinacef</span>
+            <span class="tag tag-drug">头孢呋辛酯</span>
+            <span class="tag tag-drug">头孢哌酮</span>
+            <span class="tag tag-drug">舒巴坦</span>
+            <span class="tag tag-drug">Sulperazon</span>
+            <span class="tag tag-drug">头孢噻肟</span>
+            <span class="tag tag-drug">Claforan</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">头孢唑肟</span>
+            <span class="tag tag-drug">Cefizox</span>
+            <span class="tag tag-drug">头孢比普</span>
+            <span class="tag tag-drug">头孢洛林</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">甲基硫四氮唑</span>
+            <span class="tag tag-drug">MTT</span>
+            <!-- 细菌 -->
+            <span class="tag tag-bacteria">MSSA</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+            <span class="tag tag-bacteria">万古霉素耐药肠球菌</span>
+            <span class="tag tag-bacteria">脆弱拟杆菌</span>
+            <span class="tag tag-bacteria">二路普雷沃菌</span>
+            <span class="tag tag-bacteria">解糖胨普雷沃菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="头孢菌素类抗生素用药参考表；第一至第三代头孢菌素肠道外给药剂量与不良反应；头孢唑啉、头孢替坦、头孢西丁、头孢呋辛、头孢哌酮、舒巴坦、头孢噻肟、头孢曲松、头孢唑肟、头孢比普、头孢洛林、MSSA、MRSA、艰难梭菌、脆弱拟杆菌、流感嗜血杆菌、腹泻、菌血症、盆腔感染、腹腔感染；=310" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="310.html">310</a>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>头孢唑啉</span>
+        <span>头孢替坦</span>
+        <span>头孢西丁</span>
+        <span>头孢呋辛</span>
+        <span>头孢哌酮</span>
+        <span>舒巴坦</span>
+        <span>头孢噻肟</span>
+        <span>头孢唑肟</span>
+        <span>头孢比普</span>
+        <span>头孢洛林</span>
+        <span>头孢菌素</span>
+        <span>第一代</span>
+        <span>第二代</span>
+        <span>第三代</span>
+        <span>头霉素</span>
+        <span>MSSA</span>
+        <span>MRSA</span>
+        <span>ESBL</span>
+        <span>AmpC</span>
+        <span>艰难梭菌</span>
+        <span>腹泻</span>
+        <span>抗生素</span>
+        <span>剂量</span>
+        <span>不良反应</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.style.background = 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)';
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

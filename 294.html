@@ -1,0 +1,505 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗细菌药物药效学与酶介导药物相互作用表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn {
+            background: #fff;
+            color: #2980b9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+        
+        .main-title {
+            text-align: center;
+            padding: 30px 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px 30px;
+        }
+        
+        .table-wrapper {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+            transition: background 0.3s ease;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        .section-title {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+            padding: 15px 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .text-content {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            font-size: 14px;
+            line-height: 2;
+            color: #555;
+        }
+        
+        .text-content p {
+            margin-bottom: 15px;
+            text-indent: 2em;
+        }
+        
+        .tags-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(41,128,185,0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(90deg, #c0392b 0%, #e74c3c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(90deg, #8e44ad 0%, #9b59b6 100%);
+        }
+        
+        .copy-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(41,128,185,0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #2980b9;
+            color: #fff;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding: 20px 15px 15px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            td {
+                padding: 8px 5px;
+            }
+            
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btns {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .text-content {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="293.html" class="nav-btn">← 上一页</a>
+            <a href="295.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~抗细菌药物药效学与酶介导药物相互作用表*****</h1>
+    
+    <div class="container">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>抗菌活性</th>
+                        <th>抗生素后效应(PAE)</th>
+                        <th>药物</th>
+                        <th>治疗目标</th>
+                        <th>PK/PD参数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>杀菌药物，时间依赖性</td>
+                        <td>针对革兰阳性球菌短，针对革兰阴性杆菌无或短（除碳青霉烯以外，其对于多种革兰阴性杆菌具有PAE）</td>
+                        <td>β-内酰胺类、万古霉素</td>
+                        <td>延长暴露时间</td>
+                        <td>T > MIC</td>
+                    </tr>
+                    <tr>
+                        <td>杀菌药物，浓度依赖性</td>
+                        <td>长（浓度依赖）</td>
+                        <td>氨基糖甙类、氟喹诺酮类、达托霉素、多黏菌素、甲硝唑、阿奇霉素（?）、酮内酯类</td>
+                        <td>增加血清药物浓度</td>
+                        <td>Cmax/MIC；AUC24/MIC</td>
+                    </tr>
+                    <tr>
+                        <td>抑菌药物</td>
+                        <td>中-长</td>
+                        <td>大环内酯类、克林霉素、链阳霉素类、四环素、替加环素、利奈唑胺</td>
+                        <td>增加给药剂量</td>
+                        <td>AUC24/MIC</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">表中名词缩写见第2页。</p>
+        
+        <h2 style="text-align: center; color: #1a5276; font-size: 20px; margin-bottom: 20px;">表9C 酶和运转分子介导的抗感染药物的相互作用</h2>
+        
+        <div class="text-content">
+            <p>>50%的药物经一种或多种CYP450酶系代谢。若药物经特定的CYP酶代谢，该酶可被另一药物诱导，联合用药就会造成药物剂量过低，导致治疗失败。相反，药物代谢可被另一药物抑制，造成药物过量，导致毒性反应。一个药物可能是多种酶的底物，抑制或诱导多种酶。抑制作用倾向相对较快的过程，与剂量相关，而诱导通常缓慢。当两种或两种以上的酶的诱导剂或抑制剂联合应用时，风险增加。通常涉及药物相互作用的CYP450酶包括CYP3A4、CYP2C9/19、CYP1A2和CYP2D6。</p>
+            
+            <p>药物转运系统影响相互作用。转运系统存在于多种组织中，如肾脏和胃肠道，将药物泵入或泵出细胞。重要的药物转运系统包括P糖蛋白（PGB）、有机阴离子转运体（OAT）和有机阳离子转运体（OCT）。</p>
+            
+            <p>了解这些酶有助于理解有临床意义的相互作用以及预测尚未认识的相互作用。某些抗微生物药物是酶的抑制剂，应用时会造成血药浓度升高，使用时要核查药物相互作用，如大环内酯类、环丙沙星、甲硝唑、TMP-SMX、异烟肼、唑类抗真菌药、抗反转录病毒和丙型肝炎病毒药物。萘夫西林、利福霉素和部分抗反转录病毒药物诱导酶活性，导致治疗失败。若存在药物相互作用且无备选治疗方案，监测被影响药物的血药浓度（如可行），调整剂量，监测毒性反应。</p>
+            
+            <p>BRCP：乳腺癌耐药蛋白。CYP450命名规则：如3A4，其中3代表家族，A代表亚家族，4代表基因。OTA：有机阴离子转运体。OATP：有机阴离子转运多肽。OCT：有机阳离子转运体。PGP：P-糖蛋白。UGT：尿苷二磷酸葡萄糖醛酸转移酶。</p>
+        </div>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>药物</th>
+                        <th>CYP450底物</th>
+                        <th>转运体底物</th>
+                        <th>抑制CYP450</th>
+                        <th>抑制转运体</th>
+                        <th>诱导CYP450</th>
+                        <th>诱导转运体</th>
+                        <th>血浓度的影响¹</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8" class="section-title">抗细菌药物</td>
+                    </tr>
+                    <tr>
+                        <td>阿莫西林</td>
+                        <td></td>
+                        <td>OAT</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag disease">细菌感染</span>
+                <span class="tag bacteria">革兰阳性球菌</span>
+                <span class="tag bacteria">革兰阴性杆菌</span>
+                <span class="tag drug">β-内酰胺类</span>
+                <span class="tag drug">万古霉素</span>
+                <span class="tag drug">氨基糖甙类</span>
+                <span class="tag drug">氟喹诺酮类</span>
+                <span class="tag drug">达托霉素</span>
+                <span class="tag drug">多黏菌素</span>
+                <span class="tag drug">甲硝唑</span>
+                <span class="tag drug">阿奇霉素</span>
+                <span class="tag drug">酮内酯类</span>
+                <span class="tag drug">大环内酯类</span>
+                <span class="tag drug">克林霉素</span>
+                <span class="tag drug">链阳霉素类</span>
+                <span class="tag drug">四环素</span>
+                <span class="tag drug">替加环素</span>
+                <span class="tag drug">利奈唑胺</span>
+                <span class="tag drug">阿莫西林</span>
+                <span class="tag drug">CYP450</span>
+                <span class="tag drug">CYP3A4</span>
+                <span class="tag drug">CYP2C9</span>
+                <span class="tag drug">CYP1A2</span>
+                <span class="tag drug">CYP2D6</span>
+                <span class="tag drug">P糖蛋白</span>
+                <span class="tag drug">OAT</span>
+                <span class="tag drug">OCT</span>
+                <span class="tag drug">PGP</span>
+                <span class="tag drug">UGT</span>
+            </div>
+        </div>
+        
+        <div class="copy-section">
+            <div class="copy-title">📋 复制信息</div>
+            <div class="copy-box">
+                <input type="text" class="copy-input" id="copyText" value="抗细菌药物药效学与酶介导药物相互作用表；细菌感染；β-内酰胺类；万古霉素；氨基糖甙类；氟喹诺酮类；达托霉素；多黏菌素；甲硝唑；阿奇霉素；酮内酯类；大环内酯类；克林霉素；链阳霉素类；四环素；替加环素；利奈唑胺；阿莫西林；CYP450；CYP3A4；CYP2C9；CYP1A2；CYP2D6；P糖蛋白；OAT；OCT；PGP；UGT；=294" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="page-number">294</div>
+        <p style="margin-top: 10px;">关键词：抗细菌药物 | 药效学 | PK/PD | CYP450 | 药物相互作用 | PAE | 阿莫西林 | β-内酰胺类 | 万古霉素 | 大环内酯类</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.style.background = 'linear-gradient(90deg, #27ae60 0%, #2ecc71 100%)';
+            
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.style.background = 'linear-gradient(90deg, #1a5276 0%, #2980b9 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

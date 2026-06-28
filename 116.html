@@ -1,0 +1,529 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-鼻窦炎治疗失败与毛霉菌病</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-home {
+            background-color: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background-color: #219a52;
+        }
+        
+        .btn-prev, .btn-next {
+            background-color: #e67e22;
+        }
+        
+        .btn-prev:hover, .btn-next:hover {
+            background-color: #d35400;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #2c3e50;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(:first-child) {
+            background-color: #e8f4f8;
+        }
+        
+        /* 分类行高亮 */
+        .category-row {
+            background-color: #d5e8d4 !important;
+            font-weight: bold;
+            color: #1e8449 !important;
+        }
+        
+        .category-row td {
+            color: #1e8449;
+            font-size: 14px;
+        }
+        
+        /* 警示文字 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        /* 百分比数据 */
+        .percent-data {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #16a085;
+            font-style: italic;
+        }
+        
+        /* 注释区域 */
+        .notes-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 12px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .notes-section p {
+            margin-bottom: 8px;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background-color: #9b59b6;
+        }
+        
+        .tag-fungus {
+            background-color: #8e44ad;
+        }
+        
+        .tag-symptom {
+            background-color: #f39c12;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .nav-top {
+                justify-content: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+            
+            thead th {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="115.html" class="btn btn-prev">上一页</a>
+            <a href="117.html" class="btn btn-next">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">临床抗微生物治疗的初始选择</h1>
+    <p class="subtitle">表1（51）鼻窦炎治疗失败、毛霉菌病与院内鼻窦感染</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 20%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 30%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>3天经验性抗感染治疗临床失败（疼痛、脓涕、发热）</strong>
+                    </td>
+                    <td>
+                        可能原因：耐药菌、鼻窦口阻塞、非感染性疾病如肉芽肿性多血管炎
+                    </td>
+                    <td colspan="2">
+                        等待培养和药敏试验结果时调整经验性治疗<br><br>
+                        <strong>儿童用阿莫西林治疗失败：</strong><br>
+                        <span class="drug-name">阿莫西林-克拉维酸</span> 90mg/(kg·d) 分次q12h<br>
+                        或<span class="drug-name">克林霉素</span> 30～40mg/(kg·d) 分次q8h<br>
+                        ＋口服头孢菌素，<span class="drug-name">头孢呋辛酯</span> 30mg/(kg·d) 分次q12h<br>
+                        或<span class="drug-name">头孢地尼</span> 14mg/(kg·d) 分次q12h<br>
+                        或<span class="drug-name">头孢泊肟</span> 10mg/(kg·d) 分次q12h<br><br>
+                        <strong>成人门诊患者：</strong><br>
+                        <span class="drug-name">阿莫西林-克拉维酸</span> 1000/62.5mg 2片po bid<br>
+                        或<span class="drug-name">左氧氟沙星</span> 750mg po qd<br><br>
+                        <strong>住院患者：</strong><br>
+                        <span class="drug-name">头孢曲松</span> 1～2g qd iv<br>
+                        或<span class="drug-name">氨苄西林-舒巴坦</span> 3g iv q6h<br>
+                        或<span class="drug-name">左氧氟沙星</span> 750mg iv qd<br><br>
+                        <strong><em>治疗5～10天</em></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>糖尿病酮症酸中毒、中性粒细胞减少、去铁胺治疗：毛霉菌病</strong>
+                    </td>
+                    <td>
+                        <span class="drug-name">根霉菌属</span>，（<span class="drug-name">毛霉菌属</span>），<span class="drug-name">曲霉属</span>
+                    </td>
+                    <td colspan="2">
+                        <em>表11，173页和182页</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>住院患者＋经鼻气管插管或鼻胃管</strong>
+                    </td>
+                    <td>
+                        革兰阴性杆菌<span class="percent-data">47%</span>（假单胞菌、不动杆菌、大肠埃希菌常见）、革兰阳性菌（<span class="drug-name">金黄色葡萄球菌</span>）<span class="percent-data">35%</span>、酵母菌<span class="percent-data">18%</span>，混合感染占<span class="percent-data">80%</span>
+                    </td>
+                    <td>
+                        拔除鼻气管插管；如仍发热且可请耳鼻喉科会诊，推荐经验治疗前鼻窦穿刺引流培养和药敏检测和金黄色葡萄球菌PCR检测<br><br>
+                        <span class="drug-name">亚胺培南</span> 0.5g iv q6h<br>
+                        或<span class="drug-name">美罗培南</span> 1g iv q8h<br><br>
+                        如果革兰染色提示MRSA，加用<span class="drug-name">万古霉素</span>
+                    </td>
+                    <td>
+                        （<span class="drug-name">头孢他啶</span> 2g iv q8h ＋<span class="drug-name">万古霉素</span>）<br>
+                        或（<span class="drug-name">头孢吡肟</span> 2g iv q12h ＋<span class="drug-name">万古霉素</span>）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: #2e86c1; font-size: 15px; margin-bottom: 10px;">辅助诊断或治疗方法及说明</h3>
+        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+            <p><strong>【治疗失败】</strong>采集鼻窦渗出液进行培养和药敏检测。如24小时无好转，行鼻窦CT并请外科会诊</p>
+            <p style="margin-top: 8px;"><strong>【院内鼻窦感染】</strong>经鼻气管插管或鼻胃管插管＞7天鼻窦积液常见；细菌性鼻窦炎不常见。推测可能是HAP/VAP的危险因素（<em class="reference">J Intens Care Med 34：844，2019</em>）</p>
+        </div>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes-section">
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：116</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择；鼻窦炎治疗失败/毛霉菌病/院内鼻窦感染/经鼻气管插管/鼻胃管/糖尿病酮症酸中毒；阿莫西林-克拉维酸/克林霉素/头孢呋辛酯/头孢地尼/头孢泊肟/左氧氟沙星/头孢曲松/氨苄西林-舒巴坦/亚胺培南/美罗培南/头孢他啶/头孢吡肟/万古霉素；耐药菌/根霉菌/毛霉菌/曲霉/假单胞菌/不动杆菌/大肠埃希菌/金黄色葡萄球菌/MRSA/酵母菌；=116" readonly>
+            <button class="btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">鼻窦炎治疗失败</span>
+            <span class="tag tag-disease">毛霉菌病</span>
+            <span class="tag tag-disease">院内鼻窦感染</span>
+            <span class="tag tag-disease">糖尿病酮症酸中毒</span>
+            <span class="tag tag-disease">中性粒细胞减少</span>
+            <span class="tag tag-disease">肉芽肿性多血管炎</span>
+            <span class="tag tag-disease">HAP/VAP</span>
+            
+            <!-- 真菌标签 -->
+            <span class="tag tag-fungus">根霉菌属</span>
+            <span class="tag tag-fungus">毛霉菌属</span>
+            <span class="tag tag-fungus">曲霉属</span>
+            <span class="tag tag-fungus">酵母菌</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">耐药菌</span>
+            <span class="tag tag-bacteria">假单胞菌</span>
+            <span class="tag tag-bacteria">不动杆菌</span>
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">头孢呋辛酯</span>
+            <span class="tag tag-antibiotic">头孢地尼</span>
+            <span class="tag tag-antibiotic">头孢泊肟</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">氨苄西林-舒巴坦</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">头孢他啶</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            
+            <!-- 操作/症状标签 -->
+            <span class="tag tag-symptom">经鼻气管插管</span>
+            <span class="tag tag-symptom">鼻胃管</span>
+            <span class="tag tag-symptom">鼻窦穿刺引流</span>
+            <span class="tag tag-symptom">鼻窦CT</span>
+            <span class="tag tag-symptom">PCR检测</span>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>临床抗微生物治疗 | 初始选择 | 鼻窦炎治疗失败 | 毛霉菌病 | 院内鼻窦感染 | 糖尿病酮症酸中毒 | 根霉菌 | 曲霉 | 假单胞菌 | 不动杆菌 | MRSA | 亚胺培南 | 美罗培南 | 万古霉素 | 头孢他啶 | 头孢吡肟 | HAP/VAP
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyInput = document.getElementById("copyInput");
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }).catch(function() {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+    </script>
+</body>
+</html>

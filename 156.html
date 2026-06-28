@@ -1,0 +1,668 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表3续 免疫功能正常患者的抗生素推荐疗程（续）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(44,90,160,0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #2c5aa0;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(44,90,160,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+            transform: translateY(-2px);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 15px 30px;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a3a6e;
+            margin-bottom: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        /* 说明文字 */
+        .note-section {
+            background: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .note-section p, .note-section li {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .note-section ul {
+            margin-left: 20px;
+        }
+        
+        .note-section a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+        
+        /* 表格样式 */
+        .table-wrapper {
+            overflow-x: auto;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: #fff;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 第一行（表头下一行）字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* 单元格 */
+        td, th {
+            border: 1px solid #c5d1e0;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f0f4f8;
+        }
+        
+        tbody tr:hover {
+            background: #e1e8f0;
+        }
+        
+        /* 感染部位列 - 蓝色底色 */
+        .infection-site {
+            background: #d6e4f0 !important;
+            font-weight: 600;
+            color: #1a3a6e;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        /* 页码显示 */
+        .page-info {
+            text-align: center;
+            margin: 25px 0 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #2c5aa0;
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #c5d1e0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #444;
+            background: #fafbfc;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a3a6e;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .tag-bacteria {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部关键词 */
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: #777;
+            font-size: 12px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #e8ecf1;
+            border-radius: 4px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 70px 10px 20px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px 6px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="155.html" class="nav-btn">← 上一页</a>
+        <a href="157.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="main-title">~~~~~表3续 免疫功能正常患者的抗生素推荐疗程（续）*****</h1>
+        <p class="sub-title">特殊细菌抗菌药物治疗方案 · 桑福德指南 · 第75页续表</p>
+        
+        <!-- 说明文字 -->
+        <div class="note-section">
+            <p><strong>对于特定的临床感染：</strong></p>
+            <ul>
+                <li>治疗目标是选择正确的药物、正确的剂量及正确的疗程。</li>
+                <li>继往治疗疗程的确定是基于观察性研究、专家建议和FDA推荐的"金标准"。</li>
+                <li>此表格总结了部分常见临床感染的抗感染治疗疗程。其他综合征及本表格所列举的临床感染的更详细资料见表1。</li>
+                <li>多数为指南、药品说明书及专家建议的经典疗程。</li>
+                <li>如果经典标准疗程与一个或一个以上的一些随机对照研究中的短疗程方案比较是非劣效的，这些随机对照研究的认证号将被列出。</li>
+                <li>"短疗程更佳" 相关文献：
+                    <ul>
+                        <li><a href="http://doi.org/10.1016/j.cmi.2022.08.024" target="_blank">http://doi.org/10.1016/j.cmi.2022.08.024</a></li>
+                        <li>Ann Intern Med 2021 174: 822.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>注意：</strong>无论选择何种疗程，停止治疗均应基于感染病灶被控制，同时临床症状和体征消失，且炎症指标好转或降至正常。</p>
+        </div>
+        
+        <!-- 主表格 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:8%">感染部位</th>
+                        <th style="width:30%">临床表现</th>
+                        <th style="width:62%">疗程</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" class="infection-site">肾脏</td>
+                        <td>膀胱炎，急性</td>
+                        <td>3天（氟喹诺酮类或TMP-SMX）；5天（呋喃妥因）；1天（磷霉素）</td>
+                    </tr>
+                    <tr>
+                        <td>肾盂肾炎</td>
+                        <td>7天（环丙沙星）；5天（左氧氟沙星750mg）（8项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site">腹腔</td>
+                        <td>无症状菌尿</td>
+                        <td>除妊娠和泌尿系手术外无须治疗</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="6" class="infection-site">肺</td>
+                        <td>继发性腹膜炎</td>
+                        <td>4～7天（控制病灶）（1项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td>肺炎：肺炎球菌性或社区获得性</td>
+                        <td>3～5天和5～14天疗效相当（14项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td>肺炎，VAP，如假单胞菌属、革兰阴性杆菌</td>
+                        <td>8～15天疗效相当（2项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td>肺炎：葡萄球菌</td>
+                        <td>21～28天（多变，直至生物标志物正常）</td>
+                    </tr>
+                    <tr>
+                        <td>耶氏肺孢子菌、艾滋病患者</td>
+                        <td>21天</td>
+                    </tr>
+                    <tr>
+                        <td>其他免疫缺陷患者</td>
+                        <td>14天</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site"></td>
+                        <td>支原体、衣原体</td>
+                        <td>阿奇霉素单剂与3天疗程（无差异），5天和10天疗程疗效相当（2项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td>军团菌</td>
+                        <td>7～10天（免疫功能低下者延长疗程）</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" class="infection-site">脑膜</td>
+                        <td>肺脓肿</td>
+                        <td>通常28～42天，可变</td>
+                    </tr>
+                    <tr>
+                        <td>脑膜炎球菌</td>
+                        <td>7天</td>
+                    </tr>
+                    <tr>
+                        <td>流感嗜血杆菌</td>
+                        <td>7天</td>
+                    </tr>
+                    <tr>
+                        <td>肺炎链球菌</td>
+                        <td>10～14天</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site"></td>
+                        <td>李斯特菌脑膜脑炎，B族链球菌，大肠埃希菌</td>
+                        <td>21天（免疫缺陷者所需疗程更长）</td>
+                    </tr>
+                    <tr>
+                        <td>儿童：在治疗3天后出现复发少见</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site">多系统</td>
+                        <td>布鲁菌病（表1，67页）</td>
+                        <td>42天，根据感染部位而定</td>
+                    </tr>
+                    <tr>
+                        <td>兔热病（表1，49页、67页）</td>
+                        <td>7～21天，根据严重程度而定</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site">肌肉</td>
+                        <td>气性坏疽（梭菌属）</td>
+                        <td>10天，需视严重程度而定</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" class="infection-site">咽部</td>
+                        <td>A族链球菌咽炎</td>
+                        <td>10天（青霉素V钾），5天（口服第二、三代头孢菌素，阿奇霉素）</td>
+                    </tr>
+                    <tr>
+                        <td>咽炎（表1，53页）</td>
+                        <td>14天（青霉素G、红霉素）</td>
+                    </tr>
+                    <tr>
+                        <td>白喉（膜性）</td>
+                        <td>单剂（青霉素G）7～10天（红霉素）</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site"></td>
+                        <td>带菌者</td>
+                        <td>30～90天（TMP-SMX），28～42天（氟喹诺酮类）</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site">前列腺</td>
+                        <td>慢性前列腺炎</td>
+                        <td>3～7天和6～10天疗效相当（12项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site">鼻窦</td>
+                        <td>急性细菌性鼻窦炎（病毒更常见）</td>
+                        <td>5～7天</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site">皮肤</td>
+                        <td>蜂窝织炎、丹毒、脓肿</td>
+                        <td>表1，65页</td>
+                    </tr>
+                    <tr>
+                        <td>莱姆病</td>
+                        <td>至热退后2天</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site">全身</td>
+                        <td>落基山斑疹热（表1，66页）</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-info">
+            <span class="page-number">156</span>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="表3续 免疫功能正常患者的抗生素推荐疗程（续）；特殊细菌抗菌药物治疗方案；桑福德指南；膀胱炎；肾盂肾炎；无症状菌尿；继发性腹膜炎；社区获得性肺炎；VAP；葡萄球菌肺炎；耶氏肺孢子菌肺炎；支原体肺炎；衣原体肺炎；军团菌肺炎；肺脓肿；脑膜炎球菌脑膜炎；流感嗜血杆菌脑膜炎；肺炎链球菌脑膜炎；李斯特菌脑膜脑炎；布鲁菌病；兔热病；气性坏疽；A族链球菌咽炎；白喉；慢性前列腺炎；急性细菌性鼻窦炎；蜂窝织炎；丹毒；脓肿；莱姆病；落基山斑疹热；肺炎链球菌；葡萄球菌；假单胞菌；革兰阴性杆菌；耶氏肺孢子菌；支原体；衣原体；军团菌；脑膜炎球菌；流感嗜血杆菌；B族链球菌；大肠埃希菌；布鲁菌；梭菌；A族链球菌；白喉杆菌；李斯特菌；立克次体；氟喹诺酮类；TMP-SMX；呋喃妥因；磷霉素；环丙沙星；左氧氟沙星；阿奇霉素；青霉素V钾；头孢菌素；青霉素G；红霉素；TMP-SMX；=156" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <p class="tags-title">🔍 快速检索标签</p>
+            <div class="tags-container">
+                <span class="tag tag-disease">膀胱炎</span>
+                <span class="tag tag-disease">肾盂肾炎</span>
+                <span class="tag tag-disease">无症状菌尿</span>
+                <span class="tag tag-disease">继发性腹膜炎</span>
+                <span class="tag tag-disease">社区获得性肺炎</span>
+                <span class="tag tag-disease">VAP</span>
+                <span class="tag tag-disease">葡萄球菌肺炎</span>
+                <span class="tag tag-disease">肺孢子菌肺炎</span>
+                <span class="tag tag-disease">支原体肺炎</span>
+                <span class="tag tag-disease">衣原体肺炎</span>
+                <span class="tag tag-disease">军团菌肺炎</span>
+                <span class="tag tag-disease">肺脓肿</span>
+                <span class="tag tag-disease">脑膜炎球菌脑膜炎</span>
+                <span class="tag tag-disease">流感嗜血杆菌脑膜炎</span>
+                <span class="tag tag-disease">肺炎链球菌脑膜炎</span>
+                <span class="tag tag-disease">李斯特菌脑膜脑炎</span>
+                <span class="tag tag-disease">布鲁菌病</span>
+                <span class="tag tag-disease">兔热病</span>
+                <span class="tag tag-disease">气性坏疽</span>
+                <span class="tag tag-disease">A族链球菌咽炎</span>
+                <span class="tag tag-disease">白喉</span>
+                <span class="tag tag-disease">慢性前列腺炎</span>
+                <span class="tag tag-disease">急性细菌性鼻窦炎</span>
+                <span class="tag tag-disease">蜂窝织炎</span>
+                <span class="tag tag-disease">丹毒</span>
+                <span class="tag tag-disease">脓肿</span>
+                <span class="tag tag-disease">莱姆病</span>
+                <span class="tag tag-disease">落基山斑疹热</span>
+                <span class="tag tag-bacteria">肺炎链球菌</span>
+                <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+                <span class="tag tag-bacteria">铜绿假单胞菌</span>
+                <span class="tag tag-bacteria">革兰阴性杆菌</span>
+                <span class="tag tag-bacteria">耶氏肺孢子菌</span>
+                <span class="tag tag-bacteria">肺炎支原体</span>
+                <span class="tag tag-bacteria">肺炎衣原体</span>
+                <span class="tag tag-bacteria">嗜肺军团菌</span>
+                <span class="tag tag-bacteria">脑膜炎奈瑟菌</span>
+                <span class="tag tag-bacteria">流感嗜血杆菌</span>
+                <span class="tag tag-bacteria">B族链球菌</span>
+                <span class="tag tag-bacteria">大肠埃希菌</span>
+                <span class="tag tag-bacteria">布鲁菌</span>
+                <span class="tag tag-bacteria">产气荚膜梭菌</span>
+                <span class="tag tag-bacteria">A族链球菌</span>
+                <span class="tag tag-bacteria">白喉棒状杆菌</span>
+                <span class="tag tag-bacteria">单核细胞增生李斯特菌</span>
+                <span class="tag tag-bacteria">立克次体</span>
+                <span class="tag tag-bacteria">伯氏疏螺旋体</span>
+                <span class="tag tag-antibiotic">氟喹诺酮类</span>
+                <span class="tag tag-antibiotic">TMP-SMX</span>
+                <span class="tag tag-antibiotic">呋喃妥因</span>
+                <span class="tag tag-antibiotic">磷霉素</span>
+                <span class="tag tag-antibiotic">环丙沙星</span>
+                <span class="tag tag-antibiotic">左氧氟沙星</span>
+                <span class="tag tag-antibiotic">阿奇霉素</span>
+                <span class="tag tag-antibiotic">青霉素V钾</span>
+                <span class="tag tag-antibiotic">头孢菌素</span>
+                <span class="tag tag-antibiotic">青霉素G</span>
+                <span class="tag tag-antibiotic">红霉素</span>
+                <span class="tag tag-antibiotic">抗生素疗程</span>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords">
+            <p>关键词：</p>
+            <span>156</span>
+            <span>表3续</span>
+            <span>免疫功能正常</span>
+            <span>抗生素疗程</span>
+            <span>桑福德指南</span>
+            <span>尿路感染</span>
+            <span>肺炎</span>
+            <span>脑膜炎</span>
+            <span>布鲁菌病</span>
+            <span>咽炎</span>
+            <span>前列腺炎</span>
+            <span>鼻窦炎</span>
+            <span>皮肤感染</span>
+            <span>莱姆病</span>
+            <span>落基山斑疹热</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showCopySuccess();
+                }).catch(err => {
+                    document.execCommand('copy');
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.style.background = '#20c997';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '#28a745';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

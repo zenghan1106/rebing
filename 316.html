@@ -1,0 +1,416 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗生素用药参考表-奥利万星、替考拉宁、特拉万星</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 32px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f2ff;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .dosage-highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .warning {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .tag-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        .tag-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .tag-bacteria {
+            background: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .copy-input:focus {
+            border-color: #667eea;
+        }
+        
+        .btn-copy {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .copy-feedback {
+            color: #27ae60;
+            font-size: 14px;
+            margin-left: 10px;
+            display: none;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .keywords-bottom {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="315.html" class="btn btn-page">上一页</a>
+            <a href="317.html" class="btn btn-page">下一页</a>
+        </div>
+    </div>
+    
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            抗生素用药参考表-奥利万星、替考拉宁、特拉万星
+            <span class="title-decoration">*****</span>
+        </h1>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类，药品，通用名（商品名）</th>
+                    <th style="width: 30%;">成人常规剂量*</th>
+                    <th style="width: 45%;">不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="drug-name">奥利万星（Orbactiv, Kimyrsa）</div>
+                        <div class="reference">综述：CID 61: 627, 2015</div>
+                    </td>
+                    <td>
+                        两种剂型。Orbactiv: 1200mg iv 持续3小时，单剂，只能用5%葡萄糖溶液（D5W）稀释。不与盐水同用<br><br>
+                        Kimyrsa: 1200mg iv 持续3小时，单剂，D5W或生理盐水稀释
+                    </td>
+                    <td>
+                        假性增加PT&INR 24小时和APTT 48小时<br><br>
+                        与华法林的药物相互作用：升高华法林血清水平。可发生急性荨麻疹。肾功能或肝功能异常无须调整剂量。血液透析不能清除。体外对VRE有效（AAC 56: 1639, 2012）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">替考拉宁（Targocid）</div>
+                        <div>（在有药供应地区）</div>
+                    </td>
+                    <td>
+                        化脓性关节炎：维持量<span class="dosage-highlight">12mg/(kg·d)</span><br><br>
+                        金黄色葡萄球菌心内膜炎：需要血清药物谷浓度> 20μg/ml（负荷剂量12mg/kg q12h×3剂，然后12mg/kg qd）
+                    </td>
+                    <td>
+                        过敏反应：发热（3mg/kg为2.2%，24mg/kg为8.2%），皮肤反应2.4%。血小板明显减少<span class="warning">[剂量≥15mg/(kg·d)]</span>。红人综合征较万古霉素少见
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">特拉万星（Vibativ）脂糖肽</div>
+                        <div class="reference">参见 CID 60: 787, 2015; CID 61 (Suppl 2), 2015</div>
+                    </td>
+                    <td>
+                        如肌酐清除率> 50ml/min: <span class="dosage-highlight">10mg/kg iv qd</span>，输注1小时以上
+                    </td>
+                    <td>
+                        <span class="warning">妊娠期禁用</span>；动物实验中有致畸作用。治疗前做妊娠试验。不良事件：味觉障碍（33%），恶心（27%），呕吐（14%），头痛（14%），肌酐升高（3.1%），泡沫尿（13%）；如快速输注会出现潮红。在临床试验中，特拉万星的肾损害为3%，万古霉素为1%。在临床实践中，21例复杂病例患者中有1/3报道了肾损伤（JAC 67: 723, 2012）。输注后可影响PT，APTT&INR达18小时
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="text-align: center; color: #7f8c8d; font-size: 12px; margin: 15px 0;">
+        注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。表中名词缩写见第2页。
+    </div>
+    
+    <div class="tag-section">
+        <div class="tag-title">检索标签</div>
+        <div class="tags">
+            <span class="tag tag-disease">化脓性关节炎</span>
+            <span class="tag tag-disease">金黄色葡萄球菌心内膜炎</span>
+            <span class="tag tag-drug">奥利万星</span>
+            <span class="tag tag-drug">替考拉宁</span>
+            <span class="tag tag-drug">特拉万星</span>
+            <span class="tag tag-drug">Orbactiv</span>
+            <span class="tag tag-drug">Kimyrsa</span>
+            <span class="tag tag-drug">Targocid</span>
+            <span class="tag tag-drug">Vibativ</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">VRE</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗生素用药参考表-奥利万星、替考拉宁、特拉万星；奥利万星、替考拉宁、特拉万星、化脓性关节炎、金黄色葡萄球菌心内膜炎、VRE、脂糖肽；=316" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        <span class="copy-feedback" id="copyFeedback">已复制到剪贴板！</span>
+    </div>
+    
+    <div class="page-number">316</div>
+    
+    <div class="keywords-bottom">
+        关键词：奥利万星 | 替考拉宁 | 特拉万星 | 脂糖肽 | 化脓性关节炎 | 金黄色葡萄球菌心内膜炎 | VRE | 抗生素
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const feedback = document.getElementById("copyFeedback");
+                feedback.style.display = "inline";
+                setTimeout(function() {
+                    feedback.style.display = "none";
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand("copy");
+                const feedback = document.getElementById("copyFeedback");
+                feedback.style.display = "inline";
+                setTimeout(function() {
+                    feedback.style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

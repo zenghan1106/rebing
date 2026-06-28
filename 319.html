@@ -1,0 +1,532 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗生素药物剂量与不良反应参考表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #2c3e50;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #fff;
+            color: #3498db;
+            border: 2px solid #3498db;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin: 20px 0 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 900px;
+        }
+        
+        thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 15px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 15px 0 0;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f8fcff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafcfe;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        td {
+            padding: 15px;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            width: 25%;
+            min-width: 200px;
+        }
+        
+        td:nth-child(2) {
+            color: #2874a6;
+            width: 25%;
+            min-width: 200px;
+        }
+        
+        td:nth-child(3) {
+            color: #5d6d7e;
+            width: 50%;
+        }
+        
+        .drug-name {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .brand-name {
+            color: #7f8c8d;
+            font-size: 13px;
+            font-weight: 400;
+        }
+        
+        .dosage-highlight {
+            background: #e8f6f3;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #148f77;
+            font-weight: 500;
+        }
+        
+        .warning-tag {
+            display: inline-block;
+            background: #fadbd8;
+            color: #c0392b;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 3px 5px 3px 0;
+            font-weight: 500;
+        }
+        
+        .ref-tag {
+            color: #7f8c8d;
+            font-size: 12px;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2e86c1;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #d68910;
+        }
+        
+        .tag-disease:hover {
+            background: #f8c471;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+        }
+        
+        .tag-drug:hover {
+            background: #58d68d;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2e86c1;
+        }
+        
+        .tag-bacteria:hover {
+            background: #5dade2;
+            color: white;
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        #copyBtn.copied {
+            background: #7f8c8d;
+        }
+        
+        .keywords-section {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            color: #95a5a6;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2e86c1;
+            font-weight: 600;
+        }
+        
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef9e7;
+            border-radius: 10px;
+            border-left: 4px solid #f4d03f;
+            font-size: 13px;
+            color: #7d6608;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .drug-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="318.html" class="page-btn">← 上一页</a>
+            <a href="320.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗生素药物剂量与不良反应参考表*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="drug-name">克拉霉素（Biaxin）</span>
+                        <span class="brand-name">或克拉霉素缓释剂（Biaxin XL）</span>
+                    </td>
+                    <td>
+                        0.5g po q12h<br>
+                        0.5g缓释片：2片 po qd
+                    </td>
+                    <td>
+                        在肾或肝功能受损患者，红霉素iv ≥ 4g/d可出现短暂可逆性耳鸣或耳聋。阿奇霉素可引起可逆性感音神经性耳聋（<span class="ref-tag">J Otolayngol 36: 257, 2007</span>）<br><br>
+                        口服红霉素制剂的剂量显示为等价盐基。达到同样的血清游离红霉素水平，需要不同剂量的红霉素酯。阿奇霉素有加重重症肌无力的症状的报道<br><br>
+                        <span class="warning-tag">FDA警告</span>：克拉霉素的使用与心脏事件和脑血管事件增加相关，接受供体干细胞移植的患者应用阿奇霉素来预防闭塞性细支气管炎与肿瘤复发和死亡增加相关
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">非达霉素（Dificid）</span>
+                        <span class="brand-name">（200mg片剂）</span>
+                    </td>
+                    <td>
+                        <span class="dosage-highlight">200mg po bid × 10d</span>，随餐或不随餐皆可
+                    </td>
+                    <td>
+                        批准用于治疗艰难梭菌毒素介导的腹泻，包括高毒力的NAP1/B1/027株。胃肠道吸收很少，粪便中浓度高。对肠道正常菌群影响小。与口服万古霉素对比的临床试验中，非NAP1菌株的复发率低（<span class="ref-tag">NEJM 364: 422, 2011</span>）<br><br>
+                        尽管肠道吸收较少，12名患者出现过敏反应，其中3名有已知的大环内酯类过敏（<span class="ref-tag">CID 58: 537, 2014</span>）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">酮内酯类 泰利霉素（Ketek）</span>
+                        <span class="ref-tag">（Med Lett 46: 66, 2004; Drug Safety 31: 561, 2008）</span>
+                    </td>
+                    <td>
+                        400mg片剂，2片 po qd。300mg片剂也有供应
+                    </td>
+                    <td>
+                        <span class="warning-tag">药物警告</span>：急性肝衰竭和严重肝损伤（<span class="ref-tag">AnIM 144: 415, 447, 2006</span>）。不常见的：视物模糊，继发于眼睛调节减慢；可加重重症肌无力（<span class="warning-tag">黑框警告：有这种疾病时禁用</span>）。肝脏、眼和重症肌无力的并发症可能是抑制神经肌接头的烟酸乙酰胆碱受体所致（<span class="ref-tag">AAC 54: 5399, 2010</span>）。可能造成QT间期延长<br><br>
+                        一些药物间相互作用（<span class="ref-tag">NEJM 355; 2260, 2006</span>）。<span class="warning-tag">在美国已不再上市</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">特地唑胺磷酸盐（Sivextro）</span>
+                        <span class="ref-tag">参见 CID 61; 1315, 2015</span>
+                    </td>
+                    <td>
+                        <span class="dosage-highlight">200mg iv/po qd</span> 输注1小时
+                    </td>
+                    <td>
+                        静脉制剂溶于250ml生理盐水：由于存在二价阳离子时使溶解度下降，因此不能使用乳酸林格液。SST临床试验结果（<span class="ref-tag">JAMA 309: 599和609, 2013</span>）<br><br>
+                        由肝脏排泄，肾功能不全无须调整剂量，轻度抑制单胺氧化酶，可致5-羟色胺综合征，但风险低（<span class="ref-tag">AAC 57; 3060.2013</span>）治疗剂量可出现血小板减少，但风险较低（<span class="ref-tag">AAC 2016, 71: 2553</span>）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tag-cloud">
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">艰难梭菌感染</span>
+            <span class="tag tag-disease">闭塞性细支气管炎</span>
+            <span class="tag tag-disease">重症肌无力</span>
+            <span class="tag tag-disease">耳鸣</span>
+            <span class="tag tag-disease">耳聋</span>
+            <span class="tag tag-disease">肝衰竭</span>
+            <span class="tag tag-disease">5-羟色胺综合征</span>
+            <span class="tag tag-disease">血小板减少</span>
+            <span class="tag tag-disease">视物模糊</span>
+            <span class="tag tag-disease">QT间期延长</span>
+            <span class="tag tag-drug">克拉霉素</span>
+            <span class="tag tag-drug">Biaxin</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">红霉素</span>
+            <span class="tag tag-drug">非达霉素</span>
+            <span class="tag tag-drug">Dificid</span>
+            <span class="tag tag-drug">泰利霉素</span>
+            <span class="tag tag-drug">Ketek</span>
+            <span class="tag tag-drug">特地唑胺</span>
+            <span class="tag tag-drug">Sivextro</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+            <span class="tag tag-bacteria">NAP1/B1/027株</span>
+            <span class="tag tag-bacteria">大环内酯类</span>
+            <span class="tag tag-bacteria">酮内酯类</span>
+            <span class="tag tag-bacteria">噁唑烷酮类</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" id="copyInput" readonly value="抗生素药物剂量与不良反应参考表；克拉霉素；非达霉素；泰利霉素；特地唑胺；艰难梭菌；NAP1/B1/027；重症肌无力；QT间期延长；肝衰竭；5-羟色胺综合征；=319">
+            <button id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">319</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords">
+            319 | 抗生素 | 大环内酯类 | 酮内酯类 | 噁唑烷酮类 | 克拉霉素 | 非达霉素 | 泰利霉素 | 特地唑胺 | 艰难梭菌 | 药物剂量 | 不良反应 | FDA警告 | 黑框警告
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showCopied();
+                });
+            } catch(e) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

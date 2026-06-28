@@ -1,0 +1,427 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗反转录病毒药物复方制剂药代动力学参数表续三*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 5px;
+        }
+        
+        .back-btn, .page-btn {
+            background: linear-gradient(145deg, #1976d2, #1565c0);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .back-btn:hover, .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565c0;
+            font-size: 20px;
+            margin: 15px 0;
+            padding: 18px;
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.15);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: white;
+            font-size: 11px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #1976d2, #1565c0);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        thead th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e6ed;
+            text-align: center;
+            vertical-align: middle;
+            color: #444;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #c62828;
+            font-size: 12px;
+        }
+        
+        .note-section {
+            margin: 20px 0;
+            padding: 18px 20px;
+            background: linear-gradient(145deg, #fff8e1, #ffecb3);
+            border-radius: 12px;
+            border-left: 5px solid #ff9800;
+            font-size: 12px;
+            color: #5d4037;
+            line-height: 2;
+        }
+        
+        .note-section p {
+            margin: 6px 0;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            border-left: 5px solid #43a047;
+        }
+        
+        .tags-section h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #66bb6a, #43a047);
+            color: white;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 14px 18px;
+            border: 2px solid #64b5f6;
+            border-radius: 12px;
+            font-size: 13px;
+            font-family: "Courier New", monospace;
+            background: white;
+            color: #1565c0;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #42a5f5, #1e88e5);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #1565c0;
+            font-size: 20px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(21, 101, 192, 0.2);
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 18px;
+            color: #546e7a;
+            font-size: 13px;
+            background: linear-gradient(145deg, #eceff1, #cfd8dc);
+            border-radius: 12px;
+            margin-top: 10px;
+            line-height: 2;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 6px;
+            }
+            
+            h1 {
+                font-size: 15px;
+                padding: 14px;
+            }
+            
+            table {
+                font-size: 9px;
+            }
+            
+            thead th {
+                font-size: 11px;
+                padding: 12px 5px;
+            }
+            
+            tbody td {
+                padding: 8px 5px;
+                line-height: 1.6;
+            }
+            
+            .back-btn, .page-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 14px;
+            }
+            
+            .note-section {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="286.html" class="page-btn">← 上一页</a>
+            <a href="288.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗反转录病毒药物复方制剂药代动力学参数表续三*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>分类</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tmax(h)</th>
+                    <th>血浆峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容<br>积/Vd</th>
+                    <th>平均血清<br>半衰期<br>(h)</th>
+                    <th>清除</th>
+                    <th>细胞内半<br>衰期(h)</th>
+                    <th>脑脊液/<br>血药<br>浓度比<br>(%)</th>
+                    <th>CPE</th>
+                    <th>AUC/<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">Dovato<br>(DTG/3TC)</td>
+                    <td>INSTI+<br>NRTI</td>
+                    <td>片剂：<br>DTG 50mg+<br>3TC 300mg</td>
+                    <td>片剂±食物</td>
+                    <td>DTG: ND<br>3TC: 86</td>
+                    <td>DTG: 2.5<br>3TC: 1</td>
+                    <td>DTG: 3.67(50mg<br>q24h, SS)<br>3TC: 2.04(300mg<br>q24h, SS)</td>
+                    <td>DTG: &gt;99<br>3TC: 36</td>
+                    <td>DTG:<br>17.4L(V/F)<br>3TC:<br>1.3 L/kg</td>
+                    <td>DTG: 14<br>3TC: 5～7</td>
+                    <td>DTG: 代谢<br>3TC: 肾脏,<br>代谢</td>
+                    <td>DTG: ND<br>3TC: ND</td>
+                    <td>DTG: ND<br>3TC: ND</td>
+                    <td>DTG: ND<br>3TC: 2</td>
+                    <td>DTG: 53.6(50mg<br>q24h, 0～24h)<br>3TC: 8.87(300mg<br>q24h, 0～24h)</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">赛进<br>(ABC/3TC)</td>
+                    <td>2NRTI</td>
+                    <td>片剂：<br>ABC 600mg+<br>3TC 300mg</td>
+                    <td>片剂±食物</td>
+                    <td>ABC: 86<br>3TC: 86</td>
+                    <td>ABC: 1.3<br>3TC: ND</td>
+                    <td>ABC: 4.26<br>(600mg, SD)<br>3TC: 2.04(300mg<br>q24h, SS)</td>
+                    <td>ABC: 50<br>3TC: &lt;36</td>
+                    <td>ABC:<br>0.86 L/kg<br>3TC:<br>1.3 L/kg</td>
+                    <td>ABC: 1.45<br>3TC: 5～7</td>
+                    <td>ABC: 代谢<br>(非CYP途径)<br>3TC: 肾脏,<br>代谢</td>
+                    <td>ABC: 20.6<br>3TC: 18</td>
+                    <td>ABC: ND<br>3TC: ND</td>
+                    <td>ABC: 3<br>3TC: 2</td>
+                    <td>ABC: 11.95<br>(600mg, 0-inf)<br>3TC: 8.87(300mg<br>q24h, 0～24h)</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Evotaz<br>(ATV/Cobi)</td>
+                    <td>Evotaz<br>(ATV/<br>Cobi)</td>
+                    <td>片剂：<br>ATV 300mg+<br>Cobi 150mg</td>
+                    <td>片剂＋食物</td>
+                    <td>ATV: ND<br>Cobi: ND</td>
+                    <td>ATV: 3.5<br>Cobi: 3</td>
+                    <td>ATV: 3.91(300mg<br>q24h, SS)<br>Cobi: 1.5(150mg<br>q24h, SS)</td>
+                    <td>ATV: 86<br>Cobi:<br>97～98</td>
+                    <td>ATV:<br>88.3L(V/F)<br>Cobi: ND</td>
+                    <td>ATV: 7.5<br>Cobi: 3～4</td>
+                    <td>ATV: 代谢<br>Cobi: 代谢</td>
+                    <td>ATV: ND<br>Cobi: ND</td>
+                    <td>ATV: ND<br>Cobi: ND</td>
+                    <td>ATV: 2<br>Cobi: ND</td>
+                    <td>ATV: 46.1<br>(300mg q24h,<br>0～24h)<br>Cobi:<br>11.1(150mg<br>q24h, 0～24h)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <p><strong>注：</strong>1 除非注明，否则均指成人制剂；＋食物＝餐中服用，无食物＝空腹服用，±食物＝餐中或空腹服用。</p>
+        <p>2 SD＝单剂量，SS＝达到稳态。</p>
+        <p>3 V/F＝Vd/口服生物利用度，Vss＝稳态时Vd，Vss/F＝稳态时Vd/口服生物利用度。</p>
+        <p>4 假定CrCl＞80L/min。</p>
+        <p>6 炎症情况下脑脊液浓度。</p>
+        <p>8 曲线下面积（AUC）＝血清药物浓度－时间曲线下面积；12h＝AUC 0～12，24h＝AUC 0～24。</p>
+        <p>11 CPE值（中枢神经系统穿透有效性）：1＝低穿透，2～3＝中等穿透，4＝高穿透（Letendre et al, CROI 2010, abs #430）。</p>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <span class="tag">抗反转录病毒药物</span>
+        <span class="tag">复方制剂</span>
+        <span class="tag">Dovato</span>
+        <span class="tag">赛进</span>
+        <span class="tag">Evotaz</span>
+        <span class="tag">DTG</span>
+        <span class="tag">3TC</span>
+        <span class="tag">ABC</span>
+        <span class="tag">ATV</span>
+        <span class="tag">Cobi</span>
+        <span class="tag">INSTI</span>
+        <span class="tag">NRTI</span>
+        <span class="tag">HIV</span>
+        <span class="tag">艾滋病</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗反转录病毒药物复方制剂药代动力学参数表续三；复方制剂；Dovato；赛进；Evotaz；DTG；3TC；ABC；ATV；Cobi；INSTI；NRTI；HIV；艾滋病；=287" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">287</div>
+    
+    <div class="keywords">
+        关键词：抗反转录病毒药物 | 复方制剂 | Dovato | 赛进 | Evotaz | DTG | 3TC | ABC | ATV | Cobi | INSTI | NRTI | HIV | 艾滋病 | 多替拉韦 | 拉米夫定 | 阿巴卡韦 | 阿扎那韦 | 可比司他 | 药代动力学 | AUC | 蛋白结合率 | 半衰期
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("✅ 已复制到剪贴板：\n" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("✅ 已复制到剪贴板：\n" + copyText.value);
+            });
+        }
+    </script>
+</body>
+</html>

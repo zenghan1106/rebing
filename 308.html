@@ -1,0 +1,530 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>碳青霉烯类抗生素用药参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(90,108,125,0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btns a:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c5282;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 12px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 12px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 15px;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            margin: 0 15px 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 单元格 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 药品名称列 */
+        td:first-child {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 180px;
+        }
+        
+        /* 剂量列 */
+        td:nth-child(2) {
+            color: #4a5568;
+            min-width: 220px;
+            line-height: 1.8;
+        }
+        
+        /* 不良反应列 */
+        td:nth-child(3) {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        /* 注释 */
+        .note {
+            margin: 0 15px 25px;
+            padding: 15px 20px;
+            background: #fffbeb;
+            border-left: 4px solid #f6ad55;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #744210;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+            margin-right: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72,187,120,0.3);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #edf2f7;
+            border-radius: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 20px;
+                padding-top: 70px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btns a {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="307.html">← 上一页</a>
+        <a href="309.html">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">碳青霉烯类抗生素用药参考表</h1>
+    <p class="subtitle">成人常规剂量、不良反应及临床用药说明</p>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>厄他培南（Invanz）</td>
+                    <td>1g iv或im q24h</td>
+                    <td>用利多卡因溶解后用于肌内注射；需询问利多卡因过敏史。标准剂量对肥胖者（BMI≥40）可能不够。有药物反应伴嗜酸性粒细胞增多和全身症状综合征（DRESS）的报道。有幻视的报道（NZ Med J 122: 76, 2009）。对铜绿假单胞菌没有活性</td>
+                </tr>
+                <tr>
+                    <td>亚胺培南＋西司他丁<br>（Primaxin, Tienam）<br>参见JAC 58: 916, 2006</td>
+                    <td>0.5g iv q6h；治疗铜绿假单胞菌：1g q6～8h（见说明）</td>
+                    <td>对铜绿假单胞菌引起的感染，剂量可增至3g/d或4g/d分次q6～8h。持续输注碳青霉烯类可能更有效且更安全（AAC 49: 1881, 2005）。关于癫痫发作的说明：癫痫发生率较低，但是碳青霉烯类发生率最高；亚胺培南和美罗培南之间无差异（JAC 69: 2043, 2014）。西司他丁能阻断亚胺培南在肾脏近曲小管腔内的酶降解作用，也能预防小管毒性。与美罗培南相比，变形杆菌属、普罗威登菌属及摩根菌属对亚胺培南的体外耐药性更高。（Can ID Med Micro 2014, 25: 285）</td>
+                </tr>
+                <tr>
+                    <td>亚胺培南－西司他丁－瑞来巴坦<br>（Relebactam）（Recarbrio）</td>
+                    <td>1.25g iv 超过30分钟q6h，若CrCl＜90ml/min需调剂量</td>
+                    <td>癫痫风险：避免同时使用丙戊酸或双丙戊酸钠。已报道艰难梭菌毒素介异的腹泻。对产KPC革兰阴性杆菌有效</td>
+                </tr>
+                <tr>
+                    <td>美罗培南（Merrem）</td>
+                    <td>0.5～1.0g iv q8h。对脑膜炎，可增至2g iv q8h<br><br>危重症患者延长输注时间：<br>CrCl≥50ml/min，2g q8h（输注3小时以上）<br>CrCl 30～49ml/min，1g q8h（输注3小时以上）<br>CrCl 10～29ml/min，1g q12h（输注3小时以上）<br><br>（Inten Care Med 37: 632, 2011）</td>
+                    <td>关于癫痫发作的说明：Meta分析显示癫痫发生率低但碳青霉烯发生癫痫率在β-内酰胺类抗生素中最高。亚胺培南和美罗培南之间无差异（JAC 69: 2043, 2014）。说明：不需要脱氢肽酶抑制药（西司他丁）。和亚胺培南相比，抗革兰阴性需氧菌活性稍强，抗葡萄球菌及链球菌活性稍低。厌氧菌：卵圆（Ovatus）拟杆菌和Distasonis拟杆菌对美罗培南更耐药</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。<br>
+        ‡ 缩略词缩写见第2页。
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病 -->
+            <span class="tag tag-disease">感染</span>
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-disease">癫痫</span>
+            <span class="tag tag-disease">DRESS</span>
+            <span class="tag tag-disease">腹泻</span>
+            <!-- 药物 -->
+            <span class="tag tag-drug">厄他培南</span>
+            <span class="tag tag-drug">Invanz</span>
+            <span class="tag tag-drug">亚胺培南</span>
+            <span class="tag tag-drug">西司他丁</span>
+            <span class="tag tag-drug">Primaxin</span>
+            <span class="tag tag-drug">Tienam</span>
+            <span class="tag tag-drug">瑞来巴坦</span>
+            <span class="tag tag-drug">Relebactam</span>
+            <span class="tag tag-drug">Recarbrio</span>
+            <span class="tag tag-drug">美罗培南</span>
+            <span class="tag tag-drug">Merrem</span>
+            <span class="tag tag-drug">利多卡因</span>
+            <span class="tag tag-drug">丙戊酸</span>
+            <span class="tag tag-drug">双丙戊酸钠</span>
+            <!-- 细菌 -->
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">变形杆菌属</span>
+            <span class="tag tag-bacteria">普罗威登菌属</span>
+            <span class="tag tag-bacteria">摩根菌属</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+            <span class="tag tag-bacteria">产KPC革兰阴性杆菌</span>
+            <span class="tag tag-bacteria">葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">拟杆菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="碳青霉烯类抗生素用药参考表；成人常规剂量、不良反应及临床用药说明；厄他培南、亚胺培南、西司他丁、瑞来巴坦、美罗培南、铜绿假单胞菌、脑膜炎、癫痫、KPC；=308" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="308.html">308</a>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>厄他培南</span>
+        <span>亚胺培南</span>
+        <span>西司他丁</span>
+        <span>瑞来巴坦</span>
+        <span>美罗培南</span>
+        <span>碳青霉烯类</span>
+        <span>铜绿假单胞菌</span>
+        <span>脑膜炎</span>
+        <span>癫痫</span>
+        <span>KPC</span>
+        <span>抗生素</span>
+        <span>剂量</span>
+        <span>不良反应</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.style.background = 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)';
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

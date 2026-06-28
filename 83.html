@@ -1,0 +1,547 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妊娠期尿路感染无症状菌尿和急性肾盂肾炎治疗方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #2c5aa0, #1e4080);
+        }
+        
+        th {
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #1e4080;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            color: #2c3e50;
+            line-height: 1.7;
+            vertical-align: top;
+        }
+        
+        .category-row {
+            background: linear-gradient(145deg, #3498db, #2980b9) !important;
+        }
+        
+        .category-row td {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .subcategory {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .pathogen-cell {
+            background: #fff8e7;
+        }
+        
+        .preferred-cell {
+            background: #e8f5e9;
+        }
+        
+        .alternative-cell {
+            background: #fce4ec;
+        }
+        
+        .auxiliary-cell {
+            background: #f3e5f5;
+        }
+        
+        tbody tr:nth-child(even):not(.category-row) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(.category-row) {
+            background: #e3f2fd;
+        }
+        
+        .notes {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .notes p {
+            color: #856404;
+            font-size: 12px;
+            line-height: 2;
+            margin: 5px 0;
+        }
+        
+        .notes .highlight {
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #f8f9fa;
+            min-height: 50px;
+            resize: vertical;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #27ae60, #219a52);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(145deg, #27ae60, #219a52);
+        }
+        
+        .tag-treatment {
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+            }
+            
+            th {
+                font-size: 11px;
+                padding: 10px 5px;
+            }
+            
+            td {
+                font-size: 10px;
+                padding: 6px;
+            }
+            
+            .category-row td {
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="82.html" class="nav-btn">← 上一页</a>
+            <a href="84.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            妊娠期尿路感染：无症状菌尿和急性肾盂肾炎治疗方案
+            <span class="title-decoration">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 24%;">首选方案</th>
+                    <th style="width: 20%;">备选方案<sup>§</sup></th>
+                    <th style="width: 20%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="5">肾脏和膀胱（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>妊娠：无症状菌尿 & 膀胱炎</strong><br>
+                        按培养和药敏试验结果选择抗生素，最后一剂抗生素1周后随访尿培养
+                    </td>
+                    <td class="pathogen-cell">
+                        大肠埃希菌（70%）<br>
+                        克雷伯菌属<br>
+                        肠杆菌属<br>
+                        变形杆菌<br>
+                        B族链球菌
+                    </td>
+                    <td class="preferred-cell">
+                        呋喃妥因（妊娠晚期除外）100mg po q12h × 5～7d、<br>
+                        阿莫西林-克拉维酸500mg po q8h × 3～7d<br>
+                        或头孢氨苄500mg po bid × 3～7d
+                    </td>
+                    <td class="alternative-cell">
+                        TMP-SMX（双剂量）（妊娠早期或足月临近分娩时不用）1片po q12h × 3d<br>
+                        或头孢泊肟100mg po q12h × 3～7d
+                    </td>
+                    <td class="auxiliary-cell">
+                        • 建议治疗以免进展至膀胱炎或肾盂肾炎<br>
+                        • 未治疗的菌尿与低出生体重风险升高、早产及围产期死亡率升高相关<br>
+                        • 若治疗后培养仍阳性，用另外的药物再治疗或用原药物治疗并延长疗程<br>
+                        • 妊娠晚期避免使用呋喃妥因，因其有引起新生儿溶血性贫血的风险
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>妊娠：急性肾盂肾炎</strong><br>
+                        诊断：肋脊角叩击痛，发热，妊娠中晚期出现恶心、呕吐。见说明
+                    </td>
+                    <td class="pathogen-cell">
+                        同膀胱炎，见上文<br>
+                        方案为经验性治疗（见说明）
+                    </td>
+                    <td class="preferred-cell">
+                        <em>病情中等：</em><br>
+                        头孢曲松1g iv qd或头孢吡肟1g iv q12h。<br><br>
+                        若青霉素过敏：氨曲南1g iv q8h（对革兰阳性球菌无效）
+                    </td>
+                    <td class="alternative-cell">
+                        <em>病情严重：</em><br>
+                        哌拉西林-他唑巴坦4.5g iv输注4h q8h<br>
+                        或美罗培南500mg iv q8h<br>
+                        或厄他培南1g iv qd
+                    </td>
+                    <td class="auxiliary-cell">
+                        • 妊娠期避免使用氟喹诺酮类和氨基糖苷类药物<br>
+                        • 退热48小时后可转换为口服治疗<br>
+                        • 疗程10～14天<br>
+                        • 如果肾盂肾炎复发，再治疗。症状消失后持续抑菌治疗直至妊娠结束：呋喃妥因50～100mg po睡前或头孢氨苄250～500mg po睡前
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><span class="highlight">注：*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><span class="highlight">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p><span class="highlight">表中名词缩写见第2页。</span></p>
+    </div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <textarea id="copyInput" readonly>妊娠期尿路感染：无症状菌尿和急性肾盂肾炎治疗方案；妊娠期尿路感染、妊娠无症状菌尿、妊娠膀胱炎、妊娠急性肾盂肾炎、大肠埃希菌、克雷伯菌属、肠杆菌属、变形杆菌、B族链球菌、呋喃妥因、阿莫西林克拉维酸、头孢氨苄、TMP-SMX、头孢泊肟、头孢曲松、头孢吡肟、氨曲南、哌拉西林他唑巴坦、美罗培南、厄他培南、氟喹诺酮类、氨基糖苷类、低出生体重、早产、围产期死亡、新生儿溶血性贫血；=83</textarea>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">妊娠期尿路感染</span>
+            <span class="tag tag-disease">妊娠无症状菌尿</span>
+            <span class="tag tag-disease">妊娠膀胱炎</span>
+            <span class="tag tag-disease">妊娠急性肾盂肾炎</span>
+            <span class="tag tag-disease">低出生体重</span>
+            <span class="tag tag-disease">早产</span>
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">克雷伯菌属</span>
+            <span class="tag tag-bacteria">肠杆菌属</span>
+            <span class="tag tag-bacteria">变形杆菌</span>
+            <span class="tag tag-bacteria">B族链球菌</span>
+            <span class="tag tag-antibiotic">呋喃妥因</span>
+            <span class="tag tag-antibiotic">阿莫西林克拉维酸</span>
+            <span class="tag tag-antibiotic">头孢氨苄</span>
+            <span class="tag tag-antibiotic">TMP-SMX</span>
+            <span class="tag tag-antibiotic">头孢泊肟</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">氨曲南</span>
+            <span class="tag tag-antibiotic">哌拉西林他唑巴坦</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">厄他培南</span>
+            <span class="tag tag-treatment">氟喹诺酮类禁忌</span>
+            <span class="tag tag-treatment">氨基糖苷类禁忌</span>
+            <span class="tag tag-treatment">新生儿溶血性贫血</span>
+            <span class="tag tag-treatment">围产期死亡</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">83</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>妊娠期尿路感染</span>
+        <span>妊娠无症状菌尿</span>
+        <span>妊娠膀胱炎</span>
+        <span>妊娠急性肾盂肾炎</span>
+        <span>大肠埃希菌</span>
+        <span>克雷伯菌属</span>
+        <span>肠杆菌属</span>
+        <span>变形杆菌</span>
+        <span>B族链球菌</span>
+        <span>呋喃妥因</span>
+        <span>阿莫西林克拉维酸</span>
+        <span>头孢氨苄</span>
+        <span>TMP-SMX</span>
+        <span>头孢泊肟</span>
+        <span>头孢曲松</span>
+        <span>头孢吡肟</span>
+        <span>氨曲南</span>
+        <span>哌拉西林他唑巴坦</span>
+        <span>美罗培南</span>
+        <span>厄他培南</span>
+        <span>氟喹诺酮类</span>
+        <span>氨基糖苷类</span>
+        <span>低出生体重</span>
+        <span>早产</span>
+        <span>围产期死亡</span>
+        <span>新生儿溶血性贫血</span>
+    </div>
+    
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

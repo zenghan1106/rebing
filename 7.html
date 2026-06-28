@@ -1,0 +1,466 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~出版说明——桑福德抗微生物治疗指南中文版介绍*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .preface-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+            text-align: center;
+            padding: 15px 0;
+            letter-spacing: 8px;
+        }
+        
+        .preface-content {
+            font-size: 15px;
+            line-height: 2.2;
+            color: #333;
+            text-indent: 2em;
+            padding: 20px;
+        }
+        
+        .highlight-text {
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        .feature-list {
+            background: #e8f0fe;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .feature-item {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #1565c0;
+            font-weight: bold;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .preface-title {
+                font-size: 18px;
+                letter-spacing: 4px;
+            }
+            
+            .preface-content {
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="6.html" class="nav-btn">← 上一页</a>
+            <a href="8.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~出版说明——桑福德抗微生物治疗指南中文版介绍*****</h1>
+        <p class="subtitle">指南引进历史、编写特点及使用注意事项</p>
+    </div>
+    
+    <div class="page-number">7</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 100%;">出版说明内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 0;">
+                        <div class="preface-title">出 版 说 明</div>
+                        <div class="preface-content">
+                            《<span class="highlight-text">桑福德抗微生物治疗指南</span>》中译本引进出版已20余年。此书由美国历届感染性疾病学会主席及著名的感染科专家独立编写，并根据病原菌的变迁和抗微生物治疗的进展每年修订一次。目前已经在全球范围12个国家和地区发行，成为医生手边的常备书籍，其实用性、权威性和独立性得到了广泛认可。这也是中国协和医科大学出版社积极与美国抗微生物治疗公司合作的初衷，一起努力推进中文版每年一版的修订和翻译工作，方便广大中国医生使用。
+                        </div>
+                        <div class="preface-content">
+                            感染性疾病依然是人类最常见的疾病之一，涉及人体各个器官，各专业的医师每天都要面对感染性疾病的患者。因此，对此类患者正确地诊断和治疗，不仅对预后至关重要，也对防止<span class="highlight-text">耐药菌</span>的生成及传播有深远意义。本指南的出版对于规范我国临床<span class="highlight-text">抗生素</span>的合理使用有指导价值。
+                        </div>
+                        <div class="preface-content">
+                            本指南内容全面，适于临床各科医师和相关检验科室医师参阅。在编写上有如下特点：
+                            <div class="feature-list">
+                                <div class="feature-item">信息丰富，包括各系统器官感染性疾病的常见病原体、传播途径、诊断要点、首选和备选治疗方案、药物不良反应、应用注意事项及预防用药等，并辅以有关文献来体现循证医学的权威性；涉及的病原体有<span class="highlight-text">细菌</span>、<span class="highlight-text">真菌</span>、<span class="highlight-text">寄生虫</span>和<span class="highlight-text">病毒</span>等。</div>
+                                <div class="feature-item">提供了抗感染药物的药效和药理学特性，使得临床用药更加安全、有效。</div>
+                                <div class="feature-item">针对临床中的一些特殊用药情况，也给予了针对性治疗方案，如肝、肾功能损害患者的用药，<span class="highlight-text">妊娠期用药</span>和<span class="highlight-text">儿童用药</span>及预防性用药。</div>
+                                <div class="feature-item">每年都有增补和修订。</div>
+                                <div class="feature-item">表格和各种检索方式的编排便于查阅和比对。本版中译本还增加了中文索引，方便读者查询。</div>
+                            </div>
+                        </div>
+                        <div class="preface-content">
+                            本指南反映了国外（主要是美国）感染病学研究的最新成果，主要是根据美国的细菌耐药性数据而制定，而国内外的疾病谱和诊疗方法不可避免地存在一定差异，读者使用本指南时必须与临床实际和国内的细...
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">桑福德抗微生物治疗指南</span>
+            <span class="tag">抗微生物</span>
+            <span class="tag">感染性疾病</span>
+            <span class="tag">病原菌</span>
+            <span class="tag">耐药菌</span>
+            <span class="tag">抗生素</span>
+            <span class="tag">细菌</span>
+            <span class="tag">真菌</span>
+            <span class="tag">寄生虫</span>
+            <span class="tag">病毒</span>
+            <span class="tag">妊娠期用药</span>
+            <span class="tag">儿童用药</span>
+            <span class="tag">预防性用药</span>
+            <span class="tag">肝肾功能损害</span>
+            <span class="tag">药效</span>
+            <span class="tag">药理学</span>
+            <span class="tag">循证医学</span>
+            <span class="tag">中文索引</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="出版说明——桑福德抗微生物治疗指南中文版介绍；指南引进历史、编写特点及使用注意事项；桑福德抗微生物治疗指南,抗微生物,感染性疾病,病原菌,耐药菌,抗生素,细菌,真菌,寄生虫,病毒,妊娠期用药,儿童用药,预防性用药,肝肾功能损害,药效,药理学,循证医学,中文索引；=7" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '出版说明——桑福德抗微生物治疗指南中文版介绍',
+                    url: window.location.href,
+                    page: '7',
+                    tags: ['桑福德抗微生物治疗指南', '抗微生物', '感染性疾病', '耐药菌', '抗生素']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '7');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '7');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '7');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

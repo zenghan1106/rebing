@@ -1,0 +1,602 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表1（40）临床抗微生物治疗的初始选择-肺炎培养结果已知的特异性治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #f1f8e9 50%, #fff3e0 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #1976d2;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(25,118,210,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25,118,210,0.4);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #388e3c;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(56,142,60,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #2e7d32;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(56,142,60,0.4);
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #0d47a1;
+            font-size: 24px;
+            padding: 70px 20px 25px;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 5px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #0d47a1;
+        }
+        
+        /* 第一行大标题 */
+        .main-title {
+            background: #0d47a1 !important;
+            font-size: 18px !important;
+            padding: 16px 10px !important;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #1976d2 !important;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #e3f2fd !important;
+            color: #0d47a1 !important;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #bbdefb;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #263238;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f5e9;
+        }
+        
+        /* 疾病名称 */
+        .disease-name {
+            color: #bf360c;
+            font-weight: 700;
+            background: #fff8e1;
+        }
+        
+        /* 参考文献 */
+        .ref {
+            color: #757575;
+            font-size: 12px;
+            display: block;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        /* 剂量强调 */
+        .dosage {
+            color: #1565c0;
+            font-weight: 600;
+        }
+        
+        /* 重要提示 */
+        .highlight {
+            color: #c62828;
+            font-weight: 700;
+        }
+        
+        /* 注释 */
+        .note {
+            color: #546e7a;
+            font-style: italic;
+        }
+        
+        /* 指南引用 */
+        .guideline {
+            color: #6a1b9a;
+            font-weight: 600;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 5px;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #0d47a1;
+            font-size: 18px;
+            margin-bottom: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffccbc;
+            color: #bf360c;
+        }
+        
+        .tag-disease:hover {
+            background: #ff7043;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-bacteria {
+            background: #c8e6c9;
+            color: #1b5e20;
+        }
+        
+        .tag-bacteria:hover {
+            background: #66bb6a;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .tag-antibiotic {
+            background: #bbdefb;
+            color: #0d47a1;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #42a5f5;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 25px 5px;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            color: #0d47a1;
+            font-size: 18px;
+            margin-bottom: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 18px;
+            border: 2px solid #90caf9;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #37474f;
+            background: #e3f2fd;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #1976d2;
+        }
+        
+        .copy-btn {
+            padding: 14px 30px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(25,118,210,0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 25px;
+            color: #546e7a;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .page-number a {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 22px;
+            padding: 8px 20px;
+            border-radius: 50%;
+            background: #e3f2fd;
+            transition: all 0.3s;
+        }
+        
+        .page-number a:hover {
+            background: #1976d2;
+            color: white;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            color: #90a4ae;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        /* 表格注释 */
+        .table-note {
+            background: #fff8e1;
+            color: #5d4037;
+            font-size: 12px;
+            padding: 15px;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                padding-top: 80px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btns {
+                top: 60px;
+                left: 15px;
+                right: auto;
+                flex-direction: column;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px 6px;
+            }
+            
+            .main-title {
+                font-size: 15px !important;
+            }
+            
+            .tags-container {
+                justify-content: center;
+            }
+            
+            .tag {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="94.html" class="nav-btn">← 上一页</a>
+        <a href="96.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表1（40）临床抗微生物治疗的初始选择*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="5" class="main-title">表1（40） 临床抗微生物治疗的初始选择</th>
+                </tr>
+                <tr>
+                    <th rowspan="2" style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 22%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 32%;">推荐治疗方案*</th>
+                    <th rowspan="2" style="width: 30%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="5">肺炎——（痰、血、胸腔积液等）培养结果已知的特异性治疗</td>
+                </tr>
+                <tr>
+                    <td class="disease-name">
+                        鲍曼不动杆菌复合群
+                    </td>
+                    <td>
+                        VAP患者，长期住ICU且反复应用抗生素
+                    </td>
+                    <td>
+                        <strong>经验性治疗：</strong>培养阳性，无体外药敏试验结果，耐药流行率&lt;15%：<span class="dosage">头孢吡肟</span>、<span class="dosage">头孢他啶</span>、<span class="dosage">氨苄西林-舒巴坦</span>、<span class="dosage">美罗培南</span>剂量见表注11
+                    </td>
+                    <td>
+                        <strong>特异性治疗：</strong>培养及药敏试验结果均有，敏感菌用<span class="dosage">头孢吡肟</span>、<span class="dosage">头孢他啶</span>、<span class="dosage">氨苄西林-舒巴坦</span>、<span class="dosage">美罗培南</span>或氟喹诺酮类<br><br>
+                        如为碳青霉烯耐药菌株：<span class="dosage">头孢地尔</span> 2g iv 输注3小时q8h
+                    </td>
+                    <td>
+                        MDR菌株感染的治疗见表5E<br><br>
+                        一项治疗包括肺炎在内的鲍曼不动杆菌复合群感染的随机临床试验，将<span class="dosage">舒巴坦</span> 1g iv＋<span class="dosage">度洛巴坦</span> 1g iv q6h＋<span class="dosage">亚胺培南</span> 1g iv q6h背景治疗与<span class="dosage">多黏菌素</span> 2.5mg/kg＋<span class="dosage">亚胺培南</span>背景治疗进行比较，前者的肾毒性显著性降低、在经实验室证实的确诊病例中死亡人数更少，舒巴坦-度洛巴坦组12/63（19%），多黏菌素组20/62（32%）。死亡率相差13.2%（95%CI -30.0～3.5（<span class="ref">Lancet ID 2023; 23: 1072</span>）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="disease-name">
+                        放线菌
+                    </td>
+                    <td>
+                        以色列放线菌，其他菌种少见
+                    </td>
+                    <td>
+                        <span class="dosage">氨苄西林</span> 200mg/（kg·d）iv分3～4次×4～6w，然后<span class="dosage">青霉素V钾</span> 2～4g/d po分4次×6～12个月
+                    </td>
+                    <td>
+                        <span class="dosage">多西环素</span>或<span class="dosage">头孢曲松</span>或<span class="dosage">克林霉素</span> iv×4～6w，然后po×6～12个月
+                    </td>
+                    <td>
+                        可以用<span class="dosage">青霉素G</span>代替氨苄西林：1000万～2000万U/d iv×4～6w，然后<span class="dosage">青霉素V钾</span> po 6～12个月
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-note">
+            <strong>注：11</strong> 治疗不动杆菌属、克雷伯菌属和假单胞菌属肺炎的抗生素剂量。青霉素类：<span class="dosage">哌拉西林-他唑巴坦</span>负荷量4.5g，4.5g iv q6h，输液4小时以上；<span class="dosage">氨苄西林-舒巴坦</span> 3g iv q6h或大剂量9g iv q8h输注4小时以上。头孢菌素：<span class="dosage">头孢他啶</span> 2g iv q8h；<span class="dosage">头孢他啶-阿维巴坦</span> 2.5g iv q8h，输注3小时以上；<span class="dosage">头孢洛生-他唑巴坦</span> 3g iv q8h输注3小时以上。<span class="dosage">亚胺培南-瑞来巴坦</span> 1.25g iv q6h，输注30分钟以上。<span class="dosage">氨曲南</span> 2g iv q8h。氟喹诺酮类：<span class="dosage">环丙沙星</span> 400mg iv q8h（感染性休克，可能需要600mg q8h），<span class="dosage">左氧氟沙星</span> 750mg iv qd。碳青霉烯类：<span class="dosage">美罗培南</span> 1～2g iv q8h；<span class="dosage">美罗培南-维搏巴坦</span> 4g iv q8h，输液3小时以上；<span class="dosage">亚胺培南</span> 0.5～1.0g iv q8h。氨基糖苷类：<span class="dosage">庆大霉素/妥布霉素</span> 7mg/kg iv×1次，然后5mg/kg iv q8h。<span class="dosage">多黏菌素B</span> 2.5mg/kg iv，输注2小时以上，12小时后1.5mg/kg iv q12h，输注1小时以上。<span class="dosage">米诺环素</span> 200mg iv单次，然后100mg iv q12h。<br><br>
+            * 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+            § 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。<br>
+            表中名词缩写见第2页。
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <a href="#" class="tag tag-disease">肺炎特异性治疗</a>
+            <a href="#" class="tag tag-disease">鲍曼不动杆菌复合群</a>
+            <a href="#" class="tag tag-disease">VAP</a>
+            <a href="#" class="tag tag-disease">ICU</a>
+            <a href="#" class="tag tag-disease">放线菌</a>
+            <a href="#" class="tag tag-disease">以色列放线菌</a>
+            <a href="#" class="tag tag-disease">MDR</a>
+            <a href="#" class="tag tag-disease">碳青霉烯耐药</a>
+            <a href="#" class="tag tag-bacteria">鲍曼不动杆菌</a>
+            <a href="#" class="tag tag-bacteria">克雷伯菌属</a>
+            <a href="#" class="tag tag-bacteria">假单胞菌属</a>
+            <a href="#" class="tag tag-antibiotic">头孢吡肟</a>
+            <a href="#" class="tag tag-antibiotic">头孢他啶</a>
+            <a href="#" class="tag tag-antibiotic">氨苄西林-舒巴坦</a>
+            <a href="#" class="tag tag-antibiotic">美罗培南</a>
+            <a href="#" class="tag tag-antibiotic">头孢地尔</a>
+            <a href="#" class="tag tag-antibiotic">舒巴坦</a>
+            <a href="#" class="tag tag-antibiotic">度洛巴坦</a>
+            <a href="#" class="tag tag-antibiotic">亚胺培南</a>
+            <a href="#" class="tag tag-antibiotic">多黏菌素</a>
+            <a href="#" class="tag tag-antibiotic">氨苄西林</a>
+            <a href="#" class="tag tag-antibiotic">青霉素V钾</a>
+            <a href="#" class="tag tag-antibiotic">青霉素G</a>
+            <a href="#" class="tag tag-antibiotic">多西环素</a>
+            <a href="#" class="tag tag-antibiotic">头孢曲松</a>
+            <a href="#" class="tag tag-antibiotic">克林霉素</a>
+            <a href="#" class="tag tag-antibiotic">哌拉西林-他唑巴坦</a>
+            <a href="#" class="tag tag-antibiotic">头孢他啶-阿维巴坦</a>
+            <a href="#" class="tag tag-antibiotic">头孢洛生-他唑巴坦</a>
+            <a href="#" class="tag tag-antibiotic">亚胺培南-瑞来巴坦</a>
+            <a href="#" class="tag tag-antibiotic">氨曲南</a>
+            <a href="#" class="tag tag-antibiotic">环丙沙星</a>
+            <a href="#" class="tag tag-antibiotic">左氧氟沙星</a>
+            <a href="#" class="tag tag-antibiotic">美罗培南-维搏巴坦</a>
+            <a href="#" class="tag tag-antibiotic">庆大霉素</a>
+            <a href="#" class="tag tag-antibiotic">妥布霉素</a>
+            <a href="#" class="tag tag-antibiotic">多黏菌素B</a>
+            <a href="#" class="tag tag-antibiotic">米诺环素</a>
+        </div>
+    </div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="表1（40）临床抗微生物治疗的初始选择；肺炎培养结果已知的特异性治疗；鲍曼不动杆菌复合群；VAP；ICU；放线菌；以色列放线菌；MDR；碳青霉烯耐药；头孢吡肟；头孢他啶；氨苄西林-舒巴坦；美罗培南；头孢地尔；舒巴坦；度洛巴坦；亚胺培南；多黏菌素；氨苄西林；青霉素V钾；青霉素G；多西环素；头孢曲松；克林霉素；哌拉西林-他唑巴坦；头孢他啶-阿维巴坦；头孢洛生-他唑巴坦；亚胺培南-瑞来巴坦；氨曲南；环丙沙星；左氧氟沙星；美罗培南-维搏巴坦；庆大霉素；妥布霉素；多黏菌素B；米诺环素；=95" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="95.html">95</a>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：表1（40） | 临床抗微生物治疗 | 初始选择 | 肺炎 | 特异性治疗 | 培养结果已知 | 鲍曼不动杆菌复合群 | 鲍曼不动杆菌 | VAP | ICU | 长期住ICU | 反复应用抗生素 | 放线菌 | 以色列放线菌 | MDR | 多重耐药 | 碳青霉烯耐药 | 头孢吡肟 | 头孢他啶 | 氨苄西林-舒巴坦 | 美罗培南 | 头孢地尔 | 舒巴坦 | 度洛巴坦 | 亚胺培南 | 多黏菌素 | 氨苄西林 | 青霉素V钾 | 青霉素G | 多西环素 | 头孢曲松 | 克林霉素 | 哌拉西林-他唑巴坦 | 头孢他啶-阿维巴坦 | 头孢洛生-他唑巴坦 | 亚胺培南-瑞来巴坦 | 氨曲南 | 环丙沙星 | 左氧氟沙星 | 美罗培南-维搏巴坦 | 庆大霉素 | 妥布霉素 | 多黏菌素B | 米诺环素 | 克雷伯菌属 | 假单胞菌属 | 肾毒性 | 降阶梯治疗
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    fallbackCopy(input);
+                });
+            } else {
+                fallbackCopy(input);
+            }
+        }
+        
+        function fallbackCopy(input) {
+            try {
+                document.execCommand('copy');
+                showCopySuccess();
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.style.background = '#388e3c';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '#1976d2';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

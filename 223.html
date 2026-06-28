@@ -1,0 +1,401 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗菌药物药理学特点表9A(8)青霉素氨基续</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+        }
+        
+        .nav-btn.prev {
+            right: 90px;
+        }
+        
+        .nav-btn.next {
+            right: 10px;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 60px 10px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a3a6e;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2c5aa0;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2c5aa0;
+            margin-left: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 10px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            border: 1px solid #1a3a6e;
+            white-space: nowrap;
+        }
+        
+        /* 第一行字体大一点 */
+        thead tr:first-child th {
+            font-size: 15px;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #e8eef7;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            padding: 10px 8px;
+            border: 1px solid #ccc;
+            color: #1a3a6e;
+        }
+        
+        /* 数据行 */
+        tbody tr.data-row {
+            background: #fff;
+        }
+        
+        tbody tr.data-row:nth-child(even) {
+            background: #fafafa;
+        }
+        
+        tbody tr.data-row:hover {
+            background: #e8f4e8;
+        }
+        
+        tbody tr.data-row td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        /* 药物名列加粗 */
+        td.drug-name {
+            font-weight: bold;
+            color: #1a3a6e;
+            white-space: nowrap;
+        }
+        
+        /* 长内容换行 */
+        td {
+            word-wrap: break-word;
+            word-break: break-all;
+            max-width: 200px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a3a6e;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e8f0e8;
+            color: #2c5aa0;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #2c5aa0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 10px 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .copy-section input {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .copy-section button {
+            width: 70px;
+            padding: 10px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-left: 5px;
+        }
+        
+        .copy-section button:hover {
+            background: #1a3a6e;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 10px 15px 30px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                padding-top: 70px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 11px;
+                padding: 8px 4px;
+            }
+            
+            thead tr:first-child th {
+                font-size: 13px;
+            }
+            
+            td {
+                padding: 6px 4px !important;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .nav-btn.prev {
+                right: 75px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">返回首页</a>
+    
+    <!-- 上一页 -->
+    <a href="222.html" class="nav-btn prev">上一页</a>
+    
+    <!-- 下一页 -->
+    <a href="224.html" class="nav-btn next">下一页</a>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">抗菌药物药理学特点表9A(8)青霉素氨基续</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>PK/PD<br>指数</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tmax<br>(h)</th>
+                    <th>血浆峰<br>值浓度<br>(μg/ml)</th>
+                    <th>尿峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结合<br>率(%)</th>
+                    <th>分布容积/<br>Vd</th>
+                    <th>平均血清<br>半衰期<br>(h)</th>
+                    <th>清除</th>
+                    <th>胆汁<br>排泄率<br>(%)</th>
+                    <th>脑脊液/<br>血药<br>浓度比<br>(%)</th>
+                    <th>脑脊<br>液穿<br>透</th>
+                    <th>AUC<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="16">抗细菌药物/β-内酰胺类/青霉素(氨基)(续)</td>
+                </tr>
+                <tr class="data-row">
+                    <td class="drug-name">阿莫西林-<br>克拉维酸</td>
+                    <td>T>MIC</td>
+                    <td>片剂(250/125mg,<br>500/125mg, 875/<br>125mg), 咀嚼片<br>(200/28.5mg,<br>400/57mg),<br>缓释片(1000/<br>62.5mg), 口服<br>悬液每5ml<br>(125.0/31.25mg,<br>250.0/62.5mg,<br>200.0/28.5mg,<br>400.0/57mg,<br>600.0/42.9mg),<br>注射液</td>
+                    <td>标准剂型<br>±食物,<br>缓释片+<br>食物</td>
+                    <td>阿莫西<br>林80,<br>克拉维<br>酸30~<br>98</td>
+                    <td>缓释<br>片: 阿<br>莫西<br>林1.5,<br>克拉维<br>酸1.03</td>
+                    <td>标准: 阿莫西林<br>11.6, 克拉维酸<br>2.2 (875/125mg,<br>SD) 缓释片:<br>阿莫西林17,<br>克拉维酸2.1<br>(2000/125mg,<br>SD) 静脉: 阿<br>莫西林105.4,<br>克拉维酸28.5<br>(1000mg/200mg,<br>SD)</td>
+                    <td>ND</td>
+                    <td>阿莫西林18,<br>克拉维酸25</td>
+                    <td>阿莫西林0.36L/<br>kg, 克拉维酸<br>0.21L/kg</td>
+                    <td>阿莫西林<br>1.0~1.4,<br>克拉维酸1</td>
+                    <td>肾脏</td>
+                    <td>阿莫西林<br>100~3000</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>标准: 阿莫<br>西林26.8, 克<br>拉维酸5.1<br>(875/125) 缓<br>释片: 阿莫<br>西林71.6, 克<br>拉维酸5.3<br>(2000/125)<br>静脉: 阿莫<br>西林76.3, 克<br>拉维酸27.9<br>(1000/20)<br>(所有0-inf)</td>
+                </tr>
+                <tr class="data-row">
+                    <td class="drug-name">氨苄西林</td>
+                    <td>T>MIC</td>
+                    <td>胶囊(250mg、<br>500mg), 口服悬<br>液(125mg/5ml,<br>250mg/5ml),<br>注射液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>100<br>(2g iv,<br>SD)</td>
+                    <td>ND</td>
+                    <td>18~22</td>
+                    <td>0.29L/kg</td>
+                    <td>1.2</td>
+                    <td>肾脏</td>
+                    <td>100~3000</td>
+                    <td>13~14</td>
+                    <td>是</td>
+                    <td>120<br>(2g iv,<br>0-inf)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">阿莫西林</span>
+            <span class="tag">克拉维酸</span>
+            <span class="tag">阿莫西林-克拉维酸</span>
+            <span class="tag">氨苄西林</span>
+            <span class="tag">青霉素</span>
+            <span class="tag">氨基</span>
+            <span class="tag">T>MIC</span>
+            <span class="tag">片剂</span>
+            <span class="tag">咀嚼片</span>
+            <span class="tag">缓释片</span>
+            <span class="tag">口服悬液</span>
+            <span class="tag">注射液</span>
+            <span class="tag">胶囊</span>
+            <span class="tag">肾脏</span>
+            <span class="tag">脑脊液穿透</span>
+            <span class="tag">SD</span>
+            <span class="tag">AUC</span>
+            <span class="tag">ND</td>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" id="copyInput" value="抗菌药物药理学特点表9A(8)青霉素氨基续；阿莫西林 克拉维酸 阿莫西林-克拉维酸 氨苄西林 青霉素 氨基；PK/PD T>MIC 蛋白结合率 半衰期 片剂 咀嚼片 缓释片 口服悬液 注射液 胶囊 肾脏 脑脊液穿透 SD AUC；=223" readonly>
+        <button onclick="copyText()">复制</button>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">223</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：抗菌药物 药理学 阿莫西林 克拉维酸 阿莫西林-克拉维酸 氨苄西林 青霉素 氨基 T>MIC 片剂 咀嚼片 缓释片 口服悬液 注射液 胶囊 肾脏 脑脊液穿透 SD AUC ND</div>
+    
+    <script>
+        function copyText() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("已复制到剪贴板！");
+        }
+    </script>
+</body>
+</html>

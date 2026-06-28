@@ -1,0 +1,570 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗感染药物剂量和不良反应参考表（利奈唑胺、四环素类）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #e6f3ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #2c3e50;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #fff;
+            color: #3498db;
+            border: 2px solid #3498db;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 26px;
+            margin: 20px 0 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+            line-height: 1.5;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 900px;
+        }
+        
+        thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 15px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 15px 0 0;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f8fcff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafcfe;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        td {
+            padding: 15px;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            width: 25%;
+            min-width: 200px;
+        }
+        
+        td:nth-child(2) {
+            color: #2874a6;
+            width: 28%;
+            min-width: 220px;
+        }
+        
+        td:nth-child(3) {
+            color: #5d6d7e;
+            width: 47%;
+        }
+        
+        .drug-name {
+            color: #1a5276;
+            font-size: 15px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .brand-name {
+            color: #7f8c8d;
+            font-size: 13px;
+            font-weight: 400;
+        }
+        
+        .dosage-highlight {
+            background: #e8f6f3;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #148f77;
+            font-weight: 500;
+        }
+        
+        .warning-tag {
+            display: inline-block;
+            background: #fadbd8;
+            color: #c0392b;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 3px 5px 3px 0;
+            font-weight: 500;
+        }
+        
+        .ref-tag {
+            color: #7f8c8d;
+            font-size: 12px;
+            font-style: italic;
+        }
+        
+        .category-row {
+            background: #d6eaf8 !important;
+        }
+        
+        .category-row td {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 12px 15px;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2e86c1;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #d68910;
+        }
+        
+        .tag-disease:hover {
+            background: #f8c471;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+        }
+        
+        .tag-drug:hover {
+            background: #58d68d;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2e86c1;
+        }
+        
+        .tag-bacteria:hover {
+            background: #5dade2;
+            color: white;
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        #copyBtn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        #copyBtn.copied {
+            background: #7f8c8d;
+        }
+        
+        .keywords-section {
+            margin-top: 30px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            color: #95a5a6;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2e86c1;
+            font-weight: 600;
+        }
+        
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef9e7;
+            border-radius: 10px;
+            border-left: 4px solid #f4d03f;
+            font-size: 13px;
+            color: #7d6608;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+            
+            td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .drug-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="319.html" class="page-btn">← 上一页</a>
+            <a href="321.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗感染药物剂量和不良反应参考表（利奈唑胺、四环素类）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">氯霉素、克林霉素（类）、红霉素族、酮内酯类、噁唑烷酮类（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">利奈唑胺（Zyvox，600mg片剂）</span>
+                        <span class="ref-tag">综述：JAC 66（Suppl4）：3，2011</span>
+                    </td>
+                    <td>
+                        <span class="dosage-highlight">po或iv剂量：600mg q12h</span><br>
+                        600mg片剂，口服悬液（100mg/5ml），及静脉注射液均有供应<br><br>
+                        <strong>特殊人群：</strong>肾功能不全（<span class="ref-tag">J Infect Chemother 17：70，2011；AAC 63：e00605，2019</span>），肝移植（<span class="ref-tag">CID 42：434，2006</span>），肺囊性纤维化（<span class="ref-tag">AAC 48：281，2004</span>），烧伤（<span class="ref-tag">J Burn Care Res 31：207，2010</span>）<br><br>
+                        <strong>肥胖：</strong>在一例体重265kg患者标准剂量临床治疗失败（<span class="ref-tag">Ann Pharmacother 47：e25，2013</span>）
+                    </td>
+                    <td>
+                        <span class="warning-tag">可逆性骨髓抑制</span>：血小板减少、贫血和中性粒细胞减少均有报道。常常出现在治疗＞2周以后。血液透析和腹膜透析危险性增加（<span class="ref-tag">Int J Antimicrob Ag 36：179，2010；JAC doi：10.1093/jac/dkv 184</span>）<br><br>
+                        <span class="warning-tag">乳酸性酸中毒</span>，<span class="warning-tag">周围神经病</span>，<span class="warning-tag">视神经病变</span>：治疗4周或以上。资料显示其抑制线粒体内蛋白质合成有时间依赖性和剂量依赖性（<span class="ref-tag">Pharmacotherapy 27：771，2007</span>）。神经病变不可逆，线粒体毒性（<span class="ref-tag">AAC 2017；61：e00542-17</span>）<br><br>
+                        <span class="warning-tag">单胺氧化酶抑制剂</span>：如与富含酪胺的食物同服，有发生严重高血压的危险。避免与伪麻黄碱、苯丙醇胺合用，警惕与SSRI合用。<span class="warning-tag">5-羟色胺综合征</span>（发热、焦虑、精神状态改变、震颤）。与SSRI合用的风险（<span class="ref-tag">CID 42：1578和43：180，2006</span>）。发生率低（<span class="ref-tag">AAC 57：5901，2013</span>）。<span class="warning-tag">其他不良反应</span>：黑毛舌和急性间质性肾炎（<span class="ref-tag">IDCP 17：61，2009</span>），牙表面变色（<span class="ref-tag">CID 2016，62：617</span>）<br><br>
+                        <span class="warning-tag">横纹肌溶解综合征</span>：一例患者应用利奈唑胺用于泛耐药结核的联合治疗时出现，可能与本药有关（<span class="ref-tag">CID 54：1624，2012</span>）<br><br>
+                        <span class="warning-tag">耐药</span>：因23S rRNA结合位点的突变，出现耐利奈唑胺的表皮葡萄球菌和MRSA（<span class="ref-tag">JAC 68：4，2013</span>）
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">四环素类</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">多西环素（Vibramycin，Doryx，Monodox，Adoxa，Periostat）</span>
+                        <span class="brand-name">（20mg、50mg、75mg、100mg片剂）</span>
+                    </td>
+                    <td>
+                        <strong>成人：</strong><span class="dosage-highlight">0.1g po或iv q12h</span>。<strong>儿童</strong>（无论年龄）：<span class="dosage-highlight">4.4mg/（kg·d）</span> po或iv 分次bid × 最多21天（认为是安全的，<span class="ref-tag">AAP Redbook 2018；J Ped 2015；166：1246</span>）
+                    </td>
+                    <td>
+                        与其他四环素类药物相似。空腹时恶心增加。糜烂性食管炎多发生于临睡前服用。服用时大量饮水。光毒性和光照性甲松离，但较四环素少。牙齿沉积比四环素少（<span class="ref-tag">JAC 2017；72：2887</span>）。肾衰竭患者可用。可以出现假性脑瘤（颅内高压）<br><br>
+                        <strong>说明：</strong>有效治疗和预防疟疾、钩端螺旋体病、斑疹伤寒
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">依拉环素（Xerava）</span>
+                        <span class="ref-tag">抗菌活性与奥马环素和替加环素相似，见表4A</span>
+                    </td>
+                    <td>
+                        <span class="dosage-highlight">1mg/kg iv</span> 输注60分钟q12h×4～14d（如与强效CYP3A4诱导剂如利福平合用，剂量增加至1.5mg/kg）。<span class="warning-tag">严重肝病</span>：1mg/kg iv q12h×1d，然后1mg/kg iv qd
+                    </td>
+                    <td>
+                        批准用于治疗成人复杂性腹腔内感染<br><br>
+                        <span class="warning-tag">警告</span>：如已知对四环素过敏，可出现危及生命的过敏反应；妊娠后6个月用药有牙齿变色和抑制骨骼生长的风险。<span class="warning-tag">常见不良反应</span>：输注部位反应、恶心、呕吐
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tag-cloud">
+            <span class="tag tag-disease">骨髓抑制</span>
+            <span class="tag tag-disease">血小板减少</span>
+            <span class="tag tag-disease">贫血</span>
+            <span class="tag tag-disease">中性粒细胞减少</span>
+            <span class="tag tag-disease">乳酸性酸中毒</span>
+            <span class="tag tag-disease">周围神经病</span>
+            <span class="tag tag-disease">视神经病变</span>
+            <span class="tag tag-disease">5-羟色胺综合征</span>
+            <span class="tag tag-disease">发热</span>
+            <span class="tag tag-disease">焦虑</span>
+            <span class="tag tag-disease">震颤</span>
+            <span class="tag tag-disease">黑毛舌</span>
+            <span class="tag tag-disease">急性间质性肾炎</span>
+            <span class="tag tag-disease">牙表面变色</span>
+            <span class="tag tag-disease">横纹肌溶解综合征</span>
+            <span class="tag tag-disease">恶心</span>
+            <span class="tag tag-disease">糜烂性食管炎</span>
+            <span class="tag tag-disease">光毒性</span>
+            <span class="tag tag-disease">光照性甲松离</span>
+            <span class="tag tag-disease">假性脑瘤</span>
+            <span class="tag tag-disease">颅内高压</span>
+            <span class="tag tag-disease">疟疾</span>
+            <span class="tag tag-disease">钩端螺旋体病</span>
+            <span class="tag tag-disease">斑疹伤寒</span>
+            <span class="tag tag-disease">复杂性腹腔内感染</span>
+            <span class="tag tag-disease">输注部位反应</span>
+            <span class="tag tag-disease">呕吐</span>
+            <span class="tag tag-disease">牙齿变色</span>
+            <span class="tag tag-disease">抑制骨骼生长</span>
+            <span class="tag tag-disease">高血压</span>
+            <span class="tag tag-disease">肥胖</span>
+            <span class="tag tag-disease">烧伤</span>
+            <span class="tag tag-disease">肺囊性纤维化</span>
+            <span class="tag tag-disease">肝移植</span>
+            <span class="tag tag-disease">肾功能不全</span>
+            <span class="tag tag-disease">结核</span>
+            <span class="tag tag-drug">利奈唑胺</span>
+            <span class="tag tag-drug">Zyvox</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">Vibramycin</span>
+            <span class="tag tag-drug">Doryx</span>
+            <span class="tag tag-drug">Monodox</span>
+            <span class="tag tag-drug">Adoxa</span>
+            <span class="tag tag-drug">Periostat</span>
+            <span class="tag tag-drug">依拉环素</span>
+            <span class="tag tag-drug">Xerava</span>
+            <span class="tag tag-drug">奥马环素</span>
+            <span class="tag tag-drug">替加环素</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">SSRI</span>
+            <span class="tag tag-drug">伪麻黄碱</span>
+            <span class="tag tag-drug">苯丙醇胺</span>
+            <span class="tag tag-drug">利福平</span>
+            <span class="tag tag-bacteria">表皮葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">23S rRNA</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" id="copyInput" readonly value="抗感染药物剂量和不良反应参考表（利奈唑胺、四环素类）；利奈唑胺；多西环素；依拉环素；Zyvox；Xerava；四环素类；噁唑烷酮类；骨髓抑制；5-羟色胺综合征；乳酸性酸中毒；周围神经病；视神经病变；复杂性腹腔内感染；MRSA；结核；疟疾；钩端螺旋体病；斑疹伤寒；=320">
+            <button id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">320</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <div class="keywords">
+            320 | 抗感染药物 | 利奈唑胺 | Zyvox | 多西环素 | Vibramycin | Doryx | 依拉环素 | Xerava | 四环素类 | 噁唑烷酮类 | 骨髓抑制 | 5-羟色胺综合征 | 乳酸性酸中毒 | 视神经病变 | 复杂性腹腔内感染 | MRSA | 耐药 | 疟疾 | 钩端螺旋体病 | 斑疹伤寒
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                }).catch(() => {
+                    document.execCommand('copy');
+                    showCopied();
+                });
+            } catch(e) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

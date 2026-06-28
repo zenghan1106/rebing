@@ -1,0 +1,474 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗反转录病毒药物药代动力学参数表-融合抑制剂附着抑制剂衣壳抑制剂*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 5px;
+        }
+        
+        .back-btn, .page-btn {
+            background: linear-gradient(145deg, #1a73e8, #1557b0);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .back-btn:hover, .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            font-size: 20px;
+            margin: 15px 0;
+            padding: 18px;
+            background: linear-gradient(145deg, #e8f0fe, #d2e3fc);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.15);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: white;
+            font-size: 11px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #1a73e8, #1565c0);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        thead th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e8ecf1;
+            text-align: center;
+            vertical-align: middle;
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+        
+        .category-row {
+            background: linear-gradient(90deg, #e8f0fe, #f0f7ff) !important;
+            font-weight: 700;
+            color: #1565c0;
+            text-align: left !important;
+        }
+        
+        .category-row td {
+            padding: 14px 12px;
+            font-size: 13px;
+            border-bottom: 2px solid #1a73e8;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #c62828;
+            font-size: 12px;
+        }
+        
+        .note-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #fff8e1, #ffecb3);
+            border-radius: 15px;
+            border-left: 5px solid #ff9800;
+            font-size: 12px;
+            color: #5d4037;
+            line-height: 2;
+        }
+        
+        .note-section p {
+            margin: 8px 0;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .tags-section h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #66bb6a, #43a047);
+            color: white;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 14px 18px;
+            border: 2px solid #64b5f6;
+            border-radius: 12px;
+            font-size: 13px;
+            font-family: "Courier New", monospace;
+            background: white;
+            color: #1565c0;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #42a5f5, #1e88e5);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #1a73e8;
+            font-size: 20px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(26, 115, 232, 0.2);
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 18px;
+            color: #546e7a;
+            font-size: 13px;
+            background: linear-gradient(145deg, #eceff1, #cfd8dc);
+            border-radius: 12px;
+            margin-top: 10px;
+            line-height: 2;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 6px;
+            }
+            
+            h1 {
+                font-size: 15px;
+                padding: 14px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 12px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .back-btn, .page-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="282.html" class="page-btn">← 上一页</a>
+            <a href="284.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗反转录病毒药物药代动力学参数表-融合抑制剂附着抑制剂衣壳抑制剂*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tmax(h)</th>
+                    <th>血浆峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容<br>积/Vd</th>
+                    <th>平均血清<br>半衰期<br>(h)</th>
+                    <th>清除</th>
+                    <th>细胞内半<br>衰期(h)</th>
+                    <th>脑脊液/血药<br>浓度比(%)</th>
+                    <th>CPE</th>
+                    <th>AUC/<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="14">融合抑制剂</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">恩夫韦肽<br>(ENF, T20)</td>
+                    <td>注射液</td>
+                    <td>—</td>
+                    <td>84<br>(sc%ab)</td>
+                    <td>4～8</td>
+                    <td>5(90mg sc<br>q12h, SS)</td>
+                    <td>92</td>
+                    <td>5.5L<br>(Vss)</td>
+                    <td>3, 8</td>
+                    <td>分解代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>1</td>
+                    <td>97.4(90mg sc<br>q12h, 0～24h)</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">马拉维诺<br>(MVC)</td>
+                    <td>片剂(25mg、75mg、<br>150mg、300mg)，<br>口服液(20mg/ml)</td>
+                    <td>所有剂型<br>±食物</td>
+                    <td>33</td>
+                    <td>0.5～4.0</td>
+                    <td>0.3～0.9<br>(300mg<br>q12h, SS)</td>
+                    <td>76</td>
+                    <td>194L</td>
+                    <td>14～18</td>
+                    <td>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>3</td>
+                    <td>3(300mg q12h,<br>0～24h)</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="14">附着抑制剂</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Fostemsavir<br>(FTR)</td>
+                    <td>缓释片(600mg)</td>
+                    <td>片剂±食物</td>
+                    <td>26, 9</td>
+                    <td>2</td>
+                    <td>1.77(600mg<br>q12h, SS)</td>
+                    <td>88.4</td>
+                    <td>29.5L<br>(Vss)</td>
+                    <td>11</td>
+                    <td>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>12.9(600mg<br>q12h, 0～12h)</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">艾巴利珠<br>单抗</td>
+                    <td>注射液</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>4.8L</td>
+                    <td>剂量依赖<br>(与IgG<br>相似)</td>
+                    <td>分解代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="14">衣壳抑制剂</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Lenacapavir<br>(LEN)</td>
+                    <td>片剂(300mg)<br>注射剂</td>
+                    <td>片剂±食物</td>
+                    <td>6～10</td>
+                    <td>口服4<br>皮下77～<br>84d</td>
+                    <td>0.087～0.097<br>(6个月末)</td>
+                    <td>>98.5</td>
+                    <td>口服19240L<br>(V/F)<br>皮下9500～<br>11700L</td>
+                    <td>口服10～12d<br>皮下8～12w</td>
+                    <td>粪便，<br>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>234.3(2d初始，<br>0～6个月)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <p><strong>注：</strong>1 除非注明，否则均指成人制剂；＋食物＝餐中服用，无食物＝空腹服用，±食物＝餐中或空腹服用。</p>
+        <p>2 SD＝单剂量，SS＝达到稳态。</p>
+        <p>3 V/F＝Vd/口服生物利用度，Vss＝稳态时Vd，Vss/F＝稳态时Vd/口服生物利用度。</p>
+        <p>4 假定CrCl＞80L/min。</p>
+        <p>6 炎症情况下脑脊液浓度。</p>
+        <p>8 曲线下面积（AUC）＝血清药物浓度－时间曲线下面积；12h＝AUC 0～12，24h＝AUC 0～24。</p>
+        <p>11 CPE值（中枢神经系统穿透有效性）：1＝低穿透，2～3＝中等穿透，4＝高穿透（Letendre et al, CROI 2010, abs #430）。</p>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <span class="tag">融合抑制剂</span>
+        <span class="tag">附着抑制剂</span>
+        <span class="tag">衣壳抑制剂</span>
+        <span class="tag">恩夫韦肽</span>
+        <span class="tag">ENF</span>
+        <span class="tag">T20</span>
+        <span class="tag">马拉维诺</span>
+        <span class="tag">MVC</span>
+        <span class="tag">Fostemsavir</span>
+        <span class="tag">FTR</span>
+        <span class="tag">艾巴利珠单抗</span>
+        <span class="tag">Lenacapavir</span>
+        <span class="tag">LEN</span>
+        <span class="tag">HIV</span>
+        <span class="tag">艾滋病</span>
+        <span class="tag">CPE</span>
+        <span class="tag">中枢神经系统穿透</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗反转录病毒药物药代动力学参数表；融合抑制剂；附着抑制剂；衣壳抑制剂；恩夫韦肽；马拉维诺；Fostemsavir；艾巴利珠单抗；Lenacapavir；HIV；艾滋病；=283" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">283</div>
+    
+    <div class="keywords">
+        关键词：抗反转录病毒药物 | 融合抑制剂 | 附着抑制剂 | 衣壳抑制剂 | 恩夫韦肽 | ENF | T20 | 马拉维诺 | MVC | Fostemsavir | FTR | 艾巴利珠单抗 | Lenacapavir | LEN | HIV | 艾滋病 | CPE | 中枢神经系统穿透 | 药代动力学 | AUC | 蛋白结合率 | 半衰期
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("✅ 已复制到剪贴板：\n" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("✅ 已复制到剪贴板：\n" + copyText.value);
+            });
+        }
+    </script>
+</body>
+</html>

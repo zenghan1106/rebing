@@ -1,0 +1,533 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择：HIV阳性肺部感染（续）及淋巴结炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1e6db5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d4edda;
+            border-radius: 10px;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            min-width: 800px;
+        }
+        
+        thead th {
+            background-color: #1e6db5;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1565c0;
+        }
+        
+        tbody td, tbody th {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            font-size: 13px;
+        }
+        
+        tbody th {
+            background-color: #e8f4f8;
+            color: #1a5276;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .section-header {
+            background-color: #d5e8d4 !important;
+            color: #2e7d32 !important;
+            font-size: 15px !important;
+        }
+        
+        .sub-header {
+            background-color: #fff3e0 !important;
+            color: #e65100 !important;
+        }
+        
+        .highlight-box {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 5px 0;
+        }
+        
+        .highlight-yellow {
+            background-color: #fffde7;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #fbc02d;
+        }
+        
+        .highlight-green {
+            background-color: #e8f5e9;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .highlight-red {
+            background-color: #ffebee;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #f44336;
+        }
+        
+        .highlight-purple {
+            background-color: #f3e5f5;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #9c27b0;
+        }
+        
+        .highlight-orange {
+            background-color: #fff3e0;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #ff9800;
+        }
+        
+        .dose-info {
+            color: #1565c0;
+            font-weight: 500;
+        }
+        
+        .ref-info {
+            color: #666;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #1e6db5;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background-color: #fff3e0;
+            color: #e65100;
+            border-color: #ffcc80;
+        }
+        
+        .tag.antibiotic {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+            border-color: #ce93d8;
+        }
+        
+        .tag.virus {
+            background-color: #fce4ec;
+            color: #c2185b;
+            border-color: #f48fb1;
+        }
+        
+        .tag.fungi {
+            background-color: #e0f2f1;
+            color: #00695c;
+            border-color: #80cbc4;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background-color: #7cb342;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background-color: #1e6db5;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            tbody td, tbody th {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="103.html" class="nav-btn">← 上一页</a>
+            <a href="105.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~临床抗微生物治疗的初始选择：HIV阳性肺部感染（续）及淋巴结炎*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 32%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="4" class="section-header">
+                        肺——人类免疫缺陷病毒感染（HIV阳性）（续）
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            <strong>CD4 T淋巴细胞计数正常</strong><br>
+                            急性起病、脓痰和肺部浸润±胸痛，应隔离患者直至排除结核：成人
+                        </div>
+                    </th>
+                    <td>
+                        <div class="highlight-green">
+                            <strong>肺炎链球菌</strong>、<strong>流感嗜血杆菌</strong>、需氧革兰阴性杆菌（包括<strong>铜绿假单胞菌</strong>）、<strong>军团菌</strong>（罕见）、<strong>结核分枝杆菌</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="highlight-yellow">
+                            <span class="dose-info">头孢曲松 1g iv qd</span>（＞65岁也用1g iv qd）＋阿奇霉素也可选用<span class="dose-info">左氧氟沙星或莫西沙星 iv</span>（见说明）
+                        </div>
+                    </td>
+                    <td>
+                        <div class="highlight-purple">
+                            怀疑细菌性肺炎，也可选择CAP的其他药物
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="section-header">
+                        淋巴结（以下方法适用于无明确原发病灶的淋巴结炎）
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="4" class="sub-header">
+                        急性淋巴结炎
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            <strong>全身性</strong>
+                        </div>
+                    </th>
+                    <td colspan="3">
+                        <div class="highlight-red">
+                            <strong>病因：</strong>EB病毒、早期HIV感染、梅毒、弓形虫、土拉菌病、莱姆病、结节病、淋巴瘤、系统性红斑狼疮、组织细胞坏死性淋巴结炎（Kikuchi-Fujimoto病）及其他。发热、淋巴结肿大的鉴别诊断<br>
+                            <span class="ref-info">(NEJM 369: 2333, 2013)</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="sub-header">
+                        区域性
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            <strong>颈部：</strong>见猫抓病
+                        </div>
+                    </th>
+                    <td>
+                        <div class="highlight-orange">
+                            <strong>猫抓病</strong>（汉赛巴尔通体），<strong>A族链球菌</strong>，<strong>金黄色葡萄球菌</strong>，<strong>厌氧菌</strong>，<strong>结核分枝杆菌</strong>（淋巴结结核），<strong>鸟分枝杆菌</strong>、<strong>瘰疬分枝杆菌</strong>、<strong>玛尔摩分枝杆菌</strong>，<strong>弓形虫</strong>，<strong>土拉菌</strong>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div class="highlight-green">
+                            根据病史和体检选择检查手段。如淋巴结触诊有波动感，穿刺检查并行革兰染色和抗酸染色，以指导用药。组织细胞坏死性淋巴结炎（Kikuchi-Fujimoto病）引起发热和良性自限性淋巴结肿大，病因不明<br>
+                            <span class="ref-info">(Blood 129: 917, 2017)</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="sub-header">
+                        腹股沟
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            <strong>性传播性</strong>
+                        </div>
+                    </th>
+                    <td colspan="3">
+                        <div class="highlight-purple">
+                            <strong>单纯疱疹病毒</strong>、<strong>软下疳</strong>、<strong>梅毒</strong>、<strong>性病性淋巴肉芽肿</strong>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            <strong>非性传播性</strong>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="highlight-yellow">
+                            <strong>A族链球菌</strong>、<strong>金黄色葡萄球菌</strong>、<strong>土拉菌</strong>、<strong>猫抓病</strong>、<strong>鼠疫耶尔森菌</strong>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div class="highlight-red">
+                            考虑腺鼠疫和腺型土拉菌病
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <span class="tag disease">HIV阳性</span>
+        <span class="tag disease">肺部感染</span>
+        <span class="tag disease">急性淋巴结炎</span>
+        <span class="tag disease">全身性淋巴结炎</span>
+        <span class="tag disease">颈部淋巴结炎</span>
+        <span class="tag disease">腹股沟淋巴结炎</span>
+        <span class="tag disease">猫抓病</span>
+        <span class="tag disease">淋巴结结核</span>
+        <span class="tag disease">腺鼠疫</span>
+        <span class="tag disease">土拉菌病</span>
+        <span class="tag disease">Kikuchi-Fujimoto病</span>
+        <span class="tag disease">组织细胞坏死性淋巴结炎</span>
+        <span class="tag disease">梅毒</span>
+        <span class="tag disease">软下疳</span>
+        <span class="tag disease">性病性淋巴肉芽肿</span>
+        <span class="tag bacteria">肺炎链球菌</span>
+        <span class="tag bacteria">流感嗜血杆菌</span>
+        <span class="tag bacteria">铜绿假单胞菌</span>
+        <span class="tag bacteria">军团菌</span>
+        <span class="tag bacteria">结核分枝杆菌</span>
+        <span class="tag bacteria">汉赛巴尔通体</span>
+        <span class="tag bacteria">A族链球菌</span>
+        <span class="tag bacteria">金黄色葡萄球菌</span>
+        <span class="tag bacteria">厌氧菌</span>
+        <span class="tag bacteria">鸟分枝杆菌</span>
+        <span class="tag bacteria">瘰疬分枝杆菌</span>
+        <span class="tag bacteria">玛尔摩分枝杆菌</span>
+        <span class="tag bacteria">鼠疫耶尔森菌</span>
+        <span class="tag bacteria">土拉菌</span>
+        <span class="tag virus">EB病毒</span>
+        <span class="tag virus">单纯疱疹病毒</span>
+        <span class="tag fungi">弓形虫</span>
+        <span class="tag antibiotic">头孢曲松</span>
+        <span class="tag antibiotic">阿奇霉素</span>
+        <span class="tag antibiotic">左氧氟沙星</span>
+        <span class="tag antibiotic">莫西沙星</span>
+        <span class="tag">CAP治疗方案</span>
+        <span class="tag">淋巴结穿刺</span>
+        <span class="tag">革兰染色</span>
+        <span class="tag">抗酸染色</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="临床抗微生物治疗的初始选择：HIV阳性肺部感染（续）及淋巴结炎；HIV阳性、肺部感染、急性淋巴结炎、猫抓病、淋巴结结核、腺鼠疫、土拉菌病、Kikuchi-Fujimoto病、肺炎链球菌、铜绿假单胞菌、头孢曲松、左氧氟沙星、莫西沙星；=104" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="footer">
+        <div class="page-number">104</div>
+        <p style="margin-top: 15px; color: #888;">关键词：HIV阳性 | 肺部感染 | 急性淋巴结炎 | 猫抓病 | 淋巴结结核 | 腺鼠疫 | 土拉菌病 | Kikuchi-Fujimoto病 | 肺炎链球菌 | 铜绿假单胞菌 | 头孢曲松 | 左氧氟沙星 | 莫西沙星</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById("copyBtn");
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "✓ 已复制";
+            btn.classList.add("copied");
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.classList.remove("copied");
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

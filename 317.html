@@ -1,0 +1,430 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗感染药物剂量和不良反应-万古霉素</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f2ff;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .dosage-highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .warning {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .note {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        .tag-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        .tag-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .tag-bacteria {
+            background: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .copy-input:focus {
+            border-color: #667eea;
+        }
+        
+        .btn-copy {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .copy-feedback {
+            color: #27ae60;
+            font-size: 14px;
+            margin-left: 10px;
+            display: none;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .keywords-bottom {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .formula {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="316.html" class="btn btn-page">上一页</a>
+            <a href="318.html" class="btn btn-page">下一页</a>
+        </div>
+    </div>
+    
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            抗感染药物剂量和不良反应-万古霉素
+            <span class="title-decoration">*****</span>
+        </h1>
+    </div>
+    
+    <div class="subtitle">表10A（7）抗感染药物的剂量和不良反应</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 22%;">分类，药品，通用名（商品名）</th>
+                    <th style="width: 38%;">成人常规剂量*</th>
+                    <th style="width: 40%;">不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="drug-name">万古霉素（Vancocin、Firvanq）</div>
+                        <div>注射：金黄色葡萄球菌菌血症、心内膜炎、侵袭性感染</div>
+                        <div>口服：艰难梭菌结肠炎</div>
+                        <div>鞘内：脑膜炎</div>
+                        <div class="reference">参见更新剂量指南</div>
+                        <div class="reference">Am J Health Sys Pharm 2020; 77: 835; Clin Infect Dis 2020; 70: 1536 & 1546; Crit Care Med 2020; 48: 912</div>
+                        <div class="reference">谷浓度与AUC<sub>ss</sub>计算的讨论（CID 2021; 72: 1497 & 1502）</div>
+                        <div class="reference">AUC计算器，参见SanfordGuide mobile app或web.sanfordguide.com（基于二项梯形模型：峰浓度和谷浓度）</div>
+                    </td>
+                    <td>
+                        金黄色葡萄球菌血症或其他敏感革兰阳性菌：目标AUC<sub>ss</sub>水平400～600μg·h/ml<br><br>
+                        推荐负荷剂量：按实际体重计：20～30mg/kg iv，滴注速度10～15mg/min（最大量3g），之间间歇输注或持续输注（CI）<br><br>
+                        <span class="note">间歇输注方案：</span>首次输注在负荷剂量开始后12小时，15～20mg/kg iv，输注1小时，间隔12小时重复。24～48小时后抽血峰浓度和谷浓度计算AUC<sub>ss</sub>（使用Sanford Guide AUC计算器），调整剂量维持AUC<sub>ss</sub>400～600μg·h/ml<br><br>
+                        <span class="note">持续输注方案：</span>负荷剂量完成后即刻开始持续静脉输注30～40mg/(kg·d)。数小时内抽血查随机血浓度：AUC=血浓度×24，调整剂量维持AUC<sub>ss</sub> 400～600μg·h/ml<br><br>
+                        病态肥胖患者剂量：BMI＞30kg/m²，先给予负荷剂量，8h后开始维持剂量。间歇性输注：15～20mg/kg iv，输注2～3小时，之后每8小时重复。24～48小时后抽血查峰浓度及谷浓度计算AUC<sub>ss</sub>（使用Sanford Guide AUC计算器）。无病态肥胖患者持续输注剂量的数据<br><br>
+                        艰难梭菌结肠炎：125mg po q6h，疗程为10天。<span class="warning">注意：口服万古霉素不吸收</span><br><br>
+                        脑膜炎鞘内注射：婴儿：5～10mg/d<br>
+                        儿童和成人：10～20mg/d，目标CSF浓度10～20μg/ml
+                    </td>
+                    <td>
+                        <span class="note">优化万古霉素PK：</span>目前最好推荐采用能实现AUC<sub>ss</sub>达到400～600μg·h/ml这一目标水平的剂量（见更新指南参考文献），无须将AUC<sub>ss</sub>除以MIC。4种计算AUC<sub>ss</sub>方法如下：<br>
+                        1. 使用谷浓度：既往使用方法，但不可靠，现已不推荐<br>
+                        2. 抽血查稳态（24～48小时）峰浓度及谷浓度：使用Sanford Guide万古霉素AUC计算器，基于梯形模型计算AUC<sub>ss</sub>，需要2个浓度水平<br>
+                        3. 首剂后抽血查峰浓度及谷浓度，有条件时使用贝叶斯模型计算器，单个浓度水平计算准确，但软件可能昂贵，基于2个以上浓度计算是否提供更多临床益处尚有争议<br>
+                        4. 持续输注时，抽血查随机血浓度，乘以输注时长（小时），如23或24<br><br>
+                        <span class="note">口服配方：</span>FDA批准口服溶液（Firvanq）25/50mg/ml（价格昂贵）。配方溶液：静脉用粉剂万古霉素5g＋无菌水47.5ml＋糖精0.2g＋甜菊糖粉0.05g＋甘油40ml和足量樱桃糖浆，配成100ml溶液，万古霉素浓度50mg/ml。口服125mg，则服用2.5ml q6h<br><br>
+                        <span class="warning">不良反应：</span>皮肤：潮红反应，与输液速度过快导致的非特异性组胺释放相关（非真正过敏反应），可通过减缓输注速度再次给药。IgA大疱性皮炎，免疫介导。药物反应：伴嗜酸性粒细胞增多和全身症状体征（DRESS），遗传易感性（J Allergy Clin Immunol 2019; 144: 483），类似无黏膜受累的Stevens-Johnson综合征。药物热、免疫性粒细胞减少，血小板计数减少。剂量依赖性肾毒性：AUC<sub>ss</sub>超过600μg·h/ml风险增加；万古霉素＋哌拉西林他唑巴坦可增加血清肌酐，可能与哌拉西林和肌酐竞争肾小管排泌有关（CID 71: 426，2020）<br><br>
+                        <span class="reference">* https://web.sanfordguide.com或Sanford Guide mobile app</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="text-align: center; color: #7f8c8d; font-size: 12px; margin: 15px 0;">
+        注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。表中名词缩写见第2页。
+    </div>
+    
+    <div class="tag-section">
+        <div class="tag-title">检索标签</div>
+        <div class="tags">
+            <span class="tag tag-disease">金黄色葡萄球菌菌血症</span>
+            <span class="tag tag-disease">心内膜炎</span>
+            <span class="tag tag-disease">侵袭性感染</span>
+            <span class="tag tag-disease">艰难梭菌结肠炎</span>
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">Vancocin</span>
+            <span class="tag tag-drug">Firvanq</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">革兰阳性菌</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗感染药物剂量和不良反应-万古霉素；表10A（7）抗感染药物的剂量和不良反应；万古霉素、Vancocin、Firvanq、金黄色葡萄球菌菌血症、心内膜炎、侵袭性感染、艰难梭菌结肠炎、脑膜炎、AUC、Sanford Guide；=317" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        <span class="copy-feedback" id="copyFeedback">已复制到剪贴板！</span>
+    </div>
+    
+    <div class="page-number">317</div>
+    
+    <div class="keywords-bottom">
+        关键词：万古霉素 | Vancocin | Firvanq | 金黄色葡萄球菌 | 心内膜炎 | 艰难梭菌结肠炎 | 脑膜炎 | AUC | Sanford Guide | 抗感染药物
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const feedback = document.getElementById("copyFeedback");
+                feedback.style.display = "inline";
+                setTimeout(function() {
+                    feedback.style.display = "none";
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand("copy");
+                const feedback = document.getElementById("copyFeedback");
+                feedback.style.display = "inline";
+                setTimeout(function() {
+                    feedback.style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

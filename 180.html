@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗真菌药物菌谱表-双相真菌*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #2e75b6;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        /* 第一行字体大一点 */
+        thead tr:first-child th {
+            font-size: 16px;
+            padding: 15px 8px;
+        }
+        
+        /* 分类头部 */
+        .category-header {
+            background: #5b9bd5 !important;
+            color: white;
+            font-size: 14px !important;
+        }
+        
+        tbody td {
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        tbody th {
+            padding: 12px 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* 敏感性颜色 */
+        .sensitive { /* + 敏感 */
+            background: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+        
+        .moderate { /* ± 中介 */
+            background: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+        }
+        
+        .resistant { /* 0 耐药 */
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .high-sens { /* ++ 高度敏感 */
+            background: #c3e6cb;
+            color: #0f5132;
+            font-weight: bold;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-fungus {
+            background: #e8f4f8;
+            color: #1a5276;
+            border: 1px solid #5b9bd5;
+        }
+        
+        .tag-antifungal {
+            background: #fef3e8;
+            color: #6c4a00;
+            border: 1px solid #f9a825;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #5b9bd5;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:active {
+            background: #218838;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-top: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th, tbody th, tbody td {
+                padding: 8px 4px;
+            }
+            
+            .tag {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="179.html" class="nav-btn">← 上一页</a>
+            <a href="181.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="title">~~~~~表4B 抗真菌药物菌谱表-双相真菌*****</h1>
+    
+    <!-- 表格容器 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">抗真菌药物</th>
+                    <th colspan="4" class="category-header">双相真菌</th>
+                </tr>
+                <tr>
+                    <th>芽生菌</th>
+                    <th>球孢子菌</th>
+                    <th>组织胞浆菌</th>
+                    <th>孢子丝菌</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 两性霉素B -->
+                <tr>
+                    <th>两性霉素B</th>
+                    <td class="high-sens">++</td>
+                    <td class="high-sens">++</td>
+                    <td class="high-sens">++</td>
+                    <td class="high-sens">++</td>
+                </tr>
+                <!-- 氟康唑 -->
+                <tr>
+                    <th>氟康唑</th>
+                    <td class="moderate">±</td>
+                    <td class="high-sens">++</td>
+                    <td class="moderate">±</td>
+                    <td class="moderate">±</td>
+                </tr>
+                <!-- 伊曲康唑 -->
+                <tr>
+                    <th>伊曲康唑</th>
+                    <td class="high-sens">++</td>
+                    <td class="high-sens">++</td>
+                    <td class="high-sens">++</td>
+                    <td class="high-sens">++</td>
+                </tr>
+                <!-- 伏立康唑 -->
+                <tr>
+                    <th>伏立康唑</th>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                </tr>
+                <!-- 泊沙康唑 -->
+                <tr>
+                    <th>泊沙康唑</th>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                </tr>
+                <!-- 艾沙康唑/硫酸艾沙康唑 -->
+                <tr>
+                    <th>艾沙康唑<br>硫酸艾沙康唑</th>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                    <td class="sensitive">+</td>
+                </tr>
+                <!-- 阿尼芬净 -->
+                <tr>
+                    <th>阿尼芬净</th>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                </tr>
+                <!-- 卡泊芬净 -->
+                <tr>
+                    <th>卡泊芬净</th>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                </tr>
+                <!-- 米卡芬净 -->
+                <tr>
+                    <th>米卡芬净</th>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                </tr>
+                <!-- 瑞扎芬净 -->
+                <tr>
+                    <th>瑞扎芬净</th>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                    <td class="resistant">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 真菌标签 -->
+            <span class="tag tag-fungus">芽生菌</span>
+            <span class="tag tag-fungus">球孢子菌</span>
+            <span class="tag tag-fungus">组织胞浆菌</span>
+            <span class="tag tag-fungus">孢子丝菌</span>
+            <!-- 抗真菌药物标签 -->
+            <span class="tag tag-antifungal">两性霉素B</span>
+            <span class="tag tag-antifungal">氟康唑</span>
+            <span class="tag tag-antifungal">伊曲康唑</span>
+            <span class="tag tag-antifungal">伏立康唑</span>
+            <span class="tag tag-antifungal">泊沙康唑</span>
+            <span class="tag tag-antifungal">艾沙康唑</span>
+            <span class="tag tag-antifungal">硫酸艾沙康唑</span>
+            <span class="tag tag-antifungal">阿尼芬净</span>
+            <span class="tag tag-antifungal">卡泊芬净</span>
+            <span class="tag tag-antifungal">米卡芬净</span>
+            <span class="tag tag-antifungal">瑞扎芬净</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="footer-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="表4B 抗真菌药物菌谱表-双相真菌；双相真菌；芽生菌；球孢子菌；组织胞浆菌；孢子丝菌；两性霉素B；氟康唑；伊曲康唑；伏立康唑；泊沙康唑；艾沙康唑；阿尼芬净；卡泊芬净；米卡芬净；瑞扎芬净；=180" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        <div class="page-number">第 180 页</div>
+        <div class="keywords">
+            <strong>关键词：</strong>抗真菌药物菌谱表；表4B；双相真菌；芽生菌；球孢子菌；组织胞浆菌；孢子丝菌；两性霉素B；氟康唑；伊曲康唑；伏立康唑；泊沙康唑；艾沙康唑；硫酸艾沙康唑；阿尼芬净；卡泊芬净；米卡芬净；瑞扎芬净
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+    </script>
+</body>
+</html>

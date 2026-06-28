@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-咽旁间隙感染与颈静脉感染性静脉炎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-home {
+            background-color: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background-color: #219a52;
+        }
+        
+        .btn-prev, .btn-next {
+            background-color: #e67e22;
+        }
+        
+        .btn-prev:hover, .btn-next:hover {
+            background-color: #d35400;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #2c3e50;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(:first-child) {
+            background-color: #e8f4f8;
+        }
+        
+        /* 分类行高亮 */
+        .category-row {
+            background-color: #d5e8d4 !important;
+            font-weight: bold;
+            color: #1e8449 !important;
+        }
+        
+        .category-row td {
+            color: #1e8449;
+            font-size: 14px;
+        }
+        
+        /* 警示文字 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        /* 注释区域 */
+        .notes-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 12px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .notes-section p {
+            margin-bottom: 8px;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background-color: #9b59b6;
+        }
+        
+        .tag-symptom {
+            background-color: #f39c12;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .nav-top {
+                justify-content: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+            
+            thead th {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="113.html" class="btn btn-prev">上一页</a>
+            <a href="115.html" class="btn btn-next">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">临床抗微生物治疗的初始选择</h1>
+    <p class="subtitle">表1（50）咽旁间隙感染、颈静脉感染性静脉炎与喉炎</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 22%;">病原体（通常）</th>
+                    <th style="width: 30%;">首选方案</th>
+                    <th style="width: 30%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">
+                        咽旁间隙感染［区域：舌下、颌下（脓性颌下炎）（50页）咽旁、咽后、气管前和下纵隔炎］
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        牙齿卫生不良、拔牙、异物（如牙签、鱼刺）
+                    </td>
+                    <td>
+                        多种细菌混合感染：<span class="drug-name">金黄色葡萄球菌</span>、链球菌属、厌氧菌、侵蚀艾肯杆菌。厌氧菌与需氧菌之比为10:1
+                    </td>
+                    <td>
+                        <span class="drug-name">头孢曲松</span> 2g iv q24h<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg iv q8h
+                    </td>
+                    <td>
+                        <span class="drug-name">哌拉西林-他唑巴坦</span> 4.5g iv q8h<br>
+                        或<span class="drug-name">氨苄西林-舒巴坦</span> 3g iv q6h
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>颈静脉感染性静脉炎<br>（Lemierre综合征）</strong>
+                    </td>
+                    <td>
+                        大多数为坏死梭杆菌<br>
+                        （<em>JCM 2018；56：e00487-18</em>）
+                    </td>
+                    <td>
+                        <span class="drug-name">哌拉西林-他唑巴坦</span> 4.5g iv 输注4小时q8h，<br>
+                        或<span class="drug-name">亚胺培南</span> 0.5g iv q6h或其他碳青霉烯类，<br>
+                        或（<span class="drug-name">甲硝唑</span> 500mg po/iv q8h<br>
+                        ＋<span class="drug-name">头孢曲松</span> 2g iv qd）
+                    </td>
+                    <td>
+                        <span class="drug-name">克林霉素</span> 600～900mg iv q8h<br><br>
+                        <span class="warning">避免使用大环内酯类：梭杆菌耐药</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>喉炎（声嘶）</strong>
+                    </td>
+                    <td>
+                        病毒（90%）
+                    </td>
+                    <td colspan="2">
+                        无适应证
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: #2e86c1; font-size: 15px; margin-bottom: 10px;">辅助诊断或治疗方法及说明</h3>
+        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+            <p><strong>【咽旁间隙感染】</strong>密切观察气道情况，1/3的患者需气管插管；MRI或CT可检出脓肿，一旦确定则切开引流；可予甲硝唑1.0g iv q12h。并发症：颈动脉感染（可能破裂）和颈静脉炎诊断：FDG PET/CT</p>
+            <p style="margin-top: 8px;"><strong>【颈静脉感染性静脉炎】</strong>常合并肺和体循环血栓形成，病变可侵蚀颈动脉。其他厌氧菌和革兰阳性球菌在咽炎后感染性静脉炎致病菌中少见</p>
+        </div>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes-section">
+        <p><strong>注：17</strong>咽旁间隙感染：<span class="drug-name">头孢曲松</span> 2g iv qd；<span class="drug-name">头孢噻肟</span> 2g iv q4～8h；<span class="drug-name">哌拉西林-他唑巴坦</span> 4.5g q8h（输注4小时）；<span class="drug-name">TMP-SMX</span> 8～10mg/(kg·d)，按TMP计算分次q6h、q8h或q12h；<span class="drug-name">克林霉素</span> 600～900mg iv q6～8h；<span class="drug-name">左氧氟沙星</span> 750mg iv qd；<span class="drug-name">万古霉素</span> 30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml。</p>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：114</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择；咽旁间隙感染/脓性颌下炎/颈静脉感染性静脉炎/Lemierre综合征/喉炎/声嘶；头孢曲松/甲硝唑/哌拉西林-他唑巴坦/氨苄西林-舒巴坦/亚胺培南/克林霉素/TMP-SMX/左氧氟沙星/万古霉素；金黄色葡萄球菌/链球菌/厌氧菌/侵蚀艾肯杆菌/坏死梭杆菌；=114" readonly>
+            <button class="btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">咽旁间隙感染</span>
+            <span class="tag tag-disease">脓性颌下炎</span>
+            <span class="tag tag-disease">Lemierre综合征</span>
+            <span class="tag tag-disease">颈静脉感染性静脉炎</span>
+            <span class="tag tag-disease">喉炎</span>
+            <span class="tag tag-disease">声嘶</span>
+            <span class="tag tag-disease">下纵隔炎</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">侵蚀艾肯杆菌</span>
+            <span class="tag tag-bacteria">坏死梭杆菌</span>
+            <span class="tag tag-bacteria">革兰阳性球菌</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">氨苄西林-舒巴坦</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">碳青霉烯类</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">TMP-SMX</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">头孢噻肟</span>
+            
+            <!-- 症状/操作标签 -->
+            <span class="tag tag-symptom">气道梗阻</span>
+            <span class="tag tag-symptom">脓肿引流</span>
+            <span class="tag tag-symptom">气管插管</span>
+            <span class="tag tag-symptom">血栓形成</span>
+            <span class="tag tag-symptom">颈动脉破裂</span>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>临床抗微生物治疗 | 初始选择 | 咽旁间隙感染 | 脓性颌下炎 | Lemierre综合征 | 颈静脉感染性静脉炎 | 喉炎 | 坏死梭杆菌 | 厌氧菌 | 甲硝唑 | 头孢曲松 | 哌拉西林-他唑巴坦 | 碳青霉烯 | 克林霉素
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyInput = document.getElementById("copyInput");
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }).catch(function() {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+    </script>
+</body>
+</html>

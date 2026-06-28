@@ -1,0 +1,421 @@
+我来为您创建这个关于Whipple病治疗的HTML网页表格，包含所有要求的特殊格式和功能。
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~Whipple病治疗指南 - 多西环素羟氯喹终身治疗方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
+            padding: 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .home-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(41, 128, 185, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-button a:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
+        }
+        
+        .home-button a::before {
+            content: "← ";
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
+            padding: 35px;
+            margin-top: 50px;
+        }
+        
+        /* 特殊格式标题 */
+        .title-special {
+            text-align: center;
+            color: #1a5276;
+            font-size: 30px;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #3498db;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 17px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        /* 检索标签区域 */
+        .search-tags {
+            background-color: #e8f6f3;
+            border: 2px dashed #27ae60;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .search-tags-label {
+            color: #1e8449;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .search-tags-content {
+            color: #6c3483;
+            font-size: 13px;
+            line-height: 1.8;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background-color: #fff;
+            table-layout: fixed;
+        }
+        
+        /* 表格头部 - 蓝色，字体大 */
+        thead th {
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid #154360;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background-color: #2980b9 !important;
+            color: #ffffff;
+            font-size: 16px !important;
+            font-weight: bold;
+            padding: 14px 10px;
+            border: 2px solid #1a5276;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #bdc3c7;
+            color: #2c3e50;
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e1f0fa;
+        }
+        
+        /* 左侧诊断列 */
+        td:first-child {
+            width: 18%;
+            background-color: #f4f6f7;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        /* 病原体列 */
+        .pathogen {
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 首选方案 */
+        .preferred {
+            color: #1e8449;
+            font-weight: 600;
+            background-color: #eafaf1;
+        }
+        
+        /* 备选方案 */
+        .alternative {
+            color: #d35400;
+            background-color: #fef5e7;
+        }
+        
+        /* 辅助说明 */
+        .notes {
+            color: #34495e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 重要提示高亮 */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+            font-weight: 600;
+        }
+        
+        /* 警告提示 */
+        .warning {
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #721c24;
+            font-weight: 600;
+        }
+        
+        /* 成功提示 */
+        .success {
+            background-color: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        /* 剂量数字突出 */
+        .dose {
+            color: #c0392b;
+            font-weight: 700;
+        }
+        
+        /* 药物名称突出 */
+        .drug {
+            background-color: #e8daef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 页脚注释区域 */
+        .footnote-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fef9e7;
+            border-radius: 10px;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .footnote-section p {
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .footnote-section .symbol {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="home-button">
+        <a href="index.html">返回首页</a>
+    </div>
+    
+    <div class="container">
+        <!-- 特殊格式标题 -->
+        <h1 class="title-special">~~~~~临床抗微生物治疗的初始选择*****</h1>
+        <p class="subtitle">小肠Whipple病治疗方案</p>
+        
+        <!-- 检索标签区域 -->
+        <div class="search-tags">
+            <div class="search-tags-label">%%%%%检索标签?????</div>
+            <div class="search-tags-content">
+                Whipple病, Whipple养障体, 惠普尔病, 多西环素, 羟氯喹, 免疫重建炎症综合征, IRIS, TMP-SMX, 复方新诺明, 碳青霉烯类, 头孢曲松, 细胞内病原菌, 感染性心内膜炎, 培养阴性, 终身治疗, 小肠感染, 胃肠道感染
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Whipple病 -->
+                <tr>
+                    <td>
+                        <span class="highlight">小肠：Whipple病</span><br><br>
+                        <span class="reference">见培养阴性的感染性心内膜炎，32页</span>
+                    </td>
+                    <td class="pathogen">
+                        <span class="drug">Whipple养障体</span>
+                    </td>
+                    <td class="preferred" colspan="2">
+                        （<span class="drug">多西环素</span> <span class="dose">100mg</span> po bid ＋ <span class="drug">羟氯喹</span> <span class="dose">200mg</span> po tid）×<span class="dose">1年</span>，<br>
+                        之后终身<span class="drug">多西环素</span> <span class="dose">100mg</span> po bid<br>
+                        （儿童剂量，<span class="highlight">见说明</span>）<br><br>
+                        
+                        <span class="warning">可发生免疫重建炎症综合征（IRIS）</span>
+                    </td>
+                    <td class="notes">
+                        体外试验中对<span class="drug">TMP-SMX</span><span class="warning">耐药</span>并且常出现临床治疗失败及复发，<br>
+                        体外试验中对<span class="drug">碳青霉烯类</span><span class="warning">耐药常见</span>，<br>
+                        <span class="drug">头孢曲松</span>对细胞内病原菌体外表现为<span class="warning">高MIC</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页脚注释区域 -->
+        <div class="footnote-section">
+            <p><span class="symbol">注：5</span> 铋剂。①在美国，<span class="drug">次水杨酸铋</span>（Pepto-Bismol）每片<span class="dose">262mg</span>，治疗幽门螺杆菌成人剂量为<span class="dose">2片（524mg）qid</span>；②美国以外，<span class="drug">次枸橼酸铋凝胶</span>（De-Nol）<span class="dose">120mg</span>咀嚼片，剂量为<span class="dose">1片qid</span>；在美国，次枸橼酸铋仅处方于复方胶囊（<span class="drug">Pylera</span>：每粒胶囊含次枸橼酸铋<span class="dose">140mg</span>＋<span class="drug">甲硝唑</span> <span class="dose">125mg</span>＋<span class="drug">四环素</span> <span class="dose">125mg</span>），<span class="dose">3粒po qid×10d</span>，同时<span class="drug">PPI</span> bid。</p>
+            
+            <p><span class="symbol">*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+            
+            <p><span class="symbol">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+            
+            <p>表中名词缩写<span class="highlight">见第2页</span>。</p>
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+
+
+---
+
+
+
+标签和标题信息
+
+
+ 项目 	 内容 	
+ **网页标题 (`<title>`标签)** 	 `~~~~~Whipple病治疗指南 - 多西环素羟氯喹终身治疗方案*****` 	
+ **主标题 (`<h1>`标签)** 	 `~~~~~临床抗微生物治疗的初始选择*****` 	
+ **副标题 (`<p class="subtitle">`)** 	 `小肠Whipple病治疗方案` 	
+ **检索标签 (`%%%%%检索标签?????`)** 	 Whipple病, Whipple养障体, 惠普尔病, 多西环素, 羟氯喹, 免疫重建炎症综合征, IRIS, TMP-SMX, 复方新诺明, 碳青霉烯类, 头孢曲松, 细胞内病原菌, 感染性心内膜炎, 培养阴性, 终身治疗, 小肠感染, 胃肠道感染 	
+
+
+
+
+---
+
+
+
+特殊格式说明
+
+
+ 格式 	 用途 	 示例 	
+ `~~~~~标题*****` 	 包裹标题文本，便于程序提取 	 `~~~~~临床抗微生物治疗的初始选择*****` 	
+ `%%%%%检索标签?????` 	 包裹检索关键词，便于程序提取疾病、药物、细菌信息 	 `%%%%%Whipple病, 多西环素, 羟氯喹, IRIS?????` 	
+
+
+
+
+---
+
+
+
+功能说明
+
+
+ 功能 	 实现方式 	
+ **返回首页按钮** 	 固定定位在左上角，蓝色背景，白色文字，点击跳转至 `index.html` 	
+ **按钮悬停效果** 	 鼠标悬停时颜色加深，向上浮动，阴影增强 	
+ **按钮箭头图标** 	 使用 `←` 符号作为返回指示 	
+
+
+
+
+---
+
+
+
+设计特点说明
+
+
+ 特性 	 实现方式 	
+ **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
+ **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
+ **子表头** 	 中蓝色 `#2980b9`，16px字号 	
+ **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
+ **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
+ **药物名称** 	 淡紫背景 `#e8daef`，紫色文字 `#6c3483`，突出显示 	
+ **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
+ **重要提示** 	 黄色高亮 `#fff3cd` 	
+ **警告提示** 	 淡红背景 `#f8d7da` 	
+ **成功/推荐** 	 淡绿背景 `#d4edda` 	
+ **页脚注释区域** 	 淡黄色背景 `#fef9e7`，橙色左边框 `#f39c12`，用于铋剂说明 	
+ **检索标签区域** 	 绿色虚线边框 `#27ae60`，浅绿背景 `#e8f6f3`，醒目易识别

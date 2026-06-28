@@ -1,0 +1,629 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~名词缩略语（I-P开头）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .abbr-code {
+            font-weight: 600;
+            color: #1565c0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .abbr-meaning {
+            color: #333;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="12.html" class="nav-btn">← 上一页</a>
+            <a href="14.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~名词缩略语（I-P开头）*****</h1>
+        <p class="subtitle">桑福德抗微生物治疗指南常用缩写对照表（续）</p>
+    </div>
+    
+    <div class="page-number">13</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">缩略语</th>
+                    <th style="width: 30%;">中文名称</th>
+                    <th style="width: 20%;">缩略语</th>
+                    <th style="width: 30%;">中文名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="abbr-code">Inv</span></td>
+                    <td><span class="abbr-meaning">研究性的</span></td>
+                    <td><span class="abbr-code">MTB</span></td>
+                    <td><span class="abbr-meaning">结核分枝杆菌</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">IP</span></td>
+                    <td><span class="abbr-meaning">腹腔内</span></td>
+                    <td><span class="abbr-code">NAF</span></td>
+                    <td><span class="abbr-meaning">萘夫西林</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">IT</span></td>
+                    <td><span class="abbr-meaning">椎管内</span></td>
+                    <td><span class="abbr-code">NAI</span></td>
+                    <td><span class="abbr-meaning">FDA未批准的（适应证或剂量）</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Itra</span></td>
+                    <td><span class="abbr-meaning">伊曲康唑</span></td>
+                    <td><span class="abbr-code">NB</span></td>
+                    <td><span class="abbr-meaning">商标名</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">iv</span></td>
+                    <td><span class="abbr-meaning">静脉注射</span></td>
+                    <td><span class="abbr-code">NIF-RTV</span></td>
+                    <td><span class="abbr-meaning">奈玛特韦-利托那韦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">IVDU</span></td>
+                    <td><span class="abbr-meaning">静脉吸毒者</span></td>
+                    <td><span class="abbr-code">NF</span></td>
+                    <td><span class="abbr-meaning">呋喃妥因</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">IVIG</span></td>
+                    <td><span class="abbr-meaning">静脉注射免疫球蛋白</span></td>
+                    <td><span class="abbr-code">NFR</span></td>
+                    <td><span class="abbr-meaning">奈非那韦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Keto</span></td>
+                    <td><span class="abbr-meaning">酮康唑</span></td>
+                    <td><span class="abbr-code">NNRTI</span></td>
+                    <td><span class="abbr-meaning">非核苷酸反转录酶抑制剂</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">KPC</span></td>
+                    <td><span class="abbr-meaning">克雷伯菌碳青霉烯酶</span></td>
+                    <td><span class="abbr-code">NOS</span></td>
+                    <td><span class="abbr-meaning">非特异性耐药机制</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">LAB</span></td>
+                    <td><span class="abbr-meaning">脂质体两性霉素B</span></td>
+                    <td><span class="abbr-code">NRTI</span></td>
+                    <td><span class="abbr-meaning">核苷酸反转录酶抑制剂</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">LCM</span></td>
+                    <td><span class="abbr-meaning">淋巴细胞脉络膜脑膜炎病毒</span></td>
+                    <td><span class="abbr-code">NSAIDs</span></td>
+                    <td><span class="abbr-meaning">非甾体抗炎药</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">LCR</span></td>
+                    <td><span class="abbr-meaning">连接酶链反应</span></td>
+                    <td><span class="abbr-code">NUS</span></td>
+                    <td><span class="abbr-meaning">美国未上市</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">LD</span></td>
+                    <td><span class="abbr-meaning">负荷剂量</span></td>
+                    <td><span class="abbr-code">NVP</span></td>
+                    <td><span class="abbr-meaning">奈韦拉平</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Len</span></td>
+                    <td><span class="abbr-meaning">lenacapavir</span></td>
+                    <td><span class="abbr-code">OAT</span></td>
+                    <td><span class="abbr-meaning">有机阴离子转运蛋白</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Levo</span></td>
+                    <td><span class="abbr-meaning">左氧氟沙星</span></td>
+                    <td><span class="abbr-code">OATP</span></td>
+                    <td><span class="abbr-meaning">有机阴离子转运多肽</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">LP/R</span></td>
+                    <td><span class="abbr-meaning">洛匹那韦/利托那韦</span></td>
+                    <td><span class="abbr-code">O Ceph</span></td>
+                    <td><span class="abbr-meaning">口服头孢菌素类</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MATE</span></td>
+                    <td><span class="abbr-meaning">多药与毒素外排转运蛋白</span></td>
+                    <td><span class="abbr-code">OCT</span></td>
+                    <td><span class="abbr-meaning">有机阳离子转运蛋白</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MBL</span></td>
+                    <td><span class="abbr-meaning">金属β-内酰胺酶</span></td>
+                    <td><span class="abbr-code">Oflox</span></td>
+                    <td><span class="abbr-meaning">氧氟沙星</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MD</span></td>
+                    <td><span class="abbr-meaning">维持量</span></td>
+                    <td><span class="abbr-code">P Ceph</span></td>
+                    <td><span class="abbr-meaning">注射用头孢菌素类药物</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MDA</span></td>
+                    <td><span class="abbr-meaning">群体药物干预</span></td>
+                    <td><span class="abbr-code">PCR</span></td>
+                    <td><span class="abbr-meaning">聚合酶链反应</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MDR</span></td>
+                    <td><span class="abbr-meaning">多药耐药</span></td>
+                    <td><span class="abbr-code">PD</span></td>
+                    <td><span class="abbr-meaning">药效动力学</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MER</span></td>
+                    <td><span class="abbr-meaning">美罗培南</span></td>
+                    <td><span class="abbr-code">PEP</span></td>
+                    <td><span class="abbr-meaning">暴露后预防</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MER-Vabor</span></td>
+                    <td><span class="abbr-meaning">美罗培南-韦博巴坦</span></td>
+                    <td><span class="abbr-code">PGP</span></td>
+                    <td><span class="abbr-meaning">P-糖蛋白</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Metro</span></td>
+                    <td><span class="abbr-meaning">甲硝唑</span></td>
+                    <td><span class="abbr-code">PI</span></td>
+                    <td><span class="abbr-meaning">蛋白酶抑制剂</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Mino</span></td>
+                    <td><span class="abbr-meaning">米诺环素</span></td>
+                    <td><span class="abbr-code">Pip-tazo</span></td>
+                    <td><span class="abbr-meaning">哌拉西林-他唑巴坦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">mL</span></td>
+                    <td><span class="abbr-meaning">毫升</span></td>
+                    <td><span class="abbr-code">PK</span></td>
+                    <td><span class="abbr-meaning">药代动力学</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MOL</span></td>
+                    <td><span class="abbr-meaning">莫诺拉韦</span></td>
+                    <td><span class="abbr-code">po</span></td>
+                    <td><span class="abbr-meaning">口服</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Moxi</span></td>
+                    <td><span class="abbr-meaning">莫西沙星</span></td>
+                    <td><span class="abbr-code">PQ</span></td>
+                    <td><span class="abbr-meaning">伯氨喹</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MQ</span></td>
+                    <td><span class="abbr-meaning">甲氟喹</span></td>
+                    <td><span class="abbr-code">PRCT</span></td>
+                    <td><span class="abbr-meaning">前瞻性随机对照研究</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MSM</span></td>
+                    <td><span class="abbr-meaning">男男性行为者</span></td>
+                    <td><span class="abbr-code">PTLD</span></td>
+                    <td><span class="abbr-meaning">移植后淋巴细胞增殖性疾病</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">MSSA/MRSA</span></td>
+                    <td><span class="abbr-meaning">甲氧西林敏感/耐甲氧西林金黄色葡萄球菌</span></td>
+                    <td><span class="abbr-code">Pts</span></td>
+                    <td><span class="abbr-meaning">患者</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">研究性的</span>
+            <span class="tag">腹腔内</span>
+            <span class="tag">椎管内</span>
+            <span class="tag">伊曲康唑</span>
+            <span class="tag">静脉注射</span>
+            <span class="tag">静脉吸毒者</span>
+            <span class="tag">静脉注射免疫球蛋白</span>
+            <span class="tag">酮康唑</span>
+            <span class="tag">克雷伯菌碳青霉烯酶</span>
+            <span class="tag">脂质体两性霉素B</span>
+            <span class="tag">淋巴细胞脉络膜脑膜炎病毒</span>
+            <span class="tag">连接酶链反应</span>
+            <span class="tag">负荷剂量</span>
+            <span class="tag">lenacapavir</span>
+            <span class="tag">左氧氟沙星</span>
+            <span class="tag">洛匹那韦/利托那韦</span>
+            <span class="tag">多药与毒素外排转运蛋白</span>
+            <span class="tag">金属β-内酰胺酶</span>
+            <span class="tag">维持量</span>
+            <span class="tag">群体药物干预</span>
+            <span class="tag">多药耐药</span>
+            <span class="tag">美罗培南</span>
+            <span class="tag">美罗培南-韦博巴坦</span>
+            <span class="tag">甲硝唑</span>
+            <span class="tag">米诺环素</span>
+            <span class="tag">毫升</span>
+            <span class="tag">莫诺拉韦</span>
+            <span class="tag">莫西沙星</span>
+            <span class="tag">甲氟喹</span>
+            <span class="tag">男男性行为者</span>
+            <span class="tag">甲氧西林敏感金黄色葡萄球菌</span>
+            <span class="tag">耐甲氧西林金黄色葡萄球菌</span>
+            <span class="tag">结核分枝杆菌</span>
+            <span class="tag">萘夫西林</span>
+            <span class="tag">奈玛特韦-利托那韦</span>
+            <span class="tag">呋喃妥因</span>
+            <span class="tag">奈非那韦</span>
+            <span class="tag">非核苷酸反转录酶抑制剂</span>
+            <span class="tag">核苷酸反转录酶抑制剂</span>
+            <span class="tag">非甾体抗炎药</span>
+            <span class="tag">奈韦拉平</span>
+            <span class="tag">有机阴离子转运蛋白</span>
+            <span class="tag">口服头孢菌素类</span>
+            <span class="tag">有机阳离子转运蛋白</span>
+            <span class="tag">氧氟沙星</span>
+            <span class="tag">注射用头孢菌素类药物</span>
+            <span class="tag">聚合酶链反应</span>
+            <span class="tag">药效动力学</span>
+            <span class="tag">暴露后预防</span>
+            <span class="tag">P-糖蛋白</span>
+            <span class="tag">蛋白酶抑制剂</span>
+            <span class="tag">哌拉西林-他唑巴坦</span>
+            <span class="tag">药代动力学</span>
+            <span class="tag">口服</span>
+            <span class="tag">伯氨喹</span>
+            <span class="tag">前瞻性随机对照研究</span>
+            <span class="tag">移植后淋巴细胞增殖性疾病</span>
+            <span class="tag">患者</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="名词缩略语（I-P开头）；桑福德抗微生物治疗指南常用缩写对照表（续）；研究性的,腹腔内,椎管内,伊曲康唑,静脉注射,静脉吸毒者,静脉注射免疫球蛋白,酮康唑,克雷伯菌碳青霉烯酶,脂质体两性霉素B,淋巴细胞脉络膜脑膜炎病毒,连接酶链反应,负荷剂量,左氧氟沙星,洛匹那韦/利托那韦,多药与毒素外排转运蛋白,金属β-内酰胺酶,维持量,群体药物干预,多药耐药,美罗培南,美罗培南-韦博巴坦,甲硝唑,米诺环素,莫诺拉韦,莫西沙星,甲氟喹,男男性行为者,甲氧西林敏感金黄色葡萄球菌,耐甲氧西林金黄色葡萄球菌,结核分枝杆菌,萘夫西林,奈玛特韦-利托那韦,呋喃妥因,奈非那韦,非核苷酸反转录酶抑制剂,核苷酸反转录酶抑制剂,非甾体抗炎药,奈韦拉平,有机阴离子转运蛋白,口服头孢菌素类,有机阳离子转运蛋白,氧氟沙星,注射用头孢菌素类药物,聚合酶链反应,药效动力学,暴露后预防,P-糖蛋白,蛋白酶抑制剂,哌拉西林-他唑巴坦,药代动力学,口服,伯氨喹,前瞻性随机对照研究,移植后淋巴细胞增殖性疾病,患者；=13" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '名词缩略语（I-P开头）',
+                    url: window.location.href,
+                    page: '13',
+                    tags: ['缩略语', '缩写', '专业术语']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '13');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '13');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '13');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

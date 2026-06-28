@@ -1,0 +1,463 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~风湿热二级预防与伤寒综合征诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background-color: #388E3C;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #0D47A1;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            border-left: 5px solid #1976D2;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-size: 12px;
+        }
+        
+        thead th {
+            background-color: #1565C0;
+            color: white;
+            padding: 12px 6px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        tbody td {
+            padding: 10px 6px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #E8F5E9;
+        }
+        
+        .section-header {
+            background-color: #FFF3E0 !important;
+            font-weight: bold;
+            color: #E65100;
+            font-size: 13px;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #B71C1C;
+            font-size: 13px;
+        }
+        
+        .pathogen {
+            color: #1B5E20;
+        }
+        
+        .treatment-first {
+            color: #0D47A1;
+            background-color: #E3F2FD;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .treatment-alt {
+            color: #6A1B9A;
+            background-color: #F3E5F5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            color: #BF360C;
+            font-size: 11px;
+        }
+        
+        .reference {
+            color: #546E7A;
+            font-style: italic;
+            font-size: 11px;
+        }
+        
+        .highlight-box {
+            background-color: #E8F5E9;
+            border-left: 4px solid #4CAF50;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning-box {
+            background-color: #FFEBEE;
+            border-left: 4px solid #F44336;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .footer-note {
+            background-color: #FFF8E1;
+            font-size: 11px;
+            color: #5D4037;
+            padding: 10px;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            border-bottom: 2px solid #E3F2FD;
+            padding-bottom: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+        
+        .tag-antibiotic {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .tag-prevention {
+            background-color: #FFF3E0;
+            color: #E65100;
+            border: 1px solid #FFCC80;
+        }
+        
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #1976D2;
+            border-radius: 6px;
+            font-size: 13px;
+            background-color: #FAFAFA;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background-color: #43A047;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2E7D32;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #F3E5F5;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #6A1B9A;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 8px 4px;
+            }
+            
+            tbody td {
+                padding: 6px 4px;
+            }
+            
+            .nav-btn, .page-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        <div class="page-nav">
+            <a href="142.html" class="nav-btn page-btn">上一页</a>
+            <a href="144.html" class="nav-btn page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~风湿热二级预防与伤寒综合征诊疗指南*****</h1>
+    <div class="subtitle">表1（64）临床抗微生物治疗的初始选择 — 全身综合征（发热/不发热）（续）</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 20%;">病原体（通常）</th>
+                    <th style="width: 32%;">推荐治疗方案</th>
+                    <th style="width: 32%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="disease-name">二级预防</span><br>
+                        （此前确诊风湿热，预防复发）
+                    </td>
+                    <td class="pathogen">
+                        <span class="treatment-first">苄星青霉素：</span><br>
+                        体重＜27kg，60万U im q3～4w；<br>
+                        体重＞27kg，120万U im q3～4w<br>
+                        或青霉素V钾 250mg po bid（优选口服方案）<br><br>
+                        或阿奇霉素（青霉素过敏时的首选方案）：<br>
+                        体重＜27kg，5mg/kg（最大250mg）po qd；<br>
+                        体重＞27kg，250mg po qd
+                    </td>
+                    <td class="treatment-alt">
+                        <span class="treatment-first">疗程？</span><br>
+                        无心脏炎：5年或至21岁，以时间长者计算。<br>
+                        无后遗症的心脏炎：最后一次发病后10年。<br>
+                        有瓣膜病变的心脏炎：最后一次发病后10年或至40岁，以时间长者计算
+                    </td>
+                    <td>
+                        <!-- 空白，原图无内容 -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">伤寒综合征</span>（伤寒热，肠热症）<br>
+                        <span class="note">氟喹诺酮类耐药普遍</span>
+                    </td>
+                    <td class="pathogen">
+                        伤寒沙门菌，副伤寒沙门菌A、B、C和猪霍乱沙门菌<br><br>
+                        <div class="warning-box">
+                            <strong>注意：</strong>体外试验对萘啶酸耐药的细菌，通常提示环丙沙星无效（氟喹诺酮类）。不要经验性使用氟喹诺酮，需要敏感性结果
+                        </div>
+                    </td>
+                    <td>
+                        <div class="highlight-box">
+                            <span class="treatment-first">非巴基斯坦或伊拉克获得：</span><br>
+                            （头孢曲松 2g iv qd × 7～14d）<br>
+                            或阿奇霉素 1g po × 1剂，随后 500mg po qd × 7d（见说明）<br><br>
+                            对于儿童，阿奇霉素 10mg/kg qd × 7d
+                        </div>
+                        <div class="highlight-box">
+                            <span class="treatment-alt">巴基斯坦或伊拉克获得或无国际旅行在美国获得的伤寒：</span><br>
+                            美罗培南 1～2g iv q8h（或其他碳青霉烯类）；<br>
+                            严重感染可使用美罗培南＋阿奇霉素（见说明）
+                        </div>
+                    </td>
+                    <td>
+                        <span class="treatment-first">地塞米松：</span>重症患者使用，第一剂要在应用抗生素前，3mg/kg iv，然后 1mg/kg q6h × 8个剂量<br><br>
+                        <span class="treatment-first">并发症：</span>末端回肠和/或盲肠穿孔、骨髓炎、化脓性关节炎、感染性动脉瘤、脑膜炎，血播性肺炎。产ESBL肠炎沙门菌对氟喹诺酮和阿奇霉素耐药，如美罗培南治疗失败，加用静脉磷霉素可能有效（<span class="reference">CID 2017; 65: 1754</span>）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="footer-note">
+                        注：* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+                        § 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。<br>
+                        表中名词缩写见第2页。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-prevention">二级预防</span>
+        <span class="tag tag-disease">风湿热</span>
+        <span class="tag tag-disease">伤寒综合征</span>
+        <span class="tag tag-disease">伤寒</span>
+        <span class="tag tag-disease">肠热症</span>
+        <span class="tag tag-disease">心脏炎</span>
+        <span class="tag tag-disease">瓣膜病变</span>
+        <span class="tag tag-antibiotic">苄星青霉素</span>
+        <span class="tag tag-antibiotic">青霉素V钾</span>
+        <span class="tag tag-antibiotic">阿奇霉素</span>
+        <span class="tag tag-antibiotic">头孢曲松</span>
+        <span class="tag tag-antibiotic">美罗培南</span>
+        <span class="tag tag-antibiotic">碳青霉烯类</span>
+        <span class="tag tag-antibiotic">磷霉素</span>
+        <span class="tag tag-antibiotic">地塞米松</span>
+        <span class="tag tag-bacteria">伤寒沙门菌</span>
+        <span class="tag tag-bacteria">副伤寒沙门菌</span>
+        <span class="tag tag-bacteria">猪霍乱沙门菌</span>
+        <span class="tag tag-bacteria">A族链球菌</span>
+        <span class="tag tag-disease">氟喹诺酮耐药</span>
+        <span class="tag tag-disease">ESBL</span>
+        <span class="tag tag-disease">萘啶酸耐药</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="风湿热二级预防与伤寒综合征诊疗指南；二级预防；风湿热；伤寒综合征；伤寒；肠热症；心脏炎；瓣膜病变；苄星青霉素；青霉素V钾；阿奇霉素；头孢曲松；美罗培南；碳青霉烯类；磷霉素；地塞米松；伤寒沙门菌；副伤寒沙门菌；猪霍乱沙门菌；A族链球菌；氟喹诺酮耐药；ESBL；=143" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：143</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>风湿热二级预防 | 伤寒综合征 | 伤寒 | 肠热症 | 心脏炎 | 瓣膜病变 | 苄星青霉素 | 青霉素V钾 | 阿奇霉素 | 头孢曲松 | 美罗培南 | 碳青霉烯类 | 磷霉素 | 地塞米松 | 伤寒沙门菌 | 副伤寒沙门菌 | 猪霍乱沙门菌 | A族链球菌 | 氟喹诺酮耐药 | ESBL | 萘啶酸耐药
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+    </script>
+</body>
+</html>

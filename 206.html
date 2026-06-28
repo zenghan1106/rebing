@@ -1,0 +1,553 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表8A(8)妊娠期危险度分级和哺乳期用药安全性-疱疹病毒流感病毒抗病毒药物续*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.3);
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 20px;
+            margin: 10px 0 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        thead {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid #1a5276;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #d5d8dc;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        
+        .category-header {
+            background: #d6eaf8;
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        
+        .note-section {
+            background: #fef9e7;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .note-section p {
+            color: #7d6608;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            color: #2e75b6;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: #2e75b6;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .tag.virus {
+            background: #fadbd8;
+            color: #922b21;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.virus:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .tag.disease {
+            background: #fdebd0;
+            color: #9c640c;
+            border-color: #f5cba7;
+        }
+        
+        .tag.disease:hover {
+            background: #e67e22;
+            color: white;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            color: #2e75b6;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        #copyBtn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        #copyBtn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        #copyBtn.copied {
+            background: #27ae60;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            line-height: 2;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .back-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="205.html" class="nav-btn">上一页</a>
+            <a href="207.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表8A(8)妊娠期危险度分级和哺乳期用药安全性-疱疹病毒流感病毒抗病毒药物续*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">类别/药物</th>
+                    <th style="width: 45%;">FDA妊娠危险度¹</th>
+                    <th style="width: 45%;">哺乳期用药</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="category-header">抗病毒治疗（疱疹病毒）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">维建乐</td>
+                    <td>B</td>
+                    <td>安全性未确立，如果可能，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Vosevi</td>
+                    <td>无人类数据，动物安全</td>
+                    <td>安全性未确立，如果可能，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">择必达</td>
+                    <td>无人类数据，动物安全</td>
+                    <td>安全性未确立，如果可能，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿昔洛韦</td>
+                    <td>B</td>
+                    <td>安全，监测</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">西多福韦</td>
+                    <td>C</td>
+                    <td>避免使用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">泛昔洛韦</td>
+                    <td>人类或动物无毒性证据</td>
+                    <td>安全性未确立，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">膦甲酸钠</td>
+                    <td>C</td>
+                    <td>安全性未确立，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">更昔洛韦</td>
+                    <td>C</td>
+                    <td>安全性未确立，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">来特莫韦</td>
+                    <td>人类数据不充分，大鼠高<br>暴露量有胚胎毒性</td>
+                    <td>安全性未确立，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">马立巴韦</td>
+                    <td>人类数据不充分，大鼠胚<br>胎-胎仔存活率下降</td>
+                    <td>无数据，如果可能，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">伐昔洛韦</td>
+                    <td>人类：目前未发现与药物<br>相关的重大出生缺陷风<br>险。动物：无毒性证据</td>
+                    <td>安全，监测</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">缬更昔洛韦</td>
+                    <td>无人类数据，动物有胚胎/<br>胎儿毒性</td>
+                    <td>安全性未确立，勿用</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category-header">抗病毒药物（流感病毒）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">金刚烷胺</td>
+                    <td>C</td>
+                    <td>勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">玛巴洛沙韦</td>
+                    <td>无人类数据，动物安全</td>
+                    <td>可能安全，但尚无数据</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">法匹拉韦</td>
+                    <td>致畸性，禁用</td>
+                    <td>勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">奥司他韦</td>
+                    <td>有限人体数据未显示胚<br>胎-胎儿毒性，动物实验<br>未见毒性</td>
+                    <td>可能安全（原药及羧酸盐代谢产物水平较低，<br>上市后监测数据未显示毒性证据）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">帕拉米韦</td>
+                    <td>人类数据不充分，动物实<br>验高暴露量有胚胎毒性</td>
+                    <td>安全性未确立，如果可能，勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">金刚乙胺</td>
+                    <td>C</td>
+                    <td>勿用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">扎那米韦</td>
+                    <td>人类或动物无毒性证据</td>
+                    <td>可能安全，但无数据</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <p><strong>注：</strong>1 大写字母（A、B、C、D、X）=旧的FDA风险分类，该列文字=新的FDA风险分类。</p>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">疱疹病毒</span>
+            <span class="tag">维建乐</span>
+            <span class="tag">Vosevi</span>
+            <span class="tag">择必达</span>
+            <span class="tag">阿昔洛韦</span>
+            <span class="tag">西多福韦</span>
+            <span class="tag">泛昔洛韦</span>
+            <span class="tag">膦甲酸钠</span>
+            <span class="tag">更昔洛韦</span>
+            <span class="tag">来特莫韦</span>
+            <span class="tag">马立巴韦</span>
+            <span class="tag">伐昔洛韦</span>
+            <span class="tag">缬更昔洛韦</span>
+            <span class="tag disease">流感病毒</span>
+            <span class="tag">金刚烷胺</span>
+            <span class="tag">玛巴洛沙韦</span>
+            <span class="tag">法匹拉韦</span>
+            <span class="tag">奥司他韦</span>
+            <span class="tag">帕拉米韦</span>
+            <span class="tag">金刚乙胺</span>
+            <span class="tag">扎那米韦</span>
+            <span class="tag">FDA</span>
+            <span class="tag">妊娠期</span>
+            <span class="tag">哺乳期</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="表8A(8)妊娠期危险度分级和哺乳期用药安全性-疱疹病毒流感病毒抗病毒药物续；疱疹病毒；流感病毒；维建乐；Vosevi；择必达；阿昔洛韦；西多福韦；泛昔洛韦；膦甲酸钠；更昔洛韦；来特莫韦；马立巴韦；伐昔洛韦；缬更昔洛韦；金刚烷胺；玛巴洛沙韦；法匹拉韦；奥司他韦；帕拉米韦；金刚乙胺；扎那米韦；FDA；妊娠期；哺乳期；=206" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <div class="page-number">第 206 页</div>
+    
+    <div class="keywords">
+        <span>关键词：</span>
+        <span>妊娠期用药</span>
+        <span>哺乳期用药</span>
+        <span>疱疹病毒</span>
+        <span>流感病毒</span>
+        <span>抗病毒药物</span>
+        <span>阿昔洛韦</span>
+        <span>伐昔洛韦</span>
+        <span>更昔洛韦</span>
+        <span>缬更昔洛韦</span>
+        <span>奥司他韦</span>
+        <span>玛巴洛沙韦</span>
+        <span>扎那米韦</span>
+        <span>金刚烷胺</span>
+        <span>金刚乙胺</span>
+        <span>法匹拉韦</span>
+        <span>帕拉米韦</span>
+        <span>FDA妊娠分级</span>
+        <span>胚胎毒性</span>
+        <span>致畸性</span>
+    </div>
+    
+    <script>
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            const btn = document.getElementById('copyBtn');
+            
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(function() {
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand('copy');
+                btn.textContent = '已复制!';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

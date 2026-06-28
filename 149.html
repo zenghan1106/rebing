@@ -1,0 +1,509 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-中毒性休克综合征</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f0f4f8;
+            padding: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .prev-btn {
+            right: 105px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .title-marker {
+            color: #e53935;
+            letter-spacing: 3px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background: #1976d2;
+            font-size: 13px;
+            padding: 10px;
+        }
+        
+        /* 第一行字体大一点 */
+        .section-header td {
+            background: #e3f2fd !important;
+            font-size: 15px;
+            font-weight: bold;
+            color: #0d47a1;
+            padding: 12px 10px;
+            border: 1px solid #90caf9;
+        }
+        
+        /* 子章节标题 */
+        .subsection-header td {
+            background: #fff3e0 !important;
+            font-size: 14px;
+            font-weight: bold;
+            color: #e65100;
+            padding: 10px;
+            border: 1px solid #ffe0b2;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #cfd8dc;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        tr:hover {
+            background: #e8eaf6;
+        }
+        
+        /* 脚注 */
+        .footnote {
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 11px;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        /* 检索标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-disease:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #e65100;
+            color: white;
+        }
+        
+        .tag-toxin {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .tag-toxin:hover {
+            background: #c62828;
+            color: white;
+        }
+        
+        .tag-syndrome {
+            background: #e1f5fe;
+            color: #01579b;
+            border: 1px solid #81d4fa;
+        }
+        
+        .tag-syndrome:hover {
+            background: #01579b;
+            color: white;
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #1565c0;
+            border-radius: 6px;
+            font-size: 13px;
+            width: calc(100% - 110px);
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            padding: 12px 24px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #0d47a1;
+        }
+        
+        #copyBtn.copied {
+            background: #2e7d32;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #757575;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+                margin-top: 65px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .tag {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="148.html" class="nav-btn prev-btn">↑ 上一页</a>
+    <a href="150.html" class="nav-btn next-btn">↓ 下一页</a>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-marker">~~~~~</span>
+        表1（67）临床抗微生物治疗的初始选择
+        <span class="title-marker">*****</span>
+    </h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="5">全身综合征（发热/不发热）（续）</td>
+                </tr>
+                <tr class="subsection-header">
+                    <td colspan="5">污泥梭状芽孢杆菌中毒性休克综合征</td>
+                </tr>
+                <tr>
+                    <td>临床表现：休克、毛细血管渗漏、血液浓缩、类白血病反应、无发热</td>
+                    <td>污泥梭菌（出血性和致死性毒素）</td>
+                    <td>补液，青霉素G 1800万～2000万U/d 分次q4～6h + 克林霉素900mg iv q8h，外科清创是关键</td>
+                    <td></td>
+                    <td>发生在多种导致厌氧组织的情况，如静脉吸毒、产后。曾报道数起米非司酮（RU486）和米索前列醇堕胎后死亡</td>
+                </tr>
+                <tr class="subsection-header">
+                    <td colspan="5">葡萄球菌中毒休克综合征</td>
+                </tr>
+                <tr>
+                    <td>产毒素金黄色葡萄球菌定植：阴道（月经卫生棉条相关），手术/创伤伤口，子宫内膜，烧伤</td>
+                    <td>金黄色葡萄球菌（中毒休克毒素介导）</td>
+                    <td>（萘夫西林或苯唑西林2g iv q4h）或（若为MRSA，万古霉素30～60mg/(kg·d) 分2～3次，目标AUC₂₄ 400～600μg·h/ml + 克林霉素600～900mg iv q8h</td>
+                    <td>（头孢唑啉1～2g iv q8h）或[若为MRSA，万古霉素30～60mg/(kg·d) 分2～3次，目标AUC₂₄ 400～600μg·h/ml或达托霉素10mg/kg iv qd] + 克林霉素600～900mg iv q8h</td>
+                    <td>克林霉素可抑制毒素产生，利奈唑胺也可以抑制毒素产生。可考虑加用IVIG 1g/kg 第1天，之后0.5g/kg，第2～3天</td>
+                </tr>
+                <tr class="subsection-header">
+                    <td colspan="5">链球菌中毒休克综合征。注意：不伴有中毒休克的坏死性筋膜炎，62页。NEJM 2017, 377: 2253</td>
+                </tr>
+                <tr>
+                    <td>伴有侵袭性疾病，如丹毒、坏死性筋膜炎、水痘继发链球菌感染<br>有日常接触继发中毒休克综合征病例报道</td>
+                    <td>A族、B族、C族、G族化脓性链球菌，B族链球菌（EID 15: 223, 2009）</td>
+                    <td>（青霉素G 2400万U/d iv 分次）+（克林霉素900mg iv q8h）<br><br>前瞻性观察性研究（CID 59: 358, 366&851, 2014）显示：<br>• 克林霉素降低死亡率<br>• 家庭日常接触继发病例发生率高</td>
+                    <td>头孢曲松2g iv qd + 克林霉素900mg iv q8h</td>
+                    <td>定义：分离出A族链球菌，有低血压并符合以下≥2项条件者：肾损害，凝血障碍，肝脏受累，急性呼吸窘迫综合征，全身皮疹，软组织坏死。与侵袭性疾病有关。通常需手术治疗<br>克林霉素可减少毒素产生<br>辅助IVIG（1g/kg 第1天，0.5g/kg 第2～3天）可能有益（CID 2020; 71: 1772）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 脚注 -->
+    <div class="footnote">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        <sup>b</sup> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div>
+            <span class="tag tag-toxin">中毒性休克综合征</span>
+            <span class="tag tag-toxin">TSS</span>
+            <span class="tag tag-disease">污泥梭菌感染</span>
+            <span class="tag tag-disease">葡萄球菌中毒休克</span>
+            <span class="tag tag-disease">链球菌中毒休克</span>
+            <span class="tag tag-disease">坏死性筋膜炎</span>
+            <span class="tag tag-disease">丹毒</span>
+            <span class="tag tag-disease">毛细血管渗漏</span>
+            <span class="tag tag-disease">类白血病反应</span>
+            <span class="tag tag-disease">静脉吸毒感染</span>
+            <span class="tag tag-disease">产后感染</span>
+            <span class="tag tag-disease">月经卫生棉条相关</span>
+            <span class="tag tag-disease">水痘继发感染</span>
+            <span class="tag tag-bacteria">污泥梭菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">B族链球菌</span>
+            <span class="tag tag-bacteria">C族链球菌</span>
+            <span class="tag tag-bacteria">G族链球菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-antibiotic">青霉素G</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">萘夫西林</span>
+            <span class="tag tag-antibiotic">苯唑西林</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">头孢唑啉</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">利奈唑胺</span>
+            <span class="tag tag-syndrome">IVIG</span>
+            <span class="tag tag-syndrome">外科清创</span>
+            <span class="tag tag-syndrome">毒素抑制</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div style="font-size: 14px; color: #555; margin-bottom: 10px;">📋 快速复制信息（标题 + 副标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">149</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：中毒性休克综合征；污泥梭菌；金黄色葡萄球菌；链球菌；MRSA；A族链球菌；坏死性筋膜炎；丹毒；克林霉素；青霉素G；万古霉素；达托霉素；头孢曲松；IVIG；毒素抑制；外科清创；毛细血管渗漏</div>
+    
+    <script>
+        // 设置编辑框内容
+        const title = "表1（67）临床抗微生物治疗的初始选择";
+        const subtitle = "中毒性休克综合征";
+        const keywords = "中毒性休克综合征；污泥梭菌；金黄色葡萄球菌；链球菌；MRSA；A族链球菌；坏死性筋膜炎；丹毒；克林霉素；青霉素G；万古霉素；达托霉素；头孢曲松；IVIG；毒素抑制；外科清创；毛细血管渗漏";
+        const pageNum = "149";
+        
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

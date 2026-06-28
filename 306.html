@@ -1,0 +1,477 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10A 抗感染药物的剂量和不良反应（续）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            color: #333;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c 0%, #449d44 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        td, th {
+            padding: 10px 8px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .category-row {
+            background: linear-gradient(135deg, #5dade2 0%, #3498db 100%) !important;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            border-color: #2980b9;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .trade-name {
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        
+        .dosage {
+            color: #1a5276;
+            font-weight: 500;
+        }
+        
+        .adverse-reaction {
+            color: #5d4037;
+        }
+        
+        .highlight-danger {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .highlight-warning {
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .note-row {
+            background-color: #fff8e1 !important;
+            color: #5d4037;
+            font-size: 12px;
+        }
+        
+        .note-row td {
+            padding: 12px 10px;
+            border-top: 2px solid #ffb300;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8fbff;
+        }
+        
+        #copyBtn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        #copyBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        #copyBtn.copied {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(243, 156, 18, 0.3);
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
+        }
+        
+        .keywords-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .keywords-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            td, th {
+                padding: 6px 4px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="305.html" class="nav-btn">← 上一页</a>
+            <a href="307.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表10A 抗感染药物的剂量和不良反应（续）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">苯唑西林<br><span class="trade-name">（Prostaphlin）</span></td>
+                    <td class="dosage">1～2g iv或im q4h，因蛋白结合力＞90%，治疗菌血症需12g/d</td>
+                    <td class="adverse-reaction">≥12g/d可致肝功能损害。通常于用药开始后2～24天出现可逆性肝功能试验异常。在儿童，苯唑西林引起的皮疹和肝脏毒性较萘夫西林多（<span class="reference">CID 34：50，2002</span>）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">氨基青霉素类</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿莫西林<br><span class="trade-name">（Amoxil，Polymox）</span></td>
+                    <td class="dosage">250mg～1g po tid</td>
+                    <td class="adverse-reaction">静脉制剂在英国和欧洲有售。静脉注射阿莫西林迅速转化成氨苄西林。传染性单核细胞增多症者可出现皮疹，见氨苄西林。与相同侧链的口服头孢菌素的交叉过敏反应增加，如头孢羟氨苄、头孢丙烯</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿莫西林缓释片<br><span class="trade-name">（Moxatag）</span></td>
+                    <td class="dosage">775mg（1片）po qd</td>
+                    <td class="adverse-reaction">过敏反应，艰难梭菌相关性腹泻，Clinitest 尿糖检测假阳性</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿莫西林－克拉维酸（奥格门汀）<br>阿莫西林－克拉维酸儿童强化口服悬液（ES-600）<br>阿莫西林－克拉维酸缓释成人片</td>
+                    <td class="dosage"><span class="reference">见成人药品说明</span><br>儿童强化口服悬液：600.0/42.9mg/5ml<br>剂量：90.0/6.4mg/kg 分次bid<br>成人制剂<span class="reference">见说明</span><br>欧洲有阿莫西林－克拉维酸静脉制剂</td>
+                    <td class="adverse-reaction">在每天2次的方案中，克拉维酸的用量较小，腹泻发生也较少。在阿莫西林－克拉维酸钾速发型过敏反应患者中，1/3由克拉维酸成分引发（<span class="reference">J Allergy Clin Immunol 125：502，2010</span>）。克拉维酸与肝毒性有关，13%～23%的药物性肝损伤由阿莫西林－克拉维酸所致。迟发型，通常轻微，肝衰竭罕见（<span class="reference">Gastroenterol 148：1340，2015；NEJM 381：264，2019</span>）<br>奥格门汀成人产品剂量方案的比较：<br>奥格门汀　　500/125mg　　1片po tid<br>奥格门汀　　875/125mg　　1片po bid<br>奥格门汀缓释片　　1000.0/62.5mg　　2片po bid</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">氨苄西林<br><span class="trade-name">（Principen）<br>（250mg、500mg胶囊）</span></td>
+                    <td class="dosage">0.25～0.50g po q6h<br>50～200mg/（kg·d）iv 分次q6h</td>
+                    <td class="adverse-reaction">65%～100%的传染性单核细胞增多症患者，90%的慢性淋巴细胞白血病患者及15%～20%服用别嘌醇者出现非荨麻疹性斑丘疹，不是真正的青霉素过敏。EBV相关的皮疹不代表永久性过敏，EBV感染后再次使用不出现皮疹。与具有相同侧链的口服头孢菌素发生交叉过敏反应的风险增加，如头孢克洛、头孢氨苄和氯碳头孢</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="3">注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>书中名词缩写见第2页。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="表10A 抗感染药物的剂量和不良反应（续）；氨基青霉素类；苯唑西林；阿莫西林；阿莫西林缓释片；阿莫西林－克拉维酸；奥格门汀；氨苄西林；Prostaphlin；Amoxil；Polymox；Moxatag；ES-600；Principen；=306" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🏷️ 检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">氨基青霉素类</span>
+            <span class="tag">苯唑西林</span>
+            <span class="tag">阿莫西林</span>
+            <span class="tag">阿莫西林缓释片</span>
+            <span class="tag">阿莫西林－克拉维酸</span>
+            <span class="tag">奥格门汀</span>
+            <span class="tag">氨苄西林</span>
+            <span class="tag">Prostaphlin</span>
+            <span class="tag">Amoxil</span>
+            <span class="tag">Polymox</span>
+            <span class="tag">Moxatag</span>
+            <span class="tag">ES-600</span>
+            <span class="tag">Principen</span>
+            <span class="tag">传染性单核细胞增多症</span>
+            <span class="tag">艰难梭菌</span>
+            <span class="tag">肝毒性</span>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <h3>🔑 关键词</h3>
+        <div class="keywords-list">
+            <span class="keyword">抗感染药物</span>
+            <span class="keyword">剂量</span>
+            <span class="keyword">不良反应</span>
+            <span class="keyword">成人常规剂量</span>
+            <span class="keyword">过敏反应</span>
+            <span class="keyword">交叉过敏</span>
+            <span class="keyword">肝功能损害</span>
+            <span class="keyword">腹泻</span>
+            <span class="keyword">皮疹</span>
+            <span class="keyword">青霉素过敏</span>
+            <span class="keyword">肾功能</span>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：306</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制！';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制！';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

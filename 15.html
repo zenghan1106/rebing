@@ -1,0 +1,513 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~参考期刊缩略语速查表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 26px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .abbr {
+            color: #2b6cb0;
+            font-weight: 600;
+        }
+        
+        .term {
+            color: #4a5568;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-journal {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ed8936;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .header {
+                justify-content: center;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="14.html" class="nav-btn">上一页</a>
+            <a href="16.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~参考期刊缩略语速查表*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>期刊缩略语</th>
+                    <th>期刊全称</th>
+                    <th>期刊缩略语</th>
+                    <th>期刊全称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="abbr">AAC</td>
+                    <td class="term">Antimicrobial Agents & Chemotherapy</td>
+                    <td class="abbr">Canad Med J</td>
+                    <td class="term">Canadian Medical Journal</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Adv PID</td>
+                    <td class="term">Advances in Pediatric Infectious Diseases</td>
+                    <td class="abbr">CCM</td>
+                    <td class="term">Critical Care Medicine</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AHJ</td>
+                    <td class="term">American Heart Journal</td>
+                    <td class="abbr">CCTID</td>
+                    <td class="term">Current Clinical Topics in Infectious Disease</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AIDS Res Hum Retrovir</td>
+                    <td class="term">AIDS Research & Human Retroviruses</td>
+                    <td class="abbr">CDSR</td>
+                    <td class="term">Cochrane Database of Systematic Reviews</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AAP</td>
+                    <td class="term">American Academy of Pediatrics</td>
+                    <td class="abbr">CID</td>
+                    <td class="term">Clinical Infectious Diseases</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AJG</td>
+                    <td class="term">American Journal of Gastroenterology</td>
+                    <td class="abbr">Clin Micro Inf</td>
+                    <td class="term">Clinical Microbiology and Infection</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AJM</td>
+                    <td class="term">American Journal of Medicine</td>
+                    <td class="abbr">CMN</td>
+                    <td class="term">Clinical Microbiology Newsletter</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AJRCCM</td>
+                    <td class="term">American Journal of Respiratory Critical Care Medicine</td>
+                    <td class="abbr">Clin Micro Rev</td>
+                    <td class="term">Clinical Microbiology Reviews</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AJTMH</td>
+                    <td class="term">American Journal of Tropical Medicine & Hygiene</td>
+                    <td class="abbr">CMAJ</td>
+                    <td class="term">Canadian Medical Association Journal</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Aliment Pharmacol Ther</td>
+                    <td class="term">Alimentary Pharmacology & Therapeutics</td>
+                    <td class="abbr">COID</td>
+                    <td class="term">Current Opinion in Infectious Disease</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Am J Hlth Pharm</td>
+                    <td class="term">American Journal of Health-System Pharmacy</td>
+                    <td class="abbr">Curr Med Res Opin</td>
+                    <td class="term">Current Medical Research and Opinion</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Amer J Transpl</td>
+                    <td class="term">American Journal of Transplantation</td>
+                    <td class="abbr">Derm Ther</td>
+                    <td class="term">Dermatologic Therapy</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AnEM</td>
+                    <td class="term">Annals of Emergency Medicine</td>
+                    <td class="abbr">Dermatol Clin</td>
+                    <td class="term">Dermatologic Clinics</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AnIM</td>
+                    <td class="term">Annals of Internal Medicine</td>
+                    <td class="abbr">Dig Dis Sci</td>
+                    <td class="term">Digestive Diseases and Sciences</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Ann Pharmacother</td>
+                    <td class="term">Annals of Pharmacotherapy</td>
+                    <td class="abbr">DMID</td>
+                    <td class="term">Diagnostic Microbiology and Infectious Disease</td>
+                </tr>
+                <tr>
+                    <td class="abbr">AnSurg</td>
+                    <td class="term">Annals of Surgery</td>
+                    <td class="abbr">EID</td>
+                    <td class="term">Emerging Infectious Diseases</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Antivir Ther</td>
+                    <td class="term">Antiviral Therapy</td>
+                    <td class="abbr">EJCMID</td>
+                    <td class="term">European Journal of Clin. Micro. & Infectious Diseases</td>
+                </tr>
+                <tr>
+                    <td class="abbr">ArDerm</td>
+                    <td class="term">Archives of Dermatology</td>
+                    <td class="abbr">Eur J Neurol</td>
+                    <td class="term">European Journal of Neurology</td>
+                </tr>
+                <tr>
+                    <td class="abbr">ArIM</td>
+                    <td class="term">Archives of Internal Medicine</td>
+                    <td class="abbr">Exp Mol Path</td>
+                    <td class="term">Experimental & Molecular Pathology</td>
+                </tr>
+                <tr>
+                    <td class="abbr">ARRD</td>
+                    <td class="term">American Review of Respiratory Disease</td>
+                    <td class="abbr">Exp Rev Anti Infect Ther</td>
+                    <td class="term">Expert Review of Anti-Infective Therapy</td>
+                </tr>
+                <tr>
+                    <td class="abbr">BMJ</td>
+                    <td class="term">British Medical Journal</td>
+                    <td class="abbr">Gastro</td>
+                    <td class="term">Gastroenterology</td>
+                </tr>
+                <tr>
+                    <td class="abbr">BMT</td>
+                    <td class="term">Bone Marrow Transplantation</td>
+                    <td class="abbr">Hpt</td>
+                    <td class="term">Hepatology</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Brit J Derm</td>
+                    <td class="term">British Journal of Dermatology</td>
+                    <td class="abbr">ICHE</td>
+                    <td class="term">Infection Control and Hospital Epidemiology</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Can JID</td>
+                    <td class="term">Canadian Journal of Infectious Diseases</td>
+                    <td class="abbr">IDC No. Amer</td>
+                    <td class="term">Infectious Disease Clinics of North America</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-journal">AAC</span>
+            <span class="tag tag-journal">Adv PID</span>
+            <span class="tag tag-journal">AHJ</span>
+            <span class="tag tag-journal">AIDS Res Hum Retrovir</span>
+            <span class="tag tag-journal">AAP</span>
+            <span class="tag tag-journal">AJG</span>
+            <span class="tag tag-journal">AJM</span>
+            <span class="tag tag-journal">AJRCCM</span>
+            <span class="tag tag-journal">AJTMH</span>
+            <span class="tag tag-journal">Aliment Pharmacol Ther</span>
+            <span class="tag tag-journal">Am J Hlth Pharm</span>
+            <span class="tag tag-journal">Amer J Transpl</span>
+            <span class="tag tag-journal">AnEM</span>
+            <span class="tag tag-journal">AnIM</span>
+            <span class="tag tag-journal">Ann Pharmacother</span>
+            <span class="tag tag-journal">AnSurg</span>
+            <span class="tag tag-journal">Antivir Ther</span>
+            <span class="tag tag-journal">ArDerm</span>
+            <span class="tag tag-journal">ArIM</span>
+            <span class="tag tag-journal">ARRD</span>
+            <span class="tag tag-journal">BMJ</span>
+            <span class="tag tag-journal">BMT</span>
+            <span class="tag tag-journal">Brit J Derm</span>
+            <span class="tag tag-journal">Can JID</span>
+            <span class="tag tag-journal">Canad Med J</span>
+            <span class="tag tag-journal">CCM</span>
+            <span class="tag tag-journal">CCTID</span>
+            <span class="tag tag-journal">CDSR</span>
+            <span class="tag tag-journal">CID</span>
+            <span class="tag tag-journal">Clin Micro Inf</span>
+            <span class="tag tag-journal">CMN</span>
+            <span class="tag tag-journal">Clin Micro Rev</span>
+            <span class="tag tag-journal">CMAJ</span>
+            <span class="tag tag-journal">COID</span>
+            <span class="tag tag-journal">Curr Med Res Opin</span>
+            <span class="tag tag-journal">Derm Ther</span>
+            <span class="tag tag-journal">Dermatol Clin</span>
+            <span class="tag tag-journal">Dig Dis Sci</span>
+            <span class="tag tag-journal">DMID</span>
+            <span class="tag tag-journal">EID</span>
+            <span class="tag tag-journal">EJCMID</span>
+            <span class="tag tag-journal">Eur J Neurol</span>
+            <span class="tag tag-journal">Exp Mol Path</span>
+            <span class="tag tag-journal">Exp Rev Anti Infect Ther</span>
+            <span class="tag tag-journal">Gastro</span>
+            <span class="tag tag-journal">Hpt</span>
+            <span class="tag tag-journal">ICHE</span>
+            <span class="tag tag-journal">IDC No. Amer</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="参考期刊缩略语速查表；医学期刊；期刊缩写；文献检索；=15" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-num">页码：15</div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            document.execCommand('copy');
+            alert('已复制到剪贴板！');
+        }
+        
+        function addToFavorite() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用 localStorage 保存收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toLocaleDateString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在 index.html 的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>

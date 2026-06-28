@@ -1,0 +1,548 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表1(37)临床抗微生物治疗的初始选择-肺支气管细支气管炎支气管炎百日咳*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-page {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background-color: #4cae4c;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 10px;
+            border-left: 5px solid #2980b9;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background-color: #2e75b6;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行（表头行）字体更大 */
+        thead tr:first-child th {
+            font-size: 17px;
+            background-color: #1a5276;
+            padding: 16px 10px;
+        }
+        
+        /* 合并单元格的表头 */
+        .sub-header {
+            background-color: #5b9bd5 !important;
+            font-size: 14px !important;
+        }
+        
+        /* 表格内容单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #d4e6f1;
+            vertical-align: top;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even) {
+            background-color: #f8fbfd;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        /* 段落标题行 */
+        .section-title {
+            background-color: #d6eaf8 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        /* 子标题行 */
+        .subsection-title {
+            background-color: #eaf2f8 !important;
+            font-weight: 600;
+            color: #2874a6;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin: 5px 0;
+            padding-left: 18px;
+        }
+        
+        td li {
+            margin-bottom: 6px;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        .italic-text {
+            font-style: italic;
+            color: #555;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .page-number a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyText {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            resize: vertical;
+            min-height: 60px;
+            font-family: monospace;
+        }
+        
+        #copyText:focus {
+            outline: none;
+            border-color: #2980b9;
+        }
+        
+        .btn-copy {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-copy.copied {
+            background-color: #27ae60;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            margin: 25px 0 15px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4e6f1;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .tag-disease {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border: 1px solid #f0b27a;
+        }
+        
+        .tag-disease:hover {
+            background-color: #f0b27a;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #58d68d;
+        }
+        
+        .tag-antibiotic:hover {
+            background-color: #58d68d;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background-color: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #85c1e9;
+        }
+        
+        .tag-bacteria:hover {
+            background-color: #85c1e9;
+            color: white;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            color: #777;
+            font-size: 13px;
+        }
+        
+        .keywords-bottom span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 17px;
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            thead tr:first-child th {
+                font-size: 15px;
+            }
+            
+            td {
+                padding: 8px 6px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="87.html" class="btn btn-page">⬅ 上一页</a>
+            <a href="89.html" class="btn btn-page">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表1(37)临床抗微生物治疗的初始选择-肺支气管细支气管炎支气管炎百日咳*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案*</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选方案</th>
+                    <th class="sub-header">备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="5">肺/支气管</td>
+                </tr>
+                <tr>
+                    <td>细支气管炎/喘息性支气管炎（呼气相哮鸣音）<br><br>婴儿/儿童（≤5岁）<br><em>见呼吸道合胞病毒，表14A，233页；Ln 368: 312, 2006</em></td>
+                    <td>呼吸道合胞病毒（RSV）（50%），副流感病毒（25%），人偏肺病毒</td>
+                    <td colspan="2">抗生素无效，主要治疗为氧疗和水化，利巴韦林不推荐用于支气管炎，除非患者系非造血干细胞移植或其他移植者</td>
+                    <td>呼吸道合胞病毒最重要；人源化小鼠单克隆抗体帕利珠单抗可用于预防，<em>表14A，233页</em>。美国儿科学会的指南建议仅在≤29孕周的新生儿和特殊人群（如合并严重心脏病的婴儿）中使用帕利珠单抗（<span class="italic-text">Pediatrics 2014; 134: 415-420</span>）</td>
+                </tr>
+                <tr class="subsection-title">
+                    <td colspan="5">支气管炎</td>
+                </tr>
+                <tr>
+                    <td>婴儿/儿童（≤5岁）<br>支气管炎特征性表现为哮鸣音和啰音，2岁以内儿童常见</td>
+                    <td>&lt;2岁：腺病毒。2～5岁：呼吸道合胞病毒、副流感病毒3型、人偏肺病毒</td>
+                    <td colspan="2">支气管炎和细支气管炎无抗菌素治疗指征</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>青少年和成人急性气管支气管炎（急性支气管炎）</td>
+                    <td>通常为病毒，肺炎支原体5%，肺炎衣原体5%。<br><em>见下文"持续性咳嗽（百日咳）"</em></td>
+                    <td colspan="2">无抗生素使用指征<br>止咳药±吸入支气管扩张药。咽拭子PCR有助于诊断支原体或衣原体</td>
+                    <td>仅有脓痰不是抗菌治疗的指征；预计咳嗽将持续2周；如有发热、寒战，需做胸部X线检查。若证实支原体感染，<span class="drug-name">多西环素</span>的疗效优于大环内酯类，大环内酯类耐药率增加</td>
+                </tr>
+                <tr>
+                    <td>社区暴发流行期间出现持续性咳嗽（&gt;14天），不发热：百日咳（哮吼性咳嗽）<br><br>5%～20%持续咳嗽&gt;14天的成人有百日咳</td>
+                    <td>百日咳鲍特菌及副百日咳鲍特菌；还需考虑哮喘、胃食管反流、鼻后滴流综合征，支原体及衣原体</td>
+                    <td>儿童：<span class="drug-name">阿奇霉素</span>/<span class="drug-name">克拉霉素</span>或依托红霉素或<span class="drug-name">红霉素</span>或<span class="drug-name">TMP-SMX</span>（剂量见表注10）</td>
+                    <td>成人：<span class="drug-name">阿奇霉素</span> 500mg po 第1天，250mg qd第2～5天，或<span class="drug-name">TMP-SMX</span>（双剂量）1片po bid×14d或（<span class="drug-name">克拉霉素</span> 500mg po bid或缓释<span class="drug-name">克拉霉素</span> 1g qd×7d）</td>
+                    <td>病程分3阶段：卡他期（1～2周），发作性咳嗽期（2～4周），恢复期（1～2周）；治疗可中止或消除百日咳卡他期；但不能缩短发作性咳嗽期。诊断：鼻咽部分泌物PCR或百日咳毒素抗体升高<br>治疗目的是清除鼻咽部携带的病原体</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="88.html">88</a>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <label for="copyText">📋 复制页面信息</label>
+        <div class="copy-input-group">
+            <textarea id="copyText" readonly>表1(37)临床抗微生物治疗的初始选择-肺支气管细支气管炎支气管炎百日咳；细支气管炎；喘息性支气管炎；支气管炎；百日咳；急性气管支气管炎；持续性咳嗽；呼吸道合胞病毒；RSV；副流感病毒；人偏肺病毒；腺病毒；肺炎支原体；肺炎衣原体；百日咳鲍特菌；副百日咳鲍特菌；阿奇霉素；克拉霉素；红霉素；TMP-SMX；多西环素；利巴韦林；帕利珠单抗；=88</textarea>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <a href="#" class="tag tag-disease">细支气管炎</a>
+            <a href="#" class="tag tag-disease">喘息性支气管炎</a>
+            <a href="#" class="tag tag-disease">急性支气管炎</a>
+            <a href="#" class="tag tag-disease">急性气管支气管炎</a>
+            <a href="#" class="tag tag-disease">百日咳</a>
+            <a href="#" class="tag tag-disease">持续性咳嗽</a>
+            <a href="#" class="tag tag-disease">哮吼性咳嗽</a>
+            
+            <!-- 抗生素药物标签 -->
+            <a href="#" class="tag tag-antibiotic">阿奇霉素</a>
+            <a href="#" class="tag tag-antibiotic">克拉霉素</a>
+            <a href="#" class="tag tag-antibiotic">红霉素</a>
+            <a href="#" class="tag tag-antibiotic">依托红霉素</a>
+            <a href="#" class="tag tag-antibiotic">TMP-SMX</a>
+            <a href="#" class="tag tag-antibiotic">多西环素</a>
+            <a href="#" class="tag tag-antibiotic">利巴韦林</a>
+            <a href="#" class="tag tag-antibiotic">帕利珠单抗</a>
+            
+            <!-- 细菌/病原体标签 -->
+            <a href="#" class="tag tag-bacteria">呼吸道合胞病毒</a>
+            <a href="#" class="tag tag-bacteria">RSV</a>
+            <a href="#" class="tag tag-bacteria">副流感病毒</a>
+            <a href="#" class="tag tag-bacteria">人偏肺病毒</a>
+            <a href="#" class="tag tag-bacteria">腺病毒</a>
+            <a href="#" class="tag tag-bacteria">肺炎支原体</a>
+            <a href="#" class="tag tag-bacteria">肺炎衣原体</a>
+            <a href="#" class="tag tag-bacteria">百日咳鲍特菌</a>
+            <a href="#" class="tag tag-bacteria">副百日咳鲍特菌</a>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>
+        <span>临床抗微生物治疗</span>
+        <span>初始选择</span>
+        <span>肺</span>
+        <span>支气管</span>
+        <span>细支气管炎</span>
+        <span>喘息性支气管炎</span>
+        <span>支气管炎</span>
+        <span>急性气管支气管炎</span>
+        <span>百日咳</span>
+        <span>持续性咳嗽</span>
+        <span>哮吼性咳嗽</span>
+        <span>呼吸道合胞病毒</span>
+        <span>RSV</span>
+        <span>副流感病毒</span>
+        <span>人偏肺病毒</span>
+        <span>腺病毒</span>
+        <span>肺炎支原体</span>
+        <span>肺炎衣原体</span>
+        <span>百日咳鲍特菌</span>
+        <span>副百日咳鲍特菌</span>
+        <span>阿奇霉素</span>
+        <span>克拉霉素</span>
+        <span>红霉素</span>
+        <span>TMP-SMX</span>
+        <span>多西环素</span>
+        <span>利巴韦林</span>
+        <span>帕利珠单抗</span>
+        <span>氧疗</span>
+        <span>水化</span>
+        <span>支气管扩张药</span>
+        <span>PCR</span>
+        <span>鼻咽部分泌物</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert('复制成功！');
+            });
+        }
+    </script>
+</body>
+</html>

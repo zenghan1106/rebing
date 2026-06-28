@@ -1,0 +1,611 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗细菌药物酶和转运体相互作用表续297*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn {
+            background: #fff;
+            color: #2980b9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+        
+        .main-title {
+            text-align: center;
+            padding: 30px 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px 30px;
+        }
+        
+        .table-wrapper {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+            transition: background 0.3s ease;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        
+        .note-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .note-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .note-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .note-content p {
+            margin-bottom: 8px;
+        }
+        
+        .tags-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(41,128,185,0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(90deg, #c0392b 0%, #e74c3c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(90deg, #8e44ad 0%, #9b59b6 100%);
+        }
+        
+        .copy-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(41,128,185,0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #2980b9;
+            color: #fff;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding: 20px 15px 15px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            td {
+                padding: 8px 5px;
+            }
+            
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btns {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="296.html" class="nav-btn">← 上一页</a>
+            <a href="298.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~抗细菌药物酶和转运体相互作用表续*****</h1>
+    
+    <div class="container">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>药物</th>
+                        <th>CYP450底物</th>
+                        <th>转运体底物</th>
+                        <th>抑制CYP450</th>
+                        <th>抑制转运体</th>
+                        <th>诱导CYP450</th>
+                        <th>诱导转运体</th>
+                        <th>血浓度的影响¹</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="drug-name">匹美西林</td>
+                        <td></td>
+                        <td>OAT3,<br>MATE1, MATE2-K</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">普拉佐米星</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>MATE, MATE2-K</td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">普那霉素</td>
+                        <td></td>
+                        <td></td>
+                        <td>3A4</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">奎奴普丁/达福普丁</td>
+                        <td></td>
+                        <td></td>
+                        <td>3A4</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">瑞他莫林</td>
+                        <td>3A4</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">利福平</td>
+                        <td>—</td>
+                        <td>PGP, OATP1B1</td>
+                        <td>—</td>
+                        <td>OAT, OATP1B1</td>
+                        <td>1A2, 2B6, 2C8,<br>2C9, 2C19, 2D6<br>（弱）, 3A4</td>
+                        <td>PGP, UGT</td>
+                        <td>↓</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">利福昔明</td>
+                        <td>3A4</td>
+                        <td>PGP, OATP1A2,<br>OATP1B1/3</td>
+                        <td></td>
+                        <td>PGP（仅体外）</td>
+                        <td>3A4 ?</td>
+                        <td></td>
+                        <td>预期临床影响<br>小</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">Sarecycline</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>PGP</td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">舒巴坦</td>
+                        <td></td>
+                        <td>OAT1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">Sulopenemmetzadroxil-probenecid</td>
+                        <td></td>
+                        <td>Sulopenem: OAT3<br>丙磺舒: BCRP</td>
+                        <td></td>
+                        <td>丙磺舒: OAT1/3</td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">特地唑胺</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>BCRP（肠道）</td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">泰利霉素</td>
+                        <td></td>
+                        <td></td>
+                        <td>3A4</td>
+                        <td>PGP（?）</td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">替加环素</td>
+                        <td></td>
+                        <td>PGP</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">TMP-SMX</td>
+                        <td>SMX: 2C9(主要),<br>3A4</td>
+                        <td></td>
+                        <td>TMP: 2C8; SMX:<br>2C9</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                    <tr>
+                        <td class="drug-name">甲氧苄啶</td>
+                        <td></td>
+                        <td></td>
+                        <td>2C8</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>↑</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="note-section">
+            <div class="note-title">📋 注释说明</div>
+            <div class="note-content">
+                <p><strong>1</strong> 指可能受所列抗菌药物影响的合并用药的血清浓度。↑=升高，↓=下降。</p>
+                <p><strong>2</strong> 碳青霉烯类药物通过抑制酰基肽水解酶（阻断肠肝循环）降低丙戊酸血药浓度。</p>
+            </div>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag disease">细菌感染</span>
+                <span class="tag drug">匹美西林</span>
+                <span class="tag drug">普拉佐米星</span>
+                <span class="tag drug">普那霉素</span>
+                <span class="tag drug">奎奴普丁</span>
+                <span class="tag drug">达福普丁</span>
+                <span class="tag drug">瑞他莫林</span>
+                <span class="tag drug">利福平</span>
+                <span class="tag drug">利福昔明</span>
+                <span class="tag drug">Sarecycline</span>
+                <span class="tag drug">舒巴坦</span>
+                <span class="tag drug">Sulopenemmetzadroxil</span>
+                <span class="tag drug">probenecid</span>
+                <span class="tag drug">特地唑胺</span>
+                <span class="tag drug">泰利霉素</span>
+                <span class="tag drug">替加环素</span>
+                <span class="tag drug">TMP-SMX</span>
+                <span class="tag drug">甲氧苄啶</span>
+                <span class="tag drug">CYP450</span>
+                <span class="tag drug">CYP3A4</span>
+                <span class="tag drug">CYP2C9</span>
+                <span class="tag drug">CYP2C8</span>
+                <span class="tag drug">CYP2C19</span>
+                <span class="tag drug">CYP1A2</span>
+                <span class="tag drug">CYP2B6</span>
+                <span class="tag drug">CYP2D6</span>
+                <span class="tag drug">PGP</span>
+                <span class="tag drug">OAT</span>
+                <span class="tag drug">OAT1</span>
+                <span class="tag drug">OAT3</span>
+                <span class="tag drug">MATE</span>
+                <span class="tag drug">MATE1</span>
+                <span class="tag drug">MATE2-K</span>
+                <span class="tag drug">OATP1B1</span>
+                <span class="tag drug">OATP1A2</span>
+                <span class="tag drug">BCRP</span>
+                <span class="tag drug">UGT</span>
+            </div>
+        </div>
+        
+        <div class="copy-section">
+            <div class="copy-title">📋 复制信息</div>
+            <div class="copy-box">
+                <input type="text" class="copy-input" id="copyText" value="抗细菌药物酶和转运体相互作用表续297；细菌感染；匹美西林；普拉佐米星；普那霉素；奎奴普丁；达福普丁；瑞他莫林；利福平；利福昔明；Sarecycline；舒巴坦；Sulopenemmetzadroxil；probenecid；特地唑胺；泰利霉素；替加环素；TMP-SMX；甲氧苄啶；CYP450；CYP3A4；CYP2C9；CYP2C8；CYP2C19；CYP1A2；CYP2B6；CYP2D6；PGP；OAT；OAT1；OAT3；MATE；MATE1；MATE2-K；OATP1B1；OATP1A2；BCRP；UGT；=297" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="page-number">297</div>
+        <p style="margin-top: 10px;">关键词：抗细菌药物 | 酶 | 转运体 | 药物相互作用 | 利福平 | 替加环素 | TMP-SMX | 甲氧苄啶 | 泰利霉素 | 舒巴坦 | CYP450 | PGP | OAT | MATE | BCRP</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.style.background = 'linear-gradient(90deg, #27ae60 0%, #2ecc71 100%)';
+            
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.style.background = 'linear-gradient(90deg, #1a5276 0%, #2980b9 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

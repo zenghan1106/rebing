@@ -1,0 +1,598 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(4)临床抗微生物治疗的初始选择</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        
+        .btn-nav {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #388E3C;
+        }
+        
+        .btn-fav {
+            background: #FF9800;
+            color: white;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(255,152,0,0.4);
+        }
+        
+        .btn-fav:hover {
+            background: #F57C00;
+        }
+        
+        .btn-copy {
+            background: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background: #7B1FA2;
+        }
+        
+        /* 标题 */
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 8px;
+        }
+        
+        .title-mark {
+            color: #E91E63;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 表格 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .section-header {
+            background: #E3F2FD !important;
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 14px;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #0D47A1;
+        }
+        
+        .pathogen {
+            color: #C62828;
+        }
+        
+        .treatment {
+            color: #2E7D32;
+        }
+        
+        .note {
+            color: #6A1B9A;
+            font-size: 12px;
+        }
+        
+        .ref {
+            color: #757575;
+            font-style: italic;
+            font-size: 11px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        /* 标签 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+        
+        .tag-disease:hover {
+            background: #1565C0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+        
+        .tag-bacteria:hover {
+            background: #C62828;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .tag-drug:hover {
+            background: #2E7D32;
+            color: white;
+        }
+        
+        /* 页码 */
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .page-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: none;
+            z-index: 200;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="22.html" class="btn btn-nav">上一页</a>
+            <a href="24.html" class="btn btn-nav">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <div class="main-title">
+            <span class="title-mark">~~~~~</span>
+            表1(4) 临床抗微生物治疗的初始选择
+            <span class="title-mark">*****</span>
+        </div>
+        <div class="sub-title">中枢神经系统感染 | 脑脓肿 | 诺卡菌感染</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:30%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">中枢神经系统</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">脑脓肿</span><br><br>
+                        <b>原发性或源于邻近部位感染的脑脓肿</b><br>
+                        <span class="ref">综述：NEJM 371: 447, 2014</span>
+                    </td>
+                    <td>
+                        <span class="pathogen">链球菌（60%～70%）</span>，<br>
+                        <span class="pathogen">拟杆菌（20%～40%）</span>，<br>
+                        <span class="pathogen">肠杆菌（25%～33%）</span>，<br>
+                        <span class="pathogen">金黄色葡萄球菌（10%～15%）</span>，<br>
+                        咽峡炎链球菌<br>
+                        <b>罕见：</b><span class="pathogen">诺卡菌</span>（见下文），<span class="pathogen">李斯特菌</span><br>
+                        见金黄色葡萄球菌"说明"
+                    </td>
+                    <td>
+                        <b>首选方案：</b><br>
+                        <span class="treatment">（头孢噻肟2g iv q4h或头孢曲松2g iv q12h）+ 甲硝唑7.5mg/kg q6h或15mg/kg iv q12h</span><br><br>
+                        如可能有金黄色葡萄球菌感染，加用<span class="treatment">万古霉素30～60mg/(kg·d)</span> 分2～3次，目标AUC₂₄ 400～600μg·h/ml或<span class="treatment">利奈唑胺600mg iv/po q12h</span><br>
+                        疗程不明确，通常4～6周或治疗至神经影像（CT/MRI）病灶吸收<br><br>
+                        <b>备选方案：</b><br>
+                        <span class="treatment">青霉素G300万～400万U iv q4h + 甲硝唑7.5mg/kg q6h或15mg/kg iv q12h</span>
+                    </td>
+                    <td>
+                        若CT提示脑炎或脓肿＜2.5cm，患者神经系统症状稳定，神志清楚，则开始抗生素治疗并观察；否则应手术引流。如果血培养或其他临床资料未能明确病原体，在安全的前提下，即使是小脓肿也应细针穿刺明确诊断<br><br>
+                        咽峡炎链球菌尤其易引起脓肿。头孢菌素和甲硝唑不能覆盖李斯特菌
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>手术后或外伤后脑脓肿</b><br>
+                        <span class="ref">综述：NEJM 371: 447, 2014</span>
+                    </td>
+                    <td>
+                        <span class="pathogen">金黄色葡萄球菌</span>，<span class="pathogen">肠杆菌</span>
+                    </td>
+                    <td>
+                        <b>MSSA：</b><span class="treatment">（萘夫西林或苯唑西林）2g iv q4h +（头孢曲松或头孢噻肟）</span><br><br>
+                        <b>MRSA：</b><span class="treatment">万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml +（头孢曲松或头孢噻肟）</span>
+                    </td>
+                    <td>
+                        经验性覆盖，根据培养结果降级。为了诊断和治疗，常需脓肿穿刺引流。若怀疑铜绿假单胞菌，将头孢曲松或头孢噻肟换成头孢吡肟或头孢他啶
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>HIV-1感染（AIDS）</b>
+                    </td>
+                    <td>
+                        <span class="pathogen">刚地弓形虫</span>
+                    </td>
+                    <td colspan="2" style="text-align:center;font-size:14px;color:#1565C0;font-weight:bold;">
+                        参见表13A，209页
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>诺卡菌：血行性脓肿</b>
+                    </td>
+                    <td>
+                        <span class="pathogen">皮疽诺卡菌</span>、<span class="pathogen">星形诺卡菌</span>和<span class="pathogen">巴西诺卡菌</span><br>
+                        其他菌种见<span class="ref">AAC 58: 795, 2014</span>
+                    </td>
+                    <td>
+                        <b>首选方案：</b><br>
+                        <span class="treatment">TMP-SMX：TMP 15mg/(kg·d) & SMX 75mg/(kg·d) 分2～4次 iv/po + 亚胺培南500mg iv q6h</span><br>
+                        多器官受累者还可加用<span class="treatment">阿米卡星7.5mg/kg q12h</span><br><br>
+                        iv治疗3～6周后，改为po。免疫正常的患者：<span class="treatment">TMP-SMX、米诺环素或阿莫西林-克拉维酸</span>，治疗3个月以上。<br>
+                        免疫抑制的患者：2种药物联合治疗至少1年<br><br>
+                        <b>备选方案：</b><br>
+                        <span class="treatment">利奈唑胺600mg iv/po q12h + 美罗培南2g q8h</span>
+                    </td>
+                    <td>
+                        需行药物敏感试验指导治疗；TMP-SMX仍是治疗CNS诺卡菌感染的药物之一。若磺胺耐药或过敏，<span class="treatment">阿米卡星</span>联合以下一种：<span class="treatment">亚胺培南、美罗培南、头孢曲松或头孢噻肟</span>。<span class="pathogen">皮疽诺卡菌</span>对第三代头孢菌素耐药，不能用于治疗该菌所致的感染
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background:#FFF3E0;color:#E65100;font-size:12px;">
+                        <b>硬膜下积脓：</b>在成人60%～90%由鼻窦炎或中耳炎播散引起，治疗与原发性脑脓肿相同；有外科急症者必须引流。综述参见<span class="ref">LnlD 7: 62, 2007</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="bottom-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="表1(4)临床抗微生物治疗的初始选择；中枢神经系统感染脑脓肿诺卡菌感染；链球菌拟杆菌肠杆菌金黄色葡萄球菌诺卡菌李斯特菌刚地弓形虫皮疽诺卡菌星形诺卡菌巴西诺卡菌；头孢噻肟头孢曲松甲硝唑万古霉素利奈唑胺青霉素G萘夫西林苯唑西林头孢吡肟头孢他啶TMP-SMX亚胺培南阿米卡星美罗培南米诺环素阿莫西林-克拉维酸；=23" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">脑脓肿</span>
+                <span class="tag tag-disease">原发性脑脓肿</span>
+                <span class="tag tag-disease">手术后脑脓肿</span>
+                <span class="tag tag-disease">外伤后脑脓肿</span>
+                <span class="tag tag-disease">HIV-1感染</span>
+                <span class="tag tag-disease">AIDS</span>
+                <span class="tag tag-disease">诺卡菌血行性脓肿</span>
+                <span class="tag tag-disease">硬膜下积脓</span>
+                
+                <!-- 细菌标签 -->
+                <span class="tag tag-bacteria">链球菌</span>
+                <span class="tag tag-bacteria">拟杆菌</span>
+                <span class="tag tag-bacteria">肠杆菌</span>
+                <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+                <span class="tag tag-bacteria">咽峡炎链球菌</span>
+                <span class="tag tag-bacteria">诺卡菌</span>
+                <span class="tag tag-bacteria">李斯特菌</span>
+                <span class="tag tag-bacteria">刚地弓形虫</span>
+                <span class="tag tag-bacteria">皮疽诺卡菌</span>
+                <span class="tag tag-bacteria">星形诺卡菌</span>
+                <span class="tag tag-bacteria">巴西诺卡菌</span>
+                <span class="tag tag-bacteria">MSSA</span>
+                <span class="tag tag-bacteria">MRSA</span>
+                <span class="tag tag-bacteria">铜绿假单胞菌</span>
+                
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">头孢噻肟</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">甲硝唑</span>
+                <span class="tag tag-drug">万古霉素</span>
+                <span class="tag tag-drug">利奈唑胺</span>
+                <span class="tag tag-drug">青霉素G</span>
+                <span class="tag tag-drug">萘夫西林</span>
+                <span class="tag tag-drug">苯唑西林</span>
+                <span class="tag tag-drug">头孢吡肟</span>
+                <span class="tag tag-drug">头孢他啶</span>
+                <span class="tag tag-drug">TMP-SMX</span>
+                <span class="tag tag-drug">亚胺培南</span>
+                <span class="tag tag-drug">阿米卡星</span>
+                <span class="tag tag-drug">美罗培南</span>
+                <span class="tag tag-drug">米诺环素</span>
+                <span class="tag tag-drug">阿莫西林-克拉维酸</span>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-info">
+            <div class="page-number">页码：23</div>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }).catch(function(err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.querySelector('.main-title').innerText.replace(/~~~~~|\\\\*\\\\*\\\\*\\\\*\\\\*/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '23';
+            
+            // 尝试添加到index.html的收藏
+            try {
+                // 使用localStorage存储收藏信息
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    showToast('该页面已在收藏中！');
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '临床抗微生物治疗',
+                    addTime: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('已添加到收藏！请在index.html查看');
+            } catch(e) {
+                showToast('收藏成功！');
+            }
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.innerText;
+                showToast('搜索: ' + text);
+                // 可以在这里添加实际的搜索功能
+            });
+        });
+    </script>
+</body>
+</html>

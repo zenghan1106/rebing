@@ -1,0 +1,381 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗感染治疗方案表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        th {
+            background: #1565C0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .pathogen {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+        
+        .treatment {
+            color: #2e7d32;
+        }
+        
+        .note {
+            color: #6a1b9a;
+            font-size: 12px;
+        }
+        
+        .disease-tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565C0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 12px;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565C0;
+            padding: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="96.html" class="nav-btn">← 上一页</a>
+            <a href="98.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title">~~~~~抗感染治疗方案参考表*****</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:15%">病原体（通常）</th>
+                    <th style="width:32%">推荐治疗方案<br>首选方案</th>
+                    <th style="width:35%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>类鼻疽博克霍尔德菌（假单胞）<br>（类鼻疽病原）<br>可导致原发或继发皮肤感染<br><em>参见NEJM 367:1035, 2012</em></td>
+                    <td class="pathogen">革兰阴性菌</td>
+                    <td class="treatment">
+                        <strong>首选：</strong>初始静脉药物治疗：头孢他啶30～50mg/kg iv q8h或美罗培南1g iv q8h。治疗至少14天。如病情好转，改口服治疗<br><br>
+                        <strong>备选：</strong>TMP-SMX 5mg/kg（按TMP计算）bid＋多西环素2mg/kg bid 成人和儿童×3个月
+                    </td>
+                    <td class="note">年龄≤8岁的儿童和孕妇不能耐受TMP-SMX的根治治疗：口服药物使用阿莫西林-克拉维酸缓释片20mg/5mg po tid×3个月</td>
+                </tr>
+                <tr>
+                    <td>肺炎衣原体肺炎</td>
+                    <td class="pathogen">肺炎衣原体</td>
+                    <td class="treatment">
+                        <strong>首选：</strong>阿奇霉素500mg第1天之后，250mg qd×4d或左氧氟沙星750mg×5d<br><br>
+                        <strong>备选：</strong>多西环素100mg q12h×5d或克拉霉素500mg bid×5d
+                    </td>
+                    <td class="note">多西环素100mg bid ×3个月是另一种选择，但TMP/SMX因失败率低，为首选<br>骨或CNS感染，疗程延长至6个月<br>临床诊断，很少微生物学确诊</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">流感嗜血杆菌</td>
+                    <td class="pathogen">β-内酰胺酶阴性</td>
+                    <td class="treatment">氨苄西林iv，阿莫西林po，TMP-SMX，阿奇霉素/克拉霉素，多西环素</td>
+                    <td class="note" rowspan="2">25%～35%菌株β-内酰胺酶阳性。对TMP-SMX及多西环素的耐药性增高。剂量见表10A，150页</td>
+                </tr>
+                <tr>
+                    <td class="pathogen">β-内酰胺酶阳性</td>
+                    <td class="treatment">阿莫西林-克拉维酸，口服第二、三代头孢菌素，注射用第三代头孢菌素，氟喹诺酮类<br>剂量：表10A</td>
+                </tr>
+                <tr>
+                    <td>流感病毒</td>
+                    <td colspan="3" style="text-align:center; color:#666;">见表14A，231页。参见IDSA指南CID 68: 895, 2019</td>
+                </tr>
+                <tr>
+                    <td>克雷伯菌属——ESBL阳性及其他肠杆菌<br>（见表5C）</td>
+                    <td class="pathogen">β-内酰胺酶阳性</td>
+                    <td class="treatment">头孢洛生-他唑巴坦、亚胺培南或美罗培南；如耐药，头孢他啶-阿维巴坦、美罗培南-韦博巴坦或亚胺培南-瑞来巴坦（剂量见表注11，44页）</td>
+                    <td class="note">ESBL可灭活所有头孢菌素；对所有氟喹诺酮类及大部分氨基糖苷类也耐药。哌拉西林-他唑巴坦治疗ESBL(+)菌失败（JAMA 2018; 320: 979 & 984）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="抗感染治疗方案参考表；类鼻疽；肺炎衣原体肺炎；流感嗜血杆菌；流感病毒；克雷伯菌属；ESBL；头孢他啶；美罗培南；阿奇霉素；多西环素；TMP-SMX；阿莫西林-克拉维酸；=97" readonly>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease">类鼻疽</span>
+        <span class="tag tag-disease">肺炎衣原体肺炎</span>
+        <span class="tag tag-disease">流感嗜血杆菌感染</span>
+        <span class="tag tag-disease">流感病毒感染</span>
+        <span class="tag tag-disease">克雷伯菌肺炎</span>
+        <span class="tag tag-bacteria">革兰阴性菌</span>
+        <span class="tag tag-bacteria">肺炎衣原体</span>
+        <span class="tag tag-bacteria">ESBL阳性菌</span>
+        <span class="tag tag-bacteria">肠杆菌科</span>
+        <span class="tag tag-antibiotic">头孢他啶</span>
+        <span class="tag tag-antibiotic">美罗培南</span>
+        <span class="tag tag-antibiotic">阿奇霉素</span>
+        <span class="tag tag-antibiotic">多西环素</span>
+        <span class="tag tag-antibiotic">TMP-SMX</span>
+        <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+        <span class="tag tag-antibiotic">左氧氟沙星</span>
+        <span class="tag tag-antibiotic">克拉霉素</span>
+        <span class="tag tag-antibiotic">氨苄西林</span>
+        <span class="tag tag-antibiotic">亚胺培南</span>
+        <span class="tag tag-antibiotic">头孢洛生-他唑巴坦</span>
+        <span class="tag tag-antibiotic">头孢他啶-阿维巴坦</span>
+    </div>
+    
+    <div class="page-num">97</div>
+    
+    <div class="keywords">
+        关键词：抗感染治疗 | 类鼻疽 | 肺炎衣原体 | 流感嗜血杆菌 | 流感病毒 | 克雷伯菌 | ESBL | 抗生素方案 | 头孢他啶 | 美罗培南 | 阿奇霉素 | 多西环素
+    </div>
+    
+    <script>
+        function copyText() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+    </script>
+</body>
+</html>

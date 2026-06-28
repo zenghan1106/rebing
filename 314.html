@@ -1,0 +1,558 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~口服头孢菌素（第二代、第三代）不良反应与说明*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f7ff;
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 8px 16px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+        }
+
+        .home-btn:hover {
+            background: #1976D2;
+        }
+
+        /* 上一页/下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.3);
+        }
+
+        .nav-btn:hover {
+            background: #388E3C;
+        }
+
+        .nav-btn.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            margin: 60px 0 20px;
+            font-size: 1.4rem;
+            padding: 0 10px;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        /* 表头 */
+        thead {
+            background: #1565C0;
+            color: white;
+        }
+
+        th {
+            padding: 14px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+
+        /* 表格第一行（分类行） */
+        .category-row {
+            background: #E3F2FD;
+        }
+
+        .category-row td {
+            font-size: 15px;
+            font-weight: bold;
+            color: #0D47A1;
+            padding: 12px;
+            border: 1px solid #BBDEFB;
+        }
+
+        /* 普通单元格 */
+        td {
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+
+        /* 药品名列 */
+        .drug-name {
+            background: #FFF8E1;
+            font-weight: 500;
+            color: #E65100;
+            white-space: nowrap;
+            min-width: 180px;
+        }
+
+        /* 剂量列 */
+        .dosage {
+            background: #E8F5E9;
+            color: #1B5E20;
+            min-width: 200px;
+        }
+
+        /* 不良反应列 */
+        .adverse {
+            background: #FCE4EC;
+            color: #880E4F;
+        }
+
+        /* 备注 */
+        .note {
+            background: #FFF3E0;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FF9800;
+            font-size: 13px;
+            color: #E65100;
+            line-height: 1.8;
+        }
+
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: #FAFAFA;
+        }
+
+        .copy-btn {
+            padding: 12px 24px;
+            background: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: #F57C00;
+        }
+
+        .copy-btn.copied {
+            background: #4CAF50;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* 疾病标签 - 红色系 */
+        .tag-disease {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+
+        .tag-disease:hover {
+            background: #C62828;
+            color: white;
+        }
+
+        /* 抗生素标签 - 绿色系 */
+        .tag-antibiotic {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+
+        .tag-antibiotic:hover {
+            background: #2E7D32;
+            color: white;
+        }
+
+        /* 细菌标签 - 蓝色系 */
+        .tag-bacteria {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+
+        .tag-bacteria:hover {
+            background: #1565C0;
+            color: white;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.1rem;
+                margin-top: 70px;
+            }
+
+            th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+
+            .drug-name {
+                min-width: 120px;
+                white-space: normal;
+            }
+
+            .dosage {
+                min-width: 150px;
+            }
+
+            .home-btn, .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .copy-wrapper {
+                flex-direction: column;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+
+            #copyInput {
+                width: 100%;
+            }
+        }
+
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 2000;
+            display: none;
+        }
+
+        .toast.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+
+    <!-- 上一页/下一页 -->
+    <div class="nav-buttons">
+        <a href="313.html" class="nav-btn">← 上一页</a>
+        <a href="315.html" class="nav-btn">下一页 →</a>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~口服头孢菌素（第二代、第三代）不良反应与说明*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">第二代口服头孢菌素</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢克洛（Ceclor）</td>
+                    <td class="dosage">0.25g po q8h 或 0.5g po q8h</td>
+                    <td class="adverse">0.1%～0.5%有血清病样反应，如关节痛、皮疹、多形红斑；但无淋巴结肿大、蛋白尿或可证实的免疫复合物</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢丙烯（Cefzil）</td>
+                    <td class="dosage">0.5g po qd 或 0.5g po bid</td>
+                    <td class="adverse">腹泻、恶心、呕吐、腹痛；罕见过敏反应</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢呋辛酯（Ceftin）</td>
+                    <td class="dosage">0.25g～0.5g po bid</td>
+                    <td class="adverse">约1%的患者因药物和铁形成复合物使粪便呈红色；胃肠道反应常见</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">氯碳头孢（Lorabid）</td>
+                    <td class="dosage">0.2g～0.4g po q12h</td>
+                    <td class="adverse">腹泻、恶心、呕吐；罕见过敏反应</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">第三代口服头孢菌素</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢地尼（Omnicef, 300mg胶囊）</td>
+                    <td class="dosage">300mg po q12h 或 600mg qd</td>
+                    <td class="adverse">少见的药物特异性不良反应；约1%的患者因药物和铁形成复合物使粪便呈红色</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢托仑（Spectracef）</td>
+                    <td class="dosage">400mg po bid</td>
+                    <td class="adverse">头孢克洛：0.1%～0.5%有血清病样反应，如关节痛、皮疹、多形红斑；但无淋巴结肿大、蛋白尿或可证实的免疫复合物<br><br>头孢地尼：约1%的患者因药物和铁形成复合物使粪便呈红色</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢克肟（Suprax, 400mg片剂）</td>
+                    <td class="dosage">0.4g po q12～24h</td>
+                    <td class="adverse">头孢托仑：水解后释出三甲基醋酸盐。70%的三甲基醋酸盐吸收后变成特戊酰肉毒碱由肾排出，血清肉毒碱（carnitine）浓度降低39%～63%。肉毒碱参与脂肪酸代谢和运转至线粒体。其作用短暂且可逆。不宜用于对肉毒碱缺乏或出生存在代谢缺陷患者，导致临床显著的肉毒碱缺失。也含酪蛋白酸盐（奶蛋白）；如对牛奶过敏，则避免服用（与乳糖不耐受不同）。需要胃酸帮助才能达到最佳吸收</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢泊肟酯（Vantin）</td>
+                    <td class="dosage">0.1～0.2g po q12h</td>
+                    <td class="adverse">头孢泊肟：罕见的有急性肝损害、血性腹泻、肺嗜酸性粒细胞浸润的报道</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢布烯（Cedax, 400mg片剂）</td>
+                    <td class="dosage">0.4g po qd</td>
+                    <td class="adverse">头孢氨苄：可能导致尿液试纸法白细胞检测出现假阴性结果</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 备注 -->
+    <div class="note">
+        <strong>注：</strong>*所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">314</div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签（点击检索相关网页）</div>
+        <div class="tags-list" id="tagsList"></div>
+    </div>
+
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 页面数据
+        const pageData = {
+            id: "314",
+            title: "口服头孢菌素（第二代、第三代）不良反应与说明",
+            keywords: ["头孢地尼","头孢托仑","头孢克肟","头孢泊肟酯","头孢布烯","头孢克洛","头孢丙烯","头孢呋辛酯","氯碳头孢","第二代口服头孢菌素","第三代口服头孢菌素","Omnicef","Spectracef","Suprax","Vantin","Cedax","Ceclor","Cefzil","Ceftin","Lorabid","血清病样反应","肉毒碱","carnitine","假阴性","不良反应"]
+        };
+
+        // 设置复制内容
+        const copyContentText = `${pageData.title}；${pageData.keywords.join('；')}；=${pageData.id}`;
+        document.getElementById('copyInput').value = copyContentText;
+
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板');
+                    document.querySelector('.copy-btn').classList.add('copied');
+                    document.querySelector('.copy-btn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.querySelector('.copy-btn').classList.remove('copied');
+                        document.querySelector('.copy-btn').textContent = '复制';
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板');
+            }
+        }
+
+        // 标签数据 - 仅来自图片中的文字
+        const tags = [
+            // 疾病/症状
+            {name: "血清病样反应", type: "disease"},
+            {name: "关节痛", type: "disease"},
+            {name: "皮疹", type: "disease"},
+            {name: "多形红斑", type: "disease"},
+            {name: "淋巴结肿大", type: "disease"},
+            {name: "蛋白尿", type: "disease"},
+            {name: "腹泻", type: "disease"},
+            {name: "恶心", type: "disease"},
+            {name: "呕吐", type: "disease"},
+            {name: "腹痛", type: "disease"},
+            {name: "过敏反应", type: "disease"},
+            {name: "急性肝损害", type: "disease"},
+            {name: "血性腹泻", type: "disease"},
+            {name: "肺嗜酸性粒细胞浸润", type: "disease"},
+            {name: "肉毒碱缺乏", type: "disease"},
+            {name: "代谢缺陷", type: "disease"},
+            {name: "牛奶过敏", type: "disease"},
+            {name: "乳糖不耐受", type: "disease"},
+            {name: "假阴性", type: "disease"},
+            
+            // 抗生素药物
+            {name: "头孢地尼", type: "antibiotic"},
+            {name: "头孢托仑", type: "antibiotic"},
+            {name: "头孢克肟", type: "antibiotic"},
+            {name: "头孢泊肟酯", type: "antibiotic"},
+            {name: "头孢布烯", type: "antibiotic"},
+            {name: "头孢克洛", type: "antibiotic"},
+            {name: "头孢丙烯", type: "antibiotic"},
+            {name: "头孢呋辛酯", type: "antibiotic"},
+            {name: "氯碳头孢", type: "antibiotic"},
+            {name: "第二代口服头孢菌素", type: "antibiotic"},
+            {name: "第三代口服头孢菌素", type: "antibiotic"},
+            
+            // 细菌/微生物相关（图片中提到的）
+            {name: "白细胞", type: "bacteria"}
+        ];
+
+        // 渲染标签
+        function renderTags() {
+            const container = document.getElementById('tagsList');
+            
+            container.innerHTML = tags.map(tag => {
+                const typeClass = tag.type === 'disease' ? 'tag-disease' : 
+                                  tag.type === 'antibiotic' ? 'tag-antibiotic' : 'tag-bacteria';
+                return `<span class="tag ${typeClass}" onclick="searchTag('${tag.name}')">${tag.name}</span>`;
+            }).join('');
+        }
+
+        function searchTag(keyword) {
+            // 跳转到首页并搜索
+            localStorage.setItem('searchKeyword', keyword);
+            location.href = 'index.html';
+        }
+
+        // 提示功能
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTags();
+        });
+    </script>
+</body>
+</html>

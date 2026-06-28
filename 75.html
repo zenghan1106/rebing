@@ -1,0 +1,657 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风湿热伴心脏炎与心室辅助装置感染及反应性关节炎治疗方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+        }
+
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 25px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4e6f1 0%, #aed6f1 100%);
+            border-radius: 12px;
+            border-left: 5px solid #2874a6;
+            border-right: 5px solid #2874a6;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .title-format {
+            display: inline;
+        }
+
+        .title-tilde {
+            color: #e74c3c;
+            letter-spacing: 3px;
+        }
+
+        .title-text {
+            color: #1a5276;
+        }
+
+        .title-star {
+            color: #f39c12;
+            letter-spacing: 3px;
+        }
+
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .home-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1a5276);
+            transform: translateY(-2px);
+        }
+
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .prev-btn, .next-btn {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background: linear-gradient(135deg, #229954, #1e8449);
+            transform: translateY(-2px);
+        }
+
+        .disabled-btn {
+            background: #bdc3c7 !important;
+            cursor: not-allowed;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 800px;
+        }
+
+        /* 表头样式 */
+        thead tr {
+            background: linear-gradient(135deg, #2874a6, #1a5276);
+            color: white;
+        }
+
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+            position: relative;
+        }
+
+        thead th:first-child {
+            border-radius: 15px 0 0 0;
+        }
+
+        /* 表头第一行字体更大 */
+        .header-main {
+            font-size: 17px !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* 子表头 */
+        .sub-header {
+            background: linear-gradient(135deg, #5dade2, #3498db) !important;
+            font-size: 14px !important;
+        }
+
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border: 1px solid #d5d8dc;
+            vertical-align: top;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+
+        /* 行交替颜色 */
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #e8f6f3;
+            transition: background-color 0.3s ease;
+        }
+
+        /* 第一列强调 */
+        tbody td:first-child {
+            background-color: #ebf5fb;
+            font-weight: 600;
+            color: #1a5276;
+            width: 15%;
+        }
+
+        /* 第二列 */
+        tbody td:nth-child(2) {
+            width: 18%;
+            color: #6c3483;
+        }
+
+        /* 第三列首选方案 */
+        tbody td:nth-child(3) {
+            width: 25%;
+            background-color: #fef9e7;
+        }
+
+        /* 第四列备选方案 */
+        tbody td:nth-child(4) {
+            width: 20%;
+            background-color: #fdedec;
+        }
+
+        /* 第五列辅助诊断 */
+        tbody td:nth-child(5) {
+            width: 22%;
+            background-color: #e8f8f5;
+        }
+
+        /* 文献引用样式 */
+        .reference {
+            color: #e74c3c;
+            font-style: italic;
+            font-size: 12px;
+        }
+
+        /* 剂量强调 */
+        .dosage {
+            color: #c0392b;
+            font-weight: 600;
+        }
+
+        /* 备注区域 */
+        .notes-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .notes-title {
+            color: #2874a6;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #aed6f1;
+        }
+
+        .notes-content {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+
+        .notes-content p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+
+        .notes-mark {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #f8f9fa;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .copy-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #8e44ad, #7d3c98);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-success {
+            background: linear-gradient(135deg, #27ae60, #229954) !important;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .tags-title {
+            color: #2874a6;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #aed6f1;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tag-disease {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .tag-disease:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+        }
+
+        .tag-bacteria {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .tag-bacteria:hover {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            transform: translateY(-2px);
+        }
+
+        .tag-antibiotic {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .tag-antibiotic:hover {
+            background: linear-gradient(135deg, #229954, #1e8449);
+            transform: translateY(-2px);
+        }
+
+        .tag-symptom {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .tag-symptom:hover {
+            background: linear-gradient(135deg, #2980b9, #1a5276);
+            transform: translateY(-2px);
+        }
+
+        /* 关键词区域 */
+        .keywords-section {
+            background: linear-gradient(135deg, #d5f5e3, #abebc6);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .keywords-title {
+            color: #1e8449;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .keywords-content {
+            color: #145a32;
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #2874a6;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            .header-main {
+                font-size: 14px !important;
+            }
+
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+
+            tbody td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+
+            .copy-input {
+                min-width: 100%;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+        }
+
+        /* 特殊标记 */
+        .highlight-red {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            color: #2874a6;
+            font-weight: bold;
+        }
+
+        .highlight-green {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* 脚注 */
+        .footnote {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 10px 10px 0;
+            font-size: 12px;
+            color: #7d6608;
+        }
+
+        /* 跨行标题 */
+        .section-title {
+            background: linear-gradient(135deg, #d5dbdb, #aeb6bf) !important;
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-btn home-btn">
+            <span>🏠</span> 返回首页
+        </a>
+        <div class="page-nav">
+            <a href="74.html" class="nav-btn prev-btn">
+                <span>◀</span> 上一页
+            </a>
+            <a href="76.html" class="nav-btn next-btn">
+                下一页 <span>▶</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-format">
+            <span class="title-tilde">~~~~~</span>
+            <span class="title-text">风湿热心脏炎与心室辅助装置感染及反应性关节炎治疗方案</span>
+            <span class="title-star">*****</span>
+        </span>
+    </h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="header-main">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" class="header-main">病原体（通常）</th>
+                    <th colspan="2" class="header-main">推荐治疗方案</th>
+                    <th rowspan="2" class="header-main">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选方案</th>
+                    <th class="sub-header">备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="section-title">心脏（续）</td>
+                </tr>
+                <tr>
+                    <td>风湿热伴心脏炎<br><span class="reference">Ln 366: 155, 2005</span></td>
+                    <td>A族链球菌感染后遗症（常为咽炎）</td>
+                    <td>阿司匹林，常用泼尼松<span class="dosage">2mg/kg po qd</span>作为发热、关节炎、关节痛的对症治疗；对心脏炎可能无作用</td>
+                    <td>—</td>
+                    <td><span class="highlight-blue">临床特点：</span>心脏炎，多关节炎，舞蹈病，皮下结节，环形红斑；预防见68页<br><br>阿司匹林剂量，<span class="dosage">80～100mg/(kg·d)</span>（儿童），<span class="dosage">4～8g/d</span>（成人）<br><br>同时推荐清除A族链球菌治疗：儿童，青霉素V，<span class="dosage">250mg tid po×10d</span>；成人，青霉素V，<span class="dosage">500mg po tid×10d</span></td>
+                </tr>
+                <tr>
+                    <td>心室辅助装置相关性感染<br><span class="reference">Clin Transplant.2019; 33: e13552; OFID. 2020 Nov 16; 8(1): ofaa532</span></td>
+                    <td>金黄色葡萄球菌、表皮葡萄球菌、需氧革兰阴性杆菌、念珠菌属（罕见）</td>
+                    <td>血、伤口、导线、埋藏部位及泵尽可能做培养，然后选用：万古霉素<span class="dosage">30～60mg/(kg·d)</span>分2～3次，目标AUC<sub>24</sub> 400～600μg·h/ml + 头孢吡肟<span class="dosage">2g iv q12h</span></td>
+                    <td>—</td>
+                    <td>可用达托霉素<span class="dosage">10mg/(kg·d)</span>代替万古霉素，（环丙沙星<span class="dosage">400mg iv q12h</span>或左氧氟沙星<span class="dosage">750mg iv qd</span>）代替头孢吡肟</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="section-title">关节——另见莱姆病，65页</td>
+                </tr>
+                <tr>
+                    <td>反应性关节炎<br><br>赖特综合征（定义见说明）</td>
+                    <td>沙眼衣原体、空肠弯曲菌、小肠结肠耶尔森菌、志贺菌或沙门菌属感染后数周内发病</td>
+                    <td>唯一治疗：非甾体抗炎药</td>
+                    <td>—</td>
+                    <td><span class="highlight-blue">定义：</span>尿道炎，结膜炎，关节炎，部分尚有葡萄膜炎及皮疹<br><br><span class="highlight-blue">关节炎：</span>非对称性寡关节炎，包括踝、膝、足及骶髂关节炎<br><br><span class="highlight-blue">皮疹：</span>手掌及足底——脓溢性皮肤角化病，阴茎头环状龟头炎<br><br><span class="highlight-red">HLA-B27阳性者易患该病</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="notes-title">📋 快速复制</div>
+        <div class="copy-wrapper">
+            <textarea class="copy-input" id="copyText" readonly>风湿热伴心脏炎与心室辅助装置感染及反应性关节炎治疗方案；风湿热伴心脏炎；心室辅助装置相关性感染；反应性关节炎；赖特综合征；A族链球菌；金黄色葡萄球菌；表皮葡萄球菌；念珠菌属；沙眼衣原体；空肠弯曲菌；小肠结肠耶尔森菌；志贺菌；沙门菌属；阿司匹林；泼尼松；青霉素V；万古霉素；头孢吡肟；达托霉素；环丙沙星；左氧氟沙星；非甾体抗炎药；HLA-B27；=75</textarea>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">风湿热伴心脏炎</span>
+            <span class="tag tag-disease">心室辅助装置感染</span>
+            <span class="tag tag-disease">反应性关节炎</span>
+            <span class="tag tag-disease">赖特综合征</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">表皮葡萄球菌</span>
+            <span class="tag tag-bacteria">沙眼衣原体</span>
+            <span class="tag tag-bacteria">空肠弯曲菌</span>
+            <span class="tag tag-bacteria">小肠结肠耶尔森菌</span>
+            <span class="tag tag-bacteria">志贺菌</span>
+            <span class="tag tag-bacteria">沙门菌属</span>
+            <span class="tag tag-bacteria">念珠菌属</span>
+            <span class="tag tag-antibiotic">阿司匹林</span>
+            <span class="tag tag-antibiotic">泼尼松</span>
+            <span class="tag tag-antibiotic">青霉素V</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">非甾体抗炎药</span>
+            <span class="tag tag-symptom">HLA-B27阳性</span>
+            <span class="tag tag-symptom">心脏炎</span>
+            <span class="tag tag-symptom">多关节炎</span>
+            <span class="tag tag-symptom">尿道炎</span>
+            <span class="tag tag-symptom">结膜炎</span>
+            <span class="tag tag-symptom">葡萄膜炎</span>
+        </div>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            风湿热伴心脏炎 | 心室辅助装置感染 | 反应性关节炎 | 赖特综合征 | A族链球菌 | 金黄色葡萄球菌 | 表皮葡萄球菌 | 沙眼衣原体 | 空肠弯曲菌 | 小肠结肠耶尔森菌 | 志贺菌 | 沙门菌属 | 念珠菌属 | 阿司匹林 | 泼尼松 | 青霉素V | 万古霉素 | 头孢吡肟 | 达托霉素 | 环丙沙星 | 左氧氟沙星 | 非甾体抗炎药 | HLA-B27 | 心脏炎 | 多关节炎 | 尿道炎 | 结膜炎 | 葡萄膜炎
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：75
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            const copyBtn = document.getElementById("copyBtn");
+            
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess(copyBtn);
+                }).catch(function(err) {
+                    document.execCommand('copy');
+                    showCopySuccess(copyBtn);
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess(copyBtn);
+            }
+        }
+        
+        function showCopySuccess(btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "✅ 已复制";
+            btn.classList.add("copy-success");
+            
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.classList.remove("copy-success");
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

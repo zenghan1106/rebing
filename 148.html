@@ -1,0 +1,478 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-感染性休克与无脾患者</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f0f4f8;
+            padding: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .prev-btn {
+            right: 105px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .title-marker {
+            color: #e53935;
+            letter-spacing: 3px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background: #1976d2;
+            font-size: 13px;
+            padding: 10px;
+        }
+        
+        /* 第一行字体大一点 */
+        .section-header td {
+            background: #e3f2fd !important;
+            font-size: 15px;
+            font-weight: bold;
+            color: #0d47a1;
+            padding: 12px 10px;
+            border: 1px solid #90caf9;
+        }
+        
+        /* 子章节标题 */
+        .subsection-header td {
+            background: #fff3e0 !important;
+            font-size: 14px;
+            font-weight: bold;
+            color: #e65100;
+            padding: 10px;
+            border: 1px solid #ffe0b2;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #cfd8dc;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        tr:hover {
+            background: #e8eaf6;
+        }
+        
+        /* 检索标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-disease:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #e65100;
+            color: white;
+        }
+        
+        .tag-syndrome {
+            background: #e1f5fe;
+            color: #01579b;
+            border: 1px solid #81d4fa;
+        }
+        
+        .tag-syndrome:hover {
+            background: #01579b;
+            color: white;
+        }
+        
+        .tag-emergency {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .tag-emergency:hover {
+            background: #c62828;
+            color: white;
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #1565c0;
+            border-radius: 6px;
+            font-size: 13px;
+            width: calc(100% - 110px);
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            padding: 12px 24px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #0d47a1;
+        }
+        
+        #copyBtn.copied {
+            background: #2e7d32;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #757575;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+                margin-top: 65px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .tag {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="147.html" class="nav-btn prev-btn">↑ 上一页</a>
+    <a href="149.html" class="nav-btn next-btn">↓ 下一页</a>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-marker">~~~~~</span>
+        表1（67）临床抗微生物治疗的初始选择
+        <span class="title-marker">*****</span>
+    </h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="5">全身综合征（发热/不发热）（续）</td>
+                </tr>
+                <tr class="subsection-header">
+                    <td colspan="5">休克综合征</td>
+                </tr>
+                <tr>
+                    <td>感染性休克：菌血症休克、内毒素休克<br>拯救脓毒症指南：诊断感染性休克1小时内给予抗生素治疗。参见CCM2024; 52: 1138; CID 2024; 78: 505<br>有关感染性休克的优秀综述：NEJM 2024, 391: 2133</td>
+                    <td>需氧革兰阴性杆菌或革兰阳性球菌菌血症<br>其他可能的病因包括中毒休克综合征和免疫治疗导致的细胞因子风暴（NEJM 383: 1907, 2020）<br>考虑休克伴随的病因，如肺栓塞，充血性心力衰竭等</td>
+                    <td>集束化治疗（NEJM 2017, 376: 2235&2282）<br>1. 两套血培养、其他相关的培养、鼻前庭金黄色葡萄球菌核酸扩增试验<br>2. 血清乳酸检测<br>3. 基线降钙素原（如有可能）；如＜0.25ng/ml，4～6小时重复<br>4. 经验性抗感染治疗：<br>—耐多药革兰阴性杆菌流行率低，哌拉西林-他唑巴坦或头孢吡肟+万古霉素（如为腹腔来源，加用甲硝唑）<br>—耐多药革兰阴性杆菌流行率高，美罗培南或亚胺培南+万古霉素<br>5. 静脉晶体液20～40ml/kg（JAMA 326: 818, 2021）。<br>—如低血压持续，开始去甲肾上腺素治疗<br>6. 尽力发现菌血症的正确来源<br>7. 监测乳酸水平及中央静脉血氧饱和度（目标≥70%），以评估灌注的充分性</td>
+                    <td></td>
+                    <td>• 持续收缩压＜90mmHg或平均动脉压＜65mmHg的患者，测随机血清皮质醇水平，之后氢化可的松50μg po qd + 氟氢可的松50μg qd鼻胃管入<br>• 胰岛素治疗：目标血糖水平140～280mg/dl<br>• 预后：迅速控制感染灶和有效的抗感染治疗提高生存率<br>• 标准集束化治疗方案的各项措施的价值存在较多争论，但Medicare已把这些措施作为医疗质量评价的工具："感染性休克早期管理（SEP-1）脓毒症质量评价"。参见CID 72: 541, 2021（IDSA观点）；CID 72: 553, 2021（Medicare & 重症医学观点）<br>• 注意：前瞻性多中心安慰剂对照的随机对照研究显示维生素C、氢化可的松和维生素B₁的联合治疗并不能降低感染性休克严重程度评分（JAMA 324: 642, 2020）<br>• 氢化可的松 + 氟氢化可的松3期随机对照试验（Lancet Respir Med 2024; 12: 366）</td>
+                </tr>
+                <tr>
+                    <td>感染性休克：脾切除术后或功能性无脾<br>无脾患者的护理：Chest 2016, 150: 1394</td>
+                    <td>肺炎链球菌、脑膜炎球菌、流感嗜血杆菌、二氧化碳嗜纤维菌（DF-2）</td>
+                    <td>无狗咬伤：头孢曲松2g iv qd（若是脑膜炎，2g iv q12h）<br><br>狗咬伤后：[哌拉西林-他唑巴坦4.5g（输注4小时以上）iv q8h或美罗培南1g iv q8h] 或克林霉素900mg iv q8h</td>
+                    <td>无狗咬伤：（左氧氟沙星750mg或莫西沙星400mg）iv qd</td>
+                    <td>外周血涂片上发现豪-乔（Howell-Jolly）小体可证实功能性无脾<br>重度DIC时常引起指（趾）对称性外周坏疽。预防见表15A，260页。免疫接种：CID 58: 309, 2014</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div>
+            <span class="tag tag-emergency">感染性休克</span>
+            <span class="tag tag-emergency">菌血症休克</span>
+            <span class="tag tag-emergency">内毒素休克</span>
+            <span class="tag tag-emergency">脓毒症</span>
+            <span class="tag tag-emergency">集束化治疗</span>
+            <span class="tag tag-disease">脾切除术后感染</span>
+            <span class="tag tag-disease">功能性无脾</span>
+            <span class="tag tag-disease">狗咬伤</span>
+            <span class="tag tag-disease">DIC</span>
+            <span class="tag tag-syndrome">细胞因子风暴</span>
+            <span class="tag tag-syndrome">中毒休克综合征</span>
+            <span class="tag tag-syndrome">耐多药革兰阴性杆菌</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">脑膜炎球菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">二氧化碳嗜纤维菌</span>
+            <span class="tag tag-bacteria">DF-2</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">莫西沙星</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">氢化可的松</span>
+            <span class="tag tag-antibiotic">氟氢可的松</span>
+            <span class="tag tag-antibiotic">去甲肾上腺素</span>
+            <span class="tag tag-antibiotic">维生素C</span>
+            <span class="tag tag-antibiotic">维生素B1</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div style="font-size: 14px; color: #555; margin-bottom: 10px;">📋 快速复制信息（标题 + 副标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">148</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：感染性休克；菌血症休克；内毒素休克；集束化治疗；脓毒症；脾切除术后感染；功能性无脾；狗咬伤；耐多药革兰阴性杆菌；细胞因子风暴；肺炎链球菌；脑膜炎球菌；流感嗜血杆菌；二氧化碳嗜纤维菌；哌拉西林-他唑巴坦；美罗培南；亚胺培南；万古霉素；头孢曲松；左氧氟沙星；莫西沙星；克林霉素；氢化可的松；去甲肾上腺素</div>
+    
+    <script>
+        // 设置编辑框内容
+        const title = "表1（67）临床抗微生物治疗的初始选择";
+        const subtitle = "感染性休克与无脾患者";
+        const keywords = "感染性休克；菌血症休克；内毒素休克；集束化治疗；脓毒症；脾切除术后感染；功能性无脾；狗咬伤；耐多药革兰阴性杆菌；细胞因子风暴；肺炎链球菌；脑膜炎球菌；流感嗜血杆菌；二氧化碳嗜纤维菌；哌拉西林-他唑巴坦；美罗培南；亚胺培南；万古霉素；头孢曲松；左氧氟沙星；莫西沙星；克林霉素；氢化可的松；去甲肾上腺素";
+        const pageNum = "148";
+        
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

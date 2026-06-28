@@ -1,0 +1,551 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表9A（31）抗菌药物药理学特点-HCV复合药物*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2980b9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(41, 128, 185, 0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #2980b9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(41, 128, 185, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 80px 20px 20px;
+            font-size: 26px;
+            color: #1a5276;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            padding: 0 20px 25px;
+            font-size: 18px;
+            color: #2874a6;
+            font-weight: 600;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 1400px;
+        }
+        
+        /* 表头 */
+        thead {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+            line-height: 1.5;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #d6eaf8 !important;
+            font-weight: bold;
+            font-size: 14px;
+            color: #1a5276;
+            text-align: left;
+            padding: 10px 15px;
+        }
+        
+        /* 数据行 */
+        tbody tr {
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #d4e6f1;
+            text-align: center;
+            vertical-align: middle;
+            color: #2c3e50;
+        }
+        
+        /* 第一列药物名称 */
+        tbody tr.data-row td:first-child {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1a5276;
+            background: #f8fbfd;
+            text-align: left;
+            padding-left: 12px;
+        }
+        
+        /* 隔行变色 */
+        tbody tr.data-row:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        tbody tr.data-row:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        /* 长内容换行 */
+        .wrap-cell {
+            max-width: 180px;
+            word-wrap: break-word;
+            white-space: normal;
+            line-height: 1.8;
+            text-align: left;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            margin: 0 15px 25px;
+            padding: 18px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .notes p {
+            margin-bottom: 6px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 18px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #b9770e;
+        }
+        
+        .tag-drug {
+            background: #d4e6f1;
+            color: #1a5276;
+        }
+        
+        .tag-virus {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+        
+        .tag-bacteria {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            padding: 0 15px;
+            line-height: 1.8;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 25px;
+            padding: 18px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #2e75b6;
+        }
+        
+        .copy-btn {
+            padding: 12px 28px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding-top: 70px;
+            }
+            
+            .sub-title {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            tbody td {
+                font-size: 11px;
+                padding: 8px 5px;
+            }
+            
+            tbody tr.data-row td:first-child {
+                font-size: 12px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="268.html" class="nav-btn">← 上一页</a>
+        <a href="270.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表9A（31）抗菌药物药理学特点*****</h1>
+    <h2 class="sub-title">抗病毒药物（非HIV）/HCV复合药物（续）</h2>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>PK/PD<br>指数</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂¹</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tmax<br>(h)</th>
+                    <th>血浆峰<br>值浓度²<br>(μg/ml)</th>
+                    <th>尿峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容积³/<br>Vd</th>
+                    <th>平均血清<br>半衰期⁴<br>(h)</th>
+                    <th>清除</th>
+                    <th>胆汁<br>排泄率⁵<br>(%)</th>
+                    <th>脑脊液/<br>血药<br>浓度比⁶<br>(%)</th>
+                    <th>脑脊<br>液穿<br>透⁷</th>
+                    <th>AUC⁸<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 分类行 -->
+                <tr>
+                    <td colspan="16" class="category-row">抗病毒药物（非HIV）/HCV复合药物（续）</td>
+                </tr>
+                <!-- 来迪派韦/索磷布韦（夏帆宁） -->
+                <tr class="data-row">
+                    <td class="wrap-cell">来迪派韦/<br>索磷布韦<br>（夏帆宁）</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">片剂（Ledip 90mg，<br>Sofos 400mg）</td>
+                    <td class="wrap-cell">片剂±<br>食物</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">Ledip<br>40~45<br>Sofos<br>0.8~1.0<br>GS-<br>331007<br>35~40</td>
+                    <td class="wrap-cell">Ledip 0.3（90mg<br>po qd，SS）<br>Sofos 0.62<br>（400mg po qd，<br>SS）<br>GS-331007 0.71<br>（400mg po qd，<br>SS）</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">Ledip >99.8<br>Sofos 61~65<br>GS-331007很小</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">Ledip 47<br>Sofos 0.5<br>GS-331007<br>27</td>
+                    <td class="wrap-cell">Ledip：胆<br>道，粪便<br>Sofos：代<br>谢<br>GS-<br>331007：<br>肾脏</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">Ledip 7.3<br>（90mg po qd，<br>0~24h）<br>Sofos 1.3<br>（400mg po<br>qd，0~24h）<br>GS-331007<br>12（400mg po<br>qd，0~24h）</td>
+                </tr>
+                <!-- 奥比他韦/帕利瑞韦/利托那韦（Technivie） -->
+                <tr class="data-row">
+                    <td class="wrap-cell">奥比他韦/<br>帕利瑞韦/<br>利托那韦<br>（Technivie）</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">片剂（Ornbit<br>12.5mg，Parita<br>75mg，RTV 50mg）</td>
+                    <td class="wrap-cell">片剂+<br>食物</td>
+                    <td class="wrap-cell">Ornbit<br>48，Parita<br>53</td>
+                    <td class="wrap-cell">Ornbit<br>5，Parita<br>4~5，<br>RTV<br>4~5</td>
+                    <td class="wrap-cell">Ornbit 0.082<br>（25mg po qd，<br>SS）<br>Parita 0.19（150mg<br>po qd，SS）<br>RTV 0.54（100mg<br>po qd，SS）</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">Ornbit 99.9<br>Parita 97~98.6<br>RTV >99</td>
+                    <td class="wrap-cell">Ornbit 173L<br>（Vss）<br>Parita 103L<br>（Vss）<br>RTV 21.5L<br>（V/F）</td>
+                    <td class="wrap-cell">Ornbit 21~25<br>Parita 5.5<br>RTV 4</td>
+                    <td class="wrap-cell">Ornbit：<br>胆道<br>Parita：<br>代谢<br>RTV：<br>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td class="wrap-cell">Ornbit 1.24<br>（25mg po qd，<br>0~24h）<br>Parita 2.28<br>（150mg po<br>qd，0~24h）<br>RTV 6.1（100mg<br>po qd，0~24h）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong></p>
+        <p>1 除非注明，否则均指成人制剂；+食物=餐中服用，无食物=空腹服用，±食物=餐中或空腹服用。</p>
+        <p>2 SD=单剂量，SS=达到稳态。</p>
+        <p>3 V/F=Vd/口服生物利用度，Vss=稳态时Vd，Vss/F=稳态时Vd/口服生物利用度。</p>
+        <p>4 假定CrCl＞80L/min。</p>
+        <p>5 （胆汁峰值浓度/血浆峰值浓度）×100。空白表示无数据。</p>
+        <p>6 炎症情况下脑脊液浓度。</p>
+        <p>7 基于药物的剂量和病原体敏感性判断。理想脑脊液浓度是≥10×MIC。</p>
+        <p>8 曲线下面积（AUC）=血清药物浓度-时间曲线下面积；12h=AUC 0~12，24h=AUC 0~24。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">HCV</span>
+            <span class="tag tag-virus">抗病毒药物</span>
+            <span class="tag tag-disease">非HIV</span>
+            <span class="tag tag-drug">来迪派韦</span>
+            <span class="tag tag-drug">索磷布韦</span>
+            <span class="tag tag-drug">夏帆宁</span>
+            <span class="tag tag-drug">Ledip</span>
+            <span class="tag tag-drug">Sofos</span>
+            <span class="tag tag-drug">GS-331007</span>
+            <span class="tag tag-drug">奥比他韦</span>
+            <span class="tag tag-drug">帕利瑞韦</span>
+            <span class="tag tag-drug">利托那韦</span>
+            <span class="tag tag-drug">Technivie</span>
+            <span class="tag tag-drug">Ornbit</span>
+            <span class="tag tag-drug">Parita</span>
+            <span class="tag tag-drug">RTV</span>
+            <span class="tag tag-drug">片剂</span>
+            <span class="tag tag-bacteria">胆道</span>
+            <span class="tag tag-bacteria">代谢</span>
+            <span class="tag tag-bacteria">肾脏</span>
+            <span class="tag tag-bacteria">粪便</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">269</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>抗菌药物；药理学特点；PK/PD参数；HCV；来迪派韦；索磷布韦；夏帆宁；Ledip；Sofos；GS-331007；奥比他韦；帕利瑞韦；利托那韦；Technivie；Ornbit；Parita；RTV；抗病毒药物；非HIV；复合药物；片剂；胆道；代谢；肾脏；粪便；分布容积；半衰期；AUC；蛋白结合率
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="表9A（31）抗菌药物药理学特点；抗病毒药物（非HIV）/HCV复合药物（续），来迪派韦/索磷布韦（夏帆宁），奥比他韦/帕利瑞韦/利托那韦（Technivie），Ledip，Sofos，GS-331007，Ornbit，Parita，RTV；抗菌药物, 药理学特点, PK/PD参数, HCV, 来迪派韦, 索磷布韦, 夏帆宁, Ledip, Sofos, GS-331007, 奥比他韦, 帕利瑞韦, 利托那韦, Technivie, Ornbit, Parita, RTV, 抗病毒药物, 非HIV, 复合药物, 片剂, 胆道, 代谢, 肾脏, 粪便, 分布容积, 半衰期, AUC, 蛋白结合率；=269" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">✓ 已复制到剪贴板</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast();
+                });
+            } else {
+                document.execCommand('copy');
+                showToast();
+            }
+        }
+        
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

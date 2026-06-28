@@ -1,0 +1,386 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 26px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #4a5568;
+            font-size: 14px;
+            margin: -10px 0 20px 0;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-header {
+            background: #e2e8f0 !important;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .note {
+            font-size: 12px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ed8936;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .header {
+                justify-content: center;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="16.html" class="nav-btn">上一页</a>
+            <a href="18.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~临床抗微生物治疗的初始选择*****</h1>
+    <p class="subtitle">治疗方案取决于感染部位或类型；在某些情况下，应根据病原结果予以治疗和预防；应根据分离出的病原体、药物敏感性及宿主的个人特点对治疗方案进行再评价</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>解剖学部位/诊断/特定情况</th>
+                    <th>病原体（通常）</th>
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                    <th>辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="5">腹部：见腹膜（51页）、胆囊（18页）、盆腔炎性疾病（28页）</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="5">骨：骨髓炎，病原学诊断至关重要。若血培养阴性，需做骨组织培养（Eur J Clin Microbiol Infect Dis 33: 371, 2014）。窦道分泌物培养不能预测骨组织培养结果。关于抗生素对骨组织的穿透性，参见 Clinical Pharmacokinetics 48: 89, 2009</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="5">血行播散性骨髓炎（参见IDSA椎体骨髓炎指南：CID July 29, 2015）<br>经验性治疗：治疗前先做骨组织及血培养</td>
+                </tr>
+                <tr>
+                    <td>新生儿（&lt;4个月）</td>
+                    <td>金黄色葡萄球菌、革兰阴性杆菌、B族链球菌、金氏金氏杆菌（儿童）</td>
+                    <td>MRSA可能：万古霉素+（头孢他啶或头孢吡肟）</td>
+                    <td>MRSA不太可能：[萘夫西林、苯唑西林或头孢唑啉150mg/(kg·d)，分次q8h]+（头孢他啶或头孢吡肟）</td>
+                    <td>出现严重过敏或毒性反应：利奈唑胺<sup>NAI</sup>10mg/kg iv/po q8h+氨曲南</td>
+                </tr>
+                <tr>
+                    <td>儿童（&gt;4个月）—成人：四肢骨髓炎（NEJM 370: 352, 2014）</td>
+                    <td>金黄色葡萄球菌、A族链球菌，革兰阴性杆菌罕见，金氏金氏杆菌（儿童）</td>
+                    <td>MRSA可能：万古霉素30～60mg/(kg·d)分2～3次，目标AUC<sub>24</sub>400～600μg·h/ml<br><br>若涂片见革兰阴性杆菌，则加用头孢他啶或头孢吡肟<br>成人剂量见下</td>
+                    <td>MRSA不太可能：萘夫西林或苯唑西林150mg/(kg·d)分次q6h（最大剂量12g），头孢唑啉150mg/(kg·d)分次q8h，儿童患者同样有效</td>
+                    <td>出现严重过敏或毒性反应：克林霉素、TMP-SMX或利奈唑胺<sup>NAI</sup><br>早期转换为口服治疗同样有效</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">骨髓炎</span>
+            <span class="tag tag-disease">血行播散性骨髓炎</span>
+            <span class="tag tag-disease">四肢骨髓炎</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <span class="tag tag-bacteria">B族链球菌</span>
+            <span class="tag tag-bacteria">金氏金氏杆菌</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">头孢他啶</span>
+            <span class="tag tag-drug">头孢吡肟</span>
+            <span class="tag tag-drug">萘夫西林</span>
+            <span class="tag tag-drug">苯唑西林</span>
+            <span class="tag tag-drug">头孢唑啉</span>
+            <span class="tag tag-drug">利奈唑胺</span>
+            <span class="tag tag-drug">氨曲南</span>
+            <span class="tag tag-drug">克林霉素</span>
+            <span class="tag tag-drug">TMP-SMX</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="临床抗微生物治疗的初始选择；抗微生物治疗；骨髓炎；经验性治疗；抗生素选择；=17" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-num">页码：17</div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            document.execCommand('copy');
+            alert('已复制到剪贴板！');
+        }
+        
+        function addToFavorite() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toLocaleDateString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在 index.html 的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>

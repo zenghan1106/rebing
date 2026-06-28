@@ -1,0 +1,522 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-动物咬伤感染</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        /* 警示提示 */
+        .alert-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #856404;
+        }
+        
+        .alert-box strong {
+            color: #d32f2f;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-home {
+            background-color: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background-color: #219a52;
+        }
+        
+        .btn-prev, .btn-next {
+            background-color: #e67e22;
+        }
+        
+        .btn-prev:hover, .btn-next:hover {
+            background-color: #d35400;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #2c3e50;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(:first-child) {
+            background-color: #e8f4f8;
+        }
+        
+        /* 分类行高亮 */
+        .category-row {
+            background-color: #d5e8d4 !important;
+            font-weight: bold;
+            color: #1e8449 !important;
+        }
+        
+        .category-row td {
+            color: #1e8449;
+            font-size: 14px;
+        }
+        
+        /* 警示文字 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #16a085;
+            font-style: italic;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background-color: #9b59b6;
+        }
+        
+        .tag-animal {
+            background-color: #795548;
+        }
+        
+        .tag-symptom {
+            background-color: #f39c12;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .nav-top {
+                justify-content: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+            
+            thead th {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="118.html" class="btn btn-prev">上一页</a>
+            <a href="120.html" class="btn btn-next">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">临床抗微生物治疗的初始选择</h1>
+    <p class="subtitle">表1（53）皮肤动物咬伤感染</p>
+    
+    <!-- 警示提示 -->
+    <div class="alert-box">
+        <strong>⚠️ 咬伤：勿忘预防破伤风——</strong>狂犬病预防见表20B，328页。综述：<em>CMR 24：231，2011</em>。<strong class="warning">避免将伤口立即闭合</strong>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 22%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 31%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">皮肤（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>鳄鱼（美国短吻鳄）</strong>
+                    </td>
+                    <td>
+                        革兰阴性杆菌包括<span class="drug-name">嗜水气单胞菌</span>、<span class="drug-name">梭菌属</span>
+                    </td>
+                    <td>
+                        <strong>严重创伤：</strong>外科清创<br>
+                        （<span class="drug-name">环丙沙星</span> 400mg iv或750mg po bid<br>
+                        或<span class="drug-name">左氧氟沙星</span> 750mg iv qd）<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg iv/po q8h；<br>
+                        或<span class="drug-name">哌拉西林-他唑巴坦</span> 4.5g iv q8h
+                    </td>
+                    <td>
+                        <strong>严重创伤：</strong>外科清创<br>
+                        ［<span class="drug-name">TMP-SMX</span> 8～10mg/(kg·d) iv 分次q6h或q8h，<br>
+                        或<span class="drug-name">头孢吡肟</span> 2g iv q8h］<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg iv/po q8h
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>蝙蝠，浣熊，臭鼬</strong>
+                    </td>
+                    <td>
+                        来自皮肤的链球菌和葡萄球菌，狂犬病
+                    </td>
+                    <td>
+                        <span class="drug-name">阿莫西林-克拉维酸</span> 875/125mg po bid<br>
+                        或500/125mg po tid
+                    </td>
+                    <td>
+                        <span class="drug-name">多西环素</span> 100mg po bid
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>熊</strong>
+                    </td>
+                    <td>
+                        <span class="drug-name">金黄色葡萄球菌</span>、凝固酶阴性葡萄球菌、甲型溶血性链球菌、肠杆菌、气单胞菌、蜡样芽孢杆菌、奈瑟菌、坚忍肠球菌<br>
+                        （<em>Clin Microbiol Rev 24：231，2011</em>）
+                    </td>
+                    <td>
+                        <span class="drug-name">哌拉西林-他唑巴坦</span> 4.5g iv输注4h以上q8h
+                    </td>
+                    <td>
+                        <span class="drug-name">万古霉素</span> iv 30～60mg/(kg·d) 分2～3次，目标AUC₂₄ 400～600μg·h/ml<br>
+                        ＋（<span class="drug-name">头孢吡肟</span> 2g iv或<span class="drug-name">环丙沙星</span> 400mg iv q8～12h）<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg q8h<br>
+                        或<span class="drug-name">阿莫西林-克拉维酸</span> 875/125mg po bid<br>
+                        ＋<span class="drug-name">环丙沙星</span> 500～750mg po bid
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: #2e86c1; font-size: 15px; margin-bottom: 10px;">辅助诊断或治疗方法及说明</h3>
+        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+            <p><strong>【鳄鱼咬伤】</strong>美国短吻鳄分离到的口腔菌群：嗜水气单胞菌和其他革兰阴性菌，以及厌氧菌（包括梭菌属）（<em>S Med J 82：262，1989</em>）</p>
+            <p style="margin-top: 8px;"><strong>【蝙蝠/浣熊/臭鼬咬伤】</strong>在美洲需预防狂犬病，狂犬病免疫球蛋白＋疫苗（表20B，328页）</p>
+            <p style="margin-top: 8px;"><strong>【熊咬伤】</strong>创伤通常需住院处理。有感染偶发分枝杆菌的报道（<em>J Clin Micro 43：1009，2005</em>）<br>熊也发生狂犬病（<em>MMWR 48：761，1999</em>）</p>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：119</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择；动物咬伤/鳄鱼咬伤/蝙蝠咬伤/浣熊咬伤/臭鼬咬伤/熊咬伤/狂犬病预防/破伤风预防；环丙沙星/左氧氟沙星/甲硝唑/哌拉西林-他唑巴坦/TMP-SMX/头孢吡肟/阿莫西林-克拉维酸/多西环素/万古霉素；嗜水气单胞菌/梭菌属/金黄色葡萄球菌/链球菌/肠杆菌/气单胞菌/蜡样芽孢杆菌/奈瑟菌/坚忍肠球菌/偶发分枝杆菌；=119" readonly>
+            <button class="btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 动物标签 -->
+            <span class="tag tag-animal">鳄鱼</span>
+            <span class="tag tag-animal">美国短吻鳄</span>
+            <span class="tag tag-animal">蝙蝠</span>
+            <span class="tag tag-animal">浣熊</span>
+            <span class="tag tag-animal">臭鼬</span>
+            <span class="tag tag-animal">熊</span>
+            
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">动物咬伤</span>
+            <span class="tag tag-disease">狂犬病</span>
+            <span class="tag tag-disease">破伤风</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">嗜水气单胞菌</span>
+            <span class="tag tag-bacteria">梭菌属</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">凝固酶阴性葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">肠杆菌</span>
+            <span class="tag tag-bacteria">气单胞菌</span>
+            <span class="tag tag-bacteria">蜡样芽孢杆菌</span>
+            <span class="tag tag-bacteria">奈瑟菌</span>
+            <span class="tag tag-bacteria">坚忍肠球菌</span>
+            <span class="tag tag-bacteria">偶发分枝杆菌</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">TMP-SMX</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            
+            <!-- 操作/注意事项标签 -->
+            <span class="tag tag-symptom">外科清创</span>
+            <span class="tag tag-symptom">伤口处理</span>
+            <span class="tag tag-symptom">狂犬病疫苗</span>
+            <span class="tag tag-symptom">免疫球蛋白</span>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>临床抗微生物治疗 | 初始选择 | 动物咬伤 | 鳄鱼咬伤 | 蝙蝠咬伤 | 浣熊咬伤 | 臭鼬咬伤 | 熊咬伤 | 狂犬病 | 破伤风 | 嗜水气单胞菌 | 梭菌属 | 金黄色葡萄球菌 | 甲硝唑 | 环丙沙星 | 哌拉西林-他唑巴坦 | 万古霉素 | 外科清创
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyInput = document.getElementById("copyInput");
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }).catch(function() {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+    </script>
+</body>
+</html>

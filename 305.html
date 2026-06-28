@@ -1,0 +1,476 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10A 抗感染药物的剂量和不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            color: #333;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c 0%, #449d44 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        td, th {
+            padding: 10px 8px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .category-row {
+            background: linear-gradient(135deg, #5dade2 0%, #3498db 100%) !important;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            border-color: #2980b9;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .trade-name {
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        
+        .dosage {
+            color: #1a5276;
+            font-weight: 500;
+        }
+        
+        .adverse-reaction {
+            color: #5d4037;
+        }
+        
+        .highlight-danger {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .highlight-warning {
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8fbff;
+        }
+        
+        #copyBtn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        #copyBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        #copyBtn.copied {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(243, 156, 18, 0.3);
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
+        }
+        
+        .keywords-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .keywords-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            td, th {
+                padding: 6px 4px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="304.html" class="nav-btn">← 上一页</a>
+            <a href="306.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表10A 抗感染药物的剂量和不良反应*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">天然青霉素类</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">苄星青霉素G<br><span class="trade-name">（比西林，Bicillin L-A）</span></td>
+                    <td class="dosage">60万～120万U im q2～4w</td>
+                    <td class="adverse-reaction">过敏反应是主要问题。10%的住院患者有青霉素过敏史，但这些患者如果使用青霉素，只有10%出现过敏反应。为什么？可能的原因：病史不准确，随年龄增加免疫力减弱，在患病毒性疾病期间反应异常，如果肌内注射比西林C-R（普鲁卡因青霉素＋苄星青霉素），可对普鲁卡因过敏</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">青霉素G</td>
+                    <td class="dosage">小剂量：60万～120万U/d im<br>大剂量：≥2000万U iv qd（12g）分次q4h</td>
+                    <td class="adverse-reaction"><span class="highlight-danger">最严重的不良反应是IgE介导的超敏反应；发生率仅为0.05%，但5%～10%是致死性的。</span>其他IgE介导的反应：荨麻疹，血管性水肿，喉头水肿，支气管痉挛，腹痛伴呕吐，低血压。均在4小时内出现。能形成抗β-内酰胺环或侧链的IgE抗体。72小时后出现麻疹样皮疹不是IgE所介导的，并且也不严重</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">青霉素V<br><span class="trade-name">（250mg、500mg胶囊）</span></td>
+                    <td class="dosage">0.25～0.50g po bid、tid、qid 餐前及睡前。因对胃酸稳定，口服治疗时青霉素V优于青霉素G</td>
+                    <td class="adverse-reaction">严重的迟发过敏反应：库姆斯（Coombs）试验阳性溶血性贫血，中性粒细胞减少，血小板减低，血清病，间质性肾炎，肝炎，嗜酸性粒细胞增多，药物热<br>与头孢菌素类和碳青霉烯类交叉过敏，0～11%。其中一个因素是结构相似，或侧链不相似<br>关于青霉素脱敏，见表7。关于皮试，建议转诊变态反应科医师<br>脑脊液中高浓度导致癫痫发作。肾功能损害时减少剂量，见表17A<br>过敏反应参见CID 59：1113，2014；JAC 69：20-43，2014；CID 58：1140，2014。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">耐青霉素酶的青霉素类</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">双氯西林<br><span class="trade-name">（Dynapen）<br>（250mg、500mg胶囊）</span></td>
+                    <td class="dosage">0.125～0.500g po q6h 饭前</td>
+                    <td class="adverse-reaction">血药浓度比氯唑西林约高2倍，更适于口服治疗。有急性出血性膀胱炎的报道。急性腹痛伴胃肠道出血而无抗生素相关性结肠炎也有报道。可以阻碍华法林的作用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">氟氯西林<span class="highlight-warning">NUS</span><br><span class="trade-name">（Floxapen，Lutropin，Staphcill）</span></td>
+                    <td class="dosage">0.25～0.50g po q6h<br>1～2g iv q4h</td>
+                    <td class="adverse-reaction">胆汁淤积性肝炎的发生率为1：15 000，常见于年龄＞55岁、女性和疗程在2周以上者。可在治疗结束后数周内发生，数周后缓解（JAC 66：1431，2011）。建议：仅用于严重感染</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">萘夫西林<br><span class="trade-name">（Unipen，Nafcil）</span></td>
+                    <td class="dosage">1～2g iv或im q4h，因蛋白结合力＞90%，治疗菌血症需12g/d</td>
+                    <td class="adverse-reaction">外渗可致组织坏死。200～300mg/（kg·d）的剂量可能出现低钾血症。可逆性的中性粒细胞减少（治疗≥21天时发生率超过10%，偶尔白细胞＜1×10⁹/L）。会降低华法林的抗凝作用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="表10A 抗感染药物的剂量和不良反应；天然青霉素类；耐青霉素酶的青霉素类；苄星青霉素G；青霉素G；青霉素V；双氯西林；氟氯西林；萘夫西林；比西林；Bicillin L-A；Dynapen；Floxapen；Lutropin；Staphcill；Unipen；Nafcil；=305" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🏷️ 检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">天然青霉素类</span>
+            <span class="tag">耐青霉素酶的青霉素类</span>
+            <span class="tag">苄星青霉素G</span>
+            <span class="tag">青霉素G</span>
+            <span class="tag">青霉素V</span>
+            <span class="tag">双氯西林</span>
+            <span class="tag">氟氯西林</span>
+            <span class="tag">萘夫西林</span>
+            <span class="tag">比西林</span>
+            <span class="tag">Bicillin L-A</span>
+            <span class="tag">Dynapen</span>
+            <span class="tag">Floxapen</span>
+            <span class="tag">Lutropin</span>
+            <span class="tag">Staphcill</span>
+            <span class="tag">Unipen</span>
+            <span class="tag">Nafcil</span>
+            <span class="tag">NUS</span>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <h3>🔑 关键词</h3>
+        <div class="keywords-list">
+            <span class="keyword">抗感染药物</span>
+            <span class="keyword">剂量</span>
+            <span class="keyword">不良反应</span>
+            <span class="keyword">成人常规剂量</span>
+            <span class="keyword">过敏反应</span>
+            <span class="keyword">IgE介导</span>
+            <span class="keyword">超敏反应</span>
+            <span class="keyword">交叉过敏</span>
+            <span class="keyword">青霉素脱敏</span>
+            <span class="keyword">皮试</span>
+            <span class="keyword">出血性膀胱炎</span>
+            <span class="keyword">胆汁淤积性肝炎</span>
+            <span class="keyword">低钾血症</span>
+            <span class="keyword">中性粒细胞减少</span>
+            <span class="keyword">华法林</span>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：305</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制！';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制！';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

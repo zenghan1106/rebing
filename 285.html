@@ -1,0 +1,414 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗反转录病毒药物复方制剂药代动力学参数表续*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 5px;
+        }
+        
+        .back-btn, .page-btn {
+            background: linear-gradient(145deg, #1976d2, #1565c0);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .back-btn:hover, .page-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 12px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565c0;
+            font-size: 20px;
+            margin: 15px 0;
+            padding: 18px;
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.15);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: white;
+            font-size: 11px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #1976d2, #1565c0);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        thead th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e6ed;
+            text-align: center;
+            vertical-align: middle;
+            color: #444;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #c62828;
+            font-size: 12px;
+        }
+        
+        .note-section {
+            margin: 20px 0;
+            padding: 16px 20px;
+            background: linear-gradient(145deg, #fff8e1, #ffecb3);
+            border-radius: 12px;
+            border-left: 5px solid #ff9800;
+            font-size: 13px;
+            color: #5d4037;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            border-left: 5px solid #43a047;
+        }
+        
+        .tags-section h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(145deg, #66bb6a, #43a047);
+            color: white;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 14px 18px;
+            border: 2px solid #64b5f6;
+            border-radius: 12px;
+            font-size: 13px;
+            font-family: "Courier New", monospace;
+            background: white;
+            color: #1565c0;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #42a5f5, #1e88e5);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #1565c0;
+            font-size: 20px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(21, 101, 192, 0.2);
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 18px;
+            color: #546e7a;
+            font-size: 13px;
+            background: linear-gradient(145deg, #eceff1, #cfd8dc);
+            border-radius: 12px;
+            margin-top: 10px;
+            line-height: 2;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 6px;
+            }
+            
+            h1 {
+                font-size: 15px;
+                padding: 14px;
+            }
+            
+            table {
+                font-size: 9px;
+            }
+            
+            thead th {
+                font-size: 11px;
+                padding: 12px 5px;
+            }
+            
+            tbody td {
+                padding: 8px 5px;
+                line-height: 1.6;
+            }
+            
+            .back-btn, .page-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="284.html" class="page-btn">← 上一页</a>
+            <a href="286.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗反转录病毒药物复方制剂药代动力学参数表续*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>分类</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tmax(h)</th>
+                    <th>血浆峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容<br>积/Vd</th>
+                    <th>平均血清<br>半衰期<br>(h)</th>
+                    <th>清除</th>
+                    <th>细胞内半<br>衰期(h)</th>
+                    <th>脑脊液/<br>血药<br>浓度比<br>(%)</th>
+                    <th>CPE</th>
+                    <th>AUC/<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">Cimduo,<br>Temixys<br>(3TC/TDF)</td>
+                    <td>2 NRTI</td>
+                    <td>片剂：<br>3TC 300mg+<br>TDF 300mg</td>
+                    <td>片剂±食物<br>(随餐)<br>(空腹)</td>
+                    <td>3TC: 86<br>TDF: 39<br>TDF: 25</td>
+                    <td>3TC: ND<br>TDF: 1</td>
+                    <td>3TC: 2.6<br>(300mg, SD)<br>TDF: 0.3<br>(300mg, SD)</td>
+                    <td>3TC: &lt;36<br>TDF: &lt;0.7</td>
+                    <td>3TC:<br>1.3 L/kg<br>TDF:<br>12～13L/kg<br>(Vss)</td>
+                    <td>3TC: 5～7<br>TDF: 17</td>
+                    <td>3TC: 肾脏,<br>代谢<br>TDF: 肾脏</td>
+                    <td>3TC: 18<br>TDF: &gt;60</td>
+                    <td>3TC: ND<br>TDF: ND</td>
+                    <td>3TC: 2<br>TDF: 1</td>
+                    <td>3TC: 11(300mg,<br>0-inf)<br>TDF: 2.3(300mg,<br>0-inf)</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">双肽芝<br>(3TC/ZDV)</td>
+                    <td>2 NRTI</td>
+                    <td>片剂：<br>3TC 150mg+<br>ZDV 300mg</td>
+                    <td>片剂±食物</td>
+                    <td>3TC: 86<br>ZDV: 64</td>
+                    <td>3TC: 快速<br>ZDV:<br>0.5～1.5</td>
+                    <td>3TC: 2.04<br>(300mg q24h,<br>SS)<br>ZDV: 1～2<br>(300mg, SD)</td>
+                    <td>3TC: &lt;36<br>ZDV: &lt;38</td>
+                    <td>3TC:<br>1.3 L/kg<br>ZDV:<br>1.6 L/kg</td>
+                    <td>3TC: 5～7<br>ZDV: 0.5～3.0</td>
+                    <td>3TC: 肾脏,<br>代谢<br>ZDV: 代谢</td>
+                    <td>3TC: 18<br>ZDV: 11</td>
+                    <td>3TC: ND<br>ZDV: 2</td>
+                    <td>3TC: 2<br>ZDV: 4</td>
+                    <td>3TC: 11(300mg,<br>0-inf)<br>ZDV: 2.1(300mg,<br>0-inf)</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Complera/<br>Eviplera<br>(RPV/FTC/<br>TDF)</td>
+                    <td>NNRTI+<br>2 NRTI</td>
+                    <td>片剂：<br>RPV 25mg+<br>FTC 200mg+<br>TDF 300mg</td>
+                    <td>片剂＋食物</td>
+                    <td>RPV: ND<br>FTC: 93<br>TDF: 39</td>
+                    <td>RPV:<br>4～5<br>FTC:<br>1～2<br>TDF: 1</td>
+                    <td>RPV: 0.1～0.2<br>(25mg, SD)<br>FTC: 1.8<br>(200mg q24h,<br>SS)<br>TDF: 0.3<br>(300mg, SD)</td>
+                    <td>RPV: 99.7<br>FTC: &lt;4<br>TDF: &lt;0.7</td>
+                    <td>RPV: 152L<br>FTC: ND<br>TDF: ND</td>
+                    <td>RPV: 50<br>FTC: 10<br>TDF: 17</td>
+                    <td>RPV: 代谢<br>FTC: 肾脏<br>TDF: 肾脏</td>
+                    <td>RPV: ND<br>FTC: 39<br>TDF: &gt;60</td>
+                    <td>RPV: ND<br>FTC: ND<br>TDF: ND</td>
+                    <td>RPV: ND<br>FTC: 3<br>TDF: 1</td>
+                    <td>RPV: 2.2(25mg<br>q24h, 0～24h)<br>FTC: 10(200mg<br>q24h, 0～24h)<br>TDF: 23(300mg,<br>0-inf)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <p><strong>注：</strong>表注见143页。</p>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <span class="tag">抗反转录病毒药物</span>
+        <span class="tag">复方制剂</span>
+        <span class="tag">Cimduo</span>
+        <span class="tag">Temixys</span>
+        <span class="tag">双肽芝</span>
+        <span class="tag">Complera</span>
+        <span class="tag">Eviplera</span>
+        <span class="tag">3TC</span>
+        <span class="tag">TDF</span>
+        <span class="tag">ZDV</span>
+        <span class="tag">RPV</span>
+        <span class="tag">FTC</span>
+        <span class="tag">NRTI</span>
+        <span class="tag">NNRTI</span>
+        <span class="tag">HIV</span>
+        <span class="tag">艾滋病</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗反转录病毒药物复方制剂药代动力学参数表续；复方制剂；Cimduo；Temixys；双肽芝；Complera；Eviplera；3TC；TDF；ZDV；RPV；FTC；NRTI；NNRTI；HIV；艾滋病；=285" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">285</div>
+    
+    <div class="keywords">
+        关键词：抗反转录病毒药物 | 复方制剂 | Cimduo | Temixys | 双肽芝 | Complera | Eviplera | 3TC | TDF | ZDV | RPV | FTC | NRTI | NNRTI | HIV | 艾滋病 | 拉米夫定 | 替诺福韦 | 齐多夫定 | 利匹韦林 | 恩曲他滨 | 药代动力学 | AUC | 蛋白结合率 | 半衰期
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("✅ 已复制到剪贴板：\n" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("✅ 已复制到剪贴板：\n" + copyText.value);
+            });
+        }
+    </script>
+</body>
+</html>

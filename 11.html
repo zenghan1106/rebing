@@ -1,0 +1,609 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~名词缩略语（A-C开头）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .abbr-code {
+            font-weight: 600;
+            color: #1565c0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .abbr-meaning {
+            color: #333;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a237e;
+            text-align: center;
+            padding: 15px 0;
+            background: #e8f0fe;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="10.html" class="nav-btn">← 上一页</a>
+            <a href="12.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~名词缩略语（A-C开头）*****</h1>
+        <p class="subtitle">桑福德抗微生物治疗指南常用缩写对照表</p>
+    </div>
+    
+    <div class="page-number">11</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">缩略语</th>
+                    <th style="width: 30%;">中文名称</th>
+                    <th style="width: 20%;">缩略语</th>
+                    <th style="width: 30%;">中文名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="section-title">名词缩略语</td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">3TC</span></td>
+                    <td><span class="abbr-meaning">拉米夫定</span></td>
+                    <td><span class="abbr-code">BW</span></td>
+                    <td><span class="abbr-meaning">体重</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ABC</span></td>
+                    <td><span class="abbr-meaning">阿巴卡韦</span></td>
+                    <td><span class="abbr-code">CABP</span></td>
+                    <td><span class="abbr-meaning">社区获得性细菌性肺炎</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ABLC</span></td>
+                    <td><span class="abbr-meaning">两性霉素B脂质体复合物</span></td>
+                    <td><span class="abbr-code">CAPD</span></td>
+                    <td><span class="abbr-meaning">持续非卧床腹膜透析</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ABSSSI</span></td>
+                    <td><span class="abbr-meaning">急性细菌性皮肤、皮肤结构感染</span></td>
+                    <td><span class="abbr-code">CARB</span></td>
+                    <td><span class="abbr-meaning">碳青霉烯类</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ACIP</span></td>
+                    <td><span class="abbr-meaning">免疫实践咨询委员会</span></td>
+                    <td><span class="abbr-code">CDC</span></td>
+                    <td><span class="abbr-meaning">美国疾病控制与预防中心</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ADF</span></td>
+                    <td><span class="abbr-meaning">阿德福韦</span></td>
+                    <td><span class="abbr-code">Cefpodox</span></td>
+                    <td><span class="abbr-meaning">头孢泊肟酯</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AG</span></td>
+                    <td><span class="abbr-meaning">氨基糖苷</span></td>
+                    <td><span class="abbr-code">Ceftaz</span></td>
+                    <td><span class="abbr-meaning">头孢他啶</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AIDS</span></td>
+                    <td><span class="abbr-meaning">获得性免疫缺陷综合征</span></td>
+                    <td><span class="abbr-code">Ceftolo-tazo</span></td>
+                    <td><span class="abbr-meaning">头孢洛生-他唑巴坦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Amox-clav</span></td>
+                    <td><span class="abbr-meaning">阿莫西林-克拉维酸</span></td>
+                    <td><span class="abbr-code">Ceph</span></td>
+                    <td><span class="abbr-meaning">头孢菌素</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AM-CL-ER</span></td>
+                    <td><span class="abbr-meaning">缓释阿莫西林-克拉维酸</span></td>
+                    <td><span class="abbr-code">CFB</span></td>
+                    <td><span class="abbr-meaning">头孢比普</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AMK</span></td>
+                    <td><span class="abbr-meaning">阿米卡星</span></td>
+                    <td><span class="abbr-code">CFP</span></td>
+                    <td><span class="abbr-meaning">头孢吡肟</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Amox</span></td>
+                    <td><span class="abbr-meaning">阿莫西林</span></td>
+                    <td><span class="abbr-code">Chloro</span></td>
+                    <td><span class="abbr-meaning">氯霉素</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AMP</span></td>
+                    <td><span class="abbr-meaning">氨苄西林</span></td>
+                    <td><span class="abbr-code">CIP</span></td>
+                    <td><span class="abbr-meaning">环丙沙星</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Ampho B</span></td>
+                    <td><span class="abbr-meaning">两性霉素B</span></td>
+                    <td><span class="abbr-code">CIP-ER</span></td>
+                    <td><span class="abbr-meaning">缓释环丙沙星</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Amp-sulb</span></td>
+                    <td><span class="abbr-meaning">氨苄西林-舒巴坦</span></td>
+                    <td><span class="abbr-code">Clarithro</span></td>
+                    <td><span class="abbr-meaning">克拉霉素</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AP</span></td>
+                    <td><span class="abbr-meaning">阿托伐醌氯胍</span></td>
+                    <td><span class="abbr-code">Clav</span></td>
+                    <td><span class="abbr-meaning">克拉维酸</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">APAG</span></td>
+                    <td><span class="abbr-meaning">抗铜绿假单胞菌氨基糖苷</span></td>
+                    <td><span class="abbr-code">Clinda</span></td>
+                    <td><span class="abbr-meaning">克林霉素</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ARDS</span></td>
+                    <td><span class="abbr-meaning">急性呼吸窘迫综合征</span></td>
+                    <td><span class="abbr-code">CLO</span></td>
+                    <td><span class="abbr-meaning">氯法齐明</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ARF</span></td>
+                    <td><span class="abbr-meaning">急性风湿热</span></td>
+                    <td><span class="abbr-code">Clot</span></td>
+                    <td><span class="abbr-meaning">克霉唑</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ASA</span></td>
+                    <td><span class="abbr-meaning">阿司匹林</span></td>
+                    <td><span class="abbr-code">CMV</span></td>
+                    <td><span class="abbr-meaning">巨细胞病毒</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ATS</span></td>
+                    <td><span class="abbr-meaning">美国胸科学会</span></td>
+                    <td><span class="abbr-code">Cobi</span></td>
+                    <td><span class="abbr-meaning">可比司他</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">ATV</span></td>
+                    <td><span class="abbr-meaning">阿扎那韦</span></td>
+                    <td><span class="abbr-code">CQ</span></td>
+                    <td><span class="abbr-meaning">磷酸氯喹</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">AUC</span></td>
+                    <td><span class="abbr-meaning">曲线下面积</span></td>
+                    <td><span class="abbr-code">CrCl</span></td>
+                    <td><span class="abbr-meaning">肌酐清除率</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">Azithro</span></td>
+                    <td><span class="abbr-meaning">阿奇霉素</span></td>
+                    <td><span class="abbr-code">CrCln</span></td>
+                    <td><span class="abbr-meaning">体表面积标化的肌酐清除率</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">BCRP</span></td>
+                    <td><span class="abbr-meaning">乳腺癌耐药蛋白</span></td>
+                    <td><span class="abbr-code">CRBSI</span></td>
+                    <td><span class="abbr-meaning">导管相关血流感染</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">bid</span></td>
+                    <td><span class="abbr-meaning">1天2次</span></td>
+                    <td><span class="abbr-code">CRE</span></td>
+                    <td><span class="abbr-meaning">耐碳青霉烯肠杆菌</span></td>
+                </tr>
+                <tr>
+                    <td><span class="abbr-code">BL/BLI</span></td>
+                    <td><span class="abbr-meaning">β-内酰胺类/β-内酰胺酶抑制剂</span></td>
+                    <td><span class="abbr-code">CRRT</span></td>
+                    <td><span class="abbr-meaning">持续肾脏替代治疗</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">拉米夫定</span>
+            <span class="tag">阿巴卡韦</span>
+            <span class="tag">两性霉素B脂质体复合物</span>
+            <span class="tag">急性细菌性皮肤皮肤结构感染</span>
+            <span class="tag">免疫实践咨询委员会</span>
+            <span class="tag">阿德福韦</span>
+            <span class="tag">氨基糖苷</span>
+            <span class="tag">获得性免疫缺陷综合征</span>
+            <span class="tag">阿莫西林-克拉维酸</span>
+            <span class="tag">阿米卡星</span>
+            <span class="tag">阿莫西林</span>
+            <span class="tag">氨苄西林</span>
+            <span class="tag">两性霉素B</span>
+            <span class="tag">氨苄西林-舒巴坦</span>
+            <span class="tag">阿托伐醌氯胍</span>
+            <span class="tag">抗铜绿假单胞菌氨基糖苷</span>
+            <span class="tag">急性呼吸窘迫综合征</span>
+            <span class="tag">急性风湿热</span>
+            <span class="tag">阿司匹林</span>
+            <span class="tag">美国胸科学会</span>
+            <span class="tag">阿扎那韦</span>
+            <span class="tag">阿奇霉素</span>
+            <span class="tag">乳腺癌耐药蛋白</span>
+            <span class="tag">β-内酰胺类</span>
+            <span class="tag">β-内酰胺酶抑制剂</span>
+            <span class="tag">社区获得性细菌性肺炎</span>
+            <span class="tag">持续非卧床腹膜透析</span>
+            <span class="tag">碳青霉烯类</span>
+            <span class="tag">美国疾病控制与预防中心</span>
+            <span class="tag">头孢泊肟酯</span>
+            <span class="tag">头孢他啶</span>
+            <span class="tag">头孢洛生-他唑巴坦</span>
+            <span class="tag">头孢菌素</span>
+            <span class="tag">头孢比普</span>
+            <span class="tag">头孢吡肟</span>
+            <span class="tag">氯霉素</span>
+            <span class="tag">环丙沙星</span>
+            <span class="tag">缓释环丙沙星</span>
+            <span class="tag">克拉霉素</span>
+            <span class="tag">克拉维酸</span>
+            <span class="tag">克林霉素</span>
+            <span class="tag">氯法齐明</span>
+            <span class="tag">克霉唑</span>
+            <span class="tag">巨细胞病毒</span>
+            <span class="tag">可比司他</span>
+            <span class="tag">磷酸氯喹</span>
+            <span class="tag">肌酐清除率</span>
+            <span class="tag">导管相关血流感染</span>
+            <span class="tag">耐碳青霉烯肠杆菌</span>
+            <span class="tag">持续肾脏替代治疗</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="名词缩略语（A-C开头）；桑福德抗微生物治疗指南常用缩写对照表；拉米夫定,阿巴卡韦,两性霉素B脂质体复合物,急性细菌性皮肤皮肤结构感染,免疫实践咨询委员会,阿德福韦,氨基糖苷,获得性免疫缺陷综合征,阿莫西林-克拉维酸,阿米卡星,阿莫西林,氨苄西林,两性霉素B,氨苄西林-舒巴坦,阿托伐醌氯胍,抗铜绿假单胞菌氨基糖苷,急性呼吸窘迫综合征,急性风湿热,阿司匹林,美国胸科学会,阿扎那韦,阿奇霉素,乳腺癌耐药蛋白,β-内酰胺类,β-内酰胺酶抑制剂,社区获得性细菌性肺炎,持续非卧床腹膜透析,碳青霉烯类,美国疾病控制与预防中心,头孢泊肟酯,头孢他啶,头孢洛生-他唑巴坦,头孢菌素,头孢比普,头孢吡肟,氯霉素,环丙沙星,缓释环丙沙星,克拉霉素,克拉维酸,克林霉素,氯法齐明,克霉唑,巨细胞病毒,可比司他,磷酸氯喹,肌酐清除率,导管相关血流感染,耐碳青霉烯肠杆菌,持续肾脏替代治疗；=11" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '名词缩略语（A-C开头）',
+                    url: window.location.href,
+                    page: '11',
+                    tags: ['缩略语', '缩写', '专业术语']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '11');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '11');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '11');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择：急性脓胸、亚急性/慢性脓胸及HIV阳性患者肺部感染*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1e6db5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d4edda;
+            border-radius: 10px;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            min-width: 800px;
+        }
+        
+        thead th {
+            background-color: #1e6db5;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1565c0;
+        }
+        
+        tbody td, tbody th {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            font-size: 13px;
+        }
+        
+        tbody th {
+            background-color: #e8f4f8;
+            color: #1a5276;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .section-header {
+            background-color: #d5e8d4 !important;
+            color: #2e7d32 !important;
+            font-size: 15px !important;
+        }
+        
+        .sub-header {
+            background-color: #fff3e0 !important;
+            color: #e65100 !important;
+        }
+        
+        .highlight-box {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 5px 0;
+        }
+        
+        .highlight-yellow {
+            background-color: #fffde7;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #fbc02d;
+        }
+        
+        .highlight-green {
+            background-color: #e8f5e9;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .highlight-red {
+            background-color: #ffebee;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #f44336;
+        }
+        
+        .highlight-purple {
+            background-color: #f3e5f5;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #9c27b0;
+        }
+        
+        .dose-info {
+            color: #1565c0;
+            font-weight: 500;
+        }
+        
+        .ref-info {
+            color: #666;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .note-section {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffa000;
+            font-size: 13px;
+        }
+        
+        .note-section p {
+            margin: 8px 0;
+        }
+        
+        .tags-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #1e6db5;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background-color: #fff3e0;
+            color: #e65100;
+            border-color: #ffcc80;
+        }
+        
+        .tag.antibiotic {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+            border-color: #ce93d8;
+        }
+        
+        .tag.fungi {
+            background-color: #fce4ec;
+            color: #c2185b;
+            border-color: #f48fb1;
+        }
+        
+        .copy-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background-color: #7cb342;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background-color: #1e6db5;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            
+            tbody td, tbody th {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="102.html" class="nav-btn">← 上一页</a>
+            <a href="104.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~临床抗微生物治疗的初始选择：急性脓胸、亚急性/慢性脓胸及HIV阳性患者肺部感染*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 32%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th rowspan="3">
+                        <div class="highlight-box">
+                            <strong>急性，常肺炎旁</strong><br>
+                            <span class="ref-info">剂量见表注，28页</span>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="highlight-green">
+                            <strong>肺炎链球菌</strong>、<strong>A族链球菌</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dose-info">头孢噻肟或头孢曲松</span>（剂量见表注7，28页）
+                    </td>
+                    <td>
+                        <span class="dose-info">万古霉素</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="highlight-yellow">
+                            <strong>金黄色葡萄球菌</strong>，筛查MRSA
+                        </div>
+                    </td>
+                    <td>
+                        如为MSSA、<span class="dose-info">萘夫西林或苯唑西林</span>
+                    </td>
+                    <td>
+                        如为MRSA，<span class="dose-info">万古霉素或利奈唑胺</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="highlight-purple">
+                            <strong>流感嗜血杆菌</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dose-info">头孢曲松</span>
+                    </td>
+                    <td>
+                        <span class="dose-info">TMP-SMX或氨苄西林-舒巴坦</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="sub-header">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #f5f5f5;"></td>
+                    <td colspan="2">
+                        <div class="highlight-green">
+                            组织型纤溶酶原激活物（10mg）＋DNA酶（DNase）（5mg）bid×3d，经胸管给药，可改善预后<br>
+                            <span class="ref-info">(NEJM 365: 518, 2011)</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #f5f5f5;"></td>
+                    <td colspan="2">
+                        <div class="highlight-yellow">
+                            通常系金黄色葡萄球菌肺炎和/或菌血症的并发症
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #f5f5f5;"></td>
+                    <td colspan="2">
+                        <div class="highlight-purple">
+                            多形性革兰阴性杆菌，对TMP-SMX耐药株增加
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            <strong>亚急性/慢性</strong>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="highlight-red">
+                            <strong>厌氧链球菌</strong>、<strong>米氏链球菌</strong>、<strong>拟杆菌属</strong>、<strong>肠杆菌科</strong>、<strong>结核分枝杆菌</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dose-info">克林霉素 450～900mg iv q8h</span>＋头孢曲松
+                    </td>
+                    <td>
+                        <span class="dose-info">头孢西丁或亚胺培南或哌拉西林-他唑巴坦或氨苄西林-舒巴坦</span>（剂量见表注7，28页）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #f5f5f5;"></td>
+                    <td colspan="2">
+                        <div class="highlight-green">
+                            胸腔内注射组织型纤溶酶原激活物（t-PA）10mg＋DNA酶5mg，经胸管给药bid×3d，可改善胸腔积液引流，减少手术频率，缩短住院时间，单药治疗无效<br>
+                            <span class="ref-info">(NEJM 365: 518, 2011)</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4" class="section-header">
+                        人类免疫缺陷病毒感染（HIV阳性）：
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="highlight-box">
+                            CD4 T淋巴细胞＜200/μl或临床艾滋病<br>
+                            干咳，进行性呼吸困难，弥漫性肺浸润病变<br>
+                            若怀疑肺孢子菌感染先用泼尼松（见说明）
+                        </div>
+                    </th>
+                    <td>
+                        <div class="highlight-red">
+                            <strong>耶氏肺孢子菌</strong>最常见，也可能是<strong>结核分枝杆菌</strong>、<strong>真菌</strong>、<strong>卡波西肉瘤</strong>和<strong>淋巴瘤</strong><br><br>
+                            <strong>注意：</strong>艾滋病患者也可有耐药肺炎球菌或其他病原体引起肺炎（见下文）
+                        </div>
+                    </td>
+                    <td>
+                        <div class="highlight-yellow">
+                            <em>以下方案针对重症肺孢子菌肺炎，轻症口服治疗方案表11A，183页</em><br><br>
+                            先用泼尼松（见说明），后用：<br><br>
+                            <span class="dose-info">TMP-SMX [15mg/(kg·d)]</span> iv分次q8h（TMP成分）或（双剂量）2片po q8h ] ×21d
+                        </div>
+                    </td>
+                    <td>
+                        <div class="highlight-purple">
+                            [（<span class="dose-info">克林霉素 600mg iv q8h</span>＋<span class="dose-info">伯氨喹 30mg po qd</span>）或<span class="dose-info">羟乙磺酸喷他脒 4mg/(kg·d) iv</span>] ×21d
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color: #f5f5f5;"></td>
+                    <td colspan="2">
+                        <div class="highlight-green">
+                            <strong>诊断</strong>（诱导痰和支气管灌洗）：组织学或单克隆抗体染色或PCR。开始应给予<span class="dose-info">泼尼松 40mg po bid×5d</span>，然后<span class="dose-info">40mg po qd×5d</span>，然后<span class="dose-info">20mg po qd×11d</span>。治疗开始时即应给予糖皮质激素，而不要等到病情恶化<br><br>
+                            如肺孢子菌检查阴性，考虑细菌性肺炎、结核、球孢子菌感染、组织胞浆菌感染、隐球菌感染、卡波西肉瘤或淋巴瘤
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <p><strong>注：</strong>有其他选择：<span class="dose-info">妥布霉素＋氨曲南 50mg/kg iv q8h</span>；<span class="dose-info">亚胺培南 15～25mg/kg iv q6h</span>＋妥布霉素；环丙沙星常用于儿童，如环丙沙星iv/po＋头孢他啶iv <span class="ref-info">(LnID 3: 537, 2003)</span>。</p>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <span class="tag disease">急性脓胸</span>
+        <span class="tag disease">亚急性脓胸</span>
+        <span class="tag disease">慢性脓胸</span>
+        <span class="tag disease">肺炎旁积液</span>
+        <span class="tag disease">HIV阳性</span>
+        <span class="tag disease">肺孢子菌肺炎</span>
+        <span class="tag disease">艾滋病肺部感染</span>
+        <span class="tag bacteria">肺炎链球菌</span>
+        <span class="tag bacteria">A族链球菌</span>
+        <span class="tag bacteria">金黄色葡萄球菌</span>
+        <span class="tag bacteria">MRSA</span>
+        <span class="tag bacteria">流感嗜血杆菌</span>
+        <span class="tag bacteria">厌氧链球菌</span>
+        <span class="tag bacteria">拟杆菌属</span>
+        <span class="tag bacteria">肠杆菌科</span>
+        <span class="tag bacteria">结核分枝杆菌</span>
+        <span class="tag bacteria">耶氏肺孢子菌</span>
+        <span class="tag antibiotic">头孢噻肟</span>
+        <span class="tag antibiotic">头孢曲松</span>
+        <span class="tag antibiotic">万古霉素</span>
+        <span class="tag antibiotic">萘夫西林</span>
+        <span class="tag antibiotic">苯唑西林</span>
+        <span class="tag antibiotic">利奈唑胺</span>
+        <span class="tag antibiotic">TMP-SMX</span>
+        <span class="tag antibiotic">氨苄西林-舒巴坦</span>
+        <span class="tag antibiotic">克林霉素</span>
+        <span class="tag antibiotic">头孢西丁</span>
+        <span class="tag antibiotic">亚胺培南</span>
+        <span class="tag antibiotic">哌拉西林-他唑巴坦</span>
+        <span class="tag antibiotic">伯氨喹</span>
+        <span class="tag antibiotic">喷他脒</span>
+        <span class="tag antibiotic">妥布霉素</span>
+        <span class="tag antibiotic">氨曲南</span>
+        <span class="tag antibiotic">环丙沙星</span>
+        <span class="tag antibiotic">头孢他啶</span>
+        <span class="tag antibiotic">泼尼松</span>
+        <span class="tag">t-PA</span>
+        <span class="tag">DNA酶</span>
+        <span class="tag">胸腔引流</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="临床抗微生物治疗的初始选择：急性脓胸、亚急性/慢性脓胸及HIV阳性患者肺部感染；急性脓胸、亚急性脓胸、慢性脓胸、肺孢子菌肺炎、HIV阳性、肺炎链球菌、金黄色葡萄球菌、MRSA、TMP-SMX、克林霉素、万古霉素、利奈唑胺、喷他脒、伯氨喹；=103" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="footer">
+        <div class="page-number">103</div>
+        <p style="margin-top: 15px; color: #888;">关键词：急性脓胸 | 亚急性脓胸 | 慢性脓胸 | HIV阳性 | 肺孢子菌肺炎 | 肺炎链球菌 | 金黄色葡萄球菌 | MRSA | TMP-SMX | 克林霉素 | 万古霉素 | 利奈唑胺 | 喷他脒 | 伯氨喹</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById("copyBtn");
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "✓ 已复制";
+            btn.classList.add("copied");
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.classList.remove("copied");
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

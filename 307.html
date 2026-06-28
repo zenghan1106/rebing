@@ -1,0 +1,487 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10A（2）抗感染药物的剂量和不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            color: #333;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c 0%, #449d44 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4fd;
+        }
+        
+        td, th {
+            padding: 10px 8px;
+            border: 1px solid #d0d0d0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .category-row {
+            background: linear-gradient(135deg, #5dade2 0%, #3498db 100%) !important;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            border-color: #2980b9;
+        }
+        
+        .subcategory-row {
+            background: linear-gradient(135deg, #85c1e9 0%, #5dade2 100%) !important;
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .subcategory-row td {
+            border-color: #5dade2;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .trade-name {
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        
+        .dosage {
+            color: #1a5276;
+            font-weight: 500;
+        }
+        
+        .adverse-reaction {
+            color: #5d4037;
+        }
+        
+        .highlight-danger {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .highlight-warning {
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .note-row {
+            background-color: #fff8e1 !important;
+            color: #5d4037;
+            font-size: 12px;
+        }
+        
+        .note-row td {
+            padding: 12px 10px;
+            border-top: 2px solid #ffb300;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8fbff;
+        }
+        
+        #copyBtn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        #copyBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        #copyBtn.copied {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(243, 156, 18, 0.3);
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
+        }
+        
+        .keywords-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .keywords-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .keywords-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            td, th {
+                padding: 6px 4px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="306.html" class="nav-btn">← 上一页</a>
+            <a href="308.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表10A（2）抗感染药物的剂量和不良反应*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">氨基青霉素（续）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">氨苄西林－舒巴坦<br><span class="trade-name">（Unasyn）</span></td>
+                    <td class="dosage">1.5～3.0g iv q6h；治疗耐药不动杆菌，氨苄西林8g/舒巴坦4g iv超过4h q8h，与美罗培南和多黏菌素B联用</td>
+                    <td class="adverse-reaction">每瓶装：氨苄西林2g、舒巴坦1g。肾功能不全时需调整剂量，<span class="reference">见表17A</span>。联合治疗剂量（氨苄西林－舒巴坦＋美罗培南＋多黏菌素B）<span class="reference">见表1，44页</span>。</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">抗假单胞菌青霉素</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">哌拉西林－他唑巴坦<br><span class="trade-name">（Zosyn）</span><br>延长输注方案，<span class="reference">见说明和表10D</span>。<br>肥胖者的剂量，<span class="reference">表17C</span></td>
+                    <td class="dosage">延长输注方案（首选）：4.5g iv 超过4小时q8h。过去的剂量：（铜绿假单胞菌除外）3.375g iv q6h或4.5g q8h。过去治疗铜绿假单胞菌剂量：3.375g q4h或4.5g q6h。输注时间均为半小时以上</td>
+                    <td class="adverse-reaction">囊性纤维化＋铜绿假单胞菌感染：350～450mg/（kg·d）分次q6h<br>肥胖者的剂量<span class="reference">见表17C，321页</span><br>文献报道药物相关血小板减少症（<span class="reference">J Thrombo Haemostasis 11：169，2012</span>）<br>哌拉西林他唑巴坦＋万古霉素肾毒性风险增加（肌酐水平增高）？肌酐水平增高可能反映哌拉西林他唑巴坦竞争肾小管对肌酐的排泄（<span class="reference">CID 71：426，2020</span>）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">替莫西林<span class="highlight-warning">NUS</span></td>
+                    <td class="dosage">2g iv q12h</td>
+                    <td class="adverse-reaction">对经典、超广谱及AmpC β-内酰胺酶高度稳定的半合成青霉素。来源：<span class="reference">www.eumedica.be</span></td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="3"><span class="highlight-warning">碳青霉烯类/THIOPENEMS。</span>综述：<span class="reference">AAC 55：4943，2011</span>。注：交叉过敏反应：在一些针对有青霉素过敏史但未经皮肤试验证实的患者的研究中，头孢菌素治疗的过敏反应发生率是0～11%（<span class="reference">JAC 54：1155，2004</span>）。在设计更好的一些研究中，青霉素皮试阳性的患者使用碳青霉烯，99%没有发生过敏反应（<span class="reference">J Allergy Clin Immunol 124：167，2009</span>）。12名对头孢菌素产生IgE介导的过敏反应的患者给予碳青霉烯后，2名出现皮疹，1名出现IgE反应（<span class="reference">CID 59：1113，2014</span>）。碳青霉烯耐药的革兰阴性杆菌的发生率最高的见于美国佐治亚州、马里兰州和纽约州（<span class="reference">JAMA 314：1455&1479，2015</span>）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">多尼培南<br><span class="trade-name">（Doribax）</span><br><span class="reference">参见CID 49：291，2009</span>。延长输注时间的剂量<span class="reference">见表10D</span></td>
+                    <td class="dosage">腹腔感染&复杂性泌尿道感染：500mg iv q8h（输注1小时）。对于延长输注时间<span class="reference">见表10D，167页</span>。不能用于治疗肺炎</td>
+                    <td class="adverse-reaction">最常见的不良反应（≥5%）：头痛，恶心，腹泻，皮疹，静脉炎。上市后监测有癫痫的报道。能够降低血清丙戊酸水平。若肾功能受损，需调整剂量。在溶液中较亚胺培南或美罗培南更稳定（<span class="reference">JAC 65：1023，2010；CID 49：291，2009</span>）。FDA安全警告（2012年5月1日）：由于安全性的原因，多尼培南治疗VAP的试验提前中止。与亚胺培南相比，多尼培南治疗的患者病死率高，治愈率低。注：多尼培南未被批准治疗任何类型的肺炎。<span class="highlight-danger">多尼培南没有被批准超过500mg q8h的剂量</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="表10A（2）抗感染药物的剂量和不良反应；氨基青霉素；抗假单胞菌青霉素；碳青霉烯类；THIOPENEMS；氨苄西林－舒巴坦；哌拉西林－他唑巴坦；替莫西林；多尼培南；Unasyn；Zosyn；Doribax；NUS；=307" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <h3>🏷️ 检索标签</h3>
+        <div class="tags-container">
+            <span class="tag">氨基青霉素</span>
+            <span class="tag">抗假单胞菌青霉素</span>
+            <span class="tag">碳青霉烯类</span>
+            <span class="tag">THIOPENEMS</span>
+            <span class="tag">氨苄西林－舒巴坦</span>
+            <span class="tag">哌拉西林－他唑巴坦</span>
+            <span class="tag">替莫西林</span>
+            <span class="tag">多尼培南</span>
+            <span class="tag">Unasyn</span>
+            <span class="tag">Zosyn</span>
+            <span class="tag">Doribax</span>
+            <span class="tag">NUS</span>
+            <span class="tag">耐药不动杆菌</span>
+            <span class="tag">铜绿假单胞菌</span>
+            <span class="tag">囊性纤维化</span>
+            <span class="tag">VAP</span>
+        </div>
+    </div>
+    
+    <div class="keywords-section">
+        <h3>🔑 关键词</h3>
+        <div class="keywords-list">
+            <span class="keyword">抗感染药物</span>
+            <span class="keyword">剂量</span>
+            <span class="keyword">不良反应</span>
+            <span class="keyword">成人常规剂量</span>
+            <span class="keyword">延长输注</span>
+            <span class="keyword">交叉过敏</span>
+            <span class="keyword">肾功能不全</span>
+            <span class="keyword">肝毒性</span>
+            <span class="keyword">癫痫</span>
+            <span class="keyword">血小板减少</span>
+            <span class="keyword">肾毒性</span>
+            <span class="keyword">FDA警告</span>
+        </div>
+    </div>
+    
+    <div class="page-number">页码：307</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制！';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制！';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

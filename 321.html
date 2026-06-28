@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~四环素类抗生素用药指南（米诺环素/奥马环素）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .drug-name {
+            font-weight: 600;
+            color: #1565c0;
+            font-size: 14px;
+        }
+        
+        .highlight-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1565c0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        .note-section {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="320.html" class="nav-btn">← 上一页</a>
+            <a href="322.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~四环素类抗生素用药指南（米诺环素/奥马环素）*****</h1>
+        <p class="subtitle">成人常规剂量、不良反应及用药说明</p>
+    </div>
+    
+    <div class="page-number">321</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类，药品，通用名（商品名）</th>
+                    <th style="width: 35%;">成人常规剂量*</th>
+                    <th style="width: 40%;">不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="drug-name">米诺环素（Minocin，Dynacin）</div>
+                        <div style="margin-top: 8px; color: #666;">
+                            （50mg、75mg、100mg胶囊，45mg、90mg、135mg缓释片，静脉制剂）<br><br>
+                            含Mg²⁺；肾功能受损者需监测血清Mg²⁺水平
+                        </div>
+                    </td>
+                    <td>
+                        负荷量200mg po或iv，然后100mg po或iv q12h<br><br>
+                        米诺环素静脉制剂有供应
+                    </td>
+                    <td>
+                        <strong>前庭症状</strong>（在有些人群中30%～90%，另一些人则没有）：眩晕（33%），共济失调（43%），恶心（50%），呕吐（3%），女性较男性多见。报道大约有34例可逆性过敏性肺炎（<em>BMJ 310：1520，1995</em>）。长期应用能够增加皮肤和其他组织的青灰色色素沉着。可出现颅内高压<br><br>
+                        <strong>说明：</strong>治疗葡萄球菌和预防脑膜炎球菌所致疾病较其他四环素类更有效。痤疮丙酸杆菌：对许多其他四环素类耐药，对米诺环素敏感。有报道在治疗痤疮的儿童中导致自身免疫性疾病（<em>J Ped 153：314，2008</em>）。对星形诺卡菌、海分枝杆菌和许多不动杆菌分离株有抗菌活性
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">奥马环素（Nuzyra）</div>
+                        <div style="margin-top: 8px; color: #666;">
+                            抗菌活性与依拉环素和替加环素相似，见表4A
+                        </div>
+                    </td>
+                    <td>
+                        <strong>社区获得性细菌性肺炎：</strong><br>
+                        负荷：第1天200mg iv输注60分钟或100mg iv输注30分钟×2次，或300mg po q12h×2剂。<br>
+                        维持：100mg iv输注30分钟qd或300mg po qd<br><br>
+                        <strong>急性细菌性皮肤及皮肤结构感染：</strong><br>
+                        负荷：200mg iv（输注60分钟），第1天，或100mg iv（输注30分钟）q12h×2剂，第1天，或450mg po qd 第1天及第2天。<br>
+                        维持：100mg iv（输注30分钟）qd，或300mg po qd
+                    </td>
+                    <td>
+                        <strong>疗程：</strong>7～14天。治疗期间及末剂后4天不建议哺乳。服药前禁食4小时服药后2小时禁食。服药后4小时不得进食乳制品、抗酸剂及多种维生素<br><br>
+                        <strong>禁忌：</strong>已知四环素过敏。<strong>警告：</strong>在治疗CAP时与莫西沙星相比死亡风险更高。在妊娠后半期用药会导致牙齿变色和牙釉质发育不良。妊娠后6个月用药抑制骨骼生长<br><br>
+                        <strong>不良反应：</strong>腹泻、恶心、呕吐、便秘，输注部位反应，AST、ALT、GGT升高，高血压，头痛，失眠。参见 <em>CID 69：180，2019</em>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <strong>注：</strong>1 SSRI＝选择性5-羟色胺再摄取抑制剂，如氟西汀（百忧解）。<br>
+        * 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">米诺环素</span>
+            <span class="tag">Minocin</span>
+            <span class="tag">Dynacin</span>
+            <span class="tag">奥马环素</span>
+            <span class="tag">Nuzyra</span>
+            <span class="tag">四环素</span>
+            <span class="tag">社区获得性细菌性肺炎</span>
+            <span class="tag">急性细菌性皮肤及皮肤结构感染</span>
+            <span class="tag">CAP</span>
+            <span class="tag">ABSSSI</span>
+            <span class="tag">痤疮丙酸杆菌</span>
+            <span class="tag">星形诺卡菌</span>
+            <span class="tag">海分枝杆菌</span>
+            <span class="tag">不动杆菌</span>
+            <span class="tag">葡萄球菌</span>
+            <span class="tag">脑膜炎球菌</span>
+            <span class="tag">前庭症状</span>
+            <span class="tag">过敏性肺炎</span>
+            <span class="tag">自身免疫性疾病</span>
+            <span class="tag">SSRI</span>
+            <span class="tag">氟西汀</span>
+            <span class="tag">百忧解</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="四环素类抗生素用药指南（米诺环素/奥马环素）；成人常规剂量、不良反应及用药说明；米诺环素,Minocin,Dynacin,奥马环素,Nuzyra,四环素,社区获得性细菌性肺炎,急性细菌性皮肤及皮肤结构感染,CAP,ABSSSI,痤疮丙酸杆菌,星形诺卡菌,海分枝杆菌,不动杆菌,葡萄球菌,脑膜炎球菌,前庭症状,过敏性肺炎,自身免疫性疾病,SSRI,氟西汀,百忧解；=321" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                // 模拟添加到index.html的收藏类目
+                const favData = {
+                    title: '四环素类抗生素用药指南（米诺环素/奥马环素）',
+                    url: window.location.href,
+                    page: '321',
+                    tags: ['米诺环素', '奥马环素', '四环素', '抗生素']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '321');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '321');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '321');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

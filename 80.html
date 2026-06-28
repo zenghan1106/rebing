@@ -1,0 +1,542 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人工关节感染PJI续页肠球菌丙酸杆菌革兰阴性杆菌铜绿假单胞菌治疗方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #2c5aa0, #1e4080);
+        }
+        
+        th {
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #1e4080;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            color: #2c3e50;
+            line-height: 1.7;
+            vertical-align: top;
+        }
+        
+        .category-row {
+            background: linear-gradient(145deg, #3498db, #2980b9) !important;
+        }
+        
+        .category-row td {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .subcategory {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .pathogen-cell {
+            background: #fff8e7;
+        }
+        
+        .preferred-cell {
+            background: #e8f5e9;
+        }
+        
+        .alternative-cell {
+            background: #fce4ec;
+        }
+        
+        .auxiliary-cell {
+            background: #f3e5f5;
+        }
+        
+        tbody tr:nth-child(even):not(.category-row) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(.category-row) {
+            background: #e3f2fd;
+        }
+        
+        .notes {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .notes p {
+            color: #856404;
+            font-size: 12px;
+            line-height: 2;
+            margin: 5px 0;
+        }
+        
+        .notes .highlight {
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #f8f9fa;
+            min-height: 50px;
+            resize: vertical;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #27ae60, #219a52);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(145deg, #27ae60, #219a52);
+        }
+        
+        .tag-treatment {
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+            }
+            
+            th {
+                font-size: 11px;
+                padding: 10px 5px;
+            }
+            
+            td {
+                font-size: 10px;
+                padding: 6px;
+            }
+            
+            .category-row td {
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="79.html" class="nav-btn">← 上一页</a>
+            <a href="81.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            人工关节感染（PJI）续页：肠球菌、痤疮丙酸杆菌、革兰阴性肠杆菌及铜绿假单胞菌治疗方案
+            <span class="title-decoration">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 16%;">病原体（通常）</th>
+                    <th style="width: 24%;">首选方案</th>
+                    <th style="width: 18%;">备选方案<sup>§</sup></th>
+                    <th style="width: 24%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="5">关节/人工关节感染（PJI）（续）</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">（接上页）</td>
+                    <td class="pathogen-cell">肠球菌</td>
+                    <td class="preferred-cell">
+                        <strong>清创/保留假体：</strong><br>
+                        青霉素敏感者选用 [氨苄西林200mg/(kg·d) iv分次输注q6h，或青霉素G 2000万U iv持续输注qd或分6次] ×4～6w<br>
+                        青霉素耐药者选用万古霉素15mg/kg iv q12h ×4～6w<br><br>
+                        <strong>一期或二期更换假体：</strong><br>
+                        上述方案 ×4～6w
+                    </td>
+                    <td class="alternative-cell">
+                        达托霉素8～10mg/kg iv qd或利奈唑胺600mg po或iv bid
+                    </td>
+                    <td class="auxiliary-cell"></td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">
+                        痤疮丙酸杆菌 [尤其对肩关节感染，保持肉汤培养10天，之后盲法传代培养可以最大程度发现痤疮丙酸杆菌（<em>Clin Infect Dis</em> 2018; 66: 54; <em>J Clin Microbiol</em> 54: 3043, 2016）]
+                    </td>
+                    <td class="preferred-cell">
+                        <strong>清创/保留假体：</strong><br>
+                        青霉素G 2000万U iv持续输注qd或分6次，或头孢曲松2g iv qd ×4～6w<br><br>
+                        <strong>一期或二期更换假体：</strong><br>
+                        上述方案 ×4～6w
+                    </td>
+                    <td class="alternative-cell">
+                        万古霉素15mg/kg iv q12h或克林霉素300～450mg po qid
+                    </td>
+                    <td class="auxiliary-cell"></td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">革兰阴性肠杆菌</td>
+                    <td class="preferred-cell">
+                        <strong>清创/保留假体：</strong><br>
+                        厄他培南1g iv qd；或根据药敏选用其他β-内酰胺类（如头孢曲松2g iv qd或头孢吡肟2g iv q12h）×4～6周<br><br>
+                        <strong>一期或二期更换假体：</strong><br>
+                        上述方案 ×4～6w
+                    </td>
+                    <td class="alternative-cell">
+                        环丙沙星750mg po bid
+                    </td>
+                    <td class="auxiliary-cell"></td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">铜绿假单胞菌</td>
+                    <td class="preferred-cell">
+                        <strong>清创/保留假体：</strong><br>
+                        头孢吡肟2g iv q12h或美罗培南1g iv q8h + 妥布霉素5.1mg/kg iv qd<br><br>
+                        <strong>一期或二期更换假体：</strong><br>
+                        上述方案4～6w
+                    </td>
+                    <td class="alternative-cell">
+                        环丙沙星750mg po bid或400mg iv q8h
+                    </td>
+                    <td class="auxiliary-cell"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><span class="highlight">注：*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><span class="highlight">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p><span class="highlight">表中名词缩写见第2页。</span></p>
+    </div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <textarea id="copyInput" readonly>人工关节感染（PJI）续页：肠球菌、痤疮丙酸杆菌、革兰阴性肠杆菌及铜绿假单胞菌治疗方案；人工关节感染、PJI、肠球菌、痤疮丙酸杆菌、革兰阴性肠杆菌、铜绿假单胞菌、氨苄西林、青霉素G、万古霉素、达托霉素、利奈唑胺、头孢曲松、克林霉素、厄他培南、头孢吡肟、美罗培南、妥布霉素、环丙沙星、清创、保留假体、一期更换假体、二期更换假体、肩关节感染、肉汤培养、盲法传代培养；=80</textarea>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">人工关节感染</span>
+            <span class="tag tag-disease">PJI</span>
+            <span class="tag tag-disease">肩关节感染</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">痤疮丙酸杆菌</span>
+            <span class="tag tag-bacteria">革兰阴性肠杆菌</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-antibiotic">氨苄西林</span>
+            <span class="tag tag-antibiotic">青霉素G</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">利奈唑胺</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">厄他培南</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">妥布霉素</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-treatment">清创保留假体</span>
+            <span class="tag tag-treatment">一期更换假体</span>
+            <span class="tag tag-treatment">二期更换假体</span>
+            <span class="tag tag-treatment">肉汤培养</span>
+            <span class="tag tag-treatment">盲法传代培养</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">80</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>人工关节感染</span>
+        <span>PJI</span>
+        <span>肠球菌</span>
+        <span>痤疮丙酸杆菌</span>
+        <span>革兰阴性肠杆菌</span>
+        <span>铜绿假单胞菌</span>
+        <span>氨苄西林</span>
+        <span>青霉素G</span>
+        <span>万古霉素</span>
+        <span>达托霉素</span>
+        <span>利奈唑胺</span>
+        <span>头孢曲松</span>
+        <span>克林霉素</span>
+        <span>厄他培南</span>
+        <span>头孢吡肟</span>
+        <span>美罗培南</span>
+        <span>妥布霉素</span>
+        <span>环丙沙星</span>
+        <span>清创</span>
+        <span>保留假体</span>
+        <span>一期更换</span>
+        <span>二期更换</span>
+    </div>
+    
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~舒发泰FTC TDF药代动力学参数表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn {
+            background: #fff;
+            color: #2980b9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+        
+        .main-title {
+            text-align: center;
+            padding: 30px 20px 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px 30px;
+        }
+        
+        .table-wrapper {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+            transition: background 0.3s ease;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            word-break: break-all;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        
+        .note-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .note-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .note-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .note-content p {
+            margin-bottom: 8px;
+        }
+        
+        .tags-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(41,128,185,0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(90deg, #c0392b 0%, #e74c3c 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(90deg, #8e44ad 0%, #9b59b6 100%);
+        }
+        
+        .copy-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(90deg, #1a5276 0%, #2980b9 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(41,128,185,0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #2980b9;
+            color: #fff;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding: 20px 15px 15px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            td {
+                padding: 8px 5px;
+            }
+            
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-btns {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="292.html" class="nav-btn">← 上一页</a>
+            <a href="294.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1 class="main-title">~~~~~舒发泰FTC TDF药代动力学参数表*****</h1>
+    
+    <div class="container">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>药物</th>
+                        <th>分类</th>
+                        <th>药物剂型</th>
+                        <th>食物影响/<br>口服制剂¹</th>
+                        <th>口服<br>吸收率<br>(%)</th>
+                        <th>达峰<br>时间/<br>Tmax(h)</th>
+                        <th>血浆峰<br>值浓度²<br>(μg/ml)</th>
+                        <th>蛋白结<br>合率<br>(%)</th>
+                        <th>分布容<br>积³/Vd</th>
+                        <th>平均血清<br>半衰期⁴<br>(h)</th>
+                        <th>清除</th>
+                        <th>细胞内半<br>衰期(h)</th>
+                        <th>脑脊液/<br>血药<br>浓度比⁶<br>(%)</th>
+                        <th>CPE¹¹</th>
+                        <th>AUC⁵/<br>(μg·h/ml)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="drug-name">舒发泰<br>(FTC/TDF)</td>
+                        <td>2 NRTI</td>
+                        <td>片剂:<br>FTC 200mg +<br>TDF 300mg<br>片剂:<br>FTC 167mg +<br>TDF 250mg<br>片剂:<br>FTC 133mg +<br>TDF 200mg<br>片剂:<br>FTC 100mg +<br>TDF 150mg</td>
+                        <td>片剂±食物</td>
+                        <td>FTC: 92<br>TDF: 25<br>(空腹)</td>
+                        <td>FTC:<br>1~2<br>TDF: 1</td>
+                        <td>FTC: 1.8 (200mg<br>q24h, SS)<br>TDF: 0.3<br>(300mg, SD)</td>
+                        <td>FTC: <4<br>TDF: <0.7</td>
+                        <td>FTC: ND<br>TDF: 1.2~<br>1.3L/kg(Vss)</td>
+                        <td>FTC: 10<br>TDF: 17</td>
+                        <td>FTC: 肾脏<br>TDF: 肾脏</td>
+                        <td>FTC: 39<br>TDF: >60</td>
+                        <td>FTC: ND<br>TDF: ND</td>
+                        <td>FTC: 3<br>TDF: 1</td>
+                        <td>FTC: 10.0<br>(200mg, 0-inf)<br>TDF: 23 (300mg,<br>0-inf)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="note-section">
+            <div class="note-title">📋 注释说明</div>
+            <div class="note-content">
+                <p><strong>1</strong> 除非注明，否则均指成人制剂；+食物=餐中服用，无食物=空腹服用，±食物=餐中或空腹服用。</p>
+                <p><strong>2</strong> SD=单剂量，SS=达到稳态。</p>
+                <p><strong>3</strong> V/F=Vd/口服生物利用度，Vss=稳态时Vd，Vss/F=稳态时Vd/口服生物利用度。</p>
+                <p><strong>4</strong> 假定CrCl > 80L/min。</p>
+                <p><strong>5</strong> （胆汁峰值浓度/血浆峰值浓度）×100。空白表示无数据。</p>
+                <p><strong>6</strong> 炎症情况下脑脊液浓度。</p>
+                <p><strong>7</strong> 基于药物的剂量和病原体敏感性判断。理想脑脊液浓度是≥10×MIC。</p>
+                <p><strong>8</strong> 曲线下面积(AUC)=血清药物浓度-时间曲线下面积；12h=AUC 0~12，24h=AUC 0~24。</p>
+                <p><strong>9</strong> 警惕可能发生癫痫（见表10B）。</p>
+                <p><strong>10</strong> 所有口服氟喹诺酮类药物应在服用硫糖铝或其他多价阳离子（如Ca、Fe、Zn）2~4小时前服用。</p>
+                <p><strong>11</strong> CPE值（中枢神经系统穿透有效性）：1=低穿透，2~3=中等穿透，4=高穿透（Letendre et al, CROI 2010, abs #430）。</p>
+                <p><strong>12</strong> Am J Trop Med Hyg 2021; 86: 122。</p>
+                <p><strong>13</strong> 给药时间3小时以上。</p>
+            </div>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag disease">HIV</span>
+                <span class="tag disease">艾滋病</span>
+                <span class="tag drug">舒发泰</span>
+                <span class="tag drug">FTC</span>
+                <span class="tag drug">TDF</span>
+                <span class="tag drug">NRTI</span>
+                <span class="tag drug">核苷类逆转录酶抑制剂</span>
+                <span class="tag drug">Emtricitabine</span>
+                <span class="tag drug">Tenofovir disoproxil fumarate</span>
+            </div>
+        </div>
+        
+        <div class="copy-section">
+            <div class="copy-title">📋 复制信息</div>
+            <div class="copy-box">
+                <input type="text" class="copy-input" id="copyText" value="舒发泰FTC TDF药代动力学参数表；HIV；艾滋病；舒发泰；FTC；TDF；NRTI；核苷类逆转录酶抑制剂；=293" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="page-number">293</div>
+        <p style="margin-top: 10px;">关键词：HIV | 艾滋病 | 舒发泰 | FTC | TDF | NRTI | 核苷类逆转录酶抑制剂 | 药代动力学 | 抗反转录病毒</p>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.style.background = 'linear-gradient(90deg, #27ae60 0%, #2ecc71 100%)';
+            
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.style.background = 'linear-gradient(90deg, #1a5276 0%, #2980b9 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

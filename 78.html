@@ -1,0 +1,448 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感染性关节炎治疗方案表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(145deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
+        }
+        
+        .nav-btn.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(145deg, #2c5aa0, #1e4080);
+        }
+        
+        th {
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1e4080;
+        }
+        
+        .first-row {
+            background: linear-gradient(145deg, #3498db, #2980b9) !important;
+        }
+        
+        .first-row td {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            color: #2c3e50;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even):not(.first-row) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(.first-row) {
+            background: #e3f2fd;
+        }
+        
+        .notes {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .notes p {
+            color: #856404;
+            font-size: 12px;
+            line-height: 2;
+            margin: 5px 0;
+        }
+        
+        .notes .highlight {
+            color: #d35400;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #f8f9fa;
+            min-height: 50px;
+            resize: vertical;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(145deg, #27ae60, #219a52);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+        }
+        
+        .tag-antibiotic {
+            background: linear-gradient(145deg, #27ae60, #219a52);
+        }
+        
+        .tag-treatment {
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+            }
+            
+            th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                font-size: 11px;
+                padding: 8px;
+            }
+            
+            .first-row td {
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="77.html" class="nav-btn">← 上一页</a>
+            <a href="79.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            感染性关节炎（关节内注射后）治疗方案与病原体分布指南
+            <span class="title-decoration">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 22%;">病原体（通常）</th>
+                    <th style="width: 30%;">首选方案</th>
+                    <th style="width: 30%;">备选方案<sup>§</sup></th>
+                    <th style="width: 25%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>感染性关节炎，关节内注射后</td>
+                    <td>MSSE或MRSE占40%，<br>MSSA或MRSA占20%，<br>铜绿假单胞菌，<br>丙酸菌属，<br>分枝杆菌</td>
+                    <td>不做经验性治疗。<br>经关节镜做微生物培养及药敏试验，<br>寻找结晶体，<br>冲洗</td>
+                    <td>—</td>
+                    <td>根据培养结果用药×14天<br>（前提是无异物存在）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><span class="highlight">注：*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><span class="highlight">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p><span class="highlight">表中名词缩写见第2页。</span></p>
+    </div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <textarea id="copyInput" readonly>感染性关节炎（关节内注射后）治疗方案与病原体分布指南；关节内注射后感染性关节炎、MSSE、MRSE、MSSA、MRSA、铜绿假单胞菌、丙酸菌属、分枝杆菌、关节镜、微生物培养、药敏试验、经验性治疗；=78</textarea>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">感染性关节炎</span>
+            <span class="tag tag-disease">关节内注射后感染</span>
+            <span class="tag tag-bacteria">MSSE</span>
+            <span class="tag tag-bacteria">MRSE</span>
+            <span class="tag tag-bacteria">MSSA</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">丙酸菌属</span>
+            <span class="tag tag-bacteria">分枝杆菌</span>
+            <span class="tag tag-antibiotic">药敏试验</span>
+            <span class="tag tag-treatment">关节镜</span>
+            <span class="tag tag-treatment">微生物培养</span>
+            <span class="tag tag-treatment">不做经验性治疗</span>
+            <span class="tag tag-treatment">关节冲洗</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">78</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>感染性关节炎</span>
+        <span>关节内注射</span>
+        <span>MSSE</span>
+        <span>MRSE</span>
+        <span>MSSA</span>
+        <span>MRSA</span>
+        <span>铜绿假单胞菌</span>
+        <span>丙酸菌属</span>
+        <span>分枝杆菌</span>
+        <span>关节镜</span>
+        <span>药敏试验</span>
+        <span>经验性治疗</span>
+    </div>
+    
+    <script>
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

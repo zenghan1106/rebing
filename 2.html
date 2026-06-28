@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~热病桑福德抗微生物治疗指南（新译第55版）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .book-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a237e;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .book-subtitle {
+            font-size: 18px;
+            color: #444;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .english-title {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            padding: 5px 0;
+            font-style: italic;
+        }
+        
+        .role-label {
+            font-weight: 600;
+            color: #1565c0;
+            width: 80px;
+            display: inline-block;
+        }
+        
+        .person-name {
+            color: #333;
+        }
+        
+        .publisher-info {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f0fe;
+            border-radius: 12px;
+        }
+        
+        .publisher-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a237e;
+        }
+        
+        .location {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .book-title {
+                font-size: 22px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="1.html" class="nav-btn">← 上一页</a>
+            <a href="3.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~热病桑福德抗微生物治疗指南（新译第55版）*****</h1>
+        <p class="subtitle">THE SANFORD GUIDE TO ANTIMICROBIAL THERAPY 2025</p>
+    </div>
+    
+    <div class="page-number">2</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">角色</th>
+                    <th style="width: 80%;">姓名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" style="text-align: center; background: #e8f0fe;">
+                        <div class="book-title">热病</div>
+                        <div class="book-subtitle">桑福德抗微生物治疗指南</div>
+                        <div class="english-title">（新译第55版）</div>
+                        <div class="english-title" style="font-weight: 600; font-style: normal; margin-top: 15px;">THE SANFORD GUIDE TO ANTIMICROBIAL THERAPY 2025</div>
+                        <div class="english-title">（55th Edition）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="role-label">主编</span></td>
+                    <td>
+                        <div style="margin-bottom: 8px;">〔美〕戴维·N. 吉尔伯特（David N. Gilbert）</div>
+                        <div style="margin-bottom: 8px;">〔美〕亨利·F. 钱伯斯（Henry F. Chambers）</div>
+                        <div style="margin-bottom: 8px;">〔美〕迈克尔·S. 萨格（Michael S. Saag）</div>
+                        <div style="margin-bottom: 8px;">〔美〕安德鲁·T. 帕维亚（Andrew T. Pavia）</div>
+                        <div>〔美〕海伦·W. 鲍彻（Helen W. Boucher）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="role-label">副主编</span></td>
+                    <td>
+                        <div style="margin-bottom: 8px;">〔美〕道格拉斯·布莱克（Douglas Black）</div>
+                        <div style="margin-bottom: 8px;">〔美〕布莱恩·S. 施瓦茨（Brian S. Schwartz）</div>
+                        <div style="margin-bottom: 8px;">〔美〕戴维·O. 弗里德曼（David O. Freedman）</div>
+                        <div>〔美〕金嘉美（Kami Kim）</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="role-label">主审</span></td>
+                    <td>李太生</td>
+                </tr>
+                <tr>
+                    <td><span class="role-label">主译</span></td>
+                    <td>范洪伟</td>
+                </tr>
+                <tr>
+                    <td><span class="role-label">译者</span></td>
+                    <td>
+                        <div style="margin-bottom: 8px;">王焕玲 周宝桐 葛瑛</div>
+                        <div>阮桂仁 张黎</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="publisher-info">
+                            <div class="publisher-name">中国协和医科大学出版社</div>
+                            <div class="location">北京</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">热病</span>
+            <span class="tag">桑福德抗微生物治疗指南</span>
+            <span class="tag">抗微生物</span>
+            <span class="tag">抗菌治疗</span>
+            <span class="tag">David N. Gilbert</span>
+            <span class="tag">Henry F. Chambers</span>
+            <span class="tag">Michael S. Saag</span>
+            <span class="tag">Andrew T. Pavia</span>
+            <span class="tag">Helen W. Boucher</span>
+            <span class="tag">Douglas Black</span>
+            <span class="tag">Brian S. Schwartz</span>
+            <span class="tag">David O. Freedman</span>
+            <span class="tag">Kami Kim</span>
+            <span class="tag">李太生</span>
+            <span class="tag">范洪伟</span>
+            <span class="tag">王焕玲</span>
+            <span class="tag">周宝桐</span>
+            <span class="tag">葛瑛</span>
+            <span class="tag">阮桂仁</span>
+            <span class="tag">张黎</span>
+            <span class="tag">中国协和医科大学出版社</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="热病桑福德抗微生物治疗指南（新译第55版）；THE SANFORD GUIDE TO ANTIMICROBIAL THERAPY 2025；热病,桑福德抗微生物治疗指南,抗微生物,抗菌治疗,David N. Gilbert,Henry F. Chambers,Michael S. Saag,Andrew T. Pavia,Helen W. Boucher,Douglas Black,Brian S. Schwartz,David O. Freedman,Kami Kim,李太生,范洪伟,王焕玲,周宝桐,葛瑛,阮桂仁,张黎,中国协和医科大学出版社；=2" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '热病桑福德抗微生物治疗指南（新译第55版）',
+                    url: window.location.href,
+                    page: '2',
+                    tags: ['热病', '桑福德', '抗微生物', '抗菌治疗']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '2');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '2');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '2');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

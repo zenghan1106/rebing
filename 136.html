@@ -1,0 +1,441 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(61)临床抗微生物治疗的初始选择-莱姆病</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 20px 0;
+            padding: 10px;
+            background: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2874a6;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2874a6;
+            margin-left: 8px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #2874a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #1a5276;
+        }
+        
+        .btn-home {
+            background: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background: #1e8449;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            min-width: 800px;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #2874a6;
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            background: #d4e6f1;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            color: #333;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #d5f5e3 !important;
+            font-weight: bold;
+            color: #1e8449;
+        }
+        
+        /* 关键词标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2874a6;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d4e6f1;
+        }
+        
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #eaf2f8;
+            color: #2874a6;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+            cursor: default;
+        }
+        
+        .tag-disease {
+            background: #fdedec;
+            color: #c0392b;
+            border-color: #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e8f8f5;
+            color: #1e8449;
+            border-color: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number a {
+            color: #2874a6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 6px;
+            }
+            
+            td {
+                padding: 6px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="135.html" class="btn">上一页</a>
+            <a href="137.html" class="btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">表1(61)临床抗微生物治疗的初始选择</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:30%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">莱姆病　注意：需考虑合并蜱传疾病，如巴贝虫病、无形体病、埃立克体病。指南：CID 72: 1-48, 2021</td>
+                </tr>
+                <tr>
+                    <td><strong>在流行区硬蜱叮咬暴露后预防</strong></td>
+                    <td>
+                        伯氏疏螺旋体<br><br>
+                        罕见情况下，梅罗尼疏螺旋体<br><br>
+                        <strong>诊断：</strong>2步法血清学检测<br>
+                        -第1步：FDA批准的酶联免疫检测（EIA或ELISA）或免疫荧光检测（IFA）。若检测结果可疑或阳性，需进行第2步确证性血清学检测。<br>
+                        -第2步：蛋白质印迹法（Western印迹法）检测
+                    </td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        流行区特别是部分吸饱血的鹿蜱幼虫，多西环素200mg po×1剂，餐中服用<br>
+                        （儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        非流行区未吸饱血，非鹿蜱，无须治疗
+                    </td>
+                    <td>
+                        流行区预防研究：移行性红斑发生率，对照组3%、多西环素组0.4%（NEJM 345: 79 & 133, 2001）<br><br>
+                        如果没有多西环素，可以用米诺环素代替
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>早期（移行性红斑）</strong><br>血清学检测阴性</td>
+                    <td></td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        多西环素100mg po bid×10d、阿莫西林500mg po tid或头孢呋辛酯500mg po bid×14d。（10天与20天疗效相同：AnIM 138: 697, 2003）<br><br>
+                        阿奇霉素500mg qd×7～10d<br>
+                        （儿童剂量见说明和表注19）
+                    </td>
+                    <td>
+                        阿奇霉素和红霉素临床治疗失败率高（Drugs 57: 157, 1999）<br><br>
+                        儿童（所有均口服，疗程为14～21天）：阿莫西林50mg/(kg·d)分3次、或头孢呋辛酯30mg/(kg·d)分2次或阿奇霉素10mg/(kg·d)（最大剂量500mg）×7～10d<br><br>
+                        病损相同：非靶样皮损（AnIM 136: 423, 2002）
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>心脏炎</strong><br>见说明</td>
+                    <td>
+                        FDA已批准了几种基于EIA的莱姆病血清学检测作为莱姆病诊断流程中的第2步血清学确证方法<br>
+                        见CDC莱姆病血清学诊断推荐更新
+                    </td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        （头孢曲松2g iv qd）或（头孢噻肟2g iv q4h）或（青霉素G 300万U iv q4h）×14～21d<br><br>
+                        <strong>备选方案：</strong><br>
+                        多西环素（见说明）100mg po bid×（儿童见表注19）14～21d或阿莫西林500mg po tid×14～21d
+                    </td>
+                    <td>
+                        Ⅰ度房室传导阻滞：口服治疗。通常自限<br><br>
+                        高度房室传导阻滞（PR间期＞0.3秒）：静脉给药——不需要植入永久心脏起搏器，但39%需临时起搏器（CID 59: 996, 2014）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-list">
+            <span class="tag tag-disease">莱姆病</span>
+            <span class="tag tag-disease">移行性红斑</span>
+            <span class="tag tag-disease">心脏炎</span>
+            <span class="tag tag-disease">巴贝虫病</span>
+            <span class="tag tag-disease">无形体病</span>
+            <span class="tag tag-disease">埃立克体病</span>
+            <span class="tag tag-disease">房室传导阻滞</span>
+            <span class="tag tag-bacteria">伯氏疏螺旋体</span>
+            <span class="tag tag-bacteria">梅罗尼疏螺旋体</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">阿莫西林</span>
+            <span class="tag tag-drug">头孢呋辛酯</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">红霉素</span>
+            <span class="tag tag-drug">米诺环素</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">头孢噻肟</span>
+            <span class="tag tag-drug">青霉素G</span>
+        </div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制（标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表1(61)临床抗微生物治疗的初始选择；临床抗微生物治疗；莱姆病；移行性红斑；心脏炎；巴贝虫病；无形体病；埃立克体病；房室传导阻滞；伯氏疏螺旋体；梅罗尼疏螺旋体；多西环素；阿莫西林；头孢呋辛酯；阿奇霉素；红霉素；米诺环素；头孢曲松；头孢噻肟；青霉素G；=136" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="136.html">136</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#27ae60';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.background = '#e74c3c';
+                }, 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>

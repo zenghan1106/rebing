@@ -1,0 +1,604 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表3 免疫功能正常患者的抗生素推荐疗程*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(44,90,160,0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #2c5aa0;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(44,90,160,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+            transform: translateY(-2px);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 15px 30px;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a3a6e;
+            margin-bottom: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        /* 说明文字 */
+        .note-section {
+            background: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .note-section p, .note-section li {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .note-section ul {
+            margin-left: 20px;
+        }
+        
+        .note-section a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+        
+        /* 表格样式 */
+        .table-wrapper {
+            overflow-x: auto;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: #fff;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 第一行（表头下一行）字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* 单元格 */
+        td, th {
+            border: 1px solid #c5d1e0;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f0f4f8;
+        }
+        
+        tbody tr:hover {
+            background: #e1e8f0;
+        }
+        
+        /* 感染部位列 - 蓝色底色 */
+        .infection-site {
+            background: #d6e4f0 !important;
+            font-weight: 600;
+            color: #1a3a6e;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        /* 页码显示 */
+        .page-info {
+            text-align: center;
+            margin: 25px 0 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .page-number {
+            display: inline-block;
+            background: #2c5aa0;
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #c5d1e0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #444;
+            background: #fafbfc;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a3a6e;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .tag-bacteria {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部关键词 */
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: #777;
+            font-size: 12px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #e8ecf1;
+            border-radius: 4px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 70px 10px 20px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px 6px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="154.html" class="nav-btn">← 上一页</a>
+        <a href="156.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <div class="container">
+        <!-- 标题 -->
+        <h1 class="main-title">~~~~~表3 免疫功能正常患者的抗生素推荐疗程*****</h1>
+        <p class="sub-title">特殊细菌抗菌药物治疗方案 · 桑福德指南</p>
+        
+        <!-- 说明文字 -->
+        <div class="note-section">
+            <p><strong>对于特定的临床感染：</strong></p>
+            <ul>
+                <li>治疗目标是选择正确的药物、正确的剂量及正确的疗程。</li>
+                <li>继往治疗疗程的确定是基于观察性研究、专家建议和FDA推荐的"金标准"。</li>
+                <li>此表格总结了部分常见临床感染的抗感染治疗疗程。其他综合征及本表格所列举的临床感染的更详细资料见表1。</li>
+                <li>多数为指南、药品说明书及专家建议的经典疗程。</li>
+                <li>如果经典标准疗程与一个或一个以上的一些随机对照研究中的短疗程方案比较是非劣效的，这些随机对照研究的认证号将被列出。</li>
+                <li>"短疗程更佳" 相关文献：
+                    <ul>
+                        <li><a href="http://doi.org/10.1016/j.cmi.2022.08.024" target="_blank">http://doi.org/10.1016/j.cmi.2022.08.024</a></li>
+                        <li>Ann Intern Med 2021 174: 822.</li>
+                    </ul>
+                </li>
+            </ul>
+            <p><strong>注意：</strong>无论选择何种疗程，停止治疗均应基于感染病灶被控制，同时临床症状和体征消失，且炎症指标好转或降至正常。</p>
+        </div>
+        
+        <!-- 主表格 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:8%">感染部位</th>
+                        <th style="width:22%">临床表现</th>
+                        <th style="width:25%">临床诊断</th>
+                        <th style="width:45%">疗程</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" class="infection-site">菌血症</td>
+                        <td>革兰阴性杆菌菌血症，病灶得到控制</td>
+                        <td>—</td>
+                        <td>7天和14天疗效相当（3项RCT）</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site">骨</td>
+                        <td>骨髓炎，成人，急性</td>
+                        <td>—</td>
+                        <td>42～56天</td>
+                    </tr>
+                    <tr>
+                        <td>儿童，急性；葡萄球菌、链球菌和肠杆菌科细菌</td>
+                        <td>—</td>
+                        <td>21～28天直至ESR正常</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site">耳</td>
+                        <td>儿童，急性；脑膜炎球菌、嗜血杆菌</td>
+                        <td>—</td>
+                        <td>14～21天</td>
+                    </tr>
+                    <tr>
+                        <td>分泌性中耳炎</td>
+                        <td>—</td>
+                        <td>&lt;2岁：10天。≥2岁：5～7天</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4" class="infection-site">胃肠道<br>（见表1）</td>
+                        <td>细菌性痢疾（志贺菌病）/旅行者腹泻</td>
+                        <td>—</td>
+                        <td>单剂，如效果不佳，可用至3天</td>
+                    </tr>
+                    <tr>
+                        <td>伤寒（伤寒沙门菌）：阿奇霉素</td>
+                        <td>—</td>
+                        <td>5～7天（儿童/青少年）</td>
+                    </tr>
+                    <tr>
+                        <td>头孢曲松</td>
+                        <td>—</td>
+                        <td>7～14天（短程治疗提高疗效）</td>
+                    </tr>
+                    <tr>
+                        <td>氟喹诺酮类</td>
+                        <td>—</td>
+                        <td>7～10天</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site"></td>
+                        <td>幽门螺杆菌</td>
+                        <td>—</td>
+                        <td>14天</td>
+                    </tr>
+                    <tr>
+                        <td>氯霉素</td>
+                        <td>—</td>
+                        <td>14天</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site"></td>
+                        <td>假膜性小肠结肠炎（艰难梭菌）</td>
+                        <td>—</td>
+                        <td>10天</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site">生殖器</td>
+                        <td>盆腔炎症疾病</td>
+                        <td>—</td>
+                        <td>14天</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site">心脏</td>
+                        <td>心包炎（化脓性）</td>
+                        <td>—</td>
+                        <td>28天或直至症状与体征缓解且生物标志物正常</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" class="infection-site">关节，<br>自体</td>
+                        <td>化脓性关节炎（非淋球菌）：成人</td>
+                        <td>—</td>
+                        <td>14～28天（3项RCT中疗效相当），合并金黄色葡萄球菌菌血症需4周</td>
+                    </tr>
+                    <tr>
+                        <td>婴儿/儿童</td>
+                        <td>—</td>
+                        <td>10～14天（治疗反应有差别，当症状和体征缓解且生物标志物正常时停药）</td>
+                    </tr>
+                    <tr>
+                        <td class="infection-site"></td>
+                        <td>淋球菌性关节炎/播散性淋球菌感染</td>
+                        <td>—</td>
+                        <td>7天（表1，25页）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-info">
+            <span class="page-number">155</span>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="表3 免疫功能正常患者的抗生素推荐疗程；特殊细菌抗菌药物治疗方案；桑福德指南；菌血症；骨髓炎；中耳炎；细菌性痢疾；伤寒；幽门螺杆菌；假膜性小肠结肠炎；盆腔炎症疾病；心包炎；化脓性关节炎；淋球菌性关节炎；革兰阴性杆菌；葡萄球菌；链球菌；肠杆菌科；脑膜炎球菌；嗜血杆菌；伤寒沙门菌；艰难梭菌；金黄色葡萄球菌；淋球菌；阿奇霉素；头孢曲松；氟喹诺酮类；氯霉素；=155" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <p class="tags-title">🔍 快速检索标签</p>
+            <div class="tags-container">
+                <span class="tag tag-disease">菌血症</span>
+                <span class="tag tag-disease">骨髓炎</span>
+                <span class="tag tag-disease">中耳炎</span>
+                <span class="tag tag-disease">细菌性痢疾</span>
+                <span class="tag tag-disease">伤寒</span>
+                <span class="tag tag-disease">幽门螺杆菌感染</span>
+                <span class="tag tag-disease">假膜性肠炎</span>
+                <span class="tag tag-disease">盆腔炎</span>
+                <span class="tag tag-disease">心包炎</span>
+                <span class="tag tag-disease">化脓性关节炎</span>
+                <span class="tag tag-disease">淋球菌关节炎</span>
+                <span class="tag tag-bacteria">革兰阴性杆菌</span>
+                <span class="tag tag-bacteria">葡萄球菌</span>
+                <span class="tag tag-bacteria">链球菌</span>
+                <span class="tag tag-bacteria">肠杆菌科</span>
+                <span class="tag tag-bacteria">脑膜炎奈瑟菌</span>
+                <span class="tag tag-bacteria">流感嗜血杆菌</span>
+                <span class="tag tag-bacteria">伤寒沙门菌</span>
+                <span class="tag tag-bacteria">艰难梭菌</span>
+                <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+                <span class="tag tag-bacteria">淋病奈瑟菌</span>
+                <span class="tag tag-antibiotic">阿奇霉素</span>
+                <span class="tag tag-antibiotic">头孢曲松</span>
+                <span class="tag tag-antibiotic">氟喹诺酮类</span>
+                <span class="tag tag-antibiotic">氯霉素</span>
+                <span class="tag tag-antibiotic">抗生素疗程</span>
+            </div>
+        </div>
+        
+        <!-- 底部关键词 -->
+        <div class="keywords">
+            <p>关键词：</p>
+            <span>155</span>
+            <span>表3</span>
+            <span>免疫功能正常</span>
+            <span>抗生素疗程</span>
+            <span>桑福德指南</span>
+            <span>特殊细菌感染</span>
+            <span>菌血症</span>
+            <span>骨髓炎</span>
+            <span>中耳炎</span>
+            <span>胃肠道感染</span>
+            <span>盆腔炎</span>
+            <span>心包炎</span>
+            <span>关节炎</span>
+            <span>淋球菌</span>
+            <span>阿奇霉素</span>
+            <span>头孢曲松</span>
+            <span>氟喹诺酮</span>
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showCopySuccess();
+                }).catch(err => {
+                    document.execCommand('copy');
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.style.background = '#20c997';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '#28a745';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

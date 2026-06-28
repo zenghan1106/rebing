@@ -1,0 +1,577 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表1（46）临床抗微生物治疗的初始选择*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(44, 90, 160, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+            min-width: 800px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid #1e3d6f;
+        }
+        
+        /* 表头第一行字体更大 */
+        thead tr:first-child th {
+            font-size: 17px;
+            padding: 16px 10px;
+        }
+        
+        /* 合并单元格的表头 */
+        .header-sub {
+            background: #3a6db5;
+            font-size: 14px;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d0d7e3;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f0fe;
+        }
+        
+        /* 第一列 */
+        td:first-child {
+            font-weight: 600;
+            color: #2c5aa0;
+            background: #f0f4f8;
+            min-width: 120px;
+        }
+        
+        /* 病原体列 */
+        td:nth-child(2) {
+            color: #555;
+            min-width: 100px;
+        }
+        
+        /* 首选方案列 */
+        td:nth-child(3) {
+            color: #2d5016;
+            background: #f6faf3;
+        }
+        
+        /* 备选方案列 */
+        td:nth-child(4) {
+            color: #5a3d00;
+            background: #faf8f3;
+        }
+        
+        /* 辅助诊断列 */
+        td:nth-child(5) {
+            color: #4a3060;
+            background: #faf6fd;
+            min-width: 150px;
+        }
+        
+        /* 口部标题行 */
+        .section-title {
+            background: #2c5aa0 !important;
+            color: white !important;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        .section-title td {
+            color: white !important;
+            background: #2c5aa0 !important;
+        }
+        
+        /* 特色标签 */
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #e8f0fe;
+            color: #2c5aa0;
+            border: 1px solid #c5d9f8;
+        }
+        
+        .tag-disease:hover {
+            background: #2c5aa0;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #e6f5e6;
+            color: #2d7a2d;
+            border: 1px solid #b8e0b8;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #2d7a2d;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #fef3e8;
+            color: #b85c00;
+            border: 1px solid #f5d5b0;
+        }
+        
+        .tag-bacteria:hover {
+            background: #b85c00;
+            color: white;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+        }
+        
+        .copy-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #d0d7e3;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #f8fafc;
+            width: calc(100% - 100px);
+            min-height: 45px;
+        }
+        
+        .copy-btn {
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .copy-btn.copied {
+            background: #2d7a2d;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            font-size: 13px;
+            color: #888;
+            line-height: 2;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            thead tr:first-child th {
+                font-size: 14px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="105.html" class="nav-btn">↑ 上一页</a>
+        <a href="107.html" class="nav-btn">↓ 下一页</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表1（46）临床抗微生物治疗的初始选择*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th class="header-sub">首选方案</th>
+                    <th class="header-sub">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="5">口</td>
+                </tr>
+                <tr>
+                    <td>阿弗他溃疡，复发性</td>
+                    <td>病因不明</td>
+                    <td colspan="2">局部使用激素（口腔用曲安奈德）可减轻疼痛和水肿</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>放线菌病：牙齿或下颌创伤后的"大颌病"</td>
+                    <td>以色列放线菌</td>
+                    <td>氨苄西林200mg/(kg·d) iv分3～4次×2～6w随后青霉素V钾2～4g/d分4次×6～12个月</td>
+                    <td>（头孢曲松2g iv qd、克林霉素600～900mg iv q8h、多西环素100mg iv/po bid）×4～6w，随后青霉素V钾2～4g/d×6～12个月</td>
+                    <td>注意：甲硝唑对放线菌无效。口服治疗前予2～6周静脉治疗的推荐为习惯性及经验性的。有口服治疗前超短期静脉治疗（短至3天），甚至未经静脉治疗直接口服治疗成功的病例报道，尤其是非重症病例。疗程短于3个月，在病灶不大的病例可能也有效</td>
+                </tr>
+                <tr>
+                    <td>面颊蜂窝织炎<br>儿童＜5岁</td>
+                    <td>流感嗜血杆菌</td>
+                    <td>头孢曲松50mg/kg iv qd</td>
+                    <td>阿莫西林-克拉维酸45～90mg/kg po分次bid或TMP-SMX 8～12mg/kg（TMP成分）iv/po分次bid</td>
+                    <td>由于疫苗接种，流感嗜血杆菌侵袭性感染已下降了95%，现主要发生于疫苗接种前的婴儿</td>
+                </tr>
+                <tr>
+                    <td>念珠菌口腔炎（鹅口疮）</td>
+                    <td>白念珠菌</td>
+                    <td>氟康唑</td>
+                    <td>棘白菌素</td>
+                    <td>表11，174页</td>
+                </tr>
+                <tr>
+                    <td>牙脓肿</td>
+                    <td>需氧&厌氧链球菌属</td>
+                    <td>轻症：阿莫西林-克拉维酸875/125mg po bid</td>
+                    <td>重症：哌拉西林-他唑巴坦4.5g iv 4h以上</td>
+                    <td>手术引流、清创。若青霉素过敏：克林霉素600mg iv q6～8h</td>
+                </tr>
+                <tr>
+                    <td>疱疹性口炎</td>
+                    <td>单纯疱疹病毒1型和2型</td>
+                    <td colspan="2">表14A</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>下颌下间隙感染，双侧[脓性颌下炎（Ludwig angina）]</td>
+                    <td>口腔厌氧菌群：兼性链球菌、金黄色葡萄球菌（罕见）</td>
+                    <td>哌拉西林-他唑巴坦或（青霉素G iv＋甲硝唑iv）</td>
+                    <td>克林霉素600mg iv q6～8h（青霉素过敏患者）</td>
+                    <td>确保呼吸道通畅，早期外科清创。若革兰染色见革兰阳性球菌，加用万古霉素iv。筛查牙感染</td>
+                </tr>
+                <tr>
+                    <td>溃疡性齿龈炎[樊尚（Vincent）咽峡炎或战壕口腔牙龈炎]</td>
+                    <td>口腔厌氧菌群＋维生素缺乏</td>
+                    <td>青霉素G 400万U iv q4h或甲硝唑500mg iv q6h</td>
+                    <td>克林霉素600mg iv q8h</td>
+                    <td>补充维生素（A～D）。可类似坏血病。重症表现为走马疳（口颊坏疽）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">阿弗他溃疡</span>
+            <span class="tag tag-disease">放线菌病</span>
+            <span class="tag tag-disease">面颊蜂窝织炎</span>
+            <span class="tag tag-disease">念珠菌口腔炎</span>
+            <span class="tag tag-disease">鹅口疮</span>
+            <span class="tag tag-disease">牙脓肿</span>
+            <span class="tag tag-disease">疱疹性口炎</span>
+            <span class="tag tag-disease">下颌下间隙感染</span>
+            <span class="tag tag-disease">脓性颌下炎</span>
+            <span class="tag tag-disease">溃疡性齿龈炎</span>
+            <span class="tag tag-disease">樊尚咽峡炎</span>
+            <span class="tag tag-antibiotic">氨苄西林</span>
+            <span class="tag tag-antibiotic">青霉素V钾</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">TMP-SMX</span>
+            <span class="tag tag-antibiotic">氟康唑</span>
+            <span class="tag tag-antibiotic">棘白菌素</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-bacteria">以色列放线菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">白念珠菌</span>
+            <span class="tag tag-bacteria">链球菌属</span>
+            <span class="tag tag-bacteria">口腔厌氧菌群</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">单纯疱疹病毒</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 复制页面信息</div>
+        <div class="copy-wrapper">
+            <textarea class="copy-input" id="copyText" readonly>表1（46）临床抗微生物治疗的初始选择；口腔感染；抗微生物治疗；初始选择；阿弗他溃疡；放线菌病；面颊蜂窝织炎；念珠菌口腔炎；鹅口疮；牙脓肿；疱疹性口炎；下颌下间隙感染；脓性颌下炎；溃疡性齿龈炎；樊尚咽峡炎；以色列放线菌；流感嗜血杆菌；白念珠菌；链球菌属；口腔厌氧菌群；金黄色葡萄球菌；单纯疱疹病毒；氨苄西林；青霉素V钾；头孢曲松；克林霉素；多西环素；阿莫西林-克拉维酸；TMP-SMX；氟康唑；棘白菌素；哌拉西林-他唑巴坦；甲硝唑；万古霉素；青霉素G；=106</textarea>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">106</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>关键词：</span>
+        <span>临床抗微生物治疗</span>
+        <span>初始选择</span>
+        <span>口腔感染</span>
+        <span>阿弗他溃疡</span>
+        <span>放线菌病</span>
+        <span>以色列放线菌</span>
+        <span>面颊蜂窝织炎</span>
+        <span>流感嗜血杆菌</span>
+        <span>念珠菌口腔炎</span>
+        <span>鹅口疮</span>
+        <span>白念珠菌</span>
+        <span>牙脓肿</span>
+        <span>链球菌属</span>
+        <span>疱疹性口炎</span>
+        <span>单纯疱疹病毒</span>
+        <span>下颌下间隙感染</span>
+        <span>脓性颌下炎</span>
+        <span>Ludwig angina</span>
+        <span>口腔厌氧菌群</span>
+        <span>金黄色葡萄球菌</span>
+        <span>溃疡性齿龈炎</span>
+        <span>樊尚咽峡炎</span>
+        <span>战壕口腔牙龈炎</span>
+        <span>氨苄西林</span>
+        <span>青霉素V钾</span>
+        <span>头孢曲松</span>
+        <span>克林霉素</span>
+        <span>多西环素</span>
+        <span>阿莫西林-克拉维酸</span>
+        <span>TMP-SMX</span>
+        <span>氟康唑</span>
+        <span>棘白菌素</span>
+        <span>哌拉西林-他唑巴坦</span>
+        <span>甲硝唑</span>
+        <span>万古霉素</span>
+        <span>青霉素G</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById("copyBtn");
+                btn.textContent = "✓ 已复制";
+                btn.classList.add("copied");
+                
+                setTimeout(() => {
+                    btn.textContent = "复制";
+                    btn.classList.remove("copied");
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    const btn = document.getElementById("copyBtn");
+                    btn.textContent = "✓ 已复制";
+                    btn.classList.add("copied");
+                    
+                    setTimeout(() => {
+                        btn.textContent = "复制";
+                        btn.classList.remove("copied");
+                    }, 2000);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

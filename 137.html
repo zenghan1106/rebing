@@ -1,0 +1,458 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(61)临床抗微生物治疗的初始选择-莱姆病续</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 20px 0;
+            padding: 10px;
+            background: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2874a6;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2874a6;
+            margin-left: 8px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #2874a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #1a5276;
+        }
+        
+        .btn-home {
+            background: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background: #1e8449;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            min-width: 800px;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #2874a6;
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            background: #d4e6f1;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            color: #333;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .notes {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            color: #555;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 关键词标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2874a6;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d4e6f1;
+        }
+        
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #eaf2f8;
+            color: #2874a6;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+            cursor: default;
+        }
+        
+        .tag-disease {
+            background: #fdedec;
+            color: #c0392b;
+            border-color: #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e8f8f5;
+            color: #1e8449;
+            border-color: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number a {
+            color: #2874a6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 6px;
+            }
+            
+            td {
+                padding: 6px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="136.html" class="btn">上一页</a>
+            <a href="138.html" class="btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">表1(61)临床抗微生物治疗的初始选择</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:30%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>面神经麻痹</strong>（早期可以是唯一表现）</td>
+                    <td></td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        （多西环素100mg po bid）<br>
+                        （儿童见表注19）或（阿莫西林500mg po tid）×14～21d<br><br>
+                        <strong>备选方案：</strong><br>
+                        头孢曲松2g iv qd×14～21d
+                    </td>
+                    <td>
+                        建议腰穿排除中枢神经系统疾病。脑脊液检查无异常，口服方案即可；如异常或未查，则建议静脉给头孢曲松
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>脑膜炎、脑炎</strong><br>（脑病见说明）</td>
+                    <td></td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        头孢曲松2g iv qd×14～28d<br><br>
+                        <strong>备选方案：</strong><br>
+                        （青霉素G 2000万U/d iv分次）或（头孢噻肟2g iv q8h）×14～28d
+                    </td>
+                    <td>
+                        脑病：记忆困难、抑郁、嗜睡或头痛，CSF异常率89%；对于莱姆病后综合征，延长疗程无明确益处
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>关节炎</strong></td>
+                    <td></td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        （多西环素100mg po bid）<br>
+                        （儿童见表注19）或（阿莫西林500mg po tid）×28d<br><br>
+                        <strong>备选方案：</strong><br>
+                        （头孢曲松2g iv qd）或（青霉素G 2000万～2400万U/d iv）×14～28d
+                    </td>
+                    <td>
+                        初始治疗1个月，如果只是部分缓解，再治疗1个月
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>孕妇</strong></td>
+                    <td></td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        阿莫西林500mg po tid×21d<br><br>
+                        <strong>备选方案：</strong><br>
+                        如青霉素过敏：（阿奇霉素500mg po qd×7～10d）或（红霉素500mg po qid×14～21d），不应选用多西环素
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>莱姆病后综合征</strong></td>
+                    <td></td>
+                    <td>无治疗指征</td>
+                    <td>治疗无益</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>18 在地方性流行区（纽约），蜱成虫和幼虫共同感染无形体和伯氏疏螺旋体的比例很高（NEJM 337: 49, 1997）。</p>
+        <p>19 重要提示：任何年龄儿童使用多西环素疗程≤21天均安全性好。儿童剂量：4.4mg/(kg·d)分次bid（AAP Redbook 2018）。</p>
+        <p>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-list">
+            <span class="tag tag-disease">莱姆病</span>
+            <span class="tag tag-disease">面神经麻痹</span>
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-disease">脑炎</span>
+            <span class="tag tag-disease">莱姆病后综合征</span>
+            <span class="tag tag-disease">关节炎</span>
+            <span class="tag tag-disease">无形体病</span>
+            <span class="tag tag-bacteria">伯氏疏螺旋体</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">阿莫西林</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">头孢噻肟</span>
+            <span class="tag tag-drug">青霉素G</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">红霉素</span>
+        </div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制（标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表1(61)临床抗微生物治疗的初始选择；临床抗微生物治疗；莱姆病；面神经麻痹；脑膜炎；脑炎；莱姆病后综合征；关节炎；无形体病；伯氏疏螺旋体；多西环素；阿莫西林；头孢曲松；头孢噻肟；青霉素G；阿奇霉素；红霉素；=137" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="137.html">137</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#27ae60';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.background = '#e74c3c';
+                }, 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>

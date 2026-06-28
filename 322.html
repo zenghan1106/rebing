@@ -1,0 +1,483 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗感染药物剂量和不良反应（四环素类/氟喹诺酮类）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .drug-name {
+            font-weight: 600;
+            color: #1565c0;
+            font-size: 14px;
+        }
+        
+        .category-row {
+            background: #e8f0fe !important;
+        }
+        
+        .category-row td {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 15px;
+        }
+        
+        .note-section {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="321.html" class="nav-btn">← 上一页</a>
+            <a href="323.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~抗感染药物剂量和不良反应（四环素类/氟喹诺酮类）*****</h1>
+        <p class="subtitle">表10A（10）抗感染药物的剂量和不良反应</p>
+    </div>
+    
+    <div class="page-number">322</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">分类，药品，通用名（商品名）</th>
+                    <th style="width: 35%;">成人常规剂量*</th>
+                    <th style="width: 40%;">不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">四环素类（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">四环素，土霉素（Sumycin）</div>
+                        <div style="margin-top: 8px; color: #666;">
+                            （250mg、500mg胶囊）<br><br>
+                            （<em>CID 36：462，2003</em>）
+                        </div>
+                    </td>
+                    <td>
+                        0.25～0.50g po q6h，0.5～1.0g iv q12h
+                    </td>
+                    <td>
+                        胃肠道反应（土霉素19%、四环素4%），过敏样反应（罕见），牙齿沉积，氮负平衡，肝脏毒性，牙釉质发育不良，假脑瘤/脑病。过期药物可致范科尼综合征。妊娠期禁用，对孕妇有肝毒性，经胎盘进入胎儿体内。<strong>说明：</strong>妊娠期静脉剂量超过2g/d可能与致死性肝毒性有关（<em>JAC 66：1431，2011</em>）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">替加环素（Tygacil）</div>
+                        <div style="margin-top: 8px; color: #666;">
+                            荟萃分析，编者按：<em>Ln ID 11：804 & 834，2011</em><br>
+                            另参见 <em>CID 54：1699和1710，2012</em>
+                        </div>
+                    </td>
+                    <td>
+                        起始剂量100mg iv，然后50mg iv q12h，如果可能，经口进餐时使用，可减少恶心的发生<br><br>
+                        <div style="border-top: 1px solid #e0e0e0; margin-top: 8px; padding-top: 8px;">
+                            <strong>如有严重肝病（Child Pugh C级）：</strong><br>
+                            起始剂量100mg iv，然后25mg iv q12h
+                        </div>
+                    </td>
+                    <td>
+                        四环素衍生物。恶心（25%）和呕吐（20%）的发生率高，但只有1%的患者由于不良事件停药。D类妊娠药物。18岁以下儿童避免使用。与其他四环素类一样，可以引起光过敏、假性脑瘤、胰腺炎、高分解代谢状态（尿素氮升高）及色素沉着（<em>CID 45：136，2007</em>）。降低血清纤维蛋白原（<em>AAC 59：1650，2015</em>）<br><br>
+                        四环素、米诺环素、替加环素与急性胰腺炎相关（<em>Int J Antimicrob Agents，34：486，2009</em>）<br><br>
+                        <strong>黑框警告：</strong>对临床试验的荟萃分析显示替加环素治疗患者的全因死亡率（2.5%）高于对照药物（1.8%）。死亡风险差异为0.6%（95%置信区间：0.1～1.2）原因尚不明确。替加环素应当用于没有其他替代治疗的情况下（<em>FDA Medwatch Sep 27，2013</em>）。疗效不佳可能因血清药物浓度低（<em>AAC 56：1065及1466，2012</em>）。对医院获得性肺炎高剂量较低剂量效果好（<em>AAC 57：1756，2013</em>）
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">
+                        氟喹诺酮类（FQ）：都能够造成阿片类药物尿检筛查假阳性（<em>Pharmacother 26：435，2006</em>）。毒性综述：<em>Drugs Aging 27：193，2010</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">环丙沙星（Cipro）和环丙沙星缓释剂（Cipro XR，Proquin XR）</div>
+                        <div style="margin-top: 8px; color: #666;">
+                            （100mg、250mg、500mg、750mg片剂，500mg缓释片）
+                        </div>
+                    </td>
+                    <td>
+                        <strong>常用胃肠外剂量：</strong>400mg iv q12h<br><br>
+                        <strong>治疗铜绿假单胞菌：</strong>400～600mg iv q8h（<em>JAC 74：1662，2019</em>）<br><br>
+                        <strong>非复杂性尿道炎/膀胱炎的（口服）剂量：</strong>250mg po bid或环丙沙星缓释片500mg po qd<br><br>
+                        <strong>其他适应证（po）：</strong>500～750mg po bid
+                    </td>
+                    <td>
+                        氟喹诺酮是导致艰难梭菌霉素介导性腹泻的常见原因<br><br>
+                        <strong>儿童：</strong>由于在未成年动物中应用出现关节软骨受损，氟喹诺酮类未被批准用于16岁以下儿童。儿童的关节不良反应估计在2%～3%（<em>LnID 3：537，2003</em>）。炭疽例外。其发病机制可能与氟喹诺酮络合镁离子以及损伤软骨有关（<em>AAC 51：1022，2007；Int J Antimicrob Agents 33：194，2009</em>）。无左氧氟沙星导致儿童软骨损害的证据（<em>Pediatrics 134：e146，2014</em>）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">四环素</span>
+            <span class="tag">土霉素</span>
+            <span class="tag">Sumycin</span>
+            <span class="tag">替加环素</span>
+            <span class="tag">Tygacil</span>
+            <span class="tag">氟喹诺酮</span>
+            <span class="tag">FQ</span>
+            <span class="tag">环丙沙星</span>
+            <span class="tag">Cipro</span>
+            <span class="tag">Cipro XR</span>
+            <span class="tag">Proquin XR</span>
+            <span class="tag">铜绿假单胞菌</span>
+            <span class="tag">艰难梭菌</span>
+            <span class="tag">炭疽</span>
+            <span class="tag">范科尼综合征</span>
+            <span class="tag">假脑瘤</span>
+            <span class="tag">胰腺炎</span>
+            <span class="tag">光过敏</span>
+            <span class="tag">色素沉着</span>
+            <span class="tag">关节软骨</span>
+            <span class="tag">尿道炎</span>
+            <span class="tag">膀胱炎</span>
+            <span class="tag">医院获得性肺炎</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="抗感染药物剂量和不良反应（四环素类/氟喹诺酮类）；表10A（10）抗感染药物的剂量和不良反应；四环素,土霉素,Sumycin,替加环素,Tygacil,氟喹诺酮,FQ,环丙沙星,Cipro,Cipro XR,Proquin XR,铜绿假单胞菌,艰难梭菌,炭疽,范科尼综合征,假脑瘤,胰腺炎,光过敏,色素沉着,关节软骨,尿道炎,膀胱炎,医院获得性肺炎；=322" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '抗感染药物剂量和不良反应（四环素类/氟喹诺酮类）',
+                    url: window.location.href,
+                    page: '322',
+                    tags: ['四环素', '土霉素', '替加环素', '环丙沙星', '氟喹诺酮']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '322');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '322');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '322');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗假单胞菌及抗耐药菌头孢菌素用药参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(90,108,125,0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btns a:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c5282;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 12px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 12px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 15px;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            margin: 0 15px 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 分类行样式 */
+        .category-row td {
+            background: #edf2f7;
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 14px;
+            padding: 12px;
+        }
+        
+        /* 子分类行样式 */
+        .subcategory-row td {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 13px;
+            padding: 10px 12px;
+            border-left: 3px solid #4a90d9;
+        }
+        
+        /* 单元格 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(even):not(.category-row):not(.subcategory-row) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover:not(.category-row):not(.subcategory-row) {
+            background: #edf2f7;
+        }
+        
+        /* 药品名称列 */
+        td:first-child {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 180px;
+        }
+        
+        /* 剂量列 */
+        td:nth-child(2) {
+            color: #4a5568;
+            min-width: 220px;
+            line-height: 1.8;
+        }
+        
+        /* 不良反应列 */
+        td:nth-child(3) {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        /* 注释 */
+        .note {
+            margin: 0 15px 25px;
+            padding: 15px 20px;
+            background: #fffbeb;
+            border-left: 4px solid #f6ad55;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #744210;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+            margin-right: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72,187,120,0.3);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #edf2f7;
+            border-radius: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 20px;
+                padding-top: 70px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btns a {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="311.html">← 上一页</a>
+        <a href="313.html">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">抗假单胞菌及抗耐药菌头孢菌素用药参考表</h1>
+    <p class="subtitle">表10A（4）抗感染药物的剂量和不良反应（续）</p>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>头孢他啶（Fortaz, Tazicef）</td>
+                    <td>常用剂量：1～2g iv或im q8～12h<br><br>延长输注剂量：<br>初始剂量：15mg/kg，输注30分钟，然后立即开始：<br><br>CrCl＞50ml/min：6g/d（输注24小时）<br>CrCl 31～50ml/min：4g/d（输注24小时）<br>CrCl 10～30ml/min：2g/d（输注24小时）<br><br>（AAC 49：3550，2005；Infect 37：418，2009）</td>
+                    <td>通常用于医疗机构相关感染，因为需考虑到铜绿假单胞菌感染。使用可能导致艰难梭菌相关腹泻发病率增加和/或选择性万古霉素耐药尿肠球菌增加。与氨曲南有交叉过敏反应（侧链相同）</td>
+                </tr>
+                <tr>
+                    <td>头孢洛生-他唑巴坦（Zerbaxa）</td>
+                    <td>见下文</td>
+                    <td></td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">抗葡萄球菌（MRSA）</td>
+                </tr>
+                <tr>
+                    <td>头孢洛林酯（Teflaro）</td>
+                    <td>600mg iv q12h（输注5分钟至1小时）肺炎/菌血症600mg iv q8h。见说明</td>
+                    <td>与PBP2a有高亲和力，对MRSA有活性，可被AmpC与ESBL灭活。已批准用于治疗MRSA所致皮肤和皮肤结构感染，也用于治疗MRSA的肺炎和菌血症，但未获批准（J Infect Chemother 19：42，2013）。体外对VISA和VRSA有活性。参见CID 52：1156，2011。成功用于菌血症和骨/关节感染，但非获批的适应证（AAC 58：2541，2014）有发生粒缺风险（JAC 71：2010，2016；AAC 60：264，2016）</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">抗产ESBL耐药革兰阴性菌</td>
+                </tr>
+                <tr>
+                    <td>头孢洛生－他唑巴坦<br>（Zerbaxa）<br>参见CID 2016，63：234</td>
+                    <td>1.5g（1.0/0.5g）iv q8h 用于GNB 复杂UTI和复杂腹腔感染（加用甲硝唑500mg iv q8h）</td>
+                    <td>输注1小时，对铜绿假单胞菌（AAC 2017，61：e0046517）和许多产ESBLs的革兰阴性菌有活性，同β-内酰胺类药物有交叉过敏反应。对CrCl 30～50ml/min患者有效性降低。高剂量也被批准用于治疗医院获得性和呼吸机相关性肺炎：3g iv q8h，输注1小时</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">抗产ESBL和丝氨酸碳青霉烯酶的耐药革兰阴性菌</td>
+                </tr>
+                <tr>
+                    <td>头孢他啶－阿维巴坦（Avycaz）</td>
+                    <td>2.5g（2g头孢他啶/0.5g阿维巴坦），对革兰阴性菌所致复杂UTI，输注超过2小时，q8h，或加用甲硝唑500mg iv q8h用于复杂性腹腔感染。也被批准用于治疗敏感GNB引起的院内获得性肺炎</td>
+                    <td>对产ESBL & KPC的需氧革兰阴性菌有活性。对产金属酶的GNB无效。对CrCl 30～50ml/min的患者有效率降低（临床试验数据）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。<br>
+        ‡ 缩略词缩写见第2页。
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病 -->
+            <span class="tag tag-disease">医疗机构相关感染</span>
+            <span class="tag tag-disease">艰难梭菌相关腹泻</span>
+            <span class="tag tag-disease">肺炎</span>
+            <span class="tag tag-disease">菌血症</span>
+            <span class="tag tag-disease">皮肤和皮肤结构感染</span>
+            <span class="tag tag-disease">骨/关节感染</span>
+            <span class="tag tag-disease">复杂UTI</span>
+            <span class="tag tag-disease">复杂腹腔感染</span>
+            <span class="tag tag-disease">院内获得性肺炎</span>
+            <span class="tag tag-disease">呼吸机相关性肺炎</span>
+            <span class="tag tag-disease">粒缺</span>
+            <!-- 药物 -->
+            <span class="tag tag-drug">头孢他啶</span>
+            <span class="tag tag-drug">Fortaz</span>
+            <span class="tag tag-drug">Tazicef</span>
+            <span class="tag tag-drug">头孢洛生</span>
+            <span class="tag tag-drug">他唑巴坦</span>
+            <span class="tag tag-drug">Zerbaxa</span>
+            <span class="tag tag-drug">头孢洛林酯</span>
+            <span class="tag tag-drug">Teflaro</span>
+            <span class="tag tag-drug">阿维巴坦</span>
+            <span class="tag tag-drug">Avycaz</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <span class="tag tag-drug">氨曲南</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <!-- 细菌 -->
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+            <span class="tag tag-bacteria">万古霉素耐药尿肠球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">VISA</span>
+            <span class="tag tag-bacteria">VRSA</span>
+            <span class="tag tag-bacteria">产ESBLs革兰阴性菌</span>
+            <span class="tag tag-bacteria">产ESBL革兰阴性菌</span>
+            <span class="tag tag-bacteria">产KPC革兰阴性菌</span>
+            <span class="tag tag-bacteria">产金属酶GNB</span>
+            <span class="tag tag-bacteria">GNB</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="抗假单胞菌及抗耐药菌头孢菌素用药参考表；表10A（4）抗感染药物的剂量和不良反应（续）；头孢他啶、头孢洛生、他唑巴坦、Zerbaxa、头孢洛林酯、Teflaro、头孢他啶-阿维巴坦、Avycaz、甲硝唑、氨曲南、万古霉素、铜绿假单胞菌、MRSA、VISA、VRSA、ESBL、KPC、产金属酶GNB、艰难梭菌、肺炎、菌血症、复杂UTI、复杂腹腔感染、院内获得性肺炎；=312" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="312.html">312</a>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>头孢他啶</span>
+        <span>头孢洛生</span>
+        <span>他唑巴坦</span>
+        <span>Zerbaxa</span>
+        <span>头孢洛林酯</span>
+        <span>Teflaro</span>
+        <span>阿维巴坦</span>
+        <span>Avycaz</span>
+        <span>甲硝唑</span>
+        <span>氨曲南</span>
+        <span>万古霉素</span>
+        <span>铜绿假单胞菌</span>
+        <span>MRSA</span>
+        <span>VISA</span>
+        <span>VRSA</span>
+        <span>ESBL</span>
+        <span>KPC</span>
+        <span>产金属酶</span>
+        <span>GNB</span>
+        <span>艰难梭菌</span>
+        <span>肺炎</span>
+        <span>菌血症</span>
+        <span>复杂UTI</span>
+        <span>腹腔感染</span>
+        <span>抗生素</span>
+        <span>剂量</span>
+        <span>不良反应</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.style.background = 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)';
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

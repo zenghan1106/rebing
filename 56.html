@@ -1,0 +1,665 @@
+我来为您创建这个关于重度腹腔感染ICU患者治疗的HTML网页表格，包含所有要求的特殊格式和功能，包括新增的编辑框和保存功能。
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~重度腹腔感染ICU患者治疗指南 - 亚胺培南美罗培南多尼培南替加环素抗微生物方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
+            padding: 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        
+        .nav-buttons > * {
+            pointer-events: auto;
+        }
+        
+        .home-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(41, 128, 185, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-button a:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
+        }
+        
+        .home-button a::before {
+            content: "← ";
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #27ae60;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(39, 174, 96, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-nav a:hover {
+            background-color: #1e8449;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .page-nav a.disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        /* 编辑框区域 */
+        .edit-section {
+            max-width: 1400px;
+            margin: 0 auto 20px auto;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 60px;
+        }
+        
+        .edit-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .edit-input:focus {
+            border-color: #1a5276;
+        }
+        
+        .save-button {
+            padding: 10px 25px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .save-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .save-button:active {
+            transform: translateY(0);
+        }
+        
+        .save-status {
+            margin-left: 10px;
+            font-size: 13px;
+            color: #27ae60;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
+            padding: 35px;
+        }
+        
+        /* 特殊格式标题 */
+        .title-special {
+            text-align: center;
+            color: #1a5276;
+            font-size: 30px;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #3498db;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 17px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        /* 检索标签区域 */
+        .search-tags {
+            background-color: #e8f6f3;
+            border: 2px dashed #27ae60;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .search-tags-label {
+            color: #1e8449;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .search-tags-content {
+            color: #6c3483;
+            font-size: 13px;
+            line-height: 1.8;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background-color: #fff;
+            table-layout: fixed;
+        }
+        
+        /* 表格头部 - 蓝色，字体大 */
+        thead th {
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid #154360;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background-color: #2980b9 !important;
+            color: #ffffff;
+            font-size: 16px !important;
+            font-weight: bold;
+            padding: 14px 10px;
+            border: 2px solid #1a5276;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #bdc3c7;
+            color: #2c3e50;
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e1f0fa;
+        }
+        
+        /* 左侧诊断列 */
+        td:first-child {
+            width: 16%;
+            background-color: #f4f6f7;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        /* 病原体列 */
+        .pathogen {
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 首选方案 */
+        .preferred {
+            color: #1e8449;
+            font-weight: 600;
+            background-color: #eafaf1;
+        }
+        
+        /* 备选方案 */
+        .alternative {
+            color: #d35400;
+            background-color: #fef5e7;
+        }
+        
+        /* 辅助说明 */
+        .notes {
+            color: #34495e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 重要提示高亮 */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+            font-weight: 600;
+        }
+        
+        /* 警告提示 */
+        .warning {
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #721c24;
+            font-weight: 600;
+        }
+        
+        /* 黑框警示 */
+        .black-box {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        
+        /* 成功提示 */
+        .success {
+            background-color: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        /* 剂量数字突出 */
+        .dose {
+            color: #c0392b;
+            font-weight: 700;
+        }
+        
+        /* 药物名称突出 */
+        .drug {
+            background-color: #e8daef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 分隔虚线 */
+        .dashed-separator {
+            border-top: 2px dashed #3498db;
+            margin: 10px 0;
+        }
+        
+        /* 页脚注释区域 */
+        .footnote-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fef9e7;
+            border-radius: 10px;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .footnote-section p {
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .footnote-section .symbol {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        /* 底部关键词和页码区域 */
+        .bottom-info {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            text-align: center;
+        }
+        
+        .bottom-keywords {
+            color: #2c3e50;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .bottom-keywords-label {
+            color: #2980b9;
+            font-weight: bold;
+        }
+        
+        .page-number {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮区域 -->
+    <div class="nav-buttons">
+        <div class="home-button">
+            <a href="index.html">返回首页</a>
+        </div>
+        <div class="page-nav">
+            <a href="21.html" class="prev-page">← 上一页</a>
+            <a href="23.html" class="next-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 编辑框区域 -->
+    <div class="edit-section">
+        <input type="text" class="edit-input" id="editInput" value="表1（20）临床抗微生物治疗的初始选择=重度腹腔感染ICU患者治疗方案=亚胺培南,美罗培南,多尼培南,替加环素,氨曲南,甲硝唑,环丙沙星,左氧氟沙星,氨苄西林,氨基糖苷类,阿米卡星,庆大霉素,妥布霉素,普拉唑霉素,头孢洛生他唑巴坦,头孢他啶阿维巴坦=22">
+        <button class="save-button" onclick="saveToFile()">保存</button>
+        <span class="save-status" id="saveStatus">✓ 已保存</span>
+    </div>
+    
+    <div class="container">
+        <!-- 特殊格式标题 -->
+        <h1 class="title-special">~~~~~表1（20）临床抗微生物治疗的初始选择（续）*****</h1>
+        <p class="subtitle">重度、危及生命的ICU患者腹腔感染治疗方案</p>
+        
+        <!-- 检索标签区域 -->
+        <div class="search-tags">
+            <div class="search-tags-label">%%%%%检索标签?????</div>
+            <div class="search-tags-content">
+                重度腹腔感染, ICU患者, 危及生命的感染, 脓毒症, 感染性休克, 亚胺培南, 美罗培南, 多尼培南, 替加环素, 氨曲南, 甲硝唑, 环丙沙星, 左氧氟沙星, 氨苄西林, 氨基糖苷类, 阿米卡星, 庆大霉素, 妥布霉素, 普拉唑霉素, 头孢洛生他唑巴坦, 头孢他啶阿维巴坦, 肠杆菌科, 铜绿假单胞菌, 拟杆菌属, 肠球菌, 外科治疗, 黑框警示, 青霉素过敏, 头孢菌素过敏
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 重度腹腔感染ICU患者 -->
+                <tr>
+                    <td>
+                        <span class="highlight">憩室炎，直肠周围脓肿，腹膜炎</span><br><br>
+                        <span class="warning">重度、危及生命的ICU患者</span>
+                    </td>
+                    <td class="pathogen">
+                        <span class="drug">肠杆菌科</span>，偶见<span class="drug">铜绿假单胞菌</span>、<span class="drug">拟杆菌属</span>、<span class="drug">肠球菌</span>
+                    </td>
+                    <td class="preferred">
+                        <span class="warning">重度、危及生命的ICU患者：</span><br><br>
+                        
+                        <span class="drug">亚胺培南</span> <span class="dose">500mg</span> iv q6h，或<br>
+                        <span class="drug">美罗培南</span> <span class="dose">1g</span> iv q8h或<br>
+                        <span class="drug">多尼培南</span> <span class="dose">500mg</span> iv q8h（输注1小时）<br><br>
+                        
+                        <span class="drug">头孢洛生-他唑巴坦</span>和<span class="drug">头孢他啶-阿维巴坦</span>剂量<span class="highlight">见腹膜炎，51页</span><br><br>
+                        
+                        <div class="dashed-separator"></div>
+                        
+                        <span class="warning">严重青霉素/头孢菌素过敏：</span><br>
+                        （<span class="drug">氨曲南</span> <span class="dose">2g</span> iv q6h至q8h）＋<br>
+                        ［<span class="drug">甲硝唑</span>（<span class="dose">500mg</span> iv q6h）或（<span class="dose">1g</span> iv q12h）］<br>
+                        或［（<span class="drug">环丙沙星</span> <span class="dose">400mg</span> iv q12h）或（<span class="drug">左氧氟沙星</span> <span class="dose">750mg</span> iv q24h）＋<span class="drug">甲硝唑</span>］
+                    </td>
+                    <td class="alternative">
+                        <span class="drug">氨苄西林</span>＋<span class="drug">甲硝唑</span>＋<br>
+                        （<span class="drug">环丙沙星</span> <span class="dose">400mg</span> iv q12h或<span class="drug">左氧氟沙星</span> <span class="dose">750mg</span> iv qd）或<br>
+                        <span class="drug">氨苄西林</span> <span class="dose">2g</span> iv q6h ＋ <span class="drug">甲硝唑</span> <span class="dose">500mg</span> iv q6h ＋ <span class="drug">氨基糖苷类</span><span class="highlight">（表10C，166页）</span>
+                    </td>
+                    <td class="notes">
+                        <span class="success">同时进行外科治疗是重要的，尤其是中重度患者。</span><br><br>
+                        
+                        <span class="black-box">替加环素黑框警示：</span>对替加环素进行的临床试验的荟萃分析显示应用替加环素治疗组的全因死亡率（<span class="dose">2.5%</span>）高于对照组（<span class="dose">1.8%</span>）<br><br>
+                        
+                        <span class="highlight">注意：</span><span class="drug">阿莫西林-克拉维酸</span>可以减少氟喹诺酮类的副作用，且不影响疗效<br>
+                        <span class="reference">(Ann Intern Med 174: 737, 2021)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页脚注释区域 -->
+        <div class="footnote-section">
+            <p><span class="symbol">注：6</span> <span class="drug">氨基糖苷类</span>。为抗假单胞菌氨基糖苷类，如<span class="drug">阿米卡星</span>、<span class="drug">庆大霉素</span>、<span class="drug">妥布霉素</span>、<span class="drug">普拉唑霉素</span>。</p>
+            
+            <p><span class="symbol">*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+            
+            <p><span class="symbol">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+            
+            <p>表中名词缩写<span class="highlight">见第2页</span>。</p>
+        </div>
+        
+        <!-- 底部关键词和页码区域 -->
+        <div class="bottom-info">
+            <div class="bottom-keywords">
+                <span class="bottom-keywords-label">关键词：</span>
+                重度腹腔感染, ICU患者, 危及生命的感染, 脓毒症, 感染性休克, 亚胺培南, 美罗培南, 多尼培南, 替加环素, 氨曲南, 甲硝唑, 环丙沙星, 左氧氟沙星, 氨苄西林, 氨基糖苷类, 阿米卡星, 庆大霉素, 妥布霉素, 普拉唑霉素, 头孢洛生他唑巴坦, 头孢他啶阿维巴坦, 肠杆菌科, 铜绿假单胞菌, 拟杆菌属, 肠球菌, 外科治疗, 黑框警示, 青霉素过敏, 头孢菌素过敏
+            </div>
+            <div class="page-number" id="pageNumber">22</div>
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
+        </div>
+    </div>
+    
+    <script>
+        // 动态获取当前页码并设置上一页/下一页链接
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentPath = window.location.pathname;
+            var fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+            var pageNum = parseInt(fileName.replace('.html', '')) || 22;
+            
+            // 更新页码显示
+            document.getElementById('pageNumber').textContent = pageNum;
+            
+            // 更新上一页链接
+            var prevLink = document.querySelector('.prev-page');
+            if (prevLink && pageNum > 1) {
+                prevLink.href = (pageNum - 1) + '.html';
+            } else if (prevLink) {
+                prevLink.classList.add('disabled');
+                prevLink.href = '#';
+            }
+            
+            // 更新下一页链接
+            var nextLink = document.querySelector('.next-page');
+            if (nextLink) {
+                nextLink.href = (pageNum + 1) + '.html';
+            }
+        });
+        
+        // 保存到文件功能
+        function saveToFile() {
+            var content = document.getElementById('editInput').value;
+            var blob = new Blob([content + '\n'], { type: 'text/plain;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'jiansuo.ini';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            // 显示保存状态
+            var status = document.getElementById('saveStatus');
+            status.style.display = 'inline';
+            setTimeout(function() {
+                status.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+---
+
+
+
+标签和标题信息
+
+
+ 项目 	 内容 	
+ **网页标题 (`<title>`标签)** 	 `~~~~~重度腹腔感染ICU患者治疗指南 - 亚胺培南美罗培南多尼培南替加环素抗微生物方案*****` 	
+ **主标题 (`<h1>`标签)** 	 `~~~~~表1（20）临床抗微生物治疗的初始选择（续）*****` 	
+ **副标题 (`<p class="subtitle">`)** 	 `重度、危及生命的ICU患者腹腔感染治疗方案` 	
+ **检索标签 (`%%%%%检索标签?????`)** 	 重度腹腔感染, ICU患者, 危及生命的感染, 脓毒症, 感染性休克, 亚胺培南, 美罗培南, 多尼培南, 替加环素, 氨曲南, 甲硝唑, 环丙沙星, 左氧氟沙星, 氨苄西林, 氨基糖苷类, 阿米卡星, 庆大霉素, 妥布霉素, 普拉唑霉素, 头孢洛生他唑巴坦, 头孢他啶阿维巴坦, 肠杆菌科, 铜绿假单胞菌, 拟杆菌属, 肠球菌, 外科治疗, 黑框警示, 青霉素过敏, 头孢菌素过敏 	
+
+
+
+
+---
+
+
+
+特殊格式说明
+
+
+ 格式 	 用途 	 示例 	
+ `~~~~~标题*****` 	 包裹标题文本，便于程序提取 	 `~~~~~表1（20）临床抗微生物治疗的初始选择（续）*****` 	
+ `%%%%%检索标签?????` 	 包裹检索关键词，便于程序提取疾病、药物、细菌信息 	 `%%%%%重度腹腔感染, ICU患者, 亚胺培南, 美罗培南, 多尼培南?????` 	
+
+
+
+
+---
+
+
+
+功能说明
+
+
+ 功能 	 实现方式 	 位置 	
+ **返回首页按钮** 	 蓝色背景，白色文字，点击跳转至 `index.html` 	 左上角固定 	
+ **上一页按钮** 	 绿色背景，白色文字，点击跳转至 `(当前页码-1).html` 	 右上角 	
+ **下一页按钮** 	 绿色背景，白色文字，点击跳转至 `(当前页码+1).html` 	 右上角 	
+ **动态页码计算** 	 JavaScript自动从文件名提取页码，动态生成上一页/下一页链接 	 自动执行 	
+ **编辑框** 	 宽度比网页短100px，包含标题、副标题、关键词和页码，用"="分隔 	 网页顶部 	
+ **保存按钮** 	 红色背景，白色文字，点击后将编辑框内容保存为 `jiansuo.ini` 	 编辑框右侧 	
+ **保存状态提示** 	 绿色"✓ 已保存"，显示3秒后消失 	 保存按钮右侧 	
+ **底部关键词** 	 显示在页码上方，包含疾病、药物、细菌等关键词 	 底部信息区域 	
+ **页码显示** 	 蓝色背景白色文字，显示当前页码（从文件名提取） 	 底部中央 	
+
+
+
+
+---
+
+
+
+设计特点说明
+
+
+ 特性 	 实现方式 	
+ **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
+ **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
+ **子表头** 	 中蓝色 `#2980b9`，16px字号 	
+ **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
+ **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
+ **备选方案列** 	 淡橙背景 `#fef5e7`，深橙文字 `#d35400` 	
+ **药物名称** 	 淡紫背景 `#e8daef`，紫色文字 `#6c3483`，突出显示 	
+ **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
+ **重要提示** 	 黄色高亮 `#fff3cd` 	
+ **警告提示** 	 淡红背景 `#f8d7da` 	
+ **黑框警示** 	 黑色背景 `#000000`，白色文字，用于替加环素黑框警示 	
+ **成功/推荐** 	 淡绿背景 `#d4edda` 	
+ **分隔虚线** 	 蓝色虚线 `#3498db`，用于分隔不同治疗方案 	
+ **页脚注释区域** 	 淡黄色背景 `#fef9e7`，橙色左边框 `#f39c12` 	
+ **检索标签区域** 	 绿色虚线边框 `#27ae60`，浅绿背景 `#e8f6f3` 	
+ **底部信息区域** 	 蓝色边框 `#3498db`，浅蓝背景 `#eaf2f8` 	
+ **编辑框** 	 蓝色边框 `#3498db`，聚焦时变为深蓝色 `#1a5276` 	
+ **保存按钮** 	 红色背景 `#e74c3c`，悬停时变为深红色 `#c0392b`

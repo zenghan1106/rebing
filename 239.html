@@ -1,0 +1,571 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表9A(16)抗菌药物药理学特点-噁唑烷酮类截短侧耳素类*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 30px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 80px 20px 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            padding: 0 20px;
+        }
+        
+        .table-id {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            margin: 0 15px 25px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            min-width: 1500px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 14px 6px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            border: 1px solid #1a3a5c;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #e8f4f8 !important;
+        }
+        
+        .category-row td {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            padding: 12px 15px;
+            border: 1px solid #b8d4e3;
+            text-align: left;
+        }
+        
+        /* 数据行 */
+        tbody tr {
+            background: #fff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 6px 5px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        /* 药物名列突出 */
+        td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #f0f7ff;
+            font-size: 12px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e5c8a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #6c5b31;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background: #55efc4;
+            color: #2d3436;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin: 0 15px 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .keywords span {
+            color: #2e5c8a;
+            font-weight: bold;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 17px;
+                padding-top: 90px;
+            }
+            
+            .sub-title {
+                font-size: 13px;
+            }
+            
+            .table-id {
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 9px;
+            }
+            
+            thead th {
+                font-size: 9px;
+                padding: 8px 4px;
+            }
+            
+            td {
+                padding: 5px 3px;
+                line-height: 1.5;
+            }
+            
+            .category-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="238.html" class="nav-btn">← 上一页</a>
+        <a href="240.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表9A(16) 抗菌药物药理学特点*****</h1>
+    <p class="sub-title">噁唑烷酮类、截短侧耳素类</p>
+    <p class="table-id">表9A（16）</p>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>PK/PD<br>指数</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂¹</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tₘₐₓ<br>(h)</th>
+                    <th>血浆峰<br>值浓度²<br>(μg/ml)</th>
+                    <th>尿峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容积³/<br>Vd</th>
+                    <th>平均血清<br>半衰期⁴<br>(h)</th>
+                    <th>清除</th>
+                    <th>胆汁<br>排泄率⁵<br>(%)</th>
+                    <th>脑脊液/<br>血药浓<br>度比⁶<br>(%)</th>
+                    <th>脑脊<br>液穿<br>透⁷</th>
+                    <th>AUC⁸<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="16">抗菌药物/其他抗菌药物（续）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="16">噁唑烷酮类</td>
+                </tr>
+                <tr>
+                    <td>利奈唑胺</td>
+                    <td>24h AUC/<br>MIC</td>
+                    <td>片剂(600mg),口服<br>悬液(100mg/5ml),<br>注射液</td>
+                    <td>片剂/口<br>服悬液±<br>食物</td>
+                    <td>100</td>
+                    <td>po: 1.3</td>
+                    <td>15～20 (600mg<br>iv/po q12h,<br>SS)</td>
+                    <td>ND</td>
+                    <td>31</td>
+                    <td>40～50L (Vss)</td>
+                    <td>5</td>
+                    <td>代谢,肾脏</td>
+                    <td>ND</td>
+                    <td>60～70</td>
+                    <td>是</td>
+                    <td>179 (600mg iv<br>q12h,0～24h)<br>276 (600mg po<br>q12h,0～24h)<br>(AAC 2006;<br>50:3971)</td>
+                </tr>
+                <tr>
+                    <td>特地唑胺</td>
+                    <td>24h AUC/<br>MIC</td>
+                    <td>片剂(200mg),注<br>射液</td>
+                    <td>片剂±<br>食物</td>
+                    <td>91</td>
+                    <td>3</td>
+                    <td>3.0 (200mg iv<br>qd, SS), 2.2<br>(200mg po qd,<br>SS)</td>
+                    <td>ND</td>
+                    <td>70～90</td>
+                    <td>67～80L (Vss)</td>
+                    <td>12</td>
+                    <td>粪便</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>29.2 (200mg<br>iv qd,0～24h)<br>25.6 (200mg<br>po qd,0～24h)</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="16">截短侧耳素类</td>
+                </tr>
+                <tr>
+                    <td>来法莫林</td>
+                    <td>24h AUC/<br>MIC</td>
+                    <td>片剂(600mg)<br>注射剂</td>
+                    <td>片剂,<br>空腹</td>
+                    <td>25</td>
+                    <td>口服:<br>0.88～<br>2.00</td>
+                    <td>3.6 (150mg<br>iv q12h, SS)<br>2.24 (600mg<br>po q12h, SS)</td>
+                    <td>ND</td>
+                    <td>94.8～<br>97.1</td>
+                    <td>86.1L (Vss)</td>
+                    <td>8</td>
+                    <td>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>28.6 (150mg iv<br>q12h,0～24h)<br>32.7 (600mg<br>po q12h,0～24h)</td>
+                </tr>
+                <tr>
+                    <td>瑞他莫林</td>
+                    <td>ND</td>
+                    <td>1%软膏</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>低,通常检测<br>不到</td>
+                    <td>ND</td>
+                    <td>94</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>表注见135页。表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-drug">利奈唑胺</span>
+            <span class="tag tag-drug">特地唑胺</span>
+            <span class="tag tag-drug">来法莫林</span>
+            <span class="tag tag-drug">瑞他莫林</span>
+            <span class="tag tag-disease">感染</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>关键词：</span>抗菌药物；药理学特点；噁唑烷酮类；截短侧耳素类；利奈唑胺；特地唑胺；来法莫林；瑞他莫林；PK/PD；AUC/MIC；蛋白结合率；分布容积；半衰期；脑脊液穿透
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 239 —</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表9A(16)抗菌药物药理学特点-噁唑烷酮类截短侧耳素类；噁唑烷酮类、截短侧耳素类；抗菌药物；药理学特点；噁唑烷酮类；截短侧耳素类；利奈唑胺；特地唑胺；来法莫林；瑞他莫林；PK/PD；AUC/MIC；蛋白结合率；分布容积；半衰期；脑脊液穿透；=239" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">✓ 已复制到剪贴板</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast();
+                });
+            } else {
+                document.execCommand('copy');
+                showToast();
+            }
+        }
+        
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-成人脓毒症</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f0f4f8;
+            padding: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .prev-btn {
+            right: 105px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .title-marker {
+            color: #e53935;
+            letter-spacing: 3px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background: #1976d2;
+            font-size: 13px;
+            padding: 10px;
+        }
+        
+        /* 第一行字体大一点 */
+        .section-header td {
+            background: #e3f2fd !important;
+            font-size: 15px;
+            font-weight: bold;
+            color: #0d47a1;
+            padding: 12px 10px;
+            border: 1px solid #90caf9;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #cfd8dc;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        tr:hover {
+            background: #e8eaf6;
+        }
+        
+        /* 注释区域 */
+        .note-box {
+            background: #fff8e1;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #5d4037;
+            border-left: 4px solid #ff9800;
+        }
+        
+        /* 脚注 */
+        .footnote {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 11px;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+            line-height: 1.8;
+        }
+        
+        /* 检索标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-disease:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #e65100;
+            color: white;
+        }
+        
+        .tag-syndrome {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #e1bee7;
+        }
+        
+        .tag-syndrome:hover {
+            background: #7b1fa2;
+            color: white;
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #1565c0;
+            border-radius: 6px;
+            font-size: 13px;
+            width: calc(100% - 110px);
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            padding: 12px 24px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #0d47a1;
+        }
+        
+        #copyBtn.copied {
+            background: #2e7d32;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #757575;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+                margin-top: 65px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .tag {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="144.html" class="nav-btn prev-btn">↑ 上一页</a>
+    <a href="146.html" class="nav-btn next-btn">↓ 下一页</a>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-marker">~~~~~</span>
+        表1（65）临床抗微生物治疗的初始选择
+        <span class="title-marker">*****</span>
+    </h1>
+    
+    <!-- 注释 -->
+    <div class="note-box">
+        <strong>感染性休克，参见71页</strong> | 概述参见 Med Clin N Amer 104: 573, 2021
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="5">全身综合征（发热/不发热）/其他全身发热综合征（续）</td>
+                </tr>
+                <tr>
+                    <td>成人：非中性粒细胞减少，无低血压但危及生命<br>感染灶不明，考虑原发菌血症、腹腔或皮肤来源。可危及生命。参见CCM 2024; 52: 1138; CID 2024; 78: 505</td>
+                    <td>需氧革兰阴性杆菌。金黄色葡萄球菌、链球菌及其他</td>
+                    <td>[(亚胺培南或美罗培南) + 万古霉素] 或 (哌拉西林-他唑巴坦+万古霉素)<br>如果产ESBL和/或碳青霉烯酶的革兰阴性杆菌，经验治疗策略需借助临床症状和培养结果<br>耐药菌低流行区：万古霉素+哌拉西林-他唑巴坦<br>耐药菌高流行区：见表5B，85页<br>剂量见表注20</td>
+                    <td>(达托霉素8～12mg/kg iv qd) + (头孢吡肟或哌拉西林-他唑巴坦)</td>
+                    <td>对于容量复苏治疗无反应的感染性休克患者，如需要持续使用血管活性药物维持收缩压＞90mmHg或平均动脉压＞65mmHg，应考虑加用氢化可的松50mg iv q6h + 氟氢可的松50μg qd（经鼻胃管入）[NEJM 2018; 378: 797, 809, 860(editorial)]<br>注意：对于头孢曲松耐药大肠埃希菌、肺炎克雷伯菌，哌拉西林-他唑巴坦疗效劣于美罗培南（JAMA 2018; 320: 979 & 984）<br>拯救脓毒症指南：Crit Care Med 2021; 49: 1974; JAMA 2023; 329: 535</td>
+                </tr>
+                <tr>
+                    <td>如疑为胆源性（见胆囊，18页）</td>
+                    <td>肠球菌+需氧革兰阴性杆菌</td>
+                    <td>哌拉西林-他唑巴坦（如为ESBL阳性，应避免使用）<br>或 环丙沙星或左氧氟沙星+甲硝唑<br>剂量见表注20</td>
+                    <td>头孢曲松+甲硝唑；或（环丙沙星或左氧氟沙星）+甲硝唑</td>
+                    <td>如怀疑肠球菌，应在头孢曲松或氟喹诺酮类方案基础上加用氨苄西林或万古霉素</td>
+                </tr>
+                <tr>
+                    <td>如为社区获得性肺炎伴严重脓毒症或脓毒症休克<br>（见43页及以后数页）</td>
+                    <td>肺炎链球菌、MRSA、军团菌、革兰阴性杆菌及其他</td>
+                    <td>(左氧氟沙星或莫西沙星) + (哌拉西林-他唑巴坦) + 万古霉素</td>
+                    <td>氨曲南+（左氧氟沙星或莫西沙星）+利奈唑胺</td>
+                    <td>CAP有很多分类。见43页及后面的资料。此处建议只针对最严重的CAP。如流感后MRSA肺炎或酗酒者发生克雷伯菌肺炎</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 脚注 -->
+    <div class="footnote">
+        <strong>注：</strong>20 注射用第三代头孢菌素（头孢噻肟2g iv q8h，危重患者q4h；头孢唑肟2g iv q4h；头孢曲松2g iv q12h），哌拉西林-他唑巴坦4.5g iv q8h（输注4小时），氨基糖苷类（表10C，166页），氨苄西林200mg/(kg·d)分次q6h，克林霉素900mg iv q8h，亚胺培南0.5g iv q6h，美罗培南1～2g iv q8h，厄他培南1g iv qd，多尼培南0.5g iv q8h（输注1小时），替卡西林或苯唑西林2g iv q4h，氨曲南2g iv q8h，甲硝唑1g负荷量后改为0.5g q6h或1g q12h，万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml（肥胖患者剂量见表17C，321页），头孢他啶2g iv q8h，头孢吡肟2g iv q12h（若粒细胞减少，则q8h），头孢匹罗2g iv q12h，环丙沙星400mg iv q12h，左氧氟沙星750mg iv qd，利奈唑胺600mg iv q12h，达托霉素8～12mg/kg iv q24h。<br>
+        * 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        <sup>b</sup> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div>
+            <span class="tag tag-disease">脓毒症</span>
+            <span class="tag tag-disease">感染性休克</span>
+            <span class="tag tag-disease">菌血症</span>
+            <span class="tag tag-disease">胆源性感染</span>
+            <span class="tag tag-disease">社区获得性肺炎</span>
+            <span class="tag tag-disease">CAP</span>
+            <span class="tag tag-syndrome">非中性粒细胞减少</span>
+            <span class="tag tag-syndrome">ESBL</span>
+            <span class="tag tag-syndrome">碳青霉烯酶</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">军团菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">莫西沙星</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">氨曲南</span>
+            <span class="tag tag-antibiotic">利奈唑胺</span>
+            <span class="tag tag-antibiotic">氨苄西林</span>
+            <span class="tag tag-antibiotic">氢化可的松</span>
+            <span class="tag tag-antibiotic">氟氢可的松</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div style="font-size: 14px; color: #555; margin-bottom: 10px;">📋 快速复制信息（标题 + 副标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">145</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：脓毒症；感染性休克；成人非中性粒细胞减少；经验性抗菌治疗；碳青霉烯类；哌拉西林-他唑巴坦；万古霉素；MRSA；ESBL；社区获得性肺炎；胆源性感染；达托霉素；利奈唑胺；氢化可的松</div>
+    
+    <script>
+        // 设置编辑框内容
+        const title = "表1（65）临床抗微生物治疗的初始选择";
+        const subtitle = "成人非中性粒细胞减少脓毒症及感染性休克";
+        const keywords = "脓毒症；感染性休克；成人非中性粒细胞减少；经验性抗菌治疗；碳青霉烯类；哌拉西林-他唑巴坦；万古霉素；MRSA；ESBL；社区获得性肺炎；胆源性感染；达托霉素；利奈唑胺；氢化可的松";
+        const pageNum = "145";
+        
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

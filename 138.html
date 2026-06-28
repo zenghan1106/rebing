@@ -1,0 +1,457 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(62)临床抗微生物治疗的初始选择</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 20px 0;
+            padding: 10px;
+            background: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2874a6;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2874a6;
+            margin-left: 8px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #2874a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #1a5276;
+        }
+        
+        .btn-home {
+            background: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background: #1e8449;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            min-width: 800px;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #2874a6;
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            background: #d4e6f1;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            color: #333;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #d5f5e3 !important;
+            font-weight: bold;
+            color: #1e8449;
+        }
+        
+        .sub-section {
+            background: #fdebd0 !important;
+            font-weight: bold;
+            color: #9c640c;
+        }
+        
+        /* 关键词标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2874a6;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d4e6f1;
+        }
+        
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #eaf2f8;
+            color: #2874a6;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+            cursor: default;
+        }
+        
+        .tag-disease {
+            background: #fdedec;
+            color: #c0392b;
+            border-color: #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e8f8f5;
+            color: #1e8449;
+            border-color: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number a {
+            color: #2874a6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 6px;
+            }
+            
+            td {
+                padding: 6px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="137.html" class="btn">上一页</a>
+            <a href="139.html" class="btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">表1(62)临床抗微生物治疗的初始选择</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:30%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">全身综合征（发热/不发热）/经蜱、蚤或虱传播（续）</td>
+                </tr>
+                <tr>
+                    <td><strong>鼠疫，菌血症</strong><br><br>参见MMWR/Vol 70/No.3 July 16, 2021</td>
+                    <td>鼠疫耶尔森菌</td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        环丙沙星400mg iv q8h或左氧氟沙星750mg iv/po qd或莫西沙星400mg iv/po qd×10～14d<br><br>
+                        <strong>备选方案：</strong><br>
+                        750mg po q12h或链霉素30mg/(kg·d) iv分2次或庆大霉素5mg/(kg·d) iv qd
+                    </td>
+                    <td>
+                        疗程10～14d。多西环素200mg iv/po bid×1d，然后100mg iv/po bid×7～10d是另一个选择。多西环素疗程不超过21天在任何年龄均是安全的（AAP Red Book 2018）
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="4">回归热</td>
+                </tr>
+                <tr>
+                    <td class="sub-section">虱传（LBRF）</td>
+                    <td>
+                        回归热包柔螺旋体<br>
+                        储存库：人<br>
+                        媒介：体虱
+                    </td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        四环素500mg iv/po×1剂或多西环素，100mg iv/po×1剂<br>
+                        （儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        红霉素500mg iv/po×1剂
+                    </td>
+                    <td>
+                        大多数患者可出现赫氏反应，如发热、心动过速、呼吸加快、血压下降（2小时以内发生）。糖皮质激素不能预防。诊断：发热时外周血涂片可见到螺旋体。回归热复发可达10次之多
+                    </td>
+                </tr>
+                <tr>
+                    <td class="sub-section">蜱传（TBRF）</td>
+                    <td>
+                        北美：赫姆斯包柔螺旋体，墨西哥流螺旋体<br>
+                        非洲：西班牙包柔螺旋体，麝鼠勺包柔螺旋体，达顿包柔螺旋体<br>
+                        俄罗斯：B. miyamoto（见说明）
+                    </td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        多西环素100mg po bid×7～10d<br>
+                        （儿童见表注19）<br><br>
+                        预防：多西环素100mg×1剂，暴露后72小时内服用有效（CID 71: 1768, 2020）<br><br>
+                        <strong>备选方案：</strong><br>
+                        红霉素500mg po qid×7～10d
+                    </td>
+                    <td>
+                        可发生赫氏反应。暴露后多西环素预防很有效（NEJM 355: 148, 2006）<br><br>
+                        B. miyamoto：诊断依靠参比实验室PCR检测。发热、头痛、血小板减少及蜱虫暴露（美国东北部）。多西环素、阿奇霉素、头孢曲松似乎有效（AnIM 163: 91&141, 2015; NEJM 373: 468, 2015）。阿莫西林耐药（Am J Med 132: 136, 2019）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-list">
+            <span class="tag tag-disease">鼠疫</span>
+            <span class="tag tag-disease">菌血症</span>
+            <span class="tag tag-disease">回归热</span>
+            <span class="tag tag-disease">虱传回归热</span>
+            <span class="tag tag-disease">LBRF</span>
+            <span class="tag tag-disease">蜱传回归热</span>
+            <span class="tag tag-disease">TBRF</span>
+            <span class="tag tag-disease">赫氏反应</span>
+            <span class="tag tag-bacteria">鼠疫耶尔森菌</span>
+            <span class="tag tag-bacteria">回归热包柔螺旋体</span>
+            <span class="tag tag-bacteria">赫姆斯包柔螺旋体</span>
+            <span class="tag tag-bacteria">墨西哥流螺旋体</span>
+            <span class="tag tag-bacteria">西班牙包柔螺旋体</span>
+            <span class="tag tag-bacteria">麝鼠勺包柔螺旋体</span>
+            <span class="tag tag-bacteria">达顿包柔螺旋体</span>
+            <span class="tag tag-bacteria">B. miyamoto</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">左氧氟沙星</span>
+            <span class="tag tag-drug">莫西沙星</span>
+            <span class="tag tag-drug">链霉素</span>
+            <span class="tag tag-drug">庆大霉素</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">红霉素</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">阿莫西林</span>
+        </div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制（标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表1(62)临床抗微生物治疗的初始选择；临床抗微生物治疗；鼠疫；菌血症；回归热；虱传回归热；LBRF；蜱传回归热；TBRF；赫氏反应；鼠疫耶尔森菌；回归热包柔螺旋体；赫姆斯包柔螺旋体；墨西哥流螺旋体；西班牙包柔螺旋体；麝鼠勺包柔螺旋体；达顿包柔螺旋体；B. miyamoto；环丙沙星；左氧氟沙星；莫西沙星；链霉素；庆大霉素；多西环素；四环素；红霉素；阿奇霉素；头孢曲松；阿莫西林；=138" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="138.html">138</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#27ae60';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.background = '#e74c3c';
+                }, 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>

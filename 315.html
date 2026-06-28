@@ -1,0 +1,574 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~糖肽类、脂糖肽类、脂肽类抗生素的剂量和不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f0ff;
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 8px 16px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(33,150,243,0.3);
+        }
+
+        .home-btn:hover {
+            background: #1976D2;
+        }
+
+        /* 上一页/下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.3);
+        }
+
+        .nav-btn:hover {
+            background: #388E3C;
+        }
+
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #4a148c;
+            margin: 60px 0 20px;
+            font-size: 1.3rem;
+            padding: 0 10px;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        /* 表头 */
+        thead {
+            background: #1565C0;
+            color: white;
+        }
+
+        th {
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+
+        /* 分类行 */
+        .category-row {
+            background: #E8EAF6;
+        }
+
+        .category-row td {
+            font-size: 14px;
+            font-weight: bold;
+            color: #283593;
+            padding: 12px 10px;
+            border: 1px solid #C5CAE9;
+        }
+
+        /* 子分类行 */
+        .subcategory-row {
+            background: #F3E5F5;
+        }
+
+        .subcategory-row td {
+            font-size: 13px;
+            font-weight: bold;
+            color: #6a1b9a;
+            padding: 10px;
+            border: 1px solid #E1BEE7;
+        }
+
+        /* 普通单元格 */
+        td {
+            padding: 10px;
+            border: 1px solid #E0E0E0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+
+        /* 药品名列 */
+        .drug-name {
+            background: #FFF3E0;
+            font-weight: 600;
+            color: #E65100;
+            min-width: 160px;
+        }
+
+        /* 剂量列 */
+        .dosage {
+            background: #E8F5E9;
+            color: #1B5E20;
+            min-width: 200px;
+        }
+
+        /* 不良反应列 */
+        .adverse {
+            background: #FCE4EC;
+            color: #880E4F;
+        }
+
+        /* 参考文献 */
+        .reference {
+            font-style: italic;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* 备注 */
+        .note {
+            background: #FFF8E1;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FFC107;
+            font-size: 13px;
+            color: #5D4037;
+            line-height: 1.8;
+        }
+
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .copy-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #D1C4E9;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            background: #FAFAFA;
+        }
+
+        .copy-btn {
+            padding: 12px 24px;
+            background: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: #F57C00;
+        }
+
+        .copy-btn.copied {
+            background: #4CAF50;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* 疾病标签 - 红色系 */
+        .tag-disease {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+
+        .tag-disease:hover {
+            background: #C62828;
+            color: white;
+        }
+
+        /* 抗生素标签 - 绿色系 */
+        .tag-antibiotic {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+
+        .tag-antibiotic:hover {
+            background: #2E7D32;
+            color: white;
+        }
+
+        /* 细菌标签 - 蓝色系 */
+        .tag-bacteria {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+
+        .tag-bacteria:hover {
+            background: #1565C0;
+            color: white;
+        }
+
+        /* 其他标签 - 紫色系 */
+        .tag-other {
+            background: #F3E5F5;
+            color: #7B1FA2;
+            border: 1px solid #CE93D8;
+        }
+
+        .tag-other:hover {
+            background: #7B1FA2;
+            color: white;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.05rem;
+                margin-top: 70px;
+            }
+
+            th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+
+            td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+
+            .drug-name {
+                min-width: 120px;
+            }
+
+            .dosage {
+                min-width: 150px;
+            }
+
+            .home-btn, .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .copy-wrapper {
+                flex-direction: column;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+
+            #copyInput {
+                width: 100%;
+            }
+        }
+
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 2000;
+            display: none;
+        }
+
+        .toast.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+
+    <!-- 上一页/下一页 -->
+    <div class="nav-buttons">
+        <a href="314.html" class="nav-btn">← 上一页</a>
+        <a href="316.html" class="nav-btn">下一页 →</a>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~表10A（6）抗感染药物的剂量和不良反应——糖肽类、脂糖肽类、脂肽类*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">氨基糖苷类及相关抗生素：表10C，166页；表17A，288页</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">糖肽类，脂糖肽类，脂肽类</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">
+                        达巴万星（Dalvance，Xydalba）<br><br>
+                        <span class="reference">耐药：JAC，2018，73：1</span><br><br>
+                        病例系列研究显示使用8～10mg/（kg·d）的较高剂量成功治疗右心及左心心内膜炎（JAC 68：936 & 2921，2013）<br><br>
+                        回顾性研究显示，如果剂量≥10mg/（kg·d），VRE菌血症有更好的生存率（CID 2017，64：605）
+                    </td>
+                    <td class="dosage">
+                        1g iv 超过30分钟，1周后500mg iv 超过30分钟或1500mg iv 超过30分钟×1剂。<br><br>
+                        避免同盐水合用，药物易发生沉淀
+                    </td>
+                    <td class="adverse">
+                        若CrCl＜30ml/min：750mg iv为起始剂量，1周后375mg iv<br><br>
+                        血液透析患者：剂量同肾功能正常患者<br><br>
+                        快速输注可致红人综合征。与其他糖肽类抗生素存在潜在交叉过敏反应。对VRE无效。与他汀类合用增加肌病/横纹肌溶解的风险（CID 67：1356，2018）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-name">
+                        达托霉素（Cubicin）
+                    </td>
+                    <td class="dosage">
+                        皮肤/软组织感染：4mg/kg iv qd（输注2小时或30分钟以上）<br><br>
+                        菌血症/右心内膜炎：6mg/kg iv qd（输注2小时或30分钟以上），试验中的剂量可达12mg/kg iv qd<br><br>
+                        病态肥胖：根据总体重计算剂量（AAC 51：2741，2007），其他剂量推荐见表17C，321页。对于难治性MRSA菌血症患者，达托霉素＋头孢洛林可以作为补救治疗（AAC 57：66，2013；AAC 56：5296，2012）
+                    </td>
+                    <td class="adverse">
+                        肺炎：达托霉素不应用于治疗肺炎（除非为血源性肺炎），其经FDA批准用于治疗由金葡菌引起的右侧心内膜炎（伴或不伴脓毒性栓塞/血源性肺炎）<br><br>
+                        达托霉素耐药：可能在万古霉素治疗期间或之后新发，在达托霉素治疗期间或之后新发 [CID 50（Suppl 1）：S10，2010]。随着达托霉素MIC升高，MRSA对TMP-SMX、萘夫西林和苯唑西林更敏感（AAC 54：5187，2010；CID 53：158，2011）<br><br>
+                        潜在肌肉毒性：建议每周检测CPK；如果CPK超过10倍正常上限，或有肌病的症状且CPK＞1000，停用达托霉素。说明书：达托霉素治疗期间停用他汀类药物（CID 2022；75：1416）。达托霉素可干扰凝血酶原检测试验使PT假性延长（Blood Coag & Fibrinolysis 19：32，2008）<br><br>
+                        注意：达托霉素剂量高达12mg/（kg·d）×14d时仍耐受良好（AAC 50：3245，2006）。有免疫性血小板减少症的报道（AAC 56 6430，2012）。长程治疗导致可逆性中性粒细胞缺乏也有报道（CID 56：1353，2013）<br><br>
+                        有嗜酸细胞性肺炎/慢性糖皮质激素依赖性肺炎的报道（CID 50：737，2010；CID 50：e63，2010）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">315</div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签（点击检索相关网页）</div>
+        <div class="tags-list" id="tagsList"></div>
+    </div>
+
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 页面数据
+        const pageData = {
+            id: "315",
+            title: "表10A（6）抗感染药物的剂量和不良反应——糖肽类、脂糖肽类、脂肽类",
+            keywords: ["糖肽类","脂糖肽类","脂肽类","达巴万星","Dalvance","Xydalba","达托霉素","Cubicin","氨基糖苷类","心内膜炎","VRE菌血症","红人综合征","交叉过敏","横纹肌溶解","皮肤软组织感染","菌血症","MRSA菌血症","头孢洛林","肌肉毒性","CPK","他汀类","凝血酶原","PT延长","免疫性血小板减少症","中性粒细胞缺乏","嗜酸细胞性肺炎"]
+        };
+
+        // 设置复制内容
+        const copyContentText = `${pageData.title}；${pageData.keywords.join('；')}；=${pageData.id}`;
+        document.getElementById('copyInput').value = copyContentText;
+
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板');
+                    document.querySelector('.copy-btn').classList.add('copied');
+                    document.querySelector('.copy-btn').textContent = '已复制';
+                    setTimeout(() => {
+                        document.querySelector('.copy-btn').classList.remove('copied');
+                        document.querySelector('.copy-btn').textContent = '复制';
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板');
+            }
+        }
+
+        // 标签数据 - 仅来自图片中的文字
+        const tags = [
+            // 疾病/症状
+            {name: "心内膜炎", type: "disease"},
+            {name: "VRE菌血症", type: "disease"},
+            {name: "红人综合征", type: "disease"},
+            {name: "横纹肌溶解", type: "disease"},
+            {name: "皮肤软组织感染", type: "disease"},
+            {name: "菌血症", type: "disease"},
+            {name: "MRSA菌血症", type: "disease"},
+            {name: "肌肉毒性", type: "disease"},
+            {name: "免疫性血小板减少症", type: "disease"},
+            {name: "中性粒细胞缺乏", type: "disease"},
+            {name: "嗜酸细胞性肺炎", type: "disease"},
+            {name: "肺炎", type: "disease"},
+            {name: "血源性肺炎", type: "disease"},
+            {name: "脓毒性栓塞", type: "disease"},
+            {name: "肌病", type: "disease"},
+            {name: "交叉过敏", type: "disease"},
+            
+            // 抗生素药物
+            {name: "达巴万星", type: "antibiotic"},
+            {name: "达托霉素", type: "antibiotic"},
+            {name: "头孢洛林", type: "antibiotic"},
+            {name: "万古霉素", type: "antibiotic"},
+            {name: "糖肽类", type: "antibiotic"},
+            {name: "脂糖肽类", type: "antibiotic"},
+            {name: "脂肽类", type: "antibiotic"},
+            {name: "他汀类", type: "antibiotic"},
+            {name: "TMP-SMX", type: "antibiotic"},
+            {name: "萘夫西林", type: "antibiotic"},
+            {name: "苯唑西林", type: "antibiotic"},
+            
+            // 细菌
+            {name: "金葡菌", type: "bacteria"},
+            {name: "MRSA", type: "bacteria"},
+            {name: "VRE", type: "bacteria"},
+            
+            // 其他/检测
+            {name: "CrCl", type: "other"},
+            {name: "CPK", type: "other"},
+            {name: "PT", type: "other"},
+            {name: "MIC", type: "other"},
+            {name: "血液透析", type: "other"},
+            {name: "肾功能", type: "other"}
+        ];
+
+        // 渲染标签
+        function renderTags() {
+            const container = document.getElementById('tagsList');
+            
+            container.innerHTML = tags.map(tag => {
+                const typeClass = tag.type === 'disease' ? 'tag-disease' : 
+                                  tag.type === 'antibiotic' ? 'tag-antibiotic' : 
+                                  tag.type === 'bacteria' ? 'tag-bacteria' : 'tag-other';
+                return `<span class="tag ${typeClass}" onclick="searchTag('${tag.name}')">${tag.name}</span>`;
+            }).join('');
+        }
+
+        function searchTag(keyword) {
+            localStorage.setItem('searchKeyword', keyword);
+            location.href = 'index.html';
+        }
+
+        // 提示功能
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTags();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-中性粒细胞缺乏发热</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f0f4f8;
+            padding: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .prev-btn {
+            right: 105px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .title-marker {
+            color: #e53935;
+            letter-spacing: 3px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background: #1976d2;
+            font-size: 13px;
+            padding: 10px;
+        }
+        
+        /* 第一行字体大一点 */
+        .section-header td {
+            background: #e3f2fd !important;
+            font-size: 15px;
+            font-weight: bold;
+            color: #0d47a1;
+            padding: 12px 10px;
+            border: 1px solid #90caf9;
+        }
+        
+        /* 指南说明行 */
+        .guideline-row td {
+            background: #e8f5e9;
+            font-size: 12px;
+            color: #2e7d32;
+            padding: 10px;
+            border: 1px solid #c8e6c9;
+        }
+        
+        /* 亚标题行 */
+        .subsection-header td {
+            background: #fff3e0 !important;
+            font-size: 14px;
+            font-weight: bold;
+            color: #e65100;
+            padding: 10px;
+            border: 1px solid #ffe0b2;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #cfd8dc;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        tr:hover {
+            background: #e8eaf6;
+        }
+        
+        /* 脚注 */
+        .footnote {
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 11px;
+            color: #555;
+            border: 1px solid #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        /* 检索标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fce4ec;
+            color: #c2185b;
+            border: 1px solid #f8bbd9;
+        }
+        
+        .tag-disease:hover {
+            background: #c2185b;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-bacteria:hover {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #e65100;
+            color: white;
+        }
+        
+        .tag-fungus {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #e1bee7;
+        }
+        
+        .tag-fungus:hover {
+            background: #7b1fa2;
+            color: white;
+        }
+        
+        .tag-syndrome {
+            background: #e1f5fe;
+            color: #01579b;
+            border: 1px solid #81d4fa;
+        }
+        
+        .tag-syndrome:hover {
+            background: #01579b;
+            color: white;
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        #copyInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #1565c0;
+            border-radius: 6px;
+            font-size: 13px;
+            width: calc(100% - 110px);
+            background: #fafafa;
+        }
+        
+        #copyBtn {
+            padding: 12px 24px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        #copyBtn:hover {
+            background: #0d47a1;
+        }
+        
+        #copyBtn.copied {
+            background: #2e7d32;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #757575;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+                margin-top: 65px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .tag {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="146.html" class="nav-btn prev-btn">↑ 上一页</a>
+    <a href="148.html" class="nav-btn next-btn">↓ 下一页</a>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-marker">~~~~~</span>
+        表1（66）临床抗微生物治疗的初始选择
+        <span class="title-marker">*****</span>
+    </h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="guideline-row">
+                    <td colspan="5">经验性治疗：中性粒细胞缺乏发热（体温≥38.3℃且超过1小时，或体温持续＞38℃，且中性粒细胞计数＜0.5×10⁹/L）（IDSA指南：CID 52: 427, 2012）（门诊患者：J Oncol: Prac 14: 250, 2018）</td>
+                </tr>
+                <tr>
+                    <td>低危患者<br>预计粒细胞缺乏＜7天，无合并症，可以口服药物</td>
+                    <td>需氧革兰阴性杆菌、甲型溶血性链球菌</td>
+                    <td>环丙沙星750mg po bid + 阿莫西林-克拉维酸875/125mg po bid，治疗到中性粒细胞计数＞1.0×10⁹/L为止</td>
+                    <td colspan="2">无局灶症状或体征，无低血压，无COPD，无真菌感染，无脱水，年龄16～60岁且积极配合和遵守医嘱的患者，可在门诊治疗，但需保证必要时随时能够入院治疗<br>青霉素过敏者：克林霉素300mg po qid替代阿莫西林-克拉维酸</td>
+                </tr>
+                <tr>
+                    <td>高危成人和儿童<br>预计粒细胞缺乏严重且超过7天，有合并症</td>
+                    <td>需氧革兰阴性杆菌，包括铜绿假单胞菌、耐头孢菌素甲型溶血性链球菌、MRSA</td>
+                    <td>经验性治疗：<br>头孢吡肟或亚胺培南或美罗培南或多尼培南或哌拉西林-他唑巴坦，是否联合万古霉素见下注<br><br>剂量见表注20，69页<br><br>以下情形经验治疗加用万古霉素：疑有导管相关血流感染、严重黏膜炎、皮肤软组织感染、肺炎或低血压</td>
+                    <td>联合用药：<br>如果患者存在严重脓毒症或休克，可加用妥布霉素 + 万古霉素 + 棘白菌素</td>
+                    <td>甲型溶血性链球菌对青霉素、头孢菌素和氟喹诺酮类耐药增加（CID 34: 1469 & 1524, 2002）<br>若有IgE介导的β-内酰胺类严重过敏如何处理？氨曲南 + 妥布霉素<br>需进行血、尿检测，胸部X线及其他依据临床症状进行的检测，必要时行CT扫描。如果培养阴性，患者无发热，则治疗至中性粒细胞≥0.5×10⁹/L<br>注意：对于头孢曲松耐药大肠埃希菌、肺炎克雷伯菌，哌拉西林-他唑巴坦疗效劣于美罗培南（JAMA 2018; 320: 979 & 984）</td>
+                </tr>
+                <tr class="subsection-header">
+                    <td colspan="5">经验性治疗5天后仍持续发热和中性粒细胞缺乏（CID 52: 427, 2011）</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>念珠菌属、曲霉菌属、耐万古霉素肠球菌、耐药革兰阴性杆菌</td>
+                    <td colspan="2">加用（卡泊芬净70mg iv，第1天，然后50mg iv qd；或米卡芬净100mg iv qd或阿尼芬净200mg iv×1剂，然后100mg iv qd）或伏立康唑6mg/kg iv q12h×2剂然后4mg/kg iv q12h</td>
+                    <td>普通的两性霉素B比两性霉素B脂质制剂更易引起发热和肾毒性，且疗效较差；而卡泊芬净和伏立康唑的耐受性更好，疗效可能也优于两性霉素B脂质制剂（NEJM 346: 225, 2002 & 351: 1391 & 1445, 2005）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 脚注 -->
+    <div class="footnote">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        <sup>b</sup> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div>
+            <span class="tag tag-disease">中性粒细胞缺乏发热</span>
+            <span class="tag tag-disease">粒细胞缺乏</span>
+            <span class="tag tag-disease">经验性治疗</span>
+            <span class="tag tag-disease">持续发热</span>
+            <span class="tag tag-disease">导管相关血流感染</span>
+            <span class="tag tag-disease">黏膜炎</span>
+            <span class="tag tag-syndrome">低危患者</span>
+            <span class="tag tag-syndrome">高危患者</span>
+            <span class="tag tag-syndrome">β-内酰胺类过敏</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">甲型溶血性链球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <span class="tag tag-bacteria">耐万古霉素肠球菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <span class="tag tag-fungus">念珠菌</span>
+            <span class="tag tag-fungus">曲霉菌</span>
+            <span class="tag tag-fungus">卡泊芬净</span>
+            <span class="tag tag-fungus">米卡芬净</span>
+            <span class="tag tag-fungus">阿尼芬净</span>
+            <span class="tag tag-fungus">伏立康唑</span>
+            <span class="tag tag-fungus">两性霉素B</span>
+            <span class="tag tag-fungus">棘白菌素</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">多尼培南</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">妥布霉素</span>
+            <span class="tag tag-antibiotic">氨曲南</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div style="font-size: 14px; color: #555; margin-bottom: 10px;">📋 快速复制信息（标题 + 副标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" id="copyInput" readonly>
+            <button id="copyBtn" onclick="copyContent()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">147</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：中性粒细胞缺乏发热；经验性治疗；低危患者；高危患者；持续发热；抗真菌治疗；铜绿假单胞菌；MRSA；甲型溶血性链球菌；卡泊芬净；伏立康唑；两性霉素B；头孢吡肟；亚胺培南；美罗培南；哌拉西林-他唑巴坦；万古霉素；妥布霉素；棘白菌素</div>
+    
+    <script>
+        // 设置编辑框内容
+        const title = "表1（66）临床抗微生物治疗的初始选择";
+        const subtitle = "中性粒细胞缺乏发热经验性治疗";
+        const keywords = "中性粒细胞缺乏发热；经验性治疗；低危患者；高危患者；持续发热；抗真菌治疗；铜绿假单胞菌；MRSA；甲型溶血性链球菌；卡泊芬净；伏立康唑；两性霉素B；头孢吡肟；亚胺培南；美罗培南；哌拉西林-他唑巴坦；万古霉素；妥布霉素；棘白菌素";
+        const pageNum = "147";
+        
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；" + "=" + pageNum;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>

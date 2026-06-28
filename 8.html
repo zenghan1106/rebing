@@ -1,0 +1,443 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~出版说明续——中美用药差异与注意事项*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .preface-content {
+            font-size: 15px;
+            line-height: 2.2;
+            color: #333;
+            text-indent: 2em;
+            padding: 20px;
+        }
+        
+        .highlight-text {
+            font-weight: 600;
+            color: #1565c0;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .publisher-info {
+            text-align: right;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 16px;
+            color: #1a237e;
+            font-weight: 600;
+        }
+        
+        .date-info {
+            text-align: right;
+            padding: 0 20px 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .preface-content {
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="7.html" class="nav-btn">← 上一页</a>
+            <a href="9.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~出版说明续——中美用药差异与注意事项*****</h1>
+        <p class="subtitle">细菌耐药性数据差异、特殊药物使用注意及翻译审校说明</p>
+    </div>
+    
+    <div class="page-number">8</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 100%;">出版说明续内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 0;">
+                        <div class="preface-content">
+                            菌耐药性数据相结合。例如，在<span class="highlight-text">社区获得性肺炎</span>的门诊治疗中，单用<span class="highlight-text">阿奇霉素</span>是北美地区的首选方案，而我国<span class="highlight-text">肺炎链球菌</span>和<span class="highlight-text">肺炎支原体</span>对<span class="highlight-text">大环内酯类抗生素</span>耐药率较高。本指南也指出，如果耐药率超过30%，大环内酯类抗生素就不应列为首选药物，因此一定要结合当地的细菌敏感性数据使用该药。又如，在北美地区<span class="highlight-text">庆大霉素</span>是治疗<span class="highlight-text">革兰阴性杆菌</span>感染的重要药物，而国人使用该药不良反应较多，尤其儿童<span class="highlight-text">耳神经毒性</span>较为突出，用药必须谨慎。再如，国内某些感染性疾病（如<span class="highlight-text">结核病</span>）发病率远高于西方国家。在长期临床实践中，我国学者总结出很多行之有效的宝贵的诊治经验，而西方学者对此经验较少，因此这些在本指南中并没有得到反映。不同人群的遗传背景差异也不容忽视，由于<span class="highlight-text">N-乙酰化酶</span>基因多态性的不同，国人服用<span class="highlight-text">异烟肼</span>的药代动力学特点也有别于西方人群。我国生物制药产业正在从仿制药向创新药转型过程中，有些药品国内还没有同产替代品，新译名也以初始命名为优先，读者必须注意。
+                        </div>
+                        <div class="preface-content">
+                            此版的翻译和审校工作均由<span class="highlight-text">北京协和医院</span>从事临床工作的专科医师担任。
+                        </div>
+                        <div class="publisher-info">
+                            中国协和医科大学出版社
+                        </div>
+                        <div class="date-info">
+                            2025年10月
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">社区获得性肺炎</span>
+            <span class="tag">阿奇霉素</span>
+            <span class="tag">肺炎链球菌</span>
+            <span class="tag">肺炎支原体</span>
+            <span class="tag">大环内酯类抗生素</span>
+            <span class="tag">庆大霉素</span>
+            <span class="tag">革兰阴性杆菌</span>
+            <span class="tag">耳神经毒性</span>
+            <span class="tag">结核病</span>
+            <span class="tag">N-乙酰化酶</span>
+            <span class="tag">异烟肼</span>
+            <span class="tag">北京协和医院</span>
+            <span class="tag">中国协和医科大学出版社</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="出版说明续——中美用药差异与注意事项；细菌耐药性数据差异、特殊药物使用注意及翻译审校说明；社区获得性肺炎,阿奇霉素,肺炎链球菌,肺炎支原体,大环内酯类抗生素,庆大霉素,革兰阴性杆菌,耳神经毒性,结核病,N-乙酰化酶,异烟肼,北京协和医院,中国协和医科大学出版社；=8" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '出版说明续——中美用药差异与注意事项',
+                    url: window.location.href,
+                    page: '8',
+                    tags: ['社区获得性肺炎', '阿奇霉素', '肺炎链球菌', '肺炎支原体', '大环内酯类抗生素', '庆大霉素', '革兰阴性杆菌', '结核病', '异烟肼']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '8');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '8');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '8');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

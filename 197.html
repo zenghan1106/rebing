@@ -1,0 +1,544 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~妊娠期危险度分级和哺乳期用药安全性（6）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .home-btn:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #FF9800;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 70px 20px 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            padding: 0 20px 15px;
+            font-size: 16px;
+            color: #424242;
+        }
+        
+        .note-text {
+            text-align: center;
+            padding: 0 20px 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            padding: 0 15px 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead {
+            background: #1976D2;
+        }
+        
+        thead th {
+            color: white;
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #1565C0;
+            vertical-align: middle;
+        }
+        
+        /* 第一行数据行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody td:first-child {
+            text-align: center;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        tbody td:nth-child(2) {
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #E3F2FD !important;
+        }
+        
+        .category-row td {
+            color: #1565C0;
+            font-weight: bold;
+            text-align: center !important;
+        }
+        
+        /* 注释区域 */
+        .annotation {
+            background: #FFF8E1;
+            margin: 0 15px 20px;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #FFB300;
+        }
+        
+        .annotation p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px 15px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid;
+        }
+        
+        .tag.disease {
+            background: #FFF3E0;
+            color: #E65100;
+            border-color: #FFE0B2;
+        }
+        
+        .tag.drug {
+            background: #E3F2FD;
+            color: #1565C0;
+            border-color: #BBDEFB;
+        }
+        
+        .tag.bacteria {
+            background: #F3E5F5;
+            color: #7B1FA2;
+            border-color: #E1BEE7;
+        }
+        
+        .tag.fungus {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-color: #C8E6C9;
+        }
+        
+        .tag.safety {
+            background: #E1F5FE;
+            color: #0277BD;
+            border-color: #B3E5FC;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #1976D2;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .copy-input {
+            width: calc(100% - 100px);
+            max-width: 500px;
+            padding: 12px 15px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #388E3C;
+        }
+        
+        .copy-btn.copied {
+            background: #2196F3;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px 20px 25px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .keywords span {
+            color: #1976D2;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding-top: 65px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                font-size: 11px;
+                padding: 8px 5px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                font-size: 11px;
+                padding: 10px;
+            }
+            
+            .copy-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页/下一页按钮 -->
+    <div class="nav-buttons">
+        <a href="196.html" class="nav-btn">← 上一页</a>
+        <a href="198.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~妊娠期危险度分级和哺乳期用药安全性（6）*****</h1>
+    <p class="sub-title">表8A（4）FDA妊娠危险度分级和哺乳期用药安全性</p>
+    <p class="note-text">部分药物具有多种抗菌活性，如阿米卡星、氨苯砜。由于篇幅有限，每种药物仅列出一项主要类别，如利福平归类在抗分枝杆菌类别。</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别/药物</th>
+                    <th>FDA<br>妊娠危险度</th>
+                    <th>哺乳期用药</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">抗细菌药物（续）</td>
+                </tr>
+                <tr>
+                    <td>四环素</td>
+                    <td>D</td>
+                    <td>短期使用安全，监测婴儿胃肠道毒性</td>
+                </tr>
+                <tr>
+                    <td>替加环素</td>
+                    <td>D</td>
+                    <td>人类：可能有胚胎毒性；动物：胚胎毒性</td>
+                </tr>
+                <tr>
+                    <td>甲氧苄啶-磺胺甲噁唑</td>
+                    <td>C</td>
+                    <td>乳汁中药物浓度低，预计吸收较差（因牛奶中的钙影响）。短期应用安全，监测婴儿胃肠道毒性</td>
+                </tr>
+                <tr>
+                    <td>甲噁唑</td>
+                    <td>C</td>
+                    <td>早产儿核黄疸风险，G6PD缺乏的婴儿禁用</td>
+                </tr>
+                <tr>
+                    <td>妥布霉素</td>
+                    <td>D</td>
+                    <td>可能安全，监测婴儿胃肠道毒性</td>
+                </tr>
+                <tr>
+                    <td>万古霉素</td>
+                    <td>C</td>
+                    <td>安全，监测</td>
+                </tr>
+                <tr>
+                    <td>贝洛托单抗</td>
+                    <td>—</td>
+                    <td>无人类或动物的数据</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">抗细菌药物联合治疗（幽门螺杆菌）</td>
+                </tr>
+                <tr>
+                    <td>枸橼酸铋钾四联制剂</td>
+                    <td>禁忌</td>
+                    <td>安全性尚未确立，避免使用</td>
+                </tr>
+                <tr>
+                    <td>利福布汀-阿莫西林-奥美拉唑三联制剂</td>
+                    <td>不推荐</td>
+                    <td>安全性尚未确立，避免使用</td>
+                </tr>
+                <tr>
+                    <td>伏唑普兰二联疗法</td>
+                    <td>尚无数据</td>
+                    <td>安全性未确立，避免使用</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">抗真菌药物</td>
+                </tr>
+                <tr>
+                    <td>两性霉素B（所有产品）</td>
+                    <td>B</td>
+                    <td>可能安全，但尚无数据</td>
+                </tr>
+                <tr>
+                    <td>阿尼芬净</td>
+                    <td>B</td>
+                    <td>人类无数据，动物有胚胎毒性</td>
+                </tr>
+                <tr>
+                    <td>卡泊芬净</td>
+                    <td>B</td>
+                    <td>人类数据不充分。动物数据显示潜在胚胎毒性</td>
+                </tr>
+                <tr>
+                    <td>艾氟康唑</td>
+                    <td>C</td>
+                    <td>人类无数据。仅在大鼠皮下注射超治疗剂量时显示毒性</td>
+                </tr>
+                <tr>
+                    <td>氟康唑</td>
+                    <td>C</td>
+                    <td>•如果可能，避免使用，特别是妊娠早期，大剂量[6～12mg/(kg·d)]长疗程低剂量（150mg，单次）导致流产或先天畸形的风险尚不明确，CDC推荐外用唑类药物治疗外阴阴道念珠菌病</td>
+                </tr>
+                <tr>
+                    <td>氟胞嘧啶</td>
+                    <td>C</td>
+                    <td>安全性未确立，避免使用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="annotation">
+        <p>注：大写字母（A、B、C、D、X）=旧的FDA风险分类，该列文字=新的FDA风险分类。</p>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <p class="tags-title">特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag disease">妊娠</span>
+            <span class="tag disease">哺乳期</span>
+            <span class="tag disease">胃肠道毒性</span>
+            <span class="tag disease">胚胎毒性</span>
+            <span class="tag disease">G6PD缺乏</span>
+            <span class="tag disease">核黄疸</span>
+            <span class="tag disease">念珠菌病</span>
+            <span class="tag drug">四环素</span>
+            <span class="tag drug">替加环素</span>
+            <span class="tag drug">甲氧苄啶-磺胺甲噁唑</span>
+            <span class="tag drug">甲噁唑</span>
+            <span class="tag drug">妥布霉素</span>
+            <span class="tag drug">万古霉素</span>
+            <span class="tag drug">贝洛托单抗</span>
+            <span class="tag drug">枸橼酸铋钾</span>
+            <span class="tag drug">利福布汀</span>
+            <span class="tag drug">阿莫西林</span>
+            <span class="tag drug">奥美拉唑</span>
+            <span class="tag drug">伏唑普兰</span>
+            <span class="tag drug">两性霉素B</span>
+            <span class="tag drug">阿尼芬净</span>
+            <span class="tag drug">卡泊芬净</span>
+            <span class="tag drug">艾氟康唑</span>
+            <span class="tag drug">氟康唑</span>
+            <span class="tag drug">氟胞嘧啶</span>
+            <span class="tag drug">抗生素</span>
+            <span class="tag fungus">抗真菌药物</span>
+            <span class="tag safety">FDA妊娠危险度</span>
+            <span class="tag safety">安全性</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">197</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="妊娠期危险度分级和哺乳期用药安全性（6）；FDA妊娠危险度分级和哺乳期用药安全性；妊娠；哺乳期；胃肠道毒性；胚胎毒性；G6PD缺乏；核黄疸；念珠菌病；四环素；替加环素；甲氧苄啶-磺胺甲噁唑；甲噁唑；妥布霉素；万古霉素；贝洛托单抗；枸橼酸铋钾；利福布汀；阿莫西林；奥美拉唑；伏唑普兰；两性霉素B；阿尼芬净；卡泊芬净；艾氟康唑；氟康唑；氟胞嘧啶；抗生素；抗真菌药物；FDA妊娠危险度；安全性；=197" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：<span>妊娠期</span>、<span>哺乳期</span>、<span>用药安全性</span>、<span>FDA分级</span>、<span>妊娠危险度</span>、<span>四环素类</span>、<span>氨基糖苷类</span>、<span>糖肽类</span>、<span>磺胺类</span>、<span>抗真菌药物</span>、<span>唑类</span>、<span>棘白菌素类</span>、<span>多烯类</span>、<span>幽门螺杆菌</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制!';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

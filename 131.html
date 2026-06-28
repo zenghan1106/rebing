@@ -1,0 +1,556 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1（59）临床抗微生物治疗的初始选择-坏死性筋膜炎与皮肤感染</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f5f0e8 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .page-title::before {
+            content: "~~~~~";
+            color: #2980b9;
+            margin-right: 10px;
+        }
+
+        .page-title::after {
+            content: "*****";
+            color: #2980b9;
+            margin-left: 10px;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background-color: #1a5276;
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #154360;
+        }
+
+        /* 第一行字体大一点 */
+        thead tr:first-child th {
+            font-size: 17px;
+            padding: 18px 12px;
+        }
+
+        /* 表体单元格 */
+        tbody td {
+            padding: 12px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+
+        /* 行交替颜色 */
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+
+        /* 第一列加粗 */
+        tbody td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            background-color: #eaf2f8;
+            min-width: 100px;
+        }
+
+        /* 小标题行 */
+        .section-header td {
+            background-color: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+
+        /* 注释行样式 */
+        .note-row td {
+            background-color: #fef9e7 !important;
+            color: #7d6608;
+            font-size: 12px;
+        }
+
+        /* 特色检索标签 */
+        .tag-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .tag-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .tag-disease {
+            background-color: #fadbd8;
+            color: #c0392b;
+        }
+
+        .tag-disease:hover {
+            background-color: #f5b7b1;
+        }
+
+        .tag-bacteria {
+            background-color: #d4efdf;
+            color: #27ae60;
+        }
+
+        .tag-bacteria:hover {
+            background-color: #a9dfbf;
+        }
+
+        .tag-antibiotic {
+            background-color: #d6eaf8;
+            color: #2980b9;
+        }
+
+        .tag-antibiotic:hover {
+            background-color: #aed6f1;
+        }
+
+        .tag-fungus {
+            background-color: #fdebd0;
+            color: #d35400;
+        }
+
+        .tag-fungus:hover {
+            background-color: #f8c471;
+        }
+
+        .tag-parasite {
+            background-color: #f5eef8;
+            color: #9b59b6;
+        }
+
+        .tag-parasite:hover {
+            background-color: #e8daef;
+        }
+
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .copy-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            outline: none;
+        }
+
+        .copy-btn {
+            padding: 14px 28px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background-color: #229954;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 15px;
+        }
+
+        .page-number a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #5d6d7e;
+            font-size: 13px;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 16px;
+                margin-top: 70px;
+            }
+
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+
+            thead tr:first-child th {
+                font-size: 14px;
+            }
+
+            tbody td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+
+            .copy-input {
+                width: 100%;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+        }
+
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-btns">
+        <a href="130.html" class="nav-btn">← 上一页</a>
+        <a href="132.html" class="nav-btn">下一页 →</a>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">表1（59）临床抗微生物治疗的初始选择</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案*</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="section-header">皮肤/伤口感染，手术后，革兰染色阴性（续）</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="note-row">坏死性筋膜炎（"食肉菌"）综述：Infect Dis Clin N Amer 2017; 31: 497; NEJM 2017, 377, 2253</td>
+                </tr>
+                <tr>
+                    <td>手术后，外伤，链球菌皮肤感染<br>见气性坏疽，50页</td>
+                    <td>7种类型：①A族、C族、G族链球菌。②梭菌属。③混合菌感染：需氧菌+厌氧菌（金黄色葡萄球菌+厌氧链球菌即是Meleney协同坏疽）。④MRSA 900mg iv。⑤创伤弧菌。⑥克雷伯菌属。⑦气单胞菌属</td>
+                    <td colspan="2">
+                        梭菌治疗见肌肉，气性坏疽，50页。混合菌伤口感染的命名不准确：梅勒尼（Meleney）协同性坏疽、富尼埃（Fournier）坏疽、坏死性筋膜炎具有共同的病理生理机制。都需紧急外科清创和抗菌治疗。诊断坏死性筋膜炎需切开探查<br><br>
+                        必须做革兰染色/培养以确定病原是链球菌、梭菌、混合菌感染还是金黄色葡萄球菌<br><br>
+                        经验性治疗：哌拉西林-他唑巴坦，亚胺培南或美罗培南+万古霉素或达托霉素；如链球菌感染可能，加克林霉素若是链球菌坏死性筋膜炎，使用青霉素和克林霉素（900mg iv q6h）是合理的。若梭菌感染（伴或不伴气性坏疽），宜在青霉素基础上加用克林霉素（50页）。见"中毒休克综合征，链球菌"，71页。不推荐IVIG，除非是A族链球菌感染，0.5g/kg，第1天，然后25g第2、第3天（CID 71: 1772, 2020）
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>穿刺伤</td>
+                    <td>铜绿假单胞菌、金黄色葡萄球菌、混合感染</td>
+                    <td colspan="2">局部清创，去除异物，预防破伤风，无须抗生素治疗</td>
+                    <td>足底刺伤只有1%～2%引起骨髓炎。如果是不透X线的异物，拍X线片</td>
+                </tr>
+                <tr>
+                    <td>葡萄球菌性烫伤样皮肤综合征</td>
+                    <td>产毒素金黄色葡萄球菌</td>
+                    <td colspan="2">
+                        MSSA：萘夫西林或苯唑西林2g iv q4h[儿童：150mg/(kg·d)分次q6h] ×5～7d<br><br>
+                        MRSA：万古霉素30～60mg/(kg·d)分2～3次，目标AUC<sub>24</sub> 400～600μg·h/ml
+                    </td>
+                    <td>毒素致表皮内层分离、尼科利斯征阳性；活体组织检查（活检）可鉴别：药物致表皮/真皮分离，称中毒性表皮坏死松解症，更严重</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="section-header">皮肤溃疡病变 鉴别诊断</td>
+                </tr>
+                <tr>
+                    <td colspan="5">考虑：炭疽、白喉、土拉菌病、铜绿假单胞菌（坏疽性深脓疱）、鼠疫、芽生菌、蜘蛛痣（罕见）、毛霉菌、分枝杆菌、利什曼原虫、雅司病、动脉供血不足、静脉淤滞及其他</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tag-section">
+        <h3>🔍 特色检索标签</h3>
+        <div class="tag-container">
+            <span class="tag tag-disease">坏死性筋膜炎</span>
+            <span class="tag tag-disease">食肉菌感染</span>
+            <span class="tag tag-disease">气性坏疽</span>
+            <span class="tag tag-disease">梅勒尼协同坏疽</span>
+            <span class="tag tag-disease">富尼埃坏疽</span>
+            <span class="tag tag-disease">穿刺伤</span>
+            <span class="tag tag-disease">葡萄球菌性烫伤样皮肤综合征</span>
+            <span class="tag tag-disease">中毒性休克综合征</span>
+            <span class="tag tag-disease">皮肤溃疡</span>
+            <span class="tag tag-disease">炭疽</span>
+            <span class="tag tag-disease">白喉</span>
+            <span class="tag tag-disease">土拉菌病</span>
+            <span class="tag tag-disease">鼠疫</span>
+            <span class="tag tag-disease">芽生菌病</span>
+            <span class="tag tag-disease">毛霉菌病</span>
+            <span class="tag tag-disease">利什曼病</span>
+            <span class="tag tag-disease">雅司病</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">C族链球菌</span>
+            <span class="tag tag-bacteria">G族链球菌</span>
+            <span class="tag tag-bacteria">梭菌属</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">创伤弧菌</span>
+            <span class="tag tag-bacteria">克雷伯菌属</span>
+            <span class="tag tag-bacteria">气单胞菌属</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">分枝杆菌</span>
+            <span class="tag tag-fungus">芽生菌</span>
+            <span class="tag tag-fungus">毛霉菌</span>
+            <span class="tag tag-parasite">利什曼原虫</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">青霉素</span>
+            <span class="tag tag-antibiotic">萘夫西林</span>
+            <span class="tag tag-antibiotic">苯唑西林</span>
+            <span class="tag tag-antibiotic">IVIG</span>
+        </div>
+    </div>
+
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="表1（59）临床抗微生物治疗的初始选择；坏死性筋膜炎；食肉菌感染；气性坏疽；梅勒尼协同坏疽；富尼埃坏疽；穿刺伤；葡萄球菌性烫伤样皮肤综合征；中毒性休克综合征；皮肤溃疡；炭疽；白喉；土拉菌病；鼠疫；芽生菌病；毛霉菌病；利什曼病；雅司病；A族链球菌；金黄色葡萄球菌；MRSA；创伤弧菌；克雷伯菌属；铜绿假单胞菌；哌拉西林-他唑巴坦；亚胺培南；美罗培南；万古霉素；达托霉素；克林霉素；青霉素；萘夫西林；苯唑西林；IVIG；=131" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📄 复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="131.html">131</a>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：临床抗微生物治疗、初始选择、坏死性筋膜炎、食肉菌感染、气性坏疽、梅勒尼协同坏疽、富尼埃坏疽、穿刺伤、葡萄球菌性烫伤样皮肤综合征、中毒性休克综合征、皮肤溃疡、炭疽、白喉、土拉菌病、鼠疫、芽生菌病、毛霉菌病、利什曼病、雅司病、A族链球菌、C族链球菌、G族链球菌、梭菌属、金黄色葡萄球菌、MRSA、创伤弧菌、克雷伯菌属、气单胞菌属、铜绿假单胞菌、分枝杆菌、芽生菌、毛霉菌、利什曼原虫、哌拉西林-他唑巴坦、亚胺培南、美罗培南、万古霉素、达托霉素、克林霉素、青霉素、萘夫西林、苯唑西林、IVIG
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast">✓ 已复制到剪贴板</div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast();
+                });
+            } else {
+                document.execCommand('copy');
+                showToast();
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

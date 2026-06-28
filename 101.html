@@ -1,0 +1,430 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~鼠疫与肺特殊感染及慢性肺炎治疗方案表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        th {
+            background: #1565C0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .pathogen {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+        
+        .treatment {
+            color: #2e7d32;
+        }
+        
+        .note {
+            color: #6a1b9a;
+            font-size: 12px;
+        }
+        
+        .disease-tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565C0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 12px;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 12px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-antibiotic {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag-virus {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag-fungus {
+            background: #e0f2f1;
+            color: #00695c;
+            border: 1px solid #80cbc4;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565C0;
+            padding: 10px;
+        }
+        
+        .footnote {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="100.html" class="nav-btn">← 上一页</a>
+            <a href="102.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title">~~~~~鼠疫与肺特殊感染及慢性肺炎治疗方案表*****</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:15%">病原体（通常）</th>
+                    <th style="width:32%">推荐治疗方案<br>首选方案 | 备选方案</th>
+                    <th style="width:35%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>鼠疫耶尔森菌（鼠疫）<br><em>MMWR 2021; 70 (RR-3): 1</em></td>
+                    <td class="pathogen">该菌若存在于气溶胶，应怀疑生物恐怖事件</td>
+                    <td class="treatment">
+                        <strong>首选：</strong>[庆大霉素5mg/kg iv qd或链霉素30mg/(kg·d)分2次]×10d<br><br>
+                        <strong>备选：</strong>（环丙沙星500mg po bid或400mg iv q12h或左氧氟沙星500mg iv/po）×10d或莫西沙星400mg po/iv qd×10d
+                    </td>
+                    <td class="note">多西环素200mg iv q12h×1d，随后100mg po bid×7～10d。氯霉素有效但有潜在毒性，如果有鼠疫脑膜炎的证据，应使用</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background:#e3f2fd; font-weight:bold; text-align:center; color:#1565C0;">肺——其他特殊感染</td>
+                </tr>
+                <tr>
+                    <td>吸入性肺炎/厌氧菌肺部感染/肺脓肿</td>
+                    <td class="pathogen">主要是厌氧菌和甲型溶血性链球菌</td>
+                    <td class="treatment">
+                        <strong>首选静脉方案：</strong><br>
+                        头孢曲松1～2g iv qd＋甲硝唑（500mg iv q6h或1g iv q12h）<br>
+                        氨苄西林-舒巴坦3g iv q6h<br><br>
+                        <strong>首选口服方案：</strong><br>
+                        克林霉素300～450mg po tid<br><br>
+                        <strong>备选静脉方案：</strong><br>
+                        哌拉西林-他唑巴坦3.375g iv q6h或4.5g输注4小时首剂后开始3.375g q8h（若CrCl＜20ml/min，则q12h）<br>
+                        厄他培南1g iv qd<br><br>
+                        <strong>备选口服方案：</strong><br>
+                        阿莫西林-克拉维酸875/125mg po bid
+                    </td>
+                    <td class="note">典型的厌氧菌肺部感染包括吸入性肺炎、坏死性肺炎、肺脓肿和脓胸（NEJM 380: 651, 2019）<br>不建议常规覆盖厌氧菌，除非存在肺脓肿或怀疑有脓胸（ATS/IDSA指南：Am J Respir Crit Care Med 2019; 200: e45-e67）<br>注意：需与无菌胃酸吸入导致的化学性肺炎相鉴别（CID 2018; 67: 513）</td>
+                </tr>
+                <tr>
+                    <td>慢性肺炎伴发热、盗汗和消瘦</td>
+                    <td class="pathogen">结核分枝杆菌、球孢子菌、组织胞浆菌</td>
+                    <td class="treatment" colspan="2">
+                        表11，表12；应用肿瘤坏死因子（TNF）抑制剂的风险[CID 41 (Suppl.3): S187, 2005]<br><br>
+                        HIV阳性、国籍、酗酒、结核接触史、发展中国家旅行史是危险因素
+                    </td>
+                </tr>
+                <tr>
+                    <td>COVID-19</td>
+                    <td class="pathogen">冠状病毒：SARS CoV-2</td>
+                    <td class="treatment" colspan="2">
+                        见表14A，疫情相关信息、治疗建议和预防措施的持续更新参见 http://webedition.sanfordguide.com
+                    </td>
+                </tr>
+                <tr>
+                    <td>RSV</td>
+                    <td class="pathogen">呼吸道合胞病毒</td>
+                    <td class="treatment" colspan="2"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="footnote">
+        <p><strong>注：</strong></p>
+        <p>13 青霉素G剂量：无脑膜炎，200万单位iv q4h；如合并脑膜炎，400万单位iv q4h。</p>
+        <p>* 所有剂量仅针对成人（除非特殊说明）及肾功能正常者。</p>
+        <p>§ 选择替代方案考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="鼠疫与肺特殊感染及慢性肺炎治疗方案表；鼠疫；吸入性肺炎；厌氧菌肺部感染；肺脓肿；慢性肺炎；COVID-19；RSV；鼠疫耶尔森菌；厌氧菌；甲型溶血性链球菌；结核分枝杆菌；球孢子菌；组织胞浆菌；SARS-CoV-2；呼吸道合胞病毒；庆大霉素；链霉素；环丙沙星；左氧氟沙星；莫西沙星；多西环素；氯霉素；头孢曲松；甲硝唑；氨苄西林-舒巴坦；克林霉素；哌拉西林-他唑巴坦；厄他培南；阿莫西林-克拉维酸；=101" readonly>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease">鼠疫</span>
+        <span class="tag tag-disease">吸入性肺炎</span>
+        <span class="tag tag-disease">厌氧菌肺部感染</span>
+        <span class="tag tag-disease">肺脓肿</span>
+        <span class="tag tag-disease">慢性肺炎</span>
+        <span class="tag tag-disease">COVID-19</span>
+        <span class="tag tag-disease">RSV感染</span>
+        <span class="tag tag-bacteria">鼠疫耶尔森菌</span>
+        <span class="tag tag-bacteria">厌氧菌</span>
+        <span class="tag tag-bacteria">甲型溶血性链球菌</span>
+        <span class="tag tag-bacteria">结核分枝杆菌</span>
+        <span class="tag tag-fungus">球孢子菌</span>
+        <span class="tag tag-fungus">组织胞浆菌</span>
+        <span class="tag tag-virus">SARS-CoV-2</span>
+        <span class="tag tag-virus">呼吸道合胞病毒</span>
+        <span class="tag tag-antibiotic">庆大霉素</span>
+        <span class="tag tag-antibiotic">链霉素</span>
+        <span class="tag tag-antibiotic">环丙沙星</span>
+        <span class="tag tag-antibiotic">左氧氟沙星</span>
+        <span class="tag tag-antibiotic">莫西沙星</span>
+        <span class="tag tag-antibiotic">多西环素</span>
+        <span class="tag tag-antibiotic">氯霉素</span>
+        <span class="tag tag-antibiotic">头孢曲松</span>
+        <span class="tag tag-antibiotic">甲硝唑</span>
+        <span class="tag tag-antibiotic">氨苄西林-舒巴坦</span>
+        <span class="tag tag-antibiotic">克林霉素</span>
+        <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+        <span class="tag tag-antibiotic">厄他培南</span>
+        <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+    </div>
+    
+    <div class="page-num">101</div>
+    
+    <div class="keywords">
+        关键词：鼠疫 | 鼠疫耶尔森菌 | 生物恐怖 | 吸入性肺炎 | 厌氧菌感染 | 肺脓肿 | 慢性肺炎 | 结核分枝杆菌 | 球孢子菌 | 组织胞浆菌 | COVID-19 | SARS-CoV-2 | RSV | 呼吸道合胞病毒 | 庆大霉素 | 链霉素 | 环丙沙星 | 左氧氟沙星 | 莫西沙星 | 多西环素 | 头孢曲松 | 甲硝唑 | 克林霉素 | 哌拉西林-他唑巴坦 | 厄他培南
+    </div>
+    
+    <script>
+        function copyText() {
+            var input = document.getElementById("copyInput");
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function() {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+    </script>
+</body>
+</html>

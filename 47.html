@@ -1,0 +1,390 @@
+我来为您创建这个关于胃肠道感染治疗的HTML网页表格。
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>胃肠道感染治疗指南 - 产志贺毒素大肠埃希菌沙门菌李斯特菌抗微生物方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
+            padding: 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
+            padding: 35px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 30px;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #3498db;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 17px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background-color: #fff;
+            table-layout: fixed;
+        }
+        
+        /* 表格头部 - 蓝色，字体大 */
+        thead th {
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid #154360;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background-color: #2980b9 !important;
+            color: #ffffff;
+            font-size: 16px !important;
+            font-weight: bold;
+            padding: 14px 10px;
+            border: 2px solid #1a5276;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background-color: #d6eaf8;
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .category-row td {
+            padding: 14px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #bdc3c7;
+            color: #2c3e50;
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e1f0fa;
+        }
+        
+        /* 左侧诊断列 */
+        td:first-child {
+            width: 16%;
+            background-color: #f4f6f7;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        /* 病原体列 */
+        .pathogen {
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 首选方案 */
+        .preferred {
+            color: #1e8449;
+            font-weight: 600;
+            background-color: #eafaf1;
+        }
+        
+        /* 备选方案 */
+        .alternative {
+            color: #d35400;
+            background-color: #fef5e7;
+        }
+        
+        /* 辅助说明 */
+        .notes {
+            color: #34495e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 重要提示高亮 */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+            font-weight: 600;
+        }
+        
+        /* 警告提示 */
+        .warning {
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #721c24;
+            font-weight: 600;
+        }
+        
+        /* 成功提示 */
+        .success {
+            background-color: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        /* 剂量数字突出 */
+        .dose {
+            color: #c0392b;
+            font-weight: 700;
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        
+        /* 步骤列表 */
+        ol.steps {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+        
+        ol.steps li {
+            margin-bottom: 6px;
+        }
+        
+        ol.steps ol {
+            padding-left: 20px;
+            margin: 4px 0;
+        }
+        
+        /* 缩进文本 */
+        .indent {
+            padding-left: 15px;
+            border-left: 3px solid #aed6f1;
+            margin: 8px 0;
+        }
+        
+        /* 分隔虚线 */
+        .dashed-separator {
+            border-top: 2px dashed #3498db;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>表1（16）临床抗微生物治疗的初始选择</h1>
+        <p class="subtitle">胃肠道/胃肠炎——特异性治疗（根据培养、显微镜检或毒素测定结果进行）（续）</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 分类行 -->
+                <tr class="category-row">
+                    <td colspan="5">胃肠道/胃肠炎——特异性治疗（根据培养、显微镜检或毒素测定结果进行）（续）</td>
+                </tr>
+                
+                <!-- 产志贺毒素大肠埃希菌 -->
+                <tr>
+                    <td rowspan="4"></td>
+                    <td class="pathogen">
+                        <span class="highlight">产志贺毒素大肠埃希菌</span>［之前称作肠出血性大肠埃希菌（EHEC）］：<br>
+                        O157:H7&O104:H4和其他。<br>
+                        <span class="dose">6%～9%</span>合并出血尿毒综合征<span class="highlight">（见说明）</span>
+                    </td>
+                    <td class="preferred">
+                        <strong>治疗</strong><br>
+                        <ol class="steps">
+                            <li>如果没有发热和血性腹泻：
+                                <ol>
+                                    <li>补液</li>
+                                    <li>避免止泻药</li>
+                                    <li>不用抗生素</li>
+                                </ol>
+                            </li>
+                            <li>如果发热、血性腹泻，有菌血症风险：<br>
+                                <span class="dose">阿奇霉素</span> 500mg iv/po qd×3d
+                            </li>
+                        </ol>
+                    </td>
+                    <td class="alternative"></td>
+                    <td class="notes">
+                        <span class="warning">抗生素治疗的风险是志贺毒素引发的HUS</span><br><br>
+                        HUS＝肾衰竭、溶血性贫血、血小板减少。因此，在高危、有记录的EHEC菌血症患者应<span class="warning">限制应用抗生素</span><br>
+                        参见 <span class="reference">CID 62: 1251&1259 2016</span><br><br>
+                        抗生素使用的正反意见参见 <span class="reference">Curr Opin Gastroenterol 2022; 38: 30</span>
+                    </td>
+                </tr>
+                
+                <!-- 产酸克雷伯菌 -->
+                <tr>
+                    <td class="pathogen">
+                        <span class="highlight">产酸克雷伯菌</span>－抗生素相关性腹泻
+                    </td>
+                    <td class="preferred">
+                        <span class="success">停抗生素有效果</span>
+                    </td>
+                    <td class="alternative"></td>
+                    <td class="notes">
+                        有建议<span class="highlight">停用NSAIDs</span>有帮助
+                    </td>
+                </tr>
+                
+                <!-- 产单核李斯特菌 -->
+                <tr>
+                    <td class="pathogen">
+                        <span class="highlight">产单核李斯特菌</span>
+                    </td>
+                    <td class="preferred" colspan="2">
+                        通常<span class="success">自限性</span>。口服抗生素（如氨苄西林或TMP-SMX）疗效未知，但在有严重感染风险者有理由应用
+                    </td>
+                    <td class="notes">
+                        已知是食物相关发热性胃肠炎的原因之一<br><br>
+                        常规粪便培养<span class="warning">不能检测</span>。<br>
+                        严重系统性疾病的高危人群：<span class="highlight">妊娠妇女、新生儿、老年人及免疫功能缺陷宿主</span>
+                    </td>
+                </tr>
+                
+                <!-- 沙门菌 -->
+                <tr>
+                    <td class="pathogen">
+                        <span class="highlight">沙门菌，非伤寒</span>－伤寒见<span class="dose">68页</span><br>
+                        <span class="dose">71%～91%</span>有发热，<span class="dose">34%</span>有血便
+                    </td>
+                    <td class="preferred" colspan="2">
+                        如果无症状或病情轻微，<span class="success">无应用抗生素指征</span>。<br>
+                        <span class="warning">需治疗的情况：</span>年龄<span class="dose">&lt;1岁或&gt;50岁</span>、免疫功能缺陷、人工血管或关节假体、菌血症、血红蛋白病或因发热和严重腹泻入院的患者<span class="highlight">（见伤寒，68页）</span><br><br>
+                        
+                        <div class="dashed-separator"></div>
+                        
+                        （<span class="dose">环丙沙星</span> 500mg bid）或（<span class="dose">左氧氟沙星</span> 500mg q24h）×<span class="dose">7～10d</span>（免疫缺陷患者<span class="dose">14天</span>）<br><br>
+                        
+                        <span class="warning">若在亚洲感染，避免使用氟喹诺酮药物，应用阿奇霉素或头孢曲松治疗</span>
+                    </td>
+                    <td class="alternative">
+                        <span class="dose">阿奇霉素</span> 500mg po qd×7d（免疫缺陷患者<span class="dose">14天</span>）
+                    </td>
+                    <td class="notes">
+                        对TMP-SMX和氯霉素<span class="warning">耐药增多</span>。如需静脉用药，头孢曲松、头孢噻肟通常有效（剂量见表注7，<span class="dose">28页</span>）<br><br>
+                        环丙沙星：敏感株，MIC<span class="dose">≤0.06μg/ml</span><br><br>
+                        <span class="success">肠炎的首要治疗是补充液体和电解质</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+
+
+---
+
+
+
+标签和标题信息
+
+
+ 项目 	 内容 	
+ **网页标题 (`<title>`标签)** 	 `胃肠道感染治疗指南 - 产志贺毒素大肠埃希菌沙门菌李斯特菌抗微生物方案` 	
+ **主标题 (`<h1>`标签)** 	 `表1（16）临床抗微生物治疗的初始选择` 	
+ **副标题 (`<p class="subtitle">`)** 	 `胃肠道/胃肠炎——特异性治疗（根据培养、显微镜检或毒素测定结果进行）（续）` 	
+ **关键词/检索词** 	 产志贺毒素大肠埃希菌、EHEC、肠出血性大肠埃希菌、产酸克雷伯菌、产单核李斯特菌、沙门菌、非伤寒沙门菌、阿奇霉素、环丙沙星、左氧氟沙星、出血性尿毒综合征、HUS、抗生素相关性腹泻 	
+
+
+
+
+---
+
+
+
+设计特点说明
+
+
+ 特性 	 实现方式 	
+ **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
+ **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
+ **子表头** 	 中蓝色 `#2980b9`，16px字号 	
+ **分类行** 	 淡蓝色背景 `#d6eaf8`，深蓝加粗文字 	
+ **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
+ **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
+ **备选方案列** 	 淡橙背景 `#fef5e7`，深橙文字 `#d35400` 	
+ **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
+ **重要提示** 	 黄色高亮 `#fff3cd` 	
+ **警告提示** 	 淡红背景 `#f8d7da` 	
+ **成功/推荐** 	 淡绿背景 `#d4edda` 	
+ **交替行** 	 白色 / 浅灰 `#f8f9fa`

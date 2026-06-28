@@ -1,0 +1,498 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-急性鼻窦炎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        /* 指南引用 */
+        .guideline-ref {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-home {
+            background-color: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background-color: #219a52;
+        }
+        
+        .btn-prev, .btn-next {
+            background-color: #e67e22;
+        }
+        
+        .btn-prev:hover, .btn-next:hover {
+            background-color: #d35400;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #2c3e50;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(:first-child) {
+            background-color: #e8f4f8;
+        }
+        
+        /* 分类行高亮 */
+        .category-row {
+            background-color: #d5e8d4 !important;
+            font-weight: bold;
+            color: #1e8449 !important;
+        }
+        
+        .category-row td {
+            color: #1e8449;
+            font-size: 14px;
+        }
+        
+        /* 警示文字 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        /* 百分比数据 */
+        .percent-data {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background-color: #9b59b6;
+        }
+        
+        .tag-symptom {
+            background-color: #f39c12;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .nav-top {
+                justify-content: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+            
+            thead th {
+                font-size: 12px;
+            }
+            
+            .guideline-ref {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="114.html" class="btn btn-prev">上一页</a>
+            <a href="116.html" class="btn btn-next">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">临床抗微生物治疗的初始选择</h1>
+    <p class="subtitle">表1（51）鼻窦、副鼻窦急性鼻窦炎</p>
+    <p class="guideline-ref">急性鼻窦炎指南：Pediatrics 132：e262 & 284，2013（美国儿科协会）；Otolaryngol Head Neck Surg 2015，152（suppl 2）：S1；JAMA 314：926，2015</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 20%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 30%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">鼻窦，副鼻窦</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>治疗目标</strong><br>
+                        • 加快缓解<br>
+                        • 防止细菌感染并发症（见说明）<br>
+                        • 避免慢性鼻窦炎<br>
+                        • 避免不必要的抗生素治疗讨论何时开始抗生素治疗<br>
+                        （<em>AnIM 2017，166：201</em>）
+                    </td>
+                    <td>
+                        <span class="drug-name">肺炎链球菌</span> <span class="percent-data">（33%）</span><br>
+                        <span class="drug-name">流感嗜血杆菌</span> <span class="percent-data">（32%）</span><br>
+                        <span class="drug-name">卡他莫拉菌</span> <span class="percent-data">（9%）</span><br>
+                        <span class="drug-name">厌氧菌</span> <span class="percent-data">（6%）</span><br>
+                        <span class="drug-name">A族链球菌</span> <span class="percent-data">（2%）</span><br>
+                        <span class="drug-name">病毒</span> <span class="percent-data">（15%～18%）</span><br>
+                        <span class="drug-name">金黄色葡萄球菌</span> <span class="percent-data">（10%）</span><br>
+                        （见说明）
+                    </td>
+                    <td>
+                        常见：病毒或过敏所致炎症引起鼻窦口阻塞<br><br>
+                        治疗：<span class="drug-name">生理盐水冲洗</span><br><br>
+                        细菌性鼻窦炎应用抗生素治疗：<br>
+                        ①发热、疼痛、流脓涕；<br>
+                        ②未用抗生素治疗，症状10天无缓解；<br>
+                        ③抗生素治疗无效<br><br>
+                        <strong><em>无青霉素过敏：</em></strong><br><br>
+                        <strong>儿童，</strong><span class="drug-name">阿莫西林</span> 90mg/(kg·d) 分2次q12h<br>
+                        或<span class="drug-name">阿莫西林-克拉维酸</span> 90mg/(kg·d)（依据阿莫西林剂量）分2次q12h，<strong>治疗10～14天</strong><br><br>
+                        <strong>成人，</strong><span class="drug-name">阿莫西林-克拉维酸</span> 875/125mg po bid×5～7d
+                    </td>
+                    <td>
+                        <strong><em>青霉素过敏：</em></strong><br><br>
+                        <strong>儿童（严重过敏反应），</strong><span class="drug-name">克林霉素</span> 30～40mg/(kg·d) 分次tid或qid×10～14d<br>
+                        （见说明）<br><br>
+                        <strong>儿童（非严重过敏反应），</strong><span class="drug-name">头孢泊肟</span> 10mg/(kg·d) po分次q12h<br><br>
+                        <strong>成人（严重过敏反应），</strong><span class="drug-name">左氧氟沙星</span> 750mg qd或<span class="drug-name">多西环素</span> 100mg bid<br><br>
+                        <strong>成人（非严重过敏反应），</strong><span class="drug-name">头孢泊肟</span> 200mg po bid
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: #2e86c1; font-size: 15px; margin-bottom: 10px;">辅助诊断或治疗方法及说明</h3>
+        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+            <p><strong>治疗</strong></p>
+            <p>• <span class="drug-name">克林霉素</span>：嗜血杆菌和莫拉菌属耐药，需联合治疗</p>
+            <p>• 疗程：5～7天（<em>IDSA指南</em>），10～14天（<em>美国儿科协会指南</em>）</p>
+            <p>• 辅助治疗：①局部缓解充血药物不超过3天；②没有证据证实鼻吸入激素和抗组胺药有益；③生理盐水冲洗有帮助</p>
+            <p>• <span class="warning">避免应用大环内酯类和TMP-SMX，因为耐药率高</span></p>
+            <p>• 无须经验性覆盖金黄色葡萄球菌，与健康人发生概率一样（<em>CID 45：e121，2007</em>）</p>
+            <p style="margin-top: 8px;"><strong>并发症：</strong>暂时性嗅觉减退、眶内感染、硬膜外脓肿、脑脓肿、脑膜炎、海绵窦血栓形成</p>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：115</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择；急性鼻窦炎/鼻窦感染/副鼻窦炎/细菌性鼻窦炎/病毒性鼻窦炎；阿莫西林/阿莫西林-克拉维酸/克林霉素/头孢泊肟/左氧氟沙星/多西环素/生理盐水冲洗；肺炎链球菌/流感嗜血杆菌/卡他莫拉菌/厌氧菌/A族链球菌/金黄色葡萄球菌/病毒；=115" readonly>
+            <button class="btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">急性鼻窦炎</span>
+            <span class="tag tag-disease">细菌性鼻窦炎</span>
+            <span class="tag tag-disease">病毒性鼻窦炎</span>
+            <span class="tag tag-disease">慢性鼻窦炎</span>
+            <span class="tag tag-disease">副鼻窦炎</span>
+            <span class="tag tag-disease">眶内感染</span>
+            <span class="tag tag-disease">脑脓肿</span>
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-disease">海绵窦血栓</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">卡他莫拉菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">莫拉菌属</span>
+            
+            <!-- 病毒标签 -->
+            <span class="tag tag-bacteria">病毒</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">阿莫西林</span>
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">头孢泊肟</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">生理盐水冲洗</span>
+            
+            <!-- 症状/注意事项标签 -->
+            <span class="tag tag-symptom">鼻窦口阻塞</span>
+            <span class="tag tag-symptom">流脓涕</span>
+            <span class="tag tag-symptom">嗅觉减退</span>
+            <span class="tag tag-symptom">青霉素过敏</span>
+            <span class="tag tag-symptom">耐药</span>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>临床抗微生物治疗 | 初始选择 | 急性鼻窦炎 | 副鼻窦炎 | 细菌性鼻窦炎 | 肺炎链球菌 | 流感嗜血杆菌 | 卡他莫拉菌 | 阿莫西林 | 阿莫西林-克拉维酸 | 头孢泊肟 | 克林霉素 | 左氧氟沙星 | 多西环素 | 生理盐水冲洗 | IDSA指南
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyInput = document.getElementById("copyInput");
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }).catch(function() {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+    </script>
+</body>
+</html>

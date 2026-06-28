@@ -1,0 +1,508 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择-导管相关血流感染*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #449d44;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child {
+            font-size: 14px;
+            font-weight: bold;
+            background: #eaf2f8;
+        }
+        
+        tbody tr:first-child td {
+            padding: 12px 10px;
+            color: #1a5276;
+        }
+        
+        td, th {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .subcategory {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .highlight-red {
+            color: #c0392b;
+        }
+        
+        .highlight-blue {
+            color: #2874a6;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin: 5px 0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin: 15px 0;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9c640c;
+        }
+        
+        .tag-disease:hover {
+            background: #f5cba7;
+        }
+        
+        .tag-bacteria {
+            background: #d4efdf;
+            color: #1e8449;
+        }
+        
+        .tag-bacteria:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-antibiotic {
+            background: #d6eaf8;
+            color: #2874a6;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #aed6f1;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        .btn-copy.copied {
+            background: #27ae60;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="150.html" class="btn btn-nav">← 上一页</a>
+            <a href="152.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~临床抗微生物治疗的初始选择-导管相关血流感染*****</h1>
+    <p class="sub-title">表1（69）临床抗微生物治疗的初始选择</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 35%;">推荐治疗方案</th>
+                    <th style="width: 32%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">血管</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background: #fef9e7;">
+                        <strong>导管相关血流感染（CRBSI）</strong>。参见<em>Infect Dis Clin No Amer 2018 Dec; 32 (4): 765-787</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3">
+                        隧道和无隧道中心静脉导管（CVC），包括经外周中心静脉导管（PICC）。外周静脉、中央静脉、动脉和血液透析导管处理，参见<em>Infect Dis Clin No Amer 2018 Dec; 32 (4): 765-787</em><br><br>
+                        诊断：同时行CVC及外周血培养。阳性时间差（DTP）≥2小时支持CVC相关血流感染诊断
+                    </td>
+                    <td>
+                        如怀疑革兰阳性细菌，经验性治疗覆盖MSSA、MRSA、MRSE
+                    </td>
+                    <td>
+                        <strong>首选方案：</strong>万古霉素<br><br>
+                        <strong>备选方案：</strong>达托霉素
+                    </td>
+                    <td>
+                        因MSSA、MRSA和MRSE高流行，推荐适用于所有临床情况
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        如怀疑革兰阴性细菌，如股静脉导管、中性粒细胞缺乏患者
+                    </td>
+                    <td colspan="2">
+                        <strong>非重症：</strong>头孢吡肟或哌拉西林-他唑巴坦<br><br>
+                        <strong>重症：</strong>美罗培南或亚胺培南
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        如念珠菌高危，经验性治疗，如长时间使用抗生素、移植后中性粒细胞缺乏、静脉高营养
+                    </td>
+                    <td>
+                        <strong>首选方案：</strong>米卡芬净或卡泊芬净<br><br>
+                        <strong>备选方案：</strong>艾沙康唑
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2"></td>
+                    <td>
+                        血培养获得表皮葡萄球菌：MSSE或MRSE（常见）
+                    </td>
+                    <td>
+                        如果不试图挽救导管，拔除导管<br><br>
+                        MRSE：万古霉素或达托霉素<br>
+                        MSSE：头孢唑啉<br><br>
+                        如试图挽救导管，抗生素治疗如上+抗生素封管治疗（ALT）×10～14d（见说明）
+                    </td>
+                    <td>
+                        抗生素封管治疗（ALT）未经过FDA批准。很多选择，首选米诺环素5mg+EDTA 30mg/ml溶于25%乙醇。参见<em>AAC 2016; 60: 3426</em>。导管溶液保留时间至少每天2～4小时
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        血培养获得金黄色葡萄球菌或里昂葡萄球菌：不推荐挽救导管治疗
+                    </td>
+                    <td>
+                        拔除导管<br><br>
+                        MSSA：（萘夫西林或苯唑西林）或头孢唑啉 ×2～6w<br>
+                        MRSA：万古霉素或达托霉素 ×2～6w
+                    </td>
+                    <td>
+                        如导管拔除72小时后仍有持续菌血症，在诊断菌血症的5～7天后行经食管超声心动图。新CVC：在拔除感染CVC后，48～72小时复查血培养
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：151</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🔍 快速检索标签：</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">导管相关血流感染</span>
+            <span class="tag tag-disease">CRBSI</span>
+            <span class="tag tag-disease">菌血症</span>
+            <span class="tag tag-disease">持续菌血症</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">表皮葡萄球菌</span>
+            <span class="tag tag-bacteria">里昂葡萄球菌</span>
+            <span class="tag tag-bacteria">MSSA</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">MSSE</span>
+            <span class="tag tag-bacteria">MRSE</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+            <span class="tag tag-bacteria">念珠菌</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">米卡芬净</span>
+            <span class="tag tag-antibiotic">卡泊芬净</span>
+            <span class="tag tag-antibiotic">艾沙康唑</span>
+            <span class="tag tag-antibiotic">头孢唑啉</span>
+            <span class="tag tag-antibiotic">萘夫西林</span>
+            <span class="tag tag-antibiotic">苯唑西林</span>
+            <span class="tag tag-antibiotic">米诺环素</span>
+            <span class="tag tag-antibiotic">抗生素封管治疗</span>
+            <span class="tag tag-disease">中心静脉导管感染</span>
+            <span class="tag tag-disease">PICC感染</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择-导管相关血流感染；导管相关血流感染、CRBSI、金黄色葡萄球菌、表皮葡萄球菌、MRSA、MSSA、万古霉素、达托霉素、头孢吡肟、哌拉西林-他唑巴坦、美罗培南、米卡芬净、卡泊芬净、艾沙康唑、抗生素封管治疗；=151" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        关键词：临床抗微生物治疗 | 导管相关血流感染 | CRBSI | 中心静脉导管 | 金黄色葡萄球菌 | MRSA | 万古霉素 | 达托霉素 | 抗真菌治疗 | 151
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

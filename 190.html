@@ -1,0 +1,459 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗生素过敏及药物脱敏方法*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2196F3;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .home-btn:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #FF9800;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 70px 20px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            padding: 0 20px 15px;
+            font-size: 16px;
+            color: #424242;
+        }
+        
+        .ref-text {
+            text-align: center;
+            padding: 0 20px 20px;
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            padding: 0 15px 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead {
+            background: #1976D2;
+        }
+        
+        thead th {
+            color: white;
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #1565C0;
+        }
+        
+        /* 第一行数据行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            font-size: 13px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 方案说明区域 */
+        .scheme-info {
+            background: white;
+            margin: 0 15px 15px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .scheme-info h3 {
+            color: #1565C0;
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+        
+        .scheme-info p {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px 15px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #C8E6C9;
+        }
+        
+        .tag.disease {
+            background: #FFF3E0;
+            color: #E65100;
+            border-color: #FFE0B2;
+        }
+        
+        .tag.drug {
+            background: #E3F2FD;
+            color: #1565C0;
+            border-color: #BBDEFB;
+        }
+        
+        .tag.bacteria {
+            background: #F3E5F5;
+            color: #7B1FA2;
+            border-color: #E1BEE7;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #1976D2;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .copy-input {
+            width: calc(100% - 100px);
+            max-width: 500px;
+            padding: 12px 15px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #388E3C;
+        }
+        
+        .copy-btn.copied {
+            background: #2196F3;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px 20px 25px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .keywords span {
+            color: #1976D2;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding-top: 65px;
+            }
+            
+            .sub-title {
+                font-size: 14px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                font-size: 11px;
+                padding: 8px 5px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                font-size: 11px;
+                padding: 10px;
+            }
+            
+            .copy-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页/下一页按钮 -->
+    <div class="nav-buttons">
+        <a href="189.html" class="nav-btn">← 上一页</a>
+        <a href="191.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~抗生素过敏及药物脱敏方法*****</h1>
+    <p class="sub-title">表7（2）头孢洛林12步静脉脱敏方案 / 缬更昔洛韦12步口服脱敏方案</p>
+    <p class="ref-text">参见 Open Forum Infect Dis 2: 1, 2015; Transplantation 98: e50, 2014</p>
+    
+    <!-- 方案一：头孢洛林 -->
+    <div class="scheme-info">
+        <h3>头孢洛林 12步静脉脱敏方案</h3>
+        <p>● 方法：累计输注剂量：600mg。12步总耗时：318分钟。</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>步骤</th>
+                    <th>浓度<br>(mg/ml)</th>
+                    <th>输注剂量<br>(ml)</th>
+                    <th>输注时间<br>(min)</th>
+                    <th>本步骤输注量<br>(mg)</th>
+                    <th>累计输注量<br>(mg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>0.0002</td><td>5</td><td>15</td><td>0.001</td><td>0.001</td></tr>
+                <tr><td>2</td><td>0.0002</td><td>15</td><td>15</td><td>0.003</td><td>0.004</td></tr>
+                <tr><td>3</td><td>0.002</td><td>5</td><td>15</td><td>0.01</td><td>0.014</td></tr>
+                <tr><td>4</td><td>0.002</td><td>15</td><td>15</td><td>0.03</td><td>0.04</td></tr>
+                <tr><td>5</td><td>0.02</td><td>5</td><td>15</td><td>0.1</td><td>0.14</td></tr>
+                <tr><td>6</td><td>0.02</td><td>15</td><td>15</td><td>0.3</td><td>0.4</td></tr>
+                <tr><td>7</td><td>0.2</td><td>5</td><td>15</td><td>1</td><td>1.4</td></tr>
+                <tr><td>8</td><td>0.2</td><td>15</td><td>15</td><td>3</td><td>4.4</td></tr>
+                <tr><td>9</td><td>2</td><td>5</td><td>15</td><td>10</td><td>14.4</td></tr>
+                <tr><td>10</td><td>2</td><td>15</td><td>15</td><td>30</td><td>44.4</td></tr>
+                <tr><td>11</td><td>2</td><td>25</td><td>15</td><td>50</td><td>94.4</td></tr>
+                <tr><td>12</td><td>2</td><td>255</td><td>153</td><td>510</td><td>604.4</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 方案二：缬更昔洛韦 -->
+    <div class="scheme-info">
+        <h3>缬更昔洛韦 12步口服脱敏方案</h3>
+        <p>● 方法：每隔15分钟用药一次，总耗时165分钟。累计用药剂量：453.6mg。</p>
+        <p>参见 Transplantation 98: e50, 2014</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>步骤</th>
+                    <th>本步骤用药量<br>(mg)</th>
+                    <th>累计用药量<br>(mg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>0.1</td><td>0.1</td></tr>
+                <tr><td>2</td><td>0.2</td><td>0.3</td></tr>
+                <tr><td>3</td><td>0.4</td><td>0.7</td></tr>
+                <tr><td>4</td><td>0.8</td><td>1.5</td></tr>
+                <tr><td>5</td><td>1.6</td><td>3.1</td></tr>
+                <tr><td>6</td><td>3.5</td><td>6.6</td></tr>
+                <tr><td>7</td><td>7</td><td>13.6</td></tr>
+                <tr><td>8</td><td>14</td><td>27.6</td></tr>
+                <tr><td>9</td><td>28</td><td>55.6</td></tr>
+                <tr><td>10</td><td>58</td><td>113.6</td></tr>
+                <tr><td>11</td><td>115</td><td>228.6</td></tr>
+                <tr><td>12</td><td>225</td><td>453.6</td></tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <p class="tags-title">特色检索标签</p>
+        <div class="tags-container">
+            <span class="tag disease">过敏</span>
+            <span class="tag disease">药物过敏</span>
+            <span class="tag drug">头孢洛林</span>
+            <span class="tag drug">缬更昔洛韦</span>
+            <span class="tag drug">抗生素</span>
+            <span class="tag bacteria">细菌感染</span>
+            <span class="tag">脱敏</span>
+            <span class="tag">静脉输注</span>
+            <span class="tag">口服</span>
+            <span class="tag">移植</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">190</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗生素过敏及药物脱敏方法；头孢洛林；缬更昔洛韦；脱敏方案；过敏；药物过敏；头孢洛林；缬更昔洛韦；抗生素；细菌感染；脱敏；静脉输注；口服；移植；=190" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：<span>抗生素过敏</span>、<span>药物脱敏</span>、<span>头孢洛林</span>、<span>缬更昔洛韦</span>、<span>静脉脱敏</span>、<span>口服脱敏</span>、<span>剂量递增</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制!';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

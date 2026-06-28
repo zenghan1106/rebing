@@ -1,0 +1,531 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学缩写与术语速查表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 26px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .abbr {
+            color: #2b6cb0;
+            font-weight: 600;
+        }
+        
+        .term {
+            color: #4a5568;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ed8936;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .header {
+                justify-content: center;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="13.html" class="nav-btn">上一页</a>
+            <a href="15.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~医学缩写与术语速查表*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>缩写/英文</th>
+                    <th>中文释义</th>
+                    <th>缩写/英文</th>
+                    <th>中文释义</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="abbr">Pyr</td>
+                    <td class="term">乙胺嘧啶</td>
+                    <td class="abbr">STD</td>
+                    <td class="term">性传播疾病</td>
+                </tr>
+                <tr>
+                    <td class="abbr">PZA</td>
+                    <td class="term">吡嗪酰胺</td>
+                    <td class="abbr">STH</td>
+                    <td class="term">土壤传播性蠕虫</td>
+                </tr>
+                <tr>
+                    <td class="abbr">PZQ</td>
+                    <td class="term">吡喹酮</td>
+                    <td class="abbr">subcut</td>
+                    <td class="term">皮下注射</td>
+                </tr>
+                <tr>
+                    <td class="abbr">qwk</td>
+                    <td class="term">每周1次</td>
+                    <td class="abbr">Sulb</td>
+                    <td class="term">舒巴坦</td>
+                </tr>
+                <tr>
+                    <td class="abbr">q[x]h</td>
+                    <td class="term">每[x]小时1次，如q8h为每8小时1次</td>
+                    <td class="abbr">TAF</td>
+                    <td class="term">丙酚替诺福韦</td>
+                </tr>
+                <tr>
+                    <td class="abbr">qid</td>
+                    <td class="term">1天3次</td>
+                    <td class="abbr">Tazo</td>
+                    <td class="term">他唑巴坦</td>
+                </tr>
+                <tr>
+                    <td class="abbr">QS</td>
+                    <td class="term">硫酸奎宁</td>
+                    <td class="abbr">TBc</td>
+                    <td class="term">结核病</td>
+                </tr>
+                <tr>
+                    <td class="abbr">R</td>
+                    <td class="term">耐药</td>
+                    <td class="abbr">TDF</td>
+                    <td class="term">替诺福韦</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RDBPCT</td>
+                    <td class="term">随机双盲安慰剂对照试验</td>
+                    <td class="abbr">TEE</td>
+                    <td class="term">经食管超声心动图</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RFB</td>
+                    <td class="term">利福布汀</td>
+                    <td class="abbr">Teico</td>
+                    <td class="term">替考拉宁</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RFP</td>
+                    <td class="term">利福喷丁</td>
+                    <td class="abbr">Telithro</td>
+                    <td class="term">泰利霉素</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Rick</td>
+                    <td class="term">立克次体</td>
+                    <td class="abbr">Tetra</td>
+                    <td class="term">四环素</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RIF</td>
+                    <td class="term">利福平</td>
+                    <td class="abbr">tid</td>
+                    <td class="term">1天3次</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RSV</td>
+                    <td class="term">呼吸道合胞病毒</td>
+                    <td class="abbr">TMP-SMX</td>
+                    <td class="term">复方磺胺甲噁唑</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RTI</td>
+                    <td class="term">呼吸道感染</td>
+                    <td class="abbr">TNF</td>
+                    <td class="term">肿瘤坏死因子</td>
+                </tr>
+                <tr>
+                    <td class="abbr">RTV</td>
+                    <td class="term">利托那韦</td>
+                    <td class="abbr">Tobra</td>
+                    <td class="term">妥布霉素</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Rx</td>
+                    <td class="term">治疗</td>
+                    <td class="abbr">TPV</td>
+                    <td class="term">替拉那韦</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SA</td>
+                    <td class="term">金黄色葡萄球菌</td>
+                    <td class="abbr">TST</td>
+                    <td class="term">结核菌素皮肤试验</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SAT</td>
+                    <td class="term">自主按医嘱服药</td>
+                    <td class="abbr">UGT</td>
+                    <td class="term">尿苷二磷酸葡萄糖醛酸基转移酶</td>
+                </tr>
+                <tr>
+                    <td class="abbr">sc</td>
+                    <td class="term">皮下注射</td>
+                    <td class="abbr">UTI</td>
+                    <td class="term">尿路感染</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SLED</td>
+                    <td class="term">持续低效每日透析</td>
+                    <td class="abbr">Vanco</td>
+                    <td class="term">万古霉素</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SSPE</td>
+                    <td class="term">亚急性硬化性全脑炎</td>
+                    <td class="abbr">Velpat</td>
+                    <td class="term">维帕他韦</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SD</td>
+                    <td class="term">单次给药后血清药物浓度</td>
+                    <td class="abbr">VISA</td>
+                    <td class="term">万古霉素中度耐药的金黄色葡萄球菌</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Sens</td>
+                    <td class="term">敏感性</td>
+                    <td class="abbr">VL</td>
+                    <td class="term">病毒载量</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SM</td>
+                    <td class="term">链霉素</td>
+                    <td class="abbr">Vori</td>
+                    <td class="term">伏立康唑</td>
+                </tr>
+                <tr>
+                    <td class="abbr">Sofos</td>
+                    <td class="term">索磷布韦</td>
+                    <td class="abbr">VZV</td>
+                    <td class="term">带状疱疹病毒</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SQV</td>
+                    <td class="term">沙奎那韦</td>
+                    <td class="abbr">WHO</td>
+                    <td class="term">世界卫生组织</td>
+                </tr>
+                <tr>
+                    <td class="abbr">SS</td>
+                    <td class="term">稳态血清浓度</td>
+                    <td class="abbr">ZDV</td>
+                    <td class="term">齐多夫定</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">结核病</span>
+            <span class="tag tag-disease">性传播疾病</span>
+            <span class="tag tag-disease">呼吸道感染</span>
+            <span class="tag tag-disease">尿路感染</span>
+            <span class="tag tag-disease">亚急性硬化性全脑炎</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">立克次体</span>
+            <span class="tag tag-drug">利福平</span>
+            <span class="tag tag-drug">利福布汀</span>
+            <span class="tag tag-drug">利福喷丁</span>
+            <span class="tag tag-drug">吡嗪酰胺</span>
+            <span class="tag tag-drug">链霉素</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">替诺福韦</span>
+            <span class="tag tag-drug">齐多夫定</span>
+            <span class="tag tag-drug">伏立康唑</span>
+            <span class="tag tag-drug">妥布霉素</span>
+            <span class="tag tag-drug">复方磺胺甲噁唑</span>
+            <span class="tag tag-drug">乙胺嘧啶</span>
+            <span class="tag tag-drug">吡喹酮</span>
+            <span class="tag tag-drug">硫酸奎宁</span>
+            <span class="tag tag-drug">索磷布韦</span>
+            <span class="tag tag-drug">维帕他韦</span>
+            <span class="tag tag-drug">丙酚替诺福韦</span>
+            <span class="tag tag-drug">他唑巴坦</span>
+            <span class="tag tag-drug">舒巴坦</span>
+            <span class="tag tag-drug">替考拉宁</span>
+            <span class="tag tag-drug">泰利霉素</span>
+            <span class="tag tag-drug">利托那韦</span>
+            <span class="tag tag-drug">替拉那韦</span>
+            <span class="tag tag-drug">沙奎那韦</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="医学缩写与术语速查表；医学术语；缩写对照；疾病；抗生素；药物；细菌；=14" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-num">页码：14</div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            document.execCommand('copy');
+            alert('已复制到剪贴板！');
+        }
+        
+        function addToFavorite() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用 localStorage 保存收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toLocaleDateString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在 index.html 的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>

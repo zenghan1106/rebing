@@ -1,0 +1,563 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(7)临床抗微生物治疗的初始选择-肺炎链球菌大肠埃希菌流感嗜血杆菌脑膜炎球菌预防</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        
+        .btn-nav {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #388E3C;
+        }
+        
+        .btn-fav {
+            background: #FF9800;
+            color: white;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(255,152,0,0.4);
+        }
+        
+        .btn-fav:hover {
+            background: #F57C00;
+        }
+        
+        .btn-copy {
+            background: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background: #7B1FA2;
+        }
+        
+        /* 标题 */
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 8px;
+        }
+        
+        .title-mark {
+            color: #E91E63;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 表格 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .section-header {
+            background: #E3F2FD !important;
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 14px;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #0D47A1;
+        }
+        
+        .pathogen {
+            color: #C62828;
+        }
+        
+        .treatment {
+            color: #2E7D32;
+        }
+        
+        .note {
+            color: #6A1B9A;
+            font-size: 12px;
+        }
+        
+        .ref {
+            color: #757575;
+            font-style: italic;
+            font-size: 11px;
+        }
+        
+        .footnote {
+            background: #FFF8E1;
+            color: #5D4037;
+            font-size: 12px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        /* 标签 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+        
+        .tag-disease:hover {
+            background: #1565C0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+        
+        .tag-bacteria:hover {
+            background: #C62828;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .tag-drug:hover {
+            background: #2E7D32;
+            color: white;
+        }
+        
+        /* 页码 */
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .page-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: none;
+            z-index: 200;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="28.html" class="btn btn-nav">上一页</a>
+            <a href="30.html" class="btn btn-nav">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <div class="main-title">
+            <span class="title-mark">~~~~~</span>
+            表1(7) 临床抗微生物治疗的初始选择
+            <span class="title-mark">*****</span>
+        </div>
+        <div class="sub-title">急性细菌性脑膜炎 | 特异性治疗 | 流感嗜血杆菌和脑膜炎球菌的预防</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:16%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:32%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">中枢神经系统/急性细菌性脑膜炎/特异性治疗——脑脊液培养阳性且已获得体外药敏结果（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">肺炎链球菌</span><br><br>
+                        <b>注意：</b><br>
+                        1. 地塞米松0.15mg/kg iv q6h；首剂在初次抗生素前15～20分钟，然后持续4天<br>
+                        2. 如果MIC≥1μg/ml，24～48小时后复查脑脊液<br>
+                        3. 疗程10～14天
+                    </td>
+                    <td>
+                        青霉素G MIC＜0.1μg/ml<br><br>
+                        青霉素G MIC≥0.1μg/ml且头孢曲松MIC≤0.5μg/ml<br><br>
+                        青霉素G MIC≥0.1μg/ml且头孢曲松MIC＞0.5μg/ml
+                    </td>
+                    <td>
+                        <span class="treatment">青霉素G 400万U iv q4h</span>或<span class="treatment">氨苄西林2g iv q4h</span><br><br>
+                        <span class="treatment">头孢曲松2g iv q12h</span>或<span class="treatment">头孢噻肟2g iv q4～6h</span><br><br>
+                        <span class="treatment">万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml +（头孢曲松或头孢噻肟，剂量同上）</span>
+                    </td>
+                    <td>
+                        其他方案：<span class="treatment">头孢曲松2g iv q12h</span><br><br>
+                        其他方案：<span class="treatment">头孢吡肟2g iv q8h</span>，或<span class="treatment">美罗培南2g iv q8h</span>，或<span class="treatment">莫西沙星400mg iv qd</span><br><br>
+                        其他方案：<span class="treatment">万古霉素 + 莫西沙星400mg iv qd</span><br>
+                        若头孢曲松MIC≥2μg/ml，则在<span class="treatment">万古霉素 +（头孢曲松或头孢噻肟）</span>基础上加用<span class="treatment">利福平600mg po或iv qd</span>或<span class="treatment">利奈唑胺600mg q12h</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">大肠埃希菌，其他大肠菌群或铜绿假单胞菌</span>
+                    </td>
+                    <td>
+                        建议咨询相关专家，需药敏试验结果
+                    </td>
+                    <td>
+                        （<span class="treatment">头孢他啶或头孢吡肟2g iv q8h</span>）+<span class="treatment">庆大霉素首剂2mg/kg iv，然后1.7mg/kg iv q8h×21d</span>
+                    </td>
+                    <td>
+                        其他方案：<span class="treatment">美罗培南2g iv q8h</span>，输注时间＞4小时；<span class="treatment">环丙沙星400mg iv q8h</span>（需要确定敏感性）<br><br>
+                        治疗4～5天后重复脑脊液培养；如脑脊液培养仍为阳性，可能需要鞘内或脑室内抗生素治疗
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="4">流感嗜血杆菌和脑膜炎球菌的预防</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">流感嗜血杆菌（B型）</span><br><br>
+                        共同居住者或密切接触人群定义：与患者同住者或非同住但在患者发病前7天至少有5天与患者接触时间≥4小时者
+                    </td>
+                    <td>
+                        <span class="pathogen">流感嗜血杆菌（B型）</span>
+                    </td>
+                    <td>
+                        1月龄及以上：<span class="treatment">利福平20mg/kg（不超过600mg）qd×4d</span><br>
+                        1月龄以下：<span class="treatment">利福平10mg/kg×4d</span>
+                    </td>
+                    <td>
+                        共同居住者或密切接触者：建议对以下人群进行利福平药物预防。指示病例（除非用头孢噻肟或头孢曲松治疗）、所有年龄＜4岁且未完成全程疫苗接种的共同居住者，以及无论免疫接种状况如何的年龄＜18岁且存在免疫受损状态的共同居住者<br><br>
+                        托幼机构接触：若托幼机构在60天内发生2例或以上侵袭性流感嗜血杆菌（B型）感染，且机构内存在未接种疫苗或未全程接种疫苗的儿童，建议进行利福平药物预防。进行预防时，该机构内的所有儿童，无论年龄及疫苗接种状态，均应服药。儿童照料者也需服药
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="bottom-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="表1(7)临床抗微生物治疗的初始选择；急性细菌性脑膜炎特异性治疗流感嗜血杆菌脑膜炎球菌预防；肺炎链球菌大肠埃希菌铜绿假单胞菌流感嗜血杆菌脑膜炎球菌；青霉素G氨苄西林头孢曲松头孢噻肟万古霉素头孢吡肟美罗培南莫西沙星利福平利奈唑胺头孢他啶庆大霉素环丙沙星；=29" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">急性细菌性脑膜炎</span>
+                <span class="tag tag-disease">特异性治疗</span>
+                <span class="tag tag-disease">流感嗜血杆菌预防</span>
+                <span class="tag tag-disease">脑膜炎球菌预防</span>
+                
+                <!-- 细菌标签 -->
+                <span class="tag tag-bacteria">肺炎链球菌</span>
+                <span class="tag tag-bacteria">大肠埃希菌</span>
+                <span class="tag tag-bacteria">铜绿假单胞菌</span>
+                <span class="tag tag-bacteria">流感嗜血杆菌</span>
+                <span class="tag tag-bacteria">脑膜炎球菌</span>
+                <span class="tag tag-bacteria">大肠菌群</span>
+                
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">青霉素G</span>
+                <span class="tag tag-drug">氨苄西林</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">头孢噻肟</span>
+                <span class="tag tag-drug">万古霉素</span>
+                <span class="tag tag-drug">头孢吡肟</span>
+                <span class="tag tag-drug">美罗培南</span>
+                <span class="tag tag-drug">莫西沙星</span>
+                <span class="tag tag-drug">利福平</span>
+                <span class="tag tag-drug">利奈唑胺</span>
+                <span class="tag tag-drug">头孢他啶</span>
+                <span class="tag tag-drug">庆大霉素</span>
+                <span class="tag tag-drug">环丙沙星</span>
+                <span class="tag tag-drug">地塞米松</span>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-info">
+            <div class="page-number">页码：29</div>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }).catch(function(err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.querySelector('.main-title').innerText.replace(/~~~~~|\\\\*\\\\*\\\\*\\\\*\\\\*/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '29';
+            
+            try {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    showToast('该页面已在收藏中！');
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '临床抗微生物治疗',
+                    addTime: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('已添加到收藏！请在index.html查看');
+            } catch(e) {
+                showToast('收藏成功！');
+            }
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.innerText;
+                showToast('搜索: ' + text);
+            });
+        });
+    </script>
+</body>
+</html>

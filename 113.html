@@ -1,0 +1,507 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-home {
+            background-color: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background-color: #219a52;
+        }
+        
+        .btn-prev, .btn-next {
+            background-color: #e67e22;
+        }
+        
+        .btn-prev:hover, .btn-next:hover {
+            background-color: #d35400;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #2c3e50;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(:first-child) {
+            background-color: #e8f4f8;
+        }
+        
+        /* 分类行高亮 */
+        .category-row {
+            background-color: #d5e8d4 !important;
+            font-weight: bold;
+            color: #1e8449 !important;
+        }
+        
+        .category-row td {
+            color: #1e8449;
+            font-size: 14px;
+        }
+        
+        /* 警示文字 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background-color: #9b59b6;
+        }
+        
+        .tag-symptom {
+            background-color: #f39c12;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .nav-top {
+                justify-content: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+            
+            thead th {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="112.html" class="btn btn-prev">上一页</a>
+            <a href="114.html" class="btn btn-next">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">临床抗微生物治疗的初始选择</h1>
+    <p class="subtitle">表1（50）咽/咽炎/扁桃体炎/会厌炎的抗感染治疗方案</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 20%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 30%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">咽/咽炎/扁桃体炎/渗出性或弥漫性红肿（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>膜性咽炎：白喉</strong><br>
+                        呼吸道隔离，鼻咽分泌物培养（特殊培养基），设法获得抗毒素，患者置于呼吸道隔离病房
+                    </td>
+                    <td>
+                        白喉杆菌（人传人）、溃疡棒状杆菌和假结核棒状杆菌（动物传人，但罕见）
+                    </td>
+                    <td>
+                        <span class="drug-name">阿奇霉素</span> 500mg iv/po qd，<br>
+                        或 <span class="drug-name">青霉素G</span> 2.5万U/kg iv q12h。<br>
+                        稳定后可序贯口服<span class="drug-name">青霉素V钾</span> 250mg qid。<br>
+                        <strong>疗程14d</strong>
+                    </td>
+                    <td>
+                        <strong>儿童：</strong><span class="drug-name">阿奇霉素</span> 10～12mg/kg iv qd；一旦可耐受改为口服。<br>
+                        或 <span class="drug-name">青霉素G</span> 30万U/(kg·d) iv 分次q6h，<strong>疗程14d</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>水疱，溃疡<br>咽炎（病毒性）</strong>
+                    </td>
+                    <td>
+                        柯萨奇病毒A9、B1～5，埃可病毒（多型），肠道病毒71，单纯疱疹病毒1型、2型
+                    </td>
+                    <td>
+                        无指征用抗菌药物。<br>
+                        对于单纯疱疹病1型、2型，<br>
+                        <span class="drug-name">阿昔洛韦</span> 400mg po tid×10d
+                    </td>
+                    <td>
+                        <strong>HIV：</strong><span class="drug-name">泛昔洛韦</span> 250mg po tid ×7～10d<br>
+                        或<span class="drug-name">伐昔洛韦</span> 1000mg po bid×7～10d
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="4">
+                        会厌炎（声门上）<span class="warning">关注危及生命的气道梗阻</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>儿童</strong></td>
+                    <td>
+                        流感嗜血杆菌（罕见）、化脓性链球菌、肺炎链球菌、金黄色葡萄球菌（包括MRSA）、病毒
+                    </td>
+                    <td>
+                        <strong>儿童剂量：</strong><br>
+                        （<span class="drug-name">头孢噻肟</span> 50mg/kg iv q8h<br>
+                        或<span class="drug-name">头孢曲松</span> 50mg/kg iv qd）<br>
+                        ＋<span class="drug-name">万古霉素</span>
+                    </td>
+                    <td>
+                        <strong>儿童剂量：</strong><br>
+                        <span class="drug-name">左氧氟沙星</span> 10mg/kg iv qd<br>
+                        ＋<span class="drug-name">克林霉素</span> 7.5mg/kg iv q6h
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>成人</strong></td>
+                    <td>
+                        A族链球菌、流感嗜血杆菌（罕见）、其他多种病原
+                    </td>
+                    <td colspan="2">
+                        与儿童相同的治疗方案。<br>
+                        <strong>成人剂量：见表注17</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: #2e86c1; font-size: 15px; margin-bottom: 10px;">辅助诊断或治疗方法及说明</h3>
+        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+            <p><strong>【白喉】</strong>白喉马抗毒素：在美国联系CDC（1-4-4-639-2880或-1231）获得。毒素检测及其他实验室问题，联系CDC：404-639-1231</p>
+            <p style="margin-top: 8px;"><strong>【病毒性咽炎】</strong>咽后壁出现小水疱提示肠道病毒。病毒是急性咽炎的最常见病原体。如果同时出现结膜炎、鼻炎、咳嗽、皮疹和声音嘶哑，要怀疑病毒</p>
+            <p style="margin-top: 8px;"><strong>【会厌炎】</strong>床旁备气管切开包。严重β-内酰胺类过敏的儿童患者使用左氧氟沙星进行急诊经验性治疗是合理的。（<em>Ped Clin No Amer 53：215，2006</em>）<br>
+            <span class="warning">糖皮质激素的使用有争议：不推荐</span></p>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：113</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择；咽/咽炎/扁桃体炎/会厌炎/白喉/膜性咽炎/病毒性咽炎/水疱/溃疡/气道梗阻；阿奇霉素/青霉素G/青霉素V钾/阿昔洛韦/泛昔洛韦/伐昔洛韦/头孢噻肟/头孢曲松/万古霉素/左氧氟沙星/克林霉素；白喉杆菌/流感嗜血杆菌/化脓性链球菌/肺炎链球菌/金黄色葡萄球菌/MRSA/A族链球菌/柯萨奇病毒/埃可病毒/肠道病毒/单纯疱疹病毒；=113" readonly>
+            <button class="btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">白喉</span>
+            <span class="tag tag-disease">膜性咽炎</span>
+            <span class="tag tag-disease">病毒性咽炎</span>
+            <span class="tag tag-disease">会厌炎</span>
+            <span class="tag tag-disease">扁桃体炎</span>
+            <span class="tag tag-disease">气道梗阻</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">白喉杆菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">溃疡棒状杆菌</span>
+            
+            <!-- 病毒标签 -->
+            <span class="tag tag-bacteria">柯萨奇病毒</span>
+            <span class="tag tag-bacteria">埃可病毒</span>
+            <span class="tag tag-bacteria">肠道病毒71</span>
+            <span class="tag tag-bacteria">单纯疱疹病毒</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">阿奇霉素</span>
+            <span class="tag tag-antibiotic">青霉素G</span>
+            <span class="tag tag-antibiotic">青霉素V钾</span>
+            <span class="tag tag-antibiotic">阿昔洛韦</span>
+            <span class="tag tag-antibiotic">泛昔洛韦</span>
+            <span class="tag tag-antibiotic">伐昔洛韦</span>
+            <span class="tag tag-antibiotic">头孢噻肟</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            
+            <!-- 症状标签 -->
+            <span class="tag tag-symptom">水疱</span>
+            <span class="tag tag-symptom">溃疡</span>
+            <span class="tag tag-symptom">渗出性红肿</span>
+            <span class="tag tag-symptom">呼吸困难</span>
+            <span class="tag tag-symptom">声音嘶哑</span>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>临床抗微生物治疗 | 初始选择 | 咽炎 | 扁桃体炎 | 白喉 | 会厌炎 | 阿奇霉素 | 青霉素 | 头孢菌素 | 万古霉素 | 抗病毒治疗 | 气道管理
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyInput = document.getElementById("copyInput");
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }).catch(function() {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+    </script>
+</body>
+</html>

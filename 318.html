@@ -1,0 +1,479 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗感染药物剂量和不良反应-氯霉素、克林霉素、红霉素族</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-page {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-decoration {
+            color: #e74c3c;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f2ff;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        .dosage-highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .warning {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .note {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        .tag-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        
+        .tag-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .tag-bacteria {
+            background: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .copy-input:focus {
+            border-color: #667eea;
+        }
+        
+        .btn-copy {
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .copy-feedback {
+            color: #27ae60;
+            font-size: 14px;
+            margin-left: 10px;
+            display: none;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .keywords-bottom {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .category-header {
+            background: #e3f2fd;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 12px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="317.html" class="btn btn-page">上一页</a>
+            <a href="319.html" class="btn btn-page">下一页</a>
+        </div>
+    </div>
+    
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decoration">~~~~~</span>
+            抗感染药物剂量和不良反应-氯霉素、克林霉素、红霉素族
+            <span class="title-decoration">*****</span>
+        </h1>
+    </div>
+    
+    <div class="subtitle">表10A（8）抗感染药物的剂量和不良反应</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 22%;">分类，药品，通用名（商品名）</th>
+                    <th style="width: 38%;">成人常规剂量*</th>
+                    <th style="width: 40%;">不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="category-header">氯霉素、克林霉素（类）、红霉素族、酮内酯类、噁唑烷酮类</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">氯霉素（Chloromycetin）</div>
+                    </td>
+                    <td>
+                        50～100mg/(kg·d) po或iv 分次q6h（最大剂量4g/d）
+                    </td>
+                    <td>
+                        在美国无口服药。血液学（约1/3患者红细胞下降，1:21600疗程发生再生障碍性贫血）。灰婴综合征见于早产儿。过敏样反应，视神经萎缩或神经病变（非常罕见）。指（趾）感觉异常，轻度双硫仑样反应。新近的综述显示，对于如呼吸道、肠道及脑膜炎的重症感染，氯霉素可能不如目前其他可选的药物有效（JAC 70: 979, 2015）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">克林霉素（Cleocin）</div>
+                    </td>
+                    <td>
+                        0.15～0.45g po q6h，600～900mg iv或im q8h<br><br>
+                        对于肥胖儿童应根据总体重计算用量（AAC 2017, 61: e0201416）
+                    </td>
+                    <td>
+                        按用药患者数量计算，本药是引起艰难梭菌毒素介导性腹泻的最常见原因。非常严重的病例可致假膜性肠炎/中毒性巨结肠炎。可用的剂型有胶囊、注射液、局部用药（治疗痤疮用）以及阴道栓剂和霜剂。用于抑制中毒性休克综合征毒素的合成
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">林可霉素（Lincocin）</div>
+                    </td>
+                    <td>
+                        0.6～1.0g iv q8～12h
+                    </td>
+                    <td>
+                        很少使用。艰难梭菌结肠炎的风险。需要恰当地稀释，输注时间与剂量相关（见说明书）
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category-header">红霉素族（用前检查药物的相互作用）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">阿奇霉素（Zithromax）</div>
+                        <div class="drug-name">阿奇霉素缓释剂（Zmax）</div>
+                    </td>
+                    <td>
+                        口服制剂：250、600mg片剂。儿童悬液：100、200mg/5ml。成人缓释悬液：2g。剂量依适应证而变，见表1，急性中耳炎（12页），慢性支气管炎急性加重（42页），社区获得性肺炎（43～44页），鼻窦炎（55页）<br><br>
+                        iv：0.5g qd
+                    </td>
+                    <td>
+                        胃轻瘫：红霉素是治疗胃轻瘫的替代药物。通过结合胃动素受体促进胃蠕动，改善胃排空大约2周，随后因快速抗药反应而失效。红霉素剂量：1.5～3.0mg/kg iv q6h输注45分钟或250mg口服悬液bid。参见Gastro Clin NA 2015, 44: 97<br><br>
+                        常见的药物间相互作用：主要问题是心电图QTc间期延长<br><br>
+                        QTc间期延长：红霉素、克拉霉素和阿奇霉素，均通过延长QTc间期增加室性心动过速的风险。可以是先天性或者获得性（NEJM 358: 169, 2008）。如果有心源性猝死的家族史、电解质紊乱或合用其他延长QTc间期的药物更应警惕。QT间期>500ms，危险性增加！其他药物增加危险性（大环内酯类、抗心律失常药及药物间相互作用见氟喹诺酮类列表，159页）。www.qtdrugs.org和www.torsades.org。参见Am J Med 128: 1362, 2015
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="drug-name">红霉素盐基和酯类（Erythrocin）</div>
+                        <div>静脉制剂的名称：乳糖酸红霉素</div>
+                    </td>
+                    <td>
+                        0.25g q6h至0.5g po或iv q6h：15～20mg/kg，最大剂量4g qd。输注30分钟以上
+                    </td>
+                    <td>
+                        成人（非儿童）应用红霉素酯大约有1‰的机会出现淤胆性肝炎<br><br>
+                        值得注意的药物间相互作用：红霉素或克拉霉素与他汀类：他汀水平升高，横纹肌溶解（Am Int med 158: 869, 2013）；克拉霉素和秋水仙碱（痛风）合用会出现致死性的秋水仙碱中毒（全血细胞减少，肾衰竭）（CID 41: 291, 2005）。克拉霉素和钙通道阻滞药合用增加低血压和肾损伤风险（JAMA 310: 2544, 2013）。同时服用磺脲类药物时会导致低血糖（JAMA Int Med 174: 1605, 2014）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="text-align: center; color: #7f8c8d; font-size: 12px; margin: 15px 0;">
+        注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。表中名词缩写见第2页。
+    </div>
+    
+    <div class="tag-section">
+        <div class="tag-title">检索标签</div>
+        <div class="tags">
+            <span class="tag tag-disease">急性中耳炎</span>
+            <span class="tag tag-disease">慢性支气管炎急性加重</span>
+            <span class="tag tag-disease">社区获得性肺炎</span>
+            <span class="tag tag-disease">鼻窦炎</span>
+            <span class="tag tag-disease">胃轻瘫</span>
+            <span class="tag tag-disease">假膜性肠炎</span>
+            <span class="tag tag-disease">中毒性巨结肠炎</span>
+            <span class="tag tag-disease">中毒性休克综合征</span>
+            <span class="tag tag-disease">艰难梭菌结肠炎</span>
+            <span class="tag tag-disease">痛风</span>
+            <span class="tag tag-drug">氯霉素</span>
+            <span class="tag tag-drug">Chloromycetin</span>
+            <span class="tag tag-drug">克林霉素</span>
+            <span class="tag tag-drug">Cleocin</span>
+            <span class="tag tag-drug">林可霉素</span>
+            <span class="tag tag-drug">Lincocin</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">Zithromax</span>
+            <span class="tag tag-drug">Zmax</span>
+            <span class="tag tag-drug">红霉素</span>
+            <span class="tag tag-drug">Erythrocin</span>
+            <span class="tag tag-drug">克拉霉素</span>
+            <span class="tag tag-drug">乳糖酸红霉素</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗感染药物剂量和不良反应-氯霉素、克林霉素、红霉素族；表10A（8）抗感染药物的剂量和不良反应；氯霉素、Chloromycetin、克林霉素、Cleocin、林可霉素、Lincocin、阿奇霉素、Zithromax、Zmax、红霉素、Erythrocin、克拉霉素、乳糖酸红霉素、急性中耳炎、慢性支气管炎急性加重、社区获得性肺炎、鼻窦炎、胃轻瘫、假膜性肠炎、中毒性巨结肠炎、中毒性休克综合征、艰难梭菌结肠炎、痛风；=318" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        <span class="copy-feedback" id="copyFeedback">已复制到剪贴板！</span>
+    </div>
+    
+    <div class="page-number">318</div>
+    
+    <div class="keywords-bottom">
+        关键词：氯霉素 | 克林霉素 | 林可霉素 | 阿奇霉素 | 红霉素 | 克拉霉素 | 乳糖酸红霉素 | 急性中耳炎 | 慢性支气管炎 | 社区获得性肺炎 | 鼻窦炎 | 胃轻瘫 | 艰难梭菌 | 假膜性肠炎 | QTc间期延长 | 抗感染药物
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const feedback = document.getElementById("copyFeedback");
+                feedback.style.display = "inline";
+                setTimeout(function() {
+                    feedback.style.display = "none";
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand("copy");
+                const feedback = document.getElementById("copyFeedback");
+                feedback.style.display = "inline";
+                setTimeout(function() {
+                    feedback.style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

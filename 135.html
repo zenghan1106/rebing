@@ -1,0 +1,427 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(61)临床抗微生物治疗的初始选择</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f8f9fa;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 20px 0;
+            padding: 10px;
+            background: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2874a6;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2874a6;
+            margin-left: 8px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #2874a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #1a5276;
+        }
+        
+        .btn-home {
+            background: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background: #1e8449;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            min-width: 800px;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #2874a6;
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+            background: #d4e6f1;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            color: #333;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #d5f5e3 !important;
+            font-weight: bold;
+            color: #1e8449;
+        }
+        
+        .info-box {
+            margin: 15px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            color: #555;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 关键词标签 */
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2874a6;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d4e6f1;
+        }
+        
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #eaf2f8;
+            color: #2874a6;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #d4e6f1;
+            cursor: default;
+        }
+        
+        .tag-disease {
+            background: #fdedec;
+            color: #c0392b;
+            border-color: #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e8f8f5;
+            color: #1e8449;
+            border-color: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #fef9e7;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .page-number a {
+            color: #2874a6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                font-size: 13px;
+            }
+            
+            .page-title {
+                font-size: 15px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 6px;
+            }
+            
+            td {
+                padding: 6px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="134.html" class="btn">上一页</a>
+            <a href="136.html" class="btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">表1(61)临床抗微生物治疗的初始选择</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:30%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">全身综合征（发热/不发热）/经蜱、蚤或虱传播/巴尔通体感染（续）</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background:#f0f8ff;">
+                        <strong>埃立克体病<sup>18</sup>。</strong>CDC诊断标准，具备下列一条：①IFA抗体升高4倍；②PCR检测出血液或脑脊液中的埃立克体DNA；③可见白细胞内桑葚样包涵体和IFA≥1:64。在威斯康星州和明尼苏达州发现新的属种（NEJM 365: 422, 2011）
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>人单核细胞埃立克体病（HME）</strong></td>
+                    <td>查菲埃立克体（美洲花蜱为媒介）</td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        多西环素100mg po或iv bid×7～10d<br>
+                        （儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        四环素500mg po qid×7～10d，尚无针对儿童和孕妇的推荐治疗方案
+                    </td>
+                    <td>
+                        美国30个州有该病流行，多在东南部；沿新泽西州－伊利诺伊州－密苏里州－俄克拉何马州－得克萨斯州分布。有户外活动和蜱接触史，流行季节4～9月，有发热、皮疹（36%）、白细胞和血小板减少；血涂片无助于诊断，PCR可用于早期诊断
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>人无形体病</strong>（过去称人中性粒细胞埃里希体病）</td>
+                    <td>嗜吞噬细胞无形体（埃立克体）（硬蜱属为媒介）。犬变种是尤因埃立克体</td>
+                    <td>
+                        <strong>首选方案：</strong><br>
+                        多西环素100mg po或iv bid×7～14d<br>
+                        （儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        四环素500mg po qid×7～14d，尚无儿童和孕妇推荐治疗<br>
+                        氯霉素是备选
+                    </td>
+                    <td>
+                        见于美国中西部、东北部、西海岸和欧洲，有蜱接触史，流行季节4～9月；户外活动后出现发热等流感样表现；无皮疹。常有白细胞和血小板减少。诊断：PCR最佳，血涂片不敏感（Am J Trop Med Hyg 93: 66, 2015）。治疗：如多西环素无法获得，米诺环素应该有效
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-list">
+            <span class="tag tag-disease">埃立克体病</span>
+            <span class="tag tag-disease">人单核细胞埃立克体病</span>
+            <span class="tag tag-disease">HME</span>
+            <span class="tag tag-disease">人无形体病</span>
+            <span class="tag tag-disease">人中性粒细胞埃里希体病</span>
+            <span class="tag tag-bacteria">查菲埃立克体</span>
+            <span class="tag tag-bacteria">嗜吞噬细胞无形体</span>
+            <span class="tag tag-bacteria">尤因埃立克体</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">氯霉素</span>
+            <span class="tag tag-drug">米诺环素</span>
+        </div>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制（标题 + 关键词 + 页码）</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表1(61)临床抗微生物治疗的初始选择；临床抗微生物治疗；埃立克体病；人单核细胞埃立克体病；HME；人无形体病；人中性粒细胞埃里希体病；查菲埃立克体；嗜吞噬细胞无形体；尤因埃立克体；多西环素；四环素；氯霉素；米诺环素；=135" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="135.html">135</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制!';
+                btn.style.background = '#27ae60';
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.style.background = '#e74c3c';
+                }, 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>

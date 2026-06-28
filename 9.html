@@ -1,0 +1,581 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~桑福德抗微生物治疗指南目录（表1-表11A）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .toc-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+            text-align: center;
+            padding: 15px 0;
+            letter-spacing: 8px;
+        }
+        
+        .table-number {
+            font-weight: 600;
+            color: #1565c0;
+            width: 80px;
+            display: inline-block;
+        }
+        
+        .table-name {
+            color: #333;
+        }
+        
+        .page-num {
+            color: #666;
+            font-size: 12px;
+            text-align: right;
+            min-width: 40px;
+        }
+        
+        .section-header {
+            background: #e8f0fe !important;
+            font-weight: 600;
+            color: #1a237e;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .toc-title {
+                font-size: 18px;
+                letter-spacing: 4px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="8.html" class="nav-btn">← 上一页</a>
+            <a href="10.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~桑福德抗微生物治疗指南目录（表1-表11A）*****</h1>
+        <p class="subtitle">各表格索引：临床抗微生物治疗、特殊细菌方案、抗菌谱比较、妊娠期用药等</p>
+    </div>
+    
+    <div class="page-number">9</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">表号</th>
+                    <th style="width: 65%;">内容</th>
+                    <th style="width: 10%;">页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="3" style="text-align: center;">
+                        <div class="toc-title">目 录</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">名词缩略语</td>
+                    <td class="page-num">1</td>
+                </tr>
+                <tr>
+                    <td colspan="2">参考期刊缩略语</td>
+                    <td class="page-num">1</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 1</span></td>
+                    <td><span class="table-name">临床抗微生物治疗的初始选择</span></td>
+                    <td class="page-num">1</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 2</span></td>
+                    <td><span class="table-name">特殊细菌抗菌药物治疗方案</span></td>
+                    <td class="page-num">7</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 3</span></td>
+                    <td><span class="table-name">免疫功能正常患者的抗生素推荐疗程</span></td>
+                    <td class="page-num">7</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 4A</span></td>
+                    <td><span class="table-name">抗菌谱比较</span></td>
+                    <td class="page-num">7</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 4B</span></td>
+                    <td><span class="table-name">抗真菌药物菌谱表</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 5A</span></td>
+                    <td><span class="table-name">多重耐药革兰阳性菌全身性感染的治疗建议</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 5B</span></td>
+                    <td><span class="table-name">拟诊或明确的产超广谱β-内酰胺酶肠杆菌的抗菌治疗建议</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 5C</span></td>
+                    <td><span class="table-name">特殊病原体推荐治疗方案：耐碳青霉烯肠杆菌</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 5D</span></td>
+                    <td><span class="table-name">难治性铜绿假单胞菌的治疗建议</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 5E</span></td>
+                    <td><span class="table-name">产AmpC β-内酰胺酶肠杆菌、耐碳青霉烯鲍曼不动杆菌和嗜麦芽窄食单胞菌的治疗建议</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 6</span></td>
+                    <td><span class="table-name">疑似或培养阳性的耐甲氧西林金黄色葡萄球菌感染的治疗建议</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 7</span></td>
+                    <td><span class="table-name">抗生素过敏及药物脱敏方法</span></td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 8A</span></td>
+                    <td><span class="table-name">妊娠期危险度分级和哺乳期用药安全性</span></td>
+                    <td class="page-num">9</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 8B</span></td>
+                    <td><span class="table-name">抗反转录病毒药物：妊娠期和哺乳期应用</span></td>
+                    <td class="page-num">10</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 9A</span></td>
+                    <td><span class="table-name">抗菌药物药理学特点</span></td>
+                    <td class="page-num">10</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 9B</span></td>
+                    <td><span class="table-name">抗细菌药物的药效学</span></td>
+                    <td class="page-num">14</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 9C</span></td>
+                    <td><span class="table-name">酶和运转分子介导的抗感染药物的相互作用</span></td>
+                    <td class="page-num">14</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10A</span></td>
+                    <td><span class="table-name">抗感染药物的剂量和不良反应</span></td>
+                    <td class="page-num">15</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10B</span></td>
+                    <td><span class="table-name">抗微生物药物相关的光敏感性</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10C</span></td>
+                    <td><span class="table-name">氨基糖苷类每天一次和每天多次给药方案</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10D</span></td>
+                    <td><span class="table-name">部分抗生素延长或持续给药方案</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10E</span></td>
+                    <td><span class="table-name">吸入用抗生素</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10F</span></td>
+                    <td><span class="table-name">接受ECMO治疗期间的药物剂量调整</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 10G</span></td>
+                    <td><span class="table-name">QT间期延长</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td><span class="table-number">表 11A</span></td>
+                    <td><span class="table-name">真菌感染的治疗</span></td>
+                    <td class="page-num">16</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">临床抗微生物治疗</span>
+            <span class="tag">特殊细菌</span>
+            <span class="tag">抗菌药物</span>
+            <span class="tag">抗生素</span>
+            <span class="tag">免疫功能正常</span>
+            <span class="tag">抗菌谱</span>
+            <span class="tag">抗真菌药物</span>
+            <span class="tag">多重耐药革兰阳性菌</span>
+            <span class="tag">超广谱β-内酰胺酶</span>
+            <span class="tag">肠杆菌</span>
+            <span class="tag">耐碳青霉烯肠杆菌</span>
+            <span class="tag">铜绿假单胞菌</span>
+            <span class="tag">AmpC β-内酰胺酶</span>
+            <span class="tag">鲍曼不动杆菌</span>
+            <span class="tag">嗜麦芽窄食单胞菌</span>
+            <span class="tag">耐甲氧西林金黄色葡萄球菌</span>
+            <span class="tag">药物过敏</span>
+            <span class="tag">脱敏</span>
+            <span class="tag">妊娠期</span>
+            <span class="tag">哺乳期</span>
+            <span class="tag">抗反转录病毒</span>
+            <span class="tag">药理学</span>
+            <span class="tag">药效学</span>
+            <span class="tag">药物相互作用</span>
+            <span class="tag">剂量</span>
+            <span class="tag">不良反应</span>
+            <span class="tag">光敏感性</span>
+            <span class="tag">氨基糖苷类</span>
+            <span class="tag">吸入用抗生素</span>
+            <span class="tag">ECMO</span>
+            <span class="tag">QT间期延长</span>
+            <span class="tag">真菌感染</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="桑福德抗微生物治疗指南目录（表1-表11A）；各表格索引：临床抗微生物治疗、特殊细菌方案、抗菌谱比较、妊娠期用药等；临床抗微生物治疗,特殊细菌,抗菌药物,抗生素,免疫功能正常,抗菌谱,抗真菌药物,多重耐药革兰阳性菌,超广谱β-内酰胺酶,肠杆菌,耐碳青霉烯肠杆菌,铜绿假单胞菌,AmpC β-内酰胺酶,鲍曼不动杆菌,嗜麦芽窄食单胞菌,耐甲氧西林金黄色葡萄球菌,药物过敏,脱敏,妊娠期,哺乳期,抗反转录病毒,药理学,药效学,药物相互作用,剂量,不良反应,光敏感性,氨基糖苷类,吸入用抗生素,ECMO,QT间期延长,真菌感染；=9" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '桑福德抗微生物治疗指南目录（表1-表11A）',
+                    url: window.location.href,
+                    page: '9',
+                    tags: ['临床抗微生物治疗', '抗菌药物', '抗生素', '抗真菌', '妊娠期用药', '药物相互作用']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '9');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '9');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '9');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

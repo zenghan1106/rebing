@@ -1,0 +1,596 @@
+我来为您创建这个关于憩室炎、直肠周围脓肿、腹膜炎治疗的HTML网页表格，包含所有要求的特殊格式和功能。
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~憩室炎直肠周围脓肿腹膜炎治疗指南 - 阿莫西林克拉维酸哌拉西林他唑巴坦莫西沙星抗微生物方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
+            padding: 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        
+        .nav-buttons > * {
+            pointer-events: auto;
+        }
+        
+        .home-button a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(41, 128, 185, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-button a:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
+        }
+        
+        .home-button a::before {
+            content: "← ";
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #27ae60;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(39, 174, 96, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .page-nav a:hover {
+            background-color: #1e8449;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .page-nav a.disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
+            padding: 35px;
+            margin-top: 60px;
+        }
+        
+        /* 特殊格式标题 */
+        .title-special {
+            text-align: center;
+            color: #1a5276;
+            font-size: 30px;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #3498db;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 17px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        /* 检索标签区域 */
+        .search-tags {
+            background-color: #e8f6f3;
+            border: 2px dashed #27ae60;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .search-tags-label {
+            color: #1e8449;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .search-tags-content {
+            color: #6c3483;
+            font-size: 13px;
+            line-height: 1.8;
+            word-break: break-all;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background-color: #fff;
+            table-layout: fixed;
+        }
+        
+        /* 表格头部 - 蓝色，字体大 */
+        thead th {
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid #154360;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background-color: #2980b9 !important;
+            color: #ffffff;
+            font-size: 16px !important;
+            font-weight: bold;
+            padding: 14px 10px;
+            border: 2px solid #1a5276;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background-color: #d6eaf8;
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .category-row td {
+            padding: 14px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #bdc3c7;
+            color: #2c3e50;
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e1f0fa;
+        }
+        
+        /* 左侧诊断列 */
+        td:first-child {
+            width: 16%;
+            background-color: #f4f6f7;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        /* 病原体列 */
+        .pathogen {
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 首选方案 */
+        .preferred {
+            color: #1e8449;
+            font-weight: 600;
+            background-color: #eafaf1;
+        }
+        
+        /* 备选方案 */
+        .alternative {
+            color: #d35400;
+            background-color: #fef5e7;
+        }
+        
+        /* 辅助说明 */
+        .notes {
+            color: #34495e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 重要提示高亮 */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+            font-weight: 600;
+        }
+        
+        /* 警告提示 */
+        .warning {
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #721c24;
+            font-weight: 600;
+        }
+        
+        /* 成功提示 */
+        .success {
+            background-color: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        /* 剂量数字突出 */
+        .dose {
+            color: #c0392b;
+            font-weight: 700;
+        }
+        
+        /* 药物名称突出 */
+        .drug {
+            background-color: #e8daef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 分隔虚线 */
+        .dashed-separator {
+            border-top: 2px dashed #3498db;
+            margin: 10px 0;
+        }
+        
+        /* 页脚注释区域 */
+        .footnote-section {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fef9e7;
+            border-radius: 10px;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .footnote-section p {
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .footnote-section .symbol {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        /* 底部关键词和页码区域 */
+        .bottom-info {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            text-align: center;
+        }
+        
+        .bottom-keywords {
+            color: #2c3e50;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .bottom-keywords-label {
+            color: #2980b9;
+            font-weight: bold;
+        }
+        
+        .page-number {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮区域 -->
+    <div class="nav-buttons">
+        <div class="home-button">
+            <a href="index.html">返回首页</a>
+        </div>
+        <div class="page-nav">
+            <a href="20.html" class="prev-page">← 上一页</a>
+            <a href="22.html" class="next-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 特殊格式标题 -->
+        <h1 class="title-special">~~~~~表1（20）临床抗微生物治疗的初始选择*****</h1>
+        <p class="subtitle">胃肠道/按解剖部位区分的胃肠道感染：食管至直肠（续）</p>
+        
+        <!-- 检索标签区域 -->
+        <div class="search-tags">
+            <div class="search-tags-label">%%%%%检索标签?????</div>
+            <div class="search-tags-content">
+                憩室炎, 直肠周围脓肿, 腹膜炎, 肠杆菌科, 铜绿假单胞菌, 拟杆菌属, 肠球菌, 阿莫西林克拉维酸, 哌拉西林他唑巴坦, 莫西沙星, 环丙沙星, 左氧氟沙星, 甲硝唑, 厄他培南, 头孢吡肟, 头孢西丁, 头孢替坦, 替卡西林克拉维酸, 氨苄西林舒巴坦, 多尼培南, 亚胺培南, 美罗培南, 替加环素, 克林霉素, 氨基糖苷类, 氨曲南, PCT, 降钙素原, 脆弱拟杆菌, 耐药
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 分类行 -->
+                <tr class="category-row">
+                    <td colspan="5">胃肠道/按解剖部位区分的胃肠道感染：食管至直肠（续）</td>
+                </tr>
+                
+                <!-- 憩室炎，直肠周围脓肿，腹膜炎 -->
+                <tr>
+                    <td>
+                        <span class="highlight">憩室炎，直肠周围脓肿，腹膜炎</span><br><br>
+                        <span class="reference">见腹膜炎，51页</span><br>
+                        <span class="reference">NEJM 2018; 379: 1635</span>
+                    </td>
+                    <td class="pathogen">
+                        <span class="drug">肠杆菌科</span>，偶见<span class="drug">铜绿假单胞菌</span>、<span class="drug">拟杆菌属</span>、<span class="drug">肠球菌</span>
+                    </td>
+                    <td class="preferred">
+                        <span class="success">轻症憩室炎和引流后直肠周围脓肿门诊治疗：</span><br><br>
+                        
+                        <span class="drug">阿莫西林-克拉维酸</span> <span class="dose">875/125mg</span> po bid<br><br>
+                        
+                        若β-内酰胺类药物过敏或不耐受：<br>
+                        ［<span class="drug">TMP-SMX</span>（双剂量）bid<br>
+                        或（<span class="drug">环丙沙星</span> <span class="dose">750mg</span> bid或<br>
+                        <span class="drug">左氧氟沙星</span> <span class="dose">750mg</span> qd）］<br>
+                        ＋ <span class="drug">甲硝唑</span> <span class="dose">500mg</span> q6h<br><br>
+                        
+                        疗程视治疗反应而异，通常治疗<span class="dose">7～10天</span>。可依据血浆<span class="drug">PCT</span>水平变化趋势进行疗程个体化。治疗至PCT <span class="dose"><0.5mg/ml</span><br><br>
+                        
+                        <div class="dashed-separator"></div>
+                        
+                        <span class="success">住院患者，病情轻-中度</span><br><br>
+                        
+                        <span class="drug">哌拉西林-他唑巴坦</span>负荷剂量<span class="dose">4.5g</span> iv 30min输注，4h以后，开始<span class="dose">3.375g</span> iv 输注4h之后q8h重复输注4h。<br>
+                        或<span class="drug">厄他培南</span> <span class="dose">1g</span> iv qd，<br>
+                        或<span class="drug">莫西沙星</span> <span class="dose">400mg</span> iv qd<br>
+                        <span class="warning">（拟杆菌属的耐药性可能增加）</span>
+                    </td>
+                    <td class="alternative">
+                        <span class="drug">莫西沙星</span> <span class="dose">400mg</span> po qd<br>
+                        疗程视治疗反应而异。<br>
+                        通常治疗<span class="dose">7～10天</span><br><br>
+                        
+                        <div class="dashed-separator"></div>
+                        
+                        ［（<span class="drug">环丙沙星</span> <span class="dose">400mg</span> iv q12h）或（<span class="drug">左氧氟沙星</span> <span class="dose">750mg</span> iv qd）］<br>
+                        ＋（<span class="drug">甲硝唑</span> <span class="dose">500mg</span> iv q6h或<span class="dose">1g</span> iv q12h），<br>
+                        或<span class="drug">莫西沙星</span> <span class="dose">400mg</span> iv qd，<br>
+                        或<span class="drug">头孢吡肟</span> <span class="dose">2g</span> iv q12h ＋ <span class="drug">甲硝唑</span> <span class="dose">1g</span> iv q12h，<br>
+                        或<span class="drug">阿莫西林-克拉维酸</span> <span class="dose">1000/200mg</span> iv q8h<br>
+                        <span class="highlight">（美国以外地区）</span>
+                    </td>
+                    <td class="notes">
+                        必须<span class="highlight">"覆盖"</span>革兰阴性需氧菌和革兰阴性厌氧菌；<br>
+                        <span class="success">只对革兰阴性厌氧杆菌有效</span>的有<span class="drug">克林霉素</span>、<span class="drug">甲硝唑</span>。<br>
+                        <span class="success">只对革兰阴性需氧杆菌有效</span>的有抗假单胞<span class="drug">氨基糖苷</span>，注射用第二、三、四代头孢菌素<span class="highlight">（表10A，150页）</span>、<span class="drug">氨曲南</span>、<span class="drug">环丙沙星</span>、<span class="drug">左氧氟沙星</span>。<br>
+                        <span class="success">对以上二者都有效</span>者有<span class="drug">头孢西丁</span>、<span class="drug">头孢替坦</span>、<span class="drug">替卡西林-克拉维酸</span>、<span class="drug">哌拉西林-他唑巴坦</span>、<span class="drug">氨苄西林-舒巴坦</span>、<span class="drug">厄他培南</span>、<span class="drug">多尼培南</span>、<span class="drug">亚胺培南</span>、<span class="drug">美罗培南</span>、<span class="drug">莫西沙星</span>和<span class="drug">替加环素</span><br><br>
+                        
+                        <span class="warning">耐药性（脆弱拟杆菌）：</span>对<span class="drug">甲硝唑</span>、<span class="drug">哌拉西林-他唑巴坦</span><span class="success">耐药罕见</span>。肠道细菌对<span class="drug">氟喹诺酮</span>的耐药性增加，尤其是近期用过任何氟喹诺酮类药物的患者
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页脚注释区域 -->
+        <div class="footnote-section">
+            <p><span class="symbol">*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+            
+            <p><span class="symbol">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+            
+            <p>表中名词缩写<span class="highlight">见第2页</span>。</p>
+        </div>
+        
+        <!-- 底部关键词和页码区域 -->
+        <div class="bottom-info">
+            <div class="bottom-keywords">
+                <span class="bottom-keywords-label">关键词：</span>
+                憩室炎, 直肠周围脓肿, 腹膜炎, 肠杆菌科, 铜绿假单胞菌, 拟杆菌属, 肠球菌, 阿莫西林克拉维酸, 哌拉西林他唑巴坦, 莫西沙星, 环丙沙星, 左氧氟沙星, 甲硝唑, 厄他培南, 头孢吡肟, 头孢西丁, 头孢替坦, 替卡西林克拉维酸, 氨苄西林舒巴坦, 多尼培南, 亚胺培南, 美罗培南, 替加环素, 克林霉素, 氨基糖苷类, 氨曲南, PCT, 降钙素原, 脆弱拟杆菌, 耐药
+            </div>
+            <div class="page-number" id="pageNumber">21</div>
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
+        </div>
+    </div>
+    
+    <script>
+        // 动态获取当前页码并设置上一页/下一页链接
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentPath = window.location.pathname;
+            var fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+            var pageNum = parseInt(fileName.replace('.html', '')) || 21;
+            
+            // 更新页码显示
+            document.getElementById('pageNumber').textContent = pageNum;
+            
+            // 更新上一页链接
+            var prevLink = document.querySelector('.prev-page');
+            if (prevLink && pageNum > 1) {
+                prevLink.href = (pageNum - 1) + '.html';
+            } else if (prevLink) {
+                prevLink.classList.add('disabled');
+                prevLink.href = '#';
+            }
+            
+            // 更新下一页链接
+            var nextLink = document.querySelector('.next-page');
+            if (nextLink) {
+                nextLink.href = (pageNum + 1) + '.html';
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+
+
+---
+
+
+
+标签和标题信息
+
+
+ 项目 	 内容 	
+ **网页标题 (`<title>`标签)** 	 `~~~~~憩室炎直肠周围脓肿腹膜炎治疗指南 - 阿莫西林克拉维酸哌拉西林他唑巴坦莫西沙星抗微生物方案*****` 	
+ **主标题 (`<h1>`标签)** 	 `~~~~~表1（20）临床抗微生物治疗的初始选择*****` 	
+ **副标题 (`<p class="subtitle">`)** 	 `胃肠道/按解剖部位区分的胃肠道感染：食管至直肠（续）` 	
+ **检索标签 (`%%%%%检索标签?????`)** 	 憩室炎, 直肠周围脓肿, 腹膜炎, 肠杆菌科, 铜绿假单胞菌, 拟杆菌属, 肠球菌, 阿莫西林克拉维酸, 哌拉西林他唑巴坦, 莫西沙星, 环丙沙星, 左氧氟沙星, 甲硝唑, 厄他培南, 头孢吡肟, 头孢西丁, 头孢替坦, 替卡西林克拉维酸, 氨苄西林舒巴坦, 多尼培南, 亚胺培南, 美罗培南, 替加环素, 克林霉素, 氨基糖苷类, 氨曲南, PCT, 降钙素原, 脆弱拟杆菌, 耐药 	
+
+
+
+
+---
+
+
+
+特殊格式说明
+
+
+ 格式 	 用途 	 示例 	
+ `~~~~~标题*****` 	 包裹标题文本，便于程序提取 	 `~~~~~表1（20）临床抗微生物治疗的初始选择*****` 	
+ `%%%%%检索标签?????` 	 包裹检索关键词，便于程序提取疾病、药物、细菌信息 	 `%%%%%憩室炎, 直肠周围脓肿, 腹膜炎, 阿莫西林克拉维酸, 哌拉西林他唑巴坦, 莫西沙星?????` 	
+
+
+
+
+---
+
+
+
+功能说明
+
+
+ 功能 	 实现方式 	 位置 	
+ **返回首页按钮** 	 蓝色背景，白色文字，点击跳转至 `index.html` 	 左上角固定 	
+ **上一页按钮** 	 绿色背景，白色文字，点击跳转至 `(当前页码-1).html` 	 右上角 	
+ **下一页按钮** 	 绿色背景，白色文字，点击跳转至 `(当前页码+1).html` 	 右上角 	
+ **动态页码计算** 	 JavaScript自动从文件名提取页码，动态生成上一页/下一页链接 	 自动执行 	
+ **底部关键词** 	 显示在页码上方，包含疾病、药物、细菌等关键词 	 底部信息区域 	
+ **页码显示** 	 蓝色背景白色文字，显示当前页码（从文件名提取） 	 底部中央 	
+
+
+
+
+---
+
+
+
+设计特点说明
+
+
+ 特性 	 实现方式 	
+ **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
+ **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
+ **子表头** 	 中蓝色 `#2980b9`，16px字号 	
+ **分类行** 	 淡蓝色背景 `#d6eaf8`，深蓝加粗文字 	
+ **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
+ **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
+ **备选方案列** 	 淡橙背景 `#fef5e7`，深橙文字 `#d35400` 	
+ **药物名称** 	 淡紫背景 `#e8daef`，紫色文字 `#6c3483`，突出显示 	
+ **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
+ **重要提示** 	 黄色高亮 `#fff3cd` 	
+ **警告提示** 	 淡红背景 `#f8d7da` 	
+ **成功/推荐** 	 淡绿背景 `#d4edda` 	
+ **分隔虚线** 	 蓝色虚线 `#3498db`，用于分隔不同治疗方案 	
+ **页脚注释区域** 	 淡黄色背景 `#fef9e7`，橙色左边框 `#f39c12` 	
+ **检索标签区域** 	 绿色虚线边框 `#27ae60`，浅绿背景 `#e8f6f3` 	
+ **底部信息区域** 	 蓝色边框 `#3498db`，浅蓝背景 `#eaf2f8`

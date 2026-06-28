@@ -1,0 +1,441 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~立克次体病诊疗指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 13px;
+        }
+        
+        thead th {
+            background-color: #1565C0;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0d47a1;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #c62828;
+        }
+        
+        .pathogen {
+            color: #2e7d32;
+        }
+        
+        .treatment {
+            color: #1565C0;
+        }
+        
+        .note {
+            color: #6a1b9a;
+            font-size: 12px;
+        }
+        
+        .section-title {
+            background-color: #fff3e0;
+            font-weight: bold;
+            color: #e65100;
+        }
+        
+        .footer-note {
+            background-color: #e8f5e9;
+            font-size: 12px;
+            color: #2e7d32;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 4px;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-antibiotic {
+            background-color: #e3f2fd;
+            color: #1565C0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-bacteria {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #1565C0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f3e5f5;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #6a1b9a;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 4px;
+            }
+            
+            tbody td {
+                padding: 6px 4px;
+            }
+            
+            .nav-btn, .page-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        <div class="page-nav">
+            <a href="138.html" class="nav-btn page-btn">上一页</a>
+            <a href="140.html" class="nav-btn page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~立克次体病诊疗指南*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 32%;">推荐治疗方案</th>
+                    <th style="width: 32%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="section-title">立克次体病 — 斑点热（注意：不包括立克次体痘）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">落基山斑点热（RMSF）</span><br>
+                        CID 71: 188, 2020<br><br>
+                        <span class="note">注意：可模拟埃立克次体病。皮疹特征很重要—见说明</span>
+                    </td>
+                    <td class="pathogen">
+                        立氏立克次体（革蜱传播）
+                    </td>
+                    <td class="treatment">
+                        <strong>首选方案：</strong><br>
+                        多西环素 100mg po/iv bid×7d或体温正常后再用2d<br>
+                        有人建议负荷量：200mg iv/po q2h×3d，随后100mg po/iv bid<br><br>
+                        <strong>备选方案：</strong><br>
+                        妊娠：多西环素
+                    </td>
+                    <td>
+                        发热，皮疹（88%），瘀点（40%～50%）；皮疹可由四肢播散到躯干；不到50%的患者皮疹在最初72小时内出现<br>
+                        诊断：依赖皮肤活检免疫组化；检出抗体可确诊；美国东南和中南诸州最高发，也见于俄克拉何马州、南达科他州和蒙大拿州。美国42个州有病例报告<br>
+                        <strong>注意：仅3%～18%的患者有发热、皮疹和蜱接触史，早期死亡主要见于儿童，因此用多西环素经验性治疗是合理的</strong><br>
+                        氯霉素为次选药物，疗效不如多西环素
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">其他斑点热</span><br>
+                        如立克次体痘<br>
+                        非洲蜱咬热<br>
+                        帕克立克次体
+                    </td>
+                    <td class="pathogen">
+                        六大洲至少有8种立克次体 [CID 45(Suppl 1): S39, 2007]
+                    </td>
+                    <td class="treatment">
+                        <strong>首选方案：</strong><br>
+                        多西环素 100mg po bid×7d（儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        氯霉素 500mg po或iv qid×7d<br>
+                        年龄＜8岁儿童：口服阿奇霉素或克拉霉素（轻症）
+                    </td>
+                    <td>
+                        出现下列情况要考虑该病：<br>
+                        ①发热、剧烈肌痛、头痛；<br>
+                        ②螨或蜱暴露史；<br>
+                        ③局部焦痂或皮疹。<br>
+                        诊断：血液PCR、皮肤活检或连续抗体测定
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="section-title">斑疹伤寒——有外出旅游史及发热者应考虑</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">虱媒流行性斑疹伤寒</span>
+                    </td>
+                    <td class="pathogen">
+                        普氏立克次体（体虱或头虱是媒介）
+                    </td>
+                    <td class="treatment">
+                        <strong>首选方案：</strong><br>
+                        多西环素 100mg iv/po bid×7d。200mg×单剂，有效率95%（儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        氯霉素 500mg iv/po qid×5d
+                    </td>
+                    <td>
+                        躯干皮疹（64%）离心分布，与落基山斑疹热相反；冬天发病。诊断靠血清学
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">鼠型斑疹伤寒</span>（与猫蚤伤寒相似）
+                    </td>
+                    <td class="pathogen">
+                        地方性斑疹伤寒立克次体（鼠是宿主，蚤是媒介）
+                    </td>
+                    <td class="treatment">
+                        <strong>首选方案：</strong><br>
+                        多西环素 100mg iv/po bid×7d（儿童见表注19）<br><br>
+                        <strong>备选方案：</strong><br>
+                        氯霉素 500mg iv/po qid×5d
+                    </td>
+                    <td>
+                        皮疹20%～54%，不具有诊断性。大部分患者不治疗会在2周内恢复。治疗会加快恢复。诊断基于临床怀疑，靠血清学确诊。阿奇霉素治疗失败（CID 68: 738, 2019）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">恙虫病</span>
+                    </td>
+                    <td class="pathogen">
+                        恙虫病立克次体（啮齿动物是宿主，幼虫期恙螨是媒介）
+                    </td>
+                    <td class="treatment" colspan="2">
+                        <strong>首选方案：</strong><br>
+                        多西环素 200mg iv bid第1天，之后100mg bid×6d＋阿奇霉素 500mg iv bid第一天，之后500mg qd ×6d<br><br>
+                        方案基于前瞻性双盲随机对照研究：NEJM 2023; 388: 792
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="footer-note">
+                        <strong>注19 重要提示：</strong>任何年龄儿童使用多西环素疗程≤21天均安全性好。儿童剂量：4.4mg/(kg·d) 分次bid（AAP Redbook 2018）。<br>
+                        * 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+                        § 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease">落基山斑点热</span>
+        <span class="tag tag-disease">斑疹伤寒</span>
+        <span class="tag tag-disease">恙虫病</span>
+        <span class="tag tag-disease">立克次体痘</span>
+        <span class="tag tag-disease">非洲蜱咬热</span>
+        <span class="tag tag-antibiotic">多西环素</span>
+        <span class="tag tag-antibiotic">氯霉素</span>
+        <span class="tag tag-antibiotic">阿奇霉素</span>
+        <span class="tag tag-antibiotic">克拉霉素</span>
+        <span class="tag tag-bacteria">立氏立克次体</span>
+        <span class="tag tag-bacteria">普氏立克次体</span>
+        <span class="tag tag-bacteria">恙虫病立克次体</span>
+        <span class="tag tag-disease">蜱传疾病</span>
+        <span class="tag tag-disease">虱媒疾病</span>
+        <span class="tag tag-disease">蚤媒疾病</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="立克次体病诊疗指南；落基山斑点热；斑疹伤寒；恙虫病；多西环素；氯霉素；阿奇霉素；立克次体；蜱传疾病；=139" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：139</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>立克次体病 | 斑点热 | 斑疹伤寒 | 恙虫病 | 多西环素 | 氯霉素 | 阿奇霉素 | 立克次体 | 蜱传疾病 | 革蜱 | 体虱 | 恙螨
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗真菌药物PK/PD参数续表（多烯类、抗代谢药、唑类）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .page-nav {
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .home-btn:hover, .page-nav:hover {
+            background-color: #2874a6;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #d6eaf8;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            font-size: 12px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #154360;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9f9;
+        }
+        
+        tbody tr:hover {
+            background-color: #d6eaf8;
+        }
+        
+        .category-row {
+            background-color: #2e86c1 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            text-align: left;
+            padding: 12px 10px;
+        }
+        
+        .subcategory-row {
+            background-color: #5dade2 !important;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .subcategory-row td {
+            text-align: left;
+            padding: 10px;
+        }
+        
+        .notes {
+            background-color: #eaf2f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin-bottom: 6px;
+            text-indent: 0;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fef9e7;
+            border-radius: 10px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #7d6608;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .tag-disease {
+            background-color: #fadbd8;
+            color: #943126;
+        }
+        
+        .tag-disease:hover {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background-color: #d5f5e3;
+            color: #1e8449;
+        }
+        
+        .tag-bacteria:hover {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .tag-drug {
+            background-color: #d6eaf8;
+            color: #1a5276;
+        }
+        
+        .tag-drug:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #1a5276;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background-color: #1a5276;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2874a6;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+            word-break: break-all;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 8px 5px;
+            }
+            
+            tbody td {
+                font-size: 11px;
+                padding: 6px 4px;
+            }
+            
+            .home-btn, .page-nav {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="244.html" class="page-nav">← 上一页</a>
+            <a href="246.html" class="page-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗真菌药物PK/PD参数续表（多烯类、抗代谢药、唑类）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>PK/PD<br>指数</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂¹</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tₘₐₓ<br>(h)</th>
+                    <th>血浆峰<br>值浓度²<br>(μg/ml)</th>
+                    <th>尿峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容<br>积³/Vd</th>
+                    <th>平均血清<br>半衰期⁴<br>(h)</th>
+                    <th>清除</th>
+                    <th>胆汁<br>排泄率⁵<br>(%)</th>
+                    <th>脑脊液/<br>血药浓<br>度比⁶<br>(%)</th>
+                    <th>脑脊<br>液穿<br>透⁷</th>
+                    <th>AUC⁸<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="16">抗真菌药物（续）</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="16">多烯类</td>
+                </tr>
+                <tr>
+                    <td>两性霉素B</td>
+                    <td>Cₘₐₓ/MIC</td>
+                    <td>注射液（去氧胆酸<br>盐、ABLC、脂<br>质体）</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>去氧胆酸盐：<br>0.5～3.5（0.4～<br>0.7mg/kg qd,<br>SS）<br>ABLC: 1.0～<br>2.5（5mg/kg<br>qd, SS）<br>脂质体: 83<br>（5mg/kg qd,<br>SS）</td>
+                    <td>ND</td>
+                    <td>去氧胆酸盐：<br>91～95<br>ABLC、脂<br>质体: ND</td>
+                    <td>去氧胆酸盐：<br>4L/kg<br>ABLC: 131L/kg<br>脂 质 体: 0.1～<br>0.4L/kg（Vss）</td>
+                    <td>去氧胆酸盐：<br>24<br>ABLC: 173<br>脂质体: 6.8</td>
+                    <td>肾脏<br>（缓慢），<br>代谢？</td>
+                    <td>ND</td>
+                    <td>低</td>
+                    <td>否</td>
+                    <td>去氧胆酸盐: 17<br>（0.4～0.7mg/kg<br>qd, 0～24h）<br>ABLC: 14<br>（5mg/kg qd,<br>0～24h）<br>脂质体: 555<br>（5mg/kg qd,<br>0～24h）</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="16">抗代谢药</td>
+                </tr>
+                <tr>
+                    <td>氟胞嘧啶</td>
+                    <td>T＞MIC</td>
+                    <td>胶囊（250mg、<br>500mg）</td>
+                    <td>胶囊±<br>食物</td>
+                    <td>78～90</td>
+                    <td>2</td>
+                    <td>30～40（2.5g<br>po, SD）</td>
+                    <td>ND</td>
+                    <td>≈4</td>
+                    <td>0.6L/kg</td>
+                    <td>3～5</td>
+                    <td>肾脏</td>
+                    <td>ND</td>
+                    <td>60～100</td>
+                    <td>是</td>
+                    <td>ND</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="16">唑类</td>
+                </tr>
+                <tr>
+                    <td>艾氟康唑</td>
+                    <td>ND</td>
+                    <td>10%溶液（4ml/8ml）</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>0.67 ng/ml（28<br>天后）</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>29.9</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>12.15 ng·h/ml<br>（28天后）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="notes">
+        <p><strong>注：</strong></p>
+        <p>1 除非注明，否则均指成人制剂；+食物=餐中服用，无食物=空腹服用，±食物=餐中或空腹服用。</p>
+        <p>2 SD=单剂量，SS=达到稳态。</p>
+        <p>3 V/F=Vd/口服生物利用度，Vss=稳态时Vd，Vss/F=稳态时Vd/口服生物利用度。</p>
+        <p>4 假定CrCl＞80L/min。</p>
+        <p>5 (胆汁峰值浓度/血浆峰值浓度)×100。空白表示无数据。</p>
+        <p>6 炎症情况下脑脊液浓度。</p>
+        <p>7 基于药物的剂量和病原体敏感性判断。理想脑脊液浓度是≥10×MIC。</p>
+        <p>8 曲线下面积(AUC)=血清药物浓度-时间曲线下面积；12h=AUC 0～12，24h=AUC 0～24。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击筛选）</div>
+        <span class="tag tag-disease">感染</span>
+        <span class="tag tag-disease">炎症</span>
+        <span class="tag tag-bacteria">真菌</span>
+        <span class="tag tag-bacteria">念珠菌</span>
+        <span class="tag tag-bacteria">隐球菌</span>
+        <span class="tag tag-bacteria">曲霉</span>
+        <span class="tag tag-bacteria">毛霉</span>
+        <span class="tag tag-bacteria">组织胞浆菌</span>
+        <span class="tag tag-bacteria">球孢子菌</span>
+        <span class="tag tag-bacteria">皮炎芽生菌</span>
+        <span class="tag tag-bacteria">甲癣</span>
+        <span class="tag tag-drug">两性霉素B</span>
+        <span class="tag tag-drug">去氧胆酸盐</span>
+        <span class="tag tag-drug">ABLC</span>
+        <span class="tag tag-drug">脂质体</span>
+        <span class="tag tag-drug">氟胞嘧啶</span>
+        <span class="tag tag-drug">艾氟康唑</span>
+        <span class="tag tag-drug">多烯类</span>
+        <span class="tag tag-drug">抗代谢药</span>
+        <span class="tag tag-drug">唑类</span>
+        <span class="tag tag-drug">注射液</span>
+        <span class="tag tag-drug">胶囊</span>
+        <span class="tag tag-drug">溶液</span>
+        <span class="tag tag-drug">PK/PD</span>
+        <span class="tag tag-drug">AUC</span>
+        <span class="tag tag-drug">MIC</span>
+        <span class="tag tag-drug">Cmax</span>
+        <span class="tag tag-drug">蛋白结合率</span>
+        <span class="tag tag-drug">分布容积</span>
+        <span class="tag tag-drug">半衰期</span>
+        <span class="tag tag-drug">肾脏清除</span>
+        <span class="tag tag-drug">代谢清除</span>
+        <span class="tag tag-drug">脑脊液穿透</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗真菌药物PK/PD参数续表（多烯类、抗代谢药、唑类）；两性霉素B；去氧胆酸盐；ABLC；脂质体；氟胞嘧啶；艾氟康唑；多烯类；抗代谢药；唑类；注射液；胶囊；溶液；PK/PD；AUC；MIC；Cmax；感染；炎症；真菌；念珠菌；隐球菌；曲霉；毛霉；组织胞浆菌；球孢子菌；皮炎芽生菌；甲癣；=245" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">— 245 —</div>
+    
+    <div class="keywords">
+        关键词：两性霉素B | 去氧胆酸盐 | ABLC | 脂质体 | 氟胞嘧啶 | 艾氟康唑 | 多烯类 | 抗代谢药 | 唑类 | 抗真菌 | 念珠菌 | 隐球菌 | 曲霉 | 毛霉 | 组织胞浆菌 | 球孢子菌 | 皮炎芽生菌 | 甲癣 | PK/PD | Cmax/MIC | T>MIC | AUC/MIC | 肾脏清除 | 代谢清除 | 分布容积 | 蛋白结合率 | 半衰期 | 脑脊液穿透
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.style.backgroundColor = '#27ae60';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = '#1a5276';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

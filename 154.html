@@ -1,0 +1,642 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择-化脓性血栓性静脉炎与心内膜炎*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #449d44;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child {
+            font-size: 14px;
+            font-weight: bold;
+            background: #eaf2f8;
+        }
+        
+        tbody tr:first-child td {
+            padding: 12px 10px;
+            color: #1a5276;
+        }
+        
+        td, th {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .subcategory {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .highlight-red {
+            color: #c0392b;
+        }
+        
+        .highlight-blue {
+            color: #2874a6;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin: 5px 0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin: 15px 0;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9c640c;
+        }
+        
+        .tag-disease:hover {
+            background: #f5cba7;
+        }
+        
+        .tag-bacteria {
+            background: #d4efdf;
+            color: #1e8449;
+        }
+        
+        .tag-bacteria:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-antibiotic {
+            background: #d6eaf8;
+            color: #2874a6;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #aed6f1;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        .btn-copy.copied {
+            background: #27ae60;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 16px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="153.html" class="btn btn-nav">← 上一页</a>
+            <a href="155.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~临床抗微生物治疗的初始选择-化脓性血栓性静脉炎与心内膜炎*****</h1>
+    <p class="sub-title">表1（70）续 化脓性血栓性静脉炎 | 表1（71）心内膜炎</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 35%;">推荐治疗方案</th>
+                    <th style="width: 32%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表1(70)续 化脓性血栓性静脉炎 -->
+                <tr class="category-row">
+                    <td colspan="4">血管/导管相关血流感染（CRBSI）（续）— 化脓性（感染性）血栓性静脉炎</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background: #fef9e7;">
+                        <strong>脑静脉窦</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        海绵窦：脑神经Ⅲ、Ⅳ、Ⅴ（V₁/V₂分支）、Ⅵ受累风险
+                    </td>
+                    <td>
+                        金黄色葡萄球菌（70%）<br>
+                        链球菌属<br>
+                        厌氧菌（少见）<br>
+                        毛霉菌（糖尿病）<br>
+                        （见表11A）
+                    </td>
+                    <td>
+                        [万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml+头孢曲松2g iv q12h]，如口腔或鼻窦来源+甲硝唑500mg iv q8h<br><br>
+                        <strong>备选：</strong>可用达托霉素8～12mg/kg iv qd或利奈唑胺600mg iv q12h，代替万古霉素
+                    </td>
+                    <td>
+                        • 诊断：CT或MRI<br>
+                        • 治疗：①留取培养；②经验性抗生素治疗；③可能需要辅助手术治疗；④肝素治疗至体温正常，之后香豆素类抗凝数周
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        横窦：中耳炎/乳突炎的并发症（病原菌和中耳炎类似）
+                    </td>
+                    <td>
+                        混合菌感染（通常）<br>
+                        需氧菌如奇异变形杆菌<br>
+                        大肠埃希菌<br>
+                        金黄色葡萄球菌<br>
+                        铜绿假单胞菌<br>
+                        脆弱拟杆菌<br>
+                        其他革兰阴性杆菌
+                    </td>
+                    <td>
+                        头孢吡肟2g iv q8h+甲硝唑500mg iv q8h+万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml，浓度15～20μg/ml<br><br>
+                        <strong>备选：</strong>美罗培南2g iv q8h+利奈唑胺600mg iv q12h
+                    </td>
+                    <td>
+                        • 诊断：CT或MRI<br>
+                        • 治疗：①乳突切开根治术；②留取培养；③抗生素治疗；④抗凝治疗存在争议<br>
+                        • 预后：良好
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        上矢状窦：细菌性脑膜炎或细菌性额窦炎的并发症治疗同脑膜炎
+                    </td>
+                    <td>
+                        肺炎链球菌、脑膜炎奈瑟菌、流感嗜血杆菌（少见）、金黄色葡萄球菌（极少见）
+                    </td>
+                    <td>
+                        头孢曲松2g iv q12h+万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml+地塞米松<br><br>
+                        <strong>备选：</strong>美罗培南2g iv q8h+万古霉素30～60mg/(kg·d)分2～3次，目标AUC₂₄ 400～600μg·h/ml+地塞米松
+                    </td>
+                    <td>
+                        • 诊断：MRI<br>
+                        • 预后：差，导致脑皮质静脉血栓、出血性梗死、脑疝<br>
+                        • 抗凝治疗不推荐
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        颈静脉，Lemierre综合征：咽炎、扁桃体炎、牙感染、EBV感染的并发症
+                    </td>
+                    <td>
+                        坏死梭菌（厌氧）<br>
+                        少见：<br>
+                        其他梭菌<br>
+                        化脓性链球菌<br>
+                        拟杆菌属
+                    </td>
+                    <td>
+                        头孢曲松2g iv qd+甲硝唑500mg iv q8h<br><br>
+                        <strong>备选：</strong>哌拉西林/他唑巴坦4.5g iv输注4h以上，q8h或美罗培南500mg iv q6h（或其他碳青霉烯类）
+                    </td>
+                    <td>
+                        • 导管相关感染，加用万古霉素<br>
+                        • 坏死梭菌可以用克林霉素600～900mg iv q8h<br>
+                        • 疗程3～6周<br>
+                        • 影像：高分辨CT<br>
+                        • 抗凝药物作用不确定<br>
+                        • 参考<em>Cureus 2023；15：e43685</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        盆腔静脉：包括卵巢静脉和盆腔深静脉炎
+                    </td>
+                    <td>
+                        需氧革兰阴性杆菌<br>
+                        链球菌属<br>
+                        厌氧菌
+                    </td>
+                    <td>
+                        抗生素+抗凝（肝素，然后双香豆素类）<br><br>
+                        <strong>MDR革兰阴性菌低流行：</strong>哌拉西林-他唑巴坦4.5g iv输注4h以上q8h或（头孢曲松2g iv qd+甲硝唑500mg iv q8h）<br><br>
+                        <strong>MDR革兰阴性菌高流行：</strong>美罗培南1g iv q8h。如果有严重β-内酰胺过敏：环丙沙星400mg iv q12h+甲硝唑500mg iv q8h
+                    </td>
+                    <td>
+                        • 诊断：卵巢静脉感染表现为产后1周发热和局部疼痛；盆腔深静脉感染表现为产后3～5天发热但无局部疼痛。CT或MRI可能有帮助<br>
+                        • 治疗至体温正常后48小时且白细胞正常<br>
+                        • 双香豆素抗凝6周
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        门静脉（门静脉炎）：憩室炎、阑尾炎和（罕见）其他腹腔感染的并发症
+                    </td>
+                    <td>
+                        需氧革兰阴性杆菌：大肠埃希菌、克雷伯菌和奇异变形杆菌最常见<br>
+                        其他：需氧/厌氧链球菌，脆弱拟杆菌，梭状杆菌
+                    </td>
+                    <td>
+                        <strong>MDR革兰阴性菌低流行（<20%）：</strong><br>
+                        哌拉西林-他唑巴坦4.5g iv输注4h以上q8h或（环丙沙星400mg iv q12h+甲硝唑500mg iv q8h）<br><br>
+                        <strong>MDR革兰阴性菌高流行（≥20%）：</strong><br>
+                        如产ESBL菌，美罗培南1g iv q8h<br>
+                        如产KPC菌，头孢他啶-阿维巴坦或美罗培南-韦博巴坦或亚胺培南-瑞来巴坦<br>
+                        如产MBL菌，头孢他啶-阿维巴坦+氨曲南
+                    </td>
+                    <td>
+                        • 诊断：腹腔感染患者出现疼痛、发热、中性粒细胞增多。行腹部CT<br>
+                        • 化脓性肝脓肿是并发症之一<br>
+                        • 不抗凝，除非有高凝疾病（肿瘤）<br>
+                        • 无静脉手术指征
+                    </td>
+                </tr>
+                
+                <!-- 表1(71) 心内膜炎 -->
+                <tr class="category-row">
+                    <td colspan="4">心脏</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background: #fadbd8;">
+                        <span class="highlight-red">心内膜炎</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background: #fef9e7;">
+                        <strong>急性细菌性心内膜炎（ABE）</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        静脉吸毒者，右侧心内膜炎（三尖瓣），金黄色葡萄球菌（<em>NEJM 2023; 388：325</em>）
+                    </td>
+                    <td>
+                        金黄色葡萄球菌（60%～90%）<br>
+                        其他：铜绿假单胞菌、肠球菌、念珠菌
+                    </td>
+                    <td>
+                        <strong>右心内膜炎：</strong>（萘夫西林或苯唑西林）或头孢唑啉<br><br>
+                        <strong>左心内膜炎：</strong>（萘夫西林或苯唑西林）或头孢唑啉+庆大霉素<br><br>
+                        <strong>MRSA：</strong>万古霉素或达托霉素<br><br>
+                        <strong>铜绿假单胞菌：</strong>头孢吡肟或头孢他啶+庆大霉素或妥布霉素
+                    </td>
+                    <td>
+                        • 血培养阳性率95%～99%<br>
+                        • 超声心动图：经胸超声（TTE）或经食管超声（TEE）<br>
+                        • 外科指征：瓣膜功能不全、心力衰竭、脓肿、真菌感染、抗生素治疗无效
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：154</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🔍 快速检索标签：</p>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">化脓性血栓性静脉炎</span>
+            <span class="tag tag-disease">脑静脉窦血栓</span>
+            <span class="tag tag-disease">海绵窦血栓</span>
+            <span class="tag tag-disease">横窦血栓</span>
+            <span class="tag tag-disease">上矢状窦血栓</span>
+            <span class="tag tag-disease">Lemierre综合征</span>
+            <span class="tag tag-disease">颈静脉血栓</span>
+            <span class="tag tag-disease">盆腔静脉炎</span>
+            <span class="tag tag-disease">卵巢静脉炎</span>
+            <span class="tag tag-disease">门静脉炎</span>
+            <span class="tag tag-disease">心内膜炎</span>
+            <span class="tag tag-disease">急性细菌性心内膜炎</span>
+            <span class="tag tag-disease">ABE</span>
+            <span class="tag tag-disease">右侧心内膜炎</span>
+            <span class="tag tag-disease">三尖瓣心内膜炎</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌属</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">脑膜炎奈瑟菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">克雷伯菌</span>
+            <span class="tag tag-bacteria">奇异变形杆菌</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">脆弱拟杆菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <span class="tag tag-bacteria">坏死梭菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-bacteria">拟杆菌属</span>
+            <span class="tag tag-bacteria">梭状杆菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">念珠菌</span>
+            <span class="tag tag-bacteria">毛霉菌</span>
+            <!-- 抗生素标签 -->
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">利奈唑胺</span>
+            <span class="tag tag-antibiotic">头孢曲松</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">头孢他啶</span>
+            <span class="tag tag-antibiotic">头孢唑啉</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">哌拉西林/他唑巴坦</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">庆大霉素</span>
+            <span class="tag tag-antibiotic">妥布霉素</span>
+            <span class="tag tag-antibiotic">萘夫西林</span>
+            <span class="tag tag-antibiotic">苯唑西林</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">地塞米松</span>
+            <span class="tag tag-antibiotic">头孢他啶-阿维巴坦</span>
+            <span class="tag tag-antibiotic">美罗培南-韦博巴坦</span>
+            <span class="tag tag-antibiotic">亚胺培南-瑞来巴坦</span>
+            <span class="tag tag-antibiotic">氨曲南</span>
+            <span class="tag tag-antibiotic">ESBL</span>
+            <span class="tag tag-antibiotic">KPC</span>
+            <span class="tag tag-antibiotic">MBL</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择-化脓性血栓性静脉炎与心内膜炎；化脓性血栓性静脉炎、脑静脉窦血栓、Lemierre综合征、门静脉炎、心内膜炎、急性细菌性心内膜炎、金黄色葡萄球菌、MRSA、铜绿假单胞菌、肠球菌、念珠菌、万古霉素、达托霉素、利奈唑胺、头孢曲松、头孢吡肟、美罗培南、哌拉西林-他唑巴坦、甲硝唑、环丙沙星、庆大霉素；=154" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        关键词：临床抗微生物治疗 | 化脓性血栓性静脉炎 | 脑静脉窦血栓 | Lemierre综合征 | 门静脉炎 | 心内膜炎 | 急性细菌性心内膜炎 | 金黄色葡萄球菌 | MRSA | 万古霉素 | 达托霉素 | 154
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

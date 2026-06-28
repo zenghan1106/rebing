@@ -1,0 +1,564 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1(5)临床抗微生物治疗的初始选择-急性细菌性脑膜炎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #1976D2;
+        }
+        
+        .btn-nav {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #388E3C;
+        }
+        
+        .btn-fav {
+            background: #FF9800;
+            color: white;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(255,152,0,0.4);
+        }
+        
+        .btn-fav:hover {
+            background: #F57C00;
+        }
+        
+        .btn-copy {
+            background: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background: #7B1FA2;
+        }
+        
+        /* 标题 */
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 8px;
+        }
+        
+        .title-mark {
+            color: #E91E63;
+            font-weight: bold;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 表格 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .section-header {
+            background: #E3F2FD !important;
+            font-weight: bold;
+            color: #1565C0;
+            font-size: 14px;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #0D47A1;
+        }
+        
+        .pathogen {
+            color: #C62828;
+        }
+        
+        .treatment {
+            color: #2E7D32;
+        }
+        
+        .note {
+            color: #6A1B9A;
+            font-size: 12px;
+        }
+        
+        .ref {
+            color: #757575;
+            font-style: italic;
+            font-size: 11px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        /* 标签 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+        
+        .tag-disease:hover {
+            background: #1565C0;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+        
+        .tag-bacteria:hover {
+            background: #C62828;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .tag-drug:hover {
+            background: #2E7D32;
+            color: white;
+        }
+        
+        /* 页码 */
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .page-number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: none;
+            z-index: 200;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="24.html" class="btn btn-nav">上一页</a>
+            <a href="26.html" class="btn btn-nav">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <div class="main-title">
+            <span class="title-mark">~~~~~</span>
+            表1(5) 临床抗微生物治疗的初始选择
+            <span class="title-mark">*****</span>
+        </div>
+        <div class="sub-title">中枢神经系统（续） | 急性细菌性脑膜炎 | 经验性治疗</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:18%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:22%">病原体（通常）</th>
+                    <th style="width:30%">推荐治疗方案</th>
+                    <th style="width:30%">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="4">中枢神经系统（续）</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background:#FFF3E0;color:#E65100;font-size:12px;">
+                        <b>急性细菌性脑膜炎：</b>先予经验性治疗，用药30分钟内腰穿。若有局部神经系统体征，先予经验治疗，再做头颅CT检查，然后腰椎穿刺（腰穿）。如果无局灶性神经系统体征，则先予经验性治疗、腰穿，然后头颅CT（<span class="ref">CID 2018, 66: 321</span>）。综述：<span class="ref">JAMA 2022; 328: 2147</span>和<span class="ref">Neurol Clin 2022; 40: 77</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">经验性治疗：脑脊液涂片阴性、免疫功能正常者</span><br><br>
+                        <b>年龄：早产儿至&lt;1月龄</b><br>
+                        <span class="ref">（LnID 10: 32, 2010）</span>
+                    </td>
+                    <td>
+                        <span class="pathogen">B族链球菌49%</span>、<br>
+                        <span class="pathogen">大肠埃希菌18%</span>、<br>
+                        <span class="pathogen">李斯特菌7%</span>、<br>
+                        其他革兰阴性菌10%、<br>
+                        其他革兰阳性菌10%
+                    </td>
+                    <td>
+                        <b>首选方案：</b><br>
+                        <span class="treatment">氨苄西林75～100mg/kg iv q6h + 头孢噻肟75mg/kg iv q6h + 庆大霉素2.5mg/kg iv q8h或5～7mg/kg iv q24h</span><br><br>
+                        不推荐脑室内给药<br><br>
+                        <b>备选方案：</b><br>
+                        <span class="treatment">氨苄西林75～100mg/kg iv q6h + 头孢噻肟75mg/kg iv q6h</span>或<span class="treatment">氨苄西林75～100mg/kg iv q6h + 庆大霉素2.5mg/kg iv q8h</span>
+                    </td>
+                    <td>
+                        治疗方案应对B族链球菌、多数大肠菌群和李斯特菌有效。早产儿若长期住婴儿室，病原体可能还有<span class="pathogen">金黄色葡萄球菌</span>、<span class="pathogen">肠球菌</span>、耐药大肠菌群<br><br>
+                        若感染MRSA的风险较高，用<span class="treatment">万古霉素</span>+<span class="treatment">头孢噻肟</span>。待培养及药敏试验结果回报后调整治疗。若无头孢噻肟，可用<span class="treatment">头孢吡肟</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>年龄：1月龄至50岁</b><br>
+                        近期综述：<span class="ref">Lancet Infect Dis 16: 339, 2016</span>
+                    </td>
+                    <td>
+                        <span class="pathogen">肺炎球菌</span>，<span class="pathogen">脑膜炎球菌</span>；<span class="pathogen">流感嗜血杆菌</span>现不多见；<span class="pathogen">李斯特菌</span>罕见于青年人和免疫功能正常者（如疑为李斯特菌，加用<span class="treatment">氨苄西林2g iv q4h</span>）
+                    </td>
+                    <td>
+                        <b>成人剂量：</b>（<span class="treatment">头孢噻肟2g iv q4～6h</span>或<span class="treatment">头孢曲松2g iv q12h</span>）+<span class="treatment">地塞米松</span>+<span class="treatment">万古霉素</span><br><br>
+                        <span class="treatment">地塞米松0.15mg/kg iv q6h×2～4d</span>；与首剂抗生素同时或稍提前使用（见说明）<br><br>
+                        万古霉素的成人剂量见表注1，儿童剂量见表注2<br><br>
+                        <b>备选方案：</b><br>
+                        <span class="treatment">美罗培南2g iv q8h</span>（儿童<span class="treatment">40mg/kg iv q8h</span>）+<span class="treatment">地塞米松iv + 万古霉素</span>
+                    </td>
+                    <td>
+                        β-内酰胺类严重过敏的患者的备选方案见下文（经验性治疗革兰阳性菌和针对性治疗）研究显示<span class="treatment">地塞米松</span>对改善儿童流感嗜血杆菌脑膜炎的预后有益，但对肺炎球菌缺乏数据支持
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>年龄：&gt;50岁，或者嗜酒者、有严重基础疾病者或细胞免疫功能受损者</b>
+                    </td>
+                    <td>
+                        <span class="pathogen">肺炎球菌</span>、<span class="pathogen">李斯特菌</span>、<span class="pathogen">脑膜炎球菌</span>、<span class="pathogen">革兰阴性杆菌</span>
+                    </td>
+                    <td>
+                        （<span class="treatment">氨苄西林2g iv q4h</span>）+（<span class="treatment">头孢曲松2g iv q12h</span>或<span class="treatment">头孢噻肟2g iv q4～6h</span>）+<span class="treatment">万古霉素 + 地塞米松iv</span><br><br>
+                        <span class="treatment">万古霉素</span>剂量见表注1；<span class="treatment">地塞米松0.15mg/kg iv q6h×2～4d</span>，首剂在使用首剂抗生素之前或同时给予<br><br>
+                        <b>备选方案：</b><br>
+                        <span class="treatment">美罗培南2g iv q8h + 万古霉素 + 地塞米松iv</span><br>
+                        青霉素严重过敏见说明
+                    </td>
+                    <td>
+                        β-内酰胺类严重过敏的患者，见下文（经验性治疗革兰阳性菌和针对性治疗），替代药物应能覆盖可能的病原菌<br><br>
+                        对于意识状态改变而无局灶神经系统体征的患者，不做头颅CT即行腰穿与更早治疗和结局改善相关（<span class="ref">CID 60: 1162, 2015</span>）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="bottom-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="表1(5)临床抗微生物治疗的初始选择；急性细菌性脑膜炎经验性治疗中枢神经系统感染；B族链球菌大肠埃希菌李斯特菌金黄色葡萄球菌肠球菌肺炎球菌脑膜炎球菌流感嗜血杆菌革兰阴性杆菌；氨苄西林头孢噻肟庆大霉素万古霉素头孢吡肟头孢曲松地塞米松美罗培南；=25" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">急性细菌性脑膜炎</span>
+                <span class="tag tag-disease">脑膜炎</span>
+                <span class="tag tag-disease">经验性治疗</span>
+                
+                <!-- 细菌标签 -->
+                <span class="tag tag-bacteria">B族链球菌</span>
+                <span class="tag tag-bacteria">大肠埃希菌</span>
+                <span class="tag tag-bacteria">李斯特菌</span>
+                <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+                <span class="tag tag-bacteria">肠球菌</span>
+                <span class="tag tag-bacteria">肺炎球菌</span>
+                <span class="tag tag-bacteria">脑膜炎球菌</span>
+                <span class="tag tag-bacteria">流感嗜血杆菌</span>
+                <span class="tag tag-bacteria">革兰阴性菌</span>
+                <span class="tag tag-bacteria">革兰阳性菌</span>
+                <span class="tag tag-bacteria">革兰阴性杆菌</span>
+                <span class="tag tag-bacteria">MRSA</span>
+                
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">氨苄西林</span>
+                <span class="tag tag-drug">头孢噻肟</span>
+                <span class="tag tag-drug">庆大霉素</span>
+                <span class="tag tag-drug">万古霉素</span>
+                <span class="tag tag-drug">头孢吡肟</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">地塞米松</span>
+                <span class="tag tag-drug">美罗培南</span>
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-info">
+            <div class="page-number">页码：25</div>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }).catch(function(err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.querySelector('.main-title').innerText.replace(/~~~~~|\\\\*\\\\*\\\\*\\\\*\\\\*/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '25';
+            
+            try {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                
+                const exists = favorites.some(f => f.url === url);
+                if (exists) {
+                    showToast('该页面已在收藏中！');
+                    return;
+                }
+                
+                favorites.push({
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '临床抗微生物治疗',
+                    addTime: new Date().toLocaleString()
+                });
+                
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('已添加到收藏！请在index.html查看');
+            } catch(e) {
+                showToast('收藏成功！');
+            }
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.innerText;
+                showToast('搜索: ' + text);
+            });
+        });
+    </script>
+</body>
+</html>

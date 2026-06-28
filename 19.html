@@ -1,0 +1,390 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~骨髓炎特异性治疗与血红蛋白病抗感染方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5282;
+            font-size: 26px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #4a5568;
+            font-size: 14px;
+            margin: -10px 0 20px 0;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead th {
+            background: #2b6cb0;
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        .section-header {
+            background: #e2e8f0 !important;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .note {
+            font-size: 12px;
+            color: #718096;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            color: #2c5282;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #38a169;
+        }
+        
+        .page-num {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ed8936;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .header {
+                justify-content: center;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="18.html" class="nav-btn">上一页</a>
+            <a href="20.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~骨髓炎特异性治疗与血红蛋白病抗感染方案*****</h1>
+    <p class="subtitle">临床抗微生物治疗的初始选择——骨/血行播散性骨髓炎（续）</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>解剖学部位/<br>诊断/特定情况</th>
+                    <th>病原体（通常）</th>
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                    <th>辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="5">骨/血行播散性骨髓炎（续）</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="5">特异性治疗：已知培养及体外药物敏感试验（药敏试验）结果。参见IDSA指南：CID Jul 29, 2015</td>
+                </tr>
+                <tr>
+                    <td rowspan="2"></td>
+                    <td>MSSA</td>
+                    <td>萘夫西林或苯唑西林2g iv q4h或头孢唑啉2g iv q8h</td>
+                    <td>万古霉素30～60mg/(kg·d)分2～3次，目标AUC<sub>24</sub>400～600μg·h/ml；或达托霉素8～10mg/kg qd iv；或利奈唑胺600mg iv/po q12h</td>
+                    <td rowspan="2">儿童患者可用高剂量口服方案完成治疗（JAMA Pediatr 169: 220, 2015）<br><br>出现过敏或毒性反应时，如果体外敏感，其他可选的方案（NEJM 362: 11, 2010）：<br>①TMP-SMX 8～10mg/(kg·d) po/iv分次q8h＋利福平300～450mg bid，资料有限，特别是MRSA（AAC 53: 2672, 2009）；②左氧氟沙星750mg po qd＋利福平600mg po qd；③夫西地酸<sup>Mus</sup>500mg iv q8h＋利福平300mg po bid（CID 42: 394, 2006）<br><br>疗程：如果硬膜外或椎旁脓肿能引流，6周；如果病变广泛（特别是脓肿无法引流时），治疗失败的风险增加，需考虑延长疗程（OFID Dec 5: 1, 2014）</td>
+                </tr>
+                <tr>
+                    <td>MRSA，参见表6，88页。参见IDSA指南，CID 52: e18-55, 2011; CID 52: 285-292, 2011<br>联合治疗降低复发率</td>
+                    <td>万古霉素30～60mg/(kg·d)分2～3次，目标AUC<sub>24</sub>400～600μg·h/ml±利福平300～450mg bid</td>
+                    <td>利奈唑胺600mg iv/po q12h±利福平300mg po/iv bid，或达托霉素8～10mg/kg qd iv±利福平300～450mg po/iv bid</td>
+                </tr>
+                <tr>
+                    <td>血红蛋白病<br>镰状细胞贫血/地中海贫血</td>
+                    <td>沙门菌属，其他革兰阴性杆菌</td>
+                    <td>环丙沙星400mg iv q12h或环丙沙星750mg po bid</td>
+                    <td>左氧氟沙星750mg iv/po qd</td>
+                    <td>由于对氟喹诺酮的耐药性增加，可能需联合第二种药物（如第三代头孢菌素），直至获得敏感性结果。沙门菌属如果对萘啶酸耐药，则预测对氟喹诺酮也耐药，此时的备选方案是头孢曲松2g iv qd</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 快速检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">骨髓炎</span>
+            <span class="tag tag-disease">血行播散性骨髓炎</span>
+            <span class="tag tag-disease">血红蛋白病</span>
+            <span class="tag tag-disease">镰状细胞贫血</span>
+            <span class="tag tag-disease">地中海贫血</span>
+            <span class="tag tag-bacteria">MSSA</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">沙门菌属</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <span class="tag tag-drug">萘夫西林</span>
+            <span class="tag tag-drug">苯唑西林</span>
+            <span class="tag tag-drug">头孢唑啉</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">达托霉素</span>
+            <span class="tag tag-drug">利奈唑胺</span>
+            <span class="tag tag-drug">利福平</span>
+            <span class="tag tag-drug">TMP-SMX</span>
+            <span class="tag tag-drug">左氧氟沙星</span>
+            <span class="tag tag-drug">夫西地酸</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">头孢曲松</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="骨髓炎特异性治疗与血红蛋白病抗感染方案；临床抗微生物治疗的初始选择；骨髓炎；MSSA；MRSA；血红蛋白病；沙门菌；万古霉素；利奈唑胺；达托霉素；环丙沙星；=19" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-num">页码：19</div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            document.execCommand('copy');
+            alert('已复制到剪贴板！');
+        }
+        
+        function addToFavorite() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toLocaleDateString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在 index.html 的收藏类目下查看。');
+            } else {
+                alert('该页面已在收藏中！');
+            }
+        }
+    </script>
+</body>
+</html>

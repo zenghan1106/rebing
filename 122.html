@@ -1,0 +1,545 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表1（54）临床抗微生物治疗的初始选择-动物咬伤续</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f5f0e8 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background-color: #1a5276;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .page-title::before {
+            content: "~~~~~";
+            color: #2980b9;
+            margin-right: 10px;
+        }
+
+        .page-title::after {
+            content: "*****";
+            color: #2980b9;
+            margin-left: 10px;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background-color: #1a5276;
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #154360;
+        }
+
+        /* 第一行字体大一点 */
+        thead tr:first-child th {
+            font-size: 17px;
+            padding: 18px 12px;
+        }
+
+        /* 表体单元格 */
+        tbody td {
+            padding: 12px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+
+        /* 行交替颜色 */
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+
+        /* 第一列加粗 */
+        tbody td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            background-color: #eaf2f8;
+            min-width: 100px;
+        }
+
+        /* 注释行样式 */
+        .note-row td {
+            background-color: #fef9e7 !important;
+            color: #7d6608;
+            font-size: 12px;
+        }
+
+        /* 特色检索标签 */
+        .tag-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .tag-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .tag-disease {
+            background-color: #fadbd8;
+            color: #c0392b;
+        }
+
+        .tag-disease:hover {
+            background-color: #f5b7b1;
+        }
+
+        .tag-bacteria {
+            background-color: #d4efdf;
+            color: #27ae60;
+        }
+
+        .tag-bacteria:hover {
+            background-color: #a9dfbf;
+        }
+
+        .tag-antibiotic {
+            background-color: #d6eaf8;
+            color: #2980b9;
+        }
+
+        .tag-antibiotic:hover {
+            background-color: #aed6f1;
+        }
+
+        .tag-virus {
+            background-color: #e8daef;
+            color: #8e44ad;
+        }
+
+        .tag-virus:hover {
+            background-color: #d2b4de;
+        }
+
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .copy-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .copy-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #aed6f1;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            outline: none;
+        }
+
+        .copy-btn {
+            padding: 14px 28px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background-color: #229954;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 15px;
+        }
+
+        .page-number a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #5d6d7e;
+            font-size: 13px;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 16px;
+                margin-top: 70px;
+            }
+
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+
+            thead tr:first-child th {
+                font-size: 14px;
+            }
+
+            tbody td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .copy-box-wrapper {
+                flex-direction: column;
+            }
+
+            .copy-input {
+                width: 100%;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+        }
+
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-btns">
+        <a href="121.html" class="nav-btn">← 上一页</a>
+        <a href="123.html" class="nav-btn">下一页 →</a>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="page-title">表1（54）临床抗微生物治疗的初始选择</h1>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案*</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>灵长类，猴，非人类<br>见表14A，猴疱疹</td>
+                    <td>猴疱疹病毒见说明</td>
+                    <td colspan="2">伐昔洛韦（PEP）或阿昔洛韦或更昔洛韦</td>
+                    <td>猕猴咬伤，有感染B型疱疹病毒的风险；罕见但有可能引起致命性脑炎/脊髓炎。潜在狂犬病风险<br>细菌感染和人咬伤类似；深的咬伤，参照人咬伤应用抗生素</td>
+                </tr>
+                <tr>
+                    <td>鼠</td>
+                    <td>小螺旋菌、念珠状链杆菌</td>
+                    <td>阿莫西林-克拉维酸875/125mg po bid×3d。鼠咬热：青霉素G 2mMU iv q4h或多西环素100mg po bid ×10～14d</td>
+                    <td>多西环素100mg po bid</td>
+                    <td>无须抗狂犬病治疗。可引起鼠咬热（念珠状链杆菌）：青霉素或多西环素，也可使用红霉素或克林霉素</td>
+                </tr>
+                <tr>
+                    <td>海豹</td>
+                    <td>海洋支原体</td>
+                    <td colspan="2">四环素或多西环素×2～4w</td>
+                    <td>可在咬伤后数周才发病，有播散性疾病报道（CID 62: 491, 2016）。鉴别诊断包括海豹痘，类似羊痘（Br J Derm 152: 791, 2005）和其他细菌［哈得逊毕氏菌（Bisgaardia hudsonensis）（J Infect 63: 86, 2011）和哈利氏链球菌（J Clin Microbiol 54: 739, 2016）］</td>
+                </tr>
+                <tr>
+                    <td>蛇：响尾蛇<br>（参见NEJM 386: 68, 2022）</td>
+                    <td>假单胞菌属、肠杆菌科、金黄色葡萄球菌、表皮葡萄球菌、梭菌属</td>
+                    <td colspan="2">主要治疗是抗蛇毒血清。预防破伤风。无须抗生素预防治疗（Am J Med 2018; 131: 1367）。哌拉西林-他唑巴坦可作为感染伤口的经验性治疗。根据培养结果调整（Emerg Clin N Amer 35: 339, 2017）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="background-color: #fef9e7; color: #7d6608; font-weight: bold;">蜘蛛：所谓蜘蛛造成的皮肤坏死溃疡大多由其他原因引起，如皮肤炭疽（Ln 364: 549, 2004）或MRSA感染（蜘蛛咬伤引起疼痛，炭疽无疼痛）</td>
+                </tr>
+                <tr>
+                    <td>黑寡妇（寡妇蜘蛛属）</td>
+                    <td>非感染性</td>
+                    <td>无</td>
+                    <td></td>
+                    <td>易误诊为"急腹症"：地西泮或葡萄糖酸钙有助于控制疼痛和肌肉痉挛，预防破伤风</td>
+                </tr>
+                <tr>
+                    <td>褐色隐士（斜蛛属）</td>
+                    <td>非感染性。常被过度诊断！该蜘蛛局限分布于美国中部和西南部荒漠地区</td>
+                    <td>咬伤通常自限、可自愈。没有明确有效的治疗</td>
+                    <td>临床通常用氨苯砜50mg po qd，但支持证据很少</td>
+                    <td>氨苯砜可引起溶血（需除外G6PD缺乏），还可造成肝炎，要检查基础肝功能并每周复查</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="5">
+                        注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+                        § 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。<br>
+                        表中名词缩写见第2页。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 特色检索标签 -->
+    <div class="tag-section">
+        <h3>🔍 特色检索标签</h3>
+        <div class="tag-container">
+            <span class="tag tag-disease">猴咬伤</span>
+            <span class="tag tag-disease">鼠咬伤</span>
+            <span class="tag tag-disease">鼠咬热</span>
+            <span class="tag tag-disease">海豹咬伤</span>
+            <span class="tag tag-disease">蛇咬伤</span>
+            <span class="tag tag-disease">响尾蛇咬伤</span>
+            <span class="tag tag-disease">蜘蛛咬伤</span>
+            <span class="tag tag-disease">黑寡妇蜘蛛咬伤</span>
+            <span class="tag tag-disease">褐色隐士蜘蛛咬伤</span>
+            <span class="tag tag-disease">皮肤炭疽</span>
+            <span class="tag tag-virus">猴疱疹病毒</span>
+            <span class="tag tag-virus">B型疱疹病毒</span>
+            <span class="tag tag-virus">狂犬病</span>
+            <span class="tag tag-bacteria">小螺旋菌</span>
+            <span class="tag tag-bacteria">念珠状链杆菌</span>
+            <span class="tag tag-bacteria">海洋支原体</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">假单胞菌属</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">梭菌属</span>
+            <span class="tag tag-bacteria">哈得逊毕氏菌</span>
+            <span class="tag tag-bacteria">哈利氏链球菌</span>
+            <span class="tag tag-antibiotic">伐昔洛韦</span>
+            <span class="tag tag-antibiotic">阿昔洛韦</span>
+            <span class="tag tag-antibiotic">更昔洛韦</span>
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">青霉素G</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">红霉素</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">四环素</span>
+            <span class="tag tag-antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic">氨苯砜</span>
+            <span class="tag tag-antibiotic">地西泮</span>
+            <span class="tag tag-antibiotic">葡萄糖酸钙</span>
+        </div>
+    </div>
+
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-box-wrapper">
+            <input type="text" class="copy-input" id="copyInput" value="表1（54）临床抗微生物治疗的初始选择；动物咬伤；猴咬伤；鼠咬伤；鼠咬热；海豹咬伤；蛇咬伤；蜘蛛咬伤；猴疱疹病毒；MRSA；阿莫西林-克拉维酸；青霉素G；多西环素；四环素；哌拉西林-他唑巴坦；氨苯砜；=122" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📄 复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="122.html">122</a>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：临床抗微生物治疗、初始选择、动物咬伤、猴咬伤、鼠咬伤、鼠咬热、海豹咬伤、蛇咬伤、响尾蛇、蜘蛛咬伤、黑寡妇、褐色隐士、猴疱疹病毒、B型疱疹病毒、狂犬病、海洋支原体、MRSA、皮肤炭疽、阿莫西林-克拉维酸、青霉素G、多西环素、四环素、哌拉西林-他唑巴坦、氨苯砜、伐昔洛韦、阿昔洛韦、更昔洛韦
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast">✓ 已复制到剪贴板</div>
+
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast();
+                });
+            } else {
+                document.execCommand('copy');
+                showToast();
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

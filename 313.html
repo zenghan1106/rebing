@@ -1,0 +1,604 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>头孢地尔及口服头孢菌素类用药参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(90,108,125,0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btns a:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #2c5282;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 12px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 12px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 15px;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            margin: 0 15px 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 分类行样式 */
+        .category-row td {
+            background: #edf2f7;
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 14px;
+            padding: 12px;
+        }
+        
+        /* 子分类行样式 */
+        .subcategory-row td {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 13px;
+            padding: 10px 12px;
+            border-left: 3px solid #4a90d9;
+        }
+        
+        /* 单元格 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(even):not(.category-row):not(.subcategory-row) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover:not(.category-row):not(.subcategory-row) {
+            background: #edf2f7;
+        }
+        
+        /* 药品名称列 */
+        td:first-child {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 180px;
+        }
+        
+        /* 剂量列 */
+        td:nth-child(2) {
+            color: #4a5568;
+            min-width: 220px;
+            line-height: 1.8;
+        }
+        
+        /* 不良反应列 */
+        td:nth-child(3) {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        /* 注释 */
+        .note {
+            margin: 0 15px 25px;
+            padding: 15px 20px;
+            background: #fffbeb;
+            border-left: 4px solid #f6ad55;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #744210;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tags-title::before {
+            content: "🏷️";
+            margin-right: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #4a90d9;
+        }
+        
+        .copy-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72,187,120,0.3);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 6px;
+            padding: 4px 10px;
+            background: #edf2f7;
+            border-radius: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 20px;
+                padding-top: 70px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btns a {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="312.html">← 上一页</a>
+        <a href="314.html">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">头孢地尔及口服头孢菌素类用药参考表</h1>
+    <p class="subtitle">表10A（5）抗感染药物的剂量和不良反应</p>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">头孢菌素类（续）</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">抗产ESBL、AmpC、丝氨酸和金属碳青霉烯酶的革兰阴性菌</td>
+                </tr>
+                <tr>
+                    <td>头孢地尔（Fetroja）见FDA批准的药品说明书<br>产MBL致病菌的Ⅲ期临床研究（CID 2022；75：1081 & 1085）</td>
+                    <td>成人：2g iv 输注3小时 ×7～14d<br>肾功能损伤需调整剂量（表17A）<br>儿童：无资料</td>
+                    <td>铁素头孢菌素：FDA批准用于治疗成人复杂性尿路感染，呼吸机相关性细菌肺炎，呼吸机相关性医院获得性细菌性肺炎。在体外几乎对所有的头孢菌素和碳青霉烯酶稳定。限用于其他治疗方案有限或缺乏的患者。对革兰阳性菌和厌氧菌无效。注意：在随机临床试验中，对于耐碳青霉烯类的GNB引起的肺炎、菌血症和复杂性尿路感染的患者，与可选的最佳治疗相比，在肺炎亚组分析中头孢地尔的全因死亡率更高，但无统计学意义上的显著差异（Lancet Infect Dis 2021；21：226）。在一项双盲RCT研究中（Lancet Infect Dis 2021；21：213），头孢地尔治疗革兰阴性菌引起HAP、VAP、HCAP的疗效不劣于美罗培南；在16例对美罗培南MIC＞64μg/ml的不动杆菌属感染患者中，第14天时，头孢地尔组全因死亡率为0%（0/5），美罗培南组为46%（5/11）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">口服头孢菌素类</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">第一代，口服</td>
+                </tr>
+                <tr>
+                    <td>头孢羟氨苄（Duricef, 500mg胶囊、1g片剂）</td>
+                    <td>0.5～1.0g po q12h</td>
+                    <td rowspan="6">交叉过敏：对青霉素有IgE介导的变态反应史（例如支气管痉挛性过敏反应、血管神经性水肿、速发性荨麻疹）的患者，不应该使用头孢菌素。若患者对青霉素的过敏史仅为"麻疹样皮疹"，现有数据显示此类患者使用头孢菌素后出现皮疹的风险为5%～10%；严重过敏反应的风险并不增加<br><br>• 在对青霉素有"反应"史和未行皮试的患者中，0.2%～8.4%对头孢菌素有反应（Aller Asthma Proc 26：135，2006）。如果青霉素G皮肤试验阳性，使用头孢菌素者仅2%会有反应。头孢菌素皮肤试验可以预测，但不易获得（An IM 141：16，2004；AJM 125：572，2008）<br><br>• IgE抗体抗β-内酰胺环或侧链，过敏反应10年后80%的患者IgE抗体会消失（J Aller Clin Immunol 103：918，1999）。阿莫西林、头孢羟氨苄和头孢丙烯具有相似的侧链，氨苄西林、头孢克洛、头孢氨苄和头孢拉定具有相似的侧链<br><br>• 若青霉素/头孢菌素皮肤试验无法进行或临床上无时间进行，如果病史不提示IgE介导的过敏反应，既往的反应已超过10年，头孢菌素的侧链与所涉及青霉素的侧链不同，可以使用头孢菌素<br><br>任何头孢菌素都可引起艰难梭菌毒素介导的腹泻/结肠炎</td>
+                </tr>
+                <tr>
+                    <td>头孢氨苄（Keflex, 250mg、500mg片剂）</td>
+                    <td>0.25～1g po q6h（最大剂量4g/d）</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="2">第二代，口服</td>
+                </tr>
+                <tr>
+                    <td>头孢克洛（Ceclor, Raniclor, 250mg、500mg胶囊）</td>
+                    <td>0.25～0.5g po q8h</td>
+                </tr>
+                <tr>
+                    <td>头孢丙烯（Cefzil, 250mg、500mg片剂）</td>
+                    <td>0.25～0.5g po q12h</td>
+                </tr>
+                <tr>
+                    <td>头孢呋辛酯（Ceftin）</td>
+                    <td>0.125～0.5g po q12h</td>
+                </tr>
+                <tr class="subcategory-row">
+                    <td colspan="3">第三代，口服</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。<br>
+        ‡ 缩略词缩写见第2页。
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病 -->
+            <span class="tag tag-disease">复杂性尿路感染</span>
+            <span class="tag tag-disease">呼吸机相关性细菌肺炎</span>
+            <span class="tag tag-disease">医院获得性细菌性肺炎</span>
+            <span class="tag tag-disease">肺炎</span>
+            <span class="tag tag-disease">菌血症</span>
+            <span class="tag tag-disease">HAP</span>
+            <span class="tag tag-disease">VAP</span>
+            <span class="tag tag-disease">HCAP</span>
+            <span class="tag tag-disease">支气管痉挛性过敏反应</span>
+            <span class="tag tag-disease">血管神经性水肿</span>
+            <span class="tag tag-disease">速发性荨麻疹</span>
+            <span class="tag tag-disease">麻疹样皮疹</span>
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">结肠炎</span>
+            <!-- 药物 -->
+            <span class="tag tag-drug">头孢地尔</span>
+            <span class="tag tag-drug">Fetroja</span>
+            <span class="tag tag-drug">美罗培南</span>
+            <span class="tag tag-drug">头孢羟氨苄</span>
+            <span class="tag tag-drug">Duricef</span>
+            <span class="tag tag-drug">头孢氨苄</span>
+            <span class="tag tag-drug">Keflex</span>
+            <span class="tag tag-drug">头孢克洛</span>
+            <span class="tag tag-drug">Ceclor</span>
+            <span class="tag tag-drug">Raniclor</span>
+            <span class="tag tag-drug">头孢丙烯</span>
+            <span class="tag tag-drug">Cefzil</span>
+            <span class="tag tag-drug">头孢呋辛酯</span>
+            <span class="tag tag-drug">Ceftin</span>
+            <span class="tag tag-drug">青霉素</span>
+            <span class="tag tag-drug">青霉素G</span>
+            <span class="tag tag-drug">阿莫西林</span>
+            <span class="tag tag-drug">氨苄西林</span>
+            <span class="tag tag-drug">头孢拉定</span>
+            <!-- 细菌 -->
+            <span class="tag tag-bacteria">产ESBL革兰阴性菌</span>
+            <span class="tag tag-bacteria">产AmpC革兰阴性菌</span>
+            <span class="tag tag-bacteria">产丝氨酸碳青霉烯酶革兰阴性菌</span>
+            <span class="tag tag-bacteria">产金属碳青霉烯酶革兰阴性菌</span>
+            <span class="tag tag-bacteria">产MBL致病菌</span>
+            <span class="tag tag-bacteria">GNB</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+            <span class="tag tag-bacteria">革兰阳性菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">不动杆菌属</span>
+            <span class="tag tag-bacteria">艰难梭菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="头孢地尔及口服头孢菌素类用药参考表；表10A（5）抗感染药物的剂量和不良反应；头孢地尔、Fetroja、美罗培南、头孢羟氨苄、Duricef、头孢氨苄、Keflex、头孢克洛、Ceclor、Raniclor、头孢丙烯、Cefzil、头孢呋辛酯、Ceftin、青霉素、阿莫西林、氨苄西林、产ESBL、产AmpC、产MBL、GNB、不动杆菌属、复杂性尿路感染、呼吸机相关性肺炎、HAP、VAP、HCAP、艰难梭菌；=313" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="313.html">313</a>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>头孢地尔</span>
+        <span>Fetroja</span>
+        <span>头孢羟氨苄</span>
+        <span>Duricef</span>
+        <span>头孢氨苄</span>
+        <span>Keflex</span>
+        <span>头孢克洛</span>
+        <span>Ceclor</span>
+        <span>头孢丙烯</span>
+        <span>Cefzil</span>
+        <span>头孢呋辛酯</span>
+        <span>Ceftin</span>
+        <span>口服头孢菌素</span>
+        <span>第一代头孢</span>
+        <span>第二代头孢</span>
+        <span>第三代头孢</span>
+        <span>ESBL</span>
+        <span>AmpC</span>
+        <span>MBL</span>
+        <span>碳青霉烯酶</span>
+        <span>GNB</span>
+        <span>不动杆菌</span>
+        <span>美罗培南</span>
+        <span>青霉素</span>
+        <span>交叉过敏</span>
+        <span>艰难梭菌</span>
+        <span>抗生素</span>
+        <span>剂量</span>
+        <span>不良反应</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ 已复制';
+            btn.style.background = 'linear-gradient(135deg, #4299e1 0%, #3182ce 100%)';
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

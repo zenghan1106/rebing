@@ -1,0 +1,569 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表1(36)临床抗微生物治疗的初始选择-急性复杂性尿路感染和肝脏感染*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-page {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background-color: #4cae4c;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 10px;
+            border-left: 5px solid #2980b9;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background-color: #2e75b6;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行（表头行）字体更大 */
+        thead tr:first-child th {
+            font-size: 17px;
+            background-color: #1a5276;
+            padding: 16px 10px;
+        }
+        
+        /* 合并单元格的表头 */
+        .sub-header {
+            background-color: #5b9bd5 !important;
+            font-size: 14px !important;
+        }
+        
+        /* 表格内容单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #d4e6f1;
+            vertical-align: top;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even) {
+            background-color: #f8fbfd;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        /* 段落标题行 */
+        .section-title {
+            background-color: #d6eaf8 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        /* 子标题行 */
+        .subsection-title {
+            background-color: #eaf2f8 !important;
+            font-weight: 600;
+            color: #2874a6;
+            font-style: italic;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin: 5px 0;
+            padding-left: 18px;
+        }
+        
+        td li {
+            margin-bottom: 6px;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        .italic-text {
+            font-style: italic;
+            color: #555;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .page-number a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .copy-section label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .copy-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+        }
+        
+        #copyText {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            resize: vertical;
+            min-height: 60px;
+            font-family: monospace;
+        }
+        
+        #copyText:focus {
+            outline: none;
+            border-color: #2980b9;
+        }
+        
+        .btn-copy {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-copy.copied {
+            background-color: #27ae60;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            margin: 25px 0 15px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4e6f1;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .tag-disease {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border: 1px solid #f0b27a;
+        }
+        
+        .tag-disease:hover {
+            background-color: #f0b27a;
+            color: white;
+        }
+        
+        .tag-antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #58d68d;
+        }
+        
+        .tag-antibiotic:hover {
+            background-color: #58d68d;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background-color: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #85c1e9;
+        }
+        
+        .tag-bacteria:hover {
+            background-color: #85c1e9;
+            color: white;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            color: #777;
+            font-size: 13px;
+        }
+        
+        .keywords-bottom span {
+            display: inline-block;
+            margin: 3px 6px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 17px;
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            thead tr:first-child th {
+                font-size: 15px;
+            }
+            
+            td {
+                padding: 8px 6px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-input-group {
+                flex-direction: column;
+            }
+            
+            .btn-copy {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="85.html" class="btn btn-page">⬅ 上一页</a>
+            <a href="87.html" class="btn btn-page">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表1(36)临床抗微生物治疗的初始选择-急性复杂性尿路感染和肝脏感染*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案*</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选方案</th>
+                    <th class="sub-header">备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-title">
+                    <td colspan="5">肾脏和膀胱（续）</td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="5">急性复杂性尿路感染，男性和女性</td>
+                </tr>
+                <tr>
+                    <td>定义：尿路感染+增加感染严重程度和治疗失败风险的合并状况，如糖尿病、妊娠、诊断延误、长期留置尿管、耻骨上造瘘管、结石导致的梗阻、解剖结构异常、免疫抑制</td>
+                    <td>大肠埃希菌或其他肠杆菌科合并：<br>铜绿假单胞菌<br>肠球菌<br>金黄色葡萄球菌<br>念珠菌属</td>
+                    <td>经验性治疗前：尿培养及药敏检测<br><br>若血压降低：血培养。如果有梗阻性肾病的提示，需尽早做尿路影像学检查<br><br><em>见说明</em><br><br><span class="highlight">MDR革兰阴性菌风险低：</span><br><span class="drug-name">左氧氟沙星</span> 750mg iv qd或<span class="drug-name">头孢曲松</span> 1g iv qd或<span class="drug-name">头孢吡肟</span> 1g iv q12h或<span class="drug-name">哌拉西林-他唑巴坦</span> 4.5g iv 输注4h q8h或<span class="drug-name">庆大霉素</span> 5mg/kg iv qd。若青霉素过敏：<span class="drug-name">氨曲南</span> 2g iv q8h</td>
+                    <td><span class="highlight">MDR革兰阴性菌风险≥20%：</span><br><span class="drug-name">美罗培南</span> 0.5～1.0g iv q8h或<span class="drug-name">头孢洛生-他唑巴坦</span> 1.5g iv q8h或<span class="drug-name">头孢他啶-阿维巴坦</span> 2.5g iv q8h或<span class="drug-name">美罗培南-韦博巴坦</span>（Vaborbactam）4g iv q8h<br><br><em>见说明</em></td>
+                    <td>
+                        <ul>
+                            <li>由于耐药发生率高且感染严重，经验性治疗应避免使用<span class="drug-name">呋喃妥因</span>、<span class="drug-name">磷霉素</span>和<span class="drug-name">TMP-SMX</span></li>
+                            <li>如果培养发现肠球菌，应根据体外药敏试验结果调整治疗</li>
+                            <li>疗程因合并症的状况不同而异。需要根据泌尿外科操作和患者个体化临床反应而定</li>
+                            <li>对于头孢曲松耐药大肠埃希菌和肺炎克雷伯菌，<span class="drug-name">哌拉西林-他唑巴坦</span>疗效劣于<span class="drug-name">美罗培南</span>（<span class="italic-text">JAMA 2018; 320: 979 & 984</span>）</li>
+                            <li>无发热的男性UTI可治疗7天，若发热，14天疗程效果好（<span class="italic-text">Clin Infect Dis 2023; 26: 2154</span>）</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="section-title">
+                    <td colspan="5">肝脏（自发性细菌性腹膜炎，51页）</td>
+                </tr>
+                <tr class="subsection-title">
+                    <td colspan="5">胆管炎</td>
+                </tr>
+                <tr>
+                    <td>胆管炎</td>
+                    <td></td>
+                    <td colspan="2"><em>胆囊，18页</em></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>肝硬化及静脉曲张出血</td>
+                    <td>食管菌群</td>
+                    <td><span class="drug-name">环丙沙星</span> 400mg iv q12h×最多7d</td>
+                    <td><span class="drug-name">头孢曲松</span> 1g iv qd×最多7d</td>
+                    <td>肝硬化合并消化道出血，无论有无腹水，短期预防性应用抗生素有助于减少细菌感染并提高生存率（<span class="italic-text">J Hepatol 60: 1310, 2014</span>）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="86.html">86</a>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <label for="copyText">📋 复制页面信息</label>
+        <div class="copy-input-group">
+            <textarea id="copyText" readonly>表1(36)临床抗微生物治疗的初始选择-急性复杂性尿路感染和肝脏感染；急性复杂性尿路感染；胆管炎；肝硬化；静脉曲张出血；自发性细菌性腹膜炎；大肠埃希菌；铜绿假单胞菌；肠球菌；金黄色葡萄球菌；念珠菌属；左氧氟沙星；头孢曲松；头孢吡肟；哌拉西林-他唑巴坦；庆大霉素；氨曲南；美罗培南；头孢洛生-他唑巴坦；头孢他啶-阿维巴坦；美罗培南-韦博巴坦；环丙沙星；=86</textarea>
+            <button class="btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <a href="#" class="tag tag-disease">急性复杂性尿路感染</a>
+            <a href="#" class="tag tag-disease">复杂性肾盂肾炎</a>
+            <a href="#" class="tag tag-disease">胆管炎</a>
+            <a href="#" class="tag tag-disease">肝硬化</a>
+            <a href="#" class="tag tag-disease">静脉曲张出血</a>
+            <a href="#" class="tag tag-disease">自发性细菌性腹膜炎</a>
+            <a href="#" class="tag tag-disease">梗阻性肾病</a>
+            
+            <!-- 抗生素药物标签 -->
+            <a href="#" class="tag tag-antibiotic">左氧氟沙星</a>
+            <a href="#" class="tag tag-antibiotic">头孢曲松</a>
+            <a href="#" class="tag tag-antibiotic">头孢吡肟</a>
+            <a href="#" class="tag tag-antibiotic">哌拉西林-他唑巴坦</a>
+            <a href="#" class="tag tag-antibiotic">庆大霉素</a>
+            <a href="#" class="tag tag-antibiotic">氨曲南</a>
+            <a href="#" class="tag tag-antibiotic">美罗培南</a>
+            <a href="#" class="tag tag-antibiotic">头孢洛生-他唑巴坦</a>
+            <a href="#" class="tag tag-antibiotic">头孢他啶-阿维巴坦</a>
+            <a href="#" class="tag tag-antibiotic">美罗培南-韦博巴坦</a>
+            <a href="#" class="tag tag-antibiotic">环丙沙星</a>
+            <a href="#" class="tag tag-antibiotic">呋喃妥因</a>
+            <a href="#" class="tag tag-antibiotic">磷霉素</a>
+            <a href="#" class="tag tag-antibiotic">TMP-SMX</a>
+            
+            <!-- 细菌/病原体标签 -->
+            <a href="#" class="tag tag-bacteria">大肠埃希菌</a>
+            <a href="#" class="tag tag-bacteria">肠杆菌科</a>
+            <a href="#" class="tag tag-bacteria">铜绿假单胞菌</a>
+            <a href="#" class="tag tag-bacteria">肠球菌</a>
+            <a href="#" class="tag tag-bacteria">金黄色葡萄球菌</a>
+            <a href="#" class="tag tag-bacteria">念珠菌属</a>
+            <a href="#" class="tag tag-bacteria">肺炎克雷伯菌</a>
+            <a href="#" class="tag tag-bacteria">ESBL</a>
+            <a href="#" class="tag tag-bacteria">MDR革兰阴性菌</a>
+            <a href="#" class="tag tag-bacteria">食管菌群</a>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>
+        <span>临床抗微生物治疗</span>
+        <span>初始选择</span>
+        <span>急性复杂性尿路感染</span>
+        <span>复杂性肾盂肾炎</span>
+        <span>糖尿病</span>
+        <span>妊娠</span>
+        <span>留置尿管</span>
+        <span>尿路梗阻</span>
+        <span>结石</span>
+        <span>免疫抑制</span>
+        <span>大肠埃希菌</span>
+        <span>铜绿假单胞菌</span>
+        <span>肠球菌</span>
+        <span>金黄色葡萄球菌</span>
+        <span>念珠菌</span>
+        <span>MDR革兰阴性菌</span>
+        <span>左氧氟沙星</span>
+        <span>头孢曲松</span>
+        <span>头孢吡肟</span>
+        <span>哌拉西林-他唑巴坦</span>
+        <span>庆大霉素</span>
+        <span>氨曲南</span>
+        <span>美罗培南</span>
+        <span>头孢洛生-他唑巴坦</span>
+        <span>头孢他啶-阿维巴坦</span>
+        <span>美罗培南-韦博巴坦</span>
+        <span>呋喃妥因</span>
+        <span>磷霉素</span>
+        <span>TMP-SMX</span>
+        <span>胆管炎</span>
+        <span>肝硬化</span>
+        <span>静脉曲张出血</span>
+        <span>消化道出血</span>
+        <span>自发性细菌性腹膜炎</span>
+        <span>环丙沙星</span>
+        <span>预防性抗生素</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert('复制成功！');
+            });
+        }
+    </script>
+</body>
+</html>

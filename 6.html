@@ -1,0 +1,632 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~编译者名单——桑福德抗微生物治疗指南第55版*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #1557b0;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a237e;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .section-header {
+            background: #e8f0fe !important;
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 15px;
+        }
+        
+        .person-name {
+            font-weight: 600;
+            color: #1565c0;
+            font-size: 14px;
+        }
+        
+        .person-title {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .institution {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .memorial-year {
+            font-size: 13px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .copy-btn.copied {
+            background: #1a73e8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ea4335;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(234,67,53,0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.added {
+            background: #34a853;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1565c0;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .copy-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="5.html" class="nav-btn">← 上一页</a>
+            <a href="7.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~编译者名单——桑福德抗微生物治疗指南第55版*****</h1>
+        <p class="subtitle">主编、副主编、总编、纪念、原出版社、中文版主审、主译及译者名单</p>
+    </div>
+    
+    <div class="page-number">6</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">职务/角色</th>
+                    <th style="width: 70%;">姓名及所属机构</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-header">
+                    <td colspan="2" style="text-align: center; font-size: 18px;">编译者名单</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">主编</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">David N. Gilbert, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Chief of Infectious Diseases</div>
+                        <div class="institution">Providence Portland Medical Center, Oregon</div>
+                        <div class="person-title">Professor of Medicine</div>
+                        <div class="institution">Oregon Health Sciences University</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Henry F. Chambers, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="institution">San Francisco General Hospital</div>
+                        <div class="person-title">Professor of Medicine Emeritus</div>
+                        <div class="institution">University of California, San Francisco</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Michael S. Saag, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Professor of Medicine</div>
+                        <div class="institution">Division of Infectious Diseases, University of Alabama, Birmingham</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Andrew T. Pavia, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">George & Esther Gross Presidential Professor</div>
+                        <div class="person-title">Chief, Division of Pediatric Infectious Diseases</div>
+                        <div class="institution">University of Utah, Salt Lake City</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Helen W. Boucher, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Dean & Professor of Medicine</div>
+                        <div class="institution">Tufts University School of Medicine</div>
+                        <div class="person-title">Chief Academic Officer</div>
+                        <div class="institution">Tufts Medicine, Boston, Massachusetts</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">副主编</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Douglas Black, Pharm.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Professor of Pharmacy</div>
+                        <div class="institution">University of Washington, Seattle</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">David O. Freedman, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Emeritus Professor of Medicine</div>
+                        <div class="institution">University of Alabama, Birmingham</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Brian S. Schwartz, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Associate Professor of Medicine</div>
+                        <div class="institution">University of California, San Francisco</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">Kami Kim, M.D.</div>
+                    </td>
+                    <td>
+                        <div class="person-title">Professor of Internal Medicine</div>
+                        <div class="institution">Division of Infectious Diseases and International Medicine</div>
+                        <div class="institution">Morsani College of Medicine, University of South Florida, Tampa</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">总编</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="person-name">Jeb C. Sanford</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">纪念</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="person-name">Jay P. Sanford, M.D.</div>
+                        <div class="memorial-year">1928-1996</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="person-name">Merle A. Sande, M.D.</div>
+                        <div class="memorial-year">1939-2007</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="person-name">Robert C. Moellering, Jr., M.D.</div>
+                        <div class="memorial-year">1936-2014</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">原出版社</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <div class="person-name">Antimicrobial Therapy, Inc.</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">中文版主审</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">李太生</div>
+                        <div class="person-title">教授</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">主译</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">范洪伟</div>
+                        <div class="person-title">医学博士</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="2">译者</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">王焕玲</div>
+                        <div class="person-title">医学博士</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">葛瑛</div>
+                        <div class="person-title">医学博士</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">周宝桐</div>
+                        <div class="person-title">医学博士</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">阮桂仁</div>
+                        <div class="person-title">医学博士</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="person-name">张黎</div>
+                        <div class="person-title">医学博士</div>
+                    </td>
+                    <td>
+                        <div class="institution">北京协和医院，感染内科</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可检索）</div>
+        <div>
+            <span class="tag">David N. Gilbert</span>
+            <span class="tag">Henry F. Chambers</span>
+            <span class="tag">Michael S. Saag</span>
+            <span class="tag">Andrew T. Pavia</span>
+            <span class="tag">Helen W. Boucher</span>
+            <span class="tag">Douglas Black</span>
+            <span class="tag">David O. Freedman</span>
+            <span class="tag">Brian S. Schwartz</span>
+            <span class="tag">Kami Kim</span>
+            <span class="tag">Jeb C. Sanford</span>
+            <span class="tag">Jay P. Sanford</span>
+            <span class="tag">Merle A. Sande</span>
+            <span class="tag">Robert C. Moellering</span>
+            <span class="tag">Antimicrobial Therapy</span>
+            <span class="tag">李太生</span>
+            <span class="tag">范洪伟</span>
+            <span class="tag">王焕玲</span>
+            <span class="tag">葛瑛</span>
+            <span class="tag">周宝桐</span>
+            <span class="tag">阮桂仁</span>
+            <span class="tag">张黎</span>
+            <span class="tag">北京协和医院</span>
+            <span class="tag">感染内科</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <div class="tags-title">📋 快速复制信息</div>
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="编译者名单——桑福德抗微生物治疗指南第55版；主编、副主编、总编、纪念、原出版社、中文版主审、主译及译者名单；David N. Gilbert,Henry F. Chambers,Michael S. Saag,Andrew T. Pavia,Helen W. Boucher,Douglas Black,David O. Freedman,Brian S. Schwartz,Kami Kim,Jeb C. Sanford,Jay P. Sanford,Merle A. Sande,Robert C. Moellering,Antimicrobial Therapy,李太生,范洪伟,王焕玲,葛瑛,周宝桐,阮桂仁,张黎,北京协和医院,感染内科；=6" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="addToFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function addToFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('added');
+            
+            if (btn.classList.contains('added')) {
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+                
+                const favData = {
+                    title: '编译者名单——桑福德抗微生物治疗指南第55版',
+                    url: window.location.href,
+                    page: '6',
+                    tags: ['David N. Gilbert', 'Henry F. Chambers', 'Michael S. Saag', 'Andrew T. Pavia', 'Helen W. Boucher', '北京协和医院', '感染内科']
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.find(f => f.page === '6');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！请在首页查看收藏内容。');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '6');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.page === '6');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('added');
+                btn.innerHTML = '✓';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

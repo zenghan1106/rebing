@@ -1,0 +1,499 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>临床抗微生物治疗的初始选择-慢性鼻窦炎与皮肤炭疽</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #3498db;
+            margin-left: 8px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 15px;
+        }
+        
+        /* 指南引用 */
+        .guideline-ref {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            order: 1;
+        }
+        
+        .nav-right {
+            order: 2;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-home {
+            background-color: #27ae60;
+        }
+        
+        .btn-home:hover {
+            background-color: #219a52;
+        }
+        
+        .btn-prev, .btn-next {
+            background-color: #e67e22;
+        }
+        
+        .btn-prev:hover, .btn-next:hover {
+            background-color: #d35400;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #d6eaf8;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #2c3e50;
+        }
+        
+        /* 隔行变色 */
+        tbody tr:nth-child(even):not(:first-child) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover:not(:first-child) {
+            background-color: #e8f4f8;
+        }
+        
+        /* 分类行高亮 */
+        .category-row {
+            background-color: #d5e8d4 !important;
+            font-weight: bold;
+            color: #1e8449 !important;
+        }
+        
+        .category-row td {
+            color: #1e8449;
+            font-size: 14px;
+        }
+        
+        /* 警示文字 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #16a085;
+            font-style: italic;
+        }
+        
+        /* 页码显示 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 15px 0;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background-color: #9b59b6;
+        }
+        
+        .tag-symptom {
+            background-color: #f39c12;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            .nav-top {
+                justify-content: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 6px 4px;
+            }
+            
+            thead th {
+                font-size: 12px;
+            }
+            
+            .guideline-ref {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="116.html" class="btn btn-prev">上一页</a>
+            <a href="118.html" class="btn btn-next">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">临床抗微生物治疗的初始选择</h1>
+    <p class="subtitle">表1（52）慢性鼻窦炎与皮肤炭疽</p>
+    <p class="guideline-ref">皮肤参见IDSA指南：CID 59：147，2014</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 20%;">病原体（通常）</th>
+                    <th style="width: 32%;">首选方案</th>
+                    <th style="width: 30%;">备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">鼻窦、副鼻窦（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>成人慢性鼻窦炎</strong><br><br>
+                        定义：经过药物治疗后仍有鼻窦炎症性病变，持续超过12周
+                    </td>
+                    <td>
+                        过敏、鼻窦口阻塞（息肉）等因素混合所致；仅在需氧/厌氧菌导致慢性鼻窦炎急性发作时有指征使用抗生素
+                    </td>
+                    <td>
+                        口服治疗常已充分有效：<br>
+                        <span class="drug-name">阿莫西林-克拉维酸</span> 875/125mg bid<br><br>
+                        若PCR检测MRSA阳性：加用<span class="drug-name">多西环素</span> 100mg po bid<br><br>
+                        若免疫功能低下和担心有铜绿假单胞菌感染：<br>
+                        <span class="drug-name">左氧氟沙星</span> 750mg po qd<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg po tid<br><br>
+                        疗程一般为7～10天，根据临床反应调整；尚无临床研究指导治疗
+                    </td>
+                    <td>
+                        <span class="drug-name">莫西沙星</span> 400mg po qd<br><br>
+                        若MRSA：<span class="drug-name">TMP-SMX</span> 160/800mg po bid<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg po bid<br><br>
+                        口服头孢菌素（<span class="drug-name">头孢地尼</span>或<span class="drug-name">头孢呋辛酯</span>或<span class="drug-name">头孢泊肟酯</span>）<br>
+                        ＋<span class="drug-name">甲硝唑</span> 500mg po tid
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="4">皮肤参见IDSA指南：CID 59：147，2014</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>炭疽，皮肤</strong>
+                    </td>
+                    <td>
+                        <span class="drug-name">炭疽杆菌</span><br><br>
+                        孢子通过接触感染动物或动物制品进入皮肤<br><br>
+                        <em>见"炭疽，系统性"，45页</em>
+                    </td>
+                    <td colspan="2">
+                        <strong>首选成人（包括孕妇）：</strong><br>
+                        <span class="drug-name">环丙沙星</span> 500mg po q12h<br>
+                        或<span class="drug-name">多西环素</span> 100mg po q12h<br><br>
+                        <strong>儿童（1月龄至不足18周岁）：</strong><br>
+                        <span class="drug-name">环丙沙星</span> 15mg/kg（最大剂量500mg）po q12h<br>
+                        或<span class="drug-name">多西环素</span> 2.2mg/kg（最大剂量100mg po q12h）<br><br>
+                        <strong>备选方案：</strong><span class="drug-name">左氧氟沙星</span>、<span class="drug-name">克林霉素</span>、<span class="drug-name">米诺环素</span>；<span class="drug-name">阿莫西林</span>或<span class="drug-name">青霉素V钾</span>仅用于敏感菌<br><br>
+                        完整CDC指南和替代治疗药物参见<em>MMWR/Nov.17，2023/72（6）：1-47</em>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div style="background-color: #fff; padding: 15px; border-radius: 8px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: #2e86c1; font-size: 15px; margin-bottom: 10px;">辅助诊断或治疗方法及说明</h3>
+        <div style="font-size: 13px; line-height: 1.8; color: #444;">
+            <p><strong>【慢性鼻窦炎】</strong>协调送检鼻窦或鼻窦口标本培养。疗程：7～10天。局部抗生素无效。抗生素使用参见<em class="reference">Cochrane Database Sys Rev 4：CD011994，2016</em></p>
+            <p style="margin-top: 8px;"><strong>【皮肤炭疽】</strong>暴露事件后疗程为60天，因有吸入性暴露风险，自然感染时为7～10天</p>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：117</div>
+    
+    <!-- 复制功能区域 -->
+    <div class="copy-section">
+        <div class="copy-box-wrapper">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择；慢性鼻窦炎/皮肤炭疽/炭疽杆菌/鼻窦息肉；阿莫西林-克拉维酸/多西环素/左氧氟沙星/甲硝唑/莫西沙星/TMP-SMX/头孢地尼/头孢呋辛酯/头孢泊肟酯/环丙沙星/克林霉素/米诺环素/阿莫西林/青霉素V钾；炭疽杆菌/厌氧菌/需氧菌/MRSA/铜绿假单胞菌；=117" readonly>
+            <button class="btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">慢性鼻窦炎</span>
+            <span class="tag tag-disease">急性鼻窦炎发作</span>
+            <span class="tag tag-disease">皮肤炭疽</span>
+            <span class="tag tag-disease">炭疽系统性</span>
+            <span class="tag tag-disease">鼻窦息肉</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">炭疽杆菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">需氧菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">莫西沙星</span>
+            <span class="tag tag-antibiotic">TMP-SMX</span>
+            <span class="tag tag-antibiotic">头孢地尼</span>
+            <span class="tag tag-antibiotic">头孢呋辛酯</span>
+            <span class="tag tag-antibiotic">头孢泊肟酯</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">米诺环素</span>
+            <span class="tag tag-antibiotic">阿莫西林</span>
+            <span class="tag tag-antibiotic">青霉素V钾</span>
+            
+            <!-- 症状/注意事项标签 -->
+            <span class="tag tag-symptom">鼻窦口阻塞</span>
+            <span class="tag tag-symptom">免疫功能低下</span>
+            <span class="tag tag-symptom">吸入性暴露</span>
+            <span class="tag tag-symptom">PCR检测</span>
+            <span class="tag tag-symptom">CDC指南</span>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        <strong>关键词：</strong>临床抗微生物治疗 | 初始选择 | 慢性鼻窦炎 | 皮肤炭疽 | 炭疽杆菌 | 鼻窦息肉 | 阿莫西林-克拉维酸 | 多西环素 | 左氧氟沙星 | 甲硝唑 | 环丙沙星 | 克林霉素 | MRSA | 铜绿假单胞菌 | CDC指南 | IDSA指南
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyInput = document.getElementById("copyInput");
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(function() {
+                    alert("已复制到剪贴板！");
+                }).catch(function() {
+                    document.execCommand("copy");
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+    </script>
+</body>
+</html>

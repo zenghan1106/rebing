@@ -1,0 +1,531 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表9A(12)抗菌药物药理学特点-幽门螺杆菌复方制剂续*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 30px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 80px 20px 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+            padding: 0 20px;
+        }
+        
+        .table-id {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            margin: 0 15px 25px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            min-width: 1500px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 14px 6px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            border: 1px solid #1a3a5c;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #e8f4f8 !important;
+        }
+        
+        .category-row td {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            padding: 12px 15px;
+            border: 1px solid #b8d4e3;
+            text-align: left;
+        }
+        
+        /* 数据行 */
+        tbody tr {
+            background: #fff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 6px 5px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        /* 药物名列突出 */
+        td:first-child {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #f0f7ff;
+            font-size: 12px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 0 15px 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2e5c8a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #6c5b31;
+        }
+        
+        .tag-drug {
+            background: #74b9ff;
+            color: #2d3436;
+        }
+        
+        .tag-bacteria {
+            background: #55efc4;
+            color: #2d3436;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin: 0 15px 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .keywords span {
+            color: #2e5c8a;
+            font-weight: bold;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 0 15px 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 17px;
+                padding-top: 90px;
+            }
+            
+            .sub-title {
+                font-size: 13px;
+            }
+            
+            .table-id {
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 9px;
+            }
+            
+            thead th {
+                font-size: 9px;
+                padding: 8px 4px;
+            }
+            
+            td {
+                padding: 5px 3px;
+                line-height: 1.5;
+            }
+            
+            .category-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">← 返回首页</button>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="231.html" class="nav-btn">← 上一页</a>
+        <a href="233.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表9A(12) 抗菌药物药理学特点*****</h1>
+    <p class="sub-title">治疗幽门螺杆菌复方制剂（续）</p>
+    <p class="table-id">表9A（12）</p>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>PK/PD<br>指数</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂¹</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tₘₐₓ<br>(h)</th>
+                    <th>血浆峰<br>值浓度²<br>(μg/ml)</th>
+                    <th>尿峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结<br>合率<br>(%)</th>
+                    <th>分布容积³/<br>Vd</th>
+                    <th>平均血清<br>半衰期⁴<br>(h)</th>
+                    <th>清除</th>
+                    <th>胆汁<br>排泄率⁵<br>(%)</th>
+                    <th>脑脊液/<br>血药浓<br>度比⁶<br>(%)</th>
+                    <th>脑脊<br>液穿<br>透⁷</th>
+                    <th>AUC⁸<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Talicia</td>
+                    <td>奥美拉唑:<br>ND<br>阿莫西林: T<br>>MIC<br>利福布汀:<br>24h AUC/<br>MIC</td>
+                    <td>胶囊(奥美拉唑<br>10mg,阿莫西林<br>250mg;利福布汀<br>12.5mg)</td>
+                    <td>胶囊+<br>食物</td>
+                    <td>奥美拉<br>唑: ND<br>阿莫西<br>林: ND<br>利福布<br>汀: ND</td>
+                    <td>奥美拉<br>唑:<br>1.25<br>阿莫西<br>林: 2<br>利福布<br>汀: 3</td>
+                    <td>奥美拉唑: 1.28<br>(40mg q8h,<br>SS)阿莫西<br>林: 15.9 (1g<br>q8h, SS)<br>利福布汀<br>0.088<br>(50mg)</td>
+                    <td>ND</td>
+                    <td>奥美拉<br>唑: 95<br>阿莫西<br>林: 20<br>利福布<br>汀: 85</td>
+                    <td>奥美拉唑: ND<br>阿莫西林:<br>0.36 L/kg<br>利福布汀:<br>9.3 L/kg (Vss)</td>
+                    <td>奥美拉唑: 1<br>阿莫西林:<br>1.4<br>利福布汀: 34</td>
+                    <td>奥美拉<br>唑: 代谢<br>阿莫西<br>林: 肾脏<br>利福布<br>汀: 肾脏</td>
+                    <td>奥美拉唑:<br>ND<br>阿莫西林:<br>100～3000<br>利福布汀:<br>300～500</td>
+                    <td>奥美拉唑:<br>ND<br>阿莫西林:<br>13～14<br>利福布汀:<br>30～70</td>
+                    <td>奥美拉<br>唑: ND<br>阿莫西<br>林: 是<br>利福布<br>汀: ND</td>
+                    <td>奥美拉唑:<br>7.16 (40mg<br>q8h, 0～24h)<br>阿莫西林:<br>145.8 (1g<br>q8h, 0～24h)<br>利福布汀:<br>1.32 (50mg<br>q8h, 0～24h)</td>
+                </tr>
+                <tr>
+                    <td>Voquezna<br>(Triple Pak,<br>Dual Pak)</td>
+                    <td>伏诺拉生:<br>ND<br>阿莫西林:<br>T>MIC<br>克拉霉素:<br>24h<br>AUC/MIC</td>
+                    <td>伏诺拉生20mg<br>片剂<br>阿莫西林500mg<br>胶囊<br>克拉霉素500mg<br>片剂</td>
+                    <td>伏诺拉生<br>±食物<br>阿莫西林<br>±食物<br>克拉霉素<br>±食物</td>
+                    <td>伏诺拉<br>生: ND<br>阿莫西<br>林: 80<br>克拉霉<br>素: 50</td>
+                    <td>伏诺拉<br>生: 3.0<br>阿莫西<br>林:<br>1～2<br>克拉霉<br>素:<br>2.0～25</td>
+                    <td>伏诺拉生:<br>0.038 (20mg<br>q12h, SS)<br>阿莫西林:<br>5.5～7.5<br>(500mg, SD)<br>克拉霉素:<br>3～4 (500mg<br>q8～12h, SS)</td>
+                    <td>ND</td>
+                    <td>伏诺拉生:<br>85～88<br>阿莫西林:<br>20<br>克拉霉素:<br>65～70</td>
+                    <td>伏诺拉生:<br>782.7 L (V/F)<br>阿莫西林:<br>0.36 L/kg<br>克拉霉素:<br>4 L/kg</td>
+                    <td>伏诺拉生:<br>6.8<br>阿莫西林: 1<br>克拉霉素:<br>5～7</td>
+                    <td>伏诺拉<br>生: 代谢<br>阿莫西<br>林: 肾脏<br>克拉霉<br>素: 代<br>谢/肾脏</td>
+                    <td>伏诺拉生:<br>ND<br>阿莫西林:<br>100～3000<br>克拉霉素:<br>7000</td>
+                    <td>伏诺拉生:<br>ND<br>阿莫西林:<br>13～14<br>克拉霉素:<br>ND</td>
+                    <td>伏诺拉<br>生: ND<br>阿莫西<br>林: 是<br>克拉霉<br>素: ND</td>
+                    <td>伏诺拉生:<br>0.272 (20mg<br>q12h,0～12h)<br>阿莫西林: 22<br>(500mg, 0-inf)<br>克拉霉素: 20<br>(500mg q12h,<br>0～24h)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>表注见135页。表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-drug">Talicia</span>
+            <span class="tag tag-drug">Voquezna</span>
+            <span class="tag tag-drug">Triple Pak</span>
+            <span class="tag tag-drug">Dual Pak</span>
+            <span class="tag tag-drug">奥美拉唑</span>
+            <span class="tag tag-drug">阿莫西林</span>
+            <span class="tag tag-drug">利福布汀</span>
+            <span class="tag tag-drug">伏诺拉生</span>
+            <span class="tag tag-drug">克拉霉素</span>
+            <span class="tag tag-disease">幽门螺杆菌</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>关键词：</span>抗菌药物；药理学特点；幽门螺杆菌；Talicia；Voquezna；Triple Pak；Dual Pak；奥美拉唑；阿莫西林；利福布汀；伏诺拉生；克拉霉素；PK/PD；AUC/MIC；蛋白结合率；分布容积；半衰期；脑脊液穿透
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">— 232 —</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表9A(12)抗菌药物药理学特点-幽门螺杆菌复方制剂续；治疗幽门螺杆菌复方制剂（续）；抗菌药物；药理学特点；幽门螺杆菌；Talicia；Voquezna；Triple Pak；Dual Pak；奥美拉唑；阿莫西林；利福布汀；伏诺拉生；克拉霉素；PK/PD；AUC/MIC；蛋白结合率；分布容积；半衰期；脑脊液穿透；=232" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">✓ 已复制到剪贴板</div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast();
+                });
+            } else {
+                document.execCommand('copy');
+                showToast();
+            }
+        }
+        
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

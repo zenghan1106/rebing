@@ -1,0 +1,454 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~奥比他韦/帕利瑞韦/利托那韦+达塞布韦(Viekira Pak)PK/PD参数表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.prev {
+            background: #f0ad4e;
+            box-shadow: 0 2px 8px rgba(240, 173, 78, 0.3);
+        }
+        
+        .nav-btn.prev:hover {
+            background: #ec971f;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 80px 20px 30px;
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 第一行数据（药物名称行）字体大一点 */
+        tbody tr:first-child td {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        /* 单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #e0e6ed;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.antibiotic {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #1a5c3a;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #357abd 0%, #2a6da8 100%);
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding: 15px;
+        }
+        
+        .keywords span {
+            display: inline-block;
+            margin: 3px 8px;
+            padding: 4px 12px;
+            background: #f0f2f5;
+            border-radius: 15px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 16px;
+                padding: 70px 15px 20px;
+            }
+            
+            thead th {
+                font-size: 11px;
+                padding: 10px 5px;
+            }
+            
+            td {
+                font-size: 10px !important;
+                padding: 8px 5px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 11px !important;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="269.html" class="nav-btn prev">← 上一页</a>
+        <a href="271.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~奥比他韦/帕利瑞韦/利托那韦+达塞布韦(Viekira Pak)PK/PD参数表*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>PK/PD<br>指数</th>
+                    <th>药物剂型</th>
+                    <th>食物影响/<br>口服制剂¹</th>
+                    <th>口服<br>吸收率<br>(%)</th>
+                    <th>达峰<br>时间/<br>Tₘₐₓ<br>(h)</th>
+                    <th>血浆峰<br>值浓度²<br>(μg/ml)</th>
+                    <th>尿峰<br>值浓度<br>(μg/ml)</th>
+                    <th>蛋白结合<br>率(%)</th>
+                    <th>分布容积³/<br>Vd</th>
+                    <th>平均血清<br>半衰期⁴<br>(h)</th>
+                    <th>清除</th>
+                    <th>胆汁<br>排泄率⁵<br>(%)</th>
+                    <th>脑脊液/<br>血药<br>浓度比⁶<br>(%)</th>
+                    <th>脑脊<br>液穿<br>透⁷</th>
+                    <th>AUC⁸<br>(μg·h/ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>奥比他韦/<br>帕利瑞韦/<br>利托那韦+<br>达塞布韦<br>(Viekira Pak)</td>
+                    <td>ND</td>
+                    <td>片剂(Ornbit 12.5mg,<br>Parita 75mg, RTV<br>50mg), 片剂(Dasa<br>250mg)<br>XR(Ornbit 8.33mg,<br>Parita 50mg, RTV<br>33.33mg, Dasa<br>200mg)</td>
+                    <td>所有片<br>剂+食物</td>
+                    <td>Ornbit 48<br>Parita 53<br>Dada 70</td>
+                    <td>Ornbit 5<br>(XR 5)<br>Parita<br>4~5<br>(XR 5)<br>RTV<br>4~5<br>(XR 4)<br>Dasa 4<br>(XR 8)</td>
+                    <td>Ornbit 0.068<br>(25mg po qd, SS)<br>Parita 0.26<br>(150mg po qd,<br>SS)<br>RTV 0.68(100mg<br>po qd, SS)<br>Dasa 0.67(250mg<br>po q12h,<br>SS)</td>
+                    <td>ND</td>
+                    <td>Ornbit 99.9<br>Parita 97.0~98.6<br>RTV >99<br>Dasa >99.5</td>
+                    <td>Ornbit 173L<br>(Vss)<br>Parita 103L<br>(Vss)<br>RTV 21.5L<br>(V/F)<br>Dasa 149L(Vss)</td>
+                    <td>Ornbit<br>21~25<br>Parita 5.5<br>RTV 4<br>Dasa 5.5~6</td>
+                    <td>Ornbit:<br>胆道<br>Parita:<br>代谢<br>RTV:<br>代谢<br>Dasa:<br>代谢</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>ND</td>
+                    <td>Ornbit 1(25mg<br>po qd,0~24h)<br>Parita 2.22<br>(150mg po qd,<br>0~24h)<br>RTV 6.2(100mg<br>po qd,0~24h)<br>Dasa 324(250mg<br>po q12h,0~12h)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong></p>
+        <p>1 除非注明，否则均指成人制剂；+食物=餐中服用，无食物=空腹服用，±食物=餐中或空腹服用。</p>
+        <p>2 SD=单剂量，SS=达到稳态。</p>
+        <p>3 V/F=Vd/口服生物利用度，Vss=稳态时Vd，Vss/F=稳态时Vd/口服生物利用度。</p>
+        <p>4 假定CrCl > 80L/min。</p>
+        <p>5 (胆汁峰值浓度/血浆峰值浓度)×100。空白表示无数据。</p>
+        <p>6 炎症情况下脑脊液浓度。</p>
+        <p>7 基于药物的剂量和病原体敏感性判断。理想脑脊液浓度是≥10×MIC。</p>
+        <p>8 曲线下面积(AUC)=血清药物浓度-时间曲线下面积；12h=AUC 0~12，24h=AUC 0~24。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">丙型肝炎</span>
+            <span class="tag antibiotic">奥比他韦</span>
+            <span class="tag antibiotic">帕利瑞韦</span>
+            <span class="tag antibiotic">利托那韦</span>
+            <span class="tag antibiotic">达塞布韦</span>
+            <span class="tag antibiotic">Viekira Pak</span>
+            <span class="tag bacteria">HCV</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="奥比他韦/帕利瑞韦/利托那韦+达塞布韦(Viekira Pak)PK/PD参数表；奥比他韦；帕利瑞韦；利托那韦；达塞布韦；Viekira Pak；丙型肝炎；HCV；=270" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">270</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <span>奥比他韦</span>
+        <span>帕利瑞韦</span>
+        <span>利托那韦</span>
+        <span>达塞布韦</span>
+        <span>Viekira Pak</span>
+        <span>丙型肝炎</span>
+        <span>HCV</span>
+        <span>PK/PD</span>
+        <span>抗病毒药物</span>
+        <span>药物代谢</span>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+    </script>
+</body>
+</html>

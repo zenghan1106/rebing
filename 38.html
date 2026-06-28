@@ -1,0 +1,377 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角膜炎特殊类型临床抗微生物治疗初始选择参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "SimHei", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 50%, #fff3e0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(81, 45, 168, 0.1);
+            padding: 35px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4527a0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #5e35b1;
+            font-size: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 18px;
+            border-bottom: 3px solid #7e57c2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        thead th {
+            background: linear-gradient(180deg, #512da8 0%, #4527a0 100%);
+            color: #ffffff;
+            font-weight: bold;
+            padding: 14px 10px;
+            text-align: center;
+            border: 1px solid #4527a0;
+            font-size: 13.5px;
+        }
+
+        thead th.sub-header {
+            background: linear-gradient(180deg, #9575cd 0%, #7e57c2 100%);
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #d1c4e9;
+            vertical-align: top;
+            color: #263238;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ede7f6;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #d1c4e9;
+            transition: background-color 0.3s ease;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #ffcc80 0%, #ffb74d 100%) !important;
+            font-weight: bold;
+            font-size: 14px;
+            color: #5d4037;
+            padding: 14px 10px;
+        }
+
+        .col-anatomy {
+            width: 14%;
+            background-color: #fff8e1 !important;
+            color: #5d4037;
+            font-weight: 600;
+        }
+
+        .col-pathogen {
+            width: 16%;
+            background-color: #fce4ec !important;
+            color: #880e4f;
+        }
+
+        .col-first {
+            width: 26%;
+            background-color: #e8f5e9 !important;
+            color: #1b5e20;
+        }
+
+        .col-alternative {
+            width: 16%;
+            background-color: #e1f5fe !important;
+            color: #01579b;
+        }
+
+        .col-auxiliary {
+            width: 28%;
+            background-color: #f3e5f5 !important;
+            color: #4a148c;
+        }
+
+        .highlight-drug {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .dose-info {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .warning {
+            color: #d84315;
+            font-weight: bold;
+        }
+
+        .reference {
+            color: #1565c0;
+            font-style: italic;
+        }
+
+        .tag {
+            display: inline-block;
+            color: white;
+            padding: 1px 7px;
+            border-radius: 4px;
+            font-size: 10px;
+            margin-right: 4px;
+            font-weight: bold;
+        }
+
+        .tag-contact { background: #e53935; }
+        .tag-risk { background: #fb8c00; }
+        .tag-fungal { background: #7cb342; }
+        .tag-mycobacterial { background: #00897b; }
+
+        .notes {
+            margin-top: 22px;
+            padding: 16px 22px;
+            background: linear-gradient(90deg, #fff8e1 0%, #ffecb3 100%);
+            border-radius: 12px;
+            border-left: 5px solid #ffa000;
+            font-size: 12px;
+            color: #5d4037;
+            line-height: 1.9;
+        }
+
+        .notes strong {
+            color: #e65100;
+        }
+
+        td p {
+            margin-bottom: 5px;
+        }
+
+        td p:last-child {
+            margin-bottom: 0;
+        }
+
+        .indent {
+            padding-left: 14px;
+            border-left: 2px solid #b0bec5;
+            margin: 4px 0;
+        }
+
+        .eye-regimen {
+            background: #fff3e0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 6px 0;
+            font-size: 11.5px;
+            border-left: 3px solid #ff9800;
+        }
+
+        .combo-box {
+            background: #e3f2fd;
+            padding: 6px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 3px 0;
+            font-size: 11.5px;
+        }
+
+        .fungal-options {
+            background: #f1f8e9;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 6px 0;
+            font-size: 11.5px;
+        }
+
+        .fungal-options strong {
+            color: #558b2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👁️ 角膜炎特殊类型 — 隐形眼镜/高危因素/真菌/分枝杆菌</h1>
+        <div class="subtitle">临床抗微生物治疗的初始选择</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案<sup>*</sup></th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选方案</th>
+                    <th class="sub-header">备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-anatomy">
+                        <span class="tag tag-contact">隐形眼镜</span>隐形眼镜使用者
+                    </td>
+                    <td class="col-pathogen">
+                        <p><span class="highlight-drug">铜绿假单胞菌</span></p>
+                    </td>
+                    <td class="col-first">
+                        <p><span class="highlight-drug">0.3%环丙沙星滴眼液</span>或<span class="highlight-drug">0.5%左氧氟沙星滴眼液</span></p>
+                        <div class="eye-regimen">
+                            <p><span class="dose-info">1～2滴q1h×24～72h</span>，根据疗效逐渐减量</p>
+                        </div>
+                    </td>
+                    <td class="col-alternative">
+                        <p><span class="highlight-drug">0.3%庆大霉素</span>或<span class="highlight-drug">妥布霉素滴眼液</span></p>
+                        <div class="eye-regimen">
+                            <p><span class="dose-info">1～2滴q1h×24h</span>，之后根据临床疗效逐渐减量</p>
+                        </div>
+                    </td>
+                    <td class="col-auxiliary">
+                        <p>推荐做<span class="highlight-drug">隐形眼镜拭子培养和药敏试验</span>；转诊给眼科医师</p>
+                        <p style="margin-top:4px;"><strong>角膜擦伤：</strong><span class="highlight-drug">妥布霉素</span>、<span class="highlight-drug">庆大霉素</span>或<span class="highlight-drug">环丙沙星滴眼qid×3～5d</span>；</p>
+                        <p style="margin-top:4px;">出现角膜浸润或溃疡、视力受损、治疗无效或症状加重<span class="warning">建议转诊眼科专科医师</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">
+                        <span class="tag tag-risk">高危因素</span>角膜干燥、糖尿病、免疫功能抑制者
+                    </td>
+                    <td class="col-pathogen">
+                        <p><span class="highlight-drug">金黄色葡萄球菌</span>、<span class="highlight-drug">表皮葡萄球菌</span>、<span class="highlight-drug">肺炎链球菌</span>、<span class="highlight-drug">化脓性链球菌</span>、<span class="highlight-drug">肠杆菌科</span>、<span class="highlight-drug">李斯特菌</span></p>
+                    </td>
+                    <td class="col-first">
+                        <p><span class="highlight-drug">0.3%环丙沙星滴眼液</span></p>
+                        <div class="eye-regimen">
+                            <p><span class="dose-info">1～2滴q1h×24～72h</span>，之后根据临床疗效逐渐减量</p>
+                        </div>
+                    </td>
+                    <td class="col-alternative">
+                        <p><span class="combo-box"><span class="highlight-drug">万古霉素</span>（<span class="dose-info">50mg/ml</span>）＋<span class="highlight-drug">头孢他啶</span>（<span class="dose-info">50mg/ml</span>）</span></p>
+                        <div class="eye-regimen">
+                            <p>滴眼<span class="dose-info">q1h×24～72h</span>，然后根据疗效逐渐减少用量，<span class="highlight-note">见说明</span></p>
+                        </div>
+                    </td>
+                    <td class="col-auxiliary">
+                        <p>根据<span class="highlight-drug">拭子培养和药敏试验结果</span>进行针对性治疗</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">
+                        <span class="tag tag-fungal">真菌性</span>真菌性角膜炎
+                    </td>
+                    <td class="col-pathogen">
+                        <p><span class="highlight-drug">曲霉菌</span>、<span class="highlight-drug">镰刀菌</span>、<span class="highlight-drug">念珠菌</span>及其他</p>
+                    </td>
+                    <td class="col-first">
+                        <p><span class="highlight-drug">5%纳他霉素滴眼液</span>：</p>
+                        <div class="eye-regimen">
+                            <p><span class="dose-info">1滴q1～2h×数天</span>；然后，<span class="dose-info">q3～4h×数天</span>；可根据疗效减少用药频率</p>
+                        </div>
+                    </td>
+                    <td class="col-alternative">
+                        <p><span class="highlight-drug">0.15%两性霉素B</span></p>
+                        <div class="eye-regimen">
+                            <p><span class="dose-info">1滴q1～2h×数天</span>；可根据疗效减少用药频率</p>
+                        </div>
+                    </td>
+                    <td class="col-auxiliary">
+                        <p>留取标本进行<span class="highlight-drug">真菌涂片和培养</span></p>
+                        <div class="fungal-options" style="margin-top:6px;">
+                            <p>其他多种治疗方案疗效似乎相当，包括<span class="highlight-drug">1%伊曲康唑</span>局部应用<span class="dose-info">6周</span>；口服<span class="highlight-drug">伊曲康唑100mg 2次/天×3周</span>；<span class="highlight-drug">1%伏立康唑</span>局部应用<span class="dose-info">2周</span>；<span class="highlight-drug">1%咪康唑</span><span class="dose-info">5次/天</span>；<span class="dose-info">0.5%～1.0%硫酸银</span><span class="dose-info">5次/天</span></p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-anatomy">
+                        <span class="tag tag-mycobacterial">分枝杆菌</span>分枝杆菌：眼屈光手术后
+                    </td>
+                    <td class="col-pathogen">
+                        <p><span class="highlight-drug">龟分枝杆菌</span>、<span class="highlight-drug">脓肿分枝杆菌</span>、<span class="highlight-drug">马西利亚分枝杆菌</span></p>
+                    </td>
+                    <td class="col-first">
+                        <p><span class="highlight-drug">加替沙星</span>或<span class="highlight-drug">莫西沙星滴眼液</span>：<span class="dose-info">1滴qid</span>，联用其他有活性的抗生素滴眼液<span class="combo-box">（<span class="highlight-drug">阿米卡星50mg/L</span>和<span class="highlight-drug">克拉霉素10mg/L</span>）</span></p>
+                    </td>
+                    <td class="col-alternative">
+                        <p><strong>备选方案：全身性治疗。</strong><span class="highlight-drug">多西环素</span> <span class="dose-info">100mg po bid</span>＋<span class="highlight-drug">克拉霉素</span> <span class="dose-info">500mg po bid</span></p>
+                        <p style="margin-top:4px;">（<span class="reference">Plos One 10: doi16236, 2015</span>）</p>
+                    </td>
+                    <td class="col-auxiliary">
+                        <p>—</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="notes">
+            <p><strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+            <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+            <p>表中名词缩写见第2页。</p>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+
+
+---
+
+
+
+标签和标题说明
+
+
+ 项目 	 内容 	
+ **网页标题（Title）** 	 `角膜炎特殊类型临床抗微生物治疗初始选择参考表` 	
+ **页面主标题（H1）** 	 `👁️ 角膜炎特殊类型 — 隐形眼镜/高危因素/真菌/分枝杆菌` 	
+ **副标题** 	 `临床抗微生物治疗的初始选择` 	
+ **检索关键词/标签** 	 `角膜炎特殊类型`、`隐形眼镜角膜炎`、`铜绿假单胞菌角膜炎`、`角膜干燥角膜炎`、`糖尿病角膜炎`、`免疫抑制角膜炎`、`真菌性角膜炎`、`分枝杆菌角膜炎`、`屈光手术后感染`、`曲霉菌`、`镰刀菌`、`念珠菌`、`龟分枝杆菌`、`脓肿分枝杆菌`、`马西利亚分枝杆菌`、`环丙沙星滴眼液`、`左氧氟沙星滴眼液`、`庆大霉素滴眼液`、`妥布霉素滴眼液`、`万古霉素`、`头孢他啶`、`纳他霉素滴眼液`、`两性霉素B滴眼液`、`伊曲康唑`、`伏立康唑`、`咪康唑`、`硫酸银`、`加替沙星滴眼液`、`莫西沙星滴眼液`、`阿米卡星`、`克拉霉素`、`多西环素`、`拭子培养`、`药敏试验`、`真菌涂片培养`、`转诊眼科`、`临床抗微生物治疗`、`初始选择` 	
+
+
+
+
+设计特点：
+
+• 背景色：淡紫渐变到淡蓝再到暖橙，明亮柔和
+
+• 表格配色：分区标题金黄色、解剖列淡黄、病原体列淡粉、首选方案淡绿、备选方案淡青、辅助列淡紫
+
+• 标签系统：隐形眼镜(红色)/高危因素(橙色)/真菌性(绿色)/分枝杆菌(teal)四类标签
+
+• 重点标记：药物名称红色加粗、剂量信息绿色、警告信息深橙红、参考文献蓝色斜体
+
+• 特殊设计：滴眼液方案用橙色边框详情框突出、联合用药组合用蓝色背景框标注、真菌多种替代方案用绿色详情框呈现、分枝杆菌全身治疗方案清晰标注

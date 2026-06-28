@@ -1,0 +1,482 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~头孢曲松脱敏方法及其他药物脱敏文献*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5a9bd5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .subtitle {
+            text-align: left;
+            font-size: 12px;
+            color: #555;
+            margin: 0 0 15px 0;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+        
+        .table-section {
+            margin-bottom: 25px;
+        }
+        
+        .table-label {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0 10px 0;
+            padding: 10px;
+            background: #e8f4f8;
+            border-radius: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 11px;
+        }
+        
+        /* 表格头部蓝色 */
+        thead th {
+            background: #2e75b6;
+            color: white;
+            padding: 10px 6px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            font-size: 12px;
+        }
+        
+        /* 第一行字体大一点 */
+        thead tr:first-child th {
+            font-size: 13px;
+            padding: 12px 6px;
+        }
+        
+        tbody td {
+            padding: 8px 6px;
+            text-align: center;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+        
+        tbody th {
+            padding: 10px 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+            background: #f8f9fa;
+            font-weight: bold;
+            font-size: 11px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .reference {
+            font-style: italic;
+            color: #666;
+            font-size: 10px;
+        }
+        
+        /* 文献列表 */
+        .literature-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .literature-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .literature-list {
+            font-size: 11px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .literature-item {
+            margin-bottom: 6px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .literature-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2e75b6;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-drug {
+            background: #e8f4f8;
+            color: #1a5276;
+            border: 1px solid #5b9bd5;
+        }
+        
+        .tag-procedure {
+            background: #fef3e8;
+            color: #6c4a00;
+            border: 1px solid #f9a825;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #5b9bd5;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:active {
+            background: #218838;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-top: 10px;
+        }
+        
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            .subtitle {
+                font-size: 10px;
+            }
+            
+            .table-label {
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 9px;
+            }
+            
+            thead th, tbody th, tbody td {
+                padding: 6px 4px;
+            }
+            
+            .tag {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="188.html" class="nav-btn">← 上一页</a>
+            <a href="190.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="title">~~~~~表7续 头孢曲松脱敏方法及其他药物脱敏文献*****</h1>
+    
+    <!-- 头孢曲松脱敏 -->
+    <div class="table-section">
+        <div class="table-label">头孢曲松静脉脱敏方案</div>
+        <div class="subtitle">
+            参见Allergol Immunopathol (Madr) 37: 105, 2009。<br>
+            • <b>方法</b>：静脉输注头孢曲松，每剂间隔20分钟。
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>步骤</th>
+                        <th>稀释液<br>(U/ml)</th>
+                        <th>给予剂量<br>(ml)</th>
+                        <th>剂量/步骤<br>(U)</th>
+                        <th>累计给予剂量<br>(U)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>1000</td><td>0.2</td><td>200</td><td>340</td></tr>
+                    <tr><td>2</td><td>1000</td><td>0.4</td><td>400</td><td>740</td></tr>
+                    <tr><td>3</td><td>1000</td><td>0.8</td><td>800</td><td>1540</td></tr>
+                    <tr><td>4</td><td>1000</td><td>0.2</td><td>2000</td><td>3540</td></tr>
+                    <tr><td>5</td><td>10000</td><td>0.4</td><td>4000</td><td>7540</td></tr>
+                    <tr><td>6</td><td>10000</td><td>0.8</td><td>8000</td><td>15540</td></tr>
+                    <tr><td>7</td><td>10000</td><td>0.2</td><td>20000</td><td>35540</td></tr>
+                    <tr><td>8</td><td>10000</td><td>0.4</td><td>40000</td><td>75540</td></tr>
+                    <tr><td>9</td><td>10000</td><td>0.8</td><td>80000</td><td>155540</td></tr>
+                    <tr><td>10</td><td>100000</td><td>0.2</td><td>200000</td><td>355540</td></tr>
+                    <tr><td>11</td><td>100000</td><td>0.4</td><td>400000</td><td>755540</td></tr>
+                    <tr><td>12</td><td>100000</td><td>0.8</td><td>800000</td><td>1555540</td></tr>
+                    <tr><td>13</td><td>1000000</td><td>0.2</td><td>2000000</td><td>3555540</td></tr>
+                    <tr><td>14</td><td>1000000</td><td>0.4</td><td>4000000</td><td>7555540</td></tr>
+                    <tr><td>15</td><td>1000000</td><td>0.8</td><td>8000000</td><td>15555540</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- 其他药物脱敏 -->
+    <div class="table-section">
+        <div class="table-label">其他药物口服脱敏方案</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>天数</th>
+                        <th>剂量（mg）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>第1天</td><td>0.001→0.01→0.1→1</td></tr>
+                    <tr><td>第2天</td><td>1→5→10→50</td></tr>
+                    <tr><td>第3天</td><td>100→250→500</td></tr>
+                    <tr><td>第4天</td><td>1000</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- 文献列表 -->
+    <div class="literature-section">
+        <div class="literature-title">其他药物的脱敏方法（文献）</div>
+        <div class="literature-list">
+            <div class="literature-item">头孢他啶：Curr Opin All Clin Immunol 6 (6): 476, 2006;</div>
+            <div class="literature-item">头孢他啶-阿维巴坦：Fed Pract 2002: 39: 94;</div>
+            <div class="literature-item">头孢洛林：J Allergy Clin Immunol Pract 2: 1, 2015;</div>
+            <div class="literature-item">克林霉素：Ann Allergy Asthma Immunol 2019; 123: 607;</div>
+            <div class="literature-item">黏菌素：Ann Allergy Clin Immunol 2018; 6: 2141;</div>
+            <div class="literature-item">达托霉素：Ann Allergy Asthma Immunol 100: 87, 2008;</div>
+            <div class="literature-item">多西环素：ID Cases 11: 70, 2018; Ann Allergy Asthma Immunol 2019; 123: 312;</div>
+            <div class="literature-item">恩替卡韦：AAC 2018; 62: e01371-18;</div>
+            <div class="literature-item">氟氯西林：Ann Allergy Asthma Immunol 2019; 123: 312;</div>
+            <div class="literature-item">亚胺培南-西司他丁：Ann Pharmacother 37: 513, 2003;</div>
+            <div class="literature-item">两性霉素B脂质体：J Allergy Clin Immunol Pract 5: 181, 2017;</div>
+            <div class="literature-item">美罗培南：Ann Pharmacother 37: 1424, 2003;</div>
+            <div class="literature-item">甲硝唑：Allergy Rhinol 5: 1, 2014;</div>
+            <div class="literature-item">缬更昔洛韦：Transplantation 98: e50, 2014;</div>
+            <div class="literature-item">万古霉素：Ann Pharmacother 2011; 35: 1458;</div>
+            <div class="literature-item">氨苄西林、头孢吡肟、环丙沙星、克拉霉素、克林霉素、达托霉素、利奈唑胺、妥布霉素的脱敏方案的综述：CID 58: 1140, 2014。</div>
+        </div>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 快速检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 操作/程序标签 -->
+            <span class="tag tag-procedure">药物脱敏</span>
+            <span class="tag tag-procedure">头孢曲松脱敏</span>
+            <span class="tag tag-procedure">口服脱敏</span>
+            <span class="tag tag-procedure">静脉脱敏</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">头孢他啶</span>
+            <span class="tag tag-drug">头孢他啶-阿维巴坦</span>
+            <span class="tag tag-drug">头孢洛林</span>
+            <span class="tag tag-drug">克林霉素</span>
+            <span class="tag tag-drug">黏菌素</span>
+            <span class="tag tag-drug">达托霉素</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">恩替卡韦</span>
+            <span class="tag tag-drug">氟氯西林</span>
+            <span class="tag tag-drug">亚胺培南</span>
+            <span class="tag tag-drug">亚胺培南-西司他丁</span>
+            <span class="tag tag-drug">两性霉素B脂质体</span>
+            <span class="tag tag-drug">美罗培南</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <span class="tag tag-drug">缬更昔洛韦</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">氨苄西林</span>
+            <span class="tag tag-drug">头孢吡肟</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">克拉霉素</span>
+            <span class="tag tag-drug">利奈唑胺</span>
+            <span class="tag tag-drug">妥布霉素</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="footer-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="表7续 头孢曲松脱敏方法及其他药物脱敏文献；头孢曲松脱敏；药物脱敏；头孢他啶；头孢洛林；克林霉素；黏菌素；达托霉素；多西环素；恩替卡韦；氟氯西林；亚胺培南；两性霉素B；美罗培南；甲硝唑；缬更昔洛韦；万古霉素；=189" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        <div class="page-number">第 189 页</div>
+        <div class="keywords">
+            <strong>关键词：</strong>表7续；头孢曲松脱敏；药物脱敏；静脉脱敏；口服脱敏；Allergol Immunopathol；头孢他啶；头孢他啶-阿维巴坦；头孢洛林；克林霉素；黏菌素；达托霉素；多西环素；恩替卡韦；氟氯西林；亚胺培南-西司他丁；两性霉素B脂质体；美罗培南；甲硝唑；缬更昔洛韦；万古霉素；氨苄西林；头孢吡肟；环丙沙星；克拉霉素；利奈唑胺；妥布霉素；CID；Curr Opin；Fed Pract；J Allergy Clin Immunol Pract；Ann Allergy Asthma Immunol；ID Cases；AAC；Ann Pharmacother；Allergy Rhinol；Transplantation
+        </div>
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+    </script>
+</body>
+</html>

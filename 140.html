@@ -1,0 +1,456 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择-全身综合征（发热/不发热）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #1976D2;
+            color: white;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background-color: #388E3C;
+            color: white;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #0D47A1;
+            font-size: 20px;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #E3F2FD;
+            border-radius: 8px;
+            border-left: 5px solid #1976D2;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-size: 12px;
+        }
+        
+        thead th {
+            background-color: #1565C0;
+            color: white;
+            padding: 12px 6px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+        }
+        
+        tbody td {
+            padding: 8px 6px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+        
+        tbody tr:hover {
+            background-color: #E8F5E9;
+        }
+        
+        .section-header {
+            background-color: #FFF3E0 !important;
+            font-weight: bold;
+            color: #E65100;
+            font-size: 13px;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #B71C1C;
+            font-size: 13px;
+        }
+        
+        .pathogen {
+            color: #1B5E20;
+        }
+        
+        .treatment-first {
+            color: #0D47A1;
+            background-color: #E3F2FD;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .treatment-alt {
+            color: #6A1B9A;
+            background-color: #F3E5F5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            color: #BF360C;
+            font-size: 11px;
+        }
+        
+        .reference {
+            color: #546E7A;
+            font-style: italic;
+            font-size: 11px;
+        }
+        
+        .tags-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1565C0;
+            margin-bottom: 12px;
+            font-weight: bold;
+            border-bottom: 2px solid #E3F2FD;
+            padding-bottom: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+        
+        .tag-antibiotic {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border: 1px solid #90CAF9;
+        }
+        
+        .tag-bacteria {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border: 1px solid #A5D6A7;
+        }
+        
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #1976D2;
+            border-radius: 6px;
+            font-size: 13px;
+            background-color: #FAFAFA;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background-color: #43A047;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2E7D32;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #F3E5F5;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #6A1B9A;
+            line-height: 1.8;
+        }
+        
+        .highlight-box {
+            background-color: #FFF8E1;
+            border-left: 4px solid #FFA000;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 8px 4px;
+            }
+            
+            tbody td {
+                padding: 6px 4px;
+            }
+            
+            .nav-btn, .page-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        <div class="page-nav">
+            <a href="139.html" class="nav-btn page-btn">上一页</a>
+            <a href="141.html" class="nav-btn page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~临床抗微生物治疗的初始选择*****</h1>
+    <div class="subtitle">表1（63）全身综合征（发热/不发热）（续）</div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 33%;">推荐治疗方案</th>
+                    <th style="width: 33%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="disease-name">兔热病（伤寒型）</span>
+                    </td>
+                    <td class="pathogen">
+                        弗朗西斯土拉菌（传播媒介依地理位置不同有蜱、蝇、蚊）可以直接接种在伤口
+                    </td>
+                    <td>
+                        <span class="treatment-first">首选方案（中度/重度）：</span><br>
+                        [庆大霉素或妥布霉素 5mg/(kg·d) iv分次q8h，或链霉素 10mg/kg iv或im q12h] × 10d<br><br>
+                        <span class="treatment-alt">备选方案（轻度）：</span><br>
+                        [环丙沙星 400mg iv（或750mg po）bid，或多西环素 100mg iv/po bid] × 14～21d<br>
+                        <span class="note">（儿童见表注19）</span>
+                    </td>
+                    <td>
+                        诊断：用富含半胱氨酸的培养基培养和血清学检查。实验室有病原扩散的危险。血源性脑膜炎是并发症。<br>
+                        治疗：链霉素＋氯霉素 50～100mg/(kg·d) iv分4次
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="section-header">
+                        其他动物源性全身细菌性发热疾病（非经蚤、虱或蜱传播）：应仔细采集流行病学史
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease-name">布鲁菌病</span><br><br>
+                        <span class="reference">MMWR 61: 461, 2012；诊断检测参见Clin Micro Rev 33: e0073-19, 2020</span>
+                    </td>
+                    <td class="pathogen">
+                        牛布鲁菌：牛<br>
+                        猪布鲁菌：猪<br>
+                        羊布鲁菌：山羊<br>
+                        犬布鲁菌：犬
+                    </td>
+                    <td>
+                        <div class="highlight-box">
+                            <span class="treatment-first">无局部病灶：</span><br>
+                            多西环素 100mg po bid × 6w ＋ 庆大霉素 5mg/kg qd，第1周<br><br>
+                            <span class="treatment-alt">备选：</span>（多西环素 100mg po bid ＋ 利福平 600～900mg po qd）× 6w<br>
+                            次选方案：环丙沙星 500mg po bid ＋（多西环素或利福平）× 6w
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <span class="treatment-first">脊柱炎，骶髂关节炎：</span><br>
+                            [多西环素 ＋ 庆大霉素（同上）＋ 利福平] × 至少3个月<br><br>
+                            <span class="treatment-alt">备选：</span>（环丙沙星 750mg po bid ＋ 利福平 600～900mg po qd）× 至少3个月
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <span class="treatment-first">神经布鲁菌病：</span><br>
+                            多西环素 ＋ 利福平（同上）＋ 头孢曲松 2g iv q12h，直至脑脊液恢复正常<br>
+                            <span class="reference">（AAC, 56: 1523, 2012）</span>
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <span class="treatment-first">心内膜炎：</span><br>
+                            手术 ＋ [（利福平 ＋ 多西环素 ＋ TMP-SMX）× 1.5～6个月 ＋ 庆大霉素 × 2～4w]
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <span class="treatment-first">妊娠：</span><br>
+                            资料不多。利福平 900mg qd × 6w<br><br>
+                            <span class="treatment-alt">备选：</span>利福平 900mg po qd ＋ TMP-SMX 5mg/kg（TMP计算）po bid × 4w
+                        </div>
+                    </td>
+                    <td>
+                        累及骨骼，特别是骶髂关节（20%～30%）<br><br>
+                        <span class="treatment-first">神经布鲁菌病：</span>通常表现为脑膜炎。所有布鲁菌病患者中占1%。糖皮质激素的作用不明确，不推荐使用<br><br>
+                        <span class="treatment-first">心内膜炎：</span>罕见，却是导致死亡的首要原因。需外科手术＋抗感染治疗<br><br>
+                        <span class="note">妊娠：妊娠最后1周内使用TMP-SMX可能导致胆红素脑病（核黄疸）</span><br><br>
+                        <span class="treatment-first">儿童（8岁以内）：</span>TMP-SMX × 6w ＋ 庆大霉素 × 2w
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-container">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease">兔热病</span>
+        <span class="tag tag-disease">布鲁菌病</span>
+        <span class="tag tag-disease">伤寒型</span>
+        <span class="tag tag-disease">脊柱炎</span>
+        <span class="tag tag-disease">骶髂关节炎</span>
+        <span class="tag tag-disease">神经布鲁菌病</span>
+        <span class="tag tag-disease">心内膜炎</span>
+        <span class="tag tag-antibiotic">庆大霉素</span>
+        <span class="tag tag-antibiotic">妥布霉素</span>
+        <span class="tag tag-antibiotic">链霉素</span>
+        <span class="tag tag-antibiotic">环丙沙星</span>
+        <span class="tag tag-antibiotic">多西环素</span>
+        <span class="tag tag-antibiotic">利福平</span>
+        <span class="tag tag-antibiotic">头孢曲松</span>
+        <span class="tag tag-antibiotic">TMP-SMX</span>
+        <span class="tag tag-bacteria">弗朗西斯土拉菌</span>
+        <span class="tag tag-bacteria">牛布鲁菌</span>
+        <span class="tag tag-bacteria">猪布鲁菌</span>
+        <span class="tag tag-bacteria">羊布鲁菌</span>
+        <span class="tag tag-bacteria">犬布鲁菌</span>
+        <span class="tag tag-disease">动物源性发热</span>
+        <span class="tag tag-disease">蜱传疾病</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="临床抗微生物治疗的初始选择；全身综合征（发热/不发热）；兔热病；布鲁菌病；庆大霉素；妥布霉素；链霉素；环丙沙星；多西环素；利福平；头孢曲松；TMP-SMX；弗朗西斯土拉菌；布鲁菌；=140" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：140</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>兔热病 | 布鲁菌病 | 弗朗西斯土拉菌 | 布鲁菌 | 庆大霉素 | 妥布霉素 | 链霉素 | 环丙沙星 | 多西环素 | 利福平 | 头孢曲松 | TMP-SMX | 脊柱炎 | 骶髂关节炎 | 神经布鲁菌病 | 心内膜炎 | 动物源性发热 | 伤寒型
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+    </script>
+</body>
+</html>

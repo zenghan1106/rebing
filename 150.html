@@ -1,0 +1,514 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~临床抗微生物治疗的初始选择-肉毒中毒与破伤风*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #449d44;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child {
+            font-size: 14px;
+            font-weight: bold;
+            background: #eaf2f8;
+        }
+        
+        tbody tr:first-child td {
+            padding: 12px 10px;
+            color: #1a5276;
+        }
+        
+        td, th {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .subcategory {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .highlight-red {
+            color: #c0392b;
+        }
+        
+        .highlight-blue {
+            color: #2874a6;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin: 5px 0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin: 15px 0;
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9c640c;
+        }
+        
+        .tag-disease:hover {
+            background: #f5cba7;
+        }
+        
+        .tag-bacteria {
+            background: #d4efdf;
+            color: #1e8449;
+        }
+        
+        .tag-bacteria:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-antibiotic {
+            background: #d6eaf8;
+            color: #2874a6;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #aed6f1;
+        }
+        
+        /* 底部编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #c0392b;
+        }
+        
+        .btn-copy.copied {
+            background: #27ae60;
+        }
+        
+        /* 关键词底部 */
+        .keywords-bottom {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="149.html" class="btn btn-nav">← 上一页</a>
+            <a href="151.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~临床抗微生物治疗的初始选择-肉毒中毒与破伤风*****</h1>
+    <p class="sub-title">表1（68）毒素介导的综合征</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 35%;">推荐治疗方案</th>
+                    <th style="width: 32%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="4">全身综合征（发热/不发热）（续）— 毒素介导的综合征：不发热，除非有并发症</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background: #fef9e7;">
+                        <strong>肉毒中毒综述：</strong><em>MMWR 2021（RR-2）：1</em>。可用作生物武器：<a href="http://www.cdc.gov/botulism/index.html" style="color: #2874a6;">http://www.cdc.gov/botulism/index.html</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="subcategory">食物型</span><br>
+                        呼吸困难提示病情危重
+                    </td>
+                    <td rowspan="2">
+                        肉毒梭菌<br><br>
+                        较少见：巴氏梭菌、丁酸梭菌<br><br>
+                        血、伤口组织和/或相关食物行鼠毒素生物测定
+                    </td>
+                    <td>
+                        <strong>各型都要动态观察肺活量，给予支持治疗</strong><br><br>
+                        若无肠麻痹，予清洁消化道
+                    </td>
+                    <td rowspan="2">
+                        <strong>马血清抗毒素：</strong>在美国，可联系区域或国家卫生部门（1-800-222-1222），或CDC（1-770-488-7100），婴儿肉毒中毒，联系1-510-231-7600<br><br>
+                        <strong>抗生素：</strong>可能使婴儿肉毒中毒加重；伤口型疗效尚未验证；若用抗生素，青霉素G剂量通常是1000万～2000万U/d。若有并发症（肺炎、泌尿系统感染），避免使用有神经肌肉阻滞作用的抗生素，如氨基糖苷类、四环素、多黏菌素<br><br>
+                        <strong>鉴别诊断：</strong>包括吉兰-巴雷综合征、重症肌无力、蜱咬麻痹、有机磷中毒、西尼罗病毒。肌电图有帮助
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="subcategory">婴儿型</span>
+                    </td>
+                    <td>
+                        <strong>年龄＜1岁：</strong>人肉毒梭菌免疫球蛋白（BIG）<br><br>
+                        <strong>年龄＞1岁：</strong>马血清七价肉毒梭菌抗毒素<br><br>
+                        <span class="highlight-red">对于疑似病例，不要等待实验室确证结果才开始治疗</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <strong>备选方案：</strong><br>
+                        七价马血清抗毒素-CDC（见说明）<br><br>
+                        不用抗生素；可在肠道溶解肉毒梭菌，使毒素负荷增加
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="subcategory">伤口型</span>
+                    </td>
+                    <td></td>
+                    <td>
+                        清创，厌氧菌培养；局部应用抗毒素的疗效未证实；抗生素的作用不肯定<br><br>
+                        <strong>备选：</strong>三价马血清抗毒素
+                    </td>
+                    <td>
+                        伤口型肉毒中毒与静脉吸毒相关<br><br>
+                        1/3的患者用鼠源性试剂盒不能检测到毒素
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="4" style="background: #fadbd8;">
+                        <span class="highlight-red">破伤风：牙关紧闭，全身肌肉僵直，肌肉痉挛</span><br>
+                        <em>（AnIM 154：329，2011）</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        破伤风梭菌，产生破伤风痉挛毒素
+                    </td>
+                    <td colspan="2">
+                        <strong style="color: #c0392b; font-size: 14px;">6步治疗：</strong><br><br>
+                        <strong>1.</strong> 紧急气管插管，保证气道通畅。咽部痉挛常见，早期气管切开<br><br>
+                        <strong>2.</strong> 用地西泮20mg/（kg·d）iv或咪达唑仑消除反射性痉挛。有报道地西泮联合硫酸镁的益处（<em>Ln 368：1436，2006</em>）。严重病例需用维库溴铵阻断神经肌接头<br><br>
+                        <strong>3.</strong> 中和毒素：肌内注射人高效免疫球蛋白；开始破伤风免疫接种，临床患破伤风不会产生免疫力<br><br>
+                        <strong>4.</strong> 外科清除感染组织。抗感染治疗：<span class="highlight-blue">青霉素G 300万U iv q4h</span>或<span class="highlight-blue">多西环素100mg iv q12h</span>或<span class="highlight-blue">甲硝唑1g iv q12h</span>，疗程7～10天<br><br>
+                        <strong>5.</strong> 避免灯光，可刺激肌肉痉挛<br><br>
+                        <strong>6.</strong> 使用β受体阻滞剂（如短效的艾司洛尔）控制交感神经过度活动
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">页码：150</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <p class="tags-title">🔍 快速检索标签：</p>
+        <div class="tags-container">
+            <span class="tag tag-disease">肉毒中毒</span>
+            <span class="tag tag-disease">食物型肉毒中毒</span>
+            <span class="tag tag-disease">婴儿型肉毒中毒</span>
+            <span class="tag tag-disease">伤口型肉毒中毒</span>
+            <span class="tag tag-disease">破伤风</span>
+            <span class="tag tag-disease">牙关紧闭</span>
+            <span class="tag tag-disease">肌肉僵直</span>
+            <span class="tag tag-bacteria">肉毒梭菌</span>
+            <span class="tag tag-bacteria">巴氏梭菌</span>
+            <span class="tag tag-bacteria">丁酸梭菌</span>
+            <span class="tag tag-bacteria">破伤风梭菌</span>
+            <span class="tag tag-antibiotic">青霉素G</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">地西泮</span>
+            <span class="tag tag-antibiotic">咪达唑仑</span>
+            <span class="tag tag-antibiotic">维库溴铵</span>
+            <span class="tag tag-antibiotic">艾司洛尔</span>
+            <span class="tag tag-antibiotic">人高效免疫球蛋白</span>
+            <span class="tag tag-antibiotic">七价马血清抗毒素</span>
+            <span class="tag tag-antibiotic">三价马血清抗毒素</span>
+            <span class="tag tag-disease">吉兰-巴雷综合征</span>
+            <span class="tag tag-disease">重症肌无力</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="临床抗微生物治疗的初始选择-肉毒中毒与破伤风；肉毒中毒、破伤风、肉毒梭菌、破伤风梭菌、青霉素G、多西环素、甲硝唑、抗毒素；=150" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 底部关键词 -->
+    <div class="keywords-bottom">
+        关键词：临床抗微生物治疗 | 肉毒中毒 | 破伤风 | 抗生素治疗 | 抗毒素 | 150
+    </div>
+    
+    <script>
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

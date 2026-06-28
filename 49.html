@@ -1,0 +1,469 @@
+我来为您创建这个关于胃肠道感染及特殊危险人群治疗的HTML网页表格。
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>副溶血弧菌创伤弧菌耶尔森菌中性粒细胞减少性结肠炎治疗指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
+            padding: 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
+            padding: 35px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 30px;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 4px solid #3498db;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2874a6;
+            font-size: 17px;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background-color: #fff;
+            table-layout: fixed;
+        }
+        
+        /* 表格头部 - 蓝色，字体大 */
+        thead th {
+            background-color: #1a5276;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid #154360;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+        
+        /* 子表头 */
+        .sub-header th {
+            background-color: #2980b9 !important;
+            color: #ffffff;
+            font-size: 16px !important;
+            font-weight: bold;
+            padding: 14px 10px;
+            border: 2px solid #1a5276;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background-color: #d6eaf8;
+            color: #1a5276;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .category-row td {
+            padding: 14px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 子分类行 */
+        .subcategory-row {
+            background-color: #ebf5fb;
+            color: #1a5276;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .subcategory-row td {
+            padding: 12px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #bdc3c7;
+            color: #2c3e50;
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 交替行背景 */
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e1f0fa;
+        }
+        
+        /* 左侧诊断列 */
+        td:first-child {
+            width: 16%;
+            background-color: #f4f6f7;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        /* 病原体列 */
+        .pathogen {
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 首选方案 */
+        .preferred {
+            color: #1e8449;
+            font-weight: 600;
+            background-color: #eafaf1;
+        }
+        
+        /* 备选方案 */
+        .alternative {
+            color: #d35400;
+            background-color: #fef5e7;
+        }
+        
+        /* 辅助说明 */
+        .notes {
+            color: #34495e;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 重要提示高亮 */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #856404;
+            font-weight: 600;
+        }
+        
+        /* 警告提示 */
+        .warning {
+            background-color: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #721c24;
+            font-weight: 600;
+        }
+        
+        /* 成功提示 */
+        .success {
+            background-color: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        /* 剂量数字突出 */
+        .dose {
+            color: #c0392b;
+            font-weight: 700;
+        }
+        
+        /* 儿童剂量标注 */
+        .pediatric {
+            background-color: #e8daef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #6c3483;
+            font-weight: 600;
+        }
+        
+        /* 页脚注释 */
+        .footer-notes {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #eaf2f8;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .footer-notes p {
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+        
+        .footer-notes .symbol {
+            color: #2980b9;
+            font-weight: bold;
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+        
+        /* 分隔虚线 */
+        .dashed-separator {
+            border-top: 2px dashed #3498db;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>表1（17）临床抗微生物治疗的初始选择</h1>
+        <p class="subtitle">胃肠道/胃肠炎——特异性治疗及特殊危险人群经验性治疗</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 分类行 -->
+                <tr class="category-row">
+                    <td colspan="5">胃肠道/胃肠炎——特异性治疗（根据培养、显微镜检或毒素测定结果进行）（续）</td>
+                </tr>
+                
+                <!-- 副溶血弧菌、拟态弧菌、河弧菌 -->
+                <tr>
+                    <td rowspan="3"></td>
+                    <td class="pathogen">
+                        <span class="highlight">副溶血弧菌、拟态弧菌、河弧菌</span>
+                    </td>
+                    <td class="preferred" colspan="2">
+                        <span class="warning">抗菌治疗不能缩短病程。</span><span class="success">补液</span>
+                    </td>
+                    <td class="notes">
+                        多有<span class="highlight">进食贝类史</span>。<br>
+                        重症患者治疗：<span class="dose">氟喹诺酮类、多西环素、第三代头孢菌素</span>
+                    </td>
+                </tr>
+                
+                <!-- 创伤弧菌 -->
+                <tr>
+                    <td class="pathogen">
+                        <span class="highlight">创伤弧菌</span><br><br>
+                        常见表现为皮肤损害及菌血症，<span class="warning">危及生命</span>
+                    </td>
+                    <td class="preferred" colspan="2">
+                        <span class="pediatric">成人：</span><br>
+                        （<span class="dose">多西环素或米诺环素</span> 100mg iv/po bid）<br>
+                        ＋<br>
+                        （<span class="dose">头孢曲松</span> 2g iv qd或<span class="dose">头孢他啶</span> 1g iv q8h）<br><br>
+                        
+                        <span class="pediatric">儿童：</span><br>
+                        <span class="dose">多西环素</span> 4.4mg/(kg·d) 分2次用（最大剂量200mg/d）<br><br>
+                        
+                        <span class="highlight">替代方案：</span><span class="dose">左氧氟沙星或环丙沙星</span>
+                    </td>
+                    <td class="notes"></td>
+                </tr>
+                
+                <!-- 小肠结肠炎耶尔森菌 -->
+                <tr>
+                    <td class="pathogen">
+                        <span class="highlight">小肠结肠炎耶尔森菌</span><br>
+                        发热占<span class="dose">68%</span>，血便占<span class="dose">26%</span>
+                    </td>
+                    <td class="preferred" colspan="2">
+                        除非病情严重一般<span class="success">无须治疗</span>。<br>
+                        病情严重者，联合<br>
+                        <span class="dose">多西环素</span> 100mg iv bid ＋<br>
+                        ［<span class="dose">妥布霉素或庆大霉素</span> 5mg/(kg·d) qd］<br><br>
+                        
+                        <span class="highlight">其他方案：</span><span class="dose">TMP-SMX或氟喹诺酮类抗生素</span>
+                    </td>
+                    <td class="notes">
+                        肠系膜淋巴结炎所致腹痛可类似<span class="warning">急性阑尾炎</span>；<br>
+                        实验室诊断困难，需用<span class="highlight">"冷集菌"</span>和/或耶尔森菌选择性培养基；<br>
+                        <span class="warning">去铁胺治疗可加重病情</span>，使用该药的患者应停药；<br>
+                        铁超负荷易致耶尔森菌感染
+                    </td>
+                </tr>
+                
+                <!-- 特殊危险人群分类行 -->
+                <tr class="category-row">
+                    <td colspan="5">胃肠炎：特殊危险人群经验性治疗</td>
+                </tr>
+                
+                <!-- 肛交 -->
+                <tr class="subcategory-row">
+                    <td colspan="5">肛交</td>
+                </tr>
+                
+                <!-- 直肠炎 -->
+                <tr>
+                    <td>直肠炎（仅远端15cm）</td>
+                    <td class="pathogen">
+                        疱疹病毒、淋球菌、衣原体、梅毒；<br>
+                        <span class="highlight">见生殖道，25页</span>
+                    </td>
+                    <td class="preferred" colspan="2"></td>
+                    <td class="notes"></td>
+                </tr>
+                
+                <!-- 结肠炎 -->
+                <tr>
+                    <td>结肠炎</td>
+                    <td class="pathogen">
+                        志贺菌、沙门菌、弯曲菌、溶组织阿米巴<span class="highlight">（表13A）</span>
+                    </td>
+                    <td class="preferred" colspan="2"></td>
+                    <td class="notes">
+                        <span class="highlight">见上文特殊胃肠道病原菌，胃肠炎</span>
+                    </td>
+                </tr>
+                
+                <!-- HIV-1感染者 -->
+                <tr>
+                    <td>
+                        <span class="warning">HIV-1感染者（艾滋病）：</span><br>
+                        腹泻<span class="dose">>10天</span>
+                    </td>
+                    <td class="pathogen">
+                        <span class="highlight">蓝氏贾第鞭毛虫</span><br><br>
+                        抗酸染色阳性病原体：<span class="dose">小球隐孢子虫、卡曼环孢子虫</span><br><br>
+                        其他：<span class="dose">贝氏等孢球虫，微孢子虫</span>（比氏肠孢子虫、肠炎间隔微孢子虫）
+                    </td>
+                    <td class="preferred" colspan="2"></td>
+                    <td class="notes">
+                        <span class="highlight">表13A</span>
+                    </td>
+                </tr>
+                
+                <!-- 中性粒细胞减少性小肠结肠炎 -->
+                <tr>
+                    <td>
+                        <span class="warning">中性粒细胞减少性小肠结肠炎或盲肠炎</span><br>
+                        <span class="reference">(CID 56: 711, 2013)</span><br>
+                        <span class="reference">(World J Gastroenterol 23: 42, 2017)</span>
+                    </td>
+                    <td class="pathogen">
+                        败血梭菌等侵入黏膜，<br>
+                        偶见污泥梭菌或铜绿假单胞菌引起
+                    </td>
+                    <td class="preferred">
+                        <span class="success">肠道休息</span>＋<br>
+                        <span class="dose">哌拉西林-他唑巴坦</span> 4.5g iv q8h，输注4h以上、<br>
+                        <span class="dose">亚胺培南</span> 500mg iv q6h、<br>
+                        <span class="dose">美罗培南</span> 2g iv q8h
+                    </td>
+                    <td class="alternative">
+                        <span class="dose">头孢吡肟</span> 2g iv q8h ＋<br>
+                        <span class="dose">甲硝唑</span> 500mg iv q8h
+                    </td>
+                    <td class="notes">
+                        <span class="warning">需外科会诊。</span>手术切除尚有争议，但可能需要<br><br>
+                        
+                        <span class="highlight">注意：</span>有梭菌属对克林霉素耐药的报道。<br>
+                        哌拉西林-他唑巴坦、亚胺培南、美罗培南和多尼培南能覆盖大多数病原菌
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 页脚注释 -->
+        <div class="footer-notes">
+            <p><span class="symbol">注：*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+            <p><span class="symbol">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+            <p>表中名词缩写<span class="highlight">见第2页</span>。</p>
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+
+
+---
+
+
+
+标签和标题信息
+
+
+ 项目 	 内容 	
+ **网页标题 (`<title>`标签)** 	 `副溶血弧菌创伤弧菌耶尔森菌中性粒细胞减少性结肠炎治疗指南` 	
+ **主标题 (`<h1>`标签)** 	 `表1（17）临床抗微生物治疗的初始选择` 	
+ **副标题 (`<p class="subtitle">`)** 	 `胃肠道/胃肠炎——特异性治疗及特殊危险人群经验性治疗` 	
+ **关键词/检索词** 	 副溶血弧菌、拟态弧菌、河弧菌、创伤弧菌、小肠结肠炎耶尔森菌、中性粒细胞减少性小肠结肠炎、盲肠炎、HIV腹泻、肛交直肠炎、多西环素、头孢曲松、哌拉西林他唑巴坦、亚胺培南、美罗培南、补液、进食贝类史 	
+
+
+
+
+---
+
+
+
+设计特点说明
+
+
+ 特性 	 实现方式 	
+ **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
+ **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
+ **子表头** 	 中蓝色 `#2980b9`，16px字号 	
+ **分类行** 	 淡蓝色背景 `#d6eaf8`，深蓝加粗文字，用于大分类 	
+ **子分类行** 	 更淡蓝色背景 `#ebf5fb`，用于"肛交"等子分类 	
+ **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
+ **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
+ **备选方案列** 	 淡橙背景 `#fef5e7`，深橙文字 `#d35400` 	
+ **儿童剂量** 	 淡紫背景 `#e8daef`，紫色文字 `#6c3483`，突出标注 	
+ **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
+ **重要提示** 	 黄色高亮 `#fff3cd` 	
+ **警告提示** 	 淡红背景 `#f8d7da` 	
+ **成功/推荐** 	 淡绿背景 `#d4edda` 	
+ **交替行** 	 白色 / 浅灰 `#f8f9fa`

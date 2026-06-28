@@ -25,18 +25,41 @@ body { font-family: Arial, sans-serif; background: #f0f9ff; padding: 10px; }
 .btn-secondary { background: #e2e8f0; color: #333; }
 .btn-danger { background: #ef4444; color: white; }
 
-/* 结果卡片 */
-.card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer; }
-.card:hover { border-color: #0ea5e9; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-.card-id { background: #0ea5e9; color: white; padding: 3px 10px; border-radius: 5px; font-size: 12px; display: inline-block; margin-bottom: 8px; }
-.card-title { font-weight: bold; font-size: 16px; margin-bottom: 5px; color: #333; }
-.card-keywords { font-size: 14px; color: #666; line-height: 1.4; }
+/* 结果表格 */
+.results-table { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.table-header { display: flex; background: #0ea5e9; color: white; font-weight: bold; font-size: 14px; padding: 12px 10px; }
+.table-row { display: flex; flex-wrap: wrap; border-bottom: 1px solid #e2e8f0; cursor: pointer; transition: background 0.2s; }
+.table-row:hover { background: #f0f9ff; }
+.table-row:last-child { border-bottom: none; }
+.table-cell { padding: 10px; font-size: 14px; display: flex; align-items: center; }
+.cell-id { width: 60px; flex-shrink: 0; justify-content: center; }
+.cell-id span { background: #0ea5e9; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+.cell-title-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.cell-title { font-weight: 500; color: #1e293b; line-height: 1.4; }
+.cell-keywords-text { font-size: 12px; color: #64748b; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cell-action { width: 80px; flex-shrink: 0; justify-content: center; }
+.cell-action button { padding: 6px 12px; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; background: #fef3c7; color: #92400e; }
+.cell-action button.favorited { background: #fde68a; }
+.table-empty { text-align: center; padding: 40px; color: #94a3b8; font-size: 14px; }
+
+/* 响应式表格 */
+@media (max-width: 700px) {
+  .cell-action { width: 70px; }
+  .cell-action button { padding: 6px 8px; font-size: 11px; }
+  .table-cell { padding: 8px 6px; font-size: 13px; }
+  .cell-keywords-text { display: none; }
+}
+@media (max-width: 500px) {
+  .cell-action { width: 60px; }
+}
 
 /* 模态框 */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; }
-.modal-content { background: white; margin: 50px auto; padding: 20px; width: 90%; max-width: 500px; border-radius: 10px; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; }
+.modal-overlay.active { display: flex; align-items: center; justify-content: center; }
+.modal { background: white; padding: 20px; width: 90%; max-width: 500px; border-radius: 10px; max-height: 80vh; overflow-y: auto; }
 .modal input, .modal textarea { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
 .modal textarea { min-height: 80px; }
+.modal-buttons { display: flex; gap: 8px; margin-top: 15px; }
 
 /* 收藏列表 */
 .fav-item { background: #f8fafc; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
@@ -49,8 +72,18 @@ body { font-family: Arial, sans-serif; background: #f0f9ff; padding: 10px; }
 .fav-item-actions button:last-child { background: #e2e8f0; color: #333; }
 .fav-item-actions button:active { transform: scale(0.95); }
 
+/* Toast提示 */
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #333; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 1000; opacity: 0; transition: all 0.3s; }
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
 /* 版权信息 */
 .footer { text-align: center; padding: 20px; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px solid #e2e8f0; }
+
+/* 响应式 */
+@media (max-width: 600px) {
+  .btn { padding: 12px 16px; font-size: 14px; }
+  .header h1 { font-size: 20px; }
+}
 </style>
 </head>
 <body>
@@ -68,12 +101,15 @@ body { font-family: Arial, sans-serif; background: #f0f9ff; padding: 10px; }
       <button class="btn btn-danger" id="clearBtn">清空</button>
     </div>
     <div class="btn-row">
-      <button class="btn btn-secondary" id="favBtn">⭐ 收藏夹</button>
+      <button class="btn btn-secondary" id="favBtn">⭐ 收藏夹 <span id="favCount" style="display:none;">0</span></button>
       <button class="btn btn-primary" id="addBtn">➕ 添加网页</button>
       <button class="btn btn-secondary" id="voiceBtn">🎤 语音</button>
       <button class="btn btn-secondary" id="splitBtn">＋ 分割</button>
     </div>
   </div>
+
+  <!-- 结果计数 -->
+  <div id="resultCount" style="padding: 10px; color: #666; font-size: 14px;"></div>
 
   <!-- 结果列表 -->
   <div id="results"></div>
@@ -85,291 +121,35 @@ body { font-family: Arial, sans-serif; background: #f0f9ff; padding: 10px; }
 </div>
 
 <!-- 添加网页模态框 -->
-<div id="addModal" class="modal">
-  <div class="modal-content">
+<div id="addModal" class="modal-overlay">
+  <div class="modal">
     <h3>添加新网页</h3>
     <input type="text" id="addId" placeholder="网页ID（数字）">
-    <input type="text" id="addTitle" placeholder="标题">
+    <input type="text" id="addTitle" placeholder="标题（可选）">
     <textarea id="addKeywords" placeholder="关键词（用 ; 分隔）"></textarea>
-    <button class="btn btn-primary" onclick="addNew()">添加</button>
-    <button class="btn btn-secondary" onclick="closeModal('addModal')">取消</button>
+    <div class="modal-buttons">
+      <button class="btn btn-primary" id="addConfirm">添加</button>
+      <button class="btn btn-secondary" data-close="true">取消</button>
+    </div>
   </div>
 </div>
 
 <!-- 收藏夹模态框 -->
-<div id="favModal" class="modal">
-  <div class="modal-content">
+<div id="favModal" class="modal-overlay">
+  <div class="modal">
     <h3>我的收藏</h3>
     <div id="favList"></div>
-    <button class="btn btn-secondary" onclick="closeModal('favModal')">关闭</button>
+    <div class="modal-buttons">
+      <button class="btn btn-secondary" data-close="true">关闭</button>
+    </div>
   </div>
 </div>
 
+<!-- Toast提示 -->
+<div id="toast" class="toast"></div>
+
+<!-- 加载数据文件和主程序 -->
 <script src="DATA.js"></script>
-<script>
-// 全局变量
-var allData = [];
-var favorites = [];
-var PASSWORD = '1989';
-
-// 初始化
-function init() {
-  // 检查密码
-  if (!checkPassword()) return;
-  
-  // 加载数据
-  allData = DATA || [];
-  document.getElementById('info').textContent = '共 ' + allData.length + ' 个条目';
-  
-  // 加载收藏
-  try {
-    favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  } catch(e) {
-    favorites = [];
-  }
-  
-  // 渲染所有条目
-  renderResults(allData);
-  
-  // 绑定事件
-  bindEvents();
-  
-  // 读取剪贴板
-  setTimeout(readClipboard, 500);
-}
-
-// 检查密码
-function checkPassword() {
-  // 检查是否已登录（1天内）
-  var logged = localStorage.getItem('logged');
-  if (logged && (Date.now() - parseInt(logged)) < 24*60*60*1000) {
-    return true;
-  }
-  
-  var pwd = prompt('请输入访问密码：', '');
-  if (pwd === PASSWORD) {
-    localStorage.setItem('logged', Date.now().toString());
-    return true;
-  } else {
-    document.body.innerHTML = '<h2 style="color:red;text-align:center;margin-top:50px;">密码错误，无法访问</h2>';
-    return false;
-  }
-}
-
-// 绑定事件
-function bindEvents() {
-  // 搜索框
-  document.getElementById('searchInput').addEventListener('input', function() {
-    var query = this.value;
-    var results = search(query);
-    renderResults(results);
-  });
-  
-  // 收藏夹按钮
-  document.getElementById('favBtn').addEventListener('click', function() {
-    showFavorites();
-  });
-  
-  // 添加按钮
-  document.getElementById('addBtn').addEventListener('click', function() {
-    document.getElementById('addModal').style.display = 'block';
-  });
-  
-  // 语音按钮
-  document.getElementById('voiceBtn').addEventListener('click', function() {
-    startVoice();
-  });
-  
-  // 分割按钮
-  document.getElementById('splitBtn').addEventListener('click', function() {
-    var input = document.getElementById('searchInput');
-    input.value = input.value + '+';
-    input.focus();
-  });
-}
-
-// 搜索
-function search(query) {
-  if (!query || !query.trim()) return allData;
-  
-  // 分割关键词
-  var keywords = query.split(/[;；+]/).map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
-  
-  // 过滤
-  return allData.filter(function(item) {
-    var text = (item.keywords + ' ' + (item.title || '')).toLowerCase();
-    return keywords.every(function(kw) {
-      return text.indexOf(kw.toLowerCase()) !== -1;
-    });
-  });
-}
-
-// 渲染结果
-function renderResults(results) {
-  var html = '';
-  
-  if (results.length === 0) {
-    html = '<p style="text-align:center;color:#999;padding:20px;">无匹配结果</p>';
-  } else {
-    for (var i = 0; i < results.length; i++) {
-      var item = results[i];
-      var title = item.title || item.keywords.split(';')[0] || '未命名';
-      var keywords = item.keywords;
-      
-      // 截断过长的内容
-      if (title.length > 50) title = title.substring(0, 50) + '...';
-      if (keywords.length > 100) keywords = keywords.substring(0, 100) + '...';
-      
-      html += '<div class="card" onclick="openPage(' + item.id + ')">' +
-        '<span class="card-id">#' + item.id + '</span>' +
-        '<div class="card-title">' + title + '</div>' +
-        '<div class="card-keywords">' + keywords + '</div>' +
-        '<button onclick="event.stopPropagation();toggleFav(' + item.id + ')">' +
-          (isFav(item.id) ? '★ 已收藏' : '☆ 收藏') +
-        '</button>' +
-      '</div>';
-    }
-  }
-  
-  document.getElementById('results').innerHTML = html;
-}
-
-// 打开页面
-function openPage(id) {
-  // 复制编辑框内容
-  var text = document.getElementById('searchInput').value;
-  if (navigator.clipboard && text) {
-    navigator.clipboard.writeText(text);
-  }
-  
-  // 跳转
-  window.location.href = id + '.html';
-}
-
-// 收藏功能
-function isFav(id) {
-  return favorites.some(function(f) { return f.id == id; });
-}
-
-function toggleFav(id) {
-  var idx = favorites.findIndex(function(f) { return f.id == id; });
-  
-  if (idx >= 0) {
-    favorites.splice(idx, 1);
-    alert('已取消收藏');
-  } else {
-    var item = allData.find(function(d) { return d.id == id; });
-    if (item) {
-      favorites.push({ id: item.id, title: item.title, keywords: item.keywords });
-      alert('已收藏');
-    }
-  }
-  
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  renderResults(search(document.getElementById('searchInput').value));
-}
-
-// 显示收藏夹
-function showFavorites() {
-  var html = '';
-  
-  if (favorites.length === 0) {
-    html = '<p>暂无收藏</p>';
-  } else {
-    for (var i = 0; i < favorites.length; i++) {
-      var f = favorites[i];
-      html += '<div class="fav-item">' +
-        '<span>#' + f.id + ' ' + (f.title || '') + '</span>' +
-        '<button onclick="openPage(' + f.id + ')">打开</button>' +
-        '<button onclick="removeFav(' + f.id + ')">移除</button>' +
-      '</div>';
-    }
-  }
-  
-  document.getElementById('favList').innerHTML = html;
-  document.getElementById('favModal').style.display = 'block';
-}
-
-function removeFav(id) {
-  favorites = favorites.filter(function(f) { return f.id != id; });
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  showFavorites();
-}
-
-// 添加新网页
-function addNew() {
-  var id = document.getElementById('addId').value.trim();
-  var title = document.getElementById('addTitle').value.trim();
-  var keywords = document.getElementById('addKeywords').value.trim();
-  
-  if (!id || !keywords) {
-    alert('请输入ID和关键词');
-    return;
-  }
-  
-  allData.push({ id: id, title: title, keywords: keywords });
-  alert('添加成功！');
-  closeModal('addModal');
-  renderResults(allData);
-}
-
-// 关闭模态框
-function closeModal(id) {
-  document.getElementById(id).style.display = 'none';
-}
-
-// 语音输入
-function startVoice() {
-  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-    alert('当前浏览器不支持语音输入');
-    return;
-  }
-  
-  var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.lang = 'zh-CN';
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  
-  recognition.onresult = function(event) {
-    var text = event.results[0][0].transcript;
-    var input = document.getElementById('searchInput');
-    input.value = input.value ? input.value + ' ' + text : text;
-    input.dispatchEvent(new Event('input'));
-    alert('识别完成：' + text);
-  };
-  
-  recognition.onerror = function(event) {
-    alert('识别失败：' + event.error);
-  };
-  
-  try {
-    recognition.start();
-    alert('请开始说话...');
-  } catch(e) {
-    alert('启动失败：' + e.message);
-  }
-}
-
-// 读取剪贴板
-function readClipboard() {
-  if (navigator.clipboard) {
-    navigator.clipboard.readText().then(function(text) {
-      if (text) {
-        document.getElementById('searchInput').value = text;
-        document.getElementById('searchInput').dispatchEvent(new Event('input'));
-      }
-    }).catch(function() {
-      console.log('无法读取剪贴板');
-    });
-  }
-}
-
-// 页面加载完成后初始化
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
-</script>
+<script src="app.js"></script>
 </body>
 </html>

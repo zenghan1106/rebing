@@ -1,13 +1,10 @@
-我来为您创建这个关于Whipple病治疗的HTML网页表格，包含所有要求的特殊格式和功能。
-
-
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~Whipple病治疗指南 - 多西环素羟氯喹终身治疗方案*****</title>
+    <title>~~~~~临床抗微生物治疗的初始选择-Whipple病*****</title>
     <style>
         * {
             margin: 0;
@@ -16,406 +13,641 @@
         }
         
         body {
-            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
-            background-color: #f0f8ff;
-            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
-            padding: 20px;
-            line-height: 1.7;
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
             min-height: 100vh;
         }
         
         /* 返回首页按钮 */
-        .home-button {
+        .home-btn {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-        }
-        
-        .home-button a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #2980b9;
-            color: #ffffff;
+            top: 15px;
+            left: 15px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(26,115,232,0.3);
+            z-index: 100;
             text-decoration: none;
-            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .home-btn:hover {
+            background: #1557b0;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
             font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(41, 128, 185, 0.3);
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(52,168,83,0.3);
+            text-decoration: none;
         }
         
-        .home-button a:hover {
-            background-color: #1a5276;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
+        .nav-btn:hover {
+            background: #2d8e47;
         }
         
-        .home-button a::before {
-            content: "← ";
+        .nav-btn.next {
+            background: #ea4335;
         }
         
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
-            padding: 35px;
-            margin-top: 50px;
+        .nav-btn.next:hover {
+            background: #c53929;
         }
         
-        /* 特殊格式标题 */
-        .title-special {
+        /* 标题 */
+        .main-title {
             text-align: center;
-            color: #1a5276;
-            font-size: 30px;
-            margin-bottom: 8px;
-            padding-bottom: 12px;
-            border-bottom: 4px solid #3498db;
-            font-weight: 700;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #2874a6;
-            font-size: 17px;
-            margin-bottom: 25px;
-            font-style: italic;
-        }
-        
-        /* 检索标签区域 */
-        .search-tags {
-            background-color: #e8f6f3;
-            border: 2px dashed #27ae60;
-            border-radius: 10px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .search-tags-label {
-            color: #1e8449;
+            padding: 80px 20px 30px;
+            font-size: 22px;
             font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 10px;
+            color: #1a237e;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
-        .search-tags-content {
-            color: #6c3483;
-            font-size: 13px;
-            line-height: 1.8;
-            word-break: break-all;
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            padding: 0 20px 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            margin: 0 15px 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13.5px;
-            background-color: #fff;
-            table-layout: fixed;
+            font-size: 13px;
+            min-width: 900px;
         }
         
-        /* 表格头部 - 蓝色，字体大 */
+        /* 表头 */
         thead th {
-            background-color: #1a5276;
-            color: #ffffff;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 18px 10px;
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
             text-align: center;
-            border: 2px solid #154360;
-            vertical-align: middle;
-            line-height: 1.5;
-        }
-        
-        /* 子表头 */
-        .sub-header th {
-            background-color: #2980b9 !important;
-            color: #ffffff;
-            font-size: 16px !important;
             font-weight: bold;
-            padding: 14px 10px;
-            border: 2px solid #1a5276;
+            font-size: 15px;
+            border: 1px solid #0d47a1;
         }
         
-        /* 数据单元格 */
-        td {
-            padding: 12px 10px;
-            border: 1px solid #bdc3c7;
-            color: #2c3e50;
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        /* 表格第一行字体大一点 */
+        .header-row td {
+            font-size: 14px;
+            font-weight: bold;
+            background: #e3f2fd;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
             vertical-align: top;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
         }
         
-        /* 交替行背景 */
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
+        td {
+            background: #fafafa;
         }
         
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
+        tr:nth-child(even) td {
+            background: #f5f5f5;
         }
         
-        tbody tr:hover {
-            background-color: #e1f0fa;
+        tr:hover td {
+            background: #e8f4f8;
         }
         
-        /* 左侧诊断列 */
-        td:first-child {
-            width: 18%;
-            background-color: #f4f6f7;
-            font-weight: 600;
-            color: #1a5276;
+        /* 分类标题行 */
+        .category-row {
+            background: #bbdefb !important;
         }
         
-        /* 病原体列 */
-        .pathogen {
-            color: #6c3483;
-            font-weight: 600;
+        .category-row td {
+            background: #bbdefb !important;
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 14px;
         }
         
-        /* 首选方案 */
-        .preferred {
-            color: #1e8449;
-            font-weight: 600;
-            background-color: #eafaf1;
+        /* 子分类 */
+        .subcategory {
+            background: #e8eaf6 !important;
+            font-weight: bold;
+            color: #283593;
         }
         
-        /* 备选方案 */
-        .alternative {
-            color: #d35400;
-            background-color: #fef5e7;
+        .subcategory td {
+            background: #e8eaf6 !important;
         }
         
-        /* 辅助说明 */
-        .notes {
-            color: #34495e;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-        
-        /* 引用文献 */
-        .reference {
-            color: #7f8c8d;
-            font-style: italic;
+        /* 备注文字 */
+        .note {
+            color: #666;
             font-size: 12px;
         }
         
-        /* 重要提示高亮 */
-        .highlight {
-            background-color: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #856404;
-            font-weight: 600;
+        .reference {
+            color: #1565c0;
+            font-style: italic;
         }
         
-        /* 警告提示 */
-        .warning {
-            background-color: #f8d7da;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #721c24;
-            font-weight: 600;
+        /* 剂量高亮 */
+        .dosage {
+            color: #c62828;
+            font-weight: 500;
         }
         
-        /* 成功提示 */
-        .success {
-            background-color: #d4edda;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #155724;
-            font-weight: 600;
+        /* 病原体高亮 */
+        .pathogen {
+            color: #2e7d32;
+            font-weight: 500;
         }
         
-        /* 剂量数字突出 */
-        .dose {
-            color: #c0392b;
-            font-weight: 700;
-        }
-        
-        /* 药物名称突出 */
+        /* 药物高亮 */
         .drug {
-            background-color: #e8daef;
-            padding: 2px 5px;
-            border-radius: 3px;
-            color: #6c3483;
-            font-weight: 600;
+            color: #6a1b9a;
+            font-weight: 500;
         }
         
-        /* 页脚注释区域 */
-        .footnote-section {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #fef9e7;
-            border-radius: 10px;
-            border-left: 5px solid #f39c12;
-        }
-        
-        .footnote-section p {
-            color: #2c3e50;
-            font-size: 13px;
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-        
-        .footnote-section .symbol {
-            color: #e67e22;
+        /* 警告高亮 */
+        .warning {
+            color: #c62828;
             font-weight: bold;
         }
         
-        /* 页脚 */
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            color: #7f8c8d;
+        /* 底部注释 */
+        .footnote {
+            margin: 0 15px 20px;
+            padding: 15px 20px;
+            background: #fff8e1;
+            border-radius: 8px;
             font-size: 12px;
+            color: #5d4037;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .footnote p {
+            margin: 5px 0;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin: 0 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-drug {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            border: 1px solid #ce93d8;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: #1565c0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #0d47a1;
+        }
+        
+        .copy-btn.copied {
+            background: #34a853;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ff9800;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255,152,0,0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background: #f57c00;
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            background: #e91e63;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding-top: 70px;
+            }
+            
+            .nav-buttons {
+                position: static;
+                justify-content: center;
+                margin: 10px 0;
+                padding: 0 15px;
+            }
+            
+            .home-btn {
+                position: static;
+                margin: 15px;
+                display: inline-flex;
+            }
+            
+            .header-row td {
+                font-size: 13px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            
+            .footnote {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 返回首页按钮 -->
-    <div class="home-button">
-        <a href="index.html">返回首页</a>
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="51.html" class="nav-btn">← 上一页</a>
+        <a href="53.html" class="nav-btn next">下一页 →</a>
     </div>
     
-    <div class="container">
-        <!-- 特殊格式标题 -->
-        <h1 class="title-special">~~~~~临床抗微生物治疗的初始选择*****</h1>
-        <p class="subtitle">小肠Whipple病治疗方案</p>
-        
-        <!-- 检索标签区域 -->
-        <div class="search-tags">
-            <div class="search-tags-label">%%%%%检索标签?????</div>
-            <div class="search-tags-content">
-                Whipple病, Whipple养障体, 惠普尔病, 多西环素, 羟氯喹, 免疫重建炎症综合征, IRIS, TMP-SMX, 复方新诺明, 碳青霉烯类, 头孢曲松, 细胞内病原菌, 感染性心内膜炎, 培养阴性, 终身治疗, 小肠感染, 胃肠道感染
-            </div>
-        </div>
-        
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~临床抗微生物治疗的初始选择*****</h1>
+    <p class="sub-title">表1（18）Whipple病</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案</th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                    <th style="width:16%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:24%">病原体（通常）</th>
+                    <th style="width:28%" colspan="2">推荐治疗方案</th>
+                    <th style="width:32%">辅助诊断或治疗方法及说明</th>
                 </tr>
-                <tr class="sub-header">
-                    <th>首选方案</th>
-                    <th>备选方案</th>
+                <tr style="background:#1976d2;">
+                    <th></th>
+                    <th></th>
+                    <th style="background:#1976d2;">首选方案</th>
+                    <th style="background:#1976d2;">备选方案</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Whipple病 -->
+                <!-- 小肠：Whipple病 -->
                 <tr>
                     <td>
-                        <span class="highlight">小肠：Whipple病</span><br><br>
+                        小肠：Whipple病<br>
                         <span class="reference">见培养阴性的感染性心内膜炎，32页</span>
                     </td>
-                    <td class="pathogen">
-                        <span class="drug">Whipple养障体</span>
+                    <td>
+                        <span class="pathogen">Whipple养障体</span>
                     </td>
-                    <td class="preferred" colspan="2">
-                        （<span class="drug">多西环素</span> <span class="dose">100mg</span> po bid ＋ <span class="drug">羟氯喹</span> <span class="dose">200mg</span> po tid）×<span class="dose">1年</span>，<br>
-                        之后终身<span class="drug">多西环素</span> <span class="dose">100mg</span> po bid<br>
-                        （儿童剂量，<span class="highlight">见说明</span>）<br><br>
-                        
-                        <span class="warning">可发生免疫重建炎症综合征（IRIS）</span>
+                    <td colspan="2">
+                        （<span class="drug">多西环素</span> <span class="dosage">100mg po bid</span>＋<span class="drug">羟氯喹</span> <span class="dosage">200mg po tid</span>）×<span class="dosage">1年</span>，之后终身<span class="drug">多西环素</span> <span class="dosage">100mg po bid</span>（儿童剂量，见说明）<br><br>
+                        可发生免疫重建炎症综合征（IRIS）
                     </td>
-                    <td class="notes">
-                        体外试验中对<span class="drug">TMP-SMX</span><span class="warning">耐药</span>并且常出现临床治疗失败及复发，<br>
-                        体外试验中对<span class="drug">碳青霉烯类</span><span class="warning">耐药常见</span>，<br>
-                        <span class="drug">头孢曲松</span>对细胞内病原菌体外表现为<span class="warning">高MIC</span>
+                    <td>
+                        体外试验中对<span class="drug">TMP-SMX</span>耐药并且常出现临床治疗失败及复发，体外试验中对<span class="drug">碳青霉烯类</span>耐药常见，<span class="drug">头孢曲松</span>对细胞内病原菌体外表现为高MIC
                     </td>
                 </tr>
             </tbody>
         </table>
-        
-        <!-- 页脚注释区域 -->
-        <div class="footnote-section">
-            <p><span class="symbol">注：5</span> 铋剂。①在美国，<span class="drug">次水杨酸铋</span>（Pepto-Bismol）每片<span class="dose">262mg</span>，治疗幽门螺杆菌成人剂量为<span class="dose">2片（524mg）qid</span>；②美国以外，<span class="drug">次枸橼酸铋凝胶</span>（De-Nol）<span class="dose">120mg</span>咀嚼片，剂量为<span class="dose">1片qid</span>；在美国，次枸橼酸铋仅处方于复方胶囊（<span class="drug">Pylera</span>：每粒胶囊含次枸橼酸铋<span class="dose">140mg</span>＋<span class="drug">甲硝唑</span> <span class="dose">125mg</span>＋<span class="drug">四环素</span> <span class="dose">125mg</span>），<span class="dose">3粒po qid×10d</span>，同时<span class="drug">PPI</span> bid。</p>
-            
-            <p><span class="symbol">*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            
-            <p><span class="symbol">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            
-            <p>表中名词缩写<span class="highlight">见第2页</span>。</p>
-        </div>
-        
-        <div class="footer">
-            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
-        </div>
     </div>
+    
+    <!-- 底部注释 -->
+    <div class="footnote">
+        <p><strong>注：5铋剂。</strong>①在美国，<span class="drug">次水杨酸铋</span>（Pepto-Bismol）每片262mg，治疗幽门螺杆菌成人剂量为2片（524mg）qid；②美国以外，<span class="drug">次枸橼酸铋凝胶</span>（De-Nol）120mg咀嚼片，剂量为1片qid；在美国，次枸橼酸铋仅处方于复方胶囊（<span class="drug">Pylera</span>：每粒胶囊含次枸橼酸铋140mg＋甲硝唑125mg＋四环素125mg），<span class="dosage">3粒po qid×10d</span>，同时<span class="drug">PPI</span> bid。</p>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 特色检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">Whipple病</span>
+                <span class="tag tag-disease">培养阴性的感染性心内膜炎</span>
+                <span class="tag tag-disease">免疫重建炎症综合征</span>
+                <span class="tag tag-disease">IRIS</span>
+                
+                <!-- 细菌标签 -->
+                <span class="tag tag-bacteria">Whipple养障体</span>
+                
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">多西环素</span>
+                <span class="tag tag-drug">羟氯喹</span>
+                <span class="tag tag-drug">TMP-SMX</span>
+                <span class="tag tag-drug">碳青霉烯类</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">次水杨酸铋</span>
+                <span class="tag tag-drug">Pepto-Bismol</span>
+                <span class="tag tag-drug">次枸橼酸铋凝胶</span>
+                <span class="tag tag-drug">De-Nol</span>
+                <span class="tag tag-drug">Pylera</span>
+                <span class="tag tag-drug">PPI</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：52</div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="点击收藏">☆</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "临床抗微生物治疗的初始选择",
+            subtitle: "Whipple病",
+            keywords: "多西环素;羟氯喹;TMP-SMX;碳青霉烯类;头孢曲松;次水杨酸铋;Pepto-Bismol;次枸橼酸铋凝胶;De-Nol;Pylera;PPI;Whipple养障体;Whipple病;培养阴性的感染性心内膜炎;免疫重建炎症综合征;IRIS",
+            pageNum: "52"
+        };
+        
+        // 设置编辑框内容
+        const copyContent = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                btn.title = '已收藏';
+                showToast('已添加到收藏');
+                
+                // 保存到localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: pageInfo.title,
+                    url: window.location.pathname.split('/').pop() || '52.html',
+                    subtitle: pageInfo.subtitle,
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.innerHTML = '☆';
+                btn.classList.remove('active');
+                btn.title = '点击收藏';
+                showToast('已取消收藏');
+                
+                // 从localStorage移除
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== (window.location.pathname.split('/').pop() || '52.html'));
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '52.html';
+            const isSaved = favorites.some(f => f.url === currentUrl);
+            
+            if (isSaved) {
+                isFavorited = true;
+                const btn = document.getElementById('favoriteBtn');
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                btn.title = '已收藏';
+            }
+        };
+        
+        // 标签点击搜索
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast(`搜索: ${text}`);
+                // 实际应用中可以跳转到搜索页面
+                // window.location.href = `search.html?q=${encodeURIComponent(text)}`;
+            });
+        });
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题信息
-
-
- 项目 	 内容 	
- **网页标题 (`<title>`标签)** 	 `~~~~~Whipple病治疗指南 - 多西环素羟氯喹终身治疗方案*****` 	
- **主标题 (`<h1>`标签)** 	 `~~~~~临床抗微生物治疗的初始选择*****` 	
- **副标题 (`<p class="subtitle">`)** 	 `小肠Whipple病治疗方案` 	
- **检索标签 (`%%%%%检索标签?????`)** 	 Whipple病, Whipple养障体, 惠普尔病, 多西环素, 羟氯喹, 免疫重建炎症综合征, IRIS, TMP-SMX, 复方新诺明, 碳青霉烯类, 头孢曲松, 细胞内病原菌, 感染性心内膜炎, 培养阴性, 终身治疗, 小肠感染, 胃肠道感染 	
-
-
-
-
----
-
-
-
-特殊格式说明
-
-
- 格式 	 用途 	 示例 	
- `~~~~~标题*****` 	 包裹标题文本，便于程序提取 	 `~~~~~临床抗微生物治疗的初始选择*****` 	
- `%%%%%检索标签?????` 	 包裹检索关键词，便于程序提取疾病、药物、细菌信息 	 `%%%%%Whipple病, 多西环素, 羟氯喹, IRIS?????` 	
-
-
-
-
----
-
-
-
-功能说明
-
-
- 功能 	 实现方式 	
- **返回首页按钮** 	 固定定位在左上角，蓝色背景，白色文字，点击跳转至 `index.html` 	
- **按钮悬停效果** 	 鼠标悬停时颜色加深，向上浮动，阴影增强 	
- **按钮箭头图标** 	 使用 `←` 符号作为返回指示 	
-
-
-
-
----
-
-
-
-设计特点说明
-
-
- 特性 	 实现方式 	
- **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
- **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
- **子表头** 	 中蓝色 `#2980b9`，16px字号 	
- **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
- **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
- **药物名称** 	 淡紫背景 `#e8daef`，紫色文字 `#6c3483`，突出显示 	
- **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
- **重要提示** 	 黄色高亮 `#fff3cd` 	
- **警告提示** 	 淡红背景 `#f8d7da` 	
- **成功/推荐** 	 淡绿背景 `#d4edda` 	
- **页脚注释区域** 	 淡黄色背景 `#fef9e7`，橙色左边框 `#f39c12`，用于铋剂说明 	
- **检索标签区域** 	 绿色虚线边框 `#27ae60`，浅绿背景 `#e8f6f3`，醒目易识别

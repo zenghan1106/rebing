@@ -1,2 +1,673 @@
- 项目 	 内容 	
- **网页标题（Title）** 	 `眼内炎临床抗微生物治疗初始选择 ‌‍	
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>眼内炎治疗方案-细菌性眼内炎真菌性眼内炎白内障术后青光眼术后眼内感染临床抗微生物治疗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #e8b339;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(232, 179, 57, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+        
+        .title-format {
+            font-size: 18px;
+            color: #2e7d32;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .title-format::before {
+            content: "~~~~~";
+            color: #81c784;
+            margin-right: 5px;
+        }
+        
+        .title-format::after {
+            content: "*****";
+            color: #81c784;
+            margin-left: 5px;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #0d47a1;
+            font-size: 15px;
+        }
+        
+        /* 第一行字体大一点 */
+        .first-row {
+            font-size: 14px;
+        }
+        
+        .first-row td {
+            padding: 12px 10px;
+            background: #e8f5e9;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #c8e6c9 !important;
+        }
+        
+        .category-row td {
+            padding: 10px;
+            font-weight: bold;
+            color: #1b5e20;
+            font-size: 14px;
+        }
+        
+        /* 警告行 */
+        .warning-row {
+            background: #ffebee !important;
+        }
+        
+        .warning-row td {
+            padding: 10px;
+            color: #c62828;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* 说明行 */
+        .note-row {
+            background: #fff8e1 !important;
+        }
+        
+        .note-row td {
+            padding: 10px;
+            font-style: italic;
+            color: #5d4037;
+            font-size: 12px;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #c8e6c9;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even):not(.first-row):not(.category-row):not(.warning-row):not(.note-row) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover:not(.first-row):not(.category-row):not(.warning-row):not(.note-row) {
+            background: #e8f4e8;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #42a5f5 !important;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .sub-header th {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 备注区域 */
+        .notes {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #5d6d7e;
+            line-height: 1.8;
+        }
+        
+        .notes-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-fungus {
+            background: #f5e6ca;
+            color: #8d6e63;
+            border: 1px solid #d7ccc8;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .keywords strong {
+            color: #1b5e20;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="39.html" class="nav-btn">← 上一页</a>
+        <a href="41.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <div class="main-title">眼内炎治疗方案</div>
+        <div class="title-format">临床抗微生物治疗的初始选择-眼内感染白内障术后青光眼术后穿通伤后血行性感染</div>
+        <div class="subtitle">表1（12）临床抗微生物治疗的初始选择</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 20%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 38%;">推荐治疗方案</th>
+                    <th rowspan="2" style="width: 26%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="warning-row">
+                    <td colspan="5">眼内炎：分为内源性（继发于细菌或真菌血症）和外源性（注射后、手术后）。眼科会诊非常必要</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="5">细菌性：玻璃体混浊是诊断的关键，应在治疗前抽玻璃体液和房水做培养，玻璃体内给抗菌药很重要</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="5">眼手术后（白内障）</td>
+                </tr>
+                <tr>
+                    <td>早期，急性起病（发生率0.05%）</td>
+                    <td>表皮葡萄球菌占60%，金黄色葡萄球菌、链球菌和肠球菌各占5%～10%，革兰阴性杆菌占6%</td>
+                    <td colspan="2">立即请眼科会诊。若视力仅存光感或更严重，应立即行玻璃体切割术，并于玻璃体内注射万古霉素1mg和头孢他啶2.25mg</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>轻度，慢性</td>
+                    <td>痤疮丙酸杆菌、表皮葡萄球菌、金黄色葡萄球菌（罕见），也包括真菌</td>
+                    <td colspan="2">眼内注射万古霉素，通常需做玻璃体切割术，摘除人工晶体</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>青光眼小梁切除术后</td>
+                    <td>链球菌属（甲型溶血性链球菌或其他），流感嗜血杆菌</td>
+                    <td colspan="2">转诊给眼科进行玻璃体内注射药物（如万古霉素1mg＋头孢他啶2.25mg）和眼科局部抗菌药物治疗</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>穿通伤后</td>
+                    <td>芽孢杆菌属、表皮葡萄球菌</td>
+                    <td colspan="2">转诊给眼科进行玻璃体内注射万古霉素1mg＋（头孢他啶2.25mg或阿米卡星0.4mg）＋全身应用万古霉素30～60mg/（kg·d）分2～3次，目标AUC<sub>24</sub> 400～600μg·h/ml＋（头孢他啶1g iv q8h或环丙沙星400mg iv/po q12h）。可能需行玻璃体切割术</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>血行性感染</td>
+                    <td>肺炎链球菌、脑膜炎球菌、金黄色葡萄球菌、B族链球菌和肺炎克雷伯菌</td>
+                    <td colspan="2">等待培养结束时（头孢噻肟2g iv q4h、头孢曲松2g iv qd、头孢他啶2g iv q8h或头孢他啶2g iv q8h）＋万古霉素30～60mg/（kg·d）分2～3次，目标AUC<sub>24</sub> 400～600μg·h/ml，玻璃体内使用抗生素同手术后早期。紧急眼科会诊</td>
+                    <td>—</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="5">真菌性：见于使用广谱抗菌药、经常使用糖皮质激素、留置静脉导管</td>
+                </tr>
+                <tr>
+                    <td>真菌性眼内炎</td>
+                    <td>念珠菌属、曲霉菌属</td>
+                    <td>0.005～0.010mg/0.1ml两性霉素B，玻璃体内给药；同时进行全身治疗，见表11A，177页。见说明</td>
+                    <td>—</td>
+                    <td>全身使用抗真菌药物通常对念珠菌属视网膜炎有效。玻璃体炎或眼内炎患者可能需要眼内注射两性霉素和/或玻璃体切除（参见IDSA指南CID 62: 409, 2016）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <div class="notes-title">备注说明</div>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">眼内炎</span>
+            <span class="tag tag-disease">细菌性眼内炎</span>
+            <span class="tag tag-disease">真菌性眼内炎</span>
+            <span class="tag tag-disease">内源性眼内炎</span>
+            <span class="tag tag-disease">外源性眼内炎</span>
+            <span class="tag tag-disease">白内障术后眼内炎</span>
+            <span class="tag tag-disease">青光眼小梁切除术后眼内炎</span>
+            <span class="tag tag-disease">穿通伤后眼内炎</span>
+            <span class="tag tag-disease">血行性眼内感染</span>
+            <span class="tag tag-disease">玻璃体炎</span>
+            <span class="tag tag-disease">视网膜炎</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">头孢他啶</span>
+            <span class="tag tag-drug">阿米卡星</span>
+            <span class="tag tag-drug">头孢噻肟</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">两性霉素B</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">表皮葡萄球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">甲型溶血性链球菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <span class="tag tag-bacteria">痤疮丙酸杆菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">芽孢杆菌属</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">脑膜炎球菌</span>
+            <span class="tag tag-bacteria">B族链球菌</span>
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <!-- 真菌标签 -->
+            <span class="tag tag-fungus">念珠菌属</span>
+            <span class="tag tag-fungus">曲霉菌属</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>眼内炎；细菌性眼内炎；真菌性眼内炎；内源性眼内炎；外源性眼内炎；白内障术后眼内炎；青光眼小梁切除术后眼内炎；穿通伤后眼内炎；血行性眼内感染；玻璃体炎；视网膜炎；玻璃体切割术；玻璃体内注射；表皮葡萄球菌；金黄色葡萄球菌；链球菌；甲型溶血性链球菌；肠球菌；革兰阴性杆菌；痤疮丙酸杆菌；流感嗜血杆菌；芽孢杆菌属；肺炎链球菌；脑膜炎球菌；B族链球菌；肺炎克雷伯菌；念珠菌属；曲霉菌属；万古霉素；头孢他啶；阿米卡星；头孢噻肟；头孢曲松；环丙沙星；两性霉素B；人工晶体；IDSA指南
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">40</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="眼内炎治疗方案；临床抗微生物治疗的初始选择-眼内感染白内障术后青光眼术后穿通伤后血行性感染；眼内炎；细菌性眼内炎；真菌性眼内炎；内源性眼内炎；外源性眼内炎；白内障术后眼内炎；青光眼小梁切除术后眼内炎；穿通伤后眼内炎；血行性眼内感染；玻璃体炎；视网膜炎；玻璃体切割术；玻璃体内注射；表皮葡萄球菌；金黄色葡萄球菌；链球菌；甲型溶血性链球菌；肠球菌；革兰阴性杆菌；痤疮丙酸杆菌；流感嗜血杆菌；芽孢杆菌属；肺炎链球菌；脑膜炎球菌；B族链球菌；肺炎克雷伯菌；念珠菌属；曲霉菌属；万古霉素；头孢他啶；阿米卡星；头孢噻肟；头孢曲松；环丙沙星；两性霉素B；人工晶体；IDSA指南；=40" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '眼内炎治疗方案-细菌性眼内炎真菌性眼内炎白内障术后青光眼术后眼内感染临床抗微生物治疗',
+                    url: '40.html',
+                    category: '感染性疾病'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '40.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '40.html');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击筛选效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

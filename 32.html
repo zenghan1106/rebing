@@ -1,332 +1,574 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>急性中耳炎AOM初始经验治疗临床抗微生物治疗方案参考表</title>
+    <title>表1（8）临床抗微生物治疗的初始选择-中耳炎</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Microsoft YaHei", "SimHei", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 50%, #fff3e0 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
         }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(103, 58, 183, 0.12);
-            padding: 35px;
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
-        h1 {
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #449d44;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 180px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+        }
+        
+        .btn-favorite.added {
+            background-color: #5cb85c;
+        }
+        
+        /* 标题样式 */
+        .page-title {
             text-align: center;
-            color: #4527a0;
-            font-size: 24px;
+            margin: 20px 0;
+            font-size: 22px;
+            color: #1a5276;
             font-weight: bold;
-            margin-bottom: 6px;
         }
-
-        .subtitle {
-            text-align: center;
-            color: #7e57c2;
-            font-size: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 18px;
-            border-bottom: 3px solid #9575cd;
+        
+        .title-marker {
+            color: #e74c3c;
         }
-
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
-            line-height: 1.65;
-        }
-
-        thead th {
-            background: linear-gradient(180deg, #5e35b1 0%, #4527a0 100%);
-            color: #ffffff;
-            font-weight: bold;
-            padding: 14px 10px;
-            text-align: center;
-            border: 1px solid #4527a0;
-            font-size: 13.5px;
-        }
-
-        thead th.sub-header {
-            background: linear-gradient(180deg, #9575cd 0%, #7e57c2 100%);
             font-size: 13px;
-            padding: 10px;
         }
-
-        tbody td {
-            padding: 12px 10px;
-            border: 1px solid #d1c4e9;
-            vertical-align: top;
-            color: #263238;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f3e5f5;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:hover {
-            background-color: #ede7f6;
-            transition: background-color 0.3s ease;
-        }
-
-        .section-header {
-            background: linear-gradient(90deg, #ffcc80 0%, #ffb74d 100%) !important;
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e75b6;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
             font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
             font-size: 14px;
-            color: #5d4037;
-            padding: 14px 10px;
+            font-weight: bold;
+            background-color: #d6eaf8;
         }
-
-        .col-anatomy {
-            width: 14%;
-            background-color: #fff8e1 !important;
-            color: #5d4037;
+        
+        td, th {
+            border: 1px solid #b8cce4;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        tbody td {
+            background-color: #fff;
+        }
+        
+        tbody tr:nth-child(even):not(:first-child) td {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover td {
+            background-color: #e8f4f8;
+        }
+        
+        /* 合并单元格的特殊处理 */
+        .category-cell {
+            background-color: #e8f6f3 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .subcategory-cell {
+            background-color: #f0f8ff !important;
             font-weight: 600;
         }
-
-        .col-pathogen {
-            width: 16%;
-            background-color: #fce4ec !important;
-            color: #880e4f;
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
-        .col-first {
-            width: 26%;
-            background-color: #e8f5e9 !important;
-            color: #1b5e20;
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
         }
-
-        .col-alternative {
-            width: 16%;
-            background-color: #e1f5fe !important;
-            color: #01579b;
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
-        .col-auxiliary {
-            width: 28%;
-            background-color: #f3e5f5 !important;
-            color: #4a148c;
-        }
-
-        .highlight-drug {
-            color: #c62828;
-            font-weight: bold;
-        }
-
-        .dose-info {
-            color: #2e7d32;
-            font-weight: 600;
-        }
-
-        .warning {
-            color: #d84315;
-            font-weight: bold;
-        }
-
-        .reference {
-            color: #1565c0;
-            font-style: italic;
-        }
-
+        
         .tag {
             display: inline-block;
-            background: #ff7043;
-            color: white;
-            padding: 1px 7px;
-            border-radius: 4px;
-            font-size: 10px;
-            margin-right: 4px;
-            font-weight: bold;
-        }
-
-        .tag-pediatric { background: #ec407a; }
-        .tag-adult { background: #ab47bc; }
-        .tag-acute { background: #ef5350; }
-
-        .notes {
-            margin-top: 22px;
-            padding: 16px 22px;
-            background: linear-gradient(90deg, #fff8e1 0%, #ffecb3 100%);
-            border-radius: 12px;
-            border-left: 5px solid #ffa000;
+            padding: 5px 12px;
+            border-radius: 15px;
             font-size: 12px;
-            color: #5d4037;
-            line-height: 1.9;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .notes strong {
-            color: #e65100;
+        
+        .tag-disease {
+            background-color: #ffeaa7;
+            color: #d63031;
         }
-
-        td p {
+        
+        .tag-bacteria {
+            background-color: #dfe6e9;
+            color: #2d3436;
+        }
+        
+        .tag-antibiotic {
+            background-color: #a8e6cf;
+            color: #00b894;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            background-color: #fafafa;
+        }
+        
+        .btn-copy {
+            background-color: #9b59b6;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #8e44ad;
+        }
+        
+        .btn-copy.copied {
+            background-color: #5cb85c;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 注释区域 */
+        .notes-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fffef0;
+            border-radius: 8px;
+            border-left: 4px solid #f0ad4e;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .notes-section p {
             margin-bottom: 5px;
         }
-
-        td p:last-child {
-            margin-bottom: 0;
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 5px;
+            }
+            
+            td, th {
+                padding: 6px 5px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+            
+            .btn-favorite {
+                bottom: 200px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
-
-        .indent {
-            padding-left: 14px;
-            border-left: 2px solid #b0bec5;
-            margin: 4px 0;
-        }
-
-        .stats-box {
-            background: #fff3e0;
-            padding: 6px 10px;
-            border-radius: 6px;
-            margin: 6px 0;
-            font-size: 11.5px;
-        }
-
-        .highlight-stat {
-            color: #e65100;
-            font-weight: bold;
-        }
-
-        .treatment-note {
-            background: #e8f5e9;
-            padding: 8px 12px;
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
             border-radius: 8px;
-            margin: 8px 0;
-            text-align: center;
-            font-weight: 600;
-            color: #2e7d32;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>👶👂 急性中耳炎（AOM）初始经验治疗</h1>
-        <div class="subtitle">中耳炎：婴儿，儿童，成人 — 临床抗微生物治疗的初始选择</div>
-        
+    <!-- 返回首页按钮 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="31.html" class="btn btn-nav">上一页</a>
+            <a href="33.html" class="btn btn-nav">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-marker">~~~~~</span>
+        表1（8）临床抗微生物治疗的初始选择-中耳炎
+        <span class="title-marker">*****</span>
+    </h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案<sup>*</sup></th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
-                </tr>
-                <tr>
-                    <th class="sub-header">首选方案</th>
-                    <th class="sub-header">备选方案<sup>§</sup></th>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 32%;">推荐治疗方案<br>首选方案</th>
+                    <th style="width: 32%;">备选方案<sup>§</sup></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="5" class="section-header">中耳炎：婴儿，儿童，成人 — 急性</td>
+                    <td colspan="4" class="category-cell">中耳炎：婴儿，儿童，成人</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-acute">急性</span>急性中耳炎的初始经验治疗（AOM）
-                        <p style="margin-top:8px;"><span class="warning">注：2岁以下患儿需治疗。</span></p>
-                        <p>2岁以上患者，若发热＜39℃、轻微或无耳痛，体检阴性或可疑，可给予镇痛治疗，不用抗菌药</p>
-                        <p>无发热的患者可观察48小时再决定是否使用抗生素，绝大多数患者预后良好（<span class="reference">JAMA 296: 1235, 1290, 2006</span>）</p>
-                    </td>
-                    <td class="col-pathogen">
-                        <p><strong>中耳液病原体总体检出率：</strong></p>
-                        <div class="stats-box">
-                            <p>无病原体 <span class="highlight-stat">4%</span></p>
-                            <p>病毒 <span class="highlight-stat">70%</span></p>
-                            <p>细菌＋病毒 <span class="highlight-stat">66%</span></p>
-                            <p>细菌 <span class="highlight-stat">92%</span></p>
-                        </div>
-                        <p><strong>中耳液细菌检出率：</strong></p>
-                        <p><span class="highlight-drug">肺炎链球菌</span> <span class="highlight-stat">49%</span>，<span class="highlight-drug">流感嗜血杆菌</span> <span class="highlight-stat">29%</span>，<span class="highlight-drug">卡他莫拉菌</span> <span class="highlight-stat">28%</span></p>
-                        <p>参见 <span class="reference">CID 43: 1417 & 1423, 2006</span></p>
-                        <p style="margin-top:8px;">6月龄至3岁的儿童，若急性中耳炎2次/年，病毒阳性率为<span class="highlight-stat">63%</span>（<span class="reference">CID 46: 815 & 824, 2008</span>）</p>
-                    </td>
-                    <td class="col-first">
-                        <p><strong>如近1个月未用抗生素：</strong></p>
-                        <p class="indent"><span class="highlight-drug">阿莫西林</span> <span class="dose-info">80～90mg/(kg·d)</span> 分次<span class="dose-info">q8h或q12h</span>（<span class="warning">首选</span>）</p>
-                        <p class="indent">或<span class="highlight-drug">阿莫西林－克拉维酸</span> <span class="dose-info">90/6.4mg/(kg·d)</span> 分次<span class="dose-info">bid</span></p>
-                        <p style="margin-top:8px;"><strong>非IgE介导青霉素过敏时方案：</strong></p>
-                        <p class="indent"><span class="highlight-drug">头孢地尼</span> <span class="dose-info">14mg/(kg·d)</span> 分次<span class="dose-info">q12h或q24h</span></p>
-                        <p class="indent"><span class="highlight-drug">头孢泊肟</span> <span class="dose-info">10mg/(kg·d)</span> 分次<span class="dose-info">q12h或q24h</span></p>
-                        <p class="indent"><span class="highlight-drug">头孢丙烯</span> <span class="dose-info">15mg/(kg·d)</span> 分次<span class="dose-info">q12h</span></p>
-                        <p class="indent"><span class="highlight-drug">头孢呋辛酯</span> <span class="dose-info">30mg/(kg·d)</span> 分次<span class="dose-info">q12h</span></p>
-                        <div class="treatment-note">均为儿童剂量</div>
-                        <p style="margin-top:8px; text-align:center;"><strong>疗程：</strong>年龄＜2岁，<span class="dose-info">10天</span>；年龄≥2岁，<span class="dose-info">5～7天</span></p>
-                        <p style="text-align:center;">成人剂量见<span class="reference">鼻窦炎，55页和表10A</span></p>
-                    </td>
-                    <td class="col-alternative">
-                        <p><strong>近1个月曾用抗生素：</strong></p>
-                        <p class="indent"><span class="highlight-drug">阿莫西林－克拉维酸</span> <span class="dose-info">90/6.4mg/(kg·d)</span> 分次<span class="dose-info">bid</span></p>
-                        <p class="indent">或<span class="highlight-drug">头孢曲松</span> <span class="dose-info">50mg/kg</span> iv或im <span class="dose-info">qd×3d</span></p>
-                        <p style="margin-top:8px;"><span class="highlight-drug">左氧氟沙星</span>：</p>
-                        <p class="indent">年龄＜5岁，<span class="dose-info">10mg/kg po bid×10d</span>；</p>
-                        <p class="indent">年龄＞5岁，<span class="dose-info">10mg/kg po qd×10d</span>（最大日剂量<span class="dose-info">750mg</span>）。</p>
-                        <p style="margin-top:8px;">成人也可选择<span class="highlight-drug">左氧氟沙星或莫西沙星</span></p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p><span class="highlight-drug">阿莫西林仍为一线治疗</span>，治疗失败和复发率低，即使卡他莫拉菌和非分型流感嗜血杆菌致病机率增加。对β-内酰胺类药物过敏：若过敏史不明确或只有皮疹，可口服头孢菌素；若有IgE介导的过敏，则避免用头孢菌素，如严重全身过敏反应</p>
-                        <p style="margin-top:6px;"><span class="warning">TMP-SMX</span>治疗耐药肺炎球菌或流感嗜血杆菌<span class="warning">失败率高</span>；大环内酯类抗生素对肺炎链球菌和流感嗜血杆菌的疗效有限，仅用于不能使用β-内酰胺类抗生素时</p>
-                        <p style="margin-top:6px;">年龄＜2岁、近3个月用过抗生素及日托小儿感染耐药肺炎链球菌风险增加。药物选择基于：①对产β-内酰胺酶的卡他莫拉菌和流感嗜血杆菌有活性；②对肺炎球菌有效（包括耐药菌）。头孢克洛、氯碳头孢和头孢布烯比其他β-内酰胺类抗生素对耐药肺炎球菌（青霉素耐药）活性差</p>
-                        <p style="margin-top:6px;">分泌性中耳炎用抗生素治疗无获益（<span class="reference">Cochrane Database Syst Rev. Sep 12: 9: CD009163, 2012</span>）</p>
-                        <p style="margin-top:6px;">对于鼓膜置管的持续性分泌性中耳炎，氢化可的松/杆菌肽/多黏菌素滴耳液<span class="dose-info">5滴tid×7d</span>，比口服阿莫西林－克拉维酸更有效（<span class="reference">NEJM: 370: 273, 2014</span>）</p>
-                        <p style="margin-top:6px;">难治性或复发性急性中耳炎，年龄为6月龄至5岁：如其他治疗失败，<span class="highlight-drug">左氧氟沙星</span> <span class="dose-info">20mg/(kg·d)</span> 分次<span class="dose-info">q12h</span>。鼓膜切开置管可以预防复发性中耳炎</p>
+                    <td class="subcategory-cell">急性<br>急性中耳炎的初始经验治疗（AOM）<br>注：2岁以下患儿需治疗。2岁以上患者，若发热＜39℃、轻微或无耳痛，体检阴性或可疑，可给予镇痛治疗，不用抗菌药<br>无发热的患者可观察48小时再决定是否使用抗生素，绝大多数患者预后良好（JAMA 296: 1235, 1290, 2006）</td>
+                    <td>中耳液病原体总体检出率：<br>无病原体 4%<br>病毒 70%<br>细菌+病毒 66%<br>细菌 92%<br>中耳液细菌检出率：肺炎链球菌49%，流感嗜血杆菌29%，卡他莫拉菌28%。参见CID 43: 1417 & 1423, 2006<br>6月龄至3岁的儿童，若急性中耳炎2次/年，病毒阳性率为63%（CID 46: 815 & 824, 2008）</td>
+                    <td>如近1个月未用抗生素：<br>阿莫西林80～90mg/(kg·d)分次q8h或q12h（首选）或阿莫西林-克拉维酸90/6.4mg/(kg·d)分次bid<br>非IgE介导青霉素过敏时方案：<br>头孢地尼14mg/(kg·d)分次q12h或q24h<br>头孢泊肟10mg/(kg·d)分次q12h或q24h<br>头孢丙烯15mg/(kg·d)分次q12h<br>头孢呋辛酯30mg/(kg·d)分次q12h<br><br>均为儿童剂量<br><br>疗程：年龄＜2岁，10天；年龄≥2岁，5～7天<br>成人剂量见鼻窦炎，55页和表10A</td>
+                    <td>近1个月曾用抗生素：<br>阿莫西林-克拉维酸90/6.4mg/(kg·d)分次bid或头孢曲松50mg/kg iv或im qd×3d<br>左氧氟沙星：年龄＜5岁，10mg/kg po bid×10d；年龄＞5岁，10mg/kg po qd×10d（最大日剂量750mg）。成人也可选择左氧氟沙星或莫西沙星</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div class="table-container" style="margin-top: -10px; border-radius: 0 0 8px 8px;">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 18%; background-color: #e8f6f3; font-weight: bold; color: #1a5276;">辅助诊断或治疗方法及说明</td>
+                    <td style="width: 82%;">
+                        阿莫西林仍为一线治疗，治疗失败和复发率低，即使卡他莫拉菌和非分型流感嗜血杆菌致病机率增加。对β-内酰胺类药物过敏：若过敏史不明确或只有皮疹，可口服头孢菌素；若有IgE介导的过敏，则避免用头孢菌素，如严重全身过敏反应<br><br>
+                        TMP-SMX治疗耐药肺炎球菌或流感嗜血杆菌失败率高；大环内酯类抗生素对肺炎链球菌和流感嗜血杆菌的疗效有限，仅用于不能使用β-内酰胺类抗生素时<br><br>
+                        年龄＜2岁、近3个月用过抗生素及日托小儿感染耐药肺炎链球菌风险增加。药物选择基于：①对产β-内酰胺酶的卡他莫拉菌和流感嗜血杆菌有活性；②对肺炎球菌有效（包括耐药菌）。头孢克洛、氯碳头孢和头孢布烯比其他β-内酰胺类抗生素对耐药肺炎球菌（青霉素耐药）活性差<br><br>
+                        分泌性中耳炎用抗生素治疗无获益（Cochrane Database Syst Rev. Sep 12: 9: CD009163, 2012）<br><br>
+                        对于鼓膜置管的持续性分泌性中耳炎，氢化可的松/杆菌肽/多黏菌素滴耳液5滴tid×7d，比口服阿莫西林-克拉维酸更有效（NEJM: 370: 273, 2014）<br><br>
+                        难治性或复发性急性中耳炎，年龄为6月龄至5岁：如其他治疗失败，左氧氟沙星20mg/(kg·d)分次q12h。鼓膜切开置管可以预防复发性中耳炎
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        <div class="notes">
-            <p><strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes-section">
+        <p><strong>注：</strong>所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签（点击可检索）：</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease" onclick="searchTag('中耳炎')">中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('急性中耳炎')">急性中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('AOM')">AOM</span>
+            <span class="tag tag-disease" onclick="searchTag('分泌性中耳炎')">分泌性中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('复发性中耳炎')">复发性中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('难治性中耳炎')">难治性中耳炎</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria" onclick="searchTag('肺炎链球菌')">肺炎链球菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('流感嗜血杆菌')">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('卡他莫拉菌')">卡他莫拉菌</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic" onclick="searchTag('阿莫西林')">阿莫西林</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('阿莫西林-克拉维酸')">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢地尼')">头孢地尼</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢泊肟')">头孢泊肟</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢丙烯')">头孢丙烯</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢呋辛酯')">头孢呋辛酯</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢曲松')">头孢曲松</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('左氧氟沙星')">左氧氟沙星</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('莫西沙星')">莫西沙星</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('TMP-SMX')">TMP-SMX</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢克洛')">头孢克洛</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('氯碳头孢')">氯碳头孢</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢布烯')">头孢布烯</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('氢化可的松')">氢化可的松</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('杆菌肽')">杆菌肽</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('多黏菌素')">多黏菌素</span>
         </div>
     </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">页码：32</div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: '表1（8）临床抗微生物治疗的初始选择-中耳炎',
+            subtitle: '中耳炎治疗方案',
+            keywords: '中耳炎;急性中耳炎;AOM;分泌性中耳炎;复发性中耳炎;难治性中耳炎;肺炎链球菌;流感嗜血杆菌;卡他莫拉菌;阿莫西林;阿莫西林-克拉维酸;头孢地尼;头孢泊肟;头孢丙烯;头孢呋辛酯;头孢曲松;左氧氟沙星;莫西沙星;TMP-SMX;头孢克洛;氯碳头孢;头孢布烯;氢化可的松;杆菌肽;多黏菌素',
+            pageNum: '32'
+        };
+        
+        // 初始化编辑框内容
+        const copyContent = `${pageInfo.title};${pageInfo.subtitle};${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyText').value = copyContent;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 标签检索
+        function searchTag(tag) {
+            showToast('正在检索: ' + tag);
+            // 实际应用中这里会跳转到搜索结果页
+            console.log('检索标签:', tag);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (!isFavorited) {
+                // 添加到index.html的收藏类目
+                addToIndexFavorite();
+                btn.textContent = '已收藏';
+                btn.classList.add('added');
+                isFavorited = true;
+                showToast('已添加到收藏');
+            } else {
+                btn.textContent = '收藏';
+                btn.classList.remove('added');
+                isFavorited = false;
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 模拟添加到index.html的收藏类目
+        function addToIndexFavorite() {
+            // 获取当前页面信息
+            const favoriteItem = {
+                title: pageInfo.title,
+                url: window.location.href,
+                pageNum: pageInfo.pageNum
+            };
+            
+            // 存储到localStorage，index.html可以读取
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === favoriteItem.url);
+            if (!exists) {
+                favorites.push(favoriteItem);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+            console.log('收藏列表:', favorites);
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (favorites.some(f => f.url === currentUrl)) {
+                btn.textContent = '已收藏';
+                btn.classList.add('added');
+                isFavorited = true;
+            }
+        };
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题说明
-
-
- 项目 	 内容 	
- **网页标题（Title）** 	 `急性中耳炎AOM初始经验治疗临床抗微生物治疗方案参考表` 	
- **页面主标题（H1）** 	 `👶👂 急性中耳炎（AOM）初始经验治疗` 	
- **副标题** 	 `中耳炎：婴儿，儿童，成人 — 临床抗微生物治疗的初始选择` 	
- **检索关键词/标签** 	 `急性中耳炎`、`AOM`、`急性中耳炎初始经验治疗`、`婴儿中耳炎`、`儿童中耳炎`、`成人中耳炎`、`分泌性中耳炎`、`鼓膜置管`、`阿莫西林`、`阿莫西林克拉维酸`、`头孢地尼`、`头孢泊肟`、`头孢丙烯`、`头孢呋辛酯`、`头孢曲松`、`左氧氟沙星`、`莫西沙星`、`哌拉西林他唑巴坦`、`肺炎链球菌`、`流感嗜血杆菌`、`卡他莫拉菌`、`TMP-SMX`、`大环内酯类`、`鼓膜切开置管`、`临床抗微生物治疗`、`初始选择` 	
-
-
-
-
-设计特点：
-
-• 背景色：浅蓝渐变到淡紫再到暖橙，明亮温馨
-
-• 表格配色：分区标题金黄色、解剖列淡黄、病原体列淡粉、首选方案淡绿、备选方案淡青、辅助列淡紫
-
-• 标签系统：急性(红色)标签
-
-• 重点标记：药物名称红色加粗、剂量信息绿色、警告信息深橙红、参考文献蓝色斜体、统计数据橙色加粗
-
-• 特殊设计：病原体检出率用统计框突出显示、疗程信息用绿色治疗提示框居中显示

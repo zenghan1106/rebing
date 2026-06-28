@@ -1,13 +1,10 @@
-我来为您创建这个关于胃肠道感染及特殊危险人群治疗的HTML网页表格。
-
-
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>副溶血弧菌创伤弧菌耶尔森菌中性粒细胞减少性结肠炎治疗指南</title>
+    <title>~~~~~临床抗微生物治疗的初始选择-副溶血弧菌创伤弧菌耶尔森菌及特殊人群胃肠炎*****</title>
     <style>
         * {
             margin: 0;
@@ -16,260 +13,450 @@
         }
         
         body {
-            font-family: "Microsoft YaHei", "SimSun", "Helvetica Neue", Arial, sans-serif;
-            background-color: #f0f8ff;
-            background-image: linear-gradient(160deg, #e6f3ff 0%, #f0f9ff 50%, #f5fbff 100%);
-            padding: 20px;
-            line-height: 1.7;
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
             min-height: 100vh;
         }
         
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 6px 30px rgba(70, 130, 180, 0.15);
-            padding: 35px;
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(26,115,232,0.3);
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         
-        h1 {
-            text-align: center;
-            color: #1a5276;
-            font-size: 30px;
-            margin-bottom: 8px;
-            padding-bottom: 12px;
-            border-bottom: 4px solid #3498db;
-            font-weight: 700;
+        .home-btn:hover {
+            background: #1557b0;
         }
         
-        .subtitle {
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #34a853;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(52,168,83,0.3);
+            text-decoration: none;
+        }
+        
+        .nav-btn:hover {
+            background: #2d8e47;
+        }
+        
+        .nav-btn.next {
+            background: #ea4335;
+        }
+        
+        .nav-btn.next:hover {
+            background: #c53929;
+        }
+        
+        /* 标题 */
+        .main-title {
             text-align: center;
-            color: #2874a6;
-            font-size: 17px;
-            margin-bottom: 25px;
-            font-style: italic;
+            padding: 80px 20px 30px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a237e;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            padding: 0 20px 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            margin: 0 15px 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13.5px;
-            background-color: #fff;
-            table-layout: fixed;
+            font-size: 13px;
+            min-width: 900px;
         }
         
-        /* 表格头部 - 蓝色，字体大 */
+        /* 表头 */
         thead th {
-            background-color: #1a5276;
-            color: #ffffff;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 18px 10px;
+            background: #1565c0;
+            color: white;
+            padding: 15px 12px;
             text-align: center;
-            border: 2px solid #154360;
-            vertical-align: middle;
-            line-height: 1.5;
-        }
-        
-        /* 子表头 */
-        .sub-header th {
-            background-color: #2980b9 !important;
-            color: #ffffff;
-            font-size: 16px !important;
-            font-weight: bold;
-            padding: 14px 10px;
-            border: 2px solid #1a5276;
-        }
-        
-        /* 分类行 */
-        .category-row {
-            background-color: #d6eaf8;
-            color: #1a5276;
             font-weight: bold;
             font-size: 15px;
+            border: 1px solid #0d47a1;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        /* 表格第一行字体大一点 */
+        .header-row td {
+            font-size: 14px;
+            font-weight: bold;
+            background: #e3f2fd;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        td {
+            background: #fafafa;
+        }
+        
+        tr:nth-child(even) td {
+            background: #f5f5f5;
+        }
+        
+        tr:hover td {
+            background: #e8f4f8;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #bbdefb !important;
         }
         
         .category-row td {
-            padding: 14px;
-            border: 1px solid #aed6f1;
-        }
-        
-        /* 子分类行 */
-        .subcategory-row {
-            background-color: #ebf5fb;
-            color: #1a5276;
-            font-weight: 600;
+            background: #bbdefb !important;
+            font-weight: bold;
+            color: #0d47a1;
             font-size: 14px;
         }
         
-        .subcategory-row td {
-            padding: 12px;
-            border: 1px solid #aed6f1;
+        /* 子分类 */
+        .subcategory {
+            background: #e8eaf6 !important;
+            font-weight: bold;
+            color: #283593;
         }
         
-        /* 数据单元格 */
-        td {
-            padding: 12px 10px;
-            border: 1px solid #bdc3c7;
-            color: #2c3e50;
-            vertical-align: top;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+        .subcategory td {
+            background: #e8eaf6 !important;
         }
         
-        /* 交替行背景 */
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-        
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        tbody tr:hover {
-            background-color: #e1f0fa;
-        }
-        
-        /* 左侧诊断列 */
-        td:first-child {
-            width: 16%;
-            background-color: #f4f6f7;
-            font-weight: 600;
-            color: #1a5276;
-        }
-        
-        /* 病原体列 */
-        .pathogen {
-            color: #6c3483;
-            font-weight: 600;
-        }
-        
-        /* 首选方案 */
-        .preferred {
-            color: #1e8449;
-            font-weight: 600;
-            background-color: #eafaf1;
-        }
-        
-        /* 备选方案 */
-        .alternative {
-            color: #d35400;
-            background-color: #fef5e7;
-        }
-        
-        /* 辅助说明 */
-        .notes {
-            color: #34495e;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-        
-        /* 引用文献 */
-        .reference {
-            color: #7f8c8d;
-            font-style: italic;
+        /* 备注文字 */
+        .note {
+            color: #666;
             font-size: 12px;
         }
         
-        /* 重要提示高亮 */
-        .highlight {
-            background-color: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #856404;
-            font-weight: 600;
+        .reference {
+            color: #1565c0;
+            font-style: italic;
         }
         
-        /* 警告提示 */
+        /* 剂量高亮 */
+        .dosage {
+            color: #c62828;
+            font-weight: 500;
+        }
+        
+        /* 病原体高亮 */
+        .pathogen {
+            color: #2e7d32;
+            font-weight: 500;
+        }
+        
+        /* 药物高亮 */
+        .drug {
+            color: #6a1b9a;
+            font-weight: 500;
+        }
+        
+        /* 警告高亮 */
         .warning {
-            background-color: #f8d7da;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #721c24;
-            font-weight: 600;
-        }
-        
-        /* 成功提示 */
-        .success {
-            background-color: #d4edda;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #155724;
-            font-weight: 600;
-        }
-        
-        /* 剂量数字突出 */
-        .dose {
-            color: #c0392b;
-            font-weight: 700;
-        }
-        
-        /* 儿童剂量标注 */
-        .pediatric {
-            background-color: #e8daef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #6c3483;
-            font-weight: 600;
-        }
-        
-        /* 页脚注释 */
-        .footer-notes {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #eaf2f8;
-            border-radius: 10px;
-            border-left: 5px solid #3498db;
-        }
-        
-        .footer-notes p {
-            color: #2c3e50;
-            font-size: 13px;
-            line-height: 1.8;
-            margin-bottom: 8px;
-        }
-        
-        .footer-notes .symbol {
-            color: #2980b9;
+            color: #c62828;
             font-weight: bold;
         }
         
-        /* 页脚 */
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 12px;
+        /* 链接样式 */
+        .link {
+            color: #1565c0;
+            text-decoration: underline;
+            word-break: break-all;
         }
         
-        /* 分隔虚线 */
-        .dashed-separator {
-            border-top: 2px dashed #3498db;
-            margin: 10px 0;
+        /* 底部区域 */
+        .bottom-section {
+            margin: 0 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-drug {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            border: 1px solid #ce93d8;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: #1565c0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #0d47a1;
+        }
+        
+        .copy-btn.copied {
+            background: #34a853;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ff9800;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255,152,0,0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background: #f57c00;
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            background: #e91e63;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                padding-top: 70px;
+            }
+            
+            .nav-buttons {
+                position: static;
+                justify-content: center;
+                margin: 10px 0;
+                padding: 0 15px;
+            }
+            
+            .home-btn {
+                position: static;
+                margin: 15px;
+                display: inline-flex;
+            }
+            
+            .header-row td {
+                font-size: 13px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>表1（17）临床抗微生物治疗的初始选择</h1>
-        <p class="subtitle">胃肠道/胃肠炎——特异性治疗及特殊危险人群经验性治疗</p>
-        
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="48.html" class="nav-btn">← 上一页</a>
+        <a href="50.html" class="nav-btn next">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~临床抗微生物治疗的初始选择*****</h1>
+    <p class="sub-title">表1（17）副溶血弧菌、创伤弧菌、耶尔森菌及特殊危险人群胃肠炎</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案</th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                    <th style="width:16%">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width:24%">病原体（通常）</th>
+                    <th style="width:28%" colspan="2">推荐治疗方案</th>
+                    <th style="width:32%">辅助诊断或治疗方法及说明</th>
                 </tr>
-                <tr class="sub-header">
-                    <th>首选方案</th>
-                    <th>备选方案</th>
+                <tr style="background:#1976d2;">
+                    <th></th>
+                    <th></th>
+                    <th style="background:#1976d2;">首选方案</th>
+                    <th style="background:#1976d2;">备选方案</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <!-- 分类行 -->
+                <!-- 胃肠道/胃肠炎特异性治疗（续） -->
                 <tr class="category-row">
                     <td colspan="5">胃肠道/胃肠炎——特异性治疗（根据培养、显微镜检或毒素测定结果进行）（续）</td>
                 </tr>
@@ -277,193 +464,296 @@
                 <!-- 副溶血弧菌、拟态弧菌、河弧菌 -->
                 <tr>
                     <td rowspan="3"></td>
-                    <td class="pathogen">
-                        <span class="highlight">副溶血弧菌、拟态弧菌、河弧菌</span>
+                    <td>
+                        <span class="pathogen">副溶血弧菌</span>、<span class="pathogen">拟态弧菌</span>、<span class="pathogen">河弧菌</span>
                     </td>
-                    <td class="preferred" colspan="2">
-                        <span class="warning">抗菌治疗不能缩短病程。</span><span class="success">补液</span>
+                    <td colspan="2">
+                        抗菌治疗不能缩短病程。补液
                     </td>
-                    <td class="notes">
-                        多有<span class="highlight">进食贝类史</span>。<br>
-                        重症患者治疗：<span class="dose">氟喹诺酮类、多西环素、第三代头孢菌素</span>
+                    <td>
+                        多有进食贝类史。重症患者治疗：<span class="drug">氟喹诺酮类</span>、<span class="drug">多西环素</span>、<span class="drug">第三代头孢菌素</span>
                     </td>
                 </tr>
                 
                 <!-- 创伤弧菌 -->
                 <tr>
-                    <td class="pathogen">
-                        <span class="highlight">创伤弧菌</span><br><br>
-                        常见表现为皮肤损害及菌血症，<span class="warning">危及生命</span>
+                    <td>
+                        <span class="pathogen">创伤弧菌</span><br>
+                        常见表现为皮肤损害及菌血症，危及生命
                     </td>
-                    <td class="preferred" colspan="2">
-                        <span class="pediatric">成人：</span><br>
-                        （<span class="dose">多西环素或米诺环素</span> 100mg iv/po bid）<br>
-                        ＋<br>
-                        （<span class="dose">头孢曲松</span> 2g iv qd或<span class="dose">头孢他啶</span> 1g iv q8h）<br><br>
-                        
-                        <span class="pediatric">儿童：</span><br>
-                        <span class="dose">多西环素</span> 4.4mg/(kg·d) 分2次用（最大剂量200mg/d）<br><br>
-                        
-                        <span class="highlight">替代方案：</span><span class="dose">左氧氟沙星或环丙沙星</span>
+                    <td colspan="2">
+                        成人：（<span class="drug">多西环素</span>或<span class="drug">米诺环素</span> <span class="dosage">100mg iv/po bid</span>）+（<span class="drug">头孢曲松</span> <span class="dosage">2g iv qd</span>或<span class="drug">头孢他啶</span> <span class="dosage">1g iv q8h</span>）。儿童：<span class="drug">多西环素</span> <span class="dosage">4.4mg/(kg·d)</span>分2次用（最大剂量<span class="dosage">200mg/d</span>）。替代方案：<span class="drug">左氧氟沙星</span>或<span class="drug">环丙沙星</span>
                     </td>
-                    <td class="notes"></td>
+                    <td></td>
                 </tr>
                 
                 <!-- 小肠结肠炎耶尔森菌 -->
                 <tr>
-                    <td class="pathogen">
-                        <span class="highlight">小肠结肠炎耶尔森菌</span><br>
-                        发热占<span class="dose">68%</span>，血便占<span class="dose">26%</span>
+                    <td>
+                        <span class="pathogen">小肠结肠炎耶尔森菌</span><br>
+                        发热占68%，血便占26%
                     </td>
-                    <td class="preferred" colspan="2">
-                        除非病情严重一般<span class="success">无须治疗</span>。<br>
-                        病情严重者，联合<br>
-                        <span class="dose">多西环素</span> 100mg iv bid ＋<br>
-                        ［<span class="dose">妥布霉素或庆大霉素</span> 5mg/(kg·d) qd］<br><br>
-                        
-                        <span class="highlight">其他方案：</span><span class="dose">TMP-SMX或氟喹诺酮类抗生素</span>
+                    <td colspan="2">
+                        除非病情严重一般无须治疗。病情严重者，联合<span class="drug">多西环素</span> <span class="dosage">100mg iv bid</span>＋［<span class="drug">妥布霉素</span>或<span class="drug">庆大霉素</span> <span class="dosage">5mg/(kg·d) qd</span>］。其他方案：<span class="drug">TMP-SMX</span>或<span class="drug">氟喹诺酮类抗生素</span>
                     </td>
-                    <td class="notes">
-                        肠系膜淋巴结炎所致腹痛可类似<span class="warning">急性阑尾炎</span>；<br>
-                        实验室诊断困难，需用<span class="highlight">"冷集菌"</span>和/或耶尔森菌选择性培养基；<br>
-                        <span class="warning">去铁胺治疗可加重病情</span>，使用该药的患者应停药；<br>
-                        铁超负荷易致耶尔森菌感染
+                    <td>
+                        肠系膜淋巴结炎所致腹痛可类似急性阑尾炎；实验室诊断困难，需用"冷集菌"和/或耶尔森菌选择性培养基；去铁胺治疗可加重病情，使用该药的患者应停药；铁超负荷易致耶尔森菌感染
                     </td>
                 </tr>
                 
-                <!-- 特殊危险人群分类行 -->
+                <!-- 胃肠炎：特殊危险人群经验性治疗 -->
                 <tr class="category-row">
                     <td colspan="5">胃肠炎：特殊危险人群经验性治疗</td>
                 </tr>
                 
                 <!-- 肛交 -->
-                <tr class="subcategory-row">
-                    <td colspan="5">肛交</td>
-                </tr>
-                
-                <!-- 直肠炎 -->
                 <tr>
-                    <td>直肠炎（仅远端15cm）</td>
-                    <td class="pathogen">
-                        疱疹病毒、淋球菌、衣原体、梅毒；<br>
-                        <span class="highlight">见生殖道，25页</span>
+                    <td>
+                        肛交<br><br>
+                        直肠炎（仅远端15cm）
                     </td>
-                    <td class="preferred" colspan="2"></td>
-                    <td class="notes"></td>
+                    <td colspan="3">
+                        <span class="pathogen">疱疹病毒</span>、<span class="pathogen">淋球菌</span>、<span class="pathogen">衣原体</span>、<span class="pathogen">梅毒</span>；<span class="reference">见生殖道，25页</span>
+                    </td>
+                    <td></td>
                 </tr>
                 
                 <!-- 结肠炎 -->
                 <tr>
                     <td>结肠炎</td>
-                    <td class="pathogen">
-                        志贺菌、沙门菌、弯曲菌、溶组织阿米巴<span class="highlight">（表13A）</span>
+                    <td colspan="3">
+                        <span class="pathogen">志贺菌</span>、<span class="pathogen">沙门菌</span>、<span class="pathogen">弯曲菌</span>、<span class="pathogen">溶组织阿米巴</span>（<span class="reference">表13A</span>）
                     </td>
-                    <td class="preferred" colspan="2"></td>
-                    <td class="notes">
-                        <span class="highlight">见上文特殊胃肠道病原菌，胃肠炎</span>
+                    <td>
+                        见上文特殊胃肠道病原菌，胃肠炎
                     </td>
                 </tr>
                 
                 <!-- HIV-1感染者 -->
                 <tr>
                     <td>
-                        <span class="warning">HIV-1感染者（艾滋病）：</span><br>
-                        腹泻<span class="dose">>10天</span>
+                        HIV-1感染者（艾滋病）：<br>
+                        腹泻＞10天
                     </td>
-                    <td class="pathogen">
-                        <span class="highlight">蓝氏贾第鞭毛虫</span><br><br>
-                        抗酸染色阳性病原体：<span class="dose">小球隐孢子虫、卡曼环孢子虫</span><br><br>
-                        其他：<span class="dose">贝氏等孢球虫，微孢子虫</span>（比氏肠孢子虫、肠炎间隔微孢子虫）
+                    <td colspan="3">
+                        <span class="pathogen">蓝氏贾第鞭毛虫</span><br>
+                        抗酸染色阳性病原体：<span class="pathogen">小球隐孢子虫</span>、<span class="pathogen">卡晏环孢子虫</span><br>
+                        其他：<span class="pathogen">贝氏等孢球虫</span>，<span class="pathogen">微孢子虫</span>（<span class="pathogen">比氏肠孢子虫</span>、<span class="pathogen">肠炎间隔微孢子虫</span>）
                     </td>
-                    <td class="preferred" colspan="2"></td>
-                    <td class="notes">
-                        <span class="highlight">表13A</span>
+                    <td>
+                        <span class="reference">表13A</span>
                     </td>
                 </tr>
                 
-                <!-- 中性粒细胞减少性小肠结肠炎 -->
+                <!-- 中性粒细胞减少性小肠结肠炎或盲肠炎 -->
                 <tr>
                     <td>
-                        <span class="warning">中性粒细胞减少性小肠结肠炎或盲肠炎</span><br>
-                        <span class="reference">(CID 56: 711, 2013)</span><br>
-                        <span class="reference">(World J Gastroenterol 23: 42, 2017)</span>
+                        中性粒细胞减少性小肠结肠炎或盲肠炎 <span class="reference">(CID 56: 711, 2013) (World J Gastroenterol 23: 42, 2017)</span>
                     </td>
-                    <td class="pathogen">
-                        败血梭菌等侵入黏膜，<br>
-                        偶见污泥梭菌或铜绿假单胞菌引起
+                    <td>
+                        <span class="pathogen">败血梭菌</span>等侵入黏膜，偶见<span class="pathogen">污泥梭菌</span>或<span class="pathogen">铜绿假单胞菌</span>引起
                     </td>
-                    <td class="preferred">
-                        <span class="success">肠道休息</span>＋<br>
-                        <span class="dose">哌拉西林-他唑巴坦</span> 4.5g iv q8h，输注4h以上、<br>
-                        <span class="dose">亚胺培南</span> 500mg iv q6h、<br>
-                        <span class="dose">美罗培南</span> 2g iv q8h
+                    <td>
+                        肠道休息＋<span class="drug">哌拉西林-他唑巴坦</span> <span class="dosage">4.5g iv q8h</span>，输注4h以上、<span class="drug">亚胺培南</span> <span class="dosage">500mg iv q6h</span>、<span class="drug">美罗培南</span> <span class="dosage">2g iv q8h</span>
                     </td>
-                    <td class="alternative">
-                        <span class="dose">头孢吡肟</span> 2g iv q8h ＋<br>
-                        <span class="dose">甲硝唑</span> 500mg iv q8h
+                    <td>
+                        <span class="drug">头孢吡肟</span> <span class="dosage">2g iv q8h</span>＋<span class="drug">甲硝唑</span> <span class="dosage">500mg iv q8h</span>
                     </td>
-                    <td class="notes">
-                        <span class="warning">需外科会诊。</span>手术切除尚有争议，但可能需要<br><br>
-                        
-                        <span class="highlight">注意：</span>有梭菌属对克林霉素耐药的报道。<br>
-                        哌拉西林-他唑巴坦、亚胺培南、美罗培南和多尼培南能覆盖大多数病原菌
+                    <td>
+                        需外科会诊。手术切除尚有争议，但可能需要<br>
+                        <span class="warning">注意：有梭菌属对克林霉素耐药的报道。</span><span class="drug">哌拉西林-他唑巴坦</span>、<span class="drug">亚胺培南</span>、<span class="drug">美罗培南</span>和<span class="drug">多尼培南</span>能覆盖大多数病原菌
                     </td>
                 </tr>
             </tbody>
         </table>
-        
-        <!-- 页脚注释 -->
-        <div class="footer-notes">
-            <p><span class="symbol">注：*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            <p><span class="symbol">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            <p>表中名词缩写<span class="highlight">见第2页</span>。</p>
-        </div>
-        
-        <div class="footer">
-            <p>数据来源：临床抗微生物治疗指南 | 仅供参考，请结合临床实际情况使用</p>
-        </div>
     </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 特色检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">胃肠炎</span>
+                <span class="tag tag-disease">直肠炎</span>
+                <span class="tag tag-disease">结肠炎</span>
+                <span class="tag tag-disease">菌血症</span>
+                <span class="tag tag-disease">皮肤损害</span>
+                <span class="tag tag-disease">肠系膜淋巴结炎</span>
+                <span class="tag tag-disease">急性阑尾炎</span>
+                <span class="tag tag-disease">腹泻</span>
+                <span class="tag tag-disease">中性粒细胞减少性小肠结肠炎</span>
+                <span class="tag tag-disease">盲肠炎</span>
+                
+                <!-- 细菌标签 -->
+                <span class="tag tag-bacteria">副溶血弧菌</span>
+                <span class="tag tag-bacteria">拟态弧菌</span>
+                <span class="tag tag-bacteria">河弧菌</span>
+                <span class="tag tag-bacteria">创伤弧菌</span>
+                <span class="tag tag-bacteria">小肠结肠炎耶尔森菌</span>
+                <span class="tag tag-bacteria">疱疹病毒</span>
+                <span class="tag tag-bacteria">淋球菌</span>
+                <span class="tag tag-bacteria">衣原体</span>
+                <span class="tag tag-bacteria">梅毒</span>
+                <span class="tag tag-bacteria">志贺菌</span>
+                <span class="tag tag-bacteria">沙门菌</span>
+                <span class="tag tag-bacteria">弯曲菌</span>
+                <span class="tag tag-bacteria">溶组织阿米巴</span>
+                <span class="tag tag-bacteria">蓝氏贾第鞭毛虫</span>
+                <span class="tag tag-bacteria">小球隐孢子虫</span>
+                <span class="tag tag-bacteria">卡晏环孢子虫</span>
+                <span class="tag tag-bacteria">贝氏等孢球虫</span>
+                <span class="tag tag-bacteria">微孢子虫</span>
+                <span class="tag tag-bacteria">比氏肠孢子虫</span>
+                <span class="tag tag-bacteria">肠炎间隔微孢子虫</span>
+                <span class="tag tag-bacteria">败血梭菌</span>
+                <span class="tag tag-bacteria">污泥梭菌</span>
+                <span class="tag tag-bacteria">铜绿假单胞菌</span>
+                
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">氟喹诺酮类</span>
+                <span class="tag tag-drug">多西环素</span>
+                <span class="tag tag-drug">第三代头孢菌素</span>
+                <span class="tag tag-drug">米诺环素</span>
+                <span class="tag tag-drug">头孢曲松</span>
+                <span class="tag tag-drug">头孢他啶</span>
+                <span class="tag tag-drug">左氧氟沙星</span>
+                <span class="tag tag-drug">环丙沙星</span>
+                <span class="tag tag-drug">妥布霉素</span>
+                <span class="tag tag-drug">庆大霉素</span>
+                <span class="tag tag-drug">TMP-SMX</span>
+                <span class="tag tag-drug">哌拉西林-他唑巴坦</span>
+                <span class="tag tag-drug">亚胺培南</span>
+                <span class="tag tag-drug">美罗培南</span>
+                <span class="tag tag-drug">头孢吡肟</span>
+                <span class="tag tag-drug">甲硝唑</span>
+                <span class="tag tag-drug">多尼培南</span>
+                <span class="tag tag-drug">克林霉素</span>
+            </div>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">页码：49</div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="点击收藏">☆</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: "临床抗微生物治疗的初始选择",
+            subtitle: "副溶血弧菌创伤弧菌耶尔森菌及特殊人群胃肠炎",
+            keywords: "多西环素;米诺环素;头孢曲松;头孢他啶;左氧氟沙星;环丙沙星;妥布霉素;庆大霉素;TMP-SMX;哌拉西林-他唑巴坦;亚胺培南;美罗培南;头孢吡肟;甲硝唑;多尼培南;克林霉素;氟喹诺酮类;第三代头孢菌素;副溶血弧菌;拟态弧菌;河弧菌;创伤弧菌;小肠结肠炎耶尔森菌;疱疹病毒;淋球菌;衣原体;梅毒;志贺菌;沙门菌;弯曲菌;溶组织阿米巴;蓝氏贾第鞭毛虫;小球隐孢子虫;卡晏环孢子虫;贝氏等孢球虫;微孢子虫;比氏肠孢子虫;肠炎间隔微孢子虫;败血梭菌;污泥梭菌;铜绿假单胞菌;胃肠炎;直肠炎;结肠炎;菌血症;皮肤损害;肠系膜淋巴结炎;急性阑尾炎;腹泻;中性粒细胞减少性小肠结肠炎;盲肠炎",
+            pageNum: "49"
+        };
+        
+        // 设置编辑框内容
+        const copyContent = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                showToast('内容已复制到剪贴板');
+                
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                btn.title = '已收藏';
+                showToast('已添加到收藏');
+                
+                // 保存到localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: pageInfo.title,
+                    url: window.location.pathname.split('/').pop() || '49.html',
+                    subtitle: pageInfo.subtitle,
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.innerHTML = '☆';
+                btn.classList.remove('active');
+                btn.title = '点击收藏';
+                showToast('已取消收藏');
+                
+                // 从localStorage移除
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const filtered = favorites.filter(f => f.url !== (window.location.pathname.split('/').pop() || '49.html'));
+                localStorage.setItem('favorites', JSON.stringify(filtered));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.pathname.split('/').pop() || '49.html';
+            const isSaved = favorites.some(f => f.url === currentUrl);
+            
+            if (isSaved) {
+                isFavorited = true;
+                const btn = document.getElementById('favoriteBtn');
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                btn.title = '已收藏';
+            }
+        };
+        
+        // 标签点击搜索
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast(`搜索: ${text}`);
+                // 实际应用中可以跳转到搜索页面
+                // window.location.href = `search.html?q=${encodeURIComponent(text)}`;
+            });
+        });
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题信息
-
-
- 项目 	 内容 	
- **网页标题 (`<title>`标签)** 	 `副溶血弧菌创伤弧菌耶尔森菌中性粒细胞减少性结肠炎治疗指南` 	
- **主标题 (`<h1>`标签)** 	 `表1（17）临床抗微生物治疗的初始选择` 	
- **副标题 (`<p class="subtitle">`)** 	 `胃肠道/胃肠炎——特异性治疗及特殊危险人群经验性治疗` 	
- **关键词/检索词** 	 副溶血弧菌、拟态弧菌、河弧菌、创伤弧菌、小肠结肠炎耶尔森菌、中性粒细胞减少性小肠结肠炎、盲肠炎、HIV腹泻、肛交直肠炎、多西环素、头孢曲松、哌拉西林他唑巴坦、亚胺培南、美罗培南、补液、进食贝类史 	
-
-
-
-
----
-
-
-
-设计特点说明
-
-
- 特性 	 实现方式 	
- **背景色** 	 浅蓝白渐变 `#f0f8ff` → `#e6f3ff` → `#f5fbff`，明亮清新 	
- **表格头部** 	 深蓝色 `#1a5276`，**20px大字体**，白色加粗 	
- **子表头** 	 中蓝色 `#2980b9`，16px字号 	
- **分类行** 	 淡蓝色背景 `#d6eaf8`，深蓝加粗文字，用于大分类 	
- **子分类行** 	 更淡蓝色背景 `#ebf5fb`，用于"肛交"等子分类 	
- **第一列（诊断）** 	 浅灰蓝背景 `#f4f6f7`，深蓝文字，加粗 	
- **首选方案列** 	 淡绿背景 `#eafaf1`，深绿文字 `#1e8449` 	
- **备选方案列** 	 淡橙背景 `#fef5e7`，深橙文字 `#d35400` 	
- **儿童剂量** 	 淡紫背景 `#e8daef`，紫色文字 `#6c3483`，突出标注 	
- **剂量数字** 	 红色加粗 `#c0392b`，突出显示 	
- **重要提示** 	 黄色高亮 `#fff3cd` 	
- **警告提示** 	 淡红背景 `#f8d7da` 	
- **成功/推荐** 	 淡绿背景 `#d4edda` 	
- **交替行** 	 白色 / 浅灰 `#f8f9fa`

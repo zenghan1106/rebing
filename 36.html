@@ -1,3 +1,655 @@
- 项目 	 内容 	
- **网页标题（Title）** 	 `眼部感染结膜炎症临床抗微生物治疗初始选择参考表` 	
- **页面主标题（H1）** 	 ‌‍	
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结膜炎与沙眼治疗方案-红眼病包涵体结膜炎细菌性化脓性结膜炎临床抗微生物治疗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #e8b339;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(232, 179, 57, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+        
+        .title-format {
+            font-size: 18px;
+            color: #2e7d32;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .title-format::before {
+            content: "~~~~~";
+            color: #81c784;
+            margin-right: 5px;
+        }
+        
+        .title-format::after {
+            content: "*****";
+            color: #81c784;
+            margin-left: 5px;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #0d47a1;
+            font-size: 15px;
+        }
+        
+        /* 第一行字体大一点 */
+        .first-row {
+            font-size: 14px;
+        }
+        
+        .first-row td {
+            padding: 12px 10px;
+            background: #e8f5e9;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+        
+        /* 说明行 */
+        .note-row {
+            background: #fff8e1 !important;
+        }
+        
+        .note-row td {
+            padding: 10px;
+            font-style: italic;
+            color: #5d4037;
+            font-size: 12px;
+        }
+        
+        /* 预防说明行 */
+        .prevention-row {
+            background: #e3f2fd !important;
+        }
+        
+        .prevention-row td {
+            padding: 10px;
+            color: #1565c0;
+            font-size: 13px;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #c8e6c9;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even):not(.first-row):not(.note-row):not(.prevention-row) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover:not(.first-row):not(.note-row):not(.prevention-row) {
+            background: #e8f4e8;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #42a5f5 !important;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .sub-header th {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 备注区域 */
+        .notes {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #5d6d7e;
+            line-height: 1.8;
+        }
+        
+        .notes-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-virus {
+            background: #f9e79f;
+            color: #9a7d0a;
+            border: 1px solid #f7dc6f;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .keywords strong {
+            color: #1b5e20;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="35.html" class="nav-btn">← 上一页</a>
+        <a href="37.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <div class="main-title">结膜炎与沙眼治疗方案</div>
+        <div class="title-format">临床抗微生物治疗的初始选择-结膜感染红眼病沙眼细菌性化脓性结膜炎</div>
+        <div class="subtitle">表1（10）临床抗微生物治疗的初始选择</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 20%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 38%;">推荐治疗方案</th>
+                    <th rowspan="2" style="width: 26%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="prevention-row">
+                    <td colspan="5">新生儿眼炎预防：0.5%红霉素软膏×1剂，或1%四环素软膏<sup>MDS</sup>×1剂；对淋球菌有效，但对沙眼衣原体无效</td>
+                </tr>
+                <tr>
+                    <td>红眼病（病毒性结膜炎）：通常为单侧</td>
+                    <td>腺病毒（儿童3、7型，成人8、11、19型）</td>
+                    <td>无治疗；若有症状，人工泪液或有帮助</td>
+                    <td>—</td>
+                    <td>高度传染性；成人出现眼痛和畏光提示并发角膜炎，但罕见</td>
+                </tr>
+                <tr>
+                    <td>包涵体结膜炎（成人）：通常为单侧，常伴发生殖器感染</td>
+                    <td>沙眼衣原体</td>
+                    <td>阿奇霉素1g×1剂</td>
+                    <td>多西环素100mg po bid×7d</td>
+                    <td>眼生殖系统疾病；用核酸扩增技术诊断。用核酸扩增技术在尿中检测淋球菌和衣原体。应对性伴侣进行治疗。阿奇霉素可能需要重复给药</td>
+                </tr>
+                <tr>
+                    <td>沙眼：一种与贫困相关的慢性细菌性角膜结膜炎</td>
+                    <td>沙眼衣原体</td>
+                    <td>阿奇霉素20mg/kg po×1剂，儿童78%有效，成人1g po</td>
+                    <td>多西环素100mg po bid×最少21d，或四环素250mg po qid×14d</td>
+                    <td>童年起病，可持续多年并可继发角膜损害。局部治疗帮助不大；幼儿避免使用多西环素或四环素。大规模人群治疗有效</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="5">细菌性化脓性结膜炎：儿童与成人（滴眼液加快症状缓解：Cochrane Database Syst Rev. Sep 12; 9: CD001211, 2012）</td>
+                </tr>
+                <tr>
+                    <td>JAMA 310: 1721, 2013</td>
+                    <td>金黄色葡萄球菌、肺炎链球菌、流感嗜血杆菌、甲型溶血性链球菌、莫拉菌等</td>
+                    <td>氟喹诺酮滴眼液：环丙沙星（非专利），其他价格贵（左氧氟沙星、莫西沙星）。最初2天非睡眠时1～2滴q2h，以后q4～8h×7d</td>
+                    <td>多黏菌素B＋TMP滴眼液1～2滴q3～6h×7～10d</td>
+                    <td>作为经验性治疗，氟喹诺酮类抗菌谱最好，高浓度对金黄色葡萄球菌可能有效，甚至包括MRSA。TMP抗菌谱可能涵盖MRSA。多黏菌素B抗菌谱只覆盖革兰阴性杆菌，但无TMP单药的眼用制剂。多数肺炎链球菌对庆大霉素和妥布霉素耐药</td>
+                </tr>
+                <tr>
+                    <td>淋球菌性（儿童/成人）</td>
+                    <td>淋球菌</td>
+                    <td colspan="2">头孢曲松：儿童单次25～50mg/kg im或iv（不超过125mg）。成人1g im或iv×1剂</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <div class="notes-title">备注说明</div>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">新生儿眼炎</span>
+            <span class="tag tag-disease">红眼病</span>
+            <span class="tag tag-disease">病毒性结膜炎</span>
+            <span class="tag tag-disease">包涵体结膜炎</span>
+            <span class="tag tag-disease">沙眼</span>
+            <span class="tag tag-disease">细菌性化脓性结膜炎</span>
+            <span class="tag tag-disease">淋球菌性结膜炎</span>
+            <span class="tag tag-disease">角膜炎</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-drug">红霉素软膏</span>
+            <span class="tag tag-drug">四环素软膏</span>
+            <span class="tag tag-drug">人工泪液</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">左氧氟沙星</span>
+            <span class="tag tag-drug">莫西沙星</span>
+            <span class="tag tag-drug">氟喹诺酮</span>
+            <span class="tag tag-drug">多黏菌素B</span>
+            <span class="tag tag-drug">TMP</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">庆大霉素</span>
+            <span class="tag tag-drug">妥布霉素</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">腺病毒</span>
+            <span class="tag tag-bacteria">沙眼衣原体</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">甲型溶血性链球菌</span>
+            <span class="tag tag-bacteria">莫拉菌</span>
+            <span class="tag tag-bacteria">淋球菌</span>
+            <!-- 病毒标签 -->
+            <span class="tag tag-virus">腺病毒3型</span>
+            <span class="tag tag-virus">腺病毒7型</span>
+            <span class="tag tag-virus">腺病毒8型</span>
+            <span class="tag tag-virus">腺病毒11型</span>
+            <span class="tag tag-virus">腺病毒19型</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>结膜炎；沙眼；红眼病；病毒性结膜炎；包涵体结膜炎；细菌性化脓性结膜炎；淋球菌性结膜炎；新生儿眼炎预防；腺病毒；沙眼衣原体；金黄色葡萄球菌；MRSA；肺炎链球菌；流感嗜血杆菌；莫拉菌；淋球菌；阿奇霉素；多西环素；四环素；环丙沙星；左氧氟沙星；莫西沙星；氟喹诺酮；多黏菌素B；TMP；头孢曲松；红霉素软膏；四环素软膏；人工泪液；庆大霉素；妥布霉素；角膜炎
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">36</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="结膜炎与沙眼治疗方案；临床抗微生物治疗的初始选择-结膜感染红眼病沙眼细菌性化脓性结膜炎；结膜炎；沙眼；红眼病；病毒性结膜炎；包涵体结膜炎；细菌性化脓性结膜炎；淋球菌性结膜炎；新生儿眼炎预防；腺病毒；沙眼衣原体；金黄色葡萄球菌；MRSA；肺炎链球菌；流感嗜血杆菌；莫拉菌；淋球菌；阿奇霉素；多西环素；四环素；环丙沙星；左氧氟沙星；莫西沙星；氟喹诺酮；多黏菌素B；TMP；头孢曲松；红霉素软膏；四环素软膏；人工泪液；庆大霉素；妥布霉素；角膜炎；=36" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '结膜炎与沙眼治疗方案-红眼病包涵体结膜炎细菌性化脓性结膜炎临床抗微生物治疗',
+                    url: '36.html',
+                    category: '感染性疾病'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '36.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '36.html');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击筛选效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

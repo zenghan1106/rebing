@@ -1,353 +1,625 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>乳突炎急慢性临床抗微生物治疗初始选择参考表</title>
+    <title>乳突炎治疗方案-急性与慢性乳突炎抗生素治疗指南</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Microsoft YaHei", "SimHei", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 50%, #f3e5f5 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
             min-height: 100vh;
-            padding: 20px;
         }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(216, 67, 21, 0.1);
-            padding: 35px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #bf360c;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #e65100;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .warning-banner {
-            text-align: center;
-            color: #c62828;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding: 8px 16px;
-            background: #ffebee;
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 18px;
             border-radius: 8px;
-            display: inline-block;
-            width: 100%;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #e8b339;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(232, 179, 57, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+        }
+        
+        .title-format {
+            font-size: 18px;
+            color: #2874a6;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .title-format::before {
+            content: "~~~~~";
+            color: #5dade2;
+            margin-right: 5px;
+        }
+        
+        .title-format::after {
+            content: "*****";
+            color: #5dade2;
+            margin-left: 5px;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
-            line-height: 1.65;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
         }
-
-        thead th {
-            background: linear-gradient(180deg, #d84315 0%, #bf360c 100%);
-            color: #ffffff;
-            font-weight: bold;
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2980b9 100%);
+            color: white;
+        }
+        
+        th {
             padding: 14px 10px;
             text-align: center;
-            border: 1px solid #bf360c;
-            font-size: 13.5px;
+            font-weight: 600;
+            border: 1px solid #1a5276;
+            font-size: 15px;
         }
-
-        thead th.sub-header {
-            background: linear-gradient(180deg, #ff8a65 0%, #f4511e 100%);
-            font-size: 13px;
-            padding: 10px;
-        }
-
-        tbody td {
-            padding: 12px 10px;
-            border: 1px solid #ffccbc;
-            vertical-align: top;
-            color: #263238;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #fff8e1;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:hover {
-            background-color: #ffe0b2;
-            transition: background-color 0.3s ease;
-        }
-
-        .section-header {
-            background: linear-gradient(90deg, #ffcc80 0%, #ffb74d 100%) !important;
-            font-weight: bold;
+        
+        /* 第一行字体大一点 */
+        .first-row {
             font-size: 14px;
-            color: #5d4037;
-            padding: 14px 10px;
         }
-
-        .col-anatomy {
-            width: 14%;
-            background-color: #ffecb3 !important;
-            color: #5d4037;
+        
+        .first-row td {
+            padding: 12px 10px;
+            background: #ebf5fb;
             font-weight: 600;
+            color: #1a5276;
         }
-
-        .col-pathogen {
-            width: 16%;
-            background-color: #f8bbd0 !important;
-            color: #880e4f;
+        
+        td {
+            padding: 10px;
+            border: 1px solid #d4e6f1;
+            vertical-align: top;
         }
-
-        .col-first {
-            width: 26%;
-            background-color: #c8e6c9 !important;
-            color: #1b5e20;
+        
+        tr:nth-child(even):not(.first-row) {
+            background: #f8f9fa;
         }
-
-        .col-alternative {
-            width: 16%;
-            background-color: #bbdefb !important;
-            color: #0d47a1;
+        
+        tr:hover:not(.first-row) {
+            background: #e8f4f8;
         }
-
-        .col-auxiliary {
-            width: 28%;
-            background-color: #e1bee7 !important;
-            color: #4a148c;
-        }
-
-        .highlight-drug {
-            color: #c62828;
-            font-weight: bold;
-        }
-
-        .dose-info {
-            color: #2e7d32;
-            font-weight: 600;
-        }
-
-        .warning {
-            color: #d84315;
-            font-weight: bold;
-        }
-
-        .reference {
-            color: #1565c0;
-            font-style: italic;
-        }
-
-        .tag {
-            display: inline-block;
+        
+        /* 子表头 */
+        .sub-header {
+            background: #5dade2 !important;
             color: white;
-            padding: 1px 7px;
-            border-radius: 4px;
-            font-size: 10px;
-            margin-right: 4px;
-            font-weight: bold;
+            font-size: 14px;
         }
-
-        .tag-acute { background: #e53935; }
-        .tag-chronic { background: #fb8c00; }
-        .tag-complication { background: #8e24aa; }
-
+        
+        .sub-header th {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 备注区域 */
         .notes {
-            margin-top: 22px;
-            padding: 16px 22px;
-            background: linear-gradient(90deg, #fff8e1 0%, #ffecb3 100%);
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
             border-radius: 12px;
-            border-left: 5px solid #ffa000;
-            font-size: 11.5px;
-            color: #5d4037;
-            line-height: 1.9;
-        }
-
-        .notes strong {
-            color: #e65100;
-        }
-
-        td p {
-            margin-bottom: 5px;
-        }
-
-        td p:last-child {
-            margin-bottom: 0;
-        }
-
-        .indent {
-            padding-left: 14px;
-            border-left: 2px solid #b0bec5;
-            margin: 4px 0;
-        }
-
-        .bullet-list {
-            padding-left: 16px;
-        }
-
-        .bullet-list li {
-            margin-bottom: 4px;
-            list-style-type: disc;
-        }
-
-        .dose-detail {
-            background: #fff3e0;
-            padding: 10px 14px;
-            border-radius: 8px;
-            margin: 8px 0;
-            font-size: 11.5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #5d6d7e;
             line-height: 1.8;
         }
-
-        .dose-detail strong {
-            color: #bf360c;
+        
+        .notes-title {
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
-
-        .combo-formula {
-            background: #e8f5e9;
-            padding: 6px 12px;
-            border-radius: 6px;
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
             display: inline-block;
-            margin: 3px 0;
-            font-weight: 600;
-            color: #1b5e20;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .keywords strong {
+            color: #1a5276;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #ebf5fb;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #d4e6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>👂 乳突炎 — 急慢性中耳炎的并发症</h1>
-        <div class="subtitle">临床抗微生物治疗的初始选择</div>
-        <div class="warning-banner">⚠️ 如为慢性，排查胆脂瘤（角质瘤）</div>
-        
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="33.html" class="nav-btn">← 上一页</a>
+        <a href="35.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <div class="main-title">乳突炎治疗方案</div>
+        <div class="title-format">乳突炎急性与慢性治疗方案及抗生素使用指南</div>
+        <div class="subtitle">急慢性中耳炎的并发症，如为慢性，排查胆脂瘤（角质瘤）</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案<sup>*</sup></th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                    <th rowspan="2" style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 22%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 35%;">推荐治疗方案</th>
+                    <th rowspan="2" style="width: 25%;">辅助诊断或治疗方法及说明</th>
                 </tr>
-                <tr>
-                    <th class="sub-header">首选方案</th>
-                    <th class="sub-header">备选方案<sup>§</sup></th>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td colspan="5" class="section-header">乳突炎 — 急慢性中耳炎的并发症，如为慢性，排查胆脂瘤（角质瘤）</td>
+                <tr class="first-row">
+                    <td colspan="5">乳突炎 — 急慢性中耳炎的并发症，如为慢性，排查胆脂瘤（角质瘤）</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-acute">急性</span>急性乳突炎
-                        <p style="margin-top:8px;"><span class="warning">通常病情太重不适合门诊治疗</span></p>
+                    <td>
+                        <strong>急性</strong><br>
+                        通常病情太重不适合门诊治疗
                     </td>
-                    <td class="col-pathogen">
-                        <p><strong>首次发病的急性中耳炎的并发症：</strong></p>
-                        <p><span class="highlight-drug">肺炎链球菌</span>最常见、<span class="highlight-drug">化脓性链球菌</span>、<span class="highlight-drug">金黄色葡萄球菌</span></p>
-                        <p style="margin-top:8px;"><strong>继发于慢性中耳炎：</strong></p>
-                        <p><span class="highlight-drug">金黄色葡萄球菌</span>、<span class="highlight-drug">铜绿假单胞菌</span></p>
+                    <td>
+                        首次发病的急性中耳炎的并发症：肺炎链球菌最常见、化脓性链球菌、金黄色葡萄球菌<br><br>
+                        继发于慢性中耳炎：金黄色葡萄球菌、铜绿假单胞菌
                     </td>
-                    <td class="col-first">
-                        <p><strong>儿童：</strong>首次发病，无并发症，之前未使用抗生素：</p>
-                        <p class="indent"><span class="highlight-drug">阿莫西林－舒巴坦</span> <span class="dose-info">200mg/(kg·d)</span> iv 分<span class="dose-info">4次</span>，或<span class="highlight-drug">头孢曲松</span> <span class="dose-info">50～100mg/(kg·d)</span> 分<span class="dose-info">2次</span></p>
-                        <p style="margin-top:8px;"><strong>成人：</strong>疑有并发症，按照<span class="warning">慢性感染急性加重方案</span>治疗</p>
+                    <td>
+                        <strong>儿童：</strong>首次发病，无并发症，之前未使用抗生素：阿莫西林-舒巴坦200mg/(kg·d) iv 分4次，或头孢曲松50～100mg/(kg·d) 分2次<br><br>
+                        <strong>成人：</strong>疑有并发症，按照慢性感染急性加重方案治疗
                     </td>
-                    <td class="col-alternative">
-                        <p><strong>慢性中耳炎急性加重：</strong></p>
-                        <p>外耳道手术清创，之后［<span class="combo-formula">（万古霉素＋哌拉西林－他唑巴坦 <span class="dose-info">30～60mg/(kg·d)</span> 分<span class="dose-info">2～3次</span>，目标AUC₂₄ <span class="dose-info">400～600μg·h/ml</span>）</span></p>
-                        <p>或</p>
-                        <p>［<span class="combo-formula">万古霉素（剂量同上）＋头孢吡肟他啶 <span class="dose-info">2g iv q8h</span>（成人），<span class="dose-info">50mg/kg iv q8h</span>（儿童）</span>］</p>
-                        <p>＋<span class="highlight-drug">甲硝唑</span> <span class="dose-info">750mg q8h</span>（成人），<span class="dose-info">22.5mg/(kg·d)</span> 分<span class="dose-info">3次</span>（儿童）</p>
+                    <td>
+                        慢性中耳炎急性加重：外耳道手术清创，之后[(万古霉素+哌拉西林-他唑巴坦30～60mg/(kg·d) 分2～3次，目标AUC<sub>24</sub> 400～600μg·h/ml] 或[万古霉素（剂量同上）+头孢吡肟他啶2g iv q8h（成人）, 50mg/kg iv q8h（儿童）]+甲硝唑750mg q8h（成人）, 22.5mg/(kg·d) 分3次（儿童）
                     </td>
-                    <td class="col-auxiliary">
-                        <ul class="bullet-list">
-                            <li><strong>诊断：</strong>CT或MRI</li>
-                            <li><strong>排查并发症：</strong>骨髓炎、化脓性横窦血栓性静脉炎、化脓性脑膜炎、脑脓肿</li>
-                            <li><strong>耳鼻喉科会诊</strong>是否乳突切开</li>
-                        </ul>
+                    <td>
+                        • 诊断：CT或MRI<br>
+                        • 排查并发症：骨髓炎、化脓性横窦血栓性静脉炎、化脓性脑膜炎、脑脓肿<br>
+                        • 耳鼻喉科会诊是否乳突切开
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-chronic">慢性</span>慢性乳突炎
-                        <p style="margin-top:8px;">通常无须静脉抗生素</p>
+                    <td>
+                        <strong>慢性</strong><br>
+                        通常无须静脉抗生素
                     </td>
-                    <td class="col-pathogen">
-                        <p>同首次发病，以及<span class="highlight-drug">金黄色葡萄球菌</span>、<span class="highlight-drug">铜绿假单胞菌</span>、<span class="highlight-drug">厌氧菌</span>、<span class="highlight-drug">真菌</span></p>
+                    <td>
+                        同首次发病，以及金黄色葡萄球菌、铜绿假单胞菌、厌氧菌、真菌
                     </td>
-                    <td class="col-first" colspan="2">
-                        <p>耳引流物培养。可能需要手术清创。局部氟喹诺酮药物滴耳。<span class="highlight-drug">耳鼻喉科会诊</span></p>
+                    <td colspan="2">
+                        耳引流物培养。可能需要手术清创。局部氟喹诺酮药物滴耳。耳鼻喉科会诊
                     </td>
-                    <td class="col-auxiliary">
-                        <p><strong>诊断：</strong>CT或MRI</p>
+                    <td>
+                        诊断：CT或MRI
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        <div class="notes">
-            <p><strong>注：3</strong> 治疗急性中耳炎的药物和儿童剂量（均为口服，除非提示）如下。</p>
-            <div class="dose-detail">
-                <p><span class="highlight-drug">阿莫西林</span>常用剂量：<span class="dose-info">40mg/(kg·d)</span> 分次<span class="dose-info">q12h或q8h</span>。大剂量阿莫西林：<span class="dose-info">90mg/(kg·d)</span> 分次<span class="dose-info">q12h或q8h</span>。大剂量阿莫西林－克拉维酸：<span class="dose-info">90mg/(kg·d)</span> 阿莫西林成分。增效阿莫西林－克拉维酸口服混悬液（力百汀ES-600）（5ml含阿莫西林600mg和克拉维酸42.9mg）：<span class="dose-info">90/6.4mg/(kg·d)</span> 分次<span class="dose-info">bid</span>。<span class="highlight-drug">头孢呋辛酯</span>：<span class="dose-info">30mg/(kg·d)</span> 分次<span class="dose-info">q12h</span>。<span class="highlight-drug">头孢曲松</span>：<span class="dose-info">50mg/kg im×3d</span>。<span class="highlight-drug">克林霉素</span>：<span class="dose-info">20～30mg/(kg·d)</span> 分次<span class="dose-info">qid</span>（可能对耐药肺炎球菌有效，但对流感嗜血杆菌无效）。</p>
-                <p style="margin-top:6px;">对敏感的（如对青霉素敏感）肺炎球菌适用的药物：<span class="highlight-drug">TMP-SMX</span> <span class="dose-info">4mg/kg</span>（以TMP计）<span class="dose-info">q12h</span>。<span class="highlight-drug">红霉素－磺胺异噁唑</span> <span class="dose-info">50mg/(kg·d)</span> 分次<span class="dose-info">q6～8h</span>，按红霉素计算。<span class="highlight-drug">克拉霉素</span> <span class="dose-info">15mg/(kg·d)</span> 分次<span class="dose-info">q12h</span>。<span class="highlight-drug">阿奇霉素</span> <span class="dose-info">10mg/kg×1d</span>，然后<span class="dose-info">5mg/kg qd</span>（第2～5天）；其他FDA批准的方案为<span class="dose-info">10mg/kg qd×3d</span>，或<span class="dose-info">30mg/kg×1d</span>。<span class="highlight-drug">头孢丙烯</span> <span class="dose-info">15mg/kg q12h</span>。<span class="highlight-drug">头孢泊肟酯</span> <span class="dose-info">10mg/(kg·d)×1剂</span>。<span class="highlight-drug">头孢克洛</span> <span class="dose-info">40mg/(kg·d)</span> 分次<span class="dose-info">q8h</span>。<span class="highlight-drug">头孢地尼</span> <span class="dose-info">7mg/kg q12h</span>或<span class="dose-info">14mg/kg qd</span>。</p>
-            </div>
-            <p style="margin-top:10px;">* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <div class="notes-title">备注说明</div>
+        <p><sup>3</sup> 治疗急性中耳炎的药物和儿童剂量（均为口服，除非提示）如下。阿莫西林常用剂量：40mg/(kg·d) 分次q12h或q8h。大剂量阿莫西林：90mg/(kg·d) 分次q12h或q8h。大剂量阿莫西林-克拉维酸：90mg/(kg·d) 阿莫西林成分。增效阿莫西林-克拉维酸口服混悬液（力百汀ES-600）（5ml含阿莫西林600mg和克拉维酸42.9mg）：90/6.4mg/(kg·d) 分次bid。头孢呋辛酯：30mg/(kg·d) 分次q12h。头孢曲松：50mg/kg im×3d。克林霉素：20～30mg/(kg·d) 分次qid（可能对耐药肺炎球菌有效，但对流感嗜血杆菌无效）。</p>
+        <p>对敏感的（如对青霉素敏感）肺炎球菌适用的药物：TMP-SMX 4mg/kg（以TMP计）q12h。红霉素-磺胺异噁唑50mg/(kg·d) 分次q6～8h，按红霉素计算。克拉霉素15mg/(kg·d) 分次q12h。阿奇霉素10mg/kg×1d，然后5mg/kg qd（第2～5天）；其他FDA批准的方案为10mg/kg qd×3d，或30mg/kg×1d。头孢丙烯15mg/kg q12h。头孢泊肟酯10mg/(kg·d)×1剂。头孢克洛40mg/(kg·d) 分次q8h。头孢地尼7mg/kg q12h或14mg/kg qd。</p>
+        <p><strong>※</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">乳突炎</span>
+            <span class="tag tag-disease">急性乳突炎</span>
+            <span class="tag tag-disease">慢性乳突炎</span>
+            <span class="tag tag-disease">中耳炎</span>
+            <span class="tag tag-disease">胆脂瘤</span>
+            <span class="tag tag-disease">骨髓炎</span>
+            <span class="tag tag-disease">化脓性脑膜炎</span>
+            <span class="tag tag-disease">脑脓肿</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-drug">阿莫西林</span>
+            <span class="tag tag-drug">阿莫西林-舒巴坦</span>
+            <span class="tag tag-drug">阿莫西林-克拉维酸</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-drug">头孢吡肟他啶</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <span class="tag tag-drug">氟喹诺酮</span>
+            <span class="tag tag-drug">头孢呋辛酯</span>
+            <span class="tag tag-drug">克林霉素</span>
+            <span class="tag tag-drug">TMP-SMX</span>
+            <span class="tag tag-drug">红霉素</span>
+            <span class="tag tag-drug">克拉霉素</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">头孢丙烯</span>
+            <span class="tag tag-drug">头孢泊肟酯</span>
+            <span class="tag tag-drug">头孢克洛</span>
+            <span class="tag tag-drug">头孢地尼</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">真菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
         </div>
     </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>乳突炎；急性乳突炎；慢性乳突炎；中耳炎；胆脂瘤；阿莫西林；头孢曲松；万古霉素；哌拉西林-他唑巴坦；甲硝唑；肺炎链球菌；金黄色葡萄球菌；铜绿假单胞菌；CT；MRI；手术清创
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">34</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="乳突炎治疗方案；乳突炎急性与慢性治疗方案及抗生素使用指南；乳突炎；急性乳突炎；慢性乳突炎；中耳炎；胆脂瘤；阿莫西林；头孢曲松；万古霉素；哌拉西林-他唑巴坦；甲硝唑；肺炎链球菌；金黄色葡萄球菌；铜绿假单胞菌；CT；MRI；手术清创；=34" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '乳突炎治疗方案-急性与慢性乳突炎抗生素治疗指南',
+                    url: '34.html',
+                    category: '感染性疾病'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 尝试更新index.html的收藏（通过postMessage或共享存储）
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '34.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '34.html');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击筛选效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题说明
-
-
- 项目 	 内容 	
- **网页标题（Title）** 	 `乳突炎急慢性临床抗微生物治疗初始选择参考表` 	
- **页面主标题（H1）** 	 `👂 乳突炎 — 急慢性中耳炎的并发症` 	
- **警示横幅** 	 `⚠️ 如为慢性，排查胆脂瘤（角质瘤）` 	
- **副标题** 	 `临床抗微生物治疗的初始选择` 	
- **检索关键词/标签** 	 `乳突炎`、`急性乳突炎`、`慢性乳突炎`、`中耳炎并发症`、`胆脂瘤`、`角质瘤`、`肺炎链球菌`、`化脓性链球菌`、`金黄色葡萄球菌`、`铜绿假单胞菌`、`厌氧菌`、`真菌`、`阿莫西林舒巴坦`、`头孢曲松`、`万古霉素`、`哌拉西林他唑巴坦`、`头孢吡肟他啶`、`甲硝唑`、`氟喹诺酮`、`骨髓炎`、`化脓性横窦血栓性静脉炎`、`化脓性脑膜炎`、`脑脓肿`、`乳突切开`、`CT`、`MRI`、`耳鼻喉科会诊`、`儿童剂量`、`阿莫西林`、`阿莫西林克拉维酸`、`头孢呋辛酯`、`克林霉素`、`TMP-SMX`、`红霉素`、`克拉霉素`、`阿奇霉素`、`头孢丙烯`、`头孢泊肟酯`、`头孢克洛`、`头孢地尼`、`临床抗微生物治疗`、`初始选择` 	
-
-
-
-
-设计特点：
-
-• 背景色：暖橙渐变到淡粉再到淡紫，温馨明亮
-
-• 表格配色：分区标题金黄色、解剖列淡琥珀、病原体列淡粉、首选方案淡绿、备选方案淡蓝、辅助列淡紫
-
-• 标签系统：急性(红色)/慢性(橙色)/并发症(紫色)三类标签
-
-• 重点标记：药物名称红色加粗、剂量信息绿色、警告信息深橙红、参考文献蓝色斜体
-
-• 特殊设计：顶部警示横幅突出胆脂瘤排查、复杂联合用药方案用绿色公式框标注、详细剂量注释用橙色详情框呈现、辅助诊断用项目符号列表清晰展示

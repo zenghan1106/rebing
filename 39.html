@@ -1,5 +1,662 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device ‌‍
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>棘阿米巴角膜炎与泪器感染治疗方案-原虫性角膜炎泪小管炎泪囊炎临床抗微生物治疗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #e8b339;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(232, 179, 57, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+        
+        .title-format {
+            font-size: 18px;
+            color: #2e7d32;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .title-format::before {
+            content: "~~~~~";
+            color: #81c784;
+            margin-right: 5px;
+        }
+        
+        .title-format::after {
+            content: "*****";
+            color: #81c784;
+            margin-left: 5px;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #0d47a1;
+            font-size: 15px;
+        }
+        
+        /* 第一行字体大一点 */
+        .first-row {
+            font-size: 14px;
+        }
+        
+        .first-row td {
+            padding: 12px 10px;
+            background: #e8f5e9;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #c8e6c9 !important;
+        }
+        
+        .category-row td {
+            padding: 10px;
+            font-weight: bold;
+            color: #1b5e20;
+            font-size: 14px;
+        }
+        
+        /* 子分类行 */
+        .subcategory-row {
+            background: #e8f5e9 !important;
+        }
+        
+        .subcategory-row td {
+            padding: 8px 10px;
+            font-weight: 600;
+            color: #2e7d32;
+            font-size: 13px;
+        }
+        
+        /* 说明行 */
+        .note-row {
+            background: #fff8e1 !important;
+        }
+        
+        .note-row td {
+            padding: 10px;
+            font-style: italic;
+            color: #5d4037;
+            font-size: 12px;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #c8e6c9;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even):not(.first-row):not(.category-row):not(.subcategory-row):not(.note-row) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover:not(.first-row):not(.category-row):not(.subcategory-row):not(.note-row) {
+            background: #e8f4e8;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #42a5f5 !important;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .sub-header th {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 备注区域 */
+        .notes {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #5d6d7e;
+            line-height: 1.8;
+        }
+        
+        .notes-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-parasite {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag-fungus {
+            background: #f5e6ca;
+            color: #8d6e63;
+            border: 1px solid #d7ccc8;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .keywords strong {
+            color: #1b5e20;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="38.html" class="nav-btn">← 上一页</a>
+        <a href="40.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <div class="main-title">棘阿米巴角膜炎与泪器感染治疗方案</div>
+        <div class="title-format">临床抗微生物治疗的初始选择-原虫性角膜炎泪小管炎泪囊炎</div>
+        <div class="subtitle">表1（12）临床抗微生物治疗的初始选择</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 20%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 38%;">推荐治疗方案</th>
+                    <th rowspan="2" style="width: 26%;">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td colspan="5">眼/角膜（角膜炎）（续）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="5">原虫</td>
+                </tr>
+                <tr>
+                    <td>软性隐形眼镜使用者<br>不常见；创伤和使用软性隐形眼镜是危险因素</td>
+                    <td>卡氏棘阿米巴、多噬棘阿米巴、其他棘阿米巴属、其他非寄生阿米巴种类，包括哈曼属阿米巴和内饰简变虫均可致病（Cornea 36: 785, 2017）</td>
+                    <td>局部应用0.02%～0.20%氯己定或0.02%～0.06%聚亚己基双胍（PHMB）联合丙脒腙（0.1%）或己脒啶（0.1%）。PHMB从小剂量开始，根据治疗反应逐步调整<br><br>备选方案：非对照研究显示灭特复星口服治疗可清除阿米巴，但使用灭特复星后的炎症反应可导致角膜变薄，并可导致穿孔。有建议使用糖皮质激素治疗。也可能考虑1%伏立康唑滴眼液［Cornea 2021 Sep 4（online ahead of print）］可考虑1%伏立康唑滴眼液［Eye（Lond.）2020 July 27］</td>
+                    <td>—</td>
+                    <td>开始48小时白天夜间均每小时滴眼，此后第1周内白天每小时滴眼，接下来3～4周逐渐减停。可能需外科清创</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="5">泪器</td>
+                </tr>
+                <tr>
+                    <td>泪小管炎</td>
+                    <td>放线菌、葡萄球菌、链球菌，罕见蛛网菌、梭杆菌、诺卡菌、念珠菌</td>
+                    <td>泪管区热敷4次/天。请眼科专家清除颗粒物并用抗生素滴眼液局部冲洗</td>
+                    <td>—</td>
+                    <td>指压鼻泪管开口处可见渗出物，革兰染色可确定诊断</td>
+                </tr>
+                <tr>
+                    <td>泪囊炎</td>
+                    <td>肺炎链球菌、金黄色葡萄球菌、流感嗜血杆菌、化脓性链球菌、铜绿假单胞菌</td>
+                    <td>常继发于泪道阻塞。经验性全身抗感染治疗取决于泪道吸出物革兰染色（见说明）</td>
+                    <td>—</td>
+                    <td>需眼科会诊。可能需要手术。可为急性或慢性<br>需做培养以发现MRSA</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <div class="notes-title">备注说明</div>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">棘阿米巴角膜炎</span>
+            <span class="tag tag-disease">原虫性角膜炎</span>
+            <span class="tag tag-disease">软性隐形眼镜相关角膜炎</span>
+            <span class="tag tag-disease">泪小管炎</span>
+            <span class="tag tag-disease">泪囊炎</span>
+            <span class="tag tag-disease">急性泪囊炎</span>
+            <span class="tag tag-disease">慢性泪囊炎</span>
+            <span class="tag tag-disease">泪道阻塞</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-drug">氯己定</span>
+            <span class="tag tag-drug">聚亚己基双胍</span>
+            <span class="tag tag-drug">PHMB</span>
+            <span class="tag tag-drug">丙脒腙</span>
+            <span class="tag tag-drug">己脒啶</span>
+            <span class="tag tag-drug">灭特复星</span>
+            <span class="tag tag-drug">伏立康唑</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">放线菌</span>
+            <span class="tag tag-bacteria">葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">蛛网菌</span>
+            <span class="tag tag-bacteria">梭杆菌</span>
+            <span class="tag tag-bacteria">诺卡菌</span>
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-bacteria">铜绿假单胞菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <!-- 寄生虫标签 -->
+            <span class="tag tag-parasite">卡氏棘阿米巴</span>
+            <span class="tag tag-parasite">多噬棘阿米巴</span>
+            <span class="tag tag-parasite">棘阿米巴属</span>
+            <span class="tag tag-parasite">哈曼属阿米巴</span>
+            <span class="tag tag-parasite">内饰简变虫</span>
+            <!-- 真菌标签 -->
+            <span class="tag tag-fungus">念珠菌</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>棘阿米巴角膜炎；原虫性角膜炎；软性隐形眼镜相关角膜炎；泪小管炎；泪囊炎；急性泪囊炎；慢性泪囊炎；泪道阻塞；卡氏棘阿米巴；多噬棘阿米巴；棘阿米巴属；哈曼属阿米巴；内饰简变虫；放线菌；葡萄球菌；链球菌；蛛网菌；梭杆菌；诺卡菌；念珠菌；肺炎链球菌；金黄色葡萄球菌；流感嗜血杆菌；化脓性链球菌；铜绿假单胞菌；MRSA；氯己定；聚亚己基双胍；PHMB；丙脒腙；己脒啶；灭特复星；伏立康唑；糖皮质激素；外科清创
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">39</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="棘阿米巴角膜炎与泪器感染治疗方案；临床抗微生物治疗的初始选择-原虫性角膜炎泪小管炎泪囊炎；棘阿米巴角膜炎；原虫性角膜炎；软性隐形眼镜相关角膜炎；泪小管炎；泪囊炎；急性泪囊炎；慢性泪囊炎；泪道阻塞；卡氏棘阿米巴；多噬棘阿米巴；棘阿米巴属；哈曼属阿米巴；内饰简变虫；放线菌；葡萄球菌；链球菌；蛛网菌；梭杆菌；诺卡菌；念珠菌；肺炎链球菌；金黄色葡萄球菌；流感嗜血杆菌；化脓性链球菌；铜绿假单胞菌；MRSA；氯己定；聚亚己基双胍；PHMB；丙脒腙；己脒啶；灭特复星；伏立康唑；糖皮质激素；外科清创；=39" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '棘阿米巴角膜炎与泪器感染治疗方案-原虫性角膜炎泪小管炎泪囊炎临床抗微生物治疗',
+                    url: '39.html',
+                    category: '感染性疾病'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '39.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '39.html');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击筛选效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

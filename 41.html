@@ -1,385 +1,668 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>眼内炎续视网膜脉络膜炎眼眶蜂窝织炎临床抗微生物治疗参考表</title>
+    <title>视网膜炎与眼眶蜂窝织炎治疗方案-急性视网膜坏死HIV相关视网膜炎弓形虫视网膜炎眼眶感染临床抗微生物治疗</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Microsoft YaHei", "SimHei", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 50%, #e0f7fa 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
             min-height: 100vh;
-            padding: 20px;
         }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(103, 58, 183, 0.1);
-            padding: 35px;
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-
-        h1 {
+        
+        .home-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #e8b339;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(232, 179, 57, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 标题区域 */
+        .title-section {
             text-align: center;
-            color: #4527a0;
-            font-size: 24px;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+        }
+        
+        .main-title {
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 6px;
+            color: #1b5e20;
+            margin-bottom: 8px;
         }
-
+        
+        .title-format {
+            font-size: 18px;
+            color: #2e7d32;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .title-format::before {
+            content: "~~~~~";
+            color: #81c784;
+            margin-right: 5px;
+        }
+        
+        .title-format::after {
+            content: "*****";
+            color: #81c784;
+            margin-left: 5px;
+        }
+        
         .subtitle {
-            text-align: center;
-            color: #5e35b1;
             font-size: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 18px;
-            border-bottom: 3px solid #7e57c2;
+            color: #5d6d7e;
+            margin-top: 10px;
+            font-weight: 500;
         }
-
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11.5px;
-            line-height: 1.6;
-        }
-
-        thead th {
-            background: linear-gradient(180deg, #512da8 0%, #4527a0 100%);
-            color: #ffffff;
-            font-weight: bold;
-            padding: 14px 10px;
-            text-align: center;
-            border: 1px solid #4527a0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             font-size: 13px;
         }
-
-        thead th.sub-header {
-            background: linear-gradient(180deg, #9575cd 0%, #7e57c2 100%);
-            font-size: 12.5px;
-            padding: 10px;
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
         }
-
-        tbody td {
-            padding: 10px;
-            border: 1px solid #d1c4e9;
-            vertical-align: top;
-            color: #263238;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #ede7f6;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:hover {
-            background-color: #d1c4e9;
-            transition: background-color 0.3s ease;
-        }
-
-        .section-header {
-            background: linear-gradient(90deg, #ffcc80 0%, #ffb74d 100%) !important;
-            font-weight: bold;
-            font-size: 13.5px;
-            color: #5d4037;
-            padding: 12px 10px;
-        }
-
-        .subsection-header {
-            background: linear-gradient(90deg, #ce93d8 0%, #ba68c8 100%) !important;
-            font-weight: bold;
-            font-size: 12.5px;
-            color: #4a148c;
-            padding: 10px;
-        }
-
-        .col-anatomy {
-            width: 13%;
-            background-color: #fff8e1 !important;
-            color: #5d4037;
+        
+        th {
+            padding: 14px 10px;
+            text-align: center;
             font-weight: 600;
+            border: 1px solid #0d47a1;
+            font-size: 15px;
         }
-
-        .col-pathogen {
-            width: 14%;
-            background-color: #f8bbd0 !important;
-            color: #880e4f;
+        
+        /* 第一行字体大一点 */
+        .first-row {
+            font-size: 14px;
         }
-
-        .col-first {
-            width: 34%;
-            background-color: #c8e6c9 !important;
+        
+        .first-row td {
+            padding: 12px 10px;
+            background: #e8f5e9;
+            font-weight: 600;
             color: #1b5e20;
         }
-
-        .col-alternative {
-            width: 12%;
-            background-color: #bbdefb !important;
-            color: #0d47a1;
+        
+        /* 分类行 */
+        .category-row {
+            background: #c8e6c9 !important;
         }
-
-        .col-auxiliary {
-            width: 27%;
-            background-color: #e1bee7 !important;
-            color: #4a148c;
-        }
-
-        .highlight-drug {
-            color: #c62828;
+        
+        .category-row td {
+            padding: 10px;
             font-weight: bold;
+            color: #1b5e20;
+            font-size: 14px;
         }
-
-        .dose-info {
-            color: #2e7d32;
-            font-weight: 600;
+        
+        /* 说明行 */
+        .note-row {
+            background: #fff8e1 !important;
         }
-
-        .warning {
-            color: #d84315;
-            font-weight: bold;
-        }
-
-        .reference {
-            color: #1565c0;
+        
+        .note-row td {
+            padding: 10px;
             font-style: italic;
+            color: #5d4037;
+            font-size: 12px;
         }
-
-        .tag {
-            display: inline-block;
+        
+        td {
+            padding: 10px;
+            border: 1px solid #c8e6c9;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even):not(.first-row):not(.category-row):not(.note-row) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover:not(.first-row):not(.category-row):not(.note-row) {
+            background: #e8f4e8;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #42a5f5 !important;
             color: white;
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-            margin-right: 3px;
-            font-weight: bold;
+            font-size: 14px;
         }
-
-        .tag-arn { background: #e53935; }
-        .tag-hiv { background: #8e24aa; }
-        .tag-pon { background: #fb8c00; }
-        .tag-toxo { background: #00897b; }
-        .tag-orbit { background: #c62828; }
-
+        
+        .sub-header th {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 备注区域 */
         .notes {
             margin-top: 20px;
-            padding: 14px 20px;
-            background: linear-gradient(90deg, #fff8e1 0%, #ffecb3 100%);
+            padding: 15px;
+            background: white;
             border-radius: 12px;
-            border-left: 5px solid #ffa000;
-            font-size: 11.5px;
-            color: #5d4037;
-            line-height: 1.9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #5d6d7e;
+            line-height: 1.8;
         }
-
-        .notes strong {
-            color: #e65100;
+        
+        .notes-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
-
-        td p {
-            margin-bottom: 4px;
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-
-        td p:last-child {
-            margin-bottom: 0;
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            font-size: 14px;
         }
-
-        .indent {
-            padding-left: 12px;
-            border-left: 2px solid #b0bec5;
-            margin: 4px 0;
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
-        .combo-box {
-            background: #fff3e0;
-            padding: 4px 8px;
-            border-radius: 6px;
+        
+        .tag {
             display: inline-block;
-            margin: 2px 0;
-            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .ophthalmology-note {
-            background: #ffebee;
-            padding: 6px 10px;
-            border-radius: 6px;
-            margin: 4px 0;
-            color: #c62828;
-            font-size: 11px;
-            font-weight: 600;
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
         }
-
-        .cross-ref {
-            background: #e3f2fd;
-            padding: 4px 10px;
-            border-radius: 6px;
-            display: inline-block;
-            margin: 3px 0;
-            font-size: 11.5px;
-            color: #1565c0;
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag-virus {
+            background: #f9e79f;
+            color: #9a7d0a;
+            border: 1px solid #f7dc6f;
+        }
+        
+        .tag-parasite {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .keywords strong {
+            color: #1b5e20;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>👁️ 眼/眼内炎（续）— 视网膜炎与眼眶感染</h1>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="40.html" class="nav-btn">← 上一页</a>
+        <a href="42.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <div class="main-title">视网膜炎与眼眶蜂窝织炎治疗方案</div>
+        <div class="title-format">临床抗微生物治疗的初始选择-视网膜感染眼眶感染HIV相关眼部感染</div>
         <div class="subtitle">表1（13）临床抗微生物治疗的初始选择</div>
-        
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案<sup>*</sup></th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                    <th rowspan="2" style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 20%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 38%;">推荐治疗方案</th>
+                    <th rowspan="2" style="width: 26%;">辅助诊断或治疗方法及说明</th>
                 </tr>
-                <tr>
-                    <th class="sub-header">首选方案</th>
-                    <th class="sub-header">备选方案<sup>§</sup></th>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td colspan="5" class="section-header">眼/眼内炎（续）</td>
+                <tr class="first-row">
+                    <td colspan="5">眼/眼内炎（续）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="5">视网膜炎</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="subsection-header">视网膜炎</td>
+                    <td>急性视网膜坏死<br>综述：Clinical Ophthalmology 14: 1931, 2020</td>
+                    <td>带状疱疹病毒、单纯疱疹病毒</td>
+                    <td>阿昔洛韦10～12mg/kg iv q8h×5～7d，然后800mg po 5次/天或伐昔洛韦1000mg po tid或泛昔洛韦500mg po tid</td>
+                    <td>—</td>
+                    <td>带状疱疹病毒与非典型坏死性疱疹病毒视网膜病有很强的相关性<br>眼科会诊</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-arn">ARN</span>急性视网膜坏死
-                        <p style="margin-top:4px;">综述：<span class="reference">Clinical Ophthalmology 14: 1931, 2020</span></p>
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">带状疱疹病毒</span>、<span class="highlight-drug">单纯疱疹病毒</span></p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="highlight-drug">阿昔洛韦</span> <span class="dose-info">10～12mg/kg iv q8h×5～7d</span>，然后<span class="dose-info">800mg po 5次/天</span></p>
-                        <p style="margin-top:4px;">或<span class="highlight-drug">伐昔洛韦1000mg po tid</span></p>
-                        <p style="margin-top:4px;">或<span class="highlight-drug">泛昔洛韦500mg po tid</span></p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>带状疱疹病毒与非典型坏死性疱疹病毒视网膜病有很强的相关性</p>
-                        <p style="margin-top:4px;"><span class="highlight-drug">眼科会诊</span></p>
-                    </td>
+                    <td>HIV阳性（艾滋病）<br>通常CD4细胞&lt;100/μl</td>
+                    <td>巨细胞病毒</td>
+                    <td>见表14A，226页</td>
+                    <td>—</td>
+                    <td>在艾滋病患者中，发生率为5%～10%</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-hiv">HIV</span>HIV阳性（艾滋病）
-                        <p>通常<span class="dose-info">CD4细胞＜100/μl</span></p>
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">巨细胞病毒</span></p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="cross-ref">见表14A，226页</span></p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>在艾滋病患者中，发生率为<span class="dose-info">5%～10%</span></p>
-                    </td>
+                    <td>进展性外层视网膜坏死</td>
+                    <td>水痘-带状疱疹病毒、单纯疱疹病毒、巨细胞病毒（罕见）</td>
+                    <td>阿昔洛韦10～12mg/kg iv q8h×1～2w，然后（伐昔洛韦1000mg po tid，或泛昔洛韦500mg po tid，或阿昔洛韦800mg po tid）<br>必须请眼科会诊</td>
+                    <td>—</td>
+                    <td>多数患者是严重免疫抑制患者（CD4细胞低的HIV感染者或移植患者）。抗反转录病毒治疗后若CD4细胞恢复，可以停止口服抗病毒药物（Ocul Immunol Inflammation 15: 425, 2007）</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-pon">PORN</span>进展性外层视网膜坏死
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">水痘-带状疱疹病毒</span>、<span class="highlight-drug">单纯疱疹病毒</span>、<span class="highlight-drug">巨细胞病毒</span>（罕见）</p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="highlight-drug">阿昔洛韦</span> <span class="dose-info">10～12mg/kg iv q8h×1～2w</span>，然后（<span class="highlight-drug">伐昔洛韦1000mg po tid</span>，或<span class="highlight-drug">泛昔洛韦500mg po tid</span>，或<span class="highlight-drug">阿昔洛韦800mg po tid</span>）</p>
-                        <div class="ophthalmology-note" style="margin-top:6px;">必须请眼科会诊</div>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>多数患者是严重免疫抑制患者（CD4细胞低的HIV感染者或移植患者）。抗反转录病毒治疗后若CD4细胞恢复，可以停止口服抗病毒药物（<span class="reference">Ocul Immunol Inflammation 15: 425, 2007</span>）</p>
-                    </td>
+                    <td>视网膜脉络膜炎（后葡萄膜炎）</td>
+                    <td>刚地弓形虫</td>
+                    <td>乙胺嘧啶200mg po 1次首日，然后（50～75）mg qd＋磺胺嘧啶1～1.5g po qid＋亚叶酸5～20mg 3次/周。复方磺胺双倍增强片剂1片q12h。如有视力丧失的风险，加用泼尼松1mg/（kg·d）分2次口服</td>
+                    <td>—</td>
+                    <td>免疫正常人群中弓形虫病的最常见表现。乙胺嘧啶价格昂贵，可用复方磺胺替代。复发可用以下方案治疗：复方磺胺双倍增强片剂1片q12h×45d，之后1片qod×311d（Am J Ophth 213: 195 2020）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="5">眼眶蜂窝织炎（见面部丹毒，60页）</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-toxo">弓形虫</span>视网膜脉络膜炎（后葡萄膜炎）
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">刚地弓形虫</span></p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="highlight-drug">乙胺嘧啶</span> <span class="dose-info">200mg po 1次</span>首日，然后（<span class="dose-info">50～75</span>）<span class="dose-info">mg qd</span>＋<span class="highlight-drug">磺胺嘧啶</span> <span class="dose-info">1～1.5g po qid</span>＋<span class="highlight-drug">亚叶酸</span> <span class="dose-info">5～20mg 3次/周</span>。</p>
-                        <p style="margin-top:4px;"><span class="highlight-drug">复方磺胺双倍增强片剂</span> <span class="dose-info">1片 q12h</span>。</p>
-                        <p style="margin-top:4px;">如有视力丧失的风险，加用<span class="highlight-drug">泼尼松</span> <span class="dose-info">1mg/(kg·d)</span> 分<span class="dose-info">2次</span>口服</p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>免疫正常人群中弓形虫病的最常见表现。乙胺嘧啶价格昂贵，可用复方磺胺替代。</p>
-                        <p style="margin-top:4px;">复发可用以下方案治疗：<span class="highlight-drug">复方磺胺双倍增强片剂</span> <span class="dose-info">1片 q12h×45d</span>，之后<span class="dose-info">1片 qod×311d</span>（<span class="reference">Am J Ophth 213: 195 2020</span>）</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="subsection-header">眼眶感染</td>
-                </tr>
-                <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-orbit">眼眶</span>眼眶蜂窝织炎
-                        <p>（见面部丹毒，<span class="reference">60页</span>）</p>
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">肺炎链球菌</span>、<span class="highlight-drug">流感嗜血杆菌</span>、<span class="highlight-drug">卡他莫拉菌</span>、<span class="highlight-drug">金黄色葡萄球菌</span>、<span class="highlight-drug">厌氧菌</span>、<span class="highlight-drug">A族链球菌</span>、外伤后偶有<span class="highlight-drug">革兰阴性杆菌</span></p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="highlight-drug">万古霉素</span> <span class="dose-info">15～20mg/kg iv q8～12h</span> 目标AUC₂₄ <span class="dose-info">400～600μg·h/ml</span></p>
-                        <p style="margin-top:4px;">＋［（<span class="highlight-drug">头孢曲松2g iv qd</span>＋<span class="highlight-drug">甲硝唑1g iv q12h</span>）或<span class="highlight-drug">哌拉西林-他唑巴坦3.375g iv q6h</span>或<span class="highlight-drug">氨苄西林-舒巴坦3g iv q6h</span>］</p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>若对青霉素/头孢菌素过敏：<span class="highlight-drug">万古霉素</span>＋<span class="highlight-drug">莫西沙星400mg iv q24h</span>。</p>
-                        <p style="margin-top:4px;">问题是常无法作出微生物学诊断。建议做眼眶CT或MRI检查。有形成<span class="warning">海绵窦血栓</span>的危险。</p>
-                        <p style="margin-top:4px;">金黄色葡萄球菌可选用<span class="highlight-drug">达托霉素8mg/kg iv qd</span>或<span class="highlight-drug">利奈唑胺600mg iv q12h</span></p>
-                    </td>
+                    <td>眼眶蜂窝织炎</td>
+                    <td>肺炎链球菌、流感嗜血杆菌、卡他莫拉菌、金黄色葡萄球菌、厌氧菌、A族链球菌、外伤后偶有革兰阴性杆菌</td>
+                    <td>万古霉素15～20mg/kg iv q8～12h 目标AUC<sub>24</sub> 400～600μg·h/ml＋[（头孢曲松2g iv qd＋甲硝唑1g iv q12h）或哌拉西林-他唑巴坦3.375g iv q6h或氨苄西林-舒巴坦3g iv q6h]</td>
+                    <td>—</td>
+                    <td>若对青霉素/头孢菌素过敏：万古霉素＋莫西沙星400mg iv q24h。问题是常无法作出微生物学诊断。建议做眼眶CT或MRI检查。有形成海绵窦血栓的危险。金黄色葡萄球菌可选用达托霉素8mg/kg iv qd或利奈唑胺600mg iv q12h</td>
                 </tr>
             </tbody>
         </table>
-
-        <div class="notes">
-            <p><strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <div class="notes-title">备注说明</div>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">视网膜炎</span>
+            <span class="tag tag-disease">急性视网膜坏死</span>
+            <span class="tag tag-disease">HIV阳性视网膜炎</span>
+            <span class="tag tag-disease">艾滋病视网膜病变</span>
+            <span class="tag tag-disease">进展性外层视网膜坏死</span>
+            <span class="tag tag-disease">视网膜脉络膜炎</span>
+            <span class="tag tag-disease">后葡萄膜炎</span>
+            <span class="tag tag-disease">眼眶蜂窝织炎</span>
+            <span class="tag tag-disease">面部丹毒</span>
+            <span class="tag tag-disease">海绵窦血栓</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-drug">阿昔洛韦</span>
+            <span class="tag tag-drug">伐昔洛韦</span>
+            <span class="tag tag-drug">泛昔洛韦</span>
+            <span class="tag tag-drug">乙胺嘧啶</span>
+            <span class="tag tag-drug">磺胺嘧啶</span>
+            <span class="tag tag-drug">亚叶酸</span>
+            <span class="tag tag-drug">复方磺胺</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <span class="tag tag-drug">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-drug">氨苄西林-舒巴坦</span>
+            <span class="tag tag-drug">莫西沙星</span>
+            <span class="tag tag-drug">达托霉素</span>
+            <span class="tag tag-drug">利奈唑胺</span>
+            <!-- 病毒标签 -->
+            <span class="tag tag-virus">带状疱疹病毒</span>
+            <span class="tag tag-virus">单纯疱疹病毒</span>
+            <span class="tag tag-virus">巨细胞病毒</span>
+            <span class="tag tag-virus">水痘-带状疱疹病毒</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">肺炎链球菌</span>
+            <span class="tag tag-bacteria">流感嗜血杆菌</span>
+            <span class="tag tag-bacteria">卡他莫拉菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">A族链球菌</span>
+            <span class="tag tag-bacteria">革兰阴性杆菌</span>
+            <!-- 寄生虫标签 -->
+            <span class="tag tag-parasite">刚地弓形虫</span>
         </div>
     </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>视网膜炎；急性视网膜坏死；HIV阳性视网膜炎；艾滋病视网膜病变；进展性外层视网膜坏死；视网膜脉络膜炎；后葡萄膜炎；眼眶蜂窝织炎；面部丹毒；海绵窦血栓；带状疱疹病毒；单纯疱疹病毒；巨细胞病毒；水痘-带状疱疹病毒；刚地弓形虫；肺炎链球菌；流感嗜血杆菌；卡他莫拉菌；金黄色葡萄球菌；厌氧菌；A族链球菌；革兰阴性杆菌；阿昔洛韦；伐昔洛韦；泛昔洛韦；乙胺嘧啶；磺胺嘧啶；亚叶酸；复方磺胺；泼尼松；万古霉素；头孢曲松；甲硝唑；哌拉西林-他唑巴坦；氨苄西林-舒巴坦；莫西沙星；达托霉素；利奈唑胺；CD4细胞；抗反转录病毒治疗；眼科会诊；眼眶CT；眼眶MRI
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">41</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="视网膜炎与眼眶蜂窝织炎治疗方案；临床抗微生物治疗的初始选择-视网膜感染眼眶感染HIV相关眼部感染；视网膜炎；急性视网膜坏死；HIV阳性视网膜炎；艾滋病视网膜病变；进展性外层视网膜坏死；视网膜脉络膜炎；后葡萄膜炎；眼眶蜂窝织炎；面部丹毒；海绵窦血栓；带状疱疹病毒；单纯疱疹病毒；巨细胞病毒；水痘-带状疱疹病毒；刚地弓形虫；肺炎链球菌；流感嗜血杆菌；卡他莫拉菌；金黄色葡萄球菌；厌氧菌；A族链球菌；革兰阴性杆菌；阿昔洛韦；伐昔洛韦；泛昔洛韦；乙胺嘧啶；磺胺嘧啶；亚叶酸；复方磺胺；泼尼松；万古霉素；头孢曲松；甲硝唑；哌拉西林-他唑巴坦；氨苄西林-舒巴坦；莫西沙星；达托霉素；利奈唑胺；CD4细胞；抗反转录病毒治疗；眼科会诊；眼眶CT；眼眶MRI；=41" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '视网膜炎与眼眶蜂窝织炎治疗方案-急性视网膜坏死HIV相关视网膜炎弓形虫视网膜炎眼眶感染临床抗微生物治疗',
+                    url: '41.html',
+                    category: '感染性疾病'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '41.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '41.html');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击筛选效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题说明
-
-
- 项目 	 内容 	
- **网页标题（Title）** 	 `眼内炎续视网膜脉络膜炎眼眶蜂窝织炎临床抗微生物治疗参考表` 	
- **页面主标题（H1）** 	 `👁️ 眼/眼内炎（续）— 视网膜炎与眼眶感染` 	
- **副标题** 	 `表1（13）临床抗微生物治疗的初始选择` 	
- **检索关键词/标签** 	 `急性视网膜坏死`、`ARN`、`进展性外层视网膜坏死`、`PORN`、`HIV视网膜炎`、`巨细胞病毒视网膜炎`、`CMV视网膜炎`、`视网膜脉络膜炎`、`后葡萄膜炎`、`弓形虫视网膜炎`、`眼眶蜂窝织炎`、`带状疱疹病毒`、`单纯疱疹病毒`、`水痘-带状疱疹病毒`、`刚地弓形虫`、`肺炎链球菌`、`流感嗜血杆菌`、`卡他莫拉菌`、`金黄色葡萄球菌`、`厌氧菌`、`A族链球菌`、`革兰阴性杆菌`、`阿昔洛韦`、`伐昔洛韦`、`泛昔洛韦`、`乙胺嘧啶`、`磺胺嘧啶`、`亚叶酸`、`复方磺胺`、`泼尼松`、`万古霉素`、`头孢曲松`、`甲硝唑`、`哌拉西林他唑巴坦`、`氨苄西林舒巴坦`、`莫西沙星`、`达托霉素`、`利奈唑胺`、`海绵窦血栓`、`眼科会诊`、`CD4细胞`、`临床抗微生物治疗`、`初始选择` 	
-
-
-
-
-设计特点：
-
-• 背景色：淡紫渐变到淡蓝再到浅青，明亮柔和
-
-• 表格配色：分区标题金黄色、小节标题淡紫、解剖列淡黄、病原体列淡粉、首选方案淡绿、备选方案淡蓝、辅助列淡紫
-
-• 标签系统：ARN(红色)/HIV(紫色)/PORN(橙色)/弓形虫(teal)/眼眶(深红)五类标签
-
-• 重点标记：药物名称红色加粗、剂量信息绿色、警告信息深橙红、参考文献蓝色斜体
-
-• 特殊设计：眼科会诊提示用红色警示框、交叉引用用蓝色背景框、复杂联合用药方案清晰分层展示、海绵窦血栓危险用warning标注

@@ -1,405 +1,665 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>糖尿病足感染临床抗微生物治疗初始选择参考表</title>
+    <title>糖尿病足感染治疗方案-糖尿病足溃疡骨髓炎IDSA指南临床抗微生物治疗</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Microsoft YaHei", "SimHei", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #fff8e1 0%, #f1f8e9 50%, #e0f7fa 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
             min-height: 100vh;
-            padding: 20px;
         }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(245, 124, 0, 0.1);
-            padding: 35px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #e65100;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #f57c00;
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2e7d32;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
             font-size: 14px;
-            margin-bottom: 10px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-
-        .guide-banner {
+        
+        .home-btn:hover {
+            background: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5a6c7d;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(90, 108, 125, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4a5a6a;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #e8b339;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(232, 179, 57, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #d4a030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #e74c3c;
+        }
+        
+        /* 标题区域 */
+        .title-section {
             text-align: center;
-            color: #5d4037;
-            font-size: 12.5px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding: 10px 16px;
-            background: #ffecb3;
-            border-radius: 10px;
-            border-left: 4px solid #ffa000;
-            border-right: 4px solid #ffa000;
-            line-height: 1.7;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
         }
-
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+        
+        .title-format {
+            font-size: 18px;
+            color: #2e7d32;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .title-format::before {
+            content: "~~~~~";
+            color: #81c784;
+            margin-right: 5px;
+        }
+        
+        .title-format::after {
+            content: "*****";
+            color: #81c784;
+            margin-left: 5px;
+        }
+        
+        .subtitle {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            padding: 0 5px;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11.5px;
-            line-height: 1.6;
-        }
-
-        thead th {
-            background: linear-gradient(180deg, #ef6c00 0%, #e65100 100%);
-            color: #ffffff;
-            font-weight: bold;
-            padding: 14px 10px;
-            text-align: center;
-            border: 1px solid #e65100;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             font-size: 13px;
         }
-
-        thead th.sub-header {
-            background: linear-gradient(180deg, #ffb74d 0%, #ffa726 100%);
-            font-size: 12.5px;
-            padding: 10px;
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
         }
-
-        tbody td {
-            padding: 10px;
-            border: 1px solid #ffe0b2;
-            vertical-align: top;
-            color: #263238;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #fff3e0;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:hover {
-            background-color: #ffe0b2;
-            transition: background-color 0.3s ease;
-        }
-
-        .section-header {
-            background: linear-gradient(90deg, #ffcc80 0%, #ffb74d 100%) !important;
-            font-weight: bold;
-            font-size: 13.5px;
-            color: #5d4037;
-            padding: 12px 10px;
-        }
-
-        .col-anatomy {
-            width: 12%;
-            background-color: #ffecb3 !important;
-            color: #5d4037;
+        
+        th {
+            padding: 14px 10px;
+            text-align: center;
             font-weight: 600;
+            border: 1px solid #0d47a1;
+            font-size: 15px;
         }
-
-        .col-pathogen {
-            width: 14%;
-            background-color: #f8bbd0 !important;
-            color: #880e4f;
+        
+        /* 第一行字体大一点 */
+        .first-row {
+            font-size: 14px;
         }
-
-        .col-first {
-            width: 32%;
-            background-color: #c8e6c9 !important;
+        
+        .first-row td {
+            padding: 12px 10px;
+            background: #e8f5e9;
+            font-weight: 600;
             color: #1b5e20;
         }
-
-        .col-alternative {
-            width: 10%;
-            background-color: #bbdefb !important;
-            color: #0d47a1;
+        
+        /* 分类行 */
+        .category-row {
+            background: #c8e6c9 !important;
         }
-
-        .col-auxiliary {
-            width: 32%;
-            background-color: #e1bee7 !important;
-            color: #4a148c;
-        }
-
-        .highlight-drug {
-            color: #c62828;
+        
+        .category-row td {
+            padding: 10px;
             font-weight: bold;
+            color: #1b5e20;
+            font-size: 14px;
         }
-
-        .dose-info {
-            color: #2e7d32;
-            font-weight: 600;
+        
+        /* 说明行 */
+        .note-row {
+            background: #fff8e1 !important;
         }
-
-        .warning {
-            color: #d84315;
-            font-weight: bold;
-        }
-
-        .reference {
-            color: #1565c0;
+        
+        .note-row td {
+            padding: 10px;
             font-style: italic;
+            color: #5d4037;
+            font-size: 12px;
         }
-
-        .tag {
-            display: inline-block;
+        
+        /* 警告行 */
+        .warning-row {
+            background: #ffebee !important;
+        }
+        
+        .warning-row td {
+            padding: 10px;
+            color: #c62828;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #c8e6c9;
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even):not(.first-row):not(.category-row):not(.note-row):not(.warning-row) {
+            background: #f8f9fa;
+        }
+        
+        tr:hover:not(.first-row):not(.category-row):not(.note-row):not(.warning-row) {
+            background: #e8f4e8;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #42a5f5 !important;
             color: white;
-            padding: 1px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-            margin-right: 3px;
-            font-weight: bold;
+            font-size: 14px;
         }
-
-        .tag-none { background: #757575; }
-        .tag-mild { background: #43a047; }
-        .tag-moderate { background: #fb8c00; }
-        .tag-severe { background: #e53935; }
-
+        
+        .sub-header th {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 备注区域 */
         .notes {
             margin-top: 20px;
-            padding: 14px 20px;
-            background: linear-gradient(90deg, #fff8e1 0%, #ffecb3 100%);
+            padding: 15px;
+            background: white;
             border-radius: 12px;
-            border-left: 5px solid #ffa000;
-            font-size: 11px;
-            color: #5d4037;
-            line-height: 1.9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 12px;
+            color: #5d6d7e;
+            line-height: 1.8;
         }
-
-        .notes strong {
-            color: #e65100;
-        }
-
-        td p {
-            margin-bottom: 4px;
-        }
-
-        td p:last-child {
-            margin-bottom: 0;
-        }
-
-        .indent {
-            padding-left: 12px;
-            border-left: 2px solid #b0bec5;
-            margin: 4px 0;
-        }
-
-        .combo-box {
-            background: #fff3e0;
-            padding: 4px 8px;
-            border-radius: 6px;
-            display: inline-block;
-            margin: 2px 0;
-            font-size: 11px;
-        }
-
-        .general-care {
-            background: #e8f5e9;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin: 6px 0;
-            font-size: 11.5px;
-            border-left: 3px solid #4caf50;
-        }
-
-        .general-care strong {
-            color: #2e7d32;
-        }
-
-        .principle-box {
-            background: #e3f2fd;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin: 6px 0;
-            font-size: 11.5px;
-            border-left: 3px solid #2196f3;
-        }
-
-        .principle-box strong {
-            color: #1565c0;
-        }
-
-        .dose-detail {
-            background: #fce4ec;
-            padding: 6px 10px;
-            border-radius: 6px;
-            margin: 4px 0;
-            font-size: 11px;
-            font-style: italic;
-            color: #880e4f;
-        }
-
-        .artery-warning {
-            background: #ffebee;
-            padding: 6px 12px;
-            border-radius: 6px;
-            margin: 6px 0;
-            color: #c62828;
-            font-size: 11.5px;
+        
+        .notes-title {
             font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .keywords strong {
+            color: #1b5e20;
+        }
+        
+        /* 页码 */
+        .page-number {
             text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 15px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🦶 足 — "糖尿病足"感染</h1>
-        <div class="subtitle">临床抗微生物治疗的初始选择</div>
-        <div class="guide-banner">
-            📋 "糖尿病足"累及深部组织，2/3的患者有以下三联征：神经病变、足部变形和压疮。<br>
-            参见 <span class="reference">IDSA指南 CID 54: e132, 2012</span>
-        </div>
-        
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="41.html" class="nav-btn">← 上一页</a>
+        <a href="43.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <div class="main-title">糖尿病足感染治疗方案</div>
+        <div class="title-format">临床抗微生物治疗的初始选择-糖尿病足溃疡骨髓炎IDSA指南</div>
+        <div class="subtitle">表1（13）临床抗微生物治疗的初始选择</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案<sup>*</sup></th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                    <th rowspan="2" style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2" style="width: 20%;">病原体（通常）</th>
+                    <th colspan="2" style="width: 38%;">推荐治疗方案</th>
+                    <th rowspan="2" style="width: 26%;">辅助诊断或治疗方法及说明</th>
                 </tr>
-                <tr>
-                    <th class="sub-header">首选方案</th>
-                    <th class="sub-header">备选方案<sup>§</sup></th>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td colspan="5" class="section-header">足 — "糖尿病足"</td>
+                <tr class="first-row">
+                    <td colspan="5">足</td>
+                </tr>
+                <tr class="warning-row">
+                    <td colspan="5">"糖尿病足"累及深部组织，2/3的患者有以下三联征：神经病变、足部变形和压疮。参见IDSA指南CID 54: e132, 2012</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-none">无感染</span>溃疡，无炎症
-                    </td>
-                    <td class="col-pathogen">
-                        <p>皮肤定植菌群</p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="highlight-note">无须用抗生素</span></p>
-                    </td>
-                    <td class="col-auxiliary" rowspan="4">
-                        <div class="general-care">
-                            <p><strong>一般处理：</strong></p>
-                            <p>1. 控制血糖，去除溃疡面所受压力</p>
-                            <p>2. 评估有无外周血管病变</p>
-                            <p>3. 糖尿病患者使用<span class="highlight-drug">TMP-SMX</span>需警惕<span class="warning">高钾血症</span>（具有多种危险因素，如高龄、肾功能减退、合并用药）</p>
-                            <p>4. 伤口负压治疗改善糖尿病足溃疡愈合（参见 <span class="reference">Curr Opin Infect Dis 29: 145, 2016</span>）</p>
-                        </div>
-                        <div class="principle-box" style="margin-top:8px;">
-                            <p><strong>经验性抗菌治疗原则：</strong></p>
-                            <p>1. 浅表感染的溃疡，可以使用<span class="highlight-drug">TMP-SMX</span>单药覆盖MRSA，或者无MRSA感染时，使用<span class="highlight-drug">阿莫西林-克拉维酸</span></p>
-                            <p>2. 获取培养。在培养结果回报前根据当地病原资料，在中重度感染者应覆盖<span class="highlight-drug">MRSA</span></p>
-                            <p>3. 危及肢体和/或生命的严重感染，应静脉使用对革兰阳性球菌包括MRSA、大肠菌群和其他需氧和厌氧的革兰阴性杆菌有效的药物。存在其他备选方案并可能适用于个体化患者</p>
-                            <p>4. 若溃疡面积<span class="dose-info">＞2cm²</span>、探针可触及骨质（<span class="reference">CID 2016, 63: 944</span>）、<span class="dose-info">ESR＞70mm/h</span>、X线片异常，则骨髓炎危险性增加。<span class="highlight-drug">MRI是最佳影像学检查</span></p>
-                        </div>
+                    <td>溃疡，无炎症</td>
+                    <td>皮肤定植菌群</td>
+                    <td>无须用抗生素</td>
+                    <td>—</td>
+                    <td rowspan="4">
+                        <strong>一般处理：</strong><br>
+                        1. 控制血糖，去除溃疡面所受压力<br>
+                        2. 评估有无外周血管病变<br>
+                        3. 糖尿病患者使用TMP-SMX需警惕高钾血症（具有多种危险因素，如高龄、肾功能减退、合并用药）<br>
+                        4. 伤口负压治疗改善糖尿病足溃疡愈合（参见Curr Opin Infect Dis 29: 145, 2016）<br><br>
+                        <strong>经验性抗菌治疗原则：</strong><br>
+                        1. 浅表感染的溃疡，可以使用TMP-SMX单药覆盖MRSA，或者无MRSA感染时，使用阿莫西林-克拉维酸<br>
+                        2. 获取培养。在培养结果回报前根据当地病原资料，在中重度感染者应覆盖MRSA<br>
+                        3. 危及肢体和/或生命的严重感染，应静脉使用对革兰阳性球菌包括MRSA、大肠菌群和其他需氧和厌氧的革兰阴性杆菌有效的药物。存在其他备选方案并可能适用于个体化患者<br>
+                        4. 若溃疡面积&gt;2cm²、探针可触及骨质（CID 2016, 63: 944）、ESR&gt;70mm/h、X线片异常，则骨髓炎危险性增加。MRI是最佳影像学检查
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-mild">轻度</span>轻度感染
-                    </td>
-                    <td class="col-pathogen">
-                        <p>以<span class="highlight-drug">金黄色葡萄球菌</span>（应假定是MRSA）、<span class="highlight-drug">无乳链球菌（B族）</span>和<span class="highlight-drug">化脓性链球菌</span>为主</p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><strong>口服治疗：</strong><span class="highlight-drug">阿莫西林-克拉维酸缓释剂</span> <span class="dose-info">875/125mg po bid</span>＋<span class="highlight-drug">复方磺胺双倍增强片剂</span>（<span class="dose-info">1～2片 po bid</span>）</p>
-                        <p style="margin-top:4px;">或［（<span class="highlight-drug">环丙沙星750mg po bid</span>、<span class="highlight-drug">左氧氟沙星750mg po qd</span>或<span class="highlight-drug">莫西沙星400mg po qd</span>）＋<span class="highlight-drug">利奈唑胺600mg po bid</span>］</p>
-                    </td>
+                    <td>轻度感染</td>
+                    <td>以金黄色葡萄球菌（应假定是MRSA）、无乳链球菌（B族）和化脓性链球菌为主</td>
+                    <td>口服治疗：阿莫西林-克拉维酸缓释剂875/125mg po bid＋复方磺胺双倍增强片剂（1～2片po bid）或[（环丙沙星750mg po bid、左氧氟沙星750mg po qd或莫西沙星400mg po qd）＋利奈唑胺600mg po bid]</td>
+                    <td>—</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-moderate">中度</span>中度感染
-                        <p>骨髓炎<span class="highlight-note">见说明</span></p>
-                    </td>
-                    <td class="col-pathogen">
-                        <p>同上，可能尚有大肠菌群</p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><strong>口服治疗：</strong>同上</p>
-                        <p style="margin-top:4px;"><strong>静脉给药：</strong>根据流行菌株的药敏推荐（<span class="highlight-drug">氨苄西林-舒巴坦3g iv q6h</span>或<span class="highlight-drug">厄他培南1g iv qd</span>）＋在除外MRSA之前<span class="highlight-drug">万古霉素</span> <span class="dose-info">15～20mg/kg iv q8～12h</span>以达到目标AUC₂₄ <span class="dose-info">400～600μg·h/ml</span></p>
-                        <div class="dose-detail" style="margin-top:6px;">剂量见表注4</div>
-                    </td>
+                    <td>中度感染<br>骨髓炎见说明</td>
+                    <td>同上，可能尚有大肠菌群</td>
+                    <td>口服治疗：同上<br>静脉给药：根据流行菌株的药敏推荐（氨苄西林-舒巴坦3g iv q6h或厄他培南1g iv qd）＋在除外MRSA之前万古霉素15～20mg/kg iv q8～12h以达到目标AUC<sub>24</sub> 400～600μg·h/ml<br><em>剂量见表注4</em></td>
+                    <td>—</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-severe">重度</span>广泛的局部炎症并有全身毒性症状
-                    </td>
-                    <td class="col-pathogen">
-                        <p>同上，加上<span class="highlight-drug">厌氧菌</span></p>
-                        <p>肠球菌的意义尚不明确</p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><strong>静脉给药：</strong><span class="highlight-drug">万古霉素</span> <span class="dose-info">15～20mg/kg iv q8～12h</span>以达到目标AUC₂₄ <span class="dose-info">400～600μg·h/ml</span></p>
-                        <p style="margin-top:4px;">＋<span class="highlight-drug">哌拉西林-他唑巴坦4.5g iv q8h</span></p>
-                        <p style="margin-top:4px;">或万古霉素剂量同上＋（<span class="highlight-drug">亚胺培南0.5g iv q6h</span>或<span class="highlight-drug">美罗培南1g iv q8h</span>）</p>
-                        <div class="dose-detail" style="margin-top:6px;">剂量见表注4</div>
-                        <div class="artery-warning" style="margin-top:6px;">⚠️ 评估动脉供血不足！</div>
-                    </td>
+                    <td>广泛的局部炎症并有全身毒性症状</td>
+                    <td>同上，加上厌氧菌<br>肠球菌的意义尚不明确</td>
+                    <td>静脉给药：万古霉素15～20mg/kg iv q8～12h以达到目标AUC<sub>24</sub> 400～600μg·h/ml＋哌拉西林-他唑巴坦4.5g iv q8h或万古霉素剂量同上＋（亚胺培南0.5g iv q6h或美罗培南1g iv q8h）<br><em>剂量见表注4</em><br><strong>评估动脉供血不足！</strong></td>
+                    <td>—</td>
                 </tr>
             </tbody>
         </table>
-
-        <div class="notes">
-            <p><strong>注：4</strong> 万古霉素 <span class="dose-info">15～20mg/kg iv q8～12h</span>，以达到最佳目标AUC₂₄ <span class="dose-info">400～600μg·h/ml</span>。</p>
-            <p>［静脉β-内酰胺类抗生素/β-内酰胺酶抑制剂：<span class="highlight-drug">氨苄西林-舒巴坦3g iv q6h</span>，<span class="highlight-drug">哌拉西林-他唑巴坦4.5g iv q8h</span>（输注4小时）］。</p>
-            <p>碳青霉烯：<span class="highlight-drug">多尼培南500mg iv q8h</span>（输注1小时），<span class="highlight-drug">厄他培南1g iv qd</span>，<span class="highlight-drug">亚胺培南0.5g iv q6h</span>，<span class="highlight-drug">美罗培南1g iv q8h</span>，</p>
-            <p><span class="highlight-drug">达托霉素6mg/kg iv qd</span>，<span class="highlight-drug">利奈唑胺600mg iv q12h</span>，<span class="highlight-drug">氨曲南2g iv q8h</span>。</p>
-            <p><span class="highlight-drug">环丙沙星400mg iv q12h</span>，<span class="highlight-drug">左氧氟沙星750mg iv qd</span>，<span class="highlight-drug">莫西沙星400mg iv qd</span>，<span class="highlight-drug">甲硝唑1g iv</span>负荷量然后<span class="dose-info">0.5g iv q6h</span>或<span class="dose-info">1g iv q12h</span>。</p>
-            <p style="margin-top:8px;">* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <div class="notes-title">备注说明</div>
+        <p><strong>4</strong> 万古霉素15～20mg/kg iv q8～12h，以达到最佳目标AUC<sub>24</sub> 400～600μg·h/ml，[静脉β-内酰胺类抗生素/β-内酰胺酶抑制剂：氨苄西林-舒巴坦3g iv q6h，哌拉西林-他唑巴坦4.5g iv q8h（输注4小时）]。碳青霉烯：多尼培南500mg iv q8h（输注1小时），厄他培南1g iv qd，亚胺培南0.5g iv q6h，美罗培南1g iv q8h，达托霉素6mg/kg iv qd，利奈唑胺600mg iv q12h，氨曲南2g iv q8h。环丙沙星400mg iv q12h，左氧氟沙星750mg iv qd，莫西沙星400mg iv qd，甲硝唑1g iv负荷量然后0.5g iv q6h或1g iv q12h。</p>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p><strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">糖尿病足</span>
+            <span class="tag tag-disease">糖尿病足溃疡</span>
+            <span class="tag tag-disease">糖尿病足感染</span>
+            <span class="tag tag-disease">溃疡无炎症</span>
+            <span class="tag tag-disease">轻度感染</span>
+            <span class="tag tag-disease">中度感染</span>
+            <span class="tag tag-disease">骨髓炎</span>
+            <span class="tag tag-disease">严重感染</span>
+            <span class="tag tag-disease">全身毒性症状</span>
+            <span class="tag tag-disease">神经病变</span>
+            <span class="tag tag-disease">足部变形</span>
+            <span class="tag tag-disease">压疮</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-drug">阿莫西林-克拉维酸</span>
+            <span class="tag tag-drug">复方磺胺</span>
+            <span class="tag tag-drug">TMP-SMX</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">左氧氟沙星</span>
+            <span class="tag tag-drug">莫西沙星</span>
+            <span class="tag tag-drug">利奈唑胺</span>
+            <span class="tag tag-drug">氨苄西林-舒巴坦</span>
+            <span class="tag tag-drug">厄他培南</span>
+            <span class="tag tag-drug">万古霉素</span>
+            <span class="tag tag-drug">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-drug">亚胺培南</span>
+            <span class="tag tag-drug">美罗培南</span>
+            <span class="tag tag-drug">多尼培南</span>
+            <span class="tag tag-drug">达托霉素</span>
+            <span class="tag tag-drug">氨曲南</span>
+            <span class="tag tag-drug">甲硝唑</span>
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">MRSA</span>
+            <span class="tag tag-bacteria">无乳链球菌</span>
+            <span class="tag tag-bacteria">B族链球菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-bacteria">大肠菌群</span>
+            <span class="tag tag-bacteria">厌氧菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">皮肤定植菌群</span>
         </div>
     </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            <strong>关键词：</strong>糖尿病足；糖尿病足溃疡；糖尿病足感染；骨髓炎；溃疡无炎症；轻度感染；中度感染；严重感染；全身毒性症状；神经病变；足部变形；压疮；IDSA指南；金黄色葡萄球菌；MRSA；无乳链球菌；B族链球菌；化脓性链球菌；大肠菌群；厌氧菌；肠球菌；皮肤定植菌群；阿莫西林-克拉维酸；复方磺胺；TMP-SMX；环丙沙星；左氧氟沙星；莫西沙星；利奈唑胺；氨苄西林-舒巴坦；厄他培南；万古霉素；哌拉西林-他唑巴坦；亚胺培南；美罗培南；多尼培南；达托霉素；氨曲南；甲硝唑；AUC；ESR；MRI；外周血管病变；高钾血症；伤口负压治疗
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">42</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="糖尿病足感染治疗方案；临床抗微生物治疗的初始选择-糖尿病足溃疡骨髓炎IDSA指南；糖尿病足；糖尿病足溃疡；糖尿病足感染；骨髓炎；溃疡无炎症；轻度感染；中度感染；严重感染；全身毒性症状；神经病变；足部变形；压疮；IDSA指南；金黄色葡萄球菌；MRSA；无乳链球菌；B族链球菌；化脓性链球菌；大肠菌群；厌氧菌；肠球菌；皮肤定植菌群；阿莫西林-克拉维酸；复方磺胺；TMP-SMX；环丙沙星；左氧氟沙星；莫西沙星；利奈唑胺；氨苄西林-舒巴坦；厄他培南；万古霉素；哌拉西林-他唑巴坦；亚胺培南；美罗培南；多尼培南；达托霉素；氨曲南；甲硝唑；AUC；ESR；MRI；外周血管病变；高钾血症；伤口负压治疗；=42" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('复制失败，请手动复制');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '糖尿病足感染治疗方案-糖尿病足溃疡骨髓炎IDSA指南临床抗微生物治疗',
+                    url: '42.html',
+                    category: '感染性疾病'
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '42.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '42.html');
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击筛选效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题说明
-
-
- 项目 	 内容 	
- **网页标题（Title）** 	 `糖尿病足感染临床抗微生物治疗初始选择参考表` 	
- **页面主标题（H1）** 	 `🦶 足 — "糖尿病足"感染` 	
- **副标题** 	 `临床抗微生物治疗的初始选择` 	
- **指南横幅** 	 `📋 "糖尿病足"累及深部组织，2/3的患者有以下三联征...` 	
- **检索关键词/标签** 	 `糖尿病足`、`糖尿病足感染`、`溃疡无炎症`、`轻度感染`、`中度感染`、`重度感染`、`骨髓炎`、`金黄色葡萄球菌`、`MRSA`、`无乳链球菌`、`B族链球菌`、`化脓性链球菌`、`大肠菌群`、`厌氧菌`、`肠球菌`、`阿莫西林克拉维酸`、`复方磺胺`、`TMP-SMX`、`环丙沙星`、`左氧氟沙星`、`莫西沙星`、`利奈唑胺`、`氨苄西林舒巴坦`、`厄他培南`、`万古霉素`、`哌拉西林他唑巴坦`、`亚胺培南`、`美罗培南`、`多尼培南`、`达托霉素`、`氨曲南`、`甲硝唑`、`IDSA指南`、`高钾血症`、`动脉供血不足`、`MRI`、`临床抗微生物治疗`、`初始选择` 	
-
-
-
-
-设计特点：
-
-• 背景色：暖黄渐变到淡绿再到浅青，明亮温馨
-
-• 表格配色：分区标题金黄色、解剖列淡琥珀、病原体列淡粉、首选方案淡绿、备选方案淡蓝、辅助列淡紫
-
-• 标签系统：无感染(灰色)/轻度(绿色)/中度(橙色)/重度(红色)四级标签
-
-• 重点标记：药物名称红色加粗、剂量信息绿色、警告信息深橙红、参考文献蓝色斜体
-
-• 特殊设计：IDSA指南引用用金色横幅突出、一般处理用绿色边框框、经验性治疗原则用蓝色边框框、动脉供血不足警告用红色居中警示框、详细剂量注释用粉色斜体框

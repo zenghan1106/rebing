@@ -1,330 +1,558 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>耳部外耳炎临床抗微生物治疗初始选择续表参考表</title>
+    <title>表1（9）临床抗微生物治疗的初始选择</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Microsoft YaHei", "SimHei", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #e8f5e9 0%, #e3f2fd 50%, #fff8e1 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
         }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(56, 142, 60, 0.12);
-            padding: 35px;
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
-        h1 {
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #449d44;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 180px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+        }
+        
+        .btn-favorite.added {
+            background-color: #5cb85c;
+        }
+        
+        /* 标题样式 */
+        .page-title {
             text-align: center;
-            color: #1b5e20;
-            font-size: 24px;
+            margin: 20px 0;
+            font-size: 22px;
+            color: #1a5276;
             font-weight: bold;
-            margin-bottom: 6px;
         }
-
-        .subtitle {
-            text-align: center;
-            color: #388e3c;
-            font-size: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 18px;
-            border-bottom: 3px solid #66bb6a;
+        
+        .title-marker {
+            color: #e74c3c;
         }
-
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12.5px;
-            line-height: 1.7;
-        }
-
-        thead th {
-            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
-            color: #ffffff;
-            font-weight: bold;
-            padding: 14px 10px;
-            text-align: center;
-            border: 1px solid #1b5e20;
-            font-size: 13.5px;
-        }
-
-        thead th.sub-header {
-            background: linear-gradient(180deg, #66bb6a 0%, #43a047 100%);
             font-size: 13px;
-            padding: 10px;
         }
-
-        tbody td {
-            padding: 12px 10px;
-            border: 1px solid #c8e6c9;
-            vertical-align: top;
-            color: #263238;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f1f8e9;
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-        tbody tr:hover {
-            background-color: #dcedc8;
-            transition: background-color 0.3s ease;
-        }
-
-        .section-header {
-            background: linear-gradient(90deg, #ffe082 0%, #ffca28 100%) !important;
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2e75b6;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
             font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
             font-size: 14px;
-            color: #5d4037;
-            padding: 14px 10px;
+            font-weight: bold;
+            background-color: #d6eaf8;
         }
-
-        .col-anatomy {
-            width: 14%;
-            background-color: #fff8e1 !important;
-            color: #5d4037;
+        
+        td, th {
+            border: 1px solid #b8cce4;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        tbody td {
+            background-color: #fff;
+        }
+        
+        tbody tr:nth-child(even):not(:first-child) td {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover td {
+            background-color: #e8f4f8;
+        }
+        
+        /* 合并单元格的特殊处理 */
+        .category-cell {
+            background-color: #e8f6f3 !important;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .subcategory-cell {
+            background-color: #f0f8ff !important;
             font-weight: 600;
         }
-
-        .col-pathogen {
-            width: 16%;
-            background-color: #fce4ec !important;
-            color: #880e4f;
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
-        .col-first {
-            width: 26%;
-            background-color: #e8f5e9 !important;
-            color: #1b5e20;
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
         }
-
-        .col-alternative {
-            width: 16%;
-            background-color: #e1f5fe !important;
-            color: #01579b;
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
-        .col-auxiliary {
-            width: 28%;
-            background-color: #f3e5f5 !important;
-            color: #4a148c;
-        }
-
-        .highlight-drug {
-            color: #c62828;
-            font-weight: bold;
-        }
-
-        .dose-info {
-            color: #2e7d32;
-            font-weight: 600;
-        }
-
-        .warning {
-            color: #d84315;
-            font-weight: bold;
-        }
-
-        .reference {
-            color: #1565c0;
-            font-style: italic;
-        }
-
+        
         .tag {
             display: inline-block;
-            color: white;
-            padding: 1px 7px;
-            border-radius: 4px;
-            font-size: 10px;
-            margin-right: 4px;
-            font-weight: bold;
-        }
-
-        .tag-failure { background: #e53935; }
-        .tag-ventilator { background: #3949ab; }
-        .tag-prevention { background: #00897b; }
-
-        .notes {
-            margin-top: 22px;
-            padding: 16px 22px;
-            background: linear-gradient(90deg, #fff8e1 0%, #ffecb3 100%);
-            border-radius: 12px;
-            border-left: 5px solid #ffa000;
+            padding: 5px 12px;
+            border-radius: 15px;
             font-size: 12px;
-            color: #5d4037;
-            line-height: 1.9;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .notes strong {
-            color: #e65100;
+        
+        .tag-disease {
+            background-color: #ffeaa7;
+            color: #d63031;
         }
-
-        td p {
-            margin-bottom: 5px;
+        
+        .tag-bacteria {
+            background-color: #dfe6e9;
+            color: #2d3436;
         }
-
-        td p:last-child {
-            margin-bottom: 0;
+        
+        .tag-antibiotic {
+            background-color: #a8e6cf;
+            color: #00b894;
         }
-
-        .indent {
-            padding-left: 14px;
-            border-left: 2px solid #b0bec5;
-            margin: 4px 0;
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
-
-        .dose-note {
-            background: #fff3e0;
-            padding: 8px 12px;
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
             border-radius: 8px;
-            margin: 10px 0;
-            text-align: center;
-            font-weight: 600;
-            color: #e65100;
-            font-style: italic;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
-        .cross-ref {
-            background: #e3f2fd;
-            padding: 4px 10px;
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #ddd;
             border-radius: 6px;
-            display: inline-block;
-            margin: 4px 0;
+            font-size: 13px;
+            background-color: #fafafa;
+        }
+        
+        .btn-copy {
+            background-color: #9b59b6;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #8e44ad;
+        }
+        
+        .btn-copy.copied {
+            background-color: #5cb85c;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 5px;
+            }
+            
+            td, th {
+                padding: 6px 5px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .nav-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+            
+            .btn-favorite {
+                bottom: 200px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>👂 耳/外耳炎 — 婴儿、儿童、成人（续）</h1>
-        <div class="subtitle">表1（9）临床抗微生物治疗的初始选择</div>
-        
+    <!-- 返回首页按钮 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="32.html" class="btn btn-nav">上一页</a>
+            <a href="34.html" class="btn btn-nav">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">收藏</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">
+        <span class="title-marker">~~~~~</span>
+        表1（9）临床抗微生物治疗的初始选择
+        <span class="title-marker">*****</span>
+    </h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
-                    <th rowspan="2">病原体（通常）</th>
-                    <th colspan="2">推荐治疗方案<sup>*</sup></th>
-                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
-                </tr>
-                <tr>
-                    <th class="sub-header">首选方案</th>
-                    <th class="sub-header">备选方案<sup>§</sup></th>
+                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 18%;">病原体（通常）</th>
+                    <th style="width: 32%;">推荐治疗方案<br>首选方案</th>
+                    <th style="width: 32%;">备选方案<sup>§</sup></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="5" class="section-header">耳/外耳炎 —— 婴儿、儿童、成人（续）</td>
+                    <td colspan="4" class="category-cell">耳/外耳炎——婴儿、儿童、成人（续）</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-failure">治疗失败</span>用药3天无效者的治疗
-                    </td>
-                    <td class="col-pathogen">
-                        <p>主要考虑<span class="highlight-drug">耐药肺炎链球菌</span></p>
-                    </td>
-                    <td class="col-first">
-                        <p><strong>治疗前3天至1个月内未用过抗生素者：</strong></p>
-                        <p class="indent">大剂量<span class="highlight-drug">阿莫西林－克拉维酸</span>或<span class="highlight-drug">头孢地尼</span>或<span class="highlight-drug">头孢泊肟</span>或<span class="highlight-drug">头孢罗齐</span>或<span class="highlight-drug">头孢呋辛酯</span>或im<span class="highlight-drug">头孢曲松</span><span class="dose-info">×3d</span></p>
-                    </td>
-                    <td class="col-alternative">
-                        <p><strong>治疗前3天至1个月内用过抗生素者：</strong></p>
-                        <p class="indent">若头孢曲松禁忌或为难治性感染，用<span class="highlight-drug">左氧氟沙星</span></p>
-                        <p class="indent">年龄＜5岁：<span class="dose-info">10mg/kg po q12h×10d</span></p>
-                        <p class="indent">年龄＞5岁：<span class="dose-info">10mg/kg po qd×10d</span>（每天最大剂量<span class="dose-info">750mg</span>）</p>
-                        <div class="dose-note">剂量见表注3<br>均为儿童剂量<br>疗程同上</div>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p><span class="highlight-drug">左氧氟沙星</span> <span class="dose-info">20mg/(kg·d)</span> 分次<span class="dose-info">q12h</span>，可用于其他治疗失败时（<span class="warning">FDA未批准</span>）</p>
-                    </td>
+                    <td class="subcategory-cell">用药3天无效者的治疗</td>
+                    <td>主要考虑耐药肺炎球菌</td>
+                    <td>治疗前3天至1个月内未用过抗生素者：大剂量阿莫西林-克拉维酸或头孢地尼或头孢泊肟或头孢罗齐或头孢呋辛酯或im头孢曲松×3d<br><br>剂量见表注3<br>均为儿童剂量<br>疗程同上</td>
+                    <td>治疗前3天至1个月内用过抗生素者：若头孢曲松禁忌或为难治性感染，用左氧氟沙星年龄＜5岁：10mg/kg po q12h×10d<br>年龄＞5岁：10mg/kg po qd×10d（每天最大剂量750mg）</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-ventilator">插管相关</span>经鼻气管插管48小时后
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">假单胞菌属</span>、<span class="highlight-drug">克雷伯菌</span>、<span class="highlight-drug">肠杆菌</span></p>
-                    </td>
-                    <td class="col-first" colspan="2">
-                        <p><span class="highlight-drug">头孢他啶</span>或<span class="highlight-drug">头孢吡肟</span>或<span class="highlight-drug">亚胺培南</span>或<span class="highlight-drug">美罗培南</span>或<span class="highlight-drug">哌拉西林－他唑巴坦</span>或<span class="highlight-drug">环丙沙星</span></p>
-                        <p class="cross-ref">［剂量见<span class="reference">坏死性（恶性）外耳炎，12页</span>］</p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>经鼻气管插管48小时后约<span class="dose-info">1/2</span>的患者出现分泌性中耳炎</p>
-                    </td>
+                    <td class="subcategory-cell">经鼻气管插管48小时后</td>
+                    <td>假单胞菌属、克雷伯菌、肠杆菌</td>
+                    <td colspan="2">头孢他啶或头孢吡肟或亚胺培南或美罗培南或哌拉西林-他唑巴坦或环丙沙星［剂量见坏死性（恶性）外耳炎，12页］</td>
                 </tr>
                 <tr>
-                    <td class="col-anatomy">
-                        <span class="tag tag-prevention">预防</span>急性中耳炎的预防
-                    </td>
-                    <td class="col-pathogen">
-                        <p><span class="highlight-drug">肺炎链球菌</span></p>
-                    </td>
-                    <td class="col-first">
-                        <p><span class="warning">不推荐抗生素预防</span></p>
-                    </td>
-                    <td class="col-alternative">
-                        <p>—</p>
-                    </td>
-                    <td class="col-auxiliary">
-                        <p>使用抗菌药物预防中耳炎是造成<span class="warning">耐药肺炎链球菌蔓延</span>的主要原因之一</p>
+                    <td class="subcategory-cell">急性中耳炎的预防</td>
+                    <td>肺炎链球菌</td>
+                    <td>不推荐抗生素预防</td>
+                    <td>使用抗菌药物预防中耳炎是造成耐药肺炎链球菌蔓延的主要原因之一</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 辅助诊断说明 -->
+    <div class="table-container" style="margin-top: -10px; border-radius: 0 0 8px 8px;">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 18%; background-color: #e8f6f3; font-weight: bold; color: #1a5276;">辅助诊断或治疗方法及说明</td>
+                    <td style="width: 82%;">
+                        <strong>用药3天无效者：</strong>左氧氟沙星20mg/（kg·d）分次q12h，可用于其他治疗失败时（FDA未批准）<br><br>
+                        <strong>经鼻气管插管48小时后：</strong>经鼻气管插管48小时后约1/2的患者出现分泌性中耳炎
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        <div class="notes">
-            <p><strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-            <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-            <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签（点击可检索）：</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease" onclick="searchTag('外耳炎')">外耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('中耳炎')">中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('急性中耳炎')">急性中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('分泌性中耳炎')">分泌性中耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('坏死性外耳炎')">坏死性外耳炎</span>
+            <span class="tag tag-disease" onclick="searchTag('恶性外耳炎')">恶性外耳炎</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria" onclick="searchTag('耐药肺炎球菌')">耐药肺炎球菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('肺炎链球菌')">肺炎链球菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('假单胞菌属')">假单胞菌属</span>
+            <span class="tag tag-bacteria" onclick="searchTag('克雷伯菌')">克雷伯菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('肠杆菌')">肠杆菌</span>
+            
+            <!-- 抗生素/药物标签 -->
+            <span class="tag tag-antibiotic" onclick="searchTag('阿莫西林-克拉维酸')">阿莫西林-克拉维酸</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢地尼')">头孢地尼</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢泊肟')">头孢泊肟</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢罗齐')">头孢罗齐</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢呋辛酯')">头孢呋辛酯</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢曲松')">头孢曲松</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('左氧氟沙星')">左氧氟沙星</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢他啶')">头孢他啶</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢吡肟')">头孢吡肟</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('亚胺培南')">亚胺培南</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('美罗培南')">美罗培南</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('哌拉西林-他唑巴坦')">哌拉西林-他唑巴坦</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('环丙沙星')">环丙沙星</span>
         </div>
     </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+        <div class="page-number">页码：33</div>
+    </div>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: '表1（9）临床抗微生物治疗的初始选择',
+            subtitle: '耳/外耳炎-婴儿、儿童、成人',
+            keywords: '外耳炎;中耳炎;急性中耳炎;分泌性中耳炎;坏死性外耳炎;恶性外耳炎;耐药肺炎球菌;肺炎链球菌;假单胞菌属;克雷伯菌;肠杆菌;阿莫西林-克拉维酸;头孢地尼;头孢泊肟;头孢罗齐;头孢呋辛酯;头孢曲松;左氧氟沙星;头孢他啶;头孢吡肟;亚胺培南;美罗培南;哌拉西林-他唑巴坦;环丙沙星',
+            pageNum: '33'
+        };
+        
+        // 初始化编辑框内容
+        const copyContent = `${pageInfo.title};${pageInfo.subtitle};${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyText').value = copyContent;
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopySuccess();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopySuccess();
+            }
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 标签检索
+        function searchTag(tag) {
+            showToast('正在检索: ' + tag);
+            // 实际应用中这里会跳转到搜索结果页
+            console.log('检索标签:', tag);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            if (!isFavorited) {
+                // 添加到index.html的收藏类目
+                addToIndexFavorite();
+                btn.textContent = '已收藏';
+                btn.classList.add('added');
+                isFavorited = true;
+                showToast('已添加到收藏');
+            } else {
+                btn.textContent = '收藏';
+                btn.classList.remove('added');
+                isFavorited = false;
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 模拟添加到index.html的收藏类目
+        function addToIndexFavorite() {
+            // 获取当前页面信息
+            const favoriteItem = {
+                title: pageInfo.title,
+                url: window.location.href,
+                pageNum: pageInfo.pageNum
+            };
+            
+            // 存储到localStorage，index.html可以读取
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === favoriteItem.url);
+            if (!exists) {
+                favorites.push(favoriteItem);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+            console.log('收藏列表:', favorites);
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentUrl = window.location.href;
+            const btn = document.getElementById('favoriteBtn');
+            
+            if (favorites.some(f => f.url === currentUrl)) {
+                btn.textContent = '已收藏';
+                btn.classList.add('added');
+                isFavorited = true;
+            }
+        };
+    </script>
 </body>
 </html>
-```
-
-
-
----
-
-
-
-标签和标题说明
-
-
- 项目 	 内容 	
- **网页标题（Title）** 	 `耳部外耳炎临床抗微生物治疗初始选择续表参考表` 	
- **页面主标题（H1）** 	 `👂 耳/外耳炎 — 婴儿、儿童、成人（续）` 	
- **副标题** 	 `表1（9）临床抗微生物治疗的初始选择` 	
- **检索关键词/标签** 	 `外耳炎续表`、`耳部感染续表`、`用药3天无效`、`急性中耳炎治疗失败`、`耐药肺炎链球菌`、`经鼻气管插管`、`分泌性中耳炎`、`急性中耳炎预防`、`抗生素预防`、`左氧氟沙星`、`头孢他啶`、`头孢吡肟`、`亚胺培南`、`美罗培南`、`哌拉西林他唑巴坦`、`环丙沙星`、`阿莫西林克拉维酸`、`头孢地尼`、`头孢泊肟`、`头孢罗齐`、`头孢呋辛酯`、`头孢曲松`、`假单胞菌`、`克雷伯菌`、`肠杆菌`、`FDA未批准`、`临床抗微生物治疗`、`初始选择` 	
-
-
-
-
-设计特点：
-
-• 背景色：浅绿渐变到淡蓝再到暖黄，明亮清新
-
-• 表格配色：分区标题金黄色、解剖列淡黄、病原体列淡粉、首选方案淡绿、备选方案淡青、辅助列淡紫
-
-• 标签系统：治疗失败(红色)/插管相关(靛蓝)/预防(teal绿)三类标签
-
-• 重点标记：药物名称红色加粗、剂量信息绿色、警告信息深橙红、参考文献蓝色斜体
-
-• 特殊设计：剂量注释用橙色提示框居中显示、交叉引用用蓝色背景框标注

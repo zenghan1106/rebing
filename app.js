@@ -10,10 +10,10 @@ var SEARCH_KEY = 'rebing_last_search'; // 存储上次搜索的key
 // ============ 初始化 ============
 function init() {
   console.log('初始化...');
-  
-  // 1. 检查密码
-  if (!checkPassword()) return;
-  
+
+  // 1. 检查机器码授权（已记住设备则免验证）
+  if (!initMachineAuth()) return;
+
   // 2. 加载数据
   loadData();
   
@@ -32,43 +32,8 @@ function init() {
   console.log('初始化完成');
 }
 
-// ============ 密码检查 ============
-function checkPassword() {
-  // 检查是否已登录（1天内）
-  var logged = localStorage.getItem('rebing_logged');
-  if (logged && (Date.now() - parseInt(logged)) < 24 * 60 * 60 * 1000) {
-    console.log('已登录，跳过密码');
-    return true;
-  }
-  
-  // 弹出密码输入框
-  var pwd = prompt('请输入访问密码：', '');
-  
-  // 读取key.txt（同步请求）
-  var correctPwd = '1989'; // 默认值
-  try {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'key.txt', false); // 同步
-    xhr.send(null);
-    if (xhr.status === 200) {
-      var encrypted = xhr.responseText.trim();
-      // 解密（Base64反转）
-      var decoded = encrypted.split('').reverse().join('');
-      correctPwd = atob(decoded);
-    }
-  } catch(e) {
-    console.log('读取key.txt失败，使用默认密码');
-  }
-  
-  // 验证密码
-  if (pwd === correctPwd) {
-    localStorage.setItem('rebing_logged', Date.now().toString());
-    return true;
-  } else {
-    document.body.innerHTML = '<div style="text-align:center;padding:50px;color:#ef4444;"><h2>密码错误</h2><p>无法访问此页面</p></div>';
-    return false;
-  }
-}
+// ============ 机器码验证（由 machine_auth_v2.js 提供）============
+// checkPassword() 已废弃，请使用 initMachineAuth()
 
 // ============ 数据加载 ============
 function loadData() {
@@ -77,7 +42,7 @@ function loadData() {
   
   var info = document.getElementById('info');
   if (info) {
-    info.textContent = '共 ' + allData.length + ' 个条目 | 资源来自网络，如有侵权请联系微信 zh52662006';
+    info.textContent = '共 ' + allData.length + ' 个条目 | 资源来自网络，如有侵权请联系微信 zh52662006删除';
   }
   
   // 渲染所有条目

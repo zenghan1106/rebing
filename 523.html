@@ -1,0 +1,664 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~HIV-1、HBV和HCV暴露后预防*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            z-index: 100;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .prev-btn {
+            right: 100px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2e75b6 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 12px;
+            border: 1px solid #d5d8dc;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 层级缩进 */
+        .level-1 {
+            font-weight: bold;
+            color: #1a5276;
+            background: #e8f4f8 !important;
+        }
+        
+        .level-2 {
+            padding-left: 25px !important;
+            color: #2874a6;
+        }
+        
+        .level-3 {
+            padding-left: 45px !important;
+            color: #555;
+        }
+        
+        .level-4 {
+            padding-left: 65px !important;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .note {
+            color: #7d3c98;
+            font-style: italic;
+        }
+        
+        /* 流程图区域 */
+        .flow-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .flow-box .flow-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .flow-step {
+            display: inline-block;
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 12px;
+            color: #155724;
+        }
+        
+        .flow-arrow {
+            color: #856404;
+            font-size: 18px;
+            margin: 0 5px;
+        }
+        
+        .flow-result {
+            display: inline-block;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 5px;
+            font-size: 12px;
+            color: #155724;
+            font-weight: bold;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tag-group {
+            margin-bottom: 15px;
+        }
+        
+        .tag-label {
+            display: inline-block;
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 5px;
+            border: 1px solid #aed6f1;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 2;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            background: #f0f7ff;
+            color: #2e75b6;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin: 3px;
+            font-size: 12px;
+            border: 1px solid #d6eaf8;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #17a2b8;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+        
+        .fav-btn.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <a href="522.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="524.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~HIV-1、HBV和HCV暴露后预防*****</h1>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">表15D（2） HIV-1、HBV和HCV暴露后预防</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="level-1">
+                    <td colspan="2"><strong>A. HIV职业暴露</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="2">决定启动暴露后预防（PEP）是在暴露者配合下基于以下三方面因素的临床判定：</td>
+                </tr>
+                <tr class="level-1">
+                    <td colspan="2"><strong>1. 暴露类型</strong></td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">a. 具有潜在感染性的物质：血液，非固定的组织，脑脊液；精液和阴道分泌物（与职业暴露传播HIV并无相关）；关节滑膜腔、胸腔、腹膜腔和羊膜腔液体；其他可见的血性液体</td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">b. 低或感染风险微不足道的体液，除可见的血性液体外：尿液、汗液、呕吐物、粪便、唾液、鼻腔分泌物、泪液和痰。<span class="highlight">无须PEP</span></td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">c. 如果是暴露部位皮肤完整，无论接触的物质是否存在传染性，也不管暴露源的HIV状态，均<span class="highlight">无须PEP</span></td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">d. 如果是黏膜（如血液飞溅入眼）或不完整皮肤（如擦伤的皮肤、开放伤口、皮炎）暴露，或皮肤针刺伤、手术刀或其他锐器伤或切割伤，<span class="highlight">PEP是需要的</span>。人咬伤理论上可造成皮肤破损传播HIV，尤其是出现口腔出血时，但这不属于HIV职业暴露传播</td>
+                </tr>
+                <tr class="level-1">
+                    <td colspan="2"><strong>2. 暴露源为HIV感染者时感染的可能性</strong></td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">a. 如果暴露存在HIV传播风险，如前所述，暴露源为明确的HIV阳性者，应在暴露后立即开始PEP，暴露数小时内（动物实验显示时间>72小时开始PEP会降低效果，但多久之后开始PEP将无效尚不清楚；如果暴露后感染风险极高的话，即使已经过了更长时间，也要考虑启动PEP）</td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">b. 如果暴露后存在感染HIV风险，暴露源HIV状况不明，但患者可能感染HIV或基于危险因素合理怀疑感染HIV，应在等待暴露源患者HIV状态确认的同时开始PEP</td>
+                </tr>
+                <tr class="level-3">
+                    <td colspan="2">ⅰ. 如果有条件对暴露源患者进行快速HIV检测，可以等待检测结果阳性后开始PEP</td>
+                </tr>
+                <tr class="level-3">
+                    <td colspan="2">ⅱ. 如果无法进行HIV快速检测，应启动PEP同时等待检测结果，如回报结果呈阴性则停止PEP</td>
+                </tr>
+                <tr class="level-3">
+                    <td colspan="2">ⅲ. 注意：抗体检测足以排除HIV，除非怀疑暴露源患者处于急性反转录病毒综合征期，这时需要检测HIV病毒载量</td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">c. 如果暴露源未知或暴露源明确但无法确定疾病状态和传染风险，启动PEP的决策应基于对病例的个体化的专家会诊来决定。网址http://www.nccc.ucsf.edu/about_nccc/pepline/上有PEP热线（1-888-448-4911），有关于指导暴露后严重程度及感染HIV流行病学可能性的数据</td>
+                </tr>
+                <tr class="level-1">
+                    <td colspan="2"><strong>3. PEP药物不良反应及潜在药物相互作用</strong></td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">a. 新药的耐受性更佳，可以使更高比例的暴露后医务人员能完成4周的疗程。有些药物需要根据肾功能调整剂量</td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">b. 药物相互作用的信息见表16A和表16B，药品说明书及网站hivinsite.ucsf.edu</td>
+                </tr>
+                <tr class="level-2">
+                    <td colspan="2">c. 哺乳和妊娠不是PEP的禁忌</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="flow-box">
+                            <div class="flow-title">PEP流程</div>
+                            <div>
+                                <span class="flow-step">是否暴露于潜在感染性物质？</span>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-result">否 → 无须PEP</span><br>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-result">是</span>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-step">经皮肤暴露或有不完整皮肤或黏膜暴露</span>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-result">否 → 无须PEP</span><br>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-result">是</span>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-step">HIV阳性或疑似的暴露源</span>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-result">否 → 无须PEP</span><br>
+                                <span class="flow-arrow">↓</span><br>
+                                <span class="flow-result">是 → PEP</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">523</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tag-group">
+            <span class="tag-label">HIV</span>
+            <span class="tag-label">HBV</span>
+            <span class="tag-label">HCV</span>
+            <span class="tag-label">PEP</span>
+            <span class="tag-label">暴露后预防</span>
+            <span class="tag-label">职业暴露</span>
+            <span class="tag-label">HIV-1</span>
+        </div>
+        <div class="tag-group">
+            <span class="tag-label">血液</span>
+            <span class="tag-label">脑脊液</span>
+            <span class="tag-label">精液</span>
+            <span class="tag-label">阴道分泌物</span>
+            <span class="tag-label">尿液</span>
+            <span class="tag-label">汗液</span>
+            <span class="tag-label">唾液</span>
+        </div>
+        <div class="tag-group">
+            <span class="tag-label">黏膜暴露</span>
+            <span class="tag-label">皮肤针刺伤</span>
+            <span class="tag-label">锐器伤</span>
+            <span class="tag-label">人咬伤</span>
+            <span class="tag-label">快速HIV检测</span>
+            <span class="tag-label">抗体检测</span>
+            <span class="tag-label">病毒载量</span>
+        </div>
+        <div class="tag-group">
+            <span class="tag-label">哺乳</span>
+            <span class="tag-label">妊娠</span>
+            <span class="tag-label">药物相互作用</span>
+            <span class="tag-label">肾功能调整</span>
+        </div>
+    </div>
+    
+    <!-- 关键词区域 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            <span class="keyword-tag">HIV-1</span>
+            <span class="keyword-tag">HBV</span>
+            <span class="keyword-tag">HCV</span>
+            <span class="keyword-tag">暴露后预防</span>
+            <span class="keyword-tag">PEP</span>
+            <span class="keyword-tag">职业暴露</span>
+            <span class="keyword-tag">HIV检测</span>
+            <span class="keyword-tag">快速检测</span>
+            <span class="keyword-tag">病毒载量</span>
+            <span class="keyword-tag">抗体检测</span>
+            <span class="keyword-tag">急性反转录病毒综合征</span>
+            <span class="keyword-tag">药物不良反应</span>
+            <span class="keyword-tag">药物相互作用</span>
+            <span class="keyword-tag">哺乳</span>
+            <span class="keyword-tag">妊娠</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="HIV-1、HBV和HCV暴露后预防；HIV职业暴露；PEP；暴露类型；暴露源；HIV检测；药物不良反应；HIV；HBV；HCV；血液；脑脊液；精液；黏膜暴露；针刺伤；锐器伤；快速HIV检测；病毒载量；哺乳；妊娠；=523" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">★</button>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '✓ 已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '📋 复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                }, 2000);
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.innerHTML = '♥';
+                btn.title = '已收藏';
+                
+                // 保存到localStorage，用于index页面读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: 'HIV-1、HBV和HCV暴露后预防',
+                    url: '523.html',
+                    category: 'HIV/HBV/HCV暴露后预防',
+                    date: new Date().toLocaleString('zh-CN')
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === '523.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 显示提示
+                showToast('已添加到收藏！');
+            } else {
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '523.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '523.html');
+            const btn = document.getElementById('favBtn');
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '♥';
+                btn.title = '已收藏';
+            }
+        }
+        
+        // 提示消息
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:white;padding:15px 25px;border-radius:10px;font-size:14px;z-index:1000;';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 1500);
+        }
+        
+        // 页面加载时检查收藏状态
+        document.addEventListener('DOMContentLoaded', checkFavorite);
+    </script>
+</body>
+</html>

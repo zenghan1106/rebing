@@ -1,0 +1,687 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~氯喹耐药恶性疟疾治疗方案表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #1e293b;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 100px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        
+        .page-title .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: normal;
+        }
+        
+        /* 表格样式 */
+        .table-wrapper {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.8;
+            min-width: 800px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #2563eb;
+        }
+        
+        /* 第一行数据行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: linear-gradient(135deg, #93c5fd 0%, #bfdbfe 100%) !important;
+            color: #1e3a8a;
+            font-size: 14px !important;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            vertical-align: top;
+            background: white;
+        }
+        
+        td:first-child {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #1e40af;
+            width: 22%;
+        }
+        
+        /* 病原体名称 */
+        .pathogen-name {
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 5px;
+        }
+        
+        .pathogen-detail {
+            font-size: 12px;
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin: 5px 0;
+            padding-left: 18px;
+        }
+        
+        td li {
+            margin-bottom: 6px;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .warning {
+            color: #ea580c;
+            font-weight: 600;
+        }
+        
+        .note-text {
+            color: #0369a1;
+            font-style: italic;
+        }
+        
+        /* 备注区域 */
+        .note {
+            background: #fef3c7;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f59e0b;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 底部注释 */
+        .footnote {
+            padding: 15px 20px;
+            background: #f1f5f9;
+            font-size: 12px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #f0f9ff;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #991b1b;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+            color: #166534;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            color: #1e40af;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            padding: 20px;
+            background: white;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            color: #334155;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e40af;
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #0ea5e9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #334155;
+            background: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                padding: 20px 15px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 剂量表格 */
+        .dose-table {
+            width: 100%;
+            margin: 8px 0;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+        
+        .dose-table td {
+            padding: 4px 8px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='407.html'">← 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='409.html'">下一页 →</button>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">
+            <div>~~~~~氯喹耐药恶性疟疾治疗方案表*****</div>
+            <div class="subtitle">原虫——肠道外/疟疾（疟原虫）疟疾治疗（续）| 表13C（4）寄生虫感染的治疗</div>
+        </div>
+        
+        <!-- 表格 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">病原体</th>
+                        <th colspan="2">推荐方案</th>
+                        <th rowspan="2">说明</th>
+                    </tr>
+                    <tr class="sub-header">
+                        <th>首选药物</th>
+                        <th>备选药物</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 恶性疟疾氯喹耐药地区 -->
+                    <tr>
+                        <td>
+                            <div class="pathogen-name">恶性疟疾，氯喹耐药的地区：</div>
+                            <div>疟疾预防详见 <i>N Engl J Med</i> 2016; 375: 247</div>
+                        </td>
+                        <td>
+                            <span class="drug-name">阿托伐醌250mg-氯胍100mg</span>复合片（<span class="drug-name">马拉隆，Malarone</span>）1片/d，与食物同服。旅行前1～2天、旅行期间和旅行后7天内。FDA未批准也不推荐用于孕妇，安全性数据参见：<i>J Travel Med</i> 2020 Jul 14; 27 (4): taaa074, <i>Trav Med ID</i> 27: 20, 2019。时间＜1周的短期旅行推荐服用马拉隆，由于价格较高，难以在长期旅行推广
+                        </td>
+                        <td>
+                            <span class="drug-name">多西环素</span> 100mg/d，成人和8岁以上的儿童。旅行前1～2天、旅行期间和旅行后4周内服用。或<span class="drug-name">他非诺喹</span> 200mg qd×3d（旅行前3天开始），然后200mg qw（最后一次负荷量后7天始），之后200mg一次一剂（去疟疾流行区服用最后一剂），或<span class="drug-name">甲氟喹（MFQ）</span> 250mg（基质228mg）每周口服1次，旅行前1～2周、旅行期间和旅行后4周内（见说明）
+                            <div style="margin-top:8px;">
+                                <div class="drug-name">多西环素：</div>2.2mg/（kg·d）（最大量100mg/d）
+                            </div>
+                            <div style="margin-top:8px;">
+                                <div class="drug-name">甲氟喹：</div>≤9kg，9mg/kg qw（4.6mg/kg基质）<br>
+                                10～19kg，1/4成人片剂qw<br>
+                                20～30kg，1/2成人片剂qw<br>
+                                31～45kg，3/4成人片剂qw<br>
+                                ＞45kg，1片qw
+                            </div>
+                            <div class="warning" style="margin-top:8px;">多西环素不良反应：光过敏、念珠菌性阴道炎、胃炎</div>
+                        </td>
+                        <td>
+                            <div class="highlight">妊娠：</div>目前甲氟喹是最佳选择。避免使用多西环素、伯氨喹和他非诺喹，但氯喹可致G6PD缺乏者溶血性贫血，使用非诺喹前必须测G6PD水平（见前文）。使用6个月以上，21%可出现浸润性角膜病</div>
+                            <div style="margin-top:10px;">若有心脏传导异常、癫痫或精神异常（如抑郁症、精神病），不推荐用甲氟喹。若使用，可以在旅行前3周开始服用，以保证耐受性。儿童，每周一次，故首选MFQ。特非诺喹未批准用于儿童。8岁以上儿童可用多西环素。体重低于10kg，MFQ应使用复方制剂，但AP的儿童片剂可减半。如果旅行时间长，每周一次的他非诺喹是个好选择。连续使用6个月以上的疗程未获批准；中间须停3个月作为洗脱期</div>
+                        </td>
+                    </tr>
+                    
+                    <!-- 疟疾的治疗 -->
+                    <tr>
+                        <td>
+                            <div class="pathogen-name">疟疾的治疗——</div>
+                            <div>诊断依靠显微镜检查。备选方法：快速抗原检测（Binax NOW），恶性疟原虫检出率96%～100%，其他疟原虫50%。种属鉴定或低负荷感染需要通过显微镜或PCR。治疗成功1个月后，抗原仍阳性。阴性RDT（US: Binax; 不再作为排除恶性疟疾的可靠依据，因为全球范围内HRP2/3缺失突变增加</div>
+                            <div style="margin-top:8px;" class="note-text">非复杂性恶性疟原虫（或种属未确定）WHO指南实时更新参见 https://www.who.int/teams/global-malaria-programme/guidelines-for-malaria。推荐青蒿素类联合疗法作为成人包括妊娠各阶段的一线治疗方案。（在非流行国家使用蒿甲醚-本芴醇）。肥胖者无须调整治疗剂量但需要密切随访</div>
+                        </td>
+                        <td>
+                            <div><b>中美洲，巴拿马运河以西，海地，多米尼加共和国和中东大部分地区</b></div>
+                            <div style="margin-top:8px;">成人：<span class="drug-name">氯喹磷酸盐</span> 1g（基质600mg）po，6小时后0.5g，然后0.5g qd×2d。总量：氯喹磷酸盐2.5mg</div>
+                        </td>
+                        <td>
+                            <div>儿童：<span class="drug-name">氯喹</span> 10mg/kg po（基质），然后在6h、24h及48h，5mg/kg（基质）。总量：25mg/kg（基质）</div>
+                        </td>
+                        <td>
+                            <div>其他国家可以获得不同的氯喹钠盐。剂量不等。儿童剂量绝不能超过成人剂量。氯喹+甲氟喹延长QT间期。治疗剂量超过2倍推荐剂量可能会致命</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 底部注释 -->
+        <div class="footnote">
+            <div>注：*关于药物来源见表13D，222页。</div>
+            <div>表中名词缩写见第2页。</div>
+        </div>
+        
+        <!-- 备注 -->
+        <div class="note">
+            <b>📋 重要提醒：</b>本表为氯喹耐药恶性疟疾治疗参考方案，具体用药请遵医嘱。妊娠患者、G6PD缺乏者、心脏传导异常者需特别注意药物选择禁忌。甲氟喹使用前需评估精神状况。
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">疟疾</span>
+                <span class="tag tag-disease">恶性疟疾</span>
+                <span class="tag tag-disease">氯喹耐药</span>
+                <span class="tag tag-bacteria">疟原虫</span>
+                <span class="tag tag-drug">阿托伐醌</span>
+                <span class="tag tag-drug">氯胍</span>
+                <span class="tag tag-drug">马拉隆</span>
+                <span class="tag tag-drug">Malarone</span>
+                <span class="tag tag-drug">多西环素</span>
+                <span class="tag tag-drug">他非诺喹</span>
+                <span class="tag tag-drug">甲氟喹</span>
+                <span class="tag tag-drug">MFQ</span>
+                <span class="tag tag-drug">氯喹磷酸盐</span>
+                <span class="tag tag-drug">氯喹</span>
+                <span class="tag tag-drug">伯氨喹</span>
+                <span class="tag tag-drug">青蒿素</span>
+                <span class="tag tag-drug">蒿甲醚</span>
+                <span class="tag tag-drug">本芴醇</span>
+            </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="footer-section">
+            <!-- 关键词 -->
+            <div class="keywords">
+                <div class="keywords-label">🔍 关键词</div>
+                <div class="keywords-content">
+                    氯喹耐药恶性疟疾 | 恶性疟疾 | 疟原虫 | 疟疾治疗 | 阿托伐醌-氯胍 | 马拉隆 | Malarone | 多西环素 | 他非诺喹 | 甲氟喹 | MFQ | 氯喹磷酸盐 | 氯喹 | 伯氨喹 | 青蒿素类联合疗法 | 蒿甲醚-本芴醇 | G6PD检测 | 妊娠疟疾 | 疟疾预防 | 快速抗原检测 | Binax NOW | RDT检测 | HRP2/3缺失突变
+                </div>
+            </div>
+            
+            <!-- 页码 -->
+            <div class="page-number">
+                页码：408
+            </div>
+            
+            <!-- 复制区域 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" value="氯喹耐药恶性疟疾治疗方案表；原虫肠道外疟疾疟原虫疟疾治疗；氯喹耐药恶性疟疾,恶性疟疾,疟原虫,疟疾治疗,阿托伐醌-氯胍,马拉隆,Malarone,多西环素,他非诺喹,甲氟喹,MFQ,氯喹磷酸盐,氯喹,伯氨喹,青蒿素类联合疗法,蒿甲醚-本芴醇,G6PD检测,妊娠疟疾,疟疾预防,快速抗原检测,Binax NOW,RDT检测,HRP2/3缺失突变；=408" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.querySelector('.fav-btn');
+            const title = '氯喹耐药恶性疟疾治疗方案表';
+            const url = window.location.href;
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.url === url);
+            
+            if (index === -1) {
+                // 添加收藏
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '寄生虫感染治疗',
+                    date: new Date().toLocaleString()
+                });
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到index收藏类目！');
+            } else {
+                // 取消收藏
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试向index.html发送消息（同域情况下）
+            try {
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'favorite',
+                        data: favorites
+                    }, '*');
+                }
+            } catch(e) {}
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const btn = document.querySelector('.fav-btn');
+            
+            if (favorites.some(f => f.url === url)) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+        
+        // 提示信息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkFavorite();
+        });
+    </script>
+</body>
+</html>

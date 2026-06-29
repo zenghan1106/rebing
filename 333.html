@@ -1,0 +1,659 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10B抗微生物药物相关的光敏感性*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5a67d8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(90, 103, 216, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4c51bf;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+        
+        /* 引言说明 */
+        .intro {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .intro p {
+            margin-bottom: 10px;
+        }
+        
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+            min-width: 800px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 第一列 - 药物分类 */
+        td:first-child {
+            background: #ebf4ff;
+            font-weight: 600;
+            color: #2c5282;
+            width: 18%;
+            min-width: 150px;
+        }
+        
+        tr:nth-child(even) td:first-child {
+            background: #e1effe;
+        }
+        
+        /* 第二列 - 说明 */
+        td:nth-child(2) {
+            color: #4a5568;
+            width: 82%;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .ref {
+            color: #718096;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7e2;
+            color: #97266d;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.5);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 16px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            .intro {
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="332.html" class="nav-btn">◀ 上一页</a>
+        <a href="334.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~表10B抗微生物药物相关的光敏感性*****</h1>
+    
+    <!-- 引言说明 -->
+    <div class="intro">
+        <p>光敏感性分为光过敏（Ⅳ型变态反应）或光毒性（直接组织损伤）。光毒性反应较光过敏反应更为常见，常常涉及UVA辐射。</p>
+        <p>已知以下药物在某些个体可引起光敏感性。请注意，至少在四环素类药物中，停药后光敏性仍会持续数天。此处不涉及发生反应的相对频率和严重程度。<span class="ref">参见Drug Saf 2019, 42: 827</span>。</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物或分类</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>抗寄生虫药</td>
+                    <td>乙胺嘧啶（1篇报道）、奎宁（可与奎尼丁之间有交叉反应）。罕见的有氯喹的报道。近期有阿托伐醌-氯胍引起光毒性的报道，已被光斑贴试验证实</td>
+                </tr>
+                <tr>
+                    <td>唑类抗真菌药物</td>
+                    <td>伏立康唑、伊曲康唑、酮康唑，但氟康唑无此反应。有1篇报道提示1例服用特比萘芬的患者出现日光性荨麻疹</td>
+                </tr>
+                <tr>
+                    <td>头孢噻肟</td>
+                    <td>表现为光照部位毛细血管扩张<span class="ref">（Br J Dermatol 2000; 143: 674）</span></td>
+                </tr>
+                <tr>
+                    <td>头孢他啶</td>
+                    <td>观察到晒伤易感性增加<span class="ref">[Lancet 1993; 341(8854): 1221]</span></td>
+                </tr>
+                <tr>
+                    <td>氨苯砜</td>
+                    <td>罕见，起病缓慢（数周至数月）<br>个案报道及文献综述：<span class="ref">Photodermatol Photoimmunol Photomed 2023; 39: 407</span></td>
+                </tr>
+                <tr>
+                    <td>依非韦伦</td>
+                    <td>3篇报道</td>
+                </tr>
+                <tr>
+                    <td>氟胞嘧啶</td>
+                    <td>2篇报道</td>
+                </tr>
+                <tr>
+                    <td>氟喹诺酮类</td>
+                    <td>在喹诺酮核心C-8位置上有卤原子的药物引起的反应最重（洛美沙星、司帕沙星）。近期资料显示其他某些分子特征，如N-1位置的大的极性基团可以减轻C-8位置卤原子的效果；所以德拉沙星尽管在C-8位置有Cl原子，相对来说没有光毒性。司帕沙星之后，其他氟喹诺酮药物光毒性按降序排列为环丙沙星＞吉米沙星＞左氧氟沙星＞诺氟沙星＞氧氟沙星。到目前为止，加替沙星和莫西沙星与光毒性事件不相关<span class="ref">（Photochem Photobiol Sci 2018; 17: 773）</span></td>
+                </tr>
+                <tr>
+                    <td>灰黄霉素</td>
+                    <td>通常不被视为强效光敏剂，尽管有少量早期报道</td>
+                </tr>
+                <tr>
+                    <td>异烟肼</td>
+                    <td>经再次给药和光斑贴试验证实</td>
+                </tr>
+                <tr>
+                    <td>吡嗪酰胺</td>
+                    <td>经再次给药证实</td>
+                </tr>
+                <tr>
+                    <td>瑞扎芬净</td>
+                    <td>载明于制造商处方资料中</td>
+                </tr>
+                <tr>
+                    <td>沙奎那韦</td>
+                    <td>1篇报道</td>
+                </tr>
+                <tr>
+                    <td>富马酸替诺福韦酯</td>
+                    <td>1篇报道，经组织病理和光斑贴试验证实</td>
+                </tr>
+                <tr>
+                    <td>四环素类</td>
+                    <td>四环素和多西环素均有报道，米诺环素不常见。相比其他四环素类药物，光敏性可更易出现于萨瑞环素<span class="ref">（J Am Acad Dermatol 2022; 87: 1150）</span></td>
+                </tr>
+                <tr>
+                    <td>替加环素</td>
+                    <td>无相关报道</td>
+                </tr>
+                <tr>
+                    <td>甲氧苄啶</td>
+                    <td>单药或与磺胺甲噁唑合用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病/反应标签 -->
+            <span class="tag tag-disease">光过敏</span>
+            <span class="tag tag-disease">光毒性</span>
+            <span class="tag tag-disease">Ⅳ型变态反应</span>
+            <span class="tag tag-disease">UVA辐射</span>
+            <span class="tag tag-disease">日光性荨麻疹</span>
+            <span class="tag tag-disease">毛细血管扩张</span>
+            <span class="tag tag-disease">晒伤易感性</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">乙胺嘧啶</span>
+            <span class="tag tag-drug">奎宁</span>
+            <span class="tag tag-drug">氯喹</span>
+            <span class="tag tag-drug">阿托伐醌</span>
+            <span class="tag tag-drug">氯胍</span>
+            <span class="tag tag-drug">伏立康唑</span>
+            <span class="tag tag-drug">伊曲康唑</span>
+            <span class="tag tag-drug">酮康唑</span>
+            <span class="tag tag-drug">氟康唑</span>
+            <span class="tag tag-drug">特比萘芬</span>
+            <span class="tag tag-drug">头孢噻肟</span>
+            <span class="tag tag-drug">头孢他啶</span>
+            <span class="tag tag-drug">氨苯砜</span>
+            <span class="tag tag-drug">依非韦伦</span>
+            <span class="tag tag-drug">氟胞嘧啶</span>
+            <span class="tag tag-drug">洛美沙星</span>
+            <span class="tag tag-drug">司帕沙星</span>
+            <span class="tag tag-drug">德拉沙星</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">吉米沙星</span>
+            <span class="tag tag-drug">左氧氟沙星</span>
+            <span class="tag tag-drug">诺氟沙星</span>
+            <span class="tag tag-drug">氧氟沙星</span>
+            <span class="tag tag-drug">加替沙星</span>
+            <span class="tag tag-drug">莫西沙星</span>
+            <span class="tag tag-drug">灰黄霉素</span>
+            <span class="tag tag-drug">异烟肼</span>
+            <span class="tag tag-drug">吡嗪酰胺</span>
+            <span class="tag tag-drug">瑞扎芬净</span>
+            <span class="tag tag-drug">沙奎那韦</span>
+            <span class="tag tag-drug">富马酸替诺福韦酯</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">米诺环素</span>
+            <span class="tag tag-drug">萨瑞环素</span>
+            <span class="tag tag-drug">替加环素</span>
+            <span class="tag tag-drug">甲氧苄啶</span>
+            <span class="tag tag-drug">磺胺甲噁唑</span>
+            <!-- 细菌/微生物相关 -->
+            <span class="tag tag-bacteria">光斑贴试验</span>
+            <span class="tag tag-bacteria">交叉反应</span>
+            <span class="tag tag-bacteria">奎尼丁</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="333.html">333</a>
+    </div>
+    
+    <!-- 关键词与复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表10B抗微生物药物相关的光敏感性；光过敏；光毒性；UVA辐射；氟喹诺酮类；四环素类；伏立康唑；伊曲康唑；酮康唑；头孢噻肟；头孢他啶；氨苯砜；异烟肼；吡嗪酰胺；替加环素；甲氧苄啶；德拉沙星；莫西沙星；=333" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '表10B抗微生物药物相关的光敏感性',
+                    url: '333.html',
+                    pageNum: '333'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏！');
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '333.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '333.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast('搜索: ' + text);
+                // 这里可以添加实际的搜索跳转逻辑
+            });
+        });
+    </script>
+</body>
+</html>

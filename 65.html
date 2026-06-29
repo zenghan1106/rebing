@@ -1,13 +1,10 @@
-我来根据图片内容生成符合您要求的HTML网页。图片内容是关于女性生殖道感染（阴道炎、滴虫病、细菌性阴道炎）的治疗方案表格。
-
-
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~女性生殖道感染治疗方案指南*****</title>
+    <title>~~~~~生殖道女性阴道炎治疗方案表*****</title>
     <style>
         * {
             margin: 0;
@@ -16,418 +13,576 @@
         }
         
         body {
-            font-family: "Microsoft YaHei", "SimSun", sans-serif;
-            background-color: #f0f8ff;
-            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .home-btn {
-            background-color: #1a5276;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .home-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background-color: #2874a6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .nav-btn:hover {
-            background-color: #3498db;
-        }
-        
-        .copy-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-        
-        .copy-input {
-            width: calc(100% - 120px);
-            max-width: 800px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
             padding: 10px;
-            border: 2px solid #2874a6;
-            border-radius: 5px;
-            font-size: 13px;
-            color: #1a5276;
         }
         
-        .copy-btn {
-            background-color: #27ae60;
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #4a90d9;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
             border: none;
-            border-radius: 5px;
+            font-size: 14px;
             cursor: pointer;
-            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
-        .copy-btn:hover {
-            background-color: #2ecc71;
+        .fav-btn:hover {
+            background: #ff5252;
         }
         
-        .main-title {
+        /* 标题 */
+        h1 {
             text-align: center;
-            font-size: 28px;
             color: #1a5276;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 16px;
-            color: #2874a6;
-            margin-bottom: 20px;
-        }
-        
-        .tags-container {
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin: 60px 10px 20px;
             padding: 15px;
-            background-color: #d4edda;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
             border-radius: 10px;
-            border: 2px solid #27ae60;
+            border-left: 5px solid #4a90d9;
         }
         
-        .tags-label {
-            font-weight: bold;
-            color: #1e8449;
-            font-size: 14px;
-        }
-        
-        .tags-content {
-            color: #27ae60;
-            font-size: 14px;
-            word-break: break-all;
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            background: white;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 13px;
         }
         
-        th {
-            background-color: #1a5276;
+        /* 表头 */
+        thead {
+            background: #2e86c1;
             color: white;
-            padding: 15px;
+        }
+        
+        thead th {
+            padding: 15px 10px;
             text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            border: 1px solid #154360;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #1a5276;
         }
         
-        .first-row {
-            font-size: 18px !important;
+        /* 子表头 */
+        .sub-header {
+            background: #5dade2;
         }
         
-        td {
-            padding: 12px;
-            border: 1px solid #aed6f1;
-            color: #1a5276;
+        .sub-header th {
             font-size: 14px;
-            line-height: 1.8;
+            padding: 12px 10px;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: #e8f6f3;
+            font-weight: bold;
+        }
+        
+        .category-row td {
+            padding: 10px 15px;
+            color: #1a5276;
+            font-size: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        /* 表格内容 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
             vertical-align: top;
         }
         
-        tr:nth-child(even) {
-            background-color: #ebf5fb;
+        tbody tr:nth-child(even):not(.category-row) {
+            background: #f8fbfd;
         }
         
-        tr:hover {
-            background-color: #d6eaf8;
+        tbody tr:hover:not(.category-row) {
+            background: #e8f4f8;
         }
         
-        .section-header {
-            background-color: #2874a6 !important;
-            color: white !important;
-            font-weight: bold;
-            text-align: center;
+        /* 第一行字体大一点 */
+        .first-row td {
+            font-size: 14px;
         }
         
-        .col-header {
-            background-color: #5dade2 !important;
-            color: white !important;
-            font-weight: bold;
-        }
-        
-        .category-row {
-            background-color: #d4edda !important;
-            font-weight: bold;
-            color: #1e8449 !important;
-            font-size: 15px;
-        }
-        
-        .footer-section {
-            text-align: center;
+        /* 注释区域 */
+        .notes {
             margin-top: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .keywords-box {
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: #fdebd0;
-            border-radius: 8px;
-            border: 2px solid #f39c12;
-        }
-        
-        .keywords-title {
-            font-weight: bold;
-            color: #b9770e;
-            margin-bottom: 8px;
-        }
-        
-        .keywords-list {
-            color: #7d6608;
-            font-size: 14px;
-            line-height: 2;
-        }
-        
-        .page-number {
-            font-size: 20px;
+        .tags-section h3 {
             color: #1a5276;
-            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
         
-        .note-section {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #fadbd8;
-            border-radius: 8px;
-            border: 1px solid #e74c3c;
-            text-align: left;
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e8f4f8;
+            color: #2e86c1;
+            border-radius: 20px;
             font-size: 13px;
-            color: #922b21;
-            line-height: 1.8;
+            border: 1px solid #aed6f1;
         }
         
-        .highlight {
-            color: #c0392b;
-            font-weight: bold;
+        /* 关键词区域 */
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .drug-name {
-            color: #8e44ad;
-            font-weight: 500;
+        .keywords-section h3 {
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
         
-        .dosage {
-            color: #27ae60;
-            font-weight: 500;
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
-        .reference {
-            color: #7f8c8d;
-            font-style: italic;
+        .keyword {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #fef9e7;
+            color: #b7950b;
+            border-radius: 15px;
+            font-size: 12px;
+            border: 1px solid #f9e79f;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-section input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-section button {
+            padding: 12px 25px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-section button:hover {
+            background: #219a52;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th, .sub-header th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                padding: 8px 6px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .category-row td {
+                font-size: 14px;
+            }
+            
+            .home-btn, .nav-btns a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-section input {
+                width: 100%;
+            }
+            
+            .copy-section button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="header-bar">
-        <a href="index.html" class="home-btn">← 返回首页</a>
-        <div class="nav-buttons">
-            <a href="24.html" class="nav-btn">上一页</a>
-            <a href="26.html" class="nav-btn">下一页</a>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="64.html">← 上一页</a>
+        <a href="66.html">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表1(25)临床抗微生物治疗的初始选择-生殖道女性阴道炎治疗方案表*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案*</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="5">生殖道/女性（续）</td>
+                </tr>
+                <tr class="first-row">
+                    <td>
+                        <strong>阴道炎（MMWR 70: 1, 2021）</strong><br><br>
+                        <strong>念珠菌病：</strong>瘙痒、黏稠的奶酪样分泌物、pH＜4.5<br>
+                        表11A，176页
+                    </td>
+                    <td>
+                        白念珠菌占80%～90%，光滑念珠菌、热带念珠菌可能在增多（对唑类的敏感性下降）
+                    </td>
+                    <td>
+                        口服唑类：氟康唑150mg po×1剂；伊曲康唑200mg po bid×1d。轻型病例，局部使用非处方药物通常有效（如克霉唑、布康唑、咪康唑、噻康唑），霜剂或栓剂
+                    </td>
+                    <td>
+                        阴道内用唑类：抗菌活性不一，疗程从给药1剂到用药7～14天。可用药物：布康唑、克霉唑、咪康唑、噻康唑、特康唑（剂量见表11A，176页）
+                    </td>
+                    <td>
+                        制霉菌素阴道片剂×14天效果较弱。对唑类耐药菌株：甲紫、硼酸<br><br>
+                        对复发性念珠菌病（≥4次/年），行6个月的抑菌治疗：氟康唑150mg po×1剂/周或伊曲康唑100mg po qd或克霉唑阴道栓500mg×1剂/周
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>滴虫病：</strong>大量泡沫样分泌物，pH＞4.5，治疗性伴侣——见说明
+                    </td>
+                    <td>
+                        阴道毛滴虫<br><br>
+                        <strong>诊断：</strong>NAAT及PCR可行且敏感性最高，阴道分泌物涂片检测敏感性不高
+                    </td>
+                    <td>
+                        甲硝唑女性500mg po bid×7d或男性2g po×1剂。随机对照研究显示，7天方案更有效，如HIV阳性，应给予7天治疗方案<br>
+                        或替硝唑2g po×1剂<br>
+                        或塞克硝唑2g po×1包<br><br>
+                        <strong>妊娠：见说明</strong>
+                    </td>
+                    <td>
+                        对治疗失败者：<br>
+                        重复甲硝唑500mg po bid×7d；若再次失败，甲硝唑2g po qd×3～5d，仍失败者，替硝唑2g po qd×5d
+                    </td>
+                    <td>
+                        <strong>治疗男性性伴侣：</strong>甲硝唑2g×1剂或塞克硝唑，近20%男性非淋球菌性尿道炎患者有毛滴虫感染（JID 188: 465, 2003）<br><br>
+                        顽固病例的其他治疗方案参见CID 33: 1341, 2001<br><br>
+                        <strong>妊娠：</strong>没有资料表明甲硝唑有致畸或致突变作用<br><br>
+                        滴虫病的治疗，包括妊娠相关问题，参见MMWR 70: 1, 2021（CDC指南）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>细菌性阴道炎：</strong>恶臭阴道分泌物，pH＞4.5<br><br>
+                        妊娠期不推荐筛查（JAMA 2020, 323: 1286）
+                    </td>
+                    <td>
+                        病原体不明：与阴道加德纳菌、动弯杆菌属、人型支原体、普雷沃菌属及阴道阿托波菌等有关
+                    </td>
+                    <td>
+                        甲硝唑0.5g po bid 8×7d或甲硝唑阴道凝胶<sup>§</sup>（1支置阴道）qd×5d或2%克林霉素阴道霜5g，睡前置阴道×7d
+                    </td>
+                    <td>
+                        克林霉素0.3g bid po×7d或克林霉素胶囊100mg睡前置阴道×3d。塞克硝唑2g/包（颗粒混入苹果酱、酸奶布丁）×1剂，30分钟以上服完
+                    </td>
+                    <td>
+                        男性性伴侣无龟头炎者无须治疗<br><br>
+                        <strong>孕妇：</strong>口服甲硝唑或口服克林霉素，疗程7天<br><br>
+                        <strong>复发病例：</strong>联合硼酸的强化方案：甲硝唑0.5g po bid×7d，之后睡前阴道置入硼酸明胶胶囊600mg×21d，序贯甲硝唑阴道凝胶2次/周×16周（Sex Trans Dis 36: 732, 2009）<br><br>
+                        阴道凝胶治疗后，Lactiv-V益生菌阴道治疗降低复发率（p=0.01）（NEJM 382: 1906, 2020）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <div class="tags">
+            <span class="tag">阴道炎</span>
+            <span class="tag">念珠菌病</span>
+            <span class="tag">滴虫病</span>
+            <span class="tag">细菌性阴道炎</span>
+            <span class="tag">白念珠菌</span>
+            <span class="tag">光滑念珠菌</span>
+            <span class="tag">热带念珠菌</span>
+            <span class="tag">阴道毛滴虫</span>
+            <span class="tag">阴道加德纳菌</span>
+            <span class="tag">动弯杆菌属</span>
+            <span class="tag">人型支原体</span>
+            <span class="tag">普雷沃菌属</span>
+            <span class="tag">阴道阿托波菌</span>
+            <span class="tag">氟康唑</span>
+            <span class="tag">伊曲康唑</span>
+            <span class="tag">克霉唑</span>
+            <span class="tag">布康唑</span>
+            <span class="tag">咪康唑</span>
+            <span class="tag">噻康唑</span>
+            <span class="tag">特康唑</span>
+            <span class="tag">甲硝唑</span>
+            <span class="tag">替硝唑</span>
+            <span class="tag">塞克硝唑</span>
+            <span class="tag">克林霉素</span>
+            <span class="tag">制霉菌素</span>
+            <span class="tag">硼酸</span>
+            <span class="tag">Lactiv-V益生菌</span>
         </div>
     </div>
-
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <h3>🔑 关键词</h3>
+        <div class="keywords">
+            <span class="keyword">阴道炎</span>
+            <span class="keyword">念珠菌病</span>
+            <span class="keyword">滴虫病</span>
+            <span class="keyword">细菌性阴道炎</span>
+            <span class="keyword">氟康唑</span>
+            <span class="keyword">甲硝唑</span>
+            <span class="keyword">克林霉素</span>
+            <span class="keyword">克霉唑</span>
+            <span class="keyword">替硝唑</span>
+            <span class="keyword">塞克硝唑</span>
+            <span class="keyword">伊曲康唑</span>
+            <span class="keyword">益生菌</span>
+            <span class="keyword">妊娠</span>
+            <span class="keyword">复发</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">第 65 页</div>
+    
+    <!-- 复制编辑框 -->
     <div class="copy-section">
-        <input type="text" class="copy-input" id="copyText" value="女性生殖道感染治疗方案指南；阴道炎、念珠菌病、滴虫病、细菌性阴道炎、白念珠菌、光滑念珠菌、热带念珠菌、阴道毛滴虫、阴道加德纳菌、动弯杆菌属、人型支原体、普雷沃菌属、阴道阿托波菌、氟康唑、伊曲康唑、克霉唑、布康唑、咪康唑、噻康唑、特康唑、甲硝唑、替硝唑、塞克硝唑、克林霉素、硼酸、Lactiv-V益生菌；=25" readonly>
-        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        <input type="text" id="copyText" value="表1(25)临床抗微生物治疗的初始选择-生殖道女性阴道炎治疗方案表；阴道炎；念珠菌病；滴虫病；细菌性阴道炎；氟康唑；甲硝唑；克林霉素；克霉唑；替硝唑；塞克硝唑；伊曲康唑；=65" readonly>
+        <button onclick="copyToClipboard()">📋 复制</button>
     </div>
-
-    <h1 class="main-title">~~~~~女性生殖道感染治疗方案指南*****</h1>
-    <p class="subtitle">表1（25）临床抗微生物治疗的初始选择 | 生殖道/女性（续） | 第25页</p>
-
-    <div class="tags-container">
-        <span class="tags-label">%%%%%</span>
-        <span class="tags-content">阴道炎,念珠菌病,滴虫病,细菌性阴道炎,外阴阴道念珠菌病,VVC,白念珠菌,光滑念珠菌,热带念珠菌,阴道毛滴虫,阴道加德纳菌,动弯杆菌属,人型支原体,普雷沃菌属,阴道阿托波菌,厌氧菌,氟康唑,伊曲康唑,克霉唑,布康唑,咪康唑,噻康唑,特康唑,唑类,甲硝唑,替硝唑,塞克硝唑,硝基咪唑类,克林霉素,氯霉素,制霉菌素,硼酸,甲紫,阴道凝胶,阴道栓剂,Lactiv-V益生菌,NAAT,PCR,妊娠,复发性,顽固性,HIV</span>
-        <span class="tags-label">?????</span>
-    </div>
-
-    <table>
-        <thead>
-            <tr class="first-row">
-                <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
-                <th style="width: 20%;">病原体（通常）</th>
-                <th colspan="2" style="width: 40%;">推荐治疗方案*</th>
-                <th style="width: 22%;">辅助诊断或治疗方法及说明</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="col-header" colspan="5">首选方案 | 备选方案 §</td>
-            </tr>
-            <tr class="category-row">
-                <td colspan="5">生殖道/女性（续）</td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>阴道炎（MMWR 70: 1, 2021）</strong><br><br>
-                    <strong>念珠菌病：</strong>瘙痒、黏稠的奶酪样分泌物、pH＜4.5<br><br>
-                    <span class="reference">表11A，176页</span>
-                </td>
-                <td>
-                    <span class="drug-name">白念珠菌</span>占80%～90%，<span class="drug-name">光滑念珠菌</span>、<span class="drug-name">热带念珠菌</span>可能在增多（对唑类的敏感性下降）
-                </td>
-                <td>
-                    <strong>口服唑类：</strong><br>
-                    <span class="drug-name">氟康唑</span> <span class="dosage">150mg po×1剂</span>；<br>
-                    <span class="drug-name">伊曲康唑</span> <span class="dosage">200mg po bid×1d</span>。<br><br>
-                    轻型病例，局部使用非处方药物通常有效（如<span class="drug-name">克霉唑</span>、<span class="drug-name">布康唑</span>、<span class="drug-name">咪康唑</span>、<span class="drug-name">噻康唑</span>），霜剂或栓剂
-                </td>
-                <td>
-                    <strong>阴道内用唑类：</strong>抗菌活性不一，疗程从给药1剂到用药7～14天。可用药物：<span class="drug-name">布康唑</span>、<span class="drug-name">克霉唑</span>、<span class="drug-name">咪康唑</span>、<span class="drug-name">噻康唑</span>、<span class="drug-name">特康唑</span>（剂量见<span class="reference">表11A，176页</span>）
-                </td>
-                <td>
-                    <span class="drug-name">制霉菌素</span>阴道片剂×14天效果较弱。<br><br>
-                    对唑类耐药菌株：<span class="drug-name">甲紫</span>、<span class="drug-name">硼酸</span><br><br>
-                    对<span class="highlight">复发性念珠菌病</span>（≥4次/年），行6个月的抑菌治疗：<span class="drug-name">氟康唑</span> <span class="dosage">150mg po×1剂/周</span>或<span class="drug-name">伊曲康唑</span> <span class="dosage">100mg po qd</span>或<span class="drug-name">克霉唑</span>阴道栓 <span class="dosage">500mg×1剂/周</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>滴虫病：</strong>大量泡沫样分泌物，pH＞4.5，治疗性伴侣——见说明
-                </td>
-                <td>
-                    <span class="drug-name">阴道毛滴虫</span><br><br>
-                    <strong>诊断：</strong>NAAT及PCR可行且敏感性最高，阴道分泌物涂片检测敏感性不高
-                </td>
-                <td>
-                    <span class="drug-name">甲硝唑</span>女性 <span class="dosage">500mg po bid×7d</span> 或男性 <span class="dosage">2g po×1剂</span>。随机对照研究显示，7天方案更有效，如HIV阳性，应给予7天治疗方案<br><br>
-                    或<span class="drug-name">替硝唑</span> <span class="dosage">2g po×1剂</span><br><br>
-                    或<span class="drug-name">塞克硝唑</span> <span class="dosage">2g po×1包</span><br><br>
-                    <span class="highlight">妊娠：见说明</span>
-                </td>
-                <td>
-                    <strong>对治疗失败者：</strong><br>
-                    重复<span class="drug-name">甲硝唑</span> <span class="dosage">500mg po bid×7d</span>；若再次失败，<span class="drug-name">甲硝唑</span> <span class="dosage">2g po qd×3～5d</span>，仍失败者，<span class="drug-name">替硝唑</span> <span class="dosage">2g po qd×5d</span>
-                </td>
-                <td>
-                    <strong>治疗男性性伴侣：</strong><span class="drug-name">甲硝唑</span> <span class="dosage">2g×1剂</span>或<span class="drug-name">塞克硝唑</span>，近20%男性非淋球菌性尿道炎患者有毛滴虫感染（<span class="reference">JID 188: 465, 2003</span>）<br><br>
-                    顽固病例的其他治疗方案参见<span class="reference">CID 33: 1341, 2001</span><br><br>
-                    <strong>妊娠：</strong>没有资料表明<span class="drug-name">甲硝唑</span>有致畸或致突变作用<br><br>
-                    滴虫病的治疗，包括妊娠相关问题，参见<span class="reference">MMWR 70: 1, 2021（CDC指南）</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>细菌性阴道炎：</strong>恶臭阴道分泌物，pH＞4.5<br><br>
-                    <span class="highlight">妊娠期不推荐筛查</span>（<span class="reference">JAMA 2020, 323: 1286</span>）
-                </td>
-                <td>
-                    病原体不明：与<span class="drug-name">阴道加德纳菌</span>、<span class="drug-name">动弯杆菌属</span>、<span class="drug-name">人型支原体</span>、<span class="drug-name">普雷沃菌属</span>及<span class="drug-name">阴道阿托波菌</span>等有关
-                </td>
-                <td>
-                    <span class="drug-name">甲硝唑</span> <span class="dosage">0.5g po bid</span> 或 <span class="dosage">8×7d</span> 或 <span class="drug-name">甲硝唑</span>阴道凝胶<sup>§</sup>（1支置阴道）<span class="dosage">qd×5d</span> 或 <span class="dosage">2%</span> <span class="drug-name">克林霉素</span>阴道霜 <span class="dosage">5g</span>，睡前置阴道×7d
-                </td>
-                <td>
-                    <span class="drug-name">克林霉素</span> <span class="dosage">0.3g bid po×7d</span> 或 <span class="drug-name">克林霉素</span>胶囊 <span class="dosage">100mg</span> 睡前置阴道×3d。<span class="drug-name">塞克硝唑</span> <span class="dosage">2g/包</span>（颗粒混入苹果酱、酸奶布丁）×1剂，30分钟以上服完
-                </td>
-                <td>
-                    男性性伴侣无龟头炎者无须治疗<br><br>
-                    <strong>孕妇：</strong>口服<span class="drug-name">甲硝唑</span>或口服<span class="drug-name">克林霉素</span>，疗程7天<br><br>
-                    <strong>复发病例：</strong>联合<span class="drug-name">硼酸</span>的强化方案：<span class="drug-name">甲硝唑</span> <span class="dosage">0.5g po bid×7d</span>，之后睡前阴道置入<span class="drug-name">硼酸</span>明胶胶囊 <span class="dosage">600mg×21d</span>，序贯<span class="drug-name">甲硝唑</span>阴道凝胶 <span class="dosage">2次/周×16周</span>（<span class="reference">Sex Trans Dis 36: 732, 2009</span>）<br><br>
-                    阴道凝胶治疗后，<span class="drug-name">Lactiv-V</span>益生菌阴道治疗降低复发率（<span class="reference">p=0.01</span>）（<span class="reference">NEJM 382: 1906, 2020</span>）
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="footer-section">
-        <div class="keywords-box">
-            <div class="keywords-title">🔍 关键词检索</div>
-            <div class="keywords-list">
-                <strong>疾病：</strong>阴道炎 | 外阴阴道念珠菌病 | 念珠菌病 | 滴虫病 | 细菌性阴道炎 | 复发性念珠菌病 | 妊娠期感染<br>
-                <strong>细菌/病原体：</strong>白念珠菌 | 光滑念珠菌 | 热带念珠菌 | 阴道毛滴虫 | 阴道加德纳菌 | 动弯杆菌属 | 人型支原体 | 普雷沃菌属 | 阴道阿托波菌 | 厌氧菌<br>
-                <strong>抗生素/药物：</strong>氟康唑 | 伊曲康唑 | 克霉唑 | 布康唑 | 咪康唑 | 噻康唑 | 特康唑 | 制霉菌素 | 甲硝唑 | 替硝唑 | 塞克硝唑 | 克林霉素 | 氯霉素 | 硼酸 | 甲紫 | Lactiv-V益生菌 | 阴道凝胶 | 阴道栓剂 | 阴道霜
-            </div>
-        </div>
-        <div class="page-number">25</div>
-    </div>
-
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
     <script>
+        // 复制功能
         function copyToClipboard() {
-            const copyText = document.getElementById("copyText");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value).then(function() {
-                alert("已复制到剪贴板: " + copyText.value);
-            }).catch(function(err) {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }, function() {
                 document.execCommand('copy');
-                alert("已复制到剪贴板: " + copyText.value);
+                showToast('已复制到剪贴板！');
             });
         }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = document.querySelector('h1').textContent.replace(/[~*]/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '65';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                showToast('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '阴道炎治疗方案',
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            showToast('已添加到收藏！');
+            
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                time: new Date().toLocaleString()
+            }));
+        }
+        
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newFavorite' && window.location.pathname.includes('index.html')) {
+            }
+        });
     </script>
-
 </body>
 </html>
-```
-
-
-以上是完整的HTML网页代码，满足您的所有要求：
-
-
- 要求 	 实现情况 	
- 1. 表格合并 	 所有内容在一个大表格中，长内容自动换行 	
- 2. 字体颜色/底色 	 蓝色系配色，药物名紫色、剂量绿色、重点红色高亮 	
- 3. 标题可检索 	 `~~~~~女性生殖道感染治疗方案指南*****` 	
- 5. 底图不黑不暗 	 浅蓝色渐变背景 `#f0f8ff` → `#e6f3ff` 	
- 6. 表格头部蓝色 	 `#1a5276` 深蓝色，第一行字体18px 	
- 7. 标题格式 	 `~~~~~标题*****` 格式 	
- 8. 检索标签 	 `%%%%%...?????` 包含疾病、细菌、抗生素关键词 	
- 9. 返回首页按钮 	 左上方 `← 返回首页` 跳转 `index.html` 	
- 10. 页码 	 底部显示 **25**，链接为 `25.html` 去掉后缀 	
- 11. 上一页按钮 	 右上角跳转 `24.html` 	
- 12. 下一页按钮 	 右上角跳转 `26.html` 	
- 13. 复制编辑框 	 标题+关键词+`=25`，宽度自适应，点击复制到剪贴板 	
-
-
-
-额外特性：添加了"生殖道/女性（续）"分类行（绿色背景），注释和参考文献用灰色斜体区分，表格结构清晰展示三种阴道炎类型（念珠菌病、滴虫病、细菌性阴道炎）的治疗对比。

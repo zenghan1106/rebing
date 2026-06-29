@@ -1,0 +1,575 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表13A(6)寄生虫感染的治疗：双氢青蒿素-哌喹儿童剂量及青蒿琥酯方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8f0 50%, #fff8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #2c5aa0;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1e3d6f;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1e3d6f;
+        }
+        
+        /* 表头第一行更大字体 */
+        thead tr:first-child th {
+            font-size: 18px;
+            padding: 18px 10px;
+        }
+        
+        /* 子表头 */
+        thead tr:nth-child(2) th {
+            background: #4a7fc1;
+            font-size: 14px;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d0d0d0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        /* 病原体列 */
+        td:first-child {
+            background: #f8f9fa;
+            font-weight: 500;
+            min-width: 200px;
+        }
+        
+        /* 内容单元格 */
+        td {
+            min-width: 250px;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c41e3a;
+            font-weight: bold;
+        }
+        
+        .drug-name {
+            color: #2c5aa0;
+            font-weight: 600;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin-left: 18px;
+            padding-left: 0;
+        }
+        
+        td li {
+            margin-bottom: 5px;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #e65100;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2c5aa0;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 12px 30px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin: 20px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+            background: #ff5252;
+        }
+        
+        .fav-btn.favorited {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        /* 提示 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            padding: 15px 25px;
+            background: #333;
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 16px;
+                margin-top: 80px;
+            }
+            
+            thead tr:first-child th {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .nav-btns {
+                top: 60px;
+                right: 10px;
+            }
+            
+            .home-btn {
+                top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上下页导航 -->
+    <div class="nav-btns">
+        <a href="409.html" class="nav-btn">← 上一页</a>
+        <a href="411.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表13A(6)寄生虫感染的治疗：双氢青蒿素-哌喹儿童剂量及青蒿琥酯方案*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">病原体</th>
+                    <th colspan="2">推荐方案</th>
+                    <th rowspan="2">说明</th>
+                </tr>
+                <tr>
+                    <th>首选药物</th>
+                    <th>备选药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>对氯喹耐药或耐药情况不详的非复杂恶性疟原虫或种属不详（续）</strong>
+                    </td>
+                    <td>
+                        <span class="drug-name">双氢青蒿素-哌喹</span>（DHA-PPQ）儿童剂量：<br>
+                        5～＜7kg PPQ 80mg/DHA 10mg po qd×3d<br>
+                        7～＜13kg PPQ 160mg/DHA 20mg po qd×3d<br>
+                        13～＜24kg PPQ 320mg/DHA 40mg po qd×3d<br>
+                        24～＜36kg PPQ 640mg/DHA 80mg po qd×3d<br>
+                        36～＜75kg PPQ 960mg/DHA 120mg po qd×3d<br>
+                        75～＜100kg PPQ 1280mg/DHA 160mg po qd×3d<br>
+                        ≥100kg，没有数据<br><br>
+                        许多流行国家可获得WHO授权、EMA批准的青蒿素类联合治疗方案为<span class="drug-name">咯萘啶-青蒿琥酯</span>，24～＞45kg，2片（180mg/60mg）qd×3d；20～＜24kg，每天1片<br><br>
+                        儿童颗粒或口服悬液（60mg/20mg）<br>
+                        <ul>
+                            <li>5～＜8kg，1袋qd×3d</li>
+                            <li>8～＜15kg，2袋qd×3d</li>
+                            <li>15～＜20kg，3袋qd×3d</li>
+                        </ul>
+                    </td>
+                    <td>
+                        （空）
+                    </td>
+                    <td>
+                        （空）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p>注：关于药物来源见表13D，222页。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">410</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">疟疾</span>
+            <span class="tag tag-disease">恶性疟原虫</span>
+            <span class="tag tag-disease">非复杂疟疾</span>
+            <span class="tag tag-drug">双氢青蒿素</span>
+            <span class="tag tag-drug">哌喹</span>
+            <span class="tag tag-drug">DHA</span>
+            <span class="tag tag-drug">PPQ</span>
+            <span class="tag tag-drug">咯萘啶</span>
+            <span class="tag tag-drug">青蒿琥酯</span>
+            <span class="tag tag-drug">青蒿素类联合治疗</span>
+            <span class="tag tag-bacteria">疟原虫</span>
+            <span class="tag tag-bacteria">氯喹耐药</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="tags-title">📋 复制信息</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表13A(6)寄生虫感染的治疗：双氢青蒿素-哌喹儿童剂量及青蒿琥酯方案；疟疾、恶性疟原虫、非复杂疟疾、双氢青蒿素、哌喹、DHA、PPQ、咯萘啶、青蒿琥酯、青蒿素类联合治疗、疟原虫、氯喹耐药；=410" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：疟疾 | 恶性疟原虫 | 非复杂疟疾 | 双氢青蒿素 | 哌喹 | DHA | PPQ | 咯萘啶 | 青蒿琥酯 | 青蒿素类联合治疗 | 疟原虫 | 氯喹耐药
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">♥</button>
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '★';
+                showToast('已添加到index收藏');
+                saveToIndex();
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '♥';
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 保存到index收藏（使用localStorage模拟）
+        function saveToIndex() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: '表13A(6)寄生虫感染的治疗：双氢青蒿素-哌喹儿童剂量及青蒿琥酯方案',
+                url: '410.html',
+                category: '寄生虫感染'
+            };
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === currentPage.url);
+            if (!exists) {
+                favorites.push(currentPage);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '410.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '★';
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            checkFavorite();
+        };
+    </script>
+</body>
+</html>

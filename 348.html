@@ -1,0 +1,549 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表11A（2）真菌感染的治疗*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1a5276;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #3498db;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .favorite-btn.favorited {
+            background-color: #f39c12;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .drug-info {
+            color: #2c3e50;
+        }
+        
+        .note-info {
+            color: #444;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .intro-text {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #444;
+        }
+        
+        .intro-text p {
+            margin-bottom: 10px;
+        }
+        
+        .tags-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .copy-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #3498db;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="347.html" class="nav-btn">上一页</a>
+            <a href="349.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表11A（2）真菌感染的治疗*****</h1>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2" style="width: 26%;">感染类型/病原菌/感染部位</th>
+                <th colspan="2" style="width: 36%; text-align: center;">抗微生物药物选择</th>
+                <th rowspan="2" style="width: 38%;">说明</th>
+            </tr>
+            <tr>
+                <th style="width: 18%;">首选药物</th>
+                <th style="width: 18%;">替代药物</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="disease-name">芽生菌病</span>（CID 46: 1801, 2008）<br>
+                    （皮炎芽生菌）皮肤、肺或肺外
+                </td>
+                <td class="drug-info">
+                    <strong>两性霉素B脂质体</strong>3～5mg/（kg·d），或<strong>两性霉素B</strong>0.7～1.0mg/（kg·d）×1～2w，然后<strong>伊曲康唑</strong>口服溶液200mg tid×3d，然后伊曲康唑200mg bid×6～12个月
+                </td>
+                <td class="drug-info">
+                    对于轻、中度患者，<strong>伊曲康唑</strong>口服溶液200mg tid×3d，然后1～2次/天×6～12个月，或不耐受伊曲康唑者，<strong>氟康唑</strong>400～800mg/d
+                </td>
+                <td class="note-info">
+                    应在两周后测定伊曲康唑的血清浓度以确保足够的药物暴露。氟康唑的疗效较伊曲康唑弱；伏立康唑或泊沙康唑的作用尚不明确，但体外实验显示其具有活性。可查尿芽生菌抗原以辅助诊断
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="disease-name">芽生菌病：中枢神经系统疾病</span>（CID 50: 797, 2010）
+                </td>
+                <td class="drug-info">
+                    <strong>两性霉素B脂质体</strong>5mg/（kg·d）×4～6w，然后<strong>氟康唑</strong>800mg/d
+                </td>
+                <td class="drug-info">
+                    <strong>伊曲康唑</strong>口服溶液200mg bid或tid，或<strong>伏立康唑</strong>200～400mg q12h
+                </td>
+                <td class="note-info">
+                    氟康唑与伏立康唑具有更佳的中枢神经系统穿透性，可平衡其相较于伊曲康唑稍弱的抗真菌活性。疗程应至少持续12个月且直至脑脊液指标恢复正常。需监测伊曲康唑血清浓度以保证药物达有效浓度。新近研究提示伏立康唑治疗预后更好（CID 50: 797, 2010）
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 念珠菌病引言 -->
+    <div class="intro-text">
+        <p><strong>念珠菌病：</strong>念珠菌是医院内血流感染的常见病原菌。白念珠菌和非白念珠菌对抗真菌药的敏感性降低（尤其是氟康唑）。在免疫缺陷患者抗真菌药物广泛用于预防治疗（尤其是氟康唑）。口腔、食管或阴道念珠菌病是晚期艾滋病的一个主要表现，是常见的艾滋病指征性疾病之一。IDSA指南更新参见CID 62: e1, 2016</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">348</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">芽生菌病</span>
+            <span class="tag disease">皮炎芽生菌</span>
+            <span class="tag disease">中枢神经系统疾病</span>
+            <span class="tag disease">念珠菌病</span>
+            <span class="tag disease">医院内血流感染</span>
+            <span class="tag disease">口腔念珠菌病</span>
+            <span class="tag disease">食管念珠菌病</span>
+            <span class="tag disease">阴道念珠菌病</span>
+            <span class="tag disease">艾滋病</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag antibiotic">两性霉素B脂质体</span>
+            <span class="tag antibiotic">两性霉素B</span>
+            <span class="tag antibiotic">伊曲康唑</span>
+            <span class="tag antibiotic">氟康唑</span>
+            <span class="tag antibiotic">伏立康唑</span>
+            <span class="tag antibiotic">泊沙康唑</span>
+            <!-- 细菌标签 -->
+            <span class="tag bacteria">皮炎芽生菌</span>
+            <span class="tag bacteria">白念珠菌</span>
+            <span class="tag bacteria">非白念珠菌</span>
+            <span class="tag bacteria">念珠菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表11A（2）真菌感染的治疗；真菌感染的治疗；芽生菌病；皮炎芽生菌；中枢神经系统疾病；念珠菌病；医院内血流感染；口腔念珠菌病；食管念珠菌病；阴道念珠菌病；艾滋病；两性霉素B脂质体；两性霉素B；伊曲康唑；氟康唑；伏立康唑；泊沙康唑；白念珠菌；非白念珠菌；念珠菌；IDSA；=348" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">★</button>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+                showToast('已收藏！将添加到index收藏类目');
+                
+                const favoriteData = {
+                    title: '表11A（2）真菌感染的治疗',
+                    url: '348.html',
+                    page: '348',
+                    tags: ['芽生菌病', '皮炎芽生菌', '中枢神经系统疾病', '念珠菌病', '伊曲康唑', '氟康唑', '伏立康唑', '两性霉素B', '白念珠菌', '艾滋病'],
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === '348.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '★';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '348.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '348.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+            }
+        };
+    </script>
+</body>
+</html>

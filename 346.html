@@ -1,0 +1,542 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表11A 曲霉病治疗方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1a5276;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #3498db;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .favorite-btn.favorited {
+            background-color: #f39c12;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .table-note-top {
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .drug-info {
+            color: #2c3e50;
+        }
+        
+        .note-info {
+            color: #444;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .copy-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #3498db;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="345.html" class="nav-btn">上一页</a>
+            <a href="347.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表11A 曲霉病治疗方案*****</h1>
+    
+    <!-- 表格顶部注释 -->
+    <div class="table-note-top">
+        抗真菌活性谱见表4B，84页
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2" style="width: 28%;">感染类型/病原菌/感染部位</th>
+                <th colspan="2" style="width: 36%; text-align: center;">抗微生物药物选择</th>
+                <th rowspan="2" style="width: 36%;">说明</th>
+            </tr>
+            <tr>
+                <th style="width: 18%;">首选药物</th>
+                <th style="width: 18%;">替代药物</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4" style="background-color: #f0f4f8; font-weight: bold;">
+                    曲霉病（烟曲霉菌最常见，黄曲霉菌和其他曲霉菌也可以见到）（NEJM 360: 1870, 2009; Chest 146: 1358, 2014）。诊断：Chest 156: 834, 2019
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="disease-name">变应性支气管肺曲霉病（ABPA）</span><br><br>
+                    临床表现：喘息、肺部浸润、支气管扩张和肺纤维化。气道内曲霉菌定植伴血嗜酸性粒细胞增多、血清IgE和特异抗体增高
+                </td>
+                <td class="drug-info">
+                    ABPA相关的急性哮喘发作：<br>
+                    <strong>糖皮质激素</strong>
+                </td>
+                <td class="drug-info">
+                    ABPA的治疗：<strong>伊曲康唑</strong>口服溶液200mg po bid×16w或更长时间
+                </td>
+                <td class="note-info">
+                    伊曲康唑能减少需要激素治疗的急性发作，改善免疫学指标、肺功能和运动耐量（CID 63: 433, 2016）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="disease-name">变应性真菌性鼻窦炎：</span>慢性鼻窦炎反复发作，无骨破坏的鼻息肉，哮喘、湿疹或过敏性鼻炎，IgE水平升高，分离出曲霉菌或其他暗色霉菌（链格孢菌、支孢霉菌等）
+                </td>
+                <td class="drug-info">
+                    治疗（有争议）：全身用糖皮质激素＋外科清创（易复发）
+                </td>
+                <td class="drug-info">
+                    治疗无效可试用<strong>伊曲康唑</strong>200mg po bid×12个月，或<strong>氟康唑</strong>鼻喷雾剂
+                </td>
+                <td class="note-info">
+                    有争议
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="disease-name">肺曲霉球（真菌球）</span>
+                </td>
+                <td class="drug-info" colspan="2">
+                    不治疗或外科切除。抗真菌药物的疗效尚未证实
+                </td>
+                <td class="note-info">
+                    肺隔离症可并发曲霉菌感染
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">346</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">曲霉病</span>
+            <span class="tag disease">变应性支气管肺曲霉病</span>
+            <span class="tag disease">ABPA</span>
+            <span class="tag disease">变应性真菌性鼻窦炎</span>
+            <span class="tag disease">慢性鼻窦炎</span>
+            <span class="tag disease">鼻息肉</span>
+            <span class="tag disease">哮喘</span>
+            <span class="tag disease">湿疹</span>
+            <span class="tag disease">过敏性鼻炎</span>
+            <span class="tag disease">肺曲霉球</span>
+            <span class="tag disease">真菌球</span>
+            <span class="tag disease">肺隔离症</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag antibiotic">糖皮质激素</span>
+            <span class="tag antibiotic">伊曲康唑</span>
+            <span class="tag antibiotic">氟康唑</span>
+            <!-- 细菌标签 -->
+            <span class="tag bacteria">烟曲霉菌</span>
+            <span class="tag bacteria">黄曲霉菌</span>
+            <span class="tag bacteria">曲霉菌</span>
+            <span class="tag bacteria">链格孢菌</span>
+            <span class="tag bacteria">支孢霉菌</span>
+            <span class="tag bacteria">暗色霉菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表11A 曲霉病治疗方案；曲霉病治疗方案；曲霉病；变应性支气管肺曲霉病；ABPA；变应性真菌性鼻窦炎；慢性鼻窦炎；鼻息肉；哮喘；湿疹；过敏性鼻炎；肺曲霉球；真菌球；肺隔离症；糖皮质激素；伊曲康唑；氟康唑；烟曲霉菌；黄曲霉菌；曲霉菌；链格孢菌；支孢霉菌；暗色霉菌；=346" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">★</button>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+                showToast('已收藏！将添加到index收藏类目');
+                
+                const favoriteData = {
+                    title: '表11A 曲霉病治疗方案',
+                    url: '346.html',
+                    page: '346',
+                    tags: ['曲霉病', 'ABPA', '变应性支气管肺曲霉病', '肺曲霉球', '伊曲康唑', '氟康唑', '糖皮质激素', '烟曲霉菌', '黄曲霉菌'],
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === '346.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '★';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '346.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '346.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~HIV/AIDS治疗中要考虑的其他问题*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #1e8449;
+            transform: translateY(-2px);
+        }
+        
+        .prev-btn {
+            right: 110px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #f39c12;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 10px;
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            padding: 0 20px 30px;
+            font-size: 16px;
+            color: #546e7a;
+        }
+        
+        /* 注意框 */
+        .notice-box {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 15px 20px;
+            background: #fff3e0;
+            border-radius: 8px;
+            border-left: 4px solid #ef6c00;
+            font-size: 14px;
+            color: #5d4037;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 表格单元格 */
+        td {
+            border: 1px solid #e0e0e0;
+            padding: 16px 15px;
+            vertical-align: top;
+        }
+        
+        /* 数据行 */
+        tbody tr {
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        /* 编号样式 */
+        .num {
+            color: #1565c0;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        /* 长文本换行 */
+        td {
+            word-wrap: break-word;
+            line-height: 1.8;
+        }
+        
+        /* 注释 */
+        .note {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 15px 20px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            border-left: 4px solid #1565c0;
+            font-size: 13px;
+            color: #424242;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .page-number a {
+            color: #1565c0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #1565c0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 30px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #0d47a1;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 3px;
+            background: #eceff1;
+            color: #546e7a;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 20px;
+                padding-top: 100px;
+            }
+            
+            .page-subtitle {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 14px 10px;
+            }
+            
+            td {
+                padding: 12px 10px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 95px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .notice-box {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页按钮 -->
+    <a href="494.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="496.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~HIV/AIDS治疗中要考虑的其他问题*****</h1>
+    <p class="page-subtitle">抗反转录病毒治疗（ART）相关注意事项</p>
+    
+    <!-- 注意框 -->
+    <div class="notice-box">
+        <strong>注意：</strong>初始的ART可以引起免疫重建炎症综合征，造成严重临床后果。
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 50%;">治疗注意事项（左侧）</th>
+                    <th style="width: 50%;">治疗注意事项（右侧）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="num">1.</span><strong>耐药检测：</strong>考虑到目前的耐药率，所有初始治疗的患者推荐进行治疗前耐药性检测，包括急性期感染者（等待结果期间可开始治疗，再根据耐药结果调整治疗）、抗病毒治疗失败而更改治疗、病毒学疗效不理想时，以及孕妇。停止ART 4周以上或HIV RNA＜500拷贝/毫升的患者不推荐耐药性测定
+                    </td>
+                    <td>
+                        <span class="num">4.</span><strong>药物相互作用</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="num">2.</span><strong>药物诱发的血糖紊乱和脂代谢异常</strong>（见表14D）
+                    </td>
+                    <td>
+                        <span class="num">5.</span><strong>妊娠风险</strong>（见表8）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="num">3.</span><strong>药物诱发的乳酸酸中毒和其他FDA的"黑框警告"</strong>（见表14D）
+                    </td>
+                    <td>
+                        <span class="num">6.</span><strong>妇女和儿童的应用</strong>（见表14C）
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <span class="num">7.</span><strong>肝、肾功能不全患者的剂量</strong>（见表17A，表17B）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>*CPE（中枢神经系统穿透效力）值；1＝低穿透，2、3＝中等穿透，4＝高穿透至中枢神经系统（<em>AIDS</em> 25: 357, 2011）。
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="495.html">495</a>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="HIV/AIDS治疗中要考虑的其他问题；抗反转录病毒治疗相关注意事项；ART；免疫重建炎症综合征；耐药检测；血糖紊乱；脂代谢异常；乳酸酸中毒；黑框警告；药物相互作用；妊娠风险；妇女和儿童；肝功能不全；肾功能不全；CPE；中枢神经系统穿透效力；=495" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag tag-disease">HIV</span>
+        <span class="tag tag-disease">AIDS</span>
+        <span class="tag tag-disease">免疫重建炎症综合征</span>
+        <span class="tag tag-disease">血糖紊乱</span>
+        <span class="tag tag-disease">脂代谢异常</span>
+        <span class="tag tag-disease">乳酸酸中毒</span>
+        <span class="tag tag-disease">妊娠</span>
+        <span class="tag tag-disease">肝功能不全</span>
+        <span class="tag tag-disease">肾功能不全</span>
+        <span class="tag tag-drug">ART</span>
+        <span class="tag tag-drug">抗反转录病毒治疗</span>
+        <span class="tag tag-drug">黑框警告</span>
+        <span class="tag tag-bacteria">HIV RNA</span>
+        <span class="tag tag-bacteria">CPE</span>
+        <span class="tag tag-bacteria">中枢神经系统穿透效力</span>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <span class="keyword">HIV/AIDS</span>
+        <span class="keyword">抗反转录病毒治疗</span>
+        <span class="keyword">ART</span>
+        <span class="keyword">免疫重建炎症综合征</span>
+        <span class="keyword">耐药检测</span>
+        <span class="keyword">血糖紊乱</span>
+        <span class="keyword">脂代谢异常</span>
+        <span class="keyword">乳酸酸中毒</span>
+        <span class="keyword">黑框警告</span>
+        <span class="keyword">药物相互作用</span>
+        <span class="keyword">妊娠风险</span>
+        <span class="keyword">妇女和儿童</span>
+        <span class="keyword">肝功能不全</span>
+        <span class="keyword">肾功能不全</span>
+        <span class="keyword">CPE</span>
+        <span class="keyword">中枢神经系统穿透</span>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制！';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.querySelector('.copy-btn');
+                    btn.textContent = '已复制！';
+                    setTimeout(() => btn.textContent = '复制', 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.querySelector('.fav-btn');
+            const isFav = btn.classList.toggle('active');
+            
+            const title = document.querySelector('.page-title').textContent;
+            const pageNum = '495';
+            const url = '495.html';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (isFav) {
+                const exists = favorites.find(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: title.replace(/~~~~~|*****|/g, '').trim(),
+                        url: url,
+                        pageNum: pageNum,
+                        category: 'HIV/AIDS治疗',
+                        date: new Date().toISOString()
+                    });
+                }
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                alert('已添加到收藏！请在index.html查看');
+            } else {
+                favorites = favorites.filter(f => f.url !== url);
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.addEventListener('load', () => {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '495.html');
+            if (isFav) {
+                const btn = document.querySelector('.fav-btn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        });
+    </script>
+</body>
+</html>

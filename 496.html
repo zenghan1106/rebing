@@ -1,0 +1,603 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表14D 抗反转录病毒药物和不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 30px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #1e8449;
+            transform: translateY(-2px);
+        }
+        
+        .prev-btn {
+            right: 110px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #f39c12;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 10px;
+            font-size: 28px;
+            color: #2c3e50;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            padding: 0 20px 30px;
+            font-size: 16px;
+            color: #546e7a;
+        }
+        
+        /* 类别说明框 */
+        .category-box {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 15px 20px;
+            background: #fff3e0;
+            border-radius: 8px;
+            border-left: 4px solid #ef6c00;
+            font-size: 14px;
+            color: #5d4037;
+            line-height: 1.8;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #1565c0;
+            color: white;
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 表格单元格 */
+        td, th {
+            border: 1px solid #e0e0e0;
+            padding: 14px 12px;
+            vertical-align: top;
+        }
+        
+        /* 数据行 */
+        tbody tr {
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background: #f0f7ff;
+        }
+        
+        /* 药物名称列 */
+        td:first-child {
+            font-weight: bold;
+            color: #1565c0;
+            white-space: nowrap;
+            min-width: 140px;
+        }
+        
+        /* 长文本换行 */
+        td {
+            word-wrap: break-word;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+        
+        /* 黑框警告高亮 */
+        .black-box {
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .page-number a {
+            color: #1565c0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #1565c0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 30px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #0d47a1;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 3px;
+            background: #eceff1;
+            color: #546e7a;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 20px;
+                padding-top: 100px;
+            }
+            
+            .page-subtitle {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+            }
+            
+            td:first-child {
+                white-space: normal;
+                min-width: 100px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 95px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .category-box {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页按钮 -->
+    <a href="495.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="497.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~表14D 抗反转录病毒药物和不良反应*****</h1>
+    <p class="page-subtitle">核苷类反转录酶抑制剂（NRTI）不良反应汇总</p>
+    
+    <!-- 类别说明框 -->
+    <div class="category-box">
+        <strong>核苷类反转录酶抑制剂（NRTI）所有核苷类/核苷酸类反转录酶抑制剂的黑框警告：</strong>乳酸酸中毒、肝脂肪变性，潜在致死性。同时警告有脂肪重新分布和免疫重建综合征（包括迟发性自身免疫综合征）
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称：通用名（商品名）</th>
+                    <th>常见不良反应</th>
+                    <th>最重要的不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>阿巴卡韦（Ziagen）</td>
+                    <td>头痛（7%～13%），恶心（7%～19%），腹泻（7%），不适（7%～12%）</td>
+                    <td><span class="black-box">黑框警告：</span>变态反应（HR）（8%），报道通常伴不适、发热、胃肠道不适、皮疹、困倦和呼吸道症状、肌痛、关节痛、水肿和感觉异常较少见。若怀疑HR，立即停用。严禁再次应用，可能致死。严重HR在每天一次给药时可能更常见。在高加索人群HLA-B 5701等位基因预示HR的风险增加；除外HLA-B 5701阳性的患者后，HR的发病率显著下降。DHHS指南建议检测HLA-B 5071，含阿巴卡韦的方案只能用于HLA-B 5701阴性患者；所有人群均要警惕。有报道合用阿巴卡韦可能增加心肌梗死的风险。其他研究未发现心肌梗死风险增加。FDA进行的一项临床随机试验的荟萃分析也未显示心肌梗死风险增加（www.fda.gov/drugs/drugsafety/ucm245164.htm）。尽管如此，使用阿巴卡韦时，仍建议优化控制可改变的心脏病高危因素</td>
+                </tr>
+                <tr>
+                    <td>恩曲他滨（FTC）（Emtriva）</td>
+                    <td>耐受性良好。头痛、腹泻、恶心、皮疹、皮肤色素沉着</td>
+                    <td>潜在的乳酸酸中毒（与其他NRTI相同）。<span class="black-box">黑框警告：</span>有报道停药可使乙肝加重，乙肝患者停药后需临床/实验室监测数月。如果停用FTC，可能需要抗HBV治疗</td>
+                </tr>
+                <tr>
+                    <td>拉米夫定（3TC）（Epivir）</td>
+                    <td>耐受性良好。头痛（35%），恶心（33%），腹泻（18%），腹痛（9%），失眠（11%）（均与ZDV合用）。胰腺炎在儿童更常见</td>
+                    <td><span class="black-box">黑框警告：</span>必须用治疗HIV的剂量，而不是治疗乙肝的剂量。停药可使乙肝加重。乙肝患者停用拉米夫定后需临床/实验室监测数月。如果停用3TC，可能需要抗HBV治疗</td>
+                </tr>
+                <tr>
+                    <td>齐多夫定（ZDV，AZT）（Retrovir）</td>
+                    <td>恶心（50%），厌食（20%），呕吐（17%），头痛（62%）。亦有报道虚弱、失眠、肌痛、指甲色素沉着。巨红细胞增多症可见于任何剂量的治疗方案</td>
+                    <td><span class="black-box">黑框警告：</span>血液学毒性、肌病、贫血（血红蛋白＜80g/L，1%）、中性粒细胞减少（＜0.75×10⁹/L，1.8%）。如内源性血清促红细胞生成素水平≤500mU/ml，则用促红细胞生成素α治疗贫血有效。与利巴韦林合用可能增加毒性，不建议和利巴韦林合用。在HIV、HCV共感染患者，接受齐多夫定和干扰素α±利巴韦林时可发生肝功能失代偿</td>
+                </tr>
+                <tr>
+                    <td>富马酸替诺福韦酯（TDF）（Viread）<br>丙酚替诺福韦（TAF）</td>
+                    <td>腹泻（11%），恶心（8%），呕吐（5%），腹胀（4%）（通常可以耐受）</td>
+                    <td><span class="black-box">黑框警告：</span>有报道停用替诺福韦后，乙肝恶化。如果停药需要严密监测。如果停用TDF，可能需要抗HBV治疗。有替诺福韦导致肾损害的报道，包括范可尼综合征。有TDF＋ddl致范可尼综合征和尿崩症的报道。TDF可使肾功能中度下降，较其他NRTI或TAF重，且其影响在TDF合用PI时比合用NNRTI更明显。监测CCr、血磷和尿常规，特别是既往有肾功能不全和同期使用肾毒性药物的患者。TDF与骨矿物丢失增加有关，TAF未见骨矿物丢失增加</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="496.html">496</a>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表14D 抗反转录病毒药物和不良反应；核苷类反转录酶抑制剂不良反应汇总；NRTI；阿巴卡韦；Ziagen；恩曲他滨；FTC；Emtriva；拉米夫定；3TC；Epivir；齐多夫定；ZDV；AZT；Retrovir；替诺福韦；TDF；Viread；TAF；丙酚替诺福韦；乳酸酸中毒；肝脂肪变性；免疫重建综合征；脂肪重新分布；HLA-B 5701；变态反应；心肌梗死；乙肝；HBV；HCV；贫血；中性粒细胞减少；范可尼综合征；骨矿物丢失；=496" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag tag-disease">乳酸酸中毒</span>
+        <span class="tag tag-disease">肝脂肪变性</span>
+        <span class="tag tag-disease">免疫重建综合征</span>
+        <span class="tag tag-disease">脂肪重新分布</span>
+        <span class="tag tag-disease">乙肝</span>
+        <span class="tag tag-disease">HBV</span>
+        <span class="tag tag-disease">HCV</span>
+        <span class="tag tag-disease">贫血</span>
+        <span class="tag tag-disease">中性粒细胞减少</span>
+        <span class="tag tag-disease">范可尼综合征</span>
+        <span class="tag tag-disease">骨矿物丢失</span>
+        <span class="tag tag-disease">心肌梗死</span>
+        <span class="tag tag-disease">肌病</span>
+        <span class="tag tag-disease">胰腺炎</span>
+        <span class="tag tag-drug">阿巴卡韦</span>
+        <span class="tag tag-drug">Ziagen</span>
+        <span class="tag tag-drug">恩曲他滨</span>
+        <span class="tag tag-drug">FTC</span>
+        <span class="tag tag-drug">Emtriva</span>
+        <span class="tag tag-drug">拉米夫定</span>
+        <span class="tag tag-drug">3TC</span>
+        <span class="tag tag-drug">Epivir</span>
+        <span class="tag tag-drug">齐多夫定</span>
+        <span class="tag tag-drug">ZDV</span>
+        <span class="tag tag-drug">AZT</span>
+        <span class="tag tag-drug">Retrovir</span>
+        <span class="tag tag-drug">替诺福韦</span>
+        <span class="tag tag-drug">TDF</span>
+        <span class="tag tag-drug">Viread</span>
+        <span class="tag tag-drug">TAF</span>
+        <span class="tag tag-drug">丙酚替诺福韦</span>
+        <span class="tag tag-drug">NRTI</span>
+        <span class="tag tag-drug">核苷类反转录酶抑制剂</span>
+        <span class="tag tag-drug">利巴韦林</span>
+        <span class="tag tag-drug">干扰素α</span>
+        <span class="tag tag-bacteria">HLA-B 5701</span>
+        <span class="tag tag-bacteria">促红细胞生成素α</span>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">关键词</div>
+        <span class="keyword">抗反转录病毒药物</span>
+        <span class="keyword">不良反应</span>
+        <span class="keyword">NRTI</span>
+        <span class="keyword">核苷类反转录酶抑制剂</span>
+        <span class="keyword">阿巴卡韦</span>
+        <span class="keyword">恩曲他滨</span>
+        <span class="keyword">拉米夫定</span>
+        <span class="keyword">齐多夫定</span>
+        <span class="keyword">替诺福韦</span>
+        <span class="keyword">丙酚替诺福韦</span>
+        <span class="keyword">乳酸酸中毒</span>
+        <span class="keyword">肝脂肪变性</span>
+        <span class="keyword">免疫重建综合征</span>
+        <span class="keyword">脂肪重新分布</span>
+        <span class="keyword">黑框警告</span>
+        <span class="keyword">HLA-B 5701</span>
+        <span class="keyword">变态反应</span>
+        <span class="keyword">心肌梗死</span>
+        <span class="keyword">乙肝加重</span>
+        <span class="keyword">HBV</span>
+        <span class="keyword">HCV</span>
+        <span class="keyword">贫血</span>
+        <span class="keyword">中性粒细胞减少</span>
+        <span class="keyword">范可尼综合征</span>
+        <span class="keyword">骨矿物丢失</span>
+        <span class="keyword">肾功能不全</span>
+    </div>
+
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制！';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.querySelector('.copy-btn');
+                    btn.textContent = '已复制！';
+                    setTimeout(() => btn.textContent = '复制', 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.querySelector('.fav-btn');
+            const isFav = btn.classList.toggle('active');
+            
+            const title = document.querySelector('.page-title').textContent;
+            const pageNum = '496';
+            const url = '496.html';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (isFav) {
+                const exists = favorites.find(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: title.replace(/~~~~~|*****|/g, '').trim(),
+                        url: url,
+                        pageNum: pageNum,
+                        category: '抗反转录病毒药物',
+                        date: new Date().toISOString()
+                    });
+                }
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                alert('已添加到收藏！请在index.html查看');
+            } else {
+                favorites = favorites.filter(f => f.url !== url);
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.addEventListener('load', () => {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.find(f => f.url === '496.html');
+            if (isFav) {
+                const btn = document.querySelector('.fav-btn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        });
+    </script>
+</body>
+</html>

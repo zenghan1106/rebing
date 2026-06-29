@@ -1,0 +1,458 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东非昏睡病治疗方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-btn:hover {
+            background: #357abd;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .title-format {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a3a5c;
+        }
+        
+        thead th.sub-header {
+            background: #4a7fb5;
+            font-size: 14px;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .pathogen-cell {
+            background: #e3f2fd;
+            font-weight: 500;
+        }
+        
+        .drug-name {
+            color: #1565c0;
+            font-weight: 600;
+        }
+        
+        .dose-info {
+            color: #2e7d32;
+        }
+        
+        .note-cell {
+            background: #fff8e1;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ffcdd2;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag.bacteria {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: #ffe0b2;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ffd700;
+            color: #333;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="416.html" class="nav-btn">上一页</a>
+            <a href="418.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <div class="title-wrapper">
+        <span class="title-format">~~~~~</span>
+        <span class="main-title">东非昏睡病治疗方案</span>
+        <span class="title-format">*****</span>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">病原体</th>
+                    <th colspan="2">推荐方案</th>
+                    <th rowspan="2">说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选药物</th>
+                    <th class="sub-header">备选药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="pathogen-cell">
+                        <strong>东非昏睡病（布氏锥虫罗得西亚亚种，T. brucei rhodesiense）</strong><br><br>
+                        <strong>1期：</strong>仅血液/淋巴寄生，旅行者临床系列Int J Infect Dis（2018）；https://doi.org/10.1016/j.ijid.2018.08.012<br><br>
+                        <strong>2期：</strong>中枢神经系统疾病，CSF-WBC＞5/μl或寄生虫DNA阳性脑炎
+                    </td>
+                    <td>
+                        <span class="drug-name">非昔硝唑</span><br><br>
+                        <strong>1期和2期年龄≥6岁且体重≥20kg</strong><br>
+                        • 体重≥35kg：负荷剂量1800mg（3片）qd×4d，后1200mg（2片）qd×6d<br><br>
+                        • 20kg≤体重＜35kg：负荷剂量1200mg（2片）qd×4d，后600mg（1片）qd×6d<br><br>
+                        <strong>年龄＜6岁或体重＜20kg</strong><br>
+                        1期：舒拉明5mg/kg iv（实验剂量），后20mg/kg增加至1g（儿童2g/kg实验剂量）于d1、d3、d7、d14及d21使用<br><br>
+                        2期：美拉索普罗2.2mg/(kg·d) iv×10d；非劣效于长期延用的标准治疗方案
+                    </td>
+                    <td>
+                        <strong>≥6岁且体重≥20kg儿童</strong><br>
+                        1期：舒拉明［或喷他脒4mg/(kg·d) iv或im）<br>
+                        2期：加用美拉肿醇，具体用法参照相邻栏幼儿方案<br><br>
+                        <strong>年龄＜6岁或体重＜20kg：</strong>喷他脒［4mg/(kg·d) iv或im）<br><br>
+                        如可获得，尽快换为首选药物治疗
+                    </td>
+                    <td class="note-cell">
+                        <strong>2期：</strong>若患者无法吞咽非昔硝唑或口服吸收有顾虑，优先选择美拉肿醇静脉给药。需完成10天的非昔硝唑治疗。<br><br>
+                        <strong>妊娠期用药：</strong>初期优先选择非昔硝唑和喷他脒，妊娠中晚期可使用非昔硝唑
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag disease">东非昏睡病</span>
+        <span class="tag disease">脑炎</span>
+        <span class="tag bacteria">布氏锥虫罗得西亚亚种</span>
+        <span class="tag bacteria">T. brucei rhodesiense</span>
+        <span class="tag drug">非昔硝唑</span>
+        <span class="tag drug">舒拉明</span>
+        <span class="tag drug">喷他脒</span>
+        <span class="tag drug">美拉索普罗</span>
+        <span class="tag drug">美拉肿醇</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="footer">
+        <p>页码：<span class="page-number">417</span></p>
+        <p style="margin-top:8px; color:#888;">注：*关于药物来源见表13D，222页。表中名词缩写见第2页。</p>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        // 设置复制框内容
+        const title = "东非昏睡病治疗方案";
+        const subtitle = "布氏锥虫罗得西亚亚种治疗指南";
+        const keywords = "东非昏睡病；布氏锥虫罗得西亚亚种；T. brucei rhodesiense；非昔硝唑；舒拉明；喷他脒；美拉索普罗；美拉肿醇；脑炎；";
+        const pageNum = "417";
+        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            // 获取当前页面信息
+            const pageInfo = {
+                title: title,
+                url: window.location.href,
+                pageNum: pageNum
+            };
+            
+            // 从localStorage获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (isFav) {
+                // 添加收藏（避免重复）
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                btn.title = '已收藏';
+                alert('已添加到收藏！');
+            } else {
+                // 取消收藏
+                favorites = favorites.filter(f => f.url !== pageInfo.url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.title = '收藏';
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === window.location.href);
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,13 +1,10 @@
-我来根据图片内容生成符合您要求的HTML网页。图片内容是关于盆腔炎性疾病(PID)的治疗方案表格。
-
-
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~盆腔炎性疾病(PID)治疗方案指南*****</title>
+    <title>~~~~~盆腔炎性疾病(PID)治疗方案表*****</title>
     <style>
         * {
             margin: 0;
@@ -16,377 +13,526 @@
         }
         
         body {
-            font-family: "Microsoft YaHei", "SimSun", sans-serif;
-            background-color: #f0f8ff;
-            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .home-btn {
-            background-color: #1a5276;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .home-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background-color: #2874a6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .nav-btn:hover {
-            background-color: #3498db;
-        }
-        
-        .copy-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-        
-        .copy-input {
-            width: calc(100% - 120px);
-            max-width: 800px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
             padding: 10px;
-            border: 2px solid #2874a6;
-            border-radius: 5px;
-            font-size: 13px;
-            color: #1a5276;
         }
         
-        .copy-btn {
-            background-color: #27ae60;
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btns a {
+            background: #4a90d9;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
             border: none;
-            border-radius: 5px;
+            font-size: 14px;
             cursor: pointer;
-            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
-        .copy-btn:hover {
-            background-color: #2ecc71;
+        .fav-btn:hover {
+            background: #ff5252;
         }
         
-        .main-title {
+        /* 标题 */
+        h1 {
             text-align: center;
-            font-size: 28px;
             color: #1a5276;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        
-        .subtitle {
-            text-align: center;
-            font-size: 16px;
-            color: #2874a6;
-            margin-bottom: 20px;
-        }
-        
-        .tags-container {
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin: 60px 10px 20px;
             padding: 15px;
-            background-color: #d4edda;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
             border-radius: 10px;
-            border: 2px solid #27ae60;
+            border-left: 5px solid #4a90d9;
         }
         
-        .tags-label {
-            font-weight: bold;
-            color: #1e8449;
-            font-size: 14px;
-        }
-        
-        .tags-content {
-            color: #27ae60;
-            font-size: 14px;
-            word-break: break-all;
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            background: white;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 13px;
         }
         
-        th {
-            background-color: #1a5276;
+        /* 表头 */
+        thead {
+            background: #2e86c1;
             color: white;
-            padding: 15px;
+        }
+        
+        thead th {
+            padding: 15px 10px;
             text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            border: 1px solid #154360;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #1a5276;
         }
         
-        .first-row {
-            font-size: 18px !important;
+        /* 子表头 */
+        .sub-header {
+            background: #5dade2;
         }
         
-        td {
-            padding: 12px;
-            border: 1px solid #aed6f1;
-            color: #1a5276;
+        .sub-header th {
             font-size: 14px;
-            line-height: 1.8;
+            padding: 12px 10px;
+        }
+        
+        /* 表格内容 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
             vertical-align: top;
         }
         
-        tr:nth-child(even) {
-            background-color: #ebf5fb;
+        tbody tr:nth-child(even) {
+            background: #f8fbfd;
         }
         
-        tr:hover {
-            background-color: #d6eaf8;
+        tbody tr:hover {
+            background: #e8f4f8;
         }
         
-        .section-header {
-            background-color: #2874a6 !important;
-            color: white !important;
-            font-weight: bold;
-            text-align: center;
+        /* 第一行字体大一点 */
+        .first-row td {
+            font-size: 14px;
         }
         
-        .col-header {
-            background-color: #5dade2 !important;
-            color: white !important;
-            font-weight: bold;
-        }
-        
-        .footer-section {
-            text-align: center;
+        /* 注释区域 */
+        .notes {
             margin-top: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .notes p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .keywords-box {
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: #fdebd0;
-            border-radius: 8px;
-            border: 2px solid #f39c12;
-        }
-        
-        .keywords-title {
-            font-weight: bold;
-            color: #b9770e;
-            margin-bottom: 8px;
-        }
-        
-        .keywords-list {
-            color: #7d6608;
-            font-size: 14px;
-            line-height: 2;
-        }
-        
-        .page-number {
-            font-size: 20px;
+        .tags-section h3 {
             color: #1a5276;
-            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
         
-        .note-section {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #fadbd8;
-            border-radius: 8px;
-            border: 1px solid #e74c3c;
-            text-align: left;
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e8f4f8;
+            color: #2e86c1;
+            border-radius: 20px;
             font-size: 13px;
-            color: #922b21;
-            line-height: 1.8;
+            border: 1px solid #aed6f1;
         }
         
-        .highlight {
-            color: #c0392b;
-            font-weight: bold;
+        /* 关键词区域 */
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .drug-name {
-            color: #8e44ad;
-            font-weight: 500;
+        .keywords-section h3 {
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-size: 16px;
         }
         
-        .dosage {
-            color: #27ae60;
-            font-weight: 500;
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .keyword {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #fef9e7;
+            color: #b7950b;
+            border-radius: 15px;
+            font-size: 12px;
+            border: 1px solid #f9e79f;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-section input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-section button {
+            padding: 12px 25px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-section button:hover {
+            background: #219a52;
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th, .sub-header th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            td {
+                padding: 8px 6px;
+            }
+            
+            .first-row td {
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btns a {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-section input {
+                width: 100%;
+            }
+            
+            .copy-section button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="header-bar">
-        <a href="index.html" class="home-btn">← 返回首页</a>
-        <div class="nav-buttons">
-            <a href="27.html" class="nav-btn">上一页</a>
-            <a href="29.html" class="nav-btn">下一页</a>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-btns">
+        <a href="63.html">← 上一页</a>
+        <a href="65.html">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~盆腔炎性疾病(PID)、输卵管炎、输卵管-卵巢脓肿治疗方案表*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">解剖学部位/<br>诊断/特定情况</th>
+                    <th rowspan="2">病原体（通常）</th>
+                    <th colspan="2">推荐治疗方案*</th>
+                    <th rowspan="2">辅助诊断或治疗方法及说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选方案</th>
+                    <th>备选方案<sup>§</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>
+                        <strong>盆腔炎性疾病（PID），输卵管炎，输卵管-卵巢脓肿</strong><br><br>
+                        门诊治疗限于体温＜38℃、白细胞＜11×10⁹/L，腹膜炎不明显、肠鸣音活跃、能正常进食的患者
+                    </td>
+                    <td>
+                        淋球菌、衣原体、拟杆菌，肠杆菌科、链球菌、特别是无乳链球菌<br><br>
+                        少见病原体：阴道加德纳菌、流感嗜血杆菌、巨细胞病毒（CMV）、解脲脲原体和生殖支原体
+                    </td>
+                    <td>
+                        门诊治疗：头孢曲松500mg im或iv×1剂 + 甲硝唑500mg po bid×14d + 多西环素po 1剂×14d，或（头孢西丁2g im & 丙磺舒1g po×1剂）+（多西环素100mg po bid & 甲硝唑500mg bid×14d）
+                    </td>
+                    <td>
+                        住院治疗：（头孢替坦2g iv q12h或头孢西丁2g iv q6h）+（多西环素100mg iv/po q12h）<br><br>
+                        （克林霉素900mg iv q8h）+（庆大霉素2mg/kg负荷量，然后1.5mg/kg q8h或4.5mg/kg qd），然后多西环素100mg po bid×14d
+                    </td>
+                    <td>
+                        <strong>其他胃肠外治疗方案：</strong><br>
+                        氨苄西林-舒巴坦3g iv q6h + 多西环素100mg iv/po q12h。<br><br>
+                        推荐的治疗方案不能覆盖生殖支原体，如果治疗7～10d无效应考虑生殖支原体核酸扩增试验并用莫西沙星400mg qd×14d<br><br>
+                        <strong>注意：</strong>同时评估和治疗性伴侣。因耐药日益增多，不推荐使用氟喹诺酮<br><br>
+                        输卵管-卵巢脓肿的患者建议住院进行最初的评估和治疗<br>
+                        住院患者应治疗至明显好转，且维持24小时以上，再改为门诊治疗
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>注射用第二代头孢菌素（头孢西丁2g iv q6～8h，头孢替坦2g iv q12h，头孢呋辛750mg iv q8h）；氨苄西林-舒巴坦3g iv q6h；哌拉西林-他唑巴坦4.5g输注4小时q8h；多西环素100mg iv/po q12h；克林霉素450～900mg iv q8h；氨基糖苷（庆大霉素，表10C，166页）；注射用第三代头孢菌素（头孢噻肟2g iv q8h，头孢曲松2g iv qd）；多尼培南500mg iv q8h（输注1小时）；厄他培南1g iv qd；亚胺培南0.5g iv q6h，美罗培南1～2g iv q8h；阿奇霉素500mg iv qd；利奈唑胺600mg iv/po q12h；万古霉素30～60mg/（kg·d）分2～3次，目标AUC₂₄ 400～600μg·h/ml。</p>
+        <p>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <div class="tags">
+            <span class="tag">盆腔炎性疾病</span>
+            <span class="tag">PID</span>
+            <span class="tag">输卵管炎</span>
+            <span class="tag">输卵管-卵巢脓肿</span>
+            <span class="tag">淋球菌</span>
+            <span class="tag">衣原体</span>
+            <span class="tag">拟杆菌</span>
+            <span class="tag">无乳链球菌</span>
+            <span class="tag">阴道加德纳菌</span>
+            <span class="tag">流感嗜血杆菌</span>
+            <span class="tag">巨细胞病毒</span>
+            <span class="tag">CMV</span>
+            <span class="tag">解脲脲原体</span>
+            <span class="tag">生殖支原体</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">甲硝唑</span>
+            <span class="tag">多西环素</span>
+            <span class="tag">头孢西丁</span>
+            <span class="tag">丙磺舒</span>
+            <span class="tag">头孢替坦</span>
+            <span class="tag">克林霉素</span>
+            <span class="tag">庆大霉素</span>
+            <span class="tag">氨苄西林-舒巴坦</span>
+            <span class="tag">莫西沙星</span>
+            <span class="tag">氟喹诺酮</span>
         </div>
     </div>
-
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <h3>🔑 关键词</h3>
+        <div class="keywords">
+            <span class="keyword">盆腔炎</span>
+            <span class="keyword">PID</span>
+            <span class="keyword">输卵管炎</span>
+            <span class="keyword">卵巢脓肿</span>
+            <span class="keyword">抗生素</span>
+            <span class="keyword">头孢曲松</span>
+            <span class="keyword">多西环素</span>
+            <span class="keyword">甲硝唑</span>
+            <span class="keyword">淋球菌</span>
+            <span class="keyword">衣原体</span>
+            <span class="keyword">生殖支原体</span>
+            <span class="keyword">门诊治疗</span>
+            <span class="keyword">住院治疗</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-num">第 64 页</div>
+    
+    <!-- 复制编辑框 -->
     <div class="copy-section">
-        <input type="text" class="copy-input" id="copyText" value="盆腔炎性疾病(PID)治疗方案指南；盆腔炎、输卵管炎、输卵管-卵巢脓肿、淋球菌、衣原体、头孢曲松、甲硝唑、多西环素、头孢西丁、头孢替坦、克林霉素、庆大霉素、莫西沙星；=28" readonly>
-        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        <input type="text" id="copyText" value="盆腔炎性疾病(PID)、输卵管炎、输卵管-卵巢脓肿治疗方案表；PID；输卵管炎；卵巢脓肿；头孢曲松；多西环素；甲硝唑；淋球菌；衣原体；生殖支原体；=64" readonly>
+        <button onclick="copyToClipboard()">📋 复制</button>
     </div>
-
-    <h1 class="main-title">~~~~~盆腔炎性疾病(PID)治疗方案指南*****</h1>
-    <p class="subtitle">输卵管炎、输卵管-卵巢脓肿 | 第28页</p>
-
-    <div class="tags-container">
-        <span class="tags-label">%%%%%</span>
-        <span class="tags-content">盆腔炎性疾病,PID,输卵管炎,输卵管-卵巢脓肿,淋球菌,衣原体,拟杆菌,肠杆菌科,链球菌,无乳链球菌,阴道加德纳菌,流感嗜血杆菌,巨细胞病毒,CMV,解脲脲原体,生殖支原体,头孢曲松,甲硝唑,多西环素,头孢西丁,丙磺舒,头孢替坦,头孢西丁,克林霉素,庆大霉素,氨苄西林-舒巴坦,哌拉西林-他唑巴坦,莫西沙星,氟喹诺酮,阿奇霉素,利奈唑胺,万古霉素,多尼培南,厄他培南,亚胺培南,美罗培南</span>
-        <span class="tags-label">?????</span>
-    </div>
-
-    <table>
-        <thead>
-            <tr class="first-row">
-                <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
-                <th style="width: 20%;">病原体（通常）</th>
-                <th colspan="2" style="width: 40%;">推荐治疗方案*</th>
-                <th style="width: 22%;">辅助诊断或治疗方法及说明</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="col-header" colspan="5">首选方案 | 备选方案 §</td>
-            </tr>
-            <tr>
-                <td>
-                    <strong>盆腔炎性疾病（PID），输卵管炎，输卵管-卵巢脓肿</strong><br><br>
-                    门诊治疗限于体温&lt;38℃、白细胞&lt;11×10⁹/L，腹膜炎不明显、肠鸣音活跃、能正常进食的患者
-                </td>
-                <td>
-                    <strong>常见病原体：</strong><br>
-                    <span class="drug-name">淋球菌</span>、<span class="drug-name">衣原体</span>、<span class="drug-name">拟杆菌</span>、<span class="drug-name">肠杆菌科</span>、<span class="drug-name">链球菌</span>、特别是<span class="highlight">无乳链球菌</span><br><br>
-                    <strong>少见病原体：</strong><br>
-                    <span class="drug-name">阴道加德纳菌</span>、<span class="drug-name">流感嗜血杆菌</span>、<span class="drug-name">巨细胞病毒（CMV）</span>、<span class="drug-name">解脲脲原体</span>和<span class="drug-name">生殖支原体</span>
-                </td>
-                <td>
-                    <strong>门诊治疗：</strong><br>
-                    <span class="drug-name">头孢曲松</span> <span class="dosage">500mg im或iv×1剂</span><br>
-                    + <span class="drug-name">甲硝唑</span> <span class="dosage">500mg po bid×14d</span><br>
-                    + <span class="drug-name">多西环素</span> <span class="dosage">po 1剂×14d</span><br><br>
-                    或<br><br>
-                    （<span class="drug-name">头孢西丁</span> <span class="dosage">2g im</span> & <span class="drug-name">丙磺舒</span> <span class="dosage">1g po×1剂</span>）<br>
-                    +（<span class="drug-name">多西环素</span> <span class="dosage">100mg po bid</span> & <span class="drug-name">甲硝唑</span> <span class="dosage">500mg bid×14d</span>）
-                </td>
-                <td>
-                    <strong>住院治疗：</strong><br>
-                    （<span class="drug-name">头孢替坦</span> <span class="dosage">2g iv q12h</span> 或 <span class="drug-name">头孢西丁</span> <span class="dosage">2g iv q6h</span>）<br>
-                    +（<span class="drug-name">多西环素</span> <span class="dosage">100mg iv/po q12h</span>）<br><br>
-                    --------------------<br><br>
-                    （<span class="drug-name">克林霉素</span> <span class="dosage">900mg iv q8h</span>）<br>
-                    +（<span class="drug-name">庆大霉素</span> <span class="dosage">2mg/kg负荷量</span>，然后<span class="dosage">1.5mg/kg q8h</span>或<span class="dosage">4.5mg/kg qd</span>），然后<span class="drug-name">多西环素</span> <span class="dosage">100mg po bid×14d</span>
-                </td>
-                <td>
-                    <strong>其他胃肠外治疗方案：</strong><br>
-                    <span class="drug-name">氨苄西林-舒巴坦</span> <span class="dosage">3g iv q6h</span> + <span class="drug-name">多西环素</span> <span class="dosage">100mg iv/po q12h</span><br><br>
-                    推荐的治疗方案不能覆盖<span class="highlight">生殖支原体</span>，如果治疗7～10d无效应考虑生殖支原体核酸扩增试验并用<span class="drug-name">莫西沙星</span> <span class="dosage">400mg qd×14d</span><br><br>
-                    <span class="highlight">注意：</span>同时评估和治疗性伴侣。因耐药日益增多，<span class="highlight">不推荐使用氟喹诺酮</span><br><br>
-                    <span class="highlight">输卵管-卵巢脓肿</span>的患者建议住院进行最初的评估和治疗<br><br>
-                    住院患者应治疗至明显好转，且维持24小时以上，再改为门诊治疗
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="note-section">
-        <strong>注：</strong>注射用第二代头孢菌素（<span class="drug-name">头孢西丁</span> <span class="dosage">2g iv q6～8h</span>，<span class="drug-name">头孢替坦</span> <span class="dosage">2g iv q12h</span>，<span class="drug-name">头孢呋辛</span> <span class="dosage">750mg iv q8h</span>）；<span class="drug-name">氨苄西林-舒巴坦</span> <span class="dosage">3g iv q6h</span>；<span class="drug-name">哌拉西林-他唑巴坦</span> <span class="dosage">4.5g输注4小时q8h</span>；<span class="drug-name">多西环素</span> <span class="dosage">100mg iv/po q12h</span>；<span class="drug-name">克林霉素</span> <span class="dosage">450～900mg iv q8h</span>；氨基糖苷（<span class="drug-name">庆大霉素</span>，表10C，166页）；注射用第三代头孢菌素（<span class="drug-name">头孢噻肟</span> <span class="dosage">2g iv q8h</span>，<span class="drug-name">头孢曲松</span> <span class="dosage">2g iv qd</span>）；<span class="drug-name">多尼培南</span> <span class="dosage">500mg iv q8h</span>（输注1小时）；<span class="drug-name">厄他培南</span> <span class="dosage">1g iv qd</span>；<span class="drug-name">亚胺培南</span> <span class="dosage">0.5g iv q6h</span>，<span class="drug-name">美罗培南</span> <span class="dosage">1～2g iv q8h</span>；<span class="drug-name">阿奇霉素</span> <span class="dosage">500mg iv qd</span>；<span class="drug-name">利奈唑胺</span> <span class="dosage">600mg iv/po q12h</span>；<span class="drug-name">万古霉素</span> <span class="dosage">30～60mg/(kg·d)</span>分2～3次，目标AUC₂₄ <span class="dosage">400～600μg·h/ml</span>。<br><br>
-        <strong>*</strong> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
-        <strong>§</strong> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。<br>
-        表中名词缩写见第2页。
-    </div>
-
-    <div class="footer-section">
-        <div class="keywords-box">
-            <div class="keywords-title">🔍 关键词检索</div>
-            <div class="keywords-list">
-                <strong>疾病：</strong>盆腔炎性疾病 | PID | 输卵管炎 | 输卵管-卵巢脓肿 | 腹膜炎<br>
-                <strong>细菌：</strong>淋球菌 | 衣原体 | 拟杆菌 | 肠杆菌科 | 链球菌 | 无乳链球菌 | 阴道加德纳菌 | 流感嗜血杆菌 | 巨细胞病毒CMV | 解脲脲原体 | 生殖支原体<br>
-                <strong>抗生素：</strong>头孢曲松 | 甲硝唑 | 多西环素 | 头孢西丁 | 丙磺舒 | 头孢替坦 | 克林霉素 | 庆大霉素 | 氨苄西林-舒巴坦 | 哌拉西林-他唑巴坦 | 莫西沙星 | 氟喹诺酮 | 头孢呋辛 | 头孢噻肟 | 多尼培南 | 厄他培南 | 亚胺培南 | 美罗培南 | 阿奇霉素 | 利奈唑胺 | 万古霉素
-            </div>
-        </div>
-        <div class="page-number">28</div>
-    </div>
-
+    
+    <!-- 提示 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
     <script>
+        // 复制功能
         function copyToClipboard() {
-            const copyText = document.getElementById("copyText");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value).then(function() {
-                alert("已复制到剪贴板: " + copyText.value);
-            }).catch(function(err) {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                showToast('已复制到剪贴板！');
+            }, function() {
                 document.execCommand('copy');
-                alert("已复制到剪贴板: " + copyText.value);
+                showToast('已复制到剪贴板！');
             });
         }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.querySelector('h1').textContent.replace(/[~*]/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '64';
+            
+            // 保存到localStorage
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                showToast('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: 'PID治疗方案',
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            showToast('已添加到收藏！');
+            
+            // 同时更新index.html的收藏（如果同源）
+            updateIndexFavorites(title, url, pageNum);
+        }
+        
+        // 尝试更新index.html
+        function updateIndexFavorites(title, url, pageNum) {
+            // 通过localStorage通知index页面
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                time: new Date().toLocaleString()
+            }));
+        }
+        
+        // 页面加载时检查是否有新收藏需要处理（在index页面使用）
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newFavorite' && window.location.pathname.includes('index.html')) {
+                // index页面可以监听并更新
+            }
+        });
     </script>
-
 </body>
 </html>
-```
-
-
-以上是完整的HTML网页代码，满足您的所有要求：
-
-
- 要求 	 实现情况 	
- 1. 表格合并 	 所有内容在一个大表格中，长内容自动换行 	
- 2. 字体颜色/底色 	 蓝色系配色，药物名紫色、剂量绿色、重点红色高亮 	
- 3. 标题可检索 	 `~~~~~盆腔炎性疾病(PID)治疗方案指南*****` 	
- 5. 底图不黑不暗 	 浅蓝色渐变背景 `#f0f8ff` → `#e6f3ff` 	
- 6. 表格头部蓝色 	 `#1a5276` 深蓝色，第一行字体18px 	
- 7. 标题格式 	 `~~~~~标题*****` 格式 	
- 8. 检索标签 	 `%%%%%...?????` 包含疾病、细菌、抗生素关键词 	
- 9. 返回首页按钮 	 左上方 `← 返回首页` 跳转 `index.html` 	
- 10. 页码 	 底部显示 **28**，链接为 `28.html` 去掉后缀 	
- 11. 上一页按钮 	 右上角跳转 `27.html` 	
- 12. 下一页按钮 	 右上角跳转 `29.html` 	
- 13. 复制编辑框 	 标题+关键词+`=28`，宽度自适应，点击复制到剪贴板 	
-
-
-
-额外特性：注释部分完整保留，药物名称和剂量用不同颜色区分，鼠标悬停行变色，关键词底部汇总便于检索。

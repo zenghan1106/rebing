@@ -1,0 +1,496 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗HIV蛋白酶抑制剂药物信息表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 100px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .next-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 120px;
+            right: 15px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 0 -5px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2980b9 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .note {
+            font-size: 12px;
+            color: #5d6d7e;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .copy-input:focus {
+            border-color: #2980b9;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            color: #5d6d7e;
+            font-size: 14px;
+        }
+        
+        .page-number {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 80px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
+    <a href="488.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="490.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~抗HIV蛋白酶抑制剂药物信息表*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>通用名/商品名</th>
+                    <th>药物剂型</th>
+                    <th>成人常用剂量<br>&食物影响</th>
+                    <th>口服吸收率<br>(%)</th>
+                    <th>血清T₁/₂<br>(h)</th>
+                    <th>细胞内T₁/₂<br>(h)</th>
+                    <th>CPE*</th>
+                    <th>清除</th>
+                    <th>主要不良反应/说明<br>(表14D)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">达芦那韦<br>(Prezista)</td>
+                    <td>400mg、600mg、<br>800mg片剂</td>
+                    <td>(达芦那韦600mg+利托那韦100mg) po bid餐中服，或[达芦那韦800mg(2片400mg片剂)+利托那韦100mg] po qd餐中服(初治患者的首选方案)</td>
+                    <td>82%吸收(与利托那韦同服)，食物增加吸收</td>
+                    <td>约15(与利托那韦同服)</td>
+                    <td>3</td>
+                    <td>经CYP3A代谢，是CYP3A抑制剂</td>
+                    <td>含硫。有皮疹、恶心和头痛。禁忌与某些经CYP3A代谢的药物联合应用(见说明书)。肝功能不全者谨慎使用(最近FDA警告，在治疗的早期偶尔发生肝功能不全)。最初的数月以及既往有肝病的患者需要严密监测。可导致激素避孕失败</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">洛匹那韦+<br>利托那韦<br>(克力芝,<br>Kaletra)</td>
+                    <td>(洛匹那韦200mg+利托那韦50mg)和(洛匹那韦100mg+利托那韦25mg)片剂。片剂不需要冷藏<br>口服溶液:(洛匹那韦80mg+利托那韦20mg)/ml，冷藏，室温(≤25℃)可保存2个月</td>
+                    <td>2片(洛匹那韦400mg+利托那韦100mg) po bid。与依非韦伦、奈韦拉平或未强化的福沙那韦联合治疗非初治患者时，可能需要加大剂量(与其他药合用可能需要调整剂量，见表22)</td>
+                    <td>片剂不受食物影响</td>
+                    <td>5~6</td>
+                    <td>3</td>
+                    <td>经细胞色素P450(3A4抑制剂)代谢</td>
+                    <td>恶心、呕吐、腹泻(与齐多夫定合用时加重),ALT/AST升高，胰腺炎。口服溶液含42%乙醇。洛匹那韦+利托那韦可以4片(洛匹那韦800mg+利托那韦200mg)qd，但不用于经治患者或同时使用依非韦伦、奈韦拉平、安普那韦或奈非那韦的患者。可致PR间期和QT间期延长。有心脏传导异常或合用其他相似作用药物的患者慎用</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>*CPE(中枢神经系统穿透效力)值；1=低穿透，2、3=中等穿透，4=高穿透至中枢神经系统(<em>AIDS 25: 357, 2011</em>)。
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <span class="tag disease">HIV</span>
+        <span class="tag disease">艾滋病</span>
+        <span class="tag">达芦那韦</span>
+        <span class="tag">Prezista</span>
+        <span class="tag">洛匹那韦</span>
+        <span class="tag">利托那韦</span>
+        <span class="tag">克力芝</span>
+        <span class="tag">Kaletra</span>
+        <span class="tag">蛋白酶抑制剂</span>
+        <span class="tag">CYP3A</span>
+        <span class="tag">利托那韦</span>
+        <span class="tag">初治患者</span>
+        <span class="tag">经治患者</span>
+        <span class="tag">依非韦伦</span>
+        <span class="tag">奈韦拉平</span>
+        <span class="tag">福沙那韦</span>
+        <span class="tag">齐多夫定</span>
+        <span class="tag">安普那韦</span>
+        <span class="tag">奈非那韦</span>
+        <span class="tag">皮疹</span>
+        <span class="tag">恶心</span>
+        <span class="tag">头痛</span>
+        <span class="tag">腹泻</span>
+        <span class="tag">呕吐</span>
+        <span class="tag">胰腺炎</span>
+        <span class="tag">肝功能不全</span>
+        <span class="tag">PR间期延长</span>
+        <span class="tag">QT间期延长</span>
+        <span class="tag">激素避孕失败</span>
+        <span class="tag">中枢神经系统穿透</span>
+        <span class="tag">CPE</span>
+    </div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：<span class="page-number">489</span>
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const title = "抗HIV蛋白酶抑制剂药物信息表";
+        const subtitle = "达芦那韦、洛匹那韦/利托那韦药物参数对比";
+        const keywords = "HIV;艾滋病;达芦那韦;Prezista;洛匹那韦;利托那韦;克力芝;Kaletra;蛋白酶抑制剂;CYP3A;初治患者;经治患者;依非韦伦;奈韦拉平;福沙那韦;齐多夫定;安普那韦;奈非那韦;皮疹;恶心;头痛;腹泻;呕吐;胰腺炎;肝功能不全;PR间期延长;QT间期延长;激素避孕失败;中枢神经系统穿透;CPE";
+        const pageNum = "489";
+        
+        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const btn = document.querySelector('.favorite-btn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                
+                // 保存到localStorage，用于index页面读取
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const currentPage = {
+                    title: '~~~~~抗HIV蛋白酶抑制剂药物信息表*****',
+                    url: '489.html',
+                    category: '抗感染药物',
+                    date: new Date().toLocaleDateString('zh-CN')
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === currentPage.url);
+                if (!exists) {
+                    favorites.push(currentPage);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！\n标题：抗HIV蛋白酶抑制剂药物信息表\n类目：抗感染药物');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+                
+                // 从收藏中移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '489.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                alert('已取消收藏');
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '489.html');
+            if (isFav) {
+                isFavorited = true;
+                const btn = document.querySelector('.favorite-btn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

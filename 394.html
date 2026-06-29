@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表12B 抗分枝杆菌药物的剂量及不良反应</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="393.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="395.html" class="nav-btn">下一页 ➡️</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~表12B 抗分枝杆菌药物的剂量及不良反应*****</h1>
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>药物（商品名）</th>
+                    <th>常规剂量</th>
+                    <th>给药途径/原发耐药率（RES），美国</th>
+                    <th>不良反应、毒性及注意事项</th>
+                    <th>监测</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>一线药物<br>乙胺丁醇（二盐酸乙胺丁醇）（100mg、400mg片剂）</td>
+                    <td>25mg/（kg·d）×2个月，然后15mg/（kg·d）qd（蛋白结合率＜10%，对细胞外和细胞内病原体均有抑菌作用）</td>
+                    <td>RES：0.3%（0～0.7%）<br>400mg片剂po</td>
+                    <td>视神经炎伴视力下降、中央盲点及丧失红绿色觉；周围神经病变及头痛（约1%），皮疹（罕见），关节痛（罕见），高尿酸血症（罕见）；过敏样反应（罕见）</td>
+                    <td>当剂量>15mg/（kg·d）时，每月查视力及红绿色觉。丧失≥10%认为有意义。通常停药后可恢复</td>
+                </tr>
+                <tr>
+                    <td>异烟肼（INH）（Nydrazid，Laniazid，Teebaconin）（50mg、100mg、300mg片剂）</td>
+                    <td>每天1次剂量：5～10mg/（kg·d），最大剂量300mg/d×单剂给药。每周2次给药剂量：15mg/kg（最大剂量900mg）蛋白结合率＜10%，对细胞外和细胞内病原体均有杀菌作用。酗酒、妊娠或营养不良的患者应加用维生素B6</td>
+                    <td>RES：4.1%（2.6%～8.5%）<br>300mg片剂po<br>im 100mg/ml，10ml（FDA尚未批准静脉给药，但已用于临床，特别是对AIDS）</td>
+                    <td>总体不良反应率约1%。肝脏：肝炎（10%儿童轻度AST升高，继续治疗可正常；年龄＜20岁罕见；20～34岁，1.2%；≥50岁，2.3%）[每天饮酒者和既往感染过丙型肝炎病毒者（通常无症状——CID 36：293，2003）发生率升高]。可致命。有前驱症状、尿色加深者，做肝功能检查；若AST>正常值3～5倍时，应停药。周围神经病变[剂量6mg/（kg·d）时发生率17%，300mg时较低，慢乙酰化者发生率上升]；维生素B6 10mg qd可减少发生率；其他神经后遗症、惊厥、视神经炎、中毒性脑病、精神病、肌肉颤抖、头晕、昏迷（均罕见）；过敏性皮疹、发热、轻度双硫仑样反应、进食瑞士乳酪后潮红、血细胞异常（罕见）；抗核抗体阳性（20%）。药物间相互作用常见</td>
+                    <td>治疗前查肝功能。若有症状（疲乏、虚弱、不适、食欲缺乏、恶心或呕吐）超过3d需复查（AJRCCM 152：1705，1995）。有人建议在用药2个、4个、6个月时查AST，尤其年龄>50岁者。每月做临床评估</td>
+                </tr>
+                <tr>
+                    <td>吡嗪酰胺（500mg片剂）</td>
+                    <td>25mg/（kg·d）（最大剂量2.5g/d）qd×1剂（对细胞内病原体有杀菌作用）</td>
+                    <td>500mg片剂po</td>
+                    <td>关节痛、高尿酸血症（有或无症状）、肝炎（若不超出推荐剂量，发生率不足2%）、胃部不适、光过敏（罕见）</td>
+                    <td>治疗前查肝功能。每月查AST、尿酸。若有痛风发作，测血清尿酸</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="font-size: 12px; color: #666; margin: 10px 0;">注：1注意：AIDS合并肠病患者可致抗分枝杆菌药物吸收不良。有关不良反应的综述，AJRCCM 167：1472，2003。<br>2 RES＝结核分枝杆菌的耐药百分比。<br>*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>§平均耐药率范围（拉美裔、亚裔及＜10岁的患者要高于均值）。<br>表中名词缩写见第2页。</p>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags">
+                <span class="tag">乙胺丁醇</span>
+                <span class="tag">异烟肼</span>
+                <span class="tag">INH</span>
+                <span class="tag">吡嗪酰胺</span>
+                <span class="tag">抗分枝杆菌药物</span>
+                <span class="tag">一线药物</span>
+                <span class="tag">维生素B6</span>
+            </div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">表12B 抗分枝杆菌药物的剂量及不良反应；乙胺丁醇；异烟肼；INH；吡嗪酰胺；抗分枝杆菌药物；一线药物；维生素B6；=198</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 198 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 198;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 198;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

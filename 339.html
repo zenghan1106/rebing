@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10D（3）部分抗生素延长或持续给药方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1a5276;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #3498db;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .favorite-btn.favorited {
+            background-color: #f39c12;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .stability-info {
+            color: #555;
+        }
+        
+        .dose-info {
+            color: #2c3e50;
+        }
+        
+        .note-info {
+            color: #444;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .note-footer {
+            background-color: rgba(255,255,255,0.85);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .tags-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .copy-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #3498db;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="338.html" class="nav-btn">上一页</a>
+            <a href="340.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表10D（3）部分抗生素延长或持续给药方案*****</h1>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 14%;">药物/方法</th>
+                <th style="width: 18%;">最小稳定性</th>
+                <th style="width: 32%;">推荐剂量</th>
+                <th style="width: 36%;">说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="drug-name">万古霉素</span><br>
+                    （持续输注）
+                </td>
+                <td class="stability-info">
+                    @ 37℃：48小时<br>
+                    @ 25℃：48小时<br>
+                    @ 4℃：58天<br><br>
+                    （浓度为10μg/ml）
+                </td>
+                <td class="dose-info">
+                    负荷剂量15～20mg/kg iv（速度10～15mg/min），之后30～40mg/kg，最大60mg/kg iv（输注24小时）qd
+                </td>
+                <td class="note-info">
+                    万古霉素持续输注已成为认可的治疗选择。相比间歇用药，更快达到目标浓度、变异度更小、肾毒性类似或更少（Am J Health Syst Pharm 2020; 77: 835）<br><br>
+                    建议调整剂量，使稳态血药浓度达到目标范围20～25μg/ml。若通过强化剂量方案达到更高浓度（30～40μg/ml），可能增加肾毒性风险（Clin Micro Inf 19: E98, 2013）<br><br>
+                    AUC<sub>24</sub>计算由稳态血浓度乘24。20～25μg/ml血浓度相当于AUC<sub>24</sub> 480～600μg·h/ml<br><br>
+                    由于与重症患者其他用药存在配伍禁忌，万古霉素持续输注时需通过多个静脉通路分别给药
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 表格注释 -->
+    <div class="note-footer">
+        注：表中名词缩写见第2页。
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">339</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">重症</span>
+            <span class="tag disease">肾毒性</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag antibiotic">万古霉素</span>
+            <!-- 细菌标签 -->
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表10D（3）部分抗生素延长或持续给药方案；部分抗生素延长或持续给药方案；万古霉素；重症；肾毒性；持续输注；AUC24；稳态血药浓度；配伍禁忌；=339" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">★</button>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+                showToast('已收藏！将添加到index收藏类目');
+                
+                const favoriteData = {
+                    title: '表10D（3）部分抗生素延长或持续给药方案',
+                    url: '339.html',
+                    page: '339',
+                    tags: ['万古霉素', '重症', '肾毒性', '持续输注'],
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === '339.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '★';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '339.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '339.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+            }
+        };
+    </script>
+</body>
+</html>

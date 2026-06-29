@@ -1,0 +1,414 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表13B续 抗疟药物剂量与不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #449d44;
+        }
+        
+        .btn-favorite {
+            background: #f0ad4e;
+            color: white;
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-favorite:hover {
+            background: #ec971f;
+            transform: scale(1.1);
+        }
+        
+        .btn-copy {
+            background: #5bc0de;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #46b8da;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            margin: 20px 0 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2e5c8a;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        .note-row {
+            background: #fff8e1 !important;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .drug-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .bottom-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4e3;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e5c8a;
+            color: white;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .btn-favorite {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="432.html" class="btn btn-nav">← 上一页</a>
+            <a href="434.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <button class="btn btn-favorite" onclick="addToFavorites()" title="收藏">★</button>
+    
+    <h1>~~~~~表13B续 抗疟药物剂量与不良反应*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别、药品、通用名（商品名）</th>
+                    <th>常用成人剂量</th>
+                    <th>不良反应/说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">蒿甲醚-本芴醇，po（Coartem）</td>
+                    <td>复合片剂：每片含蒿甲醚20mg和本芴醇120mg，成人每次4片，3天内服用6个剂量，餐中服用，可碾碎后以少许水溶后服下</td>
+                    <td>可延长QTc，禁用于以下患者：先天性长QTc、有猝死家族史或长QTc家族史，或需要服用可延长QTc的药物（见表10A，159页，氟喹诺酮下面的内容）。蒿甲醚诱导CYP3A4且蒿甲醚和本芴醇均经CYP3A4代谢。>30%成人有不良反应：头痛、厌食、眩晕、关节痛和肌痛。治疗后15天内可能发生非致命性，但需要输血的溶血性贫血（AnIM 163:498, 2015）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">青蒿琥酯，iv<br>（NEJM 358:1829, 2008）</td>
+                    <td>市场有售，美国CDC不再提供。2.4mg/kg，成人于0、12、24、48h iv，随后口服第二种药物</td>
+                    <td>比奎宁有效，比奎尼丁安全。肝肾功能不全无须调整剂量，无已知的药物相互作用。迟发的溶血性贫血，每周监测血常规，4周</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿托伐醌（Mepron）<br>（AAC 46:1163, 2002）</td>
+                    <td>悬液：1汤匙（750mg/5ml）po bid</td>
+                    <td>9%的患者因不良反应停药：皮疹（22%）、胃肠道不适（20%）、头痛（16%）、失眠（10%）、发热（14%）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿托伐醌+氯胍（Malarone）<br>用于预防恶性疟原虫感染，对间日疟资料少。美国有售</td>
+                    <td>预防：1片（250mg+100mg）po qd，餐中服<br>治疗：4片（1000mg+400mg）po qd×3d<br>成人片剂：250/100mg；儿童片剂62.5/25mg，治疗见说明，206页</td>
+                    <td>临床试验中的不良反应如下。成人：腹痛（17%）、恶心/呕吐（12%）、头痛（10%）、眩晕（5%），1%的患者停药。无症状ALT/AST轻度升高。儿童：咳嗽、头痛、厌食、呕吐、腹痛。G6PD缺乏者可安全使用<br>可碾碎药片并加入牛奶或其他营养液中给儿童服用<br>肾功能不全：肌酐清除率<30ml/min者禁用</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="3">注：表中名词缩写见第2页。</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="~~~~~表13B续 抗疟药物剂量与不良反应*****；抗疟药物；蒿甲醚；本芴醇；青蒿琥酯；阿托伐醌；氯胍；恶性疟原虫；间日疟；剂量；不良反应；=433" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签</div>
+            <div class="tags">
+                <span class="tag">恶性疟原虫感染</span>
+                <span class="tag">间日疟</span>
+                <span class="tag">蒿甲醚</span>
+                <span class="tag">本芴醇</span>
+                <span class="tag">青蒿琥酯</span>
+                <span class="tag">阿托伐醌</span>
+                <span class="tag">氯胍</span>
+                <span class="tag">Malarone</span>
+                <span class="tag">Coartem</span>
+                <span class="tag">Mepron</span>
+                <span class="tag">溶血性贫血</span>
+                <span class="tag">QTc延长</span>
+                <span class="tag">G6PD缺乏</span>
+                <span class="tag">肾功能不全</span>
+                <span class="tag">CYP3A4</span>
+            </div>
+        </div>
+        
+        <div class="page-info">
+            页码：433
+        </div>
+        
+        <div class="keywords">
+            关键词：抗疟药物、蒿甲醚、本芴醇、青蒿琥酯、阿托伐醌、氯胍、Malarone、Coartem、恶性疟原虫、间日疟、剂量、不良反应、QTc延长、溶血性贫血、G6PD缺乏
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！\n标题：' + title);
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        title: title,
+                        url: url
+                    }, '*');
+                }
+            } catch(e) {
+                console.log('无法向父窗口发送消息');
+            }
+        }
+    </script>
+</body>
+</html>

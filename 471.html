@@ -1,0 +1,467 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗病毒药物非HIV利巴韦林金刚烷胺金刚乙胺剂量与不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(52,152,219,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 8px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(231,76,60,0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #c0392b;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #2e86de;
+            color: white;
+            padding: 14px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+        }
+        
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 分类行样式 */
+        .category-row td {
+            background: #d6eaf8;
+            color: #1a5276;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        /* 药物名称列 */
+        td:first-child {
+            color: #2874a6;
+            font-weight: 500;
+            min-width: 140px;
+        }
+        
+        /* 说明文字自动换行 */
+        td {
+            word-break: break-word;
+            max-width: 300px;
+        }
+        
+        /* 注释区域 */
+        .note {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            color: #5d6d7e;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #5dade2;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        
+        .keywords span {
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="470.html" class="nav-btn">上一页</a>
+            <a href="472.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~抗病毒药物非HIV利巴韦林金刚烷胺金刚乙胺剂量与不良反应*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称<br>通用名（商品名）</th>
+                    <th>剂量/成人给药途径*</th>
+                    <th>说明/不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3">表14B（5） 抗病毒药物（非HIV）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">丙型肝炎/其他（续）</td>
+                </tr>
+                <tr>
+                    <td>利巴韦林<br>（Rebetol, Copegus）</td>
+                    <td>与干扰素联合治疗丙型肝炎<br>200mg胶囊和口服溶液40mg/ml（Rebetol）<br>200mg、400mg片剂（Copegus）<br>（剂量见说明）</td>
+                    <td><strong>黑框警告：</strong>利巴韦林单药治疗丙型肝炎无效，溶血性贫血可诱发心脏事件，有致畸性/胎儿毒性（妊娠安全级别X）。停药后药物在血中仍可存在6个月，所以妇女或其性伴侣应避孕至停药后至少6个月。仅批准用于CrCl＞50ml/min的患者。严重心脏病或某些血红蛋白病患者禁用。有导致ARDS的报道（Chest 124: 406, 2003）<br><br><strong>不良反应：</strong>溶血性贫血（需减量或停药）、牙齿/牙周疾病及联合干扰素治疗的不良反应（见上文）。上市不良反应：视网膜脱离、听力下降和变态反应<br><br>特殊的治疗方案见表14A。剂量取决于干扰素种类、体重、是否存在肝硬化。根据不良反应（特别是溶血的程度，有/无心脏病的标准不同）调整剂量（或停药）。与甘乐能（α干扰素-2b）联合，Rebetol的初始剂量根据体重制订：体重≤75kg，400mg am/600mg pm；体重＞75kg，600mg am/600mg pm；但与聚乙二醇干扰素联合，利巴韦林的剂量是400mg am/400mg pm（进餐时）</td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">甲型流感</td>
+                </tr>
+                <tr>
+                    <td>金刚烷胺（Symmetrel）<br>金刚乙胺（Flumadine）<br>乙型流感天然耐药，<br>大多数甲型流感耐药</td>
+                    <td>金刚烷胺100mg胶囊、片剂、口服溶液或糖浆50mg/ml。治疗或预防：100mg bid；如果年龄≥65岁，100mg qd，CCr≤50ml/min时减量。<strong>金刚乙胺</strong>100mg片剂、糖浆50mg/5ml。治疗或预防：100mg bid；老年护理中心患者、严重肝脏疾病患者和CCr≤10ml/min者，100mg qd。对于儿童，金刚乙胺仅批准用于预防</td>
+                    <td><strong>不良反应/毒性：</strong>中枢神经系统（可以轻微，如神经紧张、焦虑、精力不集中和头晕）。严重不良反应：谵妄、幻觉、癫痫发作，与肾功能不全导致血浆药物浓度升高有关，特别是老年患者、有癫痫病史或精神病史者</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释 -->
+    <div class="note">
+        <p>注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div>
+            <span class="tag">丙型肝炎</span>
+            <span class="tag">甲型流感</span>
+            <span class="tag">乙型流感</span>
+            <span class="tag">利巴韦林</span>
+            <span class="tag">Rebetol</span>
+            <span class="tag">Copegus</span>
+            <span class="tag">金刚烷胺</span>
+            <span class="tag">Symmetrel</span>
+            <span class="tag">金刚乙胺</span>
+            <span class="tag">Flumadine</span>
+            <span class="tag">干扰素</span>
+            <span class="tag">聚乙二醇干扰素</span>
+            <span class="tag">甘乐能</span>
+            <span class="tag">溶血性贫血</span>
+            <span class="tag">妊娠安全级别X</span>
+            <span class="tag">ARDS</span>
+            <span class="tag">视网膜脱离</span>
+            <span class="tag">听力下降</span>
+            <span class="tag">谵妄</span>
+            <span class="tag">幻觉</span>
+            <span class="tag">癫痫发作</span>
+            <span class="tag">肝硬化</span>
+            <span class="tag">肾功能不全</span>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">471</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：<span>抗病毒药物、非HIV、丙型肝炎、甲型流感、乙型流感、利巴韦林、金刚烷胺、金刚乙胺、Rebetol、Copegus、Symmetrel、Flumadine、干扰素、聚乙二醇干扰素、甘乐能、溶血性贫血、妊娠安全级别X、ARDS、视网膜脱离、听力下降、谵妄、幻觉、癫痫发作、肝硬化、肾功能不全</span>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗病毒药物非HIV利巴韦林金刚烷胺金刚乙胺剂量与不良反应；表14B抗病毒药物非HIV、丙型肝炎、甲型流感、乙型流感、利巴韦林、Rebetol、Copegus、金刚烷胺、Symmetrel、金刚乙胺、Flumadine、干扰素、聚乙二醇干扰素、甘乐能、溶血性贫血、妊娠安全级别X、ARDS、视网膜脱离、听力下降、谵妄、幻觉、癫痫发作、肝硬化、肾功能不全；=471" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            btn.textContent = isFav ? '★' : '☆';
+            
+            // 保存到localStorage
+            const favData = {
+                title: '抗病毒药物非HIV利巴韦林金刚烷胺金刚乙胺剂量与不良反应',
+                url: '471.html',
+                category: '抗病毒药物'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (isFav) {
+                favorites.push(favData);
+            } else {
+                favorites = favorites.filter(f => f.url !== '471.html');
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同源）
+            alert(isFav ? '已添加到收藏！' : '已取消收藏！');
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '471.html');
+            if (isFav) {
+                document.getElementById('favBtn').textContent = '★';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+
+</body>
+</html>

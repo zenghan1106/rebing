@@ -1,10 +1,10 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>类风湿关节炎生物制剂感染风险及感染性滑囊炎治疗方案</title>
+    <title>类风湿关节炎与感染性滑囊炎治疗方案参考表</title>
     <style>
         * {
             margin: 0;
@@ -14,505 +14,452 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
-            min-height: 100vh;
-            padding: 20px 10px;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .home-btn {
-            background: linear-gradient(145deg, #4a90d9, #357abd);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .home-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background: linear-gradient(145deg, #5cb85c, #449d44);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
-        }
-        
-        .nav-btn.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        
-        .title-wrapper {
-            text-align: center;
-            margin: 20px 0 30px;
-        }
-        
-        .main-title {
-            font-size: 22px;
-            color: #1a5276;
-            font-weight: bold;
+            background-color: #f0f4f8;
+            color: #333;
             line-height: 1.6;
+            padding: 10px;
         }
         
-        .title-decoration {
-            color: #e74c3c;
-            font-size: 20px;
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         
-        .table-container {
-            overflow-x: auto;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         
-        table {
+        .prev-btn {
+            right: 100px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #4a90d9;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #4a90d9;
+            margin-left: 10px;
+        }
+        
+        /* 表格样式 */
+        .main-table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            font-size: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            font-size: 13px;
         }
         
-        thead {
-            background: linear-gradient(145deg, #2c5aa0, #1e4080);
-        }
-        
-        th {
+        .main-table th {
+            background: #2e75b6;
             color: white;
-            padding: 15px 10px;
+            padding: 14px 10px;
             text-align: center;
             font-weight: bold;
-            font-size: 14px;
-            border: 1px solid #1e4080;
+            font-size: 15px;
+            border: 1px solid #1a5276;
         }
         
-        td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            color: #2c3e50;
-            line-height: 1.7;
+        .main-table td {
+            padding: 12px 10px;
+            border: 1px solid #d5d8dc;
             vertical-align: top;
         }
         
-        .category-row {
-            background: linear-gradient(145deg, #3498db, #2980b9) !important;
-        }
-        
-        .category-row td {
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        
-        .subcategory {
-            background: #e8f4f8;
-            font-weight: bold;
-            color: #1a5276;
-        }
-        
-        .pathogen-cell {
-            background: #fff8e7;
-        }
-        
-        .preferred-cell {
-            background: #e8f5e9;
-        }
-        
-        .alternative-cell {
-            background: #fce4ec;
-        }
-        
-        .auxiliary-cell {
-            background: #f3e5f5;
-        }
-        
-        tbody tr:nth-child(even):not(.category-row) {
+        .main-table tr:nth-child(even) {
             background: #f8f9fa;
         }
         
-        tbody tr:hover:not(.category-row) {
-            background: #e3f2fd;
+        .main-table tr:hover {
+            background: #eaf2f8;
         }
         
-        .notes {
-            background: #fff3cd;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border-left: 4px solid #ffc107;
+        /* 第一行字体大一点 */
+        .main-table tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
         }
         
-        .notes p {
-            color: #856404;
-            font-size: 12px;
-            line-height: 2;
-            margin: 5px 0;
-        }
-        
-        .notes .highlight {
-            color: #d35400;
-            font-weight: bold;
-        }
-        
-        .copy-section {
+        /* 注释区域 */
+        .notes-section {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            margin-bottom: 25px;
-        }
-        
-        .copy-wrapper {
-            display: flex;
-            gap: 10px;
-            align-items: stretch;
-        }
-        
-        #copyInput {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #3498db;
+            padding: 15px;
             border-radius: 8px;
-            font-size: 13px;
-            color: #2c3e50;
-            background: #f8f9fa;
-            min-height: 50px;
-            resize: vertical;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.8;
         }
         
-        .copy-btn {
-            background: linear-gradient(145deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            white-space: nowrap;
-            transition: all 0.3s ease;
+        .notes-section p {
+            margin-bottom: 8px;
         }
         
-        .copy-btn:hover {
-            transform: scale(1.05);
-        }
-        
-        .copy-btn.copied {
-            background: linear-gradient(145deg, #27ae60, #219a52);
-        }
-        
+        /* 标签区域 */
         .tags-section {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
             margin-bottom: 20px;
         }
         
         .tags-title {
-            font-size: 16px;
-            color: #2c5aa0;
-            margin-bottom: 15px;
+            font-size: 14px;
             font-weight: bold;
-        }
-        
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+            color: #1a5276;
+            margin-bottom: 10px;
         }
         
         .tag {
             display: inline-block;
             padding: 6px 14px;
+            margin: 5px;
             border-radius: 20px;
             font-size: 12px;
-            color: white;
-            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
         }
         
         .tag-disease {
-            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            background: #e8f4f8;
+            color: #1a5276;
+            border: 1px solid #5b9bd5;
         }
         
         .tag-bacteria {
-            background: linear-gradient(145deg, #9b59b6, #8e44ad);
+            background: #fef9e7;
+            color: #7d6608;
+            border: 1px solid #f4d03f;
         }
         
         .tag-antibiotic {
-            background: linear-gradient(145deg, #27ae60, #219a52);
+            background: #eafaf1;
+            color: #1e8449;
+            border: 1px solid #58d68d;
         }
         
-        .tag-treatment {
-            background: linear-gradient(145deg, #f39c12, #e67e22);
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         
+        /* 底部编辑框区域 */
+        .footer-section {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #5b9bd5;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #2e75b6;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #1a5276;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(231, 76, 60, 0.4);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 页码 */
         .page-number {
             text-align: center;
-            padding: 15px;
-            color: #7f8c8d;
             font-size: 14px;
-            font-weight: bold;
+            color: #666;
+            margin: 10px 0;
         }
         
+        /* 关键词 */
         .keywords {
             text-align: center;
-            padding: 15px;
-            color: #95a5a6;
             font-size: 12px;
+            color: #888;
+            margin-top: 10px;
+            padding: 10px;
         }
         
-        .keywords span {
-            display: inline-block;
-            margin: 3px 6px;
-        }
-        
+        /* 响应式 */
         @media (max-width: 768px) {
-            body {
-                padding: 10px 5px;
-            }
-            
-            .main-title {
-                font-size: 16px;
-            }
-            
-            th {
+            .main-table {
                 font-size: 11px;
-                padding: 10px 5px;
             }
             
-            td {
-                font-size: 10px;
-                padding: 6px;
+            .main-table th {
+                font-size: 12px;
+                padding: 10px 6px;
             }
             
-            .category-row td {
+            .main-table td {
+                padding: 8px 6px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+                margin-top: 55px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 6px 12px;
                 font-size: 12px;
             }
             
-            .copy-wrapper {
-                flex-direction: column;
-            }
-            
-            .copy-btn {
-                width: 100%;
-            }
-            
-            .nav-buttons {
-                width: 100%;
-                justify-content: center;
+            .prev-btn {
+                right: 85px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 头部导航 -->
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 返回首页</a>
-        <div class="nav-buttons">
-            <a href="80.html" class="nav-btn">← 上一页</a>
-            <a href="82.html" class="nav-btn">下一页 →</a>
-        </div>
-    </div>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="80.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="82.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()" title="点击收藏">★</button>
     
     <!-- 标题 -->
-    <div class="title-wrapper">
-        <h1 class="main-title">
-            <span class="title-decoration">~~~~~</span>
-            类风湿关节炎生物制剂感染风险及感染性滑囊炎（鹰嘴滑囊炎、髌前滑囊炎）治疗方案
-            <span class="title-decoration">*****</span>
-        </h1>
-    </div>
+    <h1 class="page-title">类风湿关节炎与感染性滑囊炎治疗方案参考表</h1>
     
-    <!-- 表格 -->
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
-                    <th style="width: 22%;">病原体（通常）</th>
-                    <th style="width: 24%;">首选方案</th>
-                    <th style="width: 18%;">备选方案<sup>§</sup></th>
-                    <th style="width: 18%;">辅助诊断或治疗方法及说明</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="category-row">
-                    <td colspan="5">关节（续）</td>
-                </tr>
-                <tr>
-                    <td>类风湿关节炎</td>
-                    <td colspan="3" style="background: #fff8e7;">
-                        肿瘤坏死因子抑制剂 [阿达木单抗、赛妥珠单抗、重组人Ⅱ型肿瘤坏死因子受体-抗体融合蛋白（益赛普）、戈利木单抗、英夫利西单抗] 及其他抗炎症因子的生物制剂（托法替尼、利妥昔单抗、托珠单抗、阿巴西普）增加结核分枝杆菌、真菌、军团菌、李斯特菌感染及恶性肿瘤的风险，暴发型乙肝可致命。完整表单参见 <em>Med Lett</em> 55: 1, 2013
-                    </td>
-                    <td class="auxiliary-cell"></td>
-                </tr>
-                <tr>
-                    <td>感染性滑囊炎：鹰嘴滑囊炎，髌前滑囊炎</td>
-                    <td class="pathogen-cell">
-                        金黄色葡萄球菌 > 80%，结核和海水放线杆菌（罕见）
-                    </td>
-                    <td class="preferred-cell">
-                        若是MSSA，萘夫西林或苯唑西林2g iv q4h或头孢唑啉2g iv q8h。口服降阶梯方案：双氯西林500mg po qid
-                    </td>
-                    <td class="alternative-cell">
-                        若是MRSA，万古霉素30～60mg/(kg·d)分2～3次，目标AUC<sub>24</sub> 400～600μg·h/ml或利奈唑胺600mg po bid。其他方案：达托霉素6mg/kg iv qd
-                    </td>
-                    <td class="auxiliary-cell">
-                        具高危因素或在高流行区应经验性覆盖MRSA。免疫缺陷而非疗程是复发的危险因素，对于行一期滑囊切除术的免疫正常患者，7天的疗程是充分的（<em>JAC</em> 65: 1008, 2010）
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th style="width: 16%;">解剖学部位/<br>诊断/特定情况</th>
+                <th style="width: 18%;">病原体（通常）</th>
+                <th style="width: 33%;">
+                    <table style="width:100%;border-collapse:collapse;">
+                        <tr><td colspan="2" style="border:none;padding:0;text-align:center;color:white;font-size:15px;">推荐治疗方案*</td></tr>
+                        <tr>
+                            <td style="width:50%;border:none;border-right:1px solid rgba(255,255,255,0.3);padding:8px 0 0 0;color:white;font-size:13px;">首选方案</td>
+                            <td style="width:50%;border:none;padding:8px 0 0 0;color:white;font-size:13px;">备选方案<sup>§</sup></td>
+                        </tr>
+                    </table>
+                </th>
+                <th style="width: 33%;">辅助诊断或治疗方法及说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>类风湿关节炎</strong></td>
+                <td colspan="3">
+                    <strong>肿瘤坏死因子抑制剂</strong>［阿达木单抗、赛妥珠单抗、重组人Ⅱ型肿瘤坏死因子受体-抗体融合蛋白（益赛普）、戈利木单抗、英夫利西单抗］及其他抗炎症因子的生物制剂（托法替尼、利妥昔单抗、托珠单抗、阿巴西普）增加结核分枝杆菌、真菌、军团菌、李斯特菌感染及恶性肿瘤的风险，暴发型乙肝可致命。完整表单参见Med Lett 55: 1, 2013
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>感染性滑囊炎：鹰嘴滑囊炎，髌前滑囊炎</strong></td>
+                <td>金黄色葡萄球菌＞80%，结核和海水分枝杆菌（罕见）</td>
+                <td>
+                    <strong>首选方案：</strong>若是MSSA，萘夫西林或苯唑西林2g iv q4h或头孢唑啉2g iv q8h。口服降阶梯方案：双氯西林500mg po qid
+                </td>
+                <td>
+                    <strong>备选方案：</strong>若是MRSA，万古霉素30～60mg/(kg·d) 分2～3次，目标AUC₂₄ 400～600μg·h/ml或利奈唑胺600mg po bid。<br><br>
+                    其他方案：达托霉素6mg/kg iv qd
+                </td>
+                <td>
+                    具高危因素或在高流行区应经验性覆盖MRSA。<br><br>
+                    免疫缺陷而非疗程是复发的危险因素，对于行一期滑囊切除术的免疫正常患者，7天的疗程是充分的（JAC 65: 1008, 2010）
+                </td>
+            </tr>
+        </tbody>
+    </table>
     
     <!-- 注释 -->
-    <div class="notes">
-        <p><span class="highlight">注：*</span> 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
-        <p><span class="highlight">§</span> 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
-        <p><span class="highlight">表中名词缩写见第2页。</span></p>
-    </div>
-    
-    <!-- 复制功能 -->
-    <div class="copy-section">
-        <div class="copy-wrapper">
-            <textarea id="copyInput" readonly>类风湿关节炎生物制剂感染风险及感染性滑囊炎（鹰嘴滑囊炎、髌前滑囊炎）治疗方案；类风湿关节炎、感染性滑囊炎、鹰嘴滑囊炎、髌前滑囊炎、金黄色葡萄球菌、结核分枝杆菌、真菌、军团菌、李斯特菌、乙肝病毒、阿达木单抗、赛妥珠单抗、益赛普、戈利木单抗、英夫利西单抗、托法替尼、利妥昔单抗、托珠单抗、阿巴西普、萘夫西林、苯唑西林、头孢唑啉、双氯西林、万古霉素、利奈唑胺、达托霉素、滑囊切除术；=81</textarea>
-            <button class="copy-btn" onclick="copyText()">📋 复制</button>
-        </div>
-    </div>
-    
-    <!-- 标签 -->
-    <div class="tags-section">
-        <div class="tags-title">🏷️ 特色检索标签</div>
-        <div class="tags-container">
-            <span class="tag tag-disease">类风湿关节炎</span>
-            <span class="tag tag-disease">感染性滑囊炎</span>
-            <span class="tag tag-disease">鹰嘴滑囊炎</span>
-            <span class="tag tag-disease">髌前滑囊炎</span>
-            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
-            <span class="tag tag-bacteria">MSSA</span>
-            <span class="tag tag-bacteria">MRSA</span>
-            <span class="tag tag-bacteria">结核分枝杆菌</span>
-            <span class="tag tag-bacteria">真菌</span>
-            <span class="tag tag-bacteria">军团菌</span>
-            <span class="tag tag-bacteria">李斯特菌</span>
-            <span class="tag tag-bacteria">海水放线杆菌</span>
-            <span class="tag tag-antibiotic">阿达木单抗</span>
-            <span class="tag tag-antibiotic">赛妥珠单抗</span>
-            <span class="tag tag-antibiotic">益赛普</span>
-            <span class="tag tag-antibiotic">戈利木单抗</span>
-            <span class="tag tag-antibiotic">英夫利西单抗</span>
-            <span class="tag tag-antibiotic">托法替尼</span>
-            <span class="tag tag-antibiotic">利妥昔单抗</span>
-            <span class="tag tag-antibiotic">托珠单抗</span>
-            <span class="tag tag-antibiotic">阿巴西普</span>
-            <span class="tag tag-antibiotic">萘夫西林</span>
-            <span class="tag tag-antibiotic">苯唑西林</span>
-            <span class="tag tag-antibiotic">头孢唑啉</span>
-            <span class="tag tag-antibiotic">双氯西林</span>
-            <span class="tag tag-antibiotic">万古霉素</span>
-            <span class="tag tag-antibiotic">利奈唑胺</span>
-            <span class="tag tag-antibiotic">达托霉素</span>
-            <span class="tag tag-treatment">滑囊切除术</span>
-            <span class="tag tag-treatment">TNF抑制剂</span>
-            <span class="tag tag-treatment">生物制剂</span>
-        </div>
+    <div class="notes-section">
+        <p><strong>注：</strong>* 所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p>§ 选择替代方案的考虑：过敏、药理/药代学特点、依从性、价格和当地耐药情况。</p>
+        <p>表中名词缩写见第2页。</p>
     </div>
     
     <!-- 页码 -->
-    <div class="page-number">81</div>
+    <div class="page-number">页码：81</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击图片内文字快速检索）</div>
+        <div>
+            <span class="tag tag-disease" onclick="searchTag('类风湿关节炎')">类风湿关节炎</span>
+            <span class="tag tag-disease" onclick="searchTag('感染性滑囊炎')">感染性滑囊炎</span>
+            <span class="tag tag-disease" onclick="searchTag('鹰嘴滑囊炎')">鹰嘴滑囊炎</span>
+            <span class="tag tag-disease" onclick="searchTag('髌前滑囊炎')">髌前滑囊炎</span>
+            <span class="tag tag-disease" onclick="searchTag('滑囊切除术')">滑囊切除术</span>
+            <span class="tag tag-bacteria" onclick="searchTag('金黄色葡萄球菌')">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('结核分枝杆菌')">结核分枝杆菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('海水分枝杆菌')">海水分枝杆菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('真菌')">真菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('军团菌')">军团菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('李斯特菌')">李斯特菌</span>
+            <span class="tag tag-bacteria" onclick="searchTag('MSSA')">MSSA</span>
+            <span class="tag tag-bacteria" onclick="searchTag('MRSA')">MRSA</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('阿达木单抗')">阿达木单抗</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('赛妥珠单抗')">赛妥珠单抗</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('益赛普')">益赛普</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('戈利木单抗')">戈利木单抗</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('英夫利西单抗')">英夫利西单抗</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('托法替尼')">托法替尼</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('利妥昔单抗')">利妥昔单抗</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('托珠单抗')">托珠单抗</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('阿巴西普')">阿巴西普</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('萘夫西林')">萘夫西林</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('苯唑西林')">苯唑西林</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('头孢唑啉')">头孢唑啉</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('双氯西林')">双氯西林</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('万古霉素')">万古霉素</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('利奈唑胺')">利奈唑胺</span>
+            <span class="tag tag-antibiotic" onclick="searchTag('达托霉素')">达托霉素</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框 -->
+    <div class="footer-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="类风湿关节炎与感染性滑囊炎治疗方案参考表；类风湿关节炎；感染性滑囊炎；鹰嘴滑囊炎；髌前滑囊炎；金黄色葡萄球菌；MSSA；MRSA；萘夫西林；苯唑西林；头孢唑啉；双氯西林；万古霉素；利奈唑胺；达托霉素；=81" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
     
     <!-- 关键词 -->
     <div class="keywords">
-        <span>类风湿关节炎</span>
-        <span>感染性滑囊炎</span>
-        <span>鹰嘴滑囊炎</span>
-        <span>髌前滑囊炎</span>
-        <span>金黄色葡萄球菌</span>
-        <span>MSSA</span>
-        <span>MRSA</span>
-        <span>结核分枝杆菌</span>
-        <span>真菌</span>
-        <span>军团菌</span>
-        <span>李斯特菌</span>
-        <span>阿达木单抗</span>
-        <span>益赛普</span>
-        <span>英夫利西单抗</span>
-        <span>托法替尼</span>
-        <span>利妥昔单抗</span>
-        <span>托珠单抗</span>
-        <span>阿巴西普</span>
-        <span>萘夫西林</span>
-        <span>苯唑西林</span>
-        <span>头孢唑啉</span>
-        <span>双氯西林</span>
-        <span>万古霉素</span>
-        <span>利奈唑胺</span>
-        <span>达托霉素</span>
-        <span>滑囊切除术</span>
+        关键词：类风湿关节炎 | 感染性滑囊炎 | 鹰嘴滑囊炎 | 髌前滑囊炎 | 金黄色葡萄球菌 | MSSA | MRSA | 萘夫西林 | 苯唑西林 | 头孢唑啉 | 双氯西林 | 万古霉素 | 利奈唑胺 | 达托霉素
     </div>
     
     <script>
-        function copyText() {
-            const input = document.getElementById('copyInput');
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
             input.select();
             input.setSelectionRange(0, 99999);
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(input.value).then(() => {
-                    showCopied();
-                });
-            } else {
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板：' + input.value);
+            }, function(err) {
                 document.execCommand('copy');
-                showCopied();
-            }
+                alert('已复制到剪贴板');
+            });
         }
         
-        function showCopied() {
-            const btn = document.querySelector('.copy-btn');
-            const originalText = btn.textContent;
-            btn.textContent = '✓ 已复制';
-            btn.classList.add('copied');
+        // 标签检索
+        function searchTag(tag) {
+            alert('正在检索：' + tag + '\n（实际应用中可跳转至搜索结果页）');
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = document.querySelector('.page-title').textContent.replace(/~~~~~|*****|\s/g, '');
+            const pageNum = '81';
             
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.classList.remove('copied');
-            }, 2000);
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.page === pageNum);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                page: pageNum,
+                url: '81.html',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏夹！\n标题：' + title + '\n页码：' + pageNum);
         }
     </script>
 </body>

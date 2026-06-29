@@ -1,0 +1,442 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表13B(2) 抗寄生虫药物剂量和主要不良反应（续）*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #449d44;
+        }
+        
+        .btn-favorite {
+            background: #f0ad4e;
+            color: white;
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-favorite:hover {
+            background: #ec971f;
+            transform: scale(1.1);
+        }
+        
+        .btn-copy {
+            background: #5bc0de;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background: #46b8da;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            margin: 20px 0 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2e5c8a;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        .category-row {
+            background: #e8f4f8 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .drug-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .bottom-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4e3;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e5c8a;
+            color: white;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .btn-favorite {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="btn btn-home">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="433.html" class="btn btn-nav">← 上一页</a>
+            <a href="435.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <button class="btn btn-favorite" onclick="addToFavorites()" title="收藏">★</button>
+    
+    <h1>~~~~~表13B(2) 抗寄生虫药物剂量和主要不良反应（续）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别、药品、通用药名（商品名）</th>
+                    <th>常用成人剂量</th>
+                    <th>不良反应/说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">抗原虫药：非肠道寄生虫/肠道外寄生虫（续）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">苄硝唑<sup>*</sup><br>苄硝唑12.5mg和100mg批准用于2～12岁儿童，美国CDC建议成人可超说明书使用（www.benznidazoletablets.com）</td>
+                    <td>5mg/(kg·d) po，100mg片剂。不按照体重计算，300mg/d×60d或300mg/d，延长治疗时间，总剂量相当于5mg/(kg·d)×60d</td>
+                    <td>50%的患者光过敏。胃肠道：腹痛、恶心、呕吐、食欲缺乏。皮肤：包括Stevens-Johnson综合征。中枢神经系统：定向力障碍、失眠、抽搐/癫痫、感觉异常、多发性神经炎。如出现白细胞或血小板减低需停止治疗。妊娠期禁用。推荐剂量：5.0～7.5mg/(kg·d)，但剂量大于5mg/(kg·d)可导致成人严重不良反应，儿童对大剂量耐受好</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">磷酸氯喹（Aralen）</td>
+                    <td>剂量不同，疟疾的预防和治疗见204～205页</td>
+                    <td>轻微不良反应：食欲缺乏、恶心、呕吐、头痛、眩晕、视物模糊、深色皮肤患者有瘙痒。严重不良反应：类风湿关节炎患者长期服用可导致视网膜病，能加重银屑病。可阻断对狂犬病疫苗的反应。癫痫者禁用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">氨苯砜<br>见注解"高铁血红蛋白血症"</td>
+                    <td>100mg po qd</td>
+                    <td>服用TMP-SMX后出现皮疹的患者通常可耐受。是导致获得性高铁血红蛋白血症的常见病因（NEJM 364:957, 2011）。该药代谢产物使血红蛋白中的二价铁转变为三价铁（不能运送氧）。血中三价铁正常不超过1%；10%则出现发绀；30%～40%造成头痛、乏力、心率增快、头晕；60%造成酸中毒和昏迷；达70%～80%患者可死亡。G6PD下降是危险因素。治疗：亚甲蓝1～2mg/kg，单剂，iv，>5min</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">依氟鸟氨酸（Ornidyl）<br>（WHO或美国CDC药品服务处）</td>
+                    <td>400mg/(kg·d) iv q12h×7d，联合应用美拉胂醇治疗非洲锥虫</td>
+                    <td>1/2的患者腹泻、呕吐、腹痛，1/2的患者贫血/白细胞减少、癫痫发作、脱发、黄疸、听力下降。妊娠期禁用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">非昔硝唑</td>
+                    <td>体重≥35kg：对于1期和轻度2期患者（CSF-WBC<100/μl）负荷剂量1800mg（3片）qd×4d，然后1200mg（2片）qd×6d</td>
+                    <td>可以餐后吞咽600mg片剂，可以完成10d治疗。FDA建议避免在eGFR<30ml/min肾功能损伤人群避免使用。如CSF细胞数不明，不建议使用非昔硝唑<br>禁忌证：肝硬化、黄疸或存在QTc间期延长>470ms。美国直接从赛诺菲公司直接获得</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="~~~~~表13B(2) 抗寄生虫药物剂量和主要不良反应（续）*****；抗原虫药；非肠道寄生虫；肠道外寄生虫；苄硝唑；磷酸氯喹；氨苯砜；依氟鸟氨酸；非昔硝唑；非洲锥虫；疟疾；高铁血红蛋白血症；Stevens-Johnson综合征；=434" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签</div>
+            <div class="tags">
+                <span class="tag">非肠道寄生虫</span>
+                <span class="tag">肠道外寄生虫</span>
+                <span class="tag">苄硝唑</span>
+                <span class="tag">磷酸氯喹</span>
+                <span class="tag">Aralen</span>
+                <span class="tag">氨苯砜</span>
+                <span class="tag">依氟鸟氨酸</span>
+                <span class="tag">Ornidyl</span>
+                <span class="tag">非昔硝唑</span>
+                <span class="tag">非洲锥虫</span>
+                <span class="tag">疟疾</span>
+                <span class="tag">Stevens-Johnson综合征</span>
+                <span class="tag">高铁血红蛋白血症</span>
+                <span class="tag">G6PD</span>
+                <span class="tag">QTc延长</span>
+                <span class="tag">妊娠期禁用</span>
+                <span class="tag">光过敏</span>
+                <span class="tag">视网膜病</span>
+            </div>
+        </div>
+        
+        <div class="page-info">
+            页码：434
+        </div>
+        
+        <div class="keywords">
+            关键词：抗寄生虫药物、抗原虫药、非肠道寄生虫、肠道外寄生虫、苄硝唑、磷酸氯喹、氨苯砜、依氟鸟氨酸、非昔硝唑、非洲锥虫、疟疾、高铁血红蛋白血症、Stevens-Johnson综合征、G6PD、QTc延长、妊娠期禁用
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板：" + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！\n标题：' + title);
+            } else {
+                alert('该页面已在收藏中！');
+            }
+            
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        title: title,
+                        url: url
+                    }, '*');
+                }
+            } catch(e) {
+                console.log('无法向父窗口发送消息');
+            }
+        }
+    </script>
+</body>
+</html>

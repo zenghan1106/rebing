@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表12A（8）分枝杆菌感染的治疗</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="390.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="392.html" class="nav-btn">下一页 ➡️</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~表12A（8）分枝杆菌感染的治疗*****</h1>
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>病原体/疾病</th>
+                    <th>不同情境</th>
+                    <th>推荐方案</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>VI.非结核分枝杆菌（NTM）（续）<br><br>龟分枝杆菌<br>M.chelonae</td>
+                    <td>皮肤、伤口、软组织感染相关，快生长；播散性/肺部感染罕见</td>
+                    <td>皮肤：克拉霉素500mg po bid+另一有效药物×4～6个月。重度感染：克拉霉素500mg po bid+妥布霉素5mg/kg iv qd+另一有效药物×2～8w，之后克拉霉素500mg po bid+另一有效药物，疗程可达12个月</td>
+                    <td>龟分枝杆菌对阿米卡星（80%）、克拉霉素（92%～100%）、阿奇霉素、妥布霉素（100%）、亚胺培南（8%～50%）、莫西沙星（0%～50%）、多西环素（25%）、利奈唑胺（50%～100%）、奥马环素（MIC90=0.25μg/ml）、替加环素（MIC90=0.125μg/ml）敏感<br>对头孢西丁耐药。有替加环素联合其他药物成功挽救治疗龟分枝杆菌感染的报道（J Antimicrob chemother 69：1945，2014）</td>
+                </tr>
+                <tr>
+                    <td>偶发分枝杆菌<br>Mycobacterium fortuitum</td>
+                    <td>需治疗；尚无最佳方案，外科切除感染部位</td>
+                    <td>阿米卡星+头孢西丁+丙磺舒×2～6w，然后口服TMP-SMX或多西环素×2～6个月。2种敏感药物口服治疗6～12个月通常有效</td>
+                    <td>对所有标准抗结核药耐药。体外对多西环素、米诺环素、头孢西丁、亚胺培南、阿米卡星、TMP-SMX、环丙沙星、氧氟沙星、阿奇霉素、克拉霉素、利奈唑胺、替加环素敏感，但部分菌株对阿奇霉素、利福布汀耐药。对偶发分枝杆菌肺病，至少用2种体外敏感的药物治疗，直至痰培养阴性持续12个月（AJRCCM 175：367，2007）。播散性疾病和抗γ干扰素的自身抗体相关（Intern Med 53：1361，2014）</td>
+                </tr>
+                <tr>
+                    <td>嗜血分枝杆菌<br>Mycobacterium haemophilum</td>
+                    <td>环丙沙星+利福布汀+克拉霉素联合治疗（EID 2019，25：1648）。外科清创可能是必要的</td>
+                    <td></td>
+                    <td>溃疡性皮损、滑膜炎、骨髓炎、淋巴结炎、肺部感染和播散性感染常发生于免疫受损的宿主人群<br>实验室：需使用补充培养基分离培养</td>
+                </tr>
+                <tr>
+                    <td>日内瓦分枝杆菌<br>Mycobacterium genavense</td>
+                    <td>选用2种或以上药物：克拉霉素、乙胺丁醇、利福布汀；氯法齐明、阿米卡星、莫西沙星作为备选</td>
+                    <td></td>
+                    <td>见于CD4＜50/μl的艾滋病患者和非HIV严重免疫受损患者。综述参见Clin Microbiol Infect 19：432，2013</td>
+                </tr>
+                <tr>
+                    <td>戈登分枝杆菌<br>Mycobacterium gordonae</td>
+                    <td>常不是致病菌</td>
+                    <td></td>
+                    <td>通常为寄生菌，并不致病。体外试验：对乙胺丁醇、利福平、阿米卡星、环丙沙星、克拉霉素、利奈唑胺敏感。对异烟肼耐药。手术切除</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="font-size: 12px; color: #666; margin: 10px 0;">注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。表中名词缩写见第2页。</p>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags">
+                <span class="tag">非结核分枝杆菌</span>
+                <span class="tag">NTM</span>
+                <span class="tag">龟分枝杆菌</span>
+                <span class="tag">偶发分枝杆菌</span>
+                <span class="tag">嗜血分枝杆菌</span>
+                <span class="tag">日内瓦分枝杆菌</span>
+                <span class="tag">戈登分枝杆菌</span>
+                <span class="tag">克拉霉素</span>
+                <span class="tag">妥布霉素</span>
+                <span class="tag">阿米卡星</span>
+                <span class="tag">头孢西丁</span>
+                <span class="tag">丙磺舒</span>
+                <span class="tag">TMP-SMX</span>
+                <span class="tag">多西环素</span>
+                <span class="tag">米诺环素</span>
+                <span class="tag">环丙沙星</span>
+                <span class="tag">氧氟沙星</span>
+                <span class="tag">阿奇霉素</span>
+                <span class="tag">利福布汀</span>
+                <span class="tag">利奈唑胺</span>
+                <span class="tag">替加环素</span>
+                <span class="tag">奥马环素</span>
+                <span class="tag">亚胺培南</span>
+                <span class="tag">乙胺丁醇</span>
+                <span class="tag">氯法齐明</span>
+                <span class="tag">莫西沙星</span>
+            </div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">表12A（8）分枝杆菌感染的治疗；非结核分枝杆菌；NTM；龟分枝杆菌；偶发分枝杆菌；嗜血分枝杆菌；日内瓦分枝杆菌；戈登分枝杆菌；克拉霉素；妥布霉素；阿米卡星；头孢西丁；丙磺舒；TMP-SMX；多西环素；米诺环素；环丙沙星；氧氟沙星；阿奇霉素；利福布汀；利奈唑胺；替加环素；奥马环素；亚胺培南；乙胺丁醇；氯法齐明；莫西沙星；=196</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 196 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 196;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 196;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

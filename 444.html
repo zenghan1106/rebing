@@ -1,0 +1,524 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~出血热病毒感染治疗方案表*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover {
+            background: #5a9e3d;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            vertical-align: top;
+            color: #444;
+        }
+        
+        .disease-name {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .drug-info {
+            color: #27ae60;
+        }
+        
+        .adverse-info {
+            color: #8e44ad;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline;
+        }
+        
+        .tag-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tag-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #4ecdc4;
+            color: white;
+        }
+        
+        .tag-virus {
+            background: #45b7d1;
+            color: white;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f39c12;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(243,156,18,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="443.html" class="page-btn">← 上一页</a>
+            <a href="445.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~出血热病毒感染治疗方案表*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 28%;">病毒/疾病</th>
+                    <th style="width: 32%;">药物/剂量</th>
+                    <th style="width: 40%;">不良反应/说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" style="background: #e8f4f8; font-weight: 600; color: #1a5276;">出血热病毒感染（续）</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">埃博拉/马尔堡出血热（中非）</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            美国CDC可在出现症状后数日确诊，最常用的诊断技术包括抗原捕获酶联免疫吸附法（ELISA）、IgM抗体（ELISA）、NAAT或病毒培养等（NEJM 382: 1832, 2020）[Journal of Infection and Public Health 15 (2022) 285-292]
+                        </div>
+                    </td>
+                    <td>
+                        <div class="drug-info">
+                            <strong>治疗：</strong>Ebanga或Inmazeb（REGN-EB3：3种全人单克隆抗体-atoltivimab、maftivimab、odesivimab-edgn）每种抗体50mg/kg（总计150mg/kg）iv单次。Ebanga（ansuvimab-zyk Ab）50mg/kg iv单次<br><br>
+                            <strong>预防：</strong>Ervebo（重组埃博拉env糖蛋白VZV载体活疫苗）1ml im（三角肌，非优势臂）
+                        </div>
+                    </td>
+                    <td>
+                        <div class="adverse-info">
+                            通常在接触后8～10天（2～21天）突然起病。症状不特异，表现为发热、寒战、肌痛和不适等。发热、恶心、虚弱、乏力是最常见的症状和体征。患者可出现弥漫性充血性斑丘疹（5～7天）（通常累及面部、颈部、躯干和上肢），可脱屑<br><br>
+                            EVD不易和其他更常见感染性疾病鉴别，如疟疾、伤寒、脑膜炎球菌血症，其他细菌感染（如肺炎）<br><br>
+                            <strong>胃肠道症状：</strong>严重水样泻、恶心、呕吐和腹痛<br><br>
+                            <strong>其他：</strong>胸痛、呼吸困难、头痛甚至意识模糊。患者可有结膜充血。有报道出现呃逆、癫痫发作和脑水肿。出血并不一定必须存在，但晚期可出现，表现为出血点、瘀点/瘀斑、静脉穿刺部位渗血和黏膜出血。大出血少见。妊娠女性可出现自然流产
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">合并肺综合征：汉坦病毒肺综合征，"sin nombre病毒"</div>
+                    </td>
+                    <td>
+                        尚未证实利巴韦林有效。早期诊断和支持治疗（常在ICU）是治疗成功的关键
+                    </td>
+                    <td>
+                        在接触啮齿动物排泄物后，急性起病，表现为发热、头痛、肌痛、干咳、血小板减少、PT延长和非心源性肺水肿伴呼吸功能不全
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">伴肾综合征：拉沙热、委内瑞拉出血热、朝鲜出血热、萨比亚出血热、阿根廷出血热、玻利维亚出血热、鸠宁病毒、马秋博病毒（90%以上发生在中国，CID59: 1040, 2014）</div>
+                    </td>
+                    <td>
+                        利巴韦林30mg/(kg·d) po，负荷剂量，随后15mg/kg q6h×4d，然后7.5mg/kg×6d（WHO推荐，见说明）
+                    </td>
+                    <td>
+                        毒性低，有溶血的报道，停药后恢复。接触者处理意见参见CID 36: 1254, 2003。拉沙热伴急性肾衰竭者死亡率增加15倍 [Lancet ID 18(6): 684-695, 2018]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">登革热和登革出血热（DHF）</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            www.cdc.gov/ncidod/dvbid/dengue/dengue-hcp.htm。去热带或亚热带的旅游者出现发热、出血、血小板减少或血液浓缩伴休克时，要考虑登革热（潜伏期通常为4～7天）。诊断靠病毒分离和血清学检查，血清送至CDC，电话：787-706-2399
+                        </div>
+                    </td>
+                    <td>
+                        无抗病毒治疗的资料。补液治疗，严密监测血流动力学。治疗综述：Current Treatment Opinion ID 9: 185-93, 2017
+                    </td>
+                    <td>
+                        诊断：IgM和IgG抗体，首选NS1抗原测定（Quest Diagnostics），仅用于临床表现符合登革热的病例。许多候选抗病毒药在研究中，尚无有效结果。在小样本临床研究中，卢帕他定可减轻临床症状并减少重症病例发生（Scientific Reports 8: 3857, 2018）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tag-section">
+        <h3>🏷️ 检索标签（点击可筛选）</h3>
+        <div class="tags">
+            <span class="tag tag-disease">埃博拉</span>
+            <span class="tag tag-disease">马尔堡出血热</span>
+            <span class="tag tag-disease">汉坦病毒肺综合征</span>
+            <span class="tag tag-disease">拉沙热</span>
+            <span class="tag tag-disease">委内瑞拉出血热</span>
+            <span class="tag tag-disease">朝鲜出血热</span>
+            <span class="tag tag-disease">萨比亚出血热</span>
+            <span class="tag tag-disease">阿根廷出血热</span>
+            <span class="tag tag-disease">玻利维亚出血热</span>
+            <span class="tag tag-disease">登革热</span>
+            <span class="tag tag-disease">登革出血热</span>
+            <span class="tag tag-drug">Ebanga</span>
+            <span class="tag tag-drug">Inmazeb</span>
+            <span class="tag tag-drug">Ervebo</span>
+            <span class="tag tag-drug">利巴韦林</span>
+            <span class="tag tag-drug">卢帕他定</span>
+            <span class="tag tag-virus">汉坦病毒</span>
+            <span class="tag tag-virus">鸠宁病毒</span>
+            <span class="tag tag-virus">马秋博病毒</span>
+            <span class="tag tag-virus">sin nombre病毒</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="出血热病毒感染治疗方案表；埃博拉；马尔堡出血热；汉坦病毒肺综合征；拉沙热；登革热；Ebanga；Inmazeb；Ervebo；利巴韦林；=444" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">页码：444</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>出血热 | 埃博拉 | 马尔堡 | 汉坦病毒 | 拉沙热 | 登革热 | 利巴韦林 | 单克隆抗体 | 疫苗 | 抗病毒治疗
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '❤️';
+                // 模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '出血热病毒感染治疗方案表',
+                    url: '444.html',
+                    pageNum: '444'
+                };
+                if (!favorites.find(f => f.url === '444.html')) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '444.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.find(f => f.url === '444.html')) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

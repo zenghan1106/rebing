@@ -1,0 +1,655 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表13A（续）寄生虫感染的治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+        }
+        
+        .prev-btn {
+            right: 100px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 25px;
+            font-size: 22px;
+            color: #1e3a5f;
+            font-weight: bold;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 12px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #1e40af;
+        }
+        
+        /* 表头第一行字体更大 */
+        thead tr:first-child th {
+            font-size: 18px;
+            padding: 16px 12px;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #3b82f6;
+        }
+        
+        /* 数据行 */
+        tbody td {
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        /* 病原体列 */
+        .pathogen {
+            font-weight: 600;
+            color: #374151;
+            min-width: 200px;
+        }
+        
+        .pathogen em {
+            color: #6b7280;
+            font-style: italic;
+        }
+        
+        /* 药物列 */
+        .drug {
+            color: #1f2937;
+            min-width: 220px;
+        }
+        
+        /* 说明列 */
+        .note {
+            color: #374151;
+            min-width: 250px;
+        }
+        
+        .note .ref {
+            color: #6b7280;
+            font-size: 12px;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        /* 悬停效果 */
+        tbody tr:hover {
+            background: #eff6ff;
+        }
+        
+        /* 脚注 */
+        .footnote {
+            padding: 12px;
+            font-size: 12px;
+            color: #4b5563;
+            background: #fefce8;
+            border-top: 2px solid #f59e0b;
+        }
+        
+        .footnote sup {
+            color: #d97706;
+            font-weight: bold;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #374151;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .tag-drug {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .tag-bacteria {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+        
+        .keywords {
+            color: #374151;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #374151;
+            background: #f9fafb;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #059669;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(245,158,11,0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #ef4444;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1f2937;
+            color: white;
+            padding: 16px 28px;
+            border-radius: 12px;
+            font-size: 14px;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th, tbody td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .pathogen, .drug, .note {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="420.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="422.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~表13A（续）寄生虫感染的治疗*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4">表 13A（续） 寄生虫感染的治疗</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>病原体</th>
+                    <th colspan="2">推荐方案</th>
+                    <th>说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th></th>
+                    <th>首选药物</th>
+                    <th>备选药物</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 广州管圆线虫 -->
+                <tr>
+                    <td class="pathogen">
+                        广州管圆线虫（<em>Angiostrongylus cantonensis</em>）<br>
+                        （管圆线虫病）：<br>
+                        引起嗜酸性粒细胞性脑膜炎，<br>
+                        抗寄生虫药物的利弊参见<br>
+                        https://pubmed.ncbi.nlm.nih.gov/32729438/
+                    </td>
+                    <td class="drug">
+                        轻、中度感染：多次腰穿（如果必要）和镇痛药。<br>
+                        泼尼松 60mg/d×14d 可减轻头痛，<br>
+                        减少腰穿次数
+                    </td>
+                    <td class="drug">
+                        加用［阿苯达唑 15mg/（kg·d）+ 泼尼松 60mg/d qd］×14d，<br>
+                        可减轻头痛及腰穿次数
+                    </td>
+                    <td class="note">
+                        阿苯达唑必须同泼尼松一起使用<br>
+                        <span class="ref">（TRSMH 102: 990, 2008）</span>。<br>
+                        颚口线虫属和贝利蛔线虫属也可导致<br>
+                        嗜酸性粒细胞性脑膜炎
+                    </td>
+                </tr>
+                
+                <!-- 贝蛔虫病 -->
+                <tr>
+                    <td class="pathogen">
+                        贝蛔虫病［浣熊蛔虫（<em>Raccoon roundworm</em>）］：<br>
+                        嗜酸性粒细胞性脑膜炎
+                    </td>
+                    <td class="drug" colspan="2">
+                        尚无被证实有效的药物。可尝试口服阿苯达唑，<br>
+                        儿童为 25～50mg/（kg·d），<br>
+                        成人为 400mg po bid，<br>
+                        与糖皮质激素合用，治疗1个月
+                    </td>
+                    <td class="note">
+                        <span class="ref">Clin Microbiol Rev 29: 375, 2016</span>。<br>
+                        嗜酸性粒细胞性脑膜炎的其他病因：<br>
+                        颚口线虫属和管圆线虫属
+                    </td>
+                </tr>
+                
+                <!-- 麦地那龙线虫病 -->
+                <tr>
+                    <td class="pathogen">
+                        麦地那龙线虫病（<em>Dracunculus medinensis</em>）：<br>
+                        几内亚蠕虫（<em>Guinea worm</em>），<br>
+                        在3个国家发现有狗宿主，根治困难
+                    </td>
+                    <td class="drug">
+                        数日内缓慢去除即将穿出皮肤的虫体
+                    </td>
+                    <td class="drug">
+                        无有效药物。口服镇痛药、抗炎药、<br>
+                        局部杀菌剂、抗生素软膏以减轻症状，<br>
+                        以便在数日内，手法轻柔地取出虫体
+                    </td>
+                    <td class="note"></td>
+                </tr>
+                
+                <!-- 丝虫病 -->
+                <tr>
+                    <td class="pathogen" colspan="4" style="background: #e0f2fe; font-weight: bold; color: #1e3a5f;">
+                        丝虫病（Filariasis）：需明确是否同时感染罗阿丝虫或盘尾丝虫
+                    </td>
+                </tr>
+                
+                <!-- 淋巴丝虫病 -->
+                <tr>
+                    <td class="pathogen">
+                        淋巴丝虫病（象皮肿）：<br>
+                        病原学：班氏吴策丝虫（<em>Wuchereria bancrofti</em>）、<br>
+                        马来布鲁丝虫（<em>Brugia malayi</em>）、<br>
+                        帝汶布鲁丝虫（<em>Brugia timori</em>）
+                    </td>
+                    <td class="drug">
+                        单独感染：<br>
+                        乙胺嗪<sup>2</sup>（DEC）<sup>*</sup> 6mg/（kg·d）<br>
+                        分3次 po×12d + 多西环素 200mg/d po×6w
+                    </td>
+                    <td class="drug">
+                        合并盘尾丝虫感染：<br>
+                        先治疗盘尾丝虫：伊维菌素 150μg/kg po×1剂，<br>
+                        1个月后开始 DEC，剂量同单独感染<br><br>
+                        合并罗阿丝虫感染：二者均可选 EDC 治疗，<br>
+                        但罗阿丝虫血症＞2500 微丝蚴/毫升可能导致严重脑病。<br>
+                        建议应用 DEC 前到专门的中心做微丝蚴血液净化<br>
+                        或者使用泼尼松 + 小剂量 EDC。<br>
+                        如果丝虫血症＜2500 微丝蚴/毫升，<br>
+                        开始常规剂量 DEC
+                    </td>
+                    <td class="note">
+                        多西环素×6w，可改善轻、中度的淋巴水肿<br>
+                        <span class="ref">（CID 55: 621, 2012）</span><br><br>
+                        注意：如果合并盘尾丝虫感染，<br>
+                        DEC 可以导致不可逆的眼部损伤
+                    </td>
+                </tr>
+                
+                <!-- 脚注 -->
+                <tr>
+                    <td class="footnote" colspan="4">
+                        <sup>2</sup> 可能需要抗组胺药物或糖皮质激素对抗虫体裂解引起的过敏反应。<br>
+                        <sup>*</sup> 关于药物来源见表 13D，222 页。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">管圆线虫病</span>
+            <span class="tag tag-disease">贝蛔虫病</span>
+            <span class="tag tag-disease">麦地那龙线虫病</span>
+            <span class="tag tag-disease">丝虫病</span>
+            <span class="tag tag-disease">淋巴丝虫病</span>
+            <span class="tag tag-disease">象皮肿</span>
+            <span class="tag tag-bacteria">广州管圆线虫</span>
+            <span class="tag tag-bacteria">Angiostrongylus cantonensis</span>
+            <span class="tag tag-bacteria">浣熊蛔虫</span>
+            <span class="tag tag-bacteria">Raccoon roundworm</span>
+            <span class="tag tag-bacteria">麦地那龙线虫</span>
+            <span class="tag tag-bacteria">Dracunculus medinensis</span>
+            <span class="tag tag-bacteria">几内亚蠕虫</span>
+            <span class="tag tag-bacteria">Guinea worm</span>
+            <span class="tag tag-bacteria">班氏吴策丝虫</span>
+            <span class="tag tag-bacteria">Wuchereria bancrofti</span>
+            <span class="tag tag-bacteria">马来布鲁丝虫</span>
+            <span class="tag tag-bacteria">Brugia malayi</span>
+            <span class="tag tag-bacteria">帝汶布鲁丝虫</span>
+            <span class="tag tag-bacteria">Brugia timori</span>
+            <span class="tag tag-bacteria">罗阿丝虫</span>
+            <span class="tag tag-bacteria">盘尾丝虫</span>
+            <span class="tag tag-bacteria">颚口线虫属</span>
+            <span class="tag tag-bacteria">贝利蛔线虫属</span>
+            <span class="tag tag-bacteria">管圆线虫属</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">阿苯达唑</span>
+            <span class="tag tag-drug">乙胺嗪</span>
+            <span class="tag tag-drug">DEC</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">伊维菌素</span>
+            <span class="tag tag-drug">镇痛药</span>
+            <span class="tag tag-drug">抗炎药</span>
+            <span class="tag tag-drug">抗生素软膏</span>
+            <span class="tag tag-drug">抗组胺药物</span>
+            <span class="tag tag-drug">糖皮质激素</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">421</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords">
+            寄生虫感染；广州管圆线虫；管圆线虫病；贝蛔虫病；浣熊蛔虫；麦地那龙线虫病；几内亚蠕虫；丝虫病；淋巴丝虫病；象皮肿；班氏吴策丝虫；马来布鲁丝虫；帝汶布鲁丝虫；罗阿丝虫；盘尾丝虫；嗜酸性粒细胞性脑膜炎；泼尼松；阿苯达唑；乙胺嗪；DEC；多西环素；伊维菌素
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" 
+               value="表13A（续）寄生虫感染的治疗；广州管圆线虫；管圆线虫病；贝蛔虫病；麦地那龙线虫病；丝虫病；淋巴丝虫病；象皮肿；班氏吴策丝虫；马来布鲁丝虫；帝汶布鲁丝虫；罗阿丝虫；盘尾丝虫；嗜酸性粒细胞性脑膜炎；泼尼松；阿苯达唑；乙胺嗪；DEC；多西环素；伊维菌素；=421" 
+               readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板');
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.innerHTML = '❤️';
+                showToast('❤️ 已收藏到首页');
+                saveToIndex();
+            } else {
+                btn.innerHTML = '⭐';
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        // 保存到index收藏
+        function saveToIndex() {
+            const title = '表13A（续）寄生虫感染的治疗';
+            const url = '421.html';
+            const category = '寄生虫感染';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: category,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.url === '421.html');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+    </script>
+</body>
+</html>

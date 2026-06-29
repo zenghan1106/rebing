@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12A sR RAT</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="376.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="378.html" class="nav-btn">➡️ 下一页</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~12A sR RAT*****</h1>
+        
+        <table class="content-table"><tbody><tr><td>12A sR RAT</td></tr><tr><td>Senate</td></tr><tr><td>a ,</td></tr><tr><td>(ID</td></tr><tr><td>» AT</td></tr><tr><td>DC)</td></tr><tr><td>N64: el, 2017,</td></tr><tr><td>Se</td></tr><tr><td>ae (T</td></tr><tr><td>), BIPF</td></tr><tr><td>est ey 1 6, 2010).</td></tr><tr><td>IT Coe</td></tr><tr><td>fe PPD) 48 — 72 //Me</td></tr><tr><td>PARE RT tant -</td></tr><tr><td>a |</td></tr><tr><td>le =</td></tr><tr><td>AEE</td></tr><tr><td>“tt all, *</td></tr><tr><td>ee 15n</td></tr><tr><td>g/d,</td></tr><tr><td>2% FSi</td></tr><tr><td>Gre</td></tr><tr><td>1B</td></tr><tr><td>* tx changer psirhe</td></tr><tr><td>B#= 10mm</td></tr><tr><td>be</td></tr><tr><td>3}</td></tr><tr><td>any</td></tr><tr><td>et</td></tr><tr><td>BF</td></tr><tr><td>i WBE</td></tr><tr><td>FETA (</td></tr><tr><td>a8) ea</td></tr><tr><td>e Ae</td></tr><tr><td>=&gt; 150 ne.</td></tr><tr><td>B fy aad</td></tr><tr><td>Hea</td></tr><tr><td>iS bea</td></tr><tr><td>iil</td></tr><tr><td>tke</td></tr><tr><td>OD ha HE a SS EB</td></tr><tr><td>i?</td></tr><tr><td>&lt;10mm,; |</td></tr><tr><td>a |</td></tr><tr><td>opie PPD</td></tr><tr><td>Jk</td></tr><tr><td>on</td></tr><tr><td>ye!</td></tr><tr><td>Ruut</td></tr><tr><td>cif</td></tr><tr><td>74 Do</td></tr><tr><td>Jb</td></tr><tr><td>A-sTe</td></tr><tr><td>= ay lie</td></tr><tr><td>= 10mrr</td></tr><tr><td>Pra</td></tr><tr><td>= =</td></tr><tr><td>ky Ji ls SB</td></tr><tr><td>is)</td></tr><tr><td>BrELTST Fe hiring</td></tr><tr><td>» “DIE</td></tr><tr><td>me hLPPD AG</td></tr><tr><td>fina.</td></tr><tr><td>B+\ER</td></tr><tr><td>(IGR:</td></tr><tr><td>i.) IG</td></tr><tr><td>iy</td></tr><tr><td>il]</td></tr><tr><td>rep fa</td></tr><tr><td>ai</td></tr><tr><td>ER</td></tr><tr><td>“, 4)</td></tr><tr><td>ke &amp;</td></tr><tr><td>SLATE</td></tr><tr><td>ep Hl J</td></tr><tr><td>308:</td></tr><tr><td>241, 2012 I</td></tr><tr><td>fi</td></tr><tr><td>5):</td></tr><tr><td>R59 (</td></tr><tr><td>: a 2010 ak</td></tr><tr><td>AYyix!</td></tr><tr><td>‘Te’</td></tr><tr><td>ay</td></tr><tr><td>( Oxford.</td></tr><tr><td>Immur</td></tr><tr><td>@iticty</td></tr><tr><td>AKIN</td></tr><tr><td>Gold</td></tr><tr><td>(QFT-G )</td></tr><tr><td>it doar</td></tr><tr><td>RAN =</td></tr><tr><td>Qiagen );</td></tr><tr><td>ay</td></tr><tr><td>STstT</td></tr><tr><td>e CDC</td></tr><tr><td>ee</td></tr><tr><td>we</td></tr><tr><td>isk</td></tr><tr><td>APS</td></tr><tr><td>Sh (</td></tr><tr><td>5}</td></tr><tr><td>&lt;3),</td></tr><tr><td>—|</td></tr><tr><td>IG)</td></tr><tr><td>BCG</td></tr><tr><td>Tab</td></tr><tr><td>a CDC</td></tr><tr><td>TAREE</td></tr><tr><td>Re</td></tr><tr><td>BCGH BS itikt!</td></tr><tr><td>4ETST. SPIE</td></tr><tr><td>~~? }</td></tr><tr><td>te</td></tr><tr><td>a, WA</td></tr><tr><td>A]</td></tr><tr><td>ILS</td></tr><tr><td>» {81</td></tr><tr><td>Nii</td></tr><tr><td>THR</td></tr><tr><td>flier’ &amp;</td></tr><tr><td>ap 1h)</td></tr><tr><td>BE</td></tr><tr><td>al</td></tr><tr><td>vs</td></tr><tr><td>—F, ce</td></tr><tr><td>ye</td></tr><tr><td>TEAR</td></tr><tr><td>Ay</td></tr><tr><td>iD Das 234, wu ne</td></tr><tr><td>pass</td></tr><tr><td>hE</td></tr><tr><td>i=</td></tr><tr><td>0.35</td></tr><tr><td>ml</td></tr><tr><td>BAR</td></tr><tr><td>| PE AS</td></tr><tr><td>ae</td></tr><tr><td>fT fi</td></tr><tr><td>(Am J Respir</td></tr><tr><td>Care Med 188,</td></tr><tr><td>i 1005</td></tr><tr><td>2013 % va I</td></tr><tr><td>7 ) TT</td></tr><tr><td>fy</td></tr><tr><td>59 (</td></tr><tr><td>&lt;: 201 0;</td></tr><tr><td>224], 2012;</td></tr><tr><td>1G</td></tr><tr><td>(208</td></tr><tr><td>IC 54: B45, 20165</td></tr><tr><td>a:</td></tr><tr><td>=|</td></tr><tr><td>A; @</td></tr><tr><td>PLICOR</td></tr><tr><td>Poe</td></tr><tr><td>— AE is</td></tr><tr><td>an)</td></tr><tr><td>DAE</td></tr><tr><td>yoo</td></tr><tr><td>Bd</td></tr><tr><td>BMY i=—9 5%, 5</td></tr><tr><td>tT PA</td></tr><tr><td>I= 95%,</td></tr><tr><td>A fica</td></tr><tr><td>40%5-—</td></tr><tr><td>Y {</td></tr><tr><td>MWR 38s 7,</td></tr><tr><td>N09:</td></tr><tr><td>1 49: 46. pre</td></tr><tr><td>al 60% - a - 90% Y Chino By</td></tr><tr><td>&gt; WPOR I RAE</td></tr><tr><td>PCR</td></tr><tr><td>muh EZ ap RET</td></tr><tr><td>vssebtcfiuddrconiaral btetinantentddtvalion- weeidihcntch atin} $ hoes Ta</td></tr><tr><td>(eis ), eee ete</td></tr><tr><td>77 —e ( JChin Micrabrol Si: 3225,</td></tr><tr><td>2073 Va</td></tr></tbody></table>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags"></div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">12A sR RAT；=377</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 377 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 377;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 377;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

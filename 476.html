@@ -1,0 +1,529 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~成人HIV患者初始推荐及替代治疗方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(52,152,219,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 8px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(231,76,60,0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #c0392b;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #2e86de;
+            color: white;
+            padding: 14px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+        }
+        
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 分类行样式 */
+        .category-row td {
+            background: #d6eaf8;
+            color: #1a5276;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        /* 药物名称列 */
+        td:first-child {
+            color: #2874a6;
+            font-weight: 500;
+            min-width: 140px;
+        }
+        
+        /* 说明文字自动换行 */
+        td {
+            word-break: break-word;
+            max-width: 300px;
+        }
+        
+        /* 注释区域 */
+        .note {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            color: #5d6d7e;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #5dade2;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        
+        .keywords span {
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="475.html" class="nav-btn">上一页</a>
+            <a href="477.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~成人HIV患者初始推荐及替代治疗方案*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>类别</th>
+                    <th>频次和剂型</th>
+                    <th>药物/剂量</th>
+                    <th>成分</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5">表14C（2） 成年HIV/AIDS患者初始抗反转录病毒治疗</td>
+                </tr>
+                <tr>
+                    <td colspan="5">成人HIV患者初始推荐及替代治疗方案</td>
+                </tr>
+                <tr class="category-row">
+                    <td rowspan="3">推荐</td>
+                    <td rowspan="2">每天1次，单片</td>
+                    <td>必妥韦1片，qd</td>
+                    <td>Bictegravir（BIC）＋FTC＋TAF</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>多韦托1片，qd</td>
+                    <td>DTG＋3TC</td>
+                    <td>M184V、M184I耐药突变者和HBV共感染者勿用</td>
+                </tr>
+                <tr>
+                    <td>每天1次，分多片</td>
+                    <td>达可挥＋多替拉韦1片，qd</td>
+                    <td>（FTC＋TAF）＋DTG</td>
+                    <td></td>
+                </tr>
+                <tr class="category-row">
+                    <td rowspan="8">备选</td>
+                    <td rowspan="8">每天1次，单片复方制剂</td>
+                    <td>Atripla 1片，qd，睡前</td>
+                    <td>TDF＋FTC＋EFV</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Complera/Eviplera 1片，qd，餐中</td>
+                    <td>FTC＋TDF＋RPV</td>
+                    <td>病毒载量＞1×10⁵拷贝/毫升者勿用</td>
+                </tr>
+                <tr>
+                    <td>德思卓1片，qd</td>
+                    <td>多拉维林（DOR）＋3TC＋TDF</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>捷夫康1片，qd</td>
+                    <td>EVG＋Cobi＋FTC＋TAF</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Odefsey 1片，qd</td>
+                    <td>FTC＋TAF＋RPV</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Stribild 1片，qd</td>
+                    <td>EVG＋Cobi＋FTC＋TDF</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Symtuza 1片，qd</td>
+                    <td>DRV＋Cobi＋FTC＋TAF</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>绥美凯1片，qd</td>
+                    <td>ABC＋3TC＋DTG</td>
+                    <td>仅用于HLA B 5701阴性者（见警告）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释 -->
+    <div class="note">
+        <p>注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div>
+            <span class="tag">HIV</span>
+            <span class="tag">AIDS</span>
+            <span class="tag">抗反转录病毒治疗</span>
+            <span class="tag">ART</span>
+            <span class="tag">必妥韦</span>
+            <span class="tag">Bictegravir</span>
+            <span class="tag">BIC</span>
+            <span class="tag">多韦托</span>
+            <span class="tag">DTG</span>
+            <span class="tag">达可挥</span>
+            <span class="tag">TAF</span>
+            <span class="tag">Atripla</span>
+            <span class="tag">TDF</span>
+            <span class="tag">FTC</span>
+            <span class="tag">EFV</span>
+            <span class="tag">Complera</span>
+            <span class="tag">Eviplera</span>
+            <span class="tag">RPV</span>
+            <span class="tag">德思卓</span>
+            <span class="tag">多拉维林</span>
+            <span class="tag">DOR</span>
+            <span class="tag">捷夫康</span>
+            <span class="tag">EVG</span>
+            <span class="tag">Cobi</span>
+            <span class="tag">Odefsey</span>
+            <span class="tag">Stribild</span>
+            <span class="tag">Symtuza</span>
+            <span class="tag">DRV</span>
+            <span class="tag">绥美凯</span>
+            <span class="tag">ABC</span>
+            <span class="tag">3TC</span>
+            <span class="tag">M184V</span>
+            <span class="tag">M184I</span>
+            <span class="tag">HBV</span>
+            <span class="tag">HLA B 5701</span>
+            <span class="tag">耐药突变</span>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">476</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：<span>HIV、AIDS、抗反转录病毒治疗、ART、必妥韦、Bictegravir、BIC、多韦托、DTG、达可挥、TAF、Atripla、TDF、FTC、EFV、Complera、Eviplera、RPV、德思卓、多拉维林、DOR、捷夫康、EVG、Cobi、Odefsey、Stribild、Symtuza、DRV、绥美凯、ABC、3TC、M184V、M184I、HBV、HLA B 5701、耐药突变</span>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="成人HIV患者初始推荐及替代治疗方案；表14C、HIV、AIDS、抗反转录病毒治疗、ART、必妥韦、Bictegravir、BIC、多韦托、DTG、达可挥、TAF、Atripla、TDF、FTC、EFV、Complera、Eviplera、RPV、德思卓、多拉维林、DOR、捷夫康、EVG、Cobi、Odefsey、Stribild、Symtuza、DRV、绥美凯、ABC、3TC、M184V、M184I、HBV、HLA B 5701、耐药突变；=476" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            btn.textContent = isFav ? '★' : '☆';
+            
+            // 保存到localStorage
+            const favData = {
+                title: '成人HIV患者初始推荐及替代治疗方案',
+                url: '476.html',
+                category: '抗病毒药物'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (isFav) {
+                favorites.push(favData);
+            } else {
+                favorites = favorites.filter(f => f.url !== '476.html');
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同源）
+            alert(isFav ? '已添加到收藏！' : '已取消收藏！');
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '476.html');
+            if (isFav) {
+                document.getElementById('favBtn').textContent = '★';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+
+</body>
+</html>

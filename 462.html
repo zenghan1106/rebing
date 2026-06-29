@@ -1,0 +1,397 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~~~~~表14A(12)抗病毒治疗方案*****</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+    min-height: 100vh;
+    padding: 10px;
+    color: #2c3e50;
+}
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-home {
+    background: #3498db;
+    color: white;
+}
+.btn-home:hover { background: #2980b9; }
+.btn-page {
+    background: #2ecc71;
+    color: white;
+}
+.btn-page:hover { background: #27ae60; }
+.btn-fav {
+    background: #e74c3c;
+    color: white;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(231,76,60,0.3);
+}
+.btn-fav:hover { background: #c0392b; }
+.btn-fav.active {
+    background: #f39c12;
+}
+.page-btns {
+    display: flex;
+    gap: 8px;
+}
+.main-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1a5276;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+.table-wrap {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 13px;
+}
+thead th {
+    background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+    color: white;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+}
+tbody td {
+    padding: 10px;
+    border: 1px solid #d5dbdb;
+    vertical-align: top;
+    line-height: 1.7;
+}
+tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+tbody tr:hover {
+    background: #e8f4f8;
+}
+.first-row td {
+    font-size: 15px;
+    font-weight: 500;
+    color: #154360;
+}
+.col-virus {
+    width: 28%;
+    font-weight: 600;
+    color: #1a5276;
+}
+.col-drug {
+    width: 32%;
+}
+.col-note {
+    width: 40%;
+}
+.full-row td {
+    text-align: center;
+    background: #eaf2f8 !important;
+    font-style: italic;
+    color: #5d6d7e;
+}
+.note-box {
+    background: rgba(255,255,255,0.8);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-size: 12px;
+    color: #5d6d7e;
+    line-height: 1.8;
+}
+.tags-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 12px;
+}
+.tags-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1a5276;
+    margin-bottom: 10px;
+}
+.tag {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 4px;
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.tag:hover {
+    transform: scale(1.05);
+}
+.tag-disease {
+    background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+}
+.tag-drug {
+    background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+}
+.tag-virus {
+    background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+}
+.bottom-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 12px;
+}
+.keywords {
+    font-size: 12px;
+    color: #5d6d7e;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+.page-num {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a5276;
+    margin: 10px 0;
+}
+.copy-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.copy-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #2c3e50;
+    background: white;
+}
+.btn-copy {
+    background: #9b59b6;
+    color: white;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+.btn-copy:hover { background: #8e44ad; }
+.btn-copy.copied {
+    background: #2ecc71;
+}
+@media (max-width: 768px) {
+    body { padding: 6px; }
+    .main-title { font-size: 16px; padding: 8px; }
+    thead th { font-size: 13px; padding: 10px 6px; }
+    tbody td { font-size: 12px; padding: 8px 6px; }
+    .first-row td { font-size: 13px; }
+    .btn { padding: 6px 12px; font-size: 12px; }
+    .tag { font-size: 11px; padding: 5px 10px; }
+    .copy-box { flex-direction: column; }
+    .copy-input { width: 100%; }
+    .btn-copy { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">❤ 收藏</button>
+
+<div class="top-nav">
+    <a href="index.html" class="btn btn-home">← 返回首页</a>
+    <div class="page-btns">
+        <a href="461.html" class="btn btn-page">← 上一页</a>
+        <a href="463.html" class="btn btn-page">下一页 →</a>
+    </div>
+</div>
+
+<h1 class="main-title">~~~~~表14A(12) 抗病毒治疗方案*****</h1>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+    <th class="col-virus">病毒/疾病</th>
+    <th class="col-drug">药物/剂量</th>
+    <th class="col-note">不良反应/说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="first-row">
+    <td>鼻病毒（普通感冒）<br>住院的儿童肺炎中阳性率为27%</td>
+    <td>无抗病毒治疗指征<br>对症治疗：<br>• 异丙托溴铵喷鼻剂（2喷/鼻孔tid）<br>• 氯马斯汀1.34mg，1～2片po bid～tid（OTC）<br>• 口服锌制剂缩短症状持续时间1天，不减轻症状严重程度<br>避免使用鼻内锌制剂（见说明）</td>
+    <td>减轻症状：与安慰剂相比，异丙托溴铵喷鼻剂可减轻流涕和喷嚏。氯马斯汀（抗组胺药）可减轻喷嚏和流涕，但6%～19%的患者出现鼻干、口干和咽干。紫锥菊精油（CID 38:1367, 2004 &amp; 40:807, 2005）。由于3种治疗上呼吸道感染的非处方药含有锌（如Zicam），有报道可造成永久性嗅觉丧失，故公共卫生专家建议停止使用（参见www.fda.gov/Safely/MedWatch/SafetyInformation/SafetyAlertsforHumanMedicalProducts/ucm166996.htm）</td>
+</tr>
+<tr>
+    <td>轮状病毒：世界各地婴儿和儿童腹泻的首位病因，每年导致50万儿童死亡</td>
+    <td>无抗病毒治疗药物，但口服补液能挽救生命</td>
+    <td>两种减毒活疫苗高度有效（85%和98%），而且安全，可以预防轮状病毒腹泻，减少住院。ACIP建议婴儿接种两种疫苗之一，RV1或RV5</td>
+</tr>
+<tr class="full-row">
+    <td colspan="3">SARS CoV-2（COVID-19）：见冠状病毒，223页</td>
+</tr>
+<tr>
+    <td>天花</td>
+    <td colspan="2">天花疫苗（如在暴露后4天内）+ Tecovirimat（Tpoxx）600mg（3粒200mg/粒胶囊）po bid×14d，或西多福韦［剂量不明确，但可能与治疗CMV相似（5mg/kg iv qw×2w，然后每周1次给药）。必须同时水化并口服丙磺舒，联系美国CDC: 770-488-7100</td>
+</tr>
+<tr>
+    <td>接触性牛痘</td>
+    <td colspan="2">疫苗接种：进展性牛痘，牛痘免疫球蛋白可能有效。欲获得免疫球蛋白，联系美国CDC: 770-488-7100</td>
+</tr>
+<tr class="full-row">
+    <td colspan="3">西尼罗病毒：见225页</td>
+</tr>
+<tr>
+    <td>寨卡病毒：由按蚊传播的黄病毒<br>CDC更新：http://www.cdc.gov/zika/index.html</td>
+    <td>无有效治疗。对症支持（在除外登革热之前，避免使用阿司匹林和非甾体抗炎药）<br>感染最严重表现是先天性出生缺陷：小头症和胎儿死亡<br>性传播情况可发生。生育前预防和咨询参见MMWR 65（39）：1077，2016</td>
+    <td>潜伏期3～7天。无症状感染非常常见；如出现症状，常表现为低热、关节痛、多形性皮疹和/或结膜充血（非化脓性结膜炎）。症状持续数日至1周。吉兰-巴雷综合征罕见。很少需住院，罕见死亡</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="note-box">
+    <b>注：</b>所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
+    表中名词缩写见第2页。
+</div>
+
+<div class="tags-section">
+    <div class="tags-title">🔍 检索标签（点击筛选）</div>
+    <span class="tag tag-virus">鼻病毒</span>
+    <span class="tag tag-virus">轮状病毒</span>
+    <span class="tag tag-virus">SARS CoV-2</span>
+    <span class="tag tag-virus">天花</span>
+    <span class="tag tag-virus">接触性牛痘</span>
+    <span class="tag tag-virus">西尼罗病毒</span>
+    <span class="tag tag-virus">寨卡病毒</span>
+    <span class="tag tag-disease">普通感冒</span>
+    <span class="tag tag-disease">儿童肺炎</span>
+    <span class="tag tag-disease">腹泻</span>
+    <span class="tag tag-disease">COVID-19</span>
+    <span class="tag tag-disease">先天性出生缺陷</span>
+    <span class="tag tag-disease">小头症</span>
+    <span class="tag tag-disease">吉兰-巴雷综合征</span>
+    <span class="tag tag-drug">异丙托溴铵喷鼻剂</span>
+    <span class="tag tag-drug">氯马斯汀</span>
+    <span class="tag tag-drug">锌制剂</span>
+    <span class="tag tag-drug">紫锥菊精油</span>
+    <span class="tag tag-drug">Tecovirimat</span>
+    <span class="tag tag-drug">Tpoxx</span>
+    <span class="tag tag-drug">西多福韦</span>
+    <span class="tag tag-drug">牛痘免疫球蛋白</span>
+    <span class="tag tag-drug">RV1</span>
+    <span class="tag tag-drug">RV5</span>
+</div>
+
+<div class="bottom-section">
+    <div class="keywords">
+        <b>关键词：</b>抗病毒治疗；鼻病毒；轮状病毒；SARS CoV-2；COVID-19；天花；接触性牛痘；西尼罗病毒；寨卡病毒；异丙托溴铵；氯马斯汀；Tecovirimat；西多福韦；疫苗；RV1；RV5；小头症；吉兰-巴雷综合征
+    </div>
+    <div class="page-num">462</div>
+    <div class="copy-box">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+</div>
+
+<script>
+// 页面信息
+const pageInfo = {
+    title: "表14A(12)抗病毒治疗方案",
+    subtitle: "病毒性疾病药物治疗参考",
+    keywords: "抗病毒治疗；鼻病毒；轮状病毒；SARS CoV-2；COVID-19；天花；接触性牛痘；西尼罗病毒；寨卡病毒；异丙托溴铵；氯马斯汀；Tecovirimat；西多福韦；疫苗；RV1；RV5；小头症；吉兰-巴雷综合征",
+    pageNum: "462"
+};
+
+// 初始化复制框内容
+document.getElementById('copyInput').value = pageInfo.title + "；" + pageInfo.subtitle + "；" + pageInfo.keywords + "=" + pageInfo.pageNum;
+
+// 复制功能
+function copyContent() {
+    const input = document.getElementById('copyInput');
+    input.select();
+    input.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(input.value).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '已复制 ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = '复制';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
+// 收藏功能
+function toggleFavorite() {
+    const btn = document.getElementById('favBtn');
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const currentPage = {
+        title: pageInfo.title,
+        url: window.location.pathname.split('/').pop() || '462.html',
+        pageNum: pageInfo.pageNum
+    };
+    
+    const exists = favorites.findIndex(f => f.url === currentPage.url);
+    if (exists >= 0) {
+        favorites.splice(exists, 1);
+        btn.textContent = '❤ 收藏';
+        btn.classList.remove('active');
+        alert('已取消收藏');
+    } else {
+        favorites.push(currentPage);
+        btn.textContent = '★ 已收藏';
+        btn.classList.add('active');
+        alert('已添加到index收藏类目！');
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+// 检查是否已收藏
+window.onload = function() {
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const currentUrl = window.location.pathname.split('/').pop() || '462.html';
+    if (favorites.find(f => f.url === currentUrl)) {
+        document.getElementById('favBtn').textContent = '★ 已收藏';
+        document.getElementById('favBtn').classList.add('active');
+    }
+};
+</script>
+
+</body>
+</html>

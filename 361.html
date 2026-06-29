@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>—=—=—_—_—=—=—=Xae———</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="360.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="362.html" class="nav-btn">➡️ 下一页</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~—=—=—_—_—=—=—=Xae———*****</h1>
+        
+        <table class="content-table"><tbody><tr><td>—=—=—_—_—=—=—=Xae———</td></tr><tr><td>——</td></tr><tr><td>aE</td></tr><tr><td>——</td></tr><tr><td>——</td></tr><tr><td>——=——</td></tr><tr><td>= —————&lt;—&lt;—&lt;—&lt;—_—_—_—</td></tr><tr><td>———</td></tr><tr><td>EEE</td></tr><tr><td>Hn 2 ee</td></tr><tr><td>RSE! /</td></tr><tr><td>Bal /</td></tr><tr><td>——————</td></tr><tr><td>—__——</td></tr><tr><td>ee</td></tr><tr><td>Ae</td></tr><tr><td>—_</td></tr><tr><td>ana eee</td></tr><tr><td>—&quot;s a</td></tr><tr><td>———</td></tr><tr><td>——</td></tr><tr><td>ee</td></tr><tr><td>ooo</td></tr><tr><td>Feil</td></tr><tr><td>2d, We</td></tr><tr><td>250tr</td></tr><tr><td>po</td></tr><tr><td>PT&quot;</td></tr><tr><td>Bia ee We if 7</td></tr><tr><td>SCI ee. WMAP, FEE</td></tr><tr><td>(Atte. AS</td></tr><tr><td>, 2</td></tr><tr><td>| Fast.</td></tr><tr><td>A 200mp po</td></tr><tr><td>Sew S</td></tr><tr><td>isl )</td></tr><tr><td>x2 ~ Sw</td></tr><tr><td>— i</td></tr><tr><td>=1 #</td></tr><tr><td>qd~4w,</td></tr><tr><td>ie 150mg po</td></tr><tr><td>12 a</td></tr><tr><td>£. =</td></tr><tr><td>bot</td></tr><tr><td>Ae i</td></tr><tr><td>OU LEE</td></tr><tr><td>ra Be</td></tr><tr><td>sil | qvuX%2~ 4</td></tr><tr><td>ATs &gt;</td></tr><tr><td>%: mM</td></tr><tr><td>JT</td></tr><tr><td>JIL 10 ~</td></tr><tr><td>20r</td></tr><tr><td>de</td></tr><tr><td>PEE ye</td></tr><tr><td>eee ee en</td></tr><tr><td>—~ Ale</td></tr><tr><td>4~8 i</td></tr><tr><td>ce ee ee ie ee ae ee a a ee ee ee</td></tr><tr><td>CHE ( PHATARER</td></tr><tr><td>i ME ( 400r</td></tr><tr><td>ME 400me pox 137n] Bk</td></tr><tr><td>—W ie ae BF</td></tr><tr><td>ie</td></tr><tr><td>(29098</td></tr><tr><td>fy Fe 400me ps qd x3 ~ 7d</td></tr><tr><td>2.590 fe He aE</td></tr><tr><td>es LOST EP</td></tr><tr><td>BRIbEL</td></tr><tr><td>I, 61</td></tr><tr><td>——</td></tr><tr><td>| #ladX2w)</td></tr><tr><td>——___—————— ———</td></tr><tr><td>ius. dd 7d ak 3 —~5 wee? —— 4w</td></tr><tr><td>————— — ———____—— —__——</td></tr><tr><td>———</td></tr><tr><td>———— ———————</td></tr><tr><td>—____—_——_—</td></tr><tr><td>RI) Mis</td></tr><tr><td>ire SIS</td></tr><tr><td>elt</td></tr><tr><td>ii</td></tr><tr><td>Ss</td></tr><tr><td>5—~ Ti</td></tr><tr><td>ne |</td></tr><tr><td>ig</td></tr><tr><td>iz</td></tr><tr><td>nes,</td></tr><tr><td>(ke d) iv</td></tr><tr><td>228</td></tr><tr><td>fifa</td></tr><tr><td>'300me</td></tr><tr><td>i2hx</td></tr><tr><td>wae,</td></tr><tr><td>i Be</td></tr><tr><td>tae</td></tr><tr><td>coses 52-197, 200</td></tr><tr><td>wy</td></tr><tr><td>Baty</td></tr><tr><td>~ L5mg/</td></tr><tr><td>“d) iv,</td></tr><tr><td>= tang id (4</td></tr><tr><td>FIGS WRT EAE TZ</td></tr><tr><td>pred eek</td></tr><tr><td>ee</td></tr><tr><td>» po/iv</td></tr><tr><td>200me gid )</td></tr><tr><td>cit</td></tr><tr><td>BE</td></tr><tr><td>ar EE</td></tr><tr><td>vi</td></tr><tr><td>ar hf</td></tr><tr><td>ms 1</td></tr><tr><td>Fl a</td></tr><tr><td>rd</td></tr><tr><td>Gr</td></tr><tr><td>ee 1</td></tr><tr><td>ql</td></tr><tr><td>ik</td></tr><tr><td>iA</td></tr><tr><td>f e350: 207, an be</td></tr><tr><td>| pi 2:</td></tr><tr><td>aT ie</td></tr><tr><td>fal .</td></tr><tr><td>ETI Bet</td></tr><tr><td>| ql2h,</td></tr><tr><td>Sym | 1d,</td></tr><tr><td>qia</td></tr><tr><td>1; pO oe | i</td></tr><tr><td>Ft, TE</td></tr><tr><td>ttl 4k</td></tr><tr><td>=3 155 OF)</td></tr><tr><td>Hi,</td></tr><tr><td>ie ee eet</td></tr><tr><td>me</td></tr><tr><td>ja</td></tr><tr><td>ql2h,</td></tr><tr><td>i 2u</td></tr><tr><td>ql</td></tr><tr><td>Me</td></tr><tr><td>GET] i A 4 90% CC.</td></tr><tr><td>Micro</td></tr><tr><td>202 695,</td></tr><tr><td>| ™</td></tr><tr><td>Trak</td></tr><tr><td>SHEA Hel SW)</td></tr><tr><td>Aiea</td></tr><tr><td>2007</td></tr><tr><td>ea Fe Fe</td></tr><tr><td>. We</td></tr><tr><td>c=</td></tr><tr><td>or</td></tr><tr><td>is</td></tr><tr><td>Sim</td></tr><tr><td>=P</td></tr><tr><td>—————</td></tr><tr><td>a __</td></tr><tr><td>a —</td></tr><tr><td>————</td></tr><tr><td>— =</td></tr><tr><td>Oh,</td></tr><tr><td>; 16</td></tr><tr><td>EN Ei</td></tr><tr><td>Tale</td></tr><tr><td>| (Ene, 787).</td></tr><tr><td>2 I</td></tr><tr><td>eee oh</td></tr><tr><td>edd &amp;</td></tr><tr><td>ALAN. C PRA</td></tr><tr><td>aA) An's</td></tr><tr><td>oe</td></tr><tr><td>sete SRS SL 2a.</td></tr></tbody></table>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags"></div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">—=—=—_—_—=—=—=Xae———；=361</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 361 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 361;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 361;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

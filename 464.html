@@ -1,0 +1,435 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗CMV药物剂量与说明*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #2e75b6;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .brand-name {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .section-title {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .note-section {
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #2e75b6;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #2e75b6;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .tag-disease {
+            background: #e74c3c;
+        }
+        
+        .tag-drug {
+            background: #27ae60;
+        }
+        
+        .tag-bacteria {
+            background: #8e44ad;
+        }
+        
+        .bottom-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #2e75b6;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #2e75b6;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #e67e22;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .header-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="463.html" class="nav-btn">上一页</a>
+            <a href="465.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗CMV药物剂量与说明*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">药物名称<br>通用名（商品名）</th>
+                    <th style="width:35%">剂量/成人给药途径</th>
+                    <th style="width:43%">说明/不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="drug-name">莱特莫韦</span><br>
+                        <span class="brand-name">（Prevymis）</span>
+                    </td>
+                    <td>
+                        用于预防异基因造血干细胞移植和高危肾移植血清阳性受者的CMV感染和CMV病<br><br>
+                        480mg qd 口服/静脉，在移植后0～28天开始应用，直至移植后100天
+                    </td>
+                    <td>
+                        <span class="section-title">活性：</span>对HSV或VZV没有活性，如果有适应证，还需要针对这些病毒给予预防治疗<br><br>
+                        <span class="section-title">不良反应：</span>恶心、呕吐，腹泻，周围水肿，咳嗽，头痛，腹痛<br><br>
+                        <span class="section-title">药物相互作用：</span>如同时使用环孢菌素，每天剂量减至240mg。严重肝损害者避免应用
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">马立巴韦</span><br>
+                        <span class="brand-name">（Livtenncity）</span>
+                    </td>
+                    <td>
+                        400mg bid（2片200mg/片），与食物或不与食物同服
+                    </td>
+                    <td>
+                        <span class="section-title">活性：</span>对HSV或VZV没有活性，如果有适应证，需要针对这些病毒给予预防治疗。用于治疗成人和儿童（≥12岁，体重≥35kg）的移植后巨细胞病毒感染，用于具有或不具有更昔洛韦、缬更昔洛韦、西多福韦或膦甲酸基因型耐药的难治性感染<br><br>
+                        <span class="section-title">不良反应：</span>味觉异常、消化道反应、乏力、中性粒细胞减少、急性肾功能损伤。药物相互作用多
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">缬更昔洛韦</span><br>
+                        <span class="brand-name">（Valcyte）</span>
+                    </td>
+                    <td>
+                        450mg片剂：与食物同服。口服液：50mg/ml。成人剂量900mg。<br><br>
+                        <span class="section-title">治疗/诱导：</span>900mg po q12h，与食物同服。<br><br>
+                        <span class="section-title">预防/维持：</span>900mg po q24h<br><br>
+                        肾功能不全需调整剂量（表17A）
+                    </td>
+                    <td>
+                        是更昔洛韦的前体，生物利用度优于口服更昔洛韦，餐中服用生物利用度为60%。妊娠安全等级：C（可能致畸，女性须避孕）<br><br>
+                        <span class="section-title">不良反应：</span>与更昔洛韦类似，可导致剂量依赖性中性粒细胞减少、贫血、血小板减少。可能出现急性肾衰竭。腹泻（16%～41%）、恶心（8%～30%）、呕吐（3%～21%）<br><br>
+                        <span class="section-title">CMV视网膜炎（危及视力的病变）：</span>900mg po q12h＋更昔洛韦眼内植入；900mg po q12h×（14～21）d，然后900mg po q24h维持口服
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <strong>注：</strong>*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <span class="tag tag-disease">CMV感染</span>
+        <span class="tag tag-disease">CMV病</span>
+        <span class="tag tag-disease">巨细胞病毒感染</span>
+        <span class="tag tag-disease">CMV视网膜炎</span>
+        <span class="tag tag-disease">移植后感染</span>
+        <span class="tag tag-drug">莱特莫韦</span>
+        <span class="tag tag-drug">马立巴韦</span>
+        <span class="tag tag-drug">缬更昔洛韦</span>
+        <span class="tag tag-drug">更昔洛韦</span>
+        <span class="tag tag-drug">西多福韦</span>
+        <span class="tag tag-drug">膦甲酸</span>
+        <span class="tag tag-bacteria">HSV</span>
+        <span class="tag tag-bacteria">VZV</span>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>莱特莫韦；Prevymis；马立巴韦；Livtenncity；缬更昔洛韦；Valcyte；CMV；巨细胞病毒；造血干细胞移植；肾移植；视网膜炎；更昔洛韦；西多福韦；膦甲酸；环孢菌素；中性粒细胞减少；肾功能不全
+        </div>
+        
+        <div class="page-number">235</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="抗CMV药物剂量与说明；莱特莫韦；马立巴韦；缬更昔洛韦；CMV感染；巨细胞病毒；移植后感染；=235" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">★</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板！");
+            }).catch(err => {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '抗CMV药物'
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到index收藏类目！');
+        }
+    </script>
+</body>
+</html>

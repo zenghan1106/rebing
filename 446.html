@@ -1,0 +1,522 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗病毒治疗方案表（肝炎与疱疹病毒感染）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover {
+            background: #5a9e3d;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            vertical-align: top;
+            color: #444;
+        }
+        
+        .disease-name {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .drug-info {
+            color: #27ae60;
+        }
+        
+        .adverse-info {
+            color: #8e44ad;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline;
+        }
+        
+        .tag-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tag-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #4ecdc4;
+            color: white;
+        }
+        
+        .tag-virus {
+            background: #45b7d1;
+            color: white;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f39c12;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(243,156,18,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="445.html" class="page-btn">← 上一页</a>
+            <a href="447.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~抗病毒治疗方案表（肝炎与疱疹病毒感染）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 28%;">病毒/疾病</th>
+                    <th style="width: 32%;">药物/剂量</th>
+                    <th style="width: 40%;">不良反应/说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="disease-name">肝炎病毒感染</div>
+                    </td>
+                    <td>
+                        见表14E（甲型肝炎、乙型肝炎），表14F（丙型肝炎）
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="background: #e8f4f8; font-weight: 600; color: #1a5276;">疱疹病毒感染</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">巨细胞病毒（CMV）</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            实体器官移植治疗指南（Transplantation 102: 900-31, 2018）<br>
+                            抗CMV药物综述（Curr Opin Organ Transplant 2019, 24: 469）
+                        </div>
+                    </td>
+                    <td>
+                        针对某些移植人群推荐一级预防（见表15E），有预防指征时，缬更昔洛韦900mg po q12h（CID 32: 783, 2001）<br><br>
+                        来特莫韦480mg iv/po qd（肾脏移植）
+                    </td>
+                    <td>
+                        进行一级预防的移植患者中，耐药率为5%（J Antimicrob Chemother 65: 2028, 2010）。干细胞移植和巨细胞病毒病高危患者，使用来特莫韦进行一级预防有效。预防治疗疗程取决于供着/受体状态和移植类型
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">CMV：结肠炎、食管炎、胃炎</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            症状和疾病部位有关
+                        </div>
+                    </td>
+                    <td>
+                        <strong>轻症：</strong>缬更昔洛韦900mg，与食物同服，bid×14～21d<br><br>
+                        <strong>重症：</strong>更昔洛韦5mg/kg iv q12h×14～21d，或膦甲酸钠（60mg/kg iv q8h或90mg/kg iv q12h）×14～21d<br><br>
+                        <strong>治疗后维持治疗：</strong>缬更昔洛韦900mg po qd，直至CD4＞0.1×10⁹/L，持续6个月以上
+                    </td>
+                    <td>
+                        诊断：全血定量PCR增高和组织病理学改变。CMV可并发炎症性肠病（IBD）严重发作；此情况下推荐CMV治疗。在不严重IBD发作中，治疗CMV的效果不确定
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">CMV：神经系统疾病，脑炎</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            脊髓炎，多神经根炎、周围神经病症状和疾病部位相关
+                        </div>
+                    </td>
+                    <td>
+                        与上述治疗重症结肠炎、食管炎、胃炎的方案相同
+                    </td>
+                    <td>
+                        诊断：全血和/或CSF定量PCR增高<br><br>
+                        多数专家建议，HIV患者的ART治疗不要迟于1周后开始，监测IRIS，如果出现，及时治疗
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">CMV：肺炎</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            <strong>高危人群：</strong>器官移植后6个月内、停止预防用药3个月后<br>
+                            需要侵袭性疾病证据<br>
+                            以全血定量PCR和/或肺活检组织病理阳性
+                        </div>
+                    </td>
+                    <td>
+                        <strong>病毒血症或/无轻微症状：</strong>缬更昔洛韦900mg po bid。<strong>肺移植或AIDS患者的重症感染：</strong>更昔洛韦5mg/kg iv q12h（肾功能不全时调整剂量）。治疗至临床症状消失和血PCR转阴；最短疗程2周，然后序贯缬更昔洛韦900mg po bid（疗程个体化）。尝试改善免疫抑制状态
+                    </td>
+                    <td>
+                        <strong>治疗后维持治疗：</strong>若是复发的高危患者，缬更昔洛韦900mg po qd×1～3个月<br><br>
+                        若治疗失败或复发，要怀疑CMV耐药。做耐药基因型检测。如果更昔洛韦耐药：膦甲酸钠（60mg/kg q8h或90mg/kg q12h）iv（肾功能不全时调整剂量）<br><br>
+                        注意：在421例骨髓移植患者回顾性研究中发现，IVIG或CMV特异性免疫球蛋白并不改善预后和总体病死率（CID 61: 31, 2015）。西多福韦是备选药物
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tag-section">
+        <h3>🏷️ 检索标签（点击可筛选）</h3>
+        <div class="tags">
+            <span class="tag tag-disease">肝炎病毒感染</span>
+            <span class="tag tag-disease">甲型肝炎</span>
+            <span class="tag tag-disease">乙型肝炎</span>
+            <span class="tag tag-disease">丙型肝炎</span>
+            <span class="tag tag-disease">疱疹病毒感染</span>
+            <span class="tag tag-disease">巨细胞病毒</span>
+            <span class="tag tag-disease">CMV</span>
+            <span class="tag tag-disease">结肠炎</span>
+            <span class="tag tag-disease">食管炎</span>
+            <span class="tag tag-disease">胃炎</span>
+            <span class="tag tag-disease">脑炎</span>
+            <span class="tag tag-disease">脊髓炎</span>
+            <span class="tag tag-disease">肺炎</span>
+            <span class="tag tag-drug">缬更昔洛韦</span>
+            <span class="tag tag-drug">来特莫韦</span>
+            <span class="tag tag-drug">更昔洛韦</span>
+            <span class="tag tag-drug">膦甲酸钠</span>
+            <span class="tag tag-drug">西多福韦</span>
+            <span class="tag tag-drug">IVIG</span>
+            <span class="tag tag-virus">HIV</span>
+            <span class="tag tag-virus">AIDS</span>
+            <span class="tag tag-virus">ART</span>
+            <span class="tag tag-virus">IRIS</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗病毒治疗方案表（肝炎与疱疹病毒感染）；肝炎病毒感染；甲型肝炎；乙型肝炎；丙型肝炎；疱疹病毒感染；巨细胞病毒；CMV；结肠炎；食管炎；胃炎；脑炎；脊髓炎；肺炎；缬更昔洛韦；来特莫韦；更昔洛韦；膦甲酸钠；西多福韦；IVIG；HIV；AIDS；ART；IRIS；=446" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">页码：446</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>肝炎病毒 | 甲型肝炎 | 乙型肝炎 | 丙型肝炎 | 疱疹病毒 | 巨细胞病毒 | CMV | 缬更昔洛韦 | 来特莫韦 | 更昔洛韦 | 膦甲酸钠 | 西多福韦 | 移植 | 肺炎 | 脑炎 | 结肠炎
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '❤️';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '抗病毒治疗方案表（肝炎与疱疹病毒感染）',
+                    url: '446.html',
+                    pageNum: '446'
+                };
+                if (!favorites.find(f => f.url === '446.html')) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '446.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.find(f => f.url === '446.html')) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

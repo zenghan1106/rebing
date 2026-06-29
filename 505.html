@@ -1,0 +1,464 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~HCV治疗药物剂量表-丙型肝炎抗病毒药物指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #2874a6;
+            margin-top: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .brand-name {
+            color: #2874a6;
+            font-weight: 500;
+        }
+        
+        .dose-text {
+            color: #444;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #2e86de;
+        }
+        
+        .bottom-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(231,76,60,0.4);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #c0392b;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .fav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="504.html" class="page-btn">← 上一页</a>
+            <a href="506.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~HCV治疗药物剂量表-丙型肝炎抗病毒药物指南*****</h1>
+        <p class="subtitle">丙型肝炎直接抗病毒药物（DAA）及干扰素治疗方案</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">药物/缩写</th>
+                    <th style="width: 20%;">商品名</th>
+                    <th style="width: 50%;">剂型/剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">帕立瑞韦/利托那韦+奥比他韦+达塞布韦（PrOD）</td>
+                    <td class="brand-name">Viekira Pak</td>
+                    <td class="dose-text">固定剂量组合片剂[（帕立瑞韦150mg/利托那韦100mg+奥比他韦25mg）1片po qd+达塞布韦250mg 1片po bid，餐中服]</td>
+                </tr>
+                <tr>
+                    <td class="drug-name"></td>
+                    <td class="brand-name">Viekira XR</td>
+                    <td class="dose-text">固定剂量组合分散片（达塞布韦200mg+帕立瑞韦50m/利托那韦33.3mg+奥比他韦8.33mg）3片po qd</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">司美匹韦（SMV）</td>
+                    <td class="brand-name">Olysio</td>
+                    <td class="dose-text">150mg片剂po qd，餐中服</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">索磷布韦（SOF）</td>
+                    <td class="brand-name">Solvadi</td>
+                    <td class="dose-text">400mg片剂po qd</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">索磷布韦+来迪派韦</td>
+                    <td class="brand-name">夏帆宁</td>
+                    <td class="dose-text">固定剂量组合片剂（索磷布韦400mg+来迪派韦90mg）1片po qd</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">索磷布韦+维帕他韦</td>
+                    <td class="brand-name">丙通沙</td>
+                    <td class="dose-text">固定剂量组合片剂（索磷布韦400mg+维帕他韦100mg）1片po qd</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">索磷布韦+维帕他韦+伏西瑞韦</td>
+                    <td class="brand-name">沃士韦</td>
+                    <td class="dose-text">固定剂量组合片剂（索磷布韦400mg+维帕他韦100mg+伏西瑞韦100mg）1片po qd，餐中服</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">利巴韦林</td>
+                    <td class="brand-name">Ribavirin<br>Copegas</td>
+                    <td class="dose-text">根据体重调整剂量：1000mg（体重<75kg）或1200mg（体重>75kg），低剂量600mg/d，餐中服</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">聚乙二醇干扰素（α-2a）</td>
+                    <td class="brand-name">Roferon<br>Intron-A<br>Peg-Intron<br>Pegasys</td>
+                    <td class="dose-text">180μg sc qw（很少使用）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">HCV</span>
+            <span class="tag">丙型肝炎</span>
+            <span class="tag">帕立瑞韦</span>
+            <span class="tag">利托那韦</span>
+            <span class="tag">奥比他韦</span>
+            <span class="tag">达塞布韦</span>
+            <span class="tag">PrOD</span>
+            <span class="tag">Viekira Pak</span>
+            <span class="tag">Viekira XR</span>
+            <span class="tag">司美匹韦</span>
+            <span class="tag">SMV</span>
+            <span class="tag">Olysio</span>
+            <span class="tag">索磷布韦</span>
+            <span class="tag">SOF</span>
+            <span class="tag">Solvadi</span>
+            <span class="tag">来迪派韦</span>
+            <span class="tag">夏帆宁</span>
+            <span class="tag">维帕他韦</span>
+            <span class="tag">丙通沙</span>
+            <span class="tag">伏西瑞韦</span>
+            <span class="tag">沃士韦</span>
+            <span class="tag">利巴韦林</span>
+            <span class="tag">Ribavirin</span>
+            <span class="tag">Copegas</span>
+            <span class="tag">聚乙二醇干扰素</span>
+            <span class="tag">α-2a</span>
+            <span class="tag">Roferon</span>
+            <span class="tag">Intron-A</span>
+            <span class="tag">Peg-Intron</span>
+            <span class="tag">Pegasys</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>丙型肝炎、HCV、DAA、直接抗病毒药物、帕立瑞韦、利托那韦、奥比他韦、达塞布韦、司美匹韦、索磷布韦、来迪派韦、维帕他韦、伏西瑞韦、利巴韦林、聚乙二醇干扰素、干扰素、抗病毒治疗
+        </div>
+        <div class="page-number">505</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="HCV治疗药物剂量表-丙型肝炎抗病毒药物指南；丙型肝炎直接抗病毒药物（DAA）及干扰素治疗方案；丙型肝炎、HCV、DAA、直接抗病毒药物、帕立瑞韦、利托那韦、奥比他韦、达塞布韦、司美匹韦、索磷布韦、来迪派韦、维帕他韦、伏西瑞韦、利巴韦林、聚乙二醇干扰素、干扰素、抗病毒治疗；=505" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板！");
+            }).catch(err => {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById("favBtn");
+            const isFav = btn.classList.toggle("active");
+            
+            const pageInfo = {
+                title: "HCV治疗药物剂量表-丙型肝炎抗病毒药物指南",
+                url: "505.html",
+                pageNum: "505"
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            
+            if (isFav) {
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem("favorites", JSON.stringify(favorites));
+                }
+                alert("已收藏！页面已添加到收藏列表");
+            } else {
+                favorites = favorites.filter(f => f.url !== pageInfo.url);
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+                alert("已取消收藏");
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            const isFav = favorites.some(f => f.url === "505.html");
+            if (isFav) {
+                document.getElementById("favBtn").classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>

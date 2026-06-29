@@ -1,0 +1,609 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10F 接受ECMO治疗期间的药物剂量调整*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1a5276;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #3498db;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .favorite-btn.favorited {
+            background-color: #f39c12;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .intro-text {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #444;
+        }
+        
+        .intro-text p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+        
+        .intro-text ul {
+            margin-left: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .intro-text li {
+            margin-bottom: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .effect-info {
+            color: #555;
+        }
+        
+        .dose-info {
+            color: #2c3e50;
+        }
+        
+        .note-info {
+            color: #444;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .copy-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #3498db;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="340.html" class="nav-btn">上一页</a>
+            <a href="342.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表10F 接受ECMO治疗期间的药物剂量调整*****</h1>
+    
+    <!-- 引言文字 -->
+    <div class="intro-text">
+        <p>重症患者接受体外膜氧合器（ECMO）支持可以改变包括抗生素在内的药物在体内的药代和药效。我们对于这些改变的认识逐渐深入中。</p>
+        <p>药物的体外循环回路吸附（CS）可能显著改变患者的用药剂量需求。</p>
+        <ul>
+            <li>管道种类、氧合器、动力泵，以及预充液的组成成分均影响CS；</li>
+            <li>亲脂性和/或蛋白结合率高的药物更容易受CS影响。</li>
+        </ul>
+        <p><strong>分布容积（Vd）增加：</strong>亲水性药物（血液稀释）通常观察到分布容积（Vd）增加。CS也增加Vd。</p>
+        <p><strong>药物清除率（CL）改变：</strong>ECMO支持时观察到CL改变。心输出量增加、液体复苏和心缩动力支持可导致药物清除增加，而肾功能不全（很多ECMO患者同时需要肾脏替代治疗）则导致药物清除减少。</p>
+        <p>PK参数与未接受ECMO治疗的患者相似。</p>
+        <p>高质量的参考文献：Ann Pharmacother 2023; 57: 706; Clin Pharmacokinet 2023; 62: 931。</p>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 14%;">药物或分类</th>
+                <th style="width: 22%;">ECMO对药物影响</th>
+                <th style="width: 20%;">剂量调整</th>
+                <th style="width: 44%;">说明，参考文献</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="drug-name">氨基糖苷类</span>
+                </td>
+                <td class="effect-info">
+                    CS 影响小，↑ Vd，↓ CL
+                </td>
+                <td class="dose-info">
+                    数据不足，无推荐
+                </td>
+                <td class="note-info">
+                    推荐TDM指导剂量调整
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">两性霉素B</span>
+                </td>
+                <td class="effect-info">
+                    CS影响小（脱氧胆酸盐），CS影响中等（脂质体）
+                </td>
+                <td class="dose-info">
+                    数据不足，无推荐
+                </td>
+                <td class="note-info">
+                    一例个案报道需要剂量加倍（Pharmacotherapy 2020; 40: 89）。脂质体数据不一致，考虑换用脱氧胆酸盐（Clin Pharmacokinet 2023; 62: 931）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">氨苄西林</span>
+                </td>
+                <td class="effect-info">
+                    对血药浓度无显著影响
+                </td>
+                <td class="dose-info">
+                    似乎无须调整剂量
+                </td>
+                <td class="note-info">
+                    首次体内试验报道，数据源自2位患者（Pharmacotherapy 2023; 43: 864）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">阿尼芬净</span>
+                </td>
+                <td class="effect-info">
+                    CS影响中等
+                </td>
+                <td class="dose-info">
+                    可能无须调整剂量
+                </td>
+                <td class="note-info">
+                    数据源自单一病例报道（Clin Pharmacokinet 2023; 62: 931）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">卡泊芬净</span>
+                </td>
+                <td class="effect-info">
+                    CS影响中等
+                </td>
+                <td class="dose-info">
+                    可能无须调整剂量
+                </td>
+                <td class="note-info">
+                    矛盾数据（Clin Pharmacokinet 2023; 62: 931）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">头孢唑啉</span>
+                </td>
+                <td class="effect-info">
+                    对头孢唑啉PK影响小
+                </td>
+                <td class="dose-info">
+                    无须调整剂量
+                </td>
+                <td class="note-info">
+                    病例报道（Chemotherapy 2019; 64: 115）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">头孢吡肟</span>
+                </td>
+                <td class="effect-info">
+                    CS 影响小，↓ CL
+                </td>
+                <td class="dose-info">
+                    考虑剂量调整，TDM
+                </td>
+                <td class="note-info">
+                    与ECMO回路相互作用微弱。PK数据显示清除率降低、毒性风险升高，特别是在低体重患者。建议调整给药方案。TDM可能有获益（J Extra Corpor Technol 2022; 54: 212; IJAA 2021; 58: 106466）
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">341</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">重症</span>
+            <span class="tag disease">肾功能不全</span>
+            <span class="tag disease">低体重</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag antibiotic">氨基糖苷类</span>
+            <span class="tag antibiotic">两性霉素B</span>
+            <span class="tag antibiotic">氨苄西林</span>
+            <span class="tag antibiotic">阿尼芬净</span>
+            <span class="tag antibiotic">卡泊芬净</span>
+            <span class="tag antibiotic">头孢唑啉</span>
+            <span class="tag antibiotic">头孢吡肟</span>
+            <!-- 细菌标签 -->
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表10F 接受ECMO治疗期间的药物剂量调整；接受ECMO治疗期间的药物剂量调整；氨基糖苷类；两性霉素B；氨苄西林；阿尼芬净；卡泊芬净；头孢唑啉；头孢吡肟；重症；肾功能不全；低体重；ECMO；体外膜氧合器；TDM；PK；Vd；CL；CS；=341" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">★</button>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+                showToast('已收藏！将添加到index收藏类目');
+                
+                const favoriteData = {
+                    title: '表10F 接受ECMO治疗期间的药物剂量调整',
+                    url: '341.html',
+                    page: '341',
+                    tags: ['氨基糖苷类', '两性霉素B', '氨苄西林', '阿尼芬净', '卡泊芬净', '头孢唑啉', '头孢吡肟', 'ECMO', '重症'],
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === '341.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '★';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '341.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '341.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+            }
+        };
+    </script>
+</body>
+</html>

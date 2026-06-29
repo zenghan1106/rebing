@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>真菌感染的治疗 - 皮肤癣菌病 (表11A(8))</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            vertical-align: top;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        .section-title {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="359.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="361.html" class="nav-btn">下一页 ➡️</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~真菌感染的治疗 - 皮肤癣菌病 (表11A(8))*****</h1>
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th style="width:25%;">感染类型/病原菌/感染部位</th>
+                    <th>抗微生物药物选择-首选药物</th>
+                    <th>抗微生物药物选择-替代药物</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="section-title">皮肤癣菌病</td>
+                </tr>
+                <tr>
+                    <td><strong>甲癣（指甲癣）</strong>（主要基于美观考虑）<br>激光疗法, FDA已批准: 中度有效, 昂贵（Med Lett 55: 15, 2013）。综述: JAMA 2018, 319: 397</td>
+                    <td>指甲用药选择<br>特比萘芬¹ 250mg po qd（儿童&lt;20kg: 67.5mg/d, 20~40kg: 125mg/d, &gt;40kg: 250mg/d）×6w（79%有效）, 或伊曲康唑² 200mg po qd×3个月 <sup>NAI</sup>, 或伊曲康唑 200mg po bid×1周/月×2个, 或氟康唑 150~300mg po qw×3~6个月 <sup>NAI</sup><br>注解: 所有方案的治愈率均低</td>
+                    <td></td>
+                    <td>趾甲用药选择<br>特比萘芬¹ 250mg po qd（儿童&lt;20kg: 67.5mg/d, 20~40kg: 125mg/d, &gt;40kg: 250mg/d）×12w（76%有效）或伊曲康唑 200mg po qd×3个月（59%有效）或10%艾氟康唑液涂于患甲, qd×48w 或伊曲康唑 200mg po bid×1w/月×3~4个月（63%有效）<sup>NAI</sup> 或氟康唑 150~300mg po qw×6~12个月（48%有效）<sup>NAI</sup> 或外用他伐硼罗（Kerydin）或外用艾氟康唑（Jublia）</td>
+                </tr>
+                <tr>
+                    <td><strong>头癣</strong>（"癣菌病"）断发毛癣菌、大小孢子菌分布于北美, 其他地方的其他菌种（PIDJ 18: 191, 1999）</td>
+                    <td>特比萘芬¹ 250mg po qd×2~4w（成人）, 4~6mg/（kg·d）（儿童）<br>10~20kg: 62.5mg qd×2w<br>20~40kg: 125mg qd×2w<br>&gt;40kg: 250mg qd×2w</td>
+                    <td>伊曲康唑⁴ 5mg/（kg·d）po×4w <sup>NTDA</sup><br>氟康唑 6mg/kg qw po×8~12w <sup>NAI</sup>, 成人150mg胶囊po qw<br>灰黄霉素: 成人500mg po qd×6~8w, 儿童年龄&gt;2岁: 微悬剂型: 20~25mg/（kg·d）超微片: 10~15mg/（kg·d）<br>疗程: 至少6周, 直至清除</td>
+                    <td>推荐疗程是针对断发毛癣菌, 治疗犬小孢子菌的疗程是其两倍。临床研究显示所有药物的治愈率相似（60%~100%）<br>酮康唑外用药或硒酸硒洗发液可减少传播（Int J Dermatol 39: 261, 2000）<br>特比萘芬耐药印度毛癣菌（JAMA 2024, 332: 859）</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags">
+                <span class="tag">甲癣</span>
+                <span class="tag">头癣</span>
+                <span class="tag">癣菌病</span>
+                <span class="tag">指甲癣</span>
+                <span class="tag">皮肤癣菌病</span>
+                <span class="tag">断发毛癣菌</span>
+                <span class="tag">大小孢子菌</span>
+                <span class="tag">犬小孢子菌</span>
+                <span class="tag">印度毛癣菌</span>
+                <span class="tag">特比萘芬</span>
+                <span class="tag">伊曲康唑</span>
+                <span class="tag">氟康唑</span>
+                <span class="tag">艾氟康唑</span>
+                <span class="tag">灰黄霉素</span>
+                <span class="tag">酮康唑</span>
+                <span class="tag">他伐硼罗</span>
+            </div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">真菌感染的治疗 - 皮肤癣菌病;表11A(8);甲癣、头癣、癣菌病、指甲癣、皮肤癣菌病;断发毛癣菌、大小孢子菌、犬小孢子菌、印度毛癣菌;特比萘芬、伊曲康唑、氟康唑、艾氟康唑、灰黄霉素、酮康唑、他伐硼罗;======180</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 180 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 180;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 180;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

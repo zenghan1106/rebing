@@ -1,0 +1,517 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表15A特定细菌感染的抗生素预防-脾切除后菌血症*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f7f4 0%, #e8f5e9 50%, #fff8e1 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(74,144,217,0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .title-box {
+            text-align: center;
+            margin: 15px 0 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+            font-weight: 600;
+        }
+        
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #2e75b6;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e1f0fa;
+        }
+        
+        .col-pathogen {
+            width: 32%;
+            min-width: 200px;
+        }
+        
+        .col-treatment {
+            width: 38%;
+            min-width: 220px;
+        }
+        
+        .col-note {
+            width: 30%;
+            min-width: 180px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .sub-section {
+            font-weight: 600;
+            color: #2874a6;
+            margin: 10px 0 6px;
+            display: block;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .ref-text {
+            color: #666;
+            font-size: 12px;
+            font-style: italic;
+            display: block;
+            margin-top: 8px;
+        }
+        
+        .age-line {
+            display: block;
+            margin: 4px 0;
+            padding-left: 0;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag.disease {
+            background: #e74c3c;
+        }
+        
+        .tag.drug {
+            background: #27ae60;
+        }
+        
+        .tag.bacteria {
+            background: #8e44ad;
+        }
+        
+        .bottom-area {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
+        .keywords-box {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #fef9e7;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .keywords-label {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-bottom: 6px;
+        }
+        
+        .keywords {
+            font-size: 14px;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(46,117,182,0.1);
+            border-radius: 8px;
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2e75b6;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #fff;
+        }
+        
+        .copy-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(230,126,34,0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #d35400;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(231,76,60,0.4);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #c0392b;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            .sub-title {
+                font-size: 14px;
+            }
+            thead th {
+                font-size: 14px;
+                padding: 10px 6px;
+            }
+            tbody td {
+                padding: 10px 6px;
+                font-size: 12px;
+            }
+            .tag {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .copy-input {
+                width: 100%;
+            }
+            .fav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="509.html" class="nav-btn">← 上一页</a>
+            <a href="511.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+
+    <div class="title-box">
+        <div class="main-title">~~~~~表15A特定细菌感染的抗生素预防-脾切除后菌血症*****</div>
+        <div class="sub-title">脾切除后菌血症 | 镰刀细胞贫血 | 无脾症</div>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-pathogen">病原体/疾病/病情分类</th>
+                    <th class="col-treatment">预防性治疗的药物/剂量/给药途径/疗程</th>
+                    <th class="col-note">备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="section-title">脾切除后菌血症</span>
+                        通常为有荚膜细菌：<span class="drug-name">肺炎链球菌</span>、<span class="drug-name">脑膜炎球菌</span>、<span class="drug-name">B型流感嗜血杆菌</span>。菌血症：<span class="drug-name">肠杆菌属</span>、<span class="drug-name">金黄色葡萄球菌</span>、<span class="drug-name">二氧化碳嗜纤维菌</span>、<span class="drug-name">铜绿假单胞菌</span>。也有致命性疟疾和严重巴贝虫病风险
+                        <span class="ref-text">无脾症综述（Chest, 2016, 150: 1394）</span>
+                    </td>
+                    <td>
+                        <span class="sub-section">抗生素预防：</span>
+                        <span class="age-line">年龄＜5岁：<span class="drug-name">阿莫西林</span>20mg/kg/d或<span class="drug-name">青霉素V钾</span>125mg bid</span>
+                        <span class="age-line">年龄＞5岁：<span class="drug-name">青霉素V钾</span>250mg bid，脾切除术后至少1年</span>
+                        <span class="age-line">也有推荐预防用药至少3年或直到满18岁</span>
+                        <span class="age-line">所有年龄：维持预防接种同时如果不每日服药预防：任何发热在寻求医疗帮助同时自行服用<span class="drug-name">阿莫西林克拉维酸</span></span>
+                        
+                        <span class="sub-section">镰刀细胞贫血：</span>
+                        <span class="age-line">年龄＜5岁：<span class="drug-name">青霉素V钾</span>125mg po bid</span>
+                        <span class="age-line">年龄＞5岁：<span class="drug-name">青霉素V钾</span>250mg po bid或<span class="drug-name">阿莫西林</span>20mg/(kg·d)</span>
+                        
+                        <span class="sub-section">替代方案：</span>
+                        <span class="age-line">可选择发热时自我治疗：</span>
+                        <span class="age-line"><span class="drug-name">头孢呋辛酯</span>可用于青霉素过敏而头孢菌素不过敏的患者</span>
+                        <span class="age-line">替代，呼吸道氟喹诺酮可以用于适用人群青霉素过敏时</span>
+                        <span class="age-line">如青霉素过敏：可选用<span class="drug-name">TMP-SMX</span>或<span class="drug-name">克拉霉素</span>，但有些地区<span class="drug-name">肺炎链球菌</span>耐药多见，尤其是青霉素耐药菌株</span>
+                    </td>
+                    <td>
+                        -
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击筛选）</div>
+        <span class="tag disease">脾切除后菌血症</span>
+        <span class="tag disease">镰刀细胞贫血</span>
+        <span class="tag disease">无脾症</span>
+        <span class="tag disease">菌血症</span>
+        <span class="tag disease">疟疾</span>
+        <span class="tag disease">巴贝虫病</span>
+        <span class="tag drug">阿莫西林</span>
+        <span class="tag drug">青霉素V钾</span>
+        <span class="tag drug">阿莫西林克拉维酸</span>
+        <span class="tag drug">头孢呋辛酯</span>
+        <span class="tag drug">TMP-SMX</span>
+        <span class="tag drug">克拉霉素</span>
+        <span class="tag bacteria">肺炎链球菌</span>
+        <span class="tag bacteria">脑膜炎球菌</span>
+        <span class="tag bacteria">B型流感嗜血杆菌</span>
+        <span class="tag bacteria">肠杆菌属</span>
+        <span class="tag bacteria">金黄色葡萄球菌</span>
+        <span class="tag bacteria">二氧化碳嗜纤维菌</span>
+        <span class="tag bacteria">铜绿假单胞菌</span>
+    </div>
+
+    <div class="bottom-area">
+        <div class="keywords-box">
+            <div class="keywords-label">关键词：</div>
+            <div class="keywords">特定细菌感染的抗生素预防、脾切除后菌血症、镰刀细胞贫血、无脾症、肺炎链球菌、脑膜炎球菌、B型流感嗜血杆菌、肠杆菌属、金黄色葡萄球菌、二氧化碳嗜纤维菌、铜绿假单胞菌、阿莫西林、青霉素V钾、阿莫西林克拉维酸、头孢呋辛酯、TMP-SMX、克拉霉素、疟疾、巴贝虫病、青霉素过敏、耐药菌株</div>
+        </div>
+        
+        <div class="page-num">510</div>
+        
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="doCopy()">📋 复制</button>
+        </div>
+    </div>
+
+    <button class="fav-btn" id="favBtn" onclick="toggleFav()" title="收藏">⭐</button>
+
+    <script>
+        // 设置复制框内容
+        const title = "表15A特定细菌感染的抗生素预防-脾切除后菌血症";
+        const subtitle = "脾切除后菌血症|镰刀细胞贫血|无脾症";
+        const keywords = "特定细菌感染的抗生素预防、脾切除后菌血症、镰刀细胞贫血、无脾症、肺炎链球菌、脑膜炎球菌、B型流感嗜血杆菌、肠杆菌属、金黄色葡萄球菌、二氧化碳嗜纤维菌、铜绿假单胞菌、阿莫西林、青霉素V钾、阿莫西林克拉维酸、头孢呋辛酯、TMP-SMX、克拉霉素、疟疾、巴贝虫病、青霉素过敏、耐药菌株";
+        const pageNum = "510";
+        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+
+        // 复制功能
+        function doCopy() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // 收藏功能（保存到localStorage，index.html可读取）
+        function toggleFav() {
+            const btn = document.getElementById('favBtn');
+            const pageData = {
+                title: title,
+                subtitle: subtitle,
+                url: '510.html',
+                pageNum: pageNum,
+                tags: ['脾切除后菌血症','镰刀细胞贫血','无脾症','菌血症','疟疾','巴贝虫病','阿莫西林','青霉素V钾','阿莫西林克拉维酸','头孢呋辛酯','TMP-SMX','克拉霉素','肺炎链球菌','脑膜炎球菌','B型流感嗜血杆菌','肠杆菌属','金黄色葡萄球菌','二氧化碳嗜纤维菌','铜绿假单胞菌']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('fav_pages') || '[]');
+            const idx = favorites.findIndex(f => f.url === '510.html');
+            
+            if (idx === -1) {
+                favorites.push(pageData);
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                alert('已收藏！可在首页查看');
+            } else {
+                favorites.splice(idx, 1);
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                alert('已取消收藏');
+            }
+            localStorage.setItem('fav_pages', JSON.stringify(favorites));
+        }
+
+        // 初始化收藏状态
+        (function initFav() {
+            const favorites = JSON.parse(localStorage.getItem('fav_pages') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.find(f => f.url === '510.html')) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        })();
+    </script>
+
+</body>
+</html>

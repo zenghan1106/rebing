@@ -1,0 +1,365 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~~~~~表14B 抗病毒药物（非HIV）*****</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+    min-height: 100vh;
+    padding: 10px;
+    color: #2c3e50;
+}
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-home {
+    background: #3498db;
+    color: white;
+}
+.btn-home:hover { background: #2980b9; }
+.btn-page {
+    background: #2ecc71;
+    color: white;
+}
+.btn-page:hover { background: #27ae60; }
+.btn-fav {
+    background: #e74c3c;
+    color: white;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(231,76,60,0.3);
+}
+.btn-fav:hover { background: #c0392b; }
+.btn-fav.active {
+    background: #f39c12;
+}
+.page-btns {
+    display: flex;
+    gap: 8px;
+}
+.main-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1a5276;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+.table-wrap {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 13px;
+}
+thead th {
+    background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+    color: white;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+}
+tbody td {
+    padding: 10px;
+    border: 1px solid #d5dbdb;
+    vertical-align: top;
+    line-height: 1.7;
+}
+tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+tbody tr:hover {
+    background: #e8f4f8;
+}
+.first-row td {
+    font-size: 15px;
+    font-weight: 500;
+    color: #154360;
+}
+.col-drug {
+    width: 28%;
+    font-weight: 600;
+    color: #1a5276;
+}
+.col-dose {
+    width: 32%;
+}
+.col-note {
+    width: 40%;
+}
+.tags-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 12px;
+}
+.tags-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1a5276;
+    margin-bottom: 10px;
+}
+.tag {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 4px;
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.tag:hover {
+    transform: scale(1.05);
+}
+.tag-disease {
+    background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+}
+.tag-drug {
+    background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+}
+.tag-virus {
+    background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+}
+.bottom-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 12px;
+}
+.keywords {
+    font-size: 12px;
+    color: #5d6d7e;
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+.page-num {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a5276;
+    margin: 10px 0;
+}
+.copy-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.copy-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #2c3e50;
+    background: white;
+}
+.btn-copy {
+    background: #9b59b6;
+    color: white;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+.btn-copy:hover { background: #8e44ad; }
+.btn-copy.copied {
+    background: #2ecc71;
+}
+@media (max-width: 768px) {
+    body { padding: 6px; }
+    .main-title { font-size: 16px; padding: 8px; }
+    thead th { font-size: 13px; padding: 10px 6px; }
+    tbody td { font-size: 12px; padding: 8px 6px; }
+    .first-row td { font-size: 13px; }
+    .btn { padding: 6px 12px; font-size: 12px; }
+    .tag { font-size: 11px; padding: 5px 10px; }
+    .copy-box { flex-direction: column; }
+    .copy-input { width: 100%; }
+    .btn-copy { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">❤ 收藏</button>
+
+<div class="top-nav">
+    <a href="index.html" class="btn btn-home">← 返回首页</a>
+    <div class="page-btns">
+        <a href="462.html" class="btn btn-page">← 上一页</a>
+        <a href="464.html" class="btn btn-page">下一页 →</a>
+    </div>
+</div>
+
+<h1 class="main-title">~~~~~表14B 抗病毒药物（非HIV）*****</h1>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+    <th class="col-drug">药物名称<br>通用名（商品名）</th>
+    <th class="col-dose">剂量/成人给药途径*</th>
+    <th class="col-note">说明/不良反应</th>
+</tr>
+</thead>
+<tbody>
+<tr class="first-row">
+    <td>巨细胞病毒（CMV）<br>西多福韦（Vistide）</td>
+    <td>5mg/kg iv qw×2w，然后隔周1次。每次注射西多福韦前要用生理盐水进行水化，每次输注西多福韦前必须使用丙磺舒：每次输西多福韦前3小时口服丙磺舒2g，然后分别在输液后2小时和8小时各服1g。每次用药前必须监测肾功能［血清肌酐（Cr）和尿蛋白］，详见药品说明书。如果Cr＞133μmol/L（1.5mg/dl），CrCl≤55ml/min或尿蛋白≥100mg/dl，禁用</td>
+    <td>不良反应：肾毒性，表现为剂量依赖性近端肾小管损伤［范科尼（Fanconi）综合征］，可见蛋白尿、糖尿、碳酸氢盐尿、磷酸尿、多尿（肾性尿崩症）和肌酐升高。应用生理盐水水化、使用丙磺舒、延长用药间隔等措施，但是肾毒性仍然多见。其他主要毒性：中性粒细胞减少（按需给予G-CSF）。眼：每月测眼压。如眼压降低50%或出现葡萄膜炎，停用。黑框警告：≤2次用药即可发生肾功能不全。使用其他肾毒性药物的患者禁用。监测有无白细胞减低。动物实验提示具有致癌性和致畸性，造成精子数目减少，生育能力下降。FDA只批准治疗HIV患者的CMV视网膜炎。说明：治疗过程中如肾功能有变化，必须减量或停药。如血清Cr增加27～35μmol/L（0.3～0.4mg/dl），西多福韦需从5mg/kg降至3mg/kg；如Cr较基线值增加44μmol/L（0.5mg/dl）或尿蛋白（+++），需停药［尿蛋白（++）需密切观察并考虑停药］</td>
+</tr>
+<tr>
+    <td>膦甲酸钠（Foscavir）</td>
+    <td>诱导治疗：90mg/kg iv q12h（输注1.5～2.0小时以上）<br>或60mg/kg iv q8h（输注1小时以上）<br>维持治疗：90～120mg/kg iv qd（输注2小时以上）<br>肾功能不全需调整剂量（表17A）</td>
+    <td>用输液泵控制输注速度。不良反应：主要毒性反应是肾功能不全（1/3的患者）。可导致和输注药物相关的低钙血症：表现为心律失常、强直、麻痹、神志改变。缓慢输注并避免同时使用可降低血钙的其他药物，如喷他脒。肌酐升高、蛋白尿、肾性尿崩，低钾、低钙、低镁血症。充分水化可减轻毒性。其他：轻度头痛（100%）、乏力（100%）、恶心（80%）、发热（25%）。中枢神经系统：癫痫。血液系统：白细胞减少、贫血。肝脏：肝功能异常。神经疾病。阴茎和口腔溃疡</td>
+</tr>
+<tr>
+    <td>更昔洛韦（Cytovene）</td>
+    <td>诱导治疗：5mg/kg iv q12h×14d<br>维持治疗：5mg/kg iv qd或6mg/kg iv，每周5次<br>肾功能不全需调整剂量（表17A）</td>
+    <td>不良反应。黑框警告：动物实验发现全血细胞减少、致癌性、致畸性和无精症。中性粒细胞绝对计数小于0.5×10⁹/L（15%）、血小板减少（21%）、贫血（6%）、发热（48%）。胃肠道不良反应（50%）：恶心、呕吐、腹泻、腹痛（19%）。皮疹（10%）、意识混乱、头痛、精神障碍和癫痫。中性粒细胞减少对中性粒细胞集落刺激因子（G-CSF或GM-CSF）有反应。与齐多夫定或硫唑嘌呤合用可增加严重骨髓抑制的发生。32%的患者停药或中断治疗，主要因为中性粒细胞减少。避免血管外渗</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="tags-section">
+    <div class="tags-title">🔍 检索标签（点击筛选）</div>
+    <span class="tag tag-virus">巨细胞病毒</span>
+    <span class="tag tag-virus">CMV</span>
+    <span class="tag tag-drug">西多福韦</span>
+    <span class="tag tag-drug">Vistide</span>
+    <span class="tag tag-drug">膦甲酸钠</span>
+    <span class="tag tag-drug">Foscavir</span>
+    <span class="tag tag-drug">更昔洛韦</span>
+    <span class="tag tag-drug">Cytovene</span>
+    <span class="tag tag-drug">丙磺舒</span>
+    <span class="tag tag-drug">G-CSF</span>
+    <span class="tag tag-drug">GM-CSF</span>
+    <span class="tag tag-drug">齐多夫定</span>
+    <span class="tag tag-drug">硫唑嘌呤</span>
+    <span class="tag tag-drug">喷他脒</span>
+    <span class="tag tag-disease">肾毒性</span>
+    <span class="tag tag-disease">肾功能不全</span>
+    <span class="tag tag-disease">低钙血症</span>
+    <span class="tag tag-disease">中性粒细胞减少</span>
+    <span class="tag tag-disease">血小板减少</span>
+    <span class="tag tag-disease">贫血</span>
+    <span class="tag tag-disease">癫痫</span>
+    <span class="tag tag-disease">视网膜炎</span>
+    <span class="tag tag-disease">葡萄膜炎</span>
+    <span class="tag tag-disease">骨髓抑制</span>
+    <span class="tag tag-disease">范科尼综合征</span>
+    <span class="tag tag-disease">肾性尿崩症</span>
+</div>
+
+<div class="bottom-section">
+    <div class="keywords">
+        <b>关键词：</b>抗病毒药物；非HIV；巨细胞病毒；CMV；西多福韦；Vistide；膦甲酸钠；Foscavir；更昔洛韦；Cytovene；肾毒性；肾功能不全；低钙血症；中性粒细胞减少；血小板减少；贫血；癫痫；视网膜炎；葡萄膜炎；骨髓抑制；范科尼综合征；肾性尿崩症；丙磺舒；G-CSF；GM-CSF；齐多夫定；硫唑嘌呤；喷他脒
+    </div>
+    <div class="page-num">463</div>
+    <div class="copy-box">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+</div>
+
+<script>
+// 页面信息
+const pageInfo = {
+    title: "表14B 抗病毒药物（非HIV）",
+    subtitle: "CMV治疗药物剂量与不良反应",
+    keywords: "抗病毒药物；非HIV；巨细胞病毒；CMV；西多福韦；Vistide；膦甲酸钠；Foscavir；更昔洛韦；Cytovene；肾毒性；肾功能不全；低钙血症；中性粒细胞减少；血小板减少；贫血；癫痫；视网膜炎；葡萄膜炎；骨髓抑制；范科尼综合征；肾性尿崩症；丙磺舒；G-CSF；GM-CSF；齐多夫定；硫唑嘌呤；喷他脒",
+    pageNum: "463"
+};
+
+// 初始化复制框内容
+document.getElementById('copyInput').value = pageInfo.title + "；" + pageInfo.subtitle + "；" + pageInfo.keywords + "=" + pageInfo.pageNum;
+
+// 复制功能
+function copyContent() {
+    const input = document.getElementById('copyInput');
+    input.select();
+    input.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(input.value).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = '已复制 ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = '复制';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
+// 收藏功能
+function toggleFavorite() {
+    const btn = document.getElementById('favBtn');
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const currentPage = {
+        title: pageInfo.title,
+        url: window.location.pathname.split('/').pop() || '463.html',
+        pageNum: pageInfo.pageNum
+    };
+    
+    const exists = favorites.findIndex(f => f.url === currentPage.url);
+    if (exists >= 0) {
+        favorites.splice(exists, 1);
+        btn.textContent = '❤ 收藏';
+        btn.classList.remove('active');
+        alert('已取消收藏');
+    } else {
+        favorites.push(currentPage);
+        btn.textContent = '★ 已收藏';
+        btn.classList.add('active');
+        alert('已添加到index收藏类目！');
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+// 检查是否已收藏
+window.onload = function() {
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const currentUrl = window.location.pathname.split('/').pop() || '463.html';
+    if (favorites.find(f => f.url === currentUrl)) {
+        document.getElementById('favBtn').textContent = '★ 已收藏';
+        document.getElementById('favBtn').classList.add('active');
+    }
+};
+</script>
+
+</body>
+</html>

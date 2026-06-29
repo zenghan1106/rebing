@@ -1,0 +1,455 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~干扰素α类药物剂量与不良反应*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(52,152,219,0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 8px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(231,76,60,0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #c0392b;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0 20px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        /* 表格容器 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #2e86de;
+            color: white;
+            padding: 14px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a5276;
+            background: #ebf5fb;
+        }
+        
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 药物名称列 */
+        td:first-child {
+            color: #2874a6;
+            font-weight: 500;
+            min-width: 140px;
+        }
+        
+        /* 说明文字自动换行 */
+        td {
+            word-break: break-word;
+            max-width: 300px;
+        }
+        
+        /* 注释区域 */
+        .note {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            color: #5d6d7e;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #5dade2;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        
+        .keywords span {
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td, th {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 14px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <a href="index.html" class="nav-btn">← 返回首页</a>
+        <div class="nav-right">
+            <a href="469.html" class="nav-btn">上一页</a>
+            <a href="471.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1>~~~~~干扰素α类药物剂量与不良反应*****</h1>
+
+    <!-- 表格 -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称<br>通用名（商品名）</th>
+                    <th>剂量/成人给药途径*</th>
+                    <th>说明/不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3"><strong>其他：</strong></td>
+                </tr>
+                <tr>
+                    <td>干扰素α<br>干扰素α-2a（Roferon-A）<br>干扰素α-2b（Intron-A）</td>
+                    <td>丙型肝炎联合治疗：常用罗扰素或甘乐能300万U sc 3次/w</td>
+                    <td>根据不同需要：现在有预充的注射剂、溶液和粉针剂多种剂型<br><br><strong>黑框警告：</strong>可能导致或加重神经精神损害、自身免疫疾病、缺血事件和感染，一旦怀疑则停止治疗<br><br><strong>不良反应：</strong>流感样症状常见，特别是治疗的第一周，发热（98%）、乏力（89%）、肌痛（73%）、头痛（71%）<br><br>胃肠道不良反应：厌食（46%）、腹泻（29%）。CNS不良反应：头晕（21%），出血性或缺血性卒中。皮疹（18%），可发展为史-约综合征或剥脱性皮炎。脱发、TSH升高、自身免疫性甲状腺疾病伴甲亢或甲减。<strong>血液系统不良反应：</strong>白细胞减少（49%）、血红蛋白下降（27%）、血小板减少（35%）。上市后观察，有报道在同时使用干扰素、利巴韦林、促红细胞生成素治疗的患者可发生抗体介导的纯红细胞再生障碍性贫血<br><br>高达1/3的患者可发生急性可逆性听力丧失和/或耳鸣（Ln 343: 1134, 1994）。有视神经病变的报道，包括视网膜出血、棉絮状渗出、色觉下降（AIDS 18: 1805, 2004）。根据个体的疗效或不良反应，可能需要调整剂量或停药。不同的产品、适应证（如丙型肝炎或乙型肝炎）和治疗模式（单药或联合治疗），剂量可能不同（如果联合治疗，仔细阅读每个产品和利巴韦林的说明）</td>
+                </tr>
+                <tr>
+                    <td>聚乙二醇干扰素α-2b<br>（PEG-Intron）</td>
+                    <td>0.5 ~ 1.5μg/kg sc qw</td>
+                    <td>（同上，见干扰素α说明）</td>
+                </tr>
+                <tr>
+                    <td>聚乙二醇干扰素α-2a<br>（Pegasys）</td>
+                    <td>180μg sc qw</td>
+                    <td>（同上，见干扰素α说明）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释 -->
+    <div class="note">
+        <p>注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div>
+            <span class="tag">丙型肝炎</span>
+            <span class="tag">乙型肝炎</span>
+            <span class="tag">干扰素α</span>
+            <span class="tag">干扰素α-2a</span>
+            <span class="tag">干扰素α-2b</span>
+            <span class="tag">聚乙二醇干扰素α-2b</span>
+            <span class="tag">聚乙二醇干扰素α-2a</span>
+            <span class="tag">Roferon-A</span>
+            <span class="tag">Intron-A</span>
+            <span class="tag">PEG-Intron</span>
+            <span class="tag">Pegasys</span>
+            <span class="tag">罗扰素</span>
+            <span class="tag">甘乐能</span>
+            <span class="tag">利巴韦林</span>
+            <span class="tag">流感样症状</span>
+            <span class="tag">白细胞减少</span>
+            <span class="tag">血小板减少</span>
+            <span class="tag">贫血</span>
+            <span class="tag">甲状腺功能异常</span>
+            <span class="tag">史-约综合征</span>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-num">470</div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：<span>干扰素α、丙型肝炎、乙型肝炎、聚乙二醇干扰素、Roferon-A、Intron-A、PEG-Intron、Pegasys、利巴韦林、流感样症状、白细胞减少、血小板减少、贫血、史-约综合征、甲状腺功能异常</span>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="干扰素α类药物剂量与不良反应；丙型肝炎、乙型肝炎、干扰素α、聚乙二醇干扰素、Roferon-A、Intron-A、PEG-Intron、Pegasys、利巴韦林、流感样症状、白细胞减少、血小板减少、贫血、史-约综合征、甲状腺功能异常；=470" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            btn.textContent = isFav ? '★' : '☆';
+            
+            // 保存到localStorage
+            const favData = {
+                title: '干扰素α类药物剂量与不良反应',
+                url: '470.html',
+                category: '抗病毒药物'
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (isFav) {
+                favorites.push(favData);
+            } else {
+                favorites = favorites.filter(f => f.url !== '470.html');
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同源）
+            alert(isFav ? '已添加到收藏！' : '已取消收藏！');
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '470.html');
+            if (isFav) {
+                document.getElementById('favBtn').textContent = '★';
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+    </script>
+
+</body>
+</html>

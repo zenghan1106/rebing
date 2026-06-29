@@ -1,0 +1,658 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~利什曼病治疗方案表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .home-btn {
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .prev-btn {
+            top: 15px;
+            right: 100px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .next-btn {
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            padding: 25px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        
+        .page-title .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 8px;
+            font-weight: normal;
+        }
+        
+        /* 表格样式 */
+        .table-wrapper {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.8;
+            min-width: 800px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #2563eb;
+        }
+        
+        /* 第一行数据行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%) !important;
+            color: #1e3a8a;
+            font-size: 14px !important;
+        }
+        
+        /* 分类行 */
+        .category-row {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e40af;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            vertical-align: top;
+            background: white;
+        }
+        
+        td:first-child {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #1e40af;
+            width: 22%;
+        }
+        
+        /* 病原体名称 */
+        .pathogen-name {
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 5px;
+        }
+        
+        .pathogen-detail {
+            font-size: 12px;
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin: 5px 0;
+            padding-left: 18px;
+        }
+        
+        td li {
+            margin-bottom: 6px;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .drug-name {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        /* 备注区域 */
+        .note {
+            background: #fef3c7;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f59e0b;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            padding: 20px;
+            background: #f1f5f9;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #991b1b;
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+            color: #166534;
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            color: #1e40af;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 底部区域 */
+        .footer-section {
+            padding: 20px;
+            background: white;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            color: #334155;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e40af;
+            padding: 15px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #334155;
+            background: white;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                padding: 20px 15px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+        
+        /* 提示信息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <button class="nav-btn home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    <button class="nav-btn prev-btn" onclick="location.href='405.html'">← 上一页</button>
+    <button class="nav-btn next-btn" onclick="location.href='407.html'">下一页 →</button>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 提示信息 -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 标题 -->
+        <div class="page-title">
+            <div>~~~~~利什曼病治疗方案表*****</div>
+            <div class="subtitle">原虫——肠道外（续）| 表13C（4）寄生虫感染的治疗</div>
+        </div>
+        
+        <!-- 表格 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">病原体</th>
+                        <th colspan="2">推荐方案</th>
+                        <th rowspan="2">说明</th>
+                    </tr>
+                    <tr class="sub-header">
+                        <th>首选药物</th>
+                        <th>备选药物</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 分类行 -->
+                    <tr class="category-row">
+                        <td colspan="4">原虫——肠道外（续）</td>
+                    </tr>
+                    
+                    <!-- 黏膜型利什曼病 -->
+                    <tr>
+                        <td>
+                            <div class="pathogen-name">黏膜型（鼻黏膜利什曼病）</div>
+                            <div>均由巴西利什曼原虫 <i>L. braziliensis</i>、圭亚那利什曼原虫 <i>L. guyanensis</i>、巴拿马利什曼原虫 <i>L. panamensis</i> 引起</div>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>任何强度的巴西里土满黏膜病：
+                                    <ul>
+                                        <li>葡萄糖酸锑钠（Pantostam）或锑酸葡甲胺（Glucantime）20mg/(kg·d) iv或im×20d</li>
+                                        <li>脂质体两性霉素B 3mg/kg iv qd d1～5、d14和d21，或者d1～5和d15</li>
+                                    </ul>
+                                </li>
+                                <li>黏膜：五价锑 20mg/(kg·d) iv×20d，或者脂质体两性霉素B累计剂量20～60mg/kg，或者两性霉素B 0.5～1.0mg/kg iv qd或qod，累计剂量20～45mg/kg</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <span class="drug-name">灭特复星</span>（与食物同服）50mg po bid（体重30～44kg）；50mg tid（体重≥45kg），治疗28天，完全缓解率62%
+                        </td>
+                        <td>
+                            联系信息和药物获取信息见表13D。<br><br>
+                            <span class="highlight">灭特复星对不同地区的黏膜利什曼病的疗效有差异，需要咨询专家</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- 内脏利什曼病 -->
+                    <tr>
+                        <td>
+                            <div class="pathogen-name">内脏利什曼病（黑热病）</div>
+                            <div>新大陆和旧大陆</div>
+                            <div style="margin-top:8px;">
+                                <div class="pathogen-detail">杜氏利什曼原虫：印度、非洲</div>
+                                <div class="pathogen-detail">婴儿利什曼原虫：地中海地区</div>
+                                <div class="pathogen-detail">恰加斯利什曼原虫：新大陆（同婴儿利什曼原虫）</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div><b>免疫功能正常患者：</b></div>
+                            脂质体两性霉素B 3mg/kg iv qd d1～5、d14和d21（东非的内脏利什曼病，总量增加至40mg/kg）
+                            <div style="margin-top:10px;"><b>HIV/AIDS患者：</b></div>
+                            <div><b>杜氏利什曼原虫：</b>脂质体两性霉素B（累计剂量30mg/kg，5mg/kg d1、d3、d5、d7、d9、d11）+ <span class="drug-name">灭特复星</span>（100mg/kg×14d亚洲和大多数其他地区；28d，东非）</div>
+                            <div style="margin-top:8px;"><b>婴儿利什曼原虫/恰加斯利什曼原虫：</b>两性霉素B脂质体（总剂量20～60mg/kg，以3～5mg/kg每日静脉输注），或者采用间隔给药方案，如4mg/kg d1～5，d10，d17，d24，d31</div>
+                            <div style="margin-top:8px; color:#059669;">这个方案（非灭特复星）可作为杜氏利士曼原虫的替代治疗方案</div>
+                        </td>
+                        <td>
+                            标准两性霉素B 1mg/kg iv qd×15～20d，或qod×8w（总剂量15～20mg/kg），或者<span class="highlight">五价锑</span> 20mg/(kg·d) iv×28d，或<span class="drug-name">灭特复星</span>（与食物同服）50mg po bid（体重30～44kg）；50mg tid（体重≥45kg），<span class="highlight">HIV患者勿使用灭特复星</span>
+                        </td>
+                        <td>
+                            <b>进展期HIV患者：</b>每3～4周使用脂质体两性霉素B（3～5mg/kg）或两性霉素B（1mg/kg）进行二级预防，直至CD4＞350/μl，参见<i>WHO指南</i>（https://www.who.int/publications/i/item/9789240048294）
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 备注 -->
+        <div class="note">
+            <b>📋 说明：</b>本表为利什曼病治疗方案参考，具体用药请遵医嘱。HIV合并感染患者需特别注意药物选择禁忌。
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 特色检索标签</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">黏膜利什曼病</span>
+                <span class="tag tag-disease">鼻黏膜利什曼病</span>
+                <span class="tag tag-disease">内脏利什曼病</span>
+                <span class="tag tag-disease">黑热病</span>
+                <span class="tag tag-bacteria">巴西利什曼原虫</span>
+                <span class="tag tag-bacteria">圭亚那利什曼原虫</span>
+                <span class="tag tag-bacteria">巴拿马利什曼原虫</span>
+                <span class="tag tag-bacteria">杜氏利什曼原虫</span>
+                <span class="tag tag-bacteria">婴儿利什曼原虫</span>
+                <span class="tag tag-bacteria">恰加斯利什曼原虫</span>
+                <span class="tag tag-drug">葡萄糖酸锑钠</span>
+                <span class="tag tag-drug">Pantostam</span>
+                <span class="tag tag-drug">锑酸葡甲胺</span>
+                <span class="tag tag-drug">Glucantime</span>
+                <span class="tag tag-drug">脂质体两性霉素B</span>
+                <span class="tag tag-drug">五价锑</span>
+                <span class="tag tag-drug">灭特复星</span>
+                <span class="tag tag-drug">标准两性霉素B</span>
+            </div>
+        </div>
+        
+        <!-- 底部区域 -->
+        <div class="footer-section">
+            <!-- 关键词 -->
+            <div class="keywords">
+                <div class="keywords-label">🔍 关键词</div>
+                <div class="keywords-content">
+                    利什曼病 | 黑热病 | 黏膜利什曼病 | 内脏利什曼病 | 巴西利什曼原虫 | 杜氏利什曼原虫 | 两性霉素B | 灭特复星 | 葡萄糖酸锑钠 | 五价锑 | HIV合并感染 | 寄生虫感染治疗
+                </div>
+            </div>
+            
+            <!-- 页码 -->
+            <div class="page-number">
+                页码：406
+            </div>
+            
+            <!-- 复制区域 -->
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyInput" value="利什曼病治疗方案表；原虫肠道外寄生虫感染治疗；利什曼病,黑热病,黏膜利什曼病,内脏利什曼病,巴西利什曼原虫,杜氏利什曼原虫,两性霉素B,灭特复星,葡萄糖酸锑钠,五价锑,HIV合并感染,寄生虫感染治疗；=406" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板！');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.querySelector('.fav-btn');
+            const title = '利什曼病治疗方案表';
+            const url = window.location.href;
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.url === url);
+            
+            if (index === -1) {
+                // 添加收藏
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '寄生虫感染治疗',
+                    date: new Date().toLocaleString()
+                });
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到index收藏类目！');
+            } else {
+                // 取消收藏
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试向index.html发送消息（同域情况下）
+            try {
+                if (window.parent !== window) {
+                    window.parent.postMessage({
+                        type: 'favorite',
+                        data: favorites
+                    }, '*');
+                }
+            } catch(e) {}
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            const btn = document.querySelector('.fav-btn');
+            
+            if (favorites.some(f => f.url === url)) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+        
+        // 提示信息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkFavorite();
+        });
+    </script>
+</body>
+</html>

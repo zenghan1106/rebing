@@ -1,0 +1,654 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗感染药物剂量和不良反应-TMP-SMX及局部用抗微生物药*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5a67d8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(90, 103, 216, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4c51bf;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+            min-width: 900px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 分类行样式 */
+        .category-row {
+            background: #e2e8f0 !important;
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            padding: 12px;
+            border-bottom: 2px solid #cbd5e0;
+        }
+        
+        /* 第一列 - 药品名称 */
+        td:first-child {
+            background: #ebf4ff;
+            font-weight: 600;
+            color: #2c5282;
+            width: 20%;
+            min-width: 170px;
+        }
+        
+        tr:nth-child(even) td:first-child {
+            background: #e1effe;
+        }
+        
+        .category-row td:first-child {
+            background: #e2e8f0 !important;
+        }
+        
+        /* 第二列 - 剂量 */
+        td:nth-child(2) {
+            color: #2d3748;
+            width: 32%;
+            min-width: 260px;
+        }
+        
+        /* 第三列 - 不良反应 */
+        td:nth-child(3) {
+            color: #4a5568;
+            width: 48%;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .ref {
+            color: #718096;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7e2;
+            color: #97266d;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.5);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 16px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="330.html" class="nav-btn">◀ 上一页</a>
+        <a href="332.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~抗感染药物剂量和不良反应-TMP-SMX及局部用抗微生物药*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        甲氧苄啶（TMP）-磺胺甲噁唑（SMX）<br>（Bactrim, Septra, Sulfatrim, Cotrimoxazole）<br>单剂量（SS）TMP 80mg/SMX 400mg<br>双剂量（DS）TMP 160mg/SMX 800mg
+                    </td>
+                    <td>
+                        <span class="highlight">标准的口服方案：</span>双剂量1片bid<br><br>
+                        <span class="highlight">肺孢子菌：</span>标准iv方案（依据TMP成分）：8～10mg/（kg·d）分次q6h, q8h或q12h
+                    </td>
+                    <td>
+                        不良反应10%：胃肠道有恶心，呕吐，食欲缺乏。皮肤：皮疹、荨麻疹，光过敏。较严重（1%～10%）：TMP、ACEI及螺内酯可增加血清K⁺，合用时发生率和严重程度均增加，会增加死亡风险<span class="ref">（BMJ 349: g6196, 2014）</span>史-约综合征和中毒性表皮坏死松解症。皮肤的不良反应可能源于SMX的毒性代谢产物而并非过敏<span class="ref">（Ann Pharmacotherapy 32: 381, 1998）</span>。维生素C 0.5～1.0g/d有可能降低毒性<span class="ref">（JAIDS 36: 1041, 2004）</span>。同磺脲类药物合用易出现低血糖。可发生急性发热性嗜中性细胞皮肤病（Sweet syndrome）<br><br>
+                        <span class="highlight">高钾血症：</span>TMP和ACEI均抑制肾小管排钾而导致危险的高钾血症<span class="ref">（BMJ 349: g6196, 2014）</span>。TMP是无菌性脑膜炎的病因之一。有治疗肺孢子菌肺炎期间发生精神病的报道<span class="ref">（JAC 66: 1117, 2011）</span>。TMP-SMX含亚硫酸盐，对亚硫酸盐过敏的患者可能诱发哮喘。是引起血小板减少的常见药物。与其他磺胺类非抗菌药物之间无交叉过敏<span class="ref">（NEJM 349: 1628, 2003）</span>。关于TMP-SMX脱敏的方法<span class="ref">见表7，89页</span>
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">局部用抗微生物药，对葡萄球菌和化脓性链球菌有活性<span class="ref">（CID 49: 1541, 2009）</span>。局部用防腐剂、抗生素的综述<span class="ref">（CID 49: 1541, 2009）</span></td>
+                </tr>
+                <tr>
+                    <td>杆菌肽（Baciguent）</td>
+                    <td>20%杆菌肽锌软膏外用1～5次/天</td>
+                    <td>对葡萄球菌、链球菌及梭状芽孢杆菌有活性。接触性皮炎。无须处方即可购买</td>
+                </tr>
+                <tr>
+                    <td>夫西地酸软膏</td>
+                    <td>2%软膏外用tid</td>
+                    <td>加拿大和欧洲（Leo Laboratories）有供应。对金黄色葡萄球菌和化脓链球菌有活性</td>
+                </tr>
+                <tr>
+                    <td>莫匹罗星（Bactroban）</td>
+                    <td>2%皮肤乳膏或软膏：外用tid×10d；2%鼻软膏：外用bid×5d</td>
+                    <td>皮肤乳膏：瘙痒、烧灼感，刺痛（1.0%～1.5%）。鼻软膏：头痛（9%），鼻炎（6%），呼吸不畅（5%）。对肠球菌或革兰阴性菌无活性。关于耐药的总结：<span class="ref">JAC 70: 2631, 2015</span>。氮质血症的患者不大量使用，会造成聚乙二醇堆积<span class="ref">（CID 49: 1541, 2009）</span></td>
+                </tr>
+                <tr>
+                    <td>多黏菌素B-杆菌肽（Polysporin）</td>
+                    <td>5000U/g，400U/g。外用1～4次/天</td>
+                    <td>多黏菌素对部分革兰阴性菌有活性，但对变形菌属、黏质沙雷菌属或革兰阳性菌无活性。<span class="ref">见上述杆菌肽的说明</span>。无须处方即可购买</td>
+                </tr>
+                <tr>
+                    <td>多黏菌素B-杆菌肽-新霉素（Neosporin，三联抗生素软膏（TAO））</td>
+                    <td>5000U/g，400U/g，3.5mg/g。外用1～3次/天</td>
+                    <td><span class="ref">见上述杆菌肽和多黏菌素B的说明。</span>新霉素对革兰阴性菌和葡萄球菌有活性，对链球菌无活性。接触性皮炎发生率为1%；如果吸收，有肾和耳毒性。TAO比莫匹罗星的抗菌谱广，对耐莫匹罗星的菌株有活性<span class="ref">（DMID 54: 63, 2006）</span>。无须处方即可购买</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">肺孢子菌肺炎</span>
+            <span class="tag tag-disease">无菌性脑膜炎</span>
+            <span class="tag tag-disease">精神病</span>
+            <span class="tag tag-disease">哮喘</span>
+            <span class="tag tag-disease">低血糖</span>
+            <span class="tag tag-disease">高钾血症</span>
+            <span class="tag tag-disease">急性发热性嗜中性细胞皮肤病</span>
+            <span class="tag tag-disease">Sweet syndrome</span>
+            <span class="tag tag-disease">接触性皮炎</span>
+            <span class="tag tag-disease">瘙痒</span>
+            <span class="tag tag-disease">烧灼感</span>
+            <span class="tag tag-disease">头痛</span>
+            <span class="tag tag-disease">鼻炎</span>
+            <span class="tag tag-disease">呼吸不畅</span>
+            <span class="tag tag-disease">氮质血症</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">甲氧苄啶</span>
+            <span class="tag tag-drug">TMP</span>
+            <span class="tag tag-drug">磺胺甲噁唑</span>
+            <span class="tag tag-drug">SMX</span>
+            <span class="tag tag-drug">Bactrim</span>
+            <span class="tag tag-drug">Septra</span>
+            <span class="tag tag-drug">Sulfatrim</span>
+            <span class="tag tag-drug">Cotrimoxazole</span>
+            <span class="tag tag-drug">ACEI</span>
+            <span class="tag tag-drug">螺内酯</span>
+            <span class="tag tag-drug">维生素C</span>
+            <span class="tag tag-drug">磺脲类药物</span>
+            <span class="tag tag-drug">杆菌肽</span>
+            <span class="tag tag-drug">Baciguent</span>
+            <span class="tag tag-drug">夫西地酸</span>
+            <span class="tag tag-drug">莫匹罗星</span>
+            <span class="tag tag-drug">Bactroban</span>
+            <span class="tag tag-drug">多黏菌素B</span>
+            <span class="tag tag-drug">Polysporin</span>
+            <span class="tag tag-drug">新霉素</span>
+            <span class="tag tag-drug">Neosporin</span>
+            <span class="tag tag-drug">TAO</span>
+            <span class="tag tag-drug">三联抗生素软膏</span>
+            <!-- 细菌/微生物相关 -->
+            <span class="tag tag-bacteria">葡萄球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">化脓性链球菌</span>
+            <span class="tag tag-bacteria">梭状芽孢杆菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">革兰阴性菌</span>
+            <span class="tag tag-bacteria">变形菌属</span>
+            <span class="tag tag-bacteria">黏质沙雷菌属</span>
+            <span class="tag tag-disease">史-约综合征</span>
+            <span class="tag tag-disease">中毒性表皮坏死松解症</span>
+            <span class="tag tag-disease">皮疹</span>
+            <span class="tag tag-disease">荨麻疹</span>
+            <span class="tag tag-disease">光过敏</span>
+            <span class="tag tag-disease">血小板减少</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="331.html">331</a>
+    </div>
+    
+    <!-- 关键词与复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗感染药物剂量和不良反应；TMP-SMX；甲氧苄啶；磺胺甲噁唑；Bactrim；Septra；局部用抗微生物药；杆菌肽；Baciguent；夫西地酸；莫匹罗星；Bactroban；多黏菌素B；Polysporin；新霉素；Neosporin；TAO；三联抗生素软膏；肺孢子菌肺炎；高钾血症；Sweet syndrome；接触性皮炎；=331" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '抗感染药物剂量和不良反应-TMP-SMX及局部用抗微生物药',
+                    url: '331.html',
+                    pageNum: '331'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏！');
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '331.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '331.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast('搜索: ' + text);
+                // 这里可以添加实际的搜索跳转逻辑
+            });
+        });
+    </script>
+</body>
+</html>

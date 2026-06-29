@@ -1,0 +1,556 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~念珠菌病血流感染续及骨关节感染抗微生物药物选择指南*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-page {
+            background: #e8f4f8;
+            color: #2c5f7c;
+            border: 1px solid #b8d4e3;
+        }
+        
+        .btn-page:hover {
+            background: #d0e8f0;
+        }
+        
+        .btn-favorite {
+            background: #ff6b6b;
+            color: white;
+            position: fixed;
+            right: 20px;
+            bottom: 120px;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 100;
+        }
+        
+        .btn-favorite:hover {
+            background: #ee5a5a;
+            transform: scale(1.1);
+        }
+        
+        .btn-favorite::before {
+            content: "♥";
+            font-size: 24px;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+            padding: 15px;
+            background: linear-gradient(90deg, #e8f4f8, #d4e6f1, #e8f4f8);
+            border-radius: 12px;
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格样式 */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1a5276 0%, #2e86ab 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a5276;
+        }
+        
+        thead th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9f9;
+        }
+        
+        tbody tr:hover {
+            background: #e8f8f5;
+        }
+        
+        .section-header {
+            background: #d4e6f1 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .highlight-box {
+            background: #fef9e7;
+            border: 2px solid #f4d03f;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .dose-info {
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        .warning-text {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .note-text {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .ref-tag {
+            background: #e8f6f3;
+            color: #1e8449;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9f9;
+            border-radius: 12px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 16px;
+            border: 2px solid #d5dbdb;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+        }
+        
+        .btn-copy:hover {
+            background: #219a52;
+        }
+        
+        .btn-copy.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 标签 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            padding: 15px;
+            background: #e8f4f8;
+            border-radius: 8px;
+        }
+        
+        /* 脚注 */
+        .footer-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef9e7;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorite()" title="添加到收藏"></button>
+    
+    <div class="container">
+        <!-- 导航按钮 -->
+        <div class="nav-buttons">
+            <div class="nav-left">
+                <a href="index.html" class="btn btn-home">← 返回首页</a>
+            </div>
+            <div class="nav-right">
+                <a href="349.html" class="btn btn-page">← 上一页</a>
+                <a href="351.html" class="btn btn-page">下一页 →</a>
+            </div>
+        </div>
+        
+        <!-- 标题 -->
+        <h1 class="main-title">~~~~~念珠菌病血流感染续及骨关节感染抗微生物药物选择指南*****</h1>
+        <p class="sub-title">表11A（5）真菌感染的治疗 | 成人推荐剂量（肾功能正常）</p>
+        
+        <!-- 表格 -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">感染类型/病原菌/感染部位</th>
+                        <th style="width: 22%;">首选药物</th>
+                        <th style="width: 28%;">替代药物</th>
+                        <th style="width: 25%;">说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4" style="background: #e8f6f3; font-weight: bold; color: #1e8449; text-align: center;">
+                            念珠菌病：血流感染（续）
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>血流感染：粒细胞缺乏患者</strong><br><br>
+                            如果可能拔除所有血管内导管；并在新部位重新置管（而非通过导丝更换）
+                        </td>
+                        <td>
+                            <span class="dose-info">卡泊芬净</span> 负荷剂量70mg iv，然后50mg/d iv，中度肝功能不全患者35mg；<br>
+                            或<span class="dose-info">米卡芬净</span> 100mg/d iv；<br>
+                            或<span class="dose-info">阿尼芬净</span> 负荷剂量200mg iv，然后100mg/d iv；<br>
+                            或<span class="dose-info">两性霉素B脂质体</span> 3～5mg/(kg·d) iv
+                        </td>
+                        <td>
+                            <span class="dose-info">氟康唑</span> 负荷剂量800mg（12mg/kg），然后400mg/d iv/po；<br>
+                            或<span class="dose-info">伏立康唑</span> 400mg（6mg/kg）bid×2剂，然后200mg（3mg/kg）q12h<br><br>
+                            另一替代方案：<span class="dose-info">瑞扎芬净</span> 负荷剂量400mg iv，然后200mg iv每周1次
+                        </td>
+                        <td>
+                            在没有播散性并发症的情况下，疗程应持续至末次阳性血培养后至少2周、所有症状完全缓解且粒细胞缺乏恢复白细胞计数恢复后进行眼底镜检查，因为在粒细胞缺乏期间可能无法观察到眼部受累征象。<br><br>
+                            具体药物选择，<em>参见上文的说明</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="background: #e8f6f3; font-weight: bold; color: #1e8449; text-align: center;">
+                            念珠菌病：骨关节感染
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>骨髓炎</strong>
+                        </td>
+                        <td>
+                            <span class="dose-info">氟康唑</span> 400mg/d（6mg/kg）iv/po；<br>
+                            或<span class="dose-info">两性霉素B脂质体</span> 3～5mg/(kg·d)×数周，然后口服氟康唑
+                        </td>
+                        <td>
+                            <span class="dose-info">卡泊芬净</span>或<span class="dose-info">米卡芬净</span>或<span class="dose-info">阿尼芬净</span>或<span class="dose-info">两性霉素B</span> 0.5～1.0mg/(kg·d) iv，数周后口服氟康唑<br><br>
+                            另一替代方案：<span class="dose-info">瑞扎芬净</span> 负荷剂量400mg iv，然后200mg iv每周1次
+                        </td>
+                        <td>
+                            总疗程为6～12个月。常需要外科清创，尽可能移除植入物
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>化脓性关节炎</strong>
+                        </td>
+                        <td>
+                            <span class="dose-info">氟康唑</span> 400mg/d（6mg/kg）iv/po；<br>
+                            或<span class="dose-info">两性霉素B脂质体</span> 3～5mg/(kg·d)×数周，然后口服氟康唑
+                        </td>
+                        <td>
+                            <span class="dose-info">卡泊芬净</span>或<span class="dose-info">米卡芬净</span>或<span class="dose-info">阿尼芬净</span>或<span class="dose-info">两性霉素B</span> 0.5～1.0mg/(kg·d) iv，数周后口服氟康唑<br><br>
+                            另一替代方案：<span class="dose-info">瑞扎芬净</span> 负荷剂量400mg iv，然后200mg iv每周1次
+                        </td>
+                        <td>
+                            所有病例均需外科清创，尽可能移除人工关节。疗程至少6周，如果保留植入物，则需无限期治疗
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 脚注 -->
+        <div class="footer-note">
+            <strong>注：</strong>* 所有推荐剂量针对成人（除非特别注明）及假设肾功能正常。表中名词缩写见第2页。
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="bottom-section">
+            <div class="copy-section">
+                <input type="text" class="copy-input" id="copyContent" value="~~~~~念珠菌病血流感染续及骨关节感染抗微生物药物选择指南*****；念珠菌病；血流感染；粒细胞缺乏；骨髓炎；化脓性关节炎；骨关节感染；白念珠菌；光滑念珠菌；卡泊芬净；米卡芬净；阿尼芬净；瑞扎芬净；氟康唑；两性霉素B脂质体；两性霉素B；伏立康唑；棘白菌素；唑类；多烯类；=350" readonly>
+                <button class="btn btn-copy" onclick="copyContent()">复制</button>
+            </div>
+            
+            <!-- 标签 -->
+            <div class="tags-section">
+                <div class="tags-title">🏷️ 检索标签</div>
+                <div class="tags-container">
+                    <span class="tag tag-disease">念珠菌病</span>
+                    <span class="tag tag-disease">血流感染</span>
+                    <span class="tag tag-disease">粒细胞缺乏</span>
+                    <span class="tag tag-disease">骨髓炎</span>
+                    <span class="tag tag-disease">化脓性关节炎</span>
+                    <span class="tag tag-disease">骨关节感染</span>
+                    <span class="tag tag-bacteria">白念珠菌</span>
+                    <span class="tag tag-bacteria">光滑念珠菌</span>
+                    <span class="tag tag-drug">卡泊芬净</span>
+                    <span class="tag tag-drug">米卡芬净</span>
+                    <span class="tag tag-drug">阿尼芬净</span>
+                    <span class="tag tag-drug">瑞扎芬净</span>
+                    <span class="tag tag-drug">氟康唑</span>
+                    <span class="tag tag-drug">两性霉素B脂质体</span>
+                    <span class="tag tag-drug">两性霉素B</span>
+                    <span class="tag tag-drug">伏立康唑</span>
+                    <span class="tag tag-drug">棘白菌素</span>
+                    <span class="tag tag-drug">唑类</span>
+                    <span class="tag tag-drug">多烯类</span>
+                </div>
+            </div>
+            
+            <!-- 页码 -->
+            <div class="page-number">350</div>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyContent');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.querySelector('.btn-copy');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                const btn = document.querySelector('.btn-copy');
+                btn.textContent = '已复制';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            const title = '~~~~~念珠菌病血流感染续及骨关节感染抗微生物药物选择指南*****';
+            const url = window.location.href;
+            const pageNum = '350';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '抗微生物药物',
+                addTime: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题：' + title + '\n页码：' + pageNum);
+            
+            if (window.opener && window.opener.updateFavorites) {
+                window.opener.updateFavorites(favorites);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        });
+    </script>
+</body>
+</html>

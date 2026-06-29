@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表12A（9）分枝杆菌感染的治疗</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="392.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="394.html" class="nav-btn">下一页 ➡️</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~表12A（9）分枝杆菌感染的治疗*****</h1>
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>病原体/疾病</th>
+                    <th>不同情境</th>
+                    <th>推荐方案</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>VII.麻风分枝杆菌<br>麻风分枝杆菌病（麻风）<br>少菌型（中间型、结核样型或偏结核样型界线类）<br>多菌型<br>界线类<br>偏瘤型界线类<br>瘤型<br>参见结节红斑性麻风（ENL）说明<br>综述：Lancet 363：1209，2004</td>
+                    <td>有两套推荐的治疗方案：一套来自美国[全国汉森病治疗项目（NHDP），Baton Rouge，LA]，另一套来自WHO。两套方案均基于专家推荐意见，未经过临床对照试验</td>
+                    <td>首选/替代：<br>（氨苯砜100mg/d+利福平600mg po/d）×12个月<br><br>（氨苯砜100mg/d+氯法齐明50mg/d+利福平600mg/d）×24个月<br>替代方案：如拒绝使用氯法齐明或无药（氨苯砜100mg/d+利福平600mg/d+米诺环素100mg/d）×24个月<br><br>氨苯砜100mg/d（无督导）+利福平600mg 1次/月（在督导下）×6个月，用于同时服用泼尼松患者<br><br>氨苯砜100mg/d+氯法齐明50mg/d（均无监督）+利福平600mg 1次/月（在督导下）×24个月</td>
+                    <td>总体不良反应率0.4%<br><br>总体不良反应5.1%。结节红斑性麻风：泼尼松60～80mg/d或沙利度胺100～400mg/d。在美国沙利度胺可致电1-800-4-CELGENE申请获得。尽管沙利度胺有效，但由于潜在毒性，WHO不再推荐其使用。然而，多数专家认为在严密监测下沙利度胺是治疗红斑结节型麻风的可选药物。氯法齐明可从全美汉森病治疗项目的IND（研发中新药）计划中获得，与1-800-642-2477联系。乙硫异烟胺（250mg qd）或丙硫异烟胺（375mg qd）可替代氯法齐明。依那西普对一例标准治疗无效的难治性病例有效（CID 52：e133，2011）。含克拉霉素、米诺环素、利福平、莫西沙星和/或氧氟沙星的联合治疗方案亦提示有效。由于出现耐药性，氨苯砜单药治疗已被放弃（CID 52：e127，2011），但既往用氨苯砜单药治疗有效的患者仍可终身维持治疗。莫西沙星在体外有高度活性，且迅速起效（AAC 52：3113，2008）</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="font-size: 12px; color: #666; margin: 10px 0;">注：*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。表中名词缩写见第2页。</p>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags">
+                <span class="tag">麻风分枝杆菌</span>
+                <span class="tag">麻风</span>
+                <span class="tag">少菌型</span>
+                <span class="tag">多菌型</span>
+                <span class="tag">界线类</span>
+                <span class="tag">结节红斑性麻风</span>
+                <span class="tag">ENL</span>
+                <span class="tag">氨苯砜</span>
+                <span class="tag">利福平</span>
+                <span class="tag">氯法齐明</span>
+                <span class="tag">米诺环素</span>
+                <span class="tag">泼尼松</span>
+                <span class="tag">沙利度胺</span>
+                <span class="tag">乙硫异烟胺</span>
+                <span class="tag">丙硫异烟胺</span>
+                <span class="tag">依那西普</span>
+                <span class="tag">克拉霉素</span>
+                <span class="tag">莫西沙星</span>
+                <span class="tag">氧氟沙星</span>
+            </div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">表12A（9）分枝杆菌感染的治疗；麻风分枝杆菌；麻风；少菌型；多菌型；界线类；结节红斑性麻风；ENL；氨苯砜；利福平；氯法齐明；米诺环素；泼尼松；沙利度胺；乙硫异烟胺；丙硫异烟胺；依那西普；克拉霉素；莫西沙星；氧氟沙星；=197</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 197 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 197;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 197;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

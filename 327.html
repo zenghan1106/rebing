@@ -1,0 +1,697 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~多黏菌素B剂量方案与维持剂量表-抗感染药物参考*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5a67d8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(90, 103, 216, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4c51bf;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+            min-width: 900px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 第一列 - 药品名称 */
+        td:first-child {
+            background: #ebf4ff;
+            font-weight: 600;
+            color: #2c5282;
+            width: 20%;
+            min-width: 170px;
+        }
+        
+        tr:nth-child(even) td:first-child {
+            background: #e1effe;
+        }
+        
+        /* 第二列 - 剂量 */
+        td:nth-child(2) {
+            color: #2d3748;
+            width: 35%;
+            min-width: 300px;
+        }
+        
+        /* 第三列 - 不良反应/说明 */
+        td:nth-child(3) {
+            color: #4a5568;
+            width: 45%;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .ref {
+            color: #718096;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 内嵌表格样式 - 用于剂量表 */
+        .inner-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 12px;
+            min-width: auto;
+        }
+        
+        .inner-table th {
+            background: #e2e8f0;
+            color: #2d3748;
+            padding: 8px 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #cbd5e0;
+        }
+        
+        .inner-table td {
+            padding: 8px 6px;
+            border: 1px solid #cbd5e0;
+            text-align: center;
+            background: #fff;
+            font-weight: normal;
+            color: #4a5568;
+        }
+        
+        .inner-table tr:nth-child(even) td {
+            background: #f7fafc;
+        }
+        
+        .inner-table tr:hover td {
+            background: #edf2f7;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7e2;
+            color: #97266d;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.5);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 16px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            .inner-table {
+                font-size: 11px;
+            }
+            
+            .inner-table th, .inner-table td {
+                padding: 6px 4px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="326.html" class="nav-btn">◀ 上一页</a>
+        <a href="328.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~多黏菌素B剂量方案与维持剂量表-抗感染药物参考*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        对于其他适应证，多黏菌素B：等效，快速达到有效血药浓度，不同患者之间PK变异度小，肾功能不全患者无须调整剂量，肾损伤风险更低<br><br>
+                        <span class="ref">（AAC 60: 2443, 2016; AAC 2017; 61: e02319-16）</span>
+                    </td>
+                    <td>
+                        <span class="highlight">其他成人剂量：</span><br><br>
+                        <span class="highlight">吸入治疗：</span>50～75mg CBA溶入生理盐水3～4ml，雾化吸入2～3次/天；肺泡上皮衬液内浓度，吸入较静脉给药高100～1000倍<br><br>
+                        <span class="highlight">脑膜炎（脑室内或鞘内注射）：</span>10mg/d，数周，鞘内注射常联合全身静脉用药<br><br>
+                        <span class="highlight">儿科剂量：</span><br><br>
+                        <span class="highlight">全身感染：</span>2.5～5.0mg/(kg·d)，分2～4次给药（根据理想体重）<br><br>
+                        <span class="highlight">囊性纤维化：</span>3～8mg/(kg·d)，3次/天（根据理想体重）<br><br>
+                        <span class="highlight">注意：</span>耐药及过敏问题。已在大肠埃希菌和肺炎克雷伯菌上发现质粒编码的Colistin耐药基因MCR-1，该基因是通过修饰了多黏菌素脂质A的靶位而产生耐药。这类菌株也可产生金属酶，从而成为泛耐药菌<span class="ref">（Infect Dis Clin NA 2020.doi.org/10.1016/j.idc.2020.08.003）</span><br><br>
+                        对碳青霉烯类药物过敏者，没有明确的可替代药物与Colistin联合。Colistin联合利福平治疗不动杆菌感染，临床应答和30天死亡率都没有改善<span class="ref">（CID 2013, 57: 349; Epidemiol Infect 2013, 141: 1214）</span>。体内与体外暴露于多黏菌素后很快筛选出耐药亚群。体外试验显示米诺环素可以防止出现耐药，并增强多黏菌素E的活性，但缺少临床数据支持。替加环素可能也有类似作用，但也缺少数据
+                    </td>
+                    <td>
+                        <span class="highlight">每天维持剂量</span>
+                        <table class="inner-table">
+                            <thead>
+                                <tr>
+                                    <th>CrCl<br>(ml/min)</th>
+                                    <th>PK研究组<br>(mg/d)<br>(bid或tid)△</th>
+                                    <th>欧洲药学会<br>(mg/d)<br>(bid或tid)△</th>
+                                    <th>美国FDA<br>(mg/d)<br>(体重-理想体重)△</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>≥90</td>
+                                    <td>360</td>
+                                    <td>300</td>
+                                    <td rowspan="2">2.5～5.0mg/(kg·d)，<br>分2～4次给药</td>
+                                </tr>
+                                <tr>
+                                    <td>80～&lt;90</td>
+                                    <td>340</td>
+                                    <td>300</td>
+                                </tr>
+                                <tr>
+                                    <td>70～&lt;80</td>
+                                    <td>300</td>
+                                    <td rowspan="3"></td>
+                                    <td rowspan="2">2.5～3.8mg/(kg·d)，<br>分2次给药</td>
+                                </tr>
+                                <tr>
+                                    <td>60～&lt;70</td>
+                                    <td>275</td>
+                                </tr>
+                                <tr>
+                                    <td>50～&lt;60</td>
+                                    <td>245</td>
+                                    <td rowspan="2">2.5mg/(kg·d) qd或bid</td>
+                                </tr>
+                                <tr>
+                                    <td>40～&lt;50</td>
+                                    <td>220</td>
+                                    <td>183～250</td>
+                                </tr>
+                                <tr>
+                                    <td>30～&lt;40</td>
+                                    <td>195</td>
+                                    <td rowspan="2">150～183</td>
+                                    <td rowspan="2">1.5mg/(kg·d) q36h</td>
+                                </tr>
+                                <tr>
+                                    <td>20～&lt;30</td>
+                                    <td>175</td>
+                                </tr>
+                                <tr>
+                                    <td>10～&lt;20</td>
+                                    <td>160</td>
+                                    <td rowspan="2">117</td>
+                                    <td rowspan="2">N/R</td>
+                                </tr>
+                                <tr>
+                                    <td>5～&lt;10</td>
+                                    <td>145</td>
+                                </tr>
+                                <tr>
+                                    <td>&lt;5</td>
+                                    <td>130</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align: center; font-size: 12px; color: #718096; margin-top: 8px;">注：△所有剂量根据colistin活性基质（CBA）mg表示</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>*所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-disease">囊性纤维化</span>
+            <span class="tag tag-disease">不动杆菌感染</span>
+            <span class="tag tag-disease">肾功能不全</span>
+            <span class="tag tag-disease">肾损伤</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">多黏菌素B</span>
+            <span class="tag tag-drug">Colistin</span>
+            <span class="tag tag-drug">CBA</span>
+            <span class="tag tag-drug">利福平</span>
+            <span class="tag tag-drug">米诺环素</span>
+            <span class="tag tag-drug">替加环素</span>
+            <span class="tag tag-drug">碳青霉烯类</span>
+            <!-- 细菌/微生物相关 -->
+            <span class="tag tag-bacteria">大肠埃希菌</span>
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <span class="tag tag-bacteria">MCR-1</span>
+            <span class="tag tag-bacteria">金属酶</span>
+            <span class="tag tag-bacteria">泛耐药菌</span>
+            <span class="tag tag-bacteria">耐药亚群</span>
+            <span class="tag tag-bacteria">PK研究组</span>
+            <span class="tag tag-bacteria">欧洲药学会</span>
+            <span class="tag tag-bacteria">美国FDA</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="327.html">327</a>
+    </div>
+    
+    <!-- 关键词与复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="多黏菌素B剂量方案与维持剂量表；抗感染药物参考；Colistin；CBA；PK研究组；欧洲药学会；美国FDA；CrCl；脑膜炎；囊性纤维化；不动杆菌感染；MCR-1；利福平；米诺环素；替加环素；碳青霉烯类；=327" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '多黏菌素B剂量方案与维持剂量表-抗感染药物参考',
+                    url: '327.html',
+                    pageNum: '327'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏！');
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '327.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '327.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast('搜索: ' + text);
+                // 这里可以添加实际的搜索跳转逻辑
+            });
+        });
+    </script>
+</body>
+</html>

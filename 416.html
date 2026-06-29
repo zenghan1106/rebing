@@ -1,0 +1,661 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非洲锥虫病昏睡病治疗方案表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+            background-color: #f5f9ff;
+            background-image: linear-gradient(135deg, #f5f9ff 0%, #eef5ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            border-left: 5px solid #2980b9;
+            border-right: 5px solid #2980b9;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2980b9;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2980b9;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #2980b9;
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 合并单元格的表头 */
+        .header-main {
+            background: #2980b9;
+            color: white;
+            font-size: 18px;
+            padding: 12px;
+        }
+        
+        /* 单元格样式 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #d4e6f1;
+            vertical-align: top;
+        }
+        
+        td {
+            background: #fafcff;
+        }
+        
+        tr:nth-child(even) td {
+            background: #f0f7ff;
+        }
+        
+        tr:hover td {
+            background: #e8f4f8;
+        }
+        
+        /* 病原体列 */
+        .pathogen-cell {
+            font-weight: bold;
+            color: #1a5276;
+            background: #d6eaf8 !important;
+            min-width: 120px;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .drug-name-alt {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 注释区域 */
+        .note-section {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f39c12;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #27ae60;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #27ae60;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2980b9;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词和页码区域 */
+        .footer-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .keywords-area {
+            margin-bottom: 20px;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .keywords-content {
+            color: #5d6d7e;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2980b9;
+            padding: 15px;
+            background: #ebf5fb;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        /* 复制编辑框区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2980b9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #fafcff;
+        }
+        
+        .copy-btn {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #1a5276;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            thead th {
+                font-size: 14px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 上一页/下一页按钮 -->
+    <div class="nav-btns">
+        <a href="415.html" class="nav-btn">← 上一页</a>
+        <a href="417.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题 ~~~~~标题***** -->
+    <h1 class="page-title" id="mainTitle">非洲锥虫病昏睡病治疗方案表</h1>
+    <p class="subtitle" id="subTitle">表13A（3）寄生虫感染：原虫——肠道外（续）</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width:15%;">病原体</th>
+                    <th colspan="2" class="header-main">推荐方案</th>
+                    <th rowspan="2" style="width:30%;">说明</th>
+                </tr>
+                <tr>
+                    <th style="width:27%;">首选药物</th>
+                    <th style="width:28%;">备选药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="pathogen-cell" colspan="4" style="text-align:left;">
+                        锥虫病（Trypanosomiasis）截至2024年，<span class="drug-name">非昔硝唑</span>（Fexinidazole）为治疗非洲锥虫病2个亚种感染的几乎所有患者的一线治疗药物。可从美国赛诺菲公司获得。老的药物，目前为二线治疗药物仍可从CDC获取。药物来源信息见表13D，222页。现在美国市场有硝呋替莫销售（www.lampit.com），美国WHO指南详细信息参见https://iris.who.int/bitstream/handle/10665/378083/9789240096035-eng.pdf?sequence=1
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">
+                        西非昏睡病（布氏锥虫冈比亚亚种，T. brucei gambiense）
+                    </td>
+                    <td colspan="2">
+                        <!-- 空，作为分类标题行 -->
+                    </td>
+                    <td>
+                        <!-- 空 -->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">
+                        1期：仅血液/淋巴结寄生，旅行者临床系列Int J Infect Dis（2018）；https://doi.org/10.1016/j.ijid.2018.08.012<br><br>
+                        2期：中枢神经系统疾病CSF-WBC＞5/μl或寄生虫DNA阳性、脑炎
+                    </td>
+                    <td>
+                        1期和2期患者年龄≥6岁且体重≥20kg，CSF-WBC＜100/μl<br>
+                        <span class="drug-name">非昔硝唑</span><br>
+                        • 体重≥35kg：负荷剂量1800mg（3片）qd×4d，然后1200mg（2片）qd×6d<br>
+                        • 体重≥20kg但＜35kg：负荷剂量1200mg（2片）qd×4d，然后600mg（1片）qd×6d<br><br>
+                        严重2期患者CSF-WBC＞100/μl<br>
+                        <span class="drug-name-alt">依氟鸟氨酸</span>400mg/（kg·d），分次给药，q12h×7d，联合<span class="drug-name">硝呋替莫</span>15mg/（kg·d），分次给药，po q8h×10d（缩写为NECT）非劣效于14d标准依氟鸟氨酸治疗（Lancet 374：56，2009；CID 56：195，2013）<br><br>
+                        年龄＜6岁儿童或体重＜20kg<br>
+                        • 1期：<span class="drug-name-alt">喷他脒</span>4mg/kg iv ×7d<br>
+                        • 2期：NECT（见上）
+                    </td>
+                    <td>
+                        年龄≥6岁且体重≥20kg<br>
+                        • 1期：<span class="drug-name-alt">喷他脒</span>4mg/kg iv×7d<br>
+                        • 2期（CSF-WBC＜100/μl）：<span class="drug-name-alt">喷他脒</span>或NECT<br>
+                        • 2期（CSF-WBC＞100/μl）：<span class="drug-name">非昔硝唑</span>如上<br><br>
+                        年龄＜6岁或体重＜20kg<br>
+                        • 1期：NECT<br>
+                        • 2期：<span class="drug-name-alt">依氟鸟氨酸</span>400mg/kg/d iv分为q12h×7d
+                    </td>
+                    <td>
+                        如果因脑脊液白细胞数不详不建议使用<span class="drug-name">非昔硝唑</span>治疗。如eGFR＜30ml/min，避免使用<span class="drug-name">非昔硝唑</span>。妊娠：妊娠中、晚期可使用<span class="drug-name">非昔硝唑</span>。必须完成10d<span class="drug-name">非昔硝唑</span>治疗。如无法吞咽、存在<span class="drug-name">非昔硝唑</span>禁忌证或口服药物吸收存在问题时，首选NECT
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note-section">
+        <p>注：*关于药物来源见表13D，222页。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 标签区域（疾病、抗生素药物、细菌） -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">锥虫病</span>
+            <span class="tag tag-disease">非洲锥虫病</span>
+            <span class="tag tag-disease">西非昏睡病</span>
+            <span class="tag tag-disease">昏睡病</span>
+            <span class="tag tag-disease">1期</span>
+            <span class="tag tag-disease">2期</span>
+            <span class="tag tag-disease">脑炎</span>
+            <span class="tag tag-disease">中枢神经系统疾病</span>
+            <span class="tag tag-disease">血液淋巴结寄生</span>
+            <span class="tag tag-disease">旅行者</span>
+            <span class="tag tag-drug">非昔硝唑</span>
+            <span class="tag tag-drug">Fexinidazole</span>
+            <span class="tag tag-drug">依氟鸟氨酸</span>
+            <span class="tag tag-drug">硝呋替莫</span>
+            <span class="tag tag-drug">喷他脒</span>
+            <span class="tag tag-drug">NECT</span>
+            <span class="tag tag-bacteria">布氏锥虫冈比亚亚种</span>
+            <span class="tag tag-bacteria">T. brucei gambiense</span>
+            <span class="tag tag-bacteria">锥虫</span>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码区域（网页底部） -->
+    <div class="footer-section">
+        <div class="keywords-area">
+            <span class="keywords-label">🔍 关键词</span>
+            <div class="keywords-content" id="keywords">
+                非洲锥虫病昏睡病治疗方案；锥虫病；Trypanosomiasis；西非昏睡病；布氏锥虫冈比亚亚种；T. brucei gambiense；非昔硝唑；Fexinidazole；依氟鸟氨酸；硝呋替莫；喷他脒；NECT；1期；2期；CSF-WBC；脑炎；中枢神经系统；eGFR；妊娠；赛诺菲；CDC；Lancet；CID；Int J Infect Dis
+            </div>
+        </div>
+        
+        <div class="page-number" id="pageNum">416</div>
+        
+        <!-- 复制编辑框 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: '非洲锥虫病昏睡病治疗方案表',
+            subtitle: '表13A（3）寄生虫感染：原虫——肠道外（续）',
+            keywords: '非洲锥虫病昏睡病治疗方案；锥虫病；Trypanosomiasis；西非昏睡病；布氏锥虫冈比亚亚种；T. brucei gambiense；非昔硝唑；Fexinidazole；依氟鸟氨酸；硝呋替莫；喷他脒；NECT；1期；2期；CSF-WBC；脑炎；中枢神经系统；eGFR；妊娠；赛诺菲；CDC；Lancet；CID；Int J Infect Dis',
+            pageNum: '416'
+        };
+        
+        // 初始化复制输入框内容
+        function initCopyInput() {
+            const content = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+            document.getElementById('copyInput').value = content;
+        }
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(() => {
+                showToast();
+            }).catch(() => {
+                // 降级方案
+                document.execCommand('copy');
+                showToast();
+            });
+        }
+        
+        // 显示提示
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                
+                // 保存到localStorage，模拟添加到index收藏类目
+                const favData = {
+                    title: pageInfo.title,
+                    url: window.location.href,
+                    pageNum: pageInfo.pageNum,
+                    addTime: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                // 避免重复
+                const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 同时保存到index收藏标记（模拟）
+                    localStorage.setItem('index_favorite_' + pageInfo.pageNum, JSON.stringify(favData));
+                }
+                
+                showToastCustom('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+                
+                // 移除收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== pageInfo.pageNum);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.removeItem('index_favorite_' + pageInfo.pageNum);
+                
+                showToastCustom('已取消收藏！');
+            }
+        }
+        
+        // 自定义提示
+        function showToastCustom(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            toast.style.background = '#e74c3c';
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toast.textContent = '已复制到剪贴板！';
+                toast.style.background = '#27ae60';
+            }, 2000);
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initCopyInput();
+            checkFavoriteStatus();
+        });
+    </script>
+</body>
+</html>

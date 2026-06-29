@@ -1,0 +1,436 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免疫功能低下宿主带状疱疹治疗方案_455</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 1000;
+        }
+        
+        .favorite-btn.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        .title-format {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid #357abd;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            border: 1px solid #e0e6ed;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .merged-row {
+            background: #fff9e6 !important;
+            font-weight: bold;
+        }
+        
+        .merged-row td {
+            border-bottom: 2px solid #4a90d9;
+        }
+        
+        .note-row {
+            background: #f0f7ff !important;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .note-row td {
+            padding: 12px;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #4a90d9;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+        }
+        
+        .tag-drug {
+            background: #e0f7e0;
+            color: #27ae60;
+        }
+        
+        .tag-virus {
+            background: #e0e8ff;
+            color: #2980b9;
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 16px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a90d9;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #666;
+            line-height: 2;
+        }
+        
+        .keywords strong {
+            color: #4a90d9;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .title-format {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                padding: 10px 18px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+
+    <!-- 顶部导航 -->
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="454.html" class="nav-btn">⬅ 上一页</a>
+            <a href="456.html" class="nav-btn">下一页 ➡</a>
+        </div>
+    </div>
+
+    <!-- 标题格式 ~~~~~标题***** -->
+    <div class="title-format">~~~~~免疫功能低下宿主带状疱疹治疗方案及药物剂量指南*****</div>
+
+    <!-- 表格内容 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">病毒/疾病</th>
+                    <th style="width: 35%;">药物/剂量</th>
+                    <th style="width: 40%;">不良反应/说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="merged-row">
+                    <td colspan="3">
+                        免疫功能低下宿主
+                    </td>
+                </tr>
+                <tr>
+                    <td>病情不严重<br>指南：Clinical Transplantation（Jun 2019），https://doi.org/10.1111/ctr.13622</td>
+                    <td>阿昔洛韦800mg po 5次/天×7d（或泛昔洛韦750mg po qd，或500mg po bid，或250mg po tid×7d；或伐昔洛韦1000mg po tid×7d，但FDA尚未批准这两药的该适应证）</td>
+                    <td>如果病情进展，改静脉输注<br>使用TNFα抑制剂的患者是VZV的高危人群，皮疹较重但PHN较少</td>
+                </tr>
+                <tr>
+                    <td>病情严重：＞1个脊神经支配区皮肤受累、三叉神经或广泛受累</td>
+                    <td>阿昔洛韦10～12.5mg/kg iv（输注1小时以上）q8h×7d。老年患者剂量减量至7.5mg/kg。如果出现肾毒性而患者病情改善，剂量减至5mg/kg q8h</td>
+                    <td>治疗需在出现症状的72小时内开始。是HIV感染患儿ART后免疫重建时的常见表现。既往用过阿昔洛韦的HIV患者出现阿昔洛韦耐药：膦甲酸钠40mg/kg iv q8h×14～26d</td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="3">
+                        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
+                        表中名词缩写见第2页。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">455</div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">免疫功能低下宿主</span>
+            <span class="tag tag-disease">带状疱疹</span>
+            <span class="tag tag-disease">病情不严重</span>
+            <span class="tag tag-disease">病情严重</span>
+            <span class="tag tag-disease">脊神经支配区皮肤受累</span>
+            <span class="tag tag-disease">三叉神经受累</span>
+            <span class="tag tag-disease">广泛受累</span>
+            <span class="tag tag-disease">TNFα抑制剂</span>
+            <span class="tag tag-disease">VZV高危人群</span>
+            <span class="tag tag-disease">PHN</span>
+            <span class="tag tag-disease">HIV感染</span>
+            <span class="tag tag-disease">ART后免疫重建</span>
+            <span class="tag tag-disease">阿昔洛韦耐药</span>
+            <span class="tag tag-disease">肾毒性</span>
+            <span class="tag tag-drug">阿昔洛韦</span>
+            <span class="tag tag-drug">泛昔洛韦</span>
+            <span class="tag tag-drug">伐昔洛韦</span>
+            <span class="tag tag-drug">膦甲酸钠</span>
+        </div>
+    </div>
+
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="免疫功能低下宿主带状疱疹治疗方案及药物剂量指南；免疫功能低下宿主、带状疱疹、病情不严重、病情严重、脊神经支配区皮肤受累、三叉神经受累、广泛受累、TNFα抑制剂、VZV高危人群、PHN、HIV感染、ART后免疫重建、阿昔洛韦耐药、肾毒性、阿昔洛韦、泛昔洛韦、伐昔洛韦、膦甲酸钠；=455" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>免疫功能低下宿主 | 带状疱疹 | 病情不严重 | 病情严重 | 脊神经支配区皮肤受累 | 三叉神经受累 | 广泛受累 | TNFα抑制剂 | VZV高危人群 | PHN | HIV感染 | ART后免疫重建 | 阿昔洛韦耐药 | 肾毒性 | 阿昔洛韦 | 泛昔洛韦 | 伐昔洛韦 | 膦甲酸钠 | Clinical Transplantation | FDA | 静脉输注 | 老年患者剂量调整
+    </div>
+
+    <script>
+        // 收藏功能（使用LocalStorage）
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const pageId = '455';
+            const title = '免疫功能低下宿主带状疱疹治疗方案及药物剂量指南';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.id === pageId);
+            
+            if (index === -1) {
+                favorites.push({ id: pageId, title: title, url: '455.html', date: new Date().toISOString() });
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！');
+            } else {
+                favorites.splice(index, 1);
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏！');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const btn = document.getElementById('favoriteBtn');
+            const pageId = '455';
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const index = favorites.findIndex(f => f.id === pageId);
+            
+            if (index !== -1) {
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    alert('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            }
+        }
+        
+        // 初始化
+        checkFavoriteStatus();
+    </script>
+
+</body>
+</html>

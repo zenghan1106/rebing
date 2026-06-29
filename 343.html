@@ -1,0 +1,633 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10F（2）接受ECMO治疗期间的药物剂量调整*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1a5276;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #3498db;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .favorite-btn.favorited {
+            background-color: #f39c12;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .effect-info {
+            color: #555;
+        }
+        
+        .dose-info {
+            color: #2c3e50;
+        }
+        
+        .note-info {
+            color: #444;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .copy-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #3498db;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="342.html" class="nav-btn">上一页</a>
+            <a href="344.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表10F（2）接受ECMO治疗期间的药物剂量调整*****</h1>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 14%;">药物或分类</th>
+                <th style="width: 24%;">ECMO对药物影响</th>
+                <th style="width: 22%;">剂量调整</th>
+                <th style="width: 40%;">建议，参考文献</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="drug-name">氟康唑</span>
+                </td>
+                <td class="effect-info">
+                    CS 影响小，↑ Vd
+                </td>
+                <td class="dose-info">
+                    数据不足，无法给出建议
+                </td>
+                <td class="note-info">
+                    考虑增加负荷剂量（Clin Pharmacokinet 2023; 62: 931）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">更昔洛韦</span>
+                </td>
+                <td class="effect-info">
+                    观察到更昔洛韦AUC<sub>24</sub>下降
+                </td>
+                <td class="dose-info">
+                    可能需要增加剂量（基于一项个案报道）
+                </td>
+                <td class="note-info">
+                    为使得1位未接受CRRT的6岁患者达到目标AUC，需要的更昔洛韦剂量为10mg/kg q12h（J Clin Pharm Ther 2020; 45: 218）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">亚胺培南-西司他丁</span>
+                </td>
+                <td class="effect-info">
+                    ↑ CL
+                </td>
+                <td class="dose-info">
+                    推荐增加剂量
+                </td>
+                <td class="note-info">
+                    基于PK模型而非临床数据，ICU 患者需要剂量为750～1000mg q6h；PK 数据变异度较大（Antimicrob Agents Chemother 2020; 64: e00385～20）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">亚胺培南-西司他丁-瑞来巴坦</span>
+                </td>
+                <td class="effect-info">
+                    PK参数与未接受ECMO治疗的患者相似
+                </td>
+                <td class="dose-info">
+                    无须调整剂量
+                </td>
+                <td class="note-info">
+                    数据源自7位接受ECMO支持治疗的危重症患者（JAC 2024; 79: 1118）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">艾沙康唑</span>
+                </td>
+                <td class="effect-info">
+                    CS 影响中等至显著
+                </td>
+                <td class="dose-info">
+                    可能需要增加剂量，但数据不一致
+                </td>
+                <td class="note-info">
+                    建议TDM指导剂量调整（Clin Pharmacokinet 2023; 62: 931）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">利奈唑胺</span>
+                </td>
+                <td class="effect-info">
+                    ↑ Vd，↑ CL？？？
+                </td>
+                <td class="dose-info">
+                    可能需要增加剂量
+                </td>
+                <td class="note-info">
+                    数据来自3位患者：治疗MRSA感染，MIC＞μg/ml时标准剂量可能不够（Am J Health Syst Pharm 2020; 77: 877; IJAA 2013; 41: 590）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">美罗培南</span>
+                </td>
+                <td class="effect-info">
+                    CS影响小
+                </td>
+                <td class="dose-info">
+                    无须调整剂量
+                </td>
+                <td class="note-info">
+                    源于配对队列研究数据（Microorganisms 2021; 9: 1310）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">米卡芬净</span>
+                </td>
+                <td class="effect-info">
+                    CS影响中等
+                </td>
+                <td class="dose-info">
+                    可能无须调整剂量
+                </td>
+                <td class="note-info">
+                    数据不一致（Clin Pharmacokinet 2023; 62: 931）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">帕拉米韦</span>
+                </td>
+                <td class="effect-info">
+                    ECMO通路对药物损失无显著影响
+                </td>
+                <td class="dose-info">
+                    无须调整剂量
+                </td>
+                <td class="note-info">
+                    初步数据来自一项小样本单剂量体外观察研究（Perfusion 2023; 38: 501）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">哌拉西林-他唑巴坦</span>
+                </td>
+                <td class="effect-info">
+                    对Vd或哌拉西林他药物暴露无显著影响
+                </td>
+                <td class="dose-info">
+                    无须调整剂量
+                </td>
+                <td class="note-info">
+                    21位接受ECMO支持治疗的重症患者匹配对照的前瞻性研究数据。观察到的患者间变异度较大，若具备TDM条件，考虑基于TDM 指导剂量调整。注意：未评估他唑巴坦的PK参数（J Antimicrob Chemother 2021; 76: 1242）
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">多黏菌素B</span>
+                </td>
+                <td class="effect-info">
+                    总体影响可能较小
+                </td>
+                <td class="dose-info">
+                    无须调整剂量
+                </td>
+                <td class="note-info">
+                    两项PK研究（JAC 2022; 77: 1379; J Clin Pharm Ther 2022; 47: 1608）
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">343</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">重症</span>
+            <span class="tag disease">危重症</span>
+            <span class="tag disease">MRSA感染</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag antibiotic">氟康唑</span>
+            <span class="tag antibiotic">更昔洛韦</span>
+            <span class="tag antibiotic">亚胺培南-西司他丁</span>
+            <span class="tag antibiotic">亚胺培南-西司他丁-瑞来巴坦</span>
+            <span class="tag antibiotic">艾沙康唑</span>
+            <span class="tag antibiotic">利奈唑胺</span>
+            <span class="tag antibiotic">美罗培南</span>
+            <span class="tag antibiotic">米卡芬净</span>
+            <span class="tag antibiotic">帕拉米韦</span>
+            <span class="tag antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag antibiotic">多黏菌素B</span>
+            <!-- 细菌标签 -->
+            <span class="tag bacteria">MRSA</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表10F（2）接受ECMO治疗期间的药物剂量调整；接受ECMO治疗期间的药物剂量调整；氟康唑；更昔洛韦；亚胺培南-西司他丁；亚胺培南-西司他丁-瑞来巴坦；艾沙康唑；利奈唑胺；美罗培南；米卡芬净；帕拉米韦；哌拉西林-他唑巴坦；多黏菌素B；重症；危重症；MRSA感染；MRSA；ECMO；TDM；PK；CRRT；AUC24；Vd；CL；CS；=343" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">★</button>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+                showToast('已收藏！将添加到index收藏类目');
+                
+                const favoriteData = {
+                    title: '表10F（2）接受ECMO治疗期间的药物剂量调整',
+                    url: '343.html',
+                    page: '343',
+                    tags: ['氟康唑', '更昔洛韦', '亚胺培南-西司他丁', '亚胺培南-西司他丁-瑞来巴坦', '艾沙康唑', '利奈唑胺', '美罗培南', '米卡芬净', '帕拉米韦', '哌拉西林-他唑巴坦', '多黏菌素B', 'MRSA', 'ECMO', '重症'],
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const exists = favorites.some(f => f.url === '343.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '★';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '343.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '343.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+            }
+        };
+    </script>
+</body>
+</html>

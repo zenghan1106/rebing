@@ -1,0 +1,506 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~虫媒病毒感染治疗方案表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover {
+            background: #5a9e3d;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+            transition: background 0.2s;
+        }
+        
+        tbody tr:hover {
+            background: #f0f7ff;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            vertical-align: top;
+            color: #444;
+        }
+        
+        .disease-name {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .drug-info {
+            color: #27ae60;
+        }
+        
+        .adverse-info {
+            color: #8e44ad;
+        }
+        
+        .note-row {
+            background: #fff8e1;
+        }
+        
+        .note-row td {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .tag-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tag-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #4ecdc4;
+            color: white;
+        }
+        
+        .tag-virus {
+            background: #45b7d1;
+            color: white;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f39c12;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(243,156,18,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="444.html" class="page-btn">← 上一页</a>
+            <a href="446.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~虫媒病毒感染治疗方案表*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 28%;">病毒/疾病</th>
+                    <th style="width: 32%;">药物/剂量</th>
+                    <th style="width: 40%;">不良反应/说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="disease-name">西尼罗病毒（JAMA 310: 308, 2013）</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            一种黄病毒，通过蚊虫、输血、器官移植和哺乳传播。鸟类（超过200种）是主要宿主，人和马是偶发宿主
+                        </div>
+                    </td>
+                    <td>
+                        无有效的治疗。支持治疗（参见www.cdc.gov/westnile/healthcareproviders）。RCT研究证实IVIG无益
+                    </td>
+                    <td>
+                        通常表现为非特异性发热性疾病，1/150病例发生脑膜脑炎、无菌性脑膜炎或脊髓灰质炎样麻痹。远期后遗症常见（神经肌肉无力和精神症状）<br><br>
+                        诊断：血清、脑脊液IgM抗体升高或CSF-PCR阳性（与州卫生部门/CDC联系）。美国常规检测供血源西尼罗病毒抗体
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">黄热病</div>
+                    </td>
+                    <td>
+                        无抗病毒治疗的资料<br><br>
+                        预防性疫苗应用指南（http://www.cdc.gov/mmwr/preview/mmwrhtml/mm6423a5.htm?s_cid=mm6423a5_w）
+                    </td>
+                    <td>
+                        由于易感人群城市化，黄热病在非洲和南美洲再次出现（参见https://www.nejm.org/doi/full/10.1056/NEJMcp1702172）。疫苗与诊断：基于IgM抗体增高。在HIV患者，特别是低病毒载量、高CD4细胞的患者，疫苗安全有效（CID 48: 659, 2009）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">基孔肯雅热（Chikungunya fever）又称断骨热</div>
+                        <div style="margin-top: 8px; color: #666; font-size: 12px;">
+                            是一种由伊蚊传播的自限性虫媒病毒疾病。可能发生大流行（加勒比地区）
+                        </div>
+                    </td>
+                    <td>
+                        无抗病毒治疗。补液，镇痛，退热
+                    </td>
+                    <td>
+                        临床表现：高热、严重肌痛和头痛、斑丘疹，偶有血小板减少，出血罕见。常为临床诊断；确诊断依靠PCR
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">严重发热伴血小板减少综合征病毒（SFTSV）</div>
+                    </td>
+                    <td>
+                        见布尼亚病毒，223页
+                    </td>
+                    <td>
+                        流行于热带地区（亚马孙盆地、巴西及中南美洲）<br>
+                        病症类似登革热/寨卡病毒，15%患者出现出血热<br>
+                        孕妇感染可致胎儿小头畸形风险
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="disease-name">Oropouche</div>
+                    </td>
+                    <td>
+                        无有效治疗，仅支持治疗（参见Lancet ID 24: 935, 2024）
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr class="note-row">
+                    <td colspan="3">
+                        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。表中名词缩写见第2页。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tag-section">
+        <h3>🏷️ 检索标签（点击可筛选）</h3>
+        <div class="tags">
+            <span class="tag tag-disease">西尼罗病毒</span>
+            <span class="tag tag-disease">黄热病</span>
+            <span class="tag tag-disease">基孔肯雅热</span>
+            <span class="tag tag-disease">断骨热</span>
+            <span class="tag tag-disease">严重发热伴血小板减少综合征</span>
+            <span class="tag tag-disease">SFTSV</span>
+            <span class="tag tag-disease">Oropouche</span>
+            <span class="tag tag-disease">布尼亚病毒</span>
+            <span class="tag tag-disease">登革热</span>
+            <span class="tag tag-disease">寨卡病毒</span>
+            <span class="tag tag-drug">IVIG</span>
+            <span class="tag tag-virus">黄病毒</span>
+            <span class="tag tag-virus">虫媒病毒</span>
+            <span class="tag tag-virus">伊蚊</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="虫媒病毒感染治疗方案表；西尼罗病毒；黄热病；基孔肯雅热；断骨热；严重发热伴血小板减少综合征；SFTSV；Oropouche；布尼亚病毒；登革热；寨卡病毒；IVIG；黄病毒；虫媒病毒；伊蚊；=445" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">页码：445</div>
+    
+    <div class="keywords">
+        <strong>关键词：</strong>西尼罗病毒 | 黄热病 | 基孔肯雅热 | 断骨热 | SFTSV | Oropouche | 虫媒病毒 | 伊蚊 | 黄病毒 | 出血热 | 疫苗 | 支持治疗
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '❤️';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '虫媒病毒感染治疗方案表',
+                    url: '445.html',
+                    pageNum: '445'
+                };
+                if (!favorites.find(f => f.url === '445.html')) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '445.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.find(f => f.url === '445.html')) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

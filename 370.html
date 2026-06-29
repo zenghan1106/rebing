@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEI Sew: Jum”</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="369.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="371.html" class="nav-btn">➡️ 下一页</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~SEI Sew: Jum”*****</h1>
+        
+        <table class="content-table"><tbody><tr><td>SEI Sew: Jum”</td></tr><tr><td>Ri aaa ves</td></tr><tr><td>HS. Wiis</td></tr><tr><td>BL PUA</td></tr><tr><td>AE A se Pa ee</td></tr><tr><td>PStEIE IER,</td></tr><tr><td>UBRAR TE. TRIG ee 09'S oO ea AM oO: Imnop/enl 457</td></tr><tr><td>DLDTEGEs HRA aS</td></tr><tr><td>{Pangizone )</td></tr><tr><td>a8 B Hea</td></tr><tr><td>Ue, AU TRE. May, (MAS aT Leese ee. SERUM TES</td></tr><tr><td>OS—~07mg) Chg db.) v1 Fl</td></tr><tr><td>BEM AOA 4</td></tr><tr><td>MSCAME PFA ¢ Pliarmacot</td></tr><tr><td>266, 2003), SRA OR aE. BATS aA</td></tr><tr><td>Ny</td></tr><tr><td>ert TAMPER,</td></tr><tr><td>PAAREBU, SKAGEN. PRET SA (Pe, BREE</td></tr><tr><td>AERRSUTSSI. WAFS |</td></tr><tr><td>sha)</td></tr><tr><td>Set GS wea att</td></tr><tr><td>RE (-25-~ 50mg iv) SP ek. GETTER AER NOMA CRIS, SETH.</td></tr><tr><td>PIRAR (25+ S0me:): AS</td></tr><tr><td>10000),</td></tr><tr><td>FRA, Bes. LU</td></tr><tr><td>SCIER,</td></tr><tr><td>ceiie</td></tr><tr><td>SMARTER,</td></tr><tr><td>MesE RT AA oe Oe</td></tr><tr><td>SELENE ChONSATDs &gt; SHERI</td></tr><tr><td>Bi: PRA, Se ZER RRNA AME, “Aezasprmenaad Fie CATES RENE), PEST</td></tr><tr><td>“RRR, LER ey UTTAR, PE et</td></tr><tr><td>‘mb raise</td></tr><tr><td>Ona awA BwokSOOm LAE See IT OR SA TEMES, ooesiteeml.</td></tr><tr><td>—————</td></tr><tr><td>iB</td></tr><tr><td>“VEE SEBAR</td></tr><tr><td>As: SLSR SAS, Sia e eS</td></tr><tr><td>MRI PRE,. Stee CAFS</td></tr><tr><td>HPs Fal</td></tr><tr><td>HERRERA ABLG],| Bb: Sn</td></tr><tr><td>qd. $7E REE 2 on</td></tr><tr><td>2 hjs AALS AHE I, FReSRI eA Heaton EEL</td></tr><tr><td>AIRS Aas ata aEe</td></tr><tr><td>(Abelcer), smp (kg dd eX Fal</td></tr><tr><td>HESIESLACAE,</td></tr><tr><td>sae TES AE EE</td></tr><tr><td>BS ME 44</td></tr><tr><td>(So);</td></tr><tr><td>as</td></tr><tr><td>Be</td></tr><tr><td>(496d,</td></tr><tr><td>pig</td></tr><tr><td>18% )e- AES: (906); BEBE boreal FE LIF 8519989 SF.</td></tr><tr><td>B, 2OOP I</td></tr><tr><td>Sri (49), TERE</td></tr><tr><td>Sopa ss</td></tr><tr><td>fe ABLORY!</td></tr><tr><td>Egy Mol</td></tr><tr><td>Tt</td></tr><tr><td>Seteetiettee het teetiet oer</td></tr><tr><td>ESR B neh ne Serr ld aa a Ee A IS</td></tr><tr><td>ounee</td></tr><tr><td>Steet ese ree</td></tr><tr><td>Tateereterersneemermermns tn rrpemee net tree ee tty gma tee net een</td></tr><tr><td>EER te (LAB, Ami</td></tr><tr><td>© RES:</td></tr><tr><td>PUN AIT S lite</td></tr><tr><td>~=5mg</td></tr><tr><td>p, SRA EBs Sa T204F ERs</td></tr><tr><td>HAMS Sie SF</td></tr><tr><td>some }e3</td></tr><tr><td>me tke'-ddivS 1 Fle, |) marly</td></tr><tr><td>Eyuese2160</td></tr><tr><td>2 ENT ea A AT co pe</td></tr><tr><td>2b atte</td></tr><tr><td>SOR ETS 28</td></tr><tr><td>SOT eT RISE Va IE | SESE SERE, OEP RE EB EES. ae</td></tr><tr><td>Ba. FRELE (SEIS 18, 7903879), BEAR CA79 M759), TEety.</td></tr><tr><td>SERIE RBA He (CIO Se: 7or, | (39.7% 7N38.7% );_ WRU C31.9909143.9%),</td></tr><tr><td>fb 240), ARG TE</td></tr><tr><td>18.4% 20.0%), TEA meee 020.4% FII5.6% ),</td></tr><tr><td>2013)</td></tr><tr><td>H ARENT C 2049671 25.6%). THERE cinenamerd</td></tr><tr><td>a. (20% ~-40%), OREM SAS, aT. AL</td></tr><tr><td>(PLM NOIRE PUM BLA</td></tr><tr><td>fe CESS EERE 4A AEAT</td></tr><tr><td>AR CT SES CATA CA ee</td></tr><tr><td>GHATS ai, cer) AB RE AR</td></tr><tr><td>3003)</td></tr></tbody></table>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags"></div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">SEI Sew: Jum”；=370</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 370 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 370;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 370;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

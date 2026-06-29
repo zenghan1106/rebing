@@ -1,0 +1,596 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~氟喹诺酮类抗生素用药参考表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5a67d8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(90, 103, 216, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4c51bf;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c5282;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 30px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+            min-width: 800px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 第一列 - 药品名称 */
+        td:first-child {
+            background: #ebf4ff;
+            font-weight: 600;
+            color: #2c5282;
+            width: 22%;
+            min-width: 180px;
+        }
+        
+        tr:nth-child(even) td:first-child {
+            background: #e1effe;
+        }
+        
+        /* 第二列 - 剂量 */
+        td:nth-child(2) {
+            color: #2d3748;
+            width: 30%;
+            min-width: 250px;
+        }
+        
+        /* 第三列 - 不良反应 */
+        td:nth-child(3) {
+            color: #4a5568;
+            width: 48%;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .ref {
+            color: #718096;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7e2;
+            color: #97266d;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.5);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="322.html" class="nav-btn">◀ 上一页</a>
+        <a href="324.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~氟喹诺酮类抗生素用药参考表*****</h1>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>*所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>德拉沙星（Baxdela）<br>450mg片剂、静脉制剂<br><span class="ref">（CID 2019; 68: 1058）</span></td>
+                    <td>300mg iv q12h输注1小时<br><br>450mg po q12h治疗5～14天（皮肤、皮肤结构感染），5～10天（社区获得性肺炎），治疗过程中可以从静脉改为口服</td>
+                    <td>
+                        <span class="highlight">中枢神经系统毒性：</span>机制不明。表现多样：头晕、意识模糊、癫痫发作。注意力/记忆障碍。可以出现周围神经病变：迅速起病，可能永久损伤<br><br>
+                        <span class="highlight">吉米沙星皮疹：</span>在治疗8～10天后出现斑疹。治疗≤5天的皮疹发生率仅1.5%，女性最高，年龄&lt;40岁，治疗14天，发生率为22.6%。男性，年龄&lt;40岁，治疗14天，发生率为7.7%。发病机制不明，是停药指征。<span class="ref">参见 Diag Micro Infect Dis 68: 140, 2010</span><br><br>
+                        <span class="highlight">低血糖/高血糖（糖代谢紊乱）：</span>风险增加，尤其是糖尿病患者的低血糖，任何已上市的氟喹诺酮均可致<span class="ref">（CID 57: 971, 2013）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>加替沙星（Tequin）<br>（在可获得的地区）见说明</td>
+                    <td>200～400mg iv/po qd（见说明）<br>滴眼液（Zymar）</td>
+                    <td>
+                        <span class="highlight">血小板减少</span>见于重症患者<span class="ref">（J Thrombo Haemostasis 11: 169, 2012）</span><br><br>
+                        <span class="highlight">阿片筛查试验假阳性：</span>氟喹诺酮类可使阿片尿检出现假阳性<span class="ref">（Ann Pharmacotherapy 38: 1525, 2004）</span><br><br>
+                        <span class="highlight">光过敏：</span>表10B，165页<br><br>
+                        <span class="highlight">QTc（校正QT）间期延长：</span>任何一种氟喹诺酮类（除了德拉沙星）都可能引起QTc间期延长（&gt;500ms或比基线延长60ms）。QTc间期延长可导致尖端扭转型室性心动过速（室速）和心室颤动（室颤）。总体风险是4.7/1万人·年<span class="ref">（CID 5: 1457, 2012）</span>。目前上市的药物危险性低。女性、低钾血症、低镁血症和心动过缓者危险性升高<span class="ref">（CID 43: 1603, 2006）</span>。主要问题是与其他药物合用时危险性增加
+                    </td>
+                </tr>
+                <tr>
+                    <td>吉米沙星（Factive）<br>（320mg片剂）</td>
+                    <td>320mg po qd</td>
+                    <td>避免与可能延长QTc间期的药物联合应用<span class="ref">（见表10G）</span></td>
+                </tr>
+                <tr>
+                    <td>左氧氟沙星（Levaquin）<br>（250mg、500mg、750mg片剂）</td>
+                    <td>250～750mg po或iv qd<br>对大多数适应证，750mg是最佳剂量；口服治疗：避免与乳制品、多种维生素、铁剂和抗酸药同服，因可被多价阳离子螯合，影响吸收。病态肥胖无须调整剂量</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">皮肤结构感染</span>
+            <span class="tag tag-disease">社区获得性肺炎</span>
+            <span class="tag tag-disease">糖尿病</span>
+            <span class="tag tag-disease">病态肥胖</span>
+            <span class="tag tag-disease">低钾血症</span>
+            <span class="tag tag-disease">低镁血症</span>
+            <span class="tag tag-disease">心动过缓</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">德拉沙星</span>
+            <span class="tag tag-drug">加替沙星</span>
+            <span class="tag tag-drug">吉米沙星</span>
+            <span class="tag tag-drug">左氧氟沙星</span>
+            <span class="tag tag-drug">氟喹诺酮</span>
+            <span class="tag tag-drug">Baxdela</span>
+            <span class="tag tag-drug">Tequin</span>
+            <span class="tag tag-drug">Zymar</span>
+            <span class="tag tag-drug">Factive</span>
+            <span class="tag tag-drug">Levaquin</span>
+            <!-- 细菌/微生物相关 -->
+            <span class="tag tag-bacteria">中枢神经系统毒性</span>
+            <span class="tag tag-bacteria">周围神经病变</span>
+            <span class="tag tag-bacteria">QTc间期延长</span>
+            <span class="tag tag-bacteria">尖端扭转型室速</span>
+            <span class="tag tag-bacteria">心室颤动</span>
+            <span class="tag tag-bacteria">糖代谢紊乱</span>
+            <span class="tag tag-bacteria">血小板减少</span>
+            <span class="tag tag-bacteria">光过敏</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="323.html">323</a>
+    </div>
+    
+    <!-- 关键词与复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="氟喹诺酮类抗生素用药参考表；德拉沙星；加替沙星；吉米沙星；左氧氟沙星；中枢神经系统毒性；QTc间期延长；糖代谢紊乱；皮肤结构感染；社区获得性肺炎；=323" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '氟喹诺酮类抗生素用药参考表',
+                    url: '323.html',
+                    pageNum: '323'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏！');
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '323.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '323.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast('搜索: ' + text);
+                // 这里可以添加实际的搜索跳转逻辑
+            });
+        });
+    </script>
+</body>
+</html>

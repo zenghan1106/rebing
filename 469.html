@@ -1,0 +1,459 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表14B（4）抗病毒药物（非HIV）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f5ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            background: #1e3d6f;
+        }
+        
+        .prev-btn {
+            right: 100px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 280px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a3a6e;
+            font-size: 22px;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #e8f0fe 0%, #d4e4ff 100%);
+            border-radius: 12px;
+            border-left: 5px solid #2c5aa0;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: 1px solid #1e3d6f;
+        }
+        
+        /* 表格内容 */
+        tbody td {
+            padding: 14px 12px;
+            border: 1px solid #e0e0e0;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4ff;
+        }
+        
+        /* 药物名称列 */
+        td:first-child {
+            font-weight: bold;
+            color: #1a3a6e;
+            min-width: 180px;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background: #e8f0fe !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #2c5aa0;
+            font-size: 15px;
+            padding: 12px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-section h3 {
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            background: #e8f0fe;
+            color: #2c5aa0;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #b8d4ff;
+        }
+        
+        .tag.disease {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: #ffcc80;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: #fce4ec;
+            color: #c2185b;
+            border-color: #f48fb1;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-section h3 {
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .copy-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #b8d4ff;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        #copyBtn {
+            padding: 12px 25px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        #copyBtn:hover {
+            background: #1e3d6f;
+        }
+        
+        #copyBtn.copied {
+            background: #4caf50;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 14px 8px;
+            }
+            
+            tbody td {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            td:first-child {
+                min-width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <a href="468.html" class="nav-btn prev-btn">← 上一页</a>
+    <a href="470.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表14B（4）抗病毒药物（非HIV）*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称<br>通用名（商品名）</th>
+                    <th>剂量/成人给药途径*</th>
+                    <th>说明/不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">丙型肝炎/直接作用药物（续）</td>
+                </tr>
+                <tr>
+                    <td>来迪派韦＋索磷布韦（Harvoni）<br>维帕他韦＋索磷布韦（Epclusa）<br>伏西瑞韦＋维帕他韦＋索磷布韦（Vosevi）</td>
+                    <td>复方制剂：（来迪派韦90mg＋索磷布韦400mg）1片po qd；（维帕他韦100mg＋索磷布韦400mg）1片po qd；（伏西瑞韦100mg＋维帕他韦100mg＋索磷布韦400mg）1片po qd，与食物同服</td>
+                    <td>NS5A/NS5B抑制剂用于治疗1型HCV。首个无须利巴韦林和干扰素的丙肝治疗药物。轻/中度肝肾功能受损者无须调整剂量。常见不良反应：乏力（16%）、头痛（14%）、恶心（7%）、腹泻（3%）、失眠（5%）。抑酸剂和H₂受体拮抗剂影响来迪派韦吸收。药物随pH升高溶解性下降。建议将来迪派韦和抑酸剂至少分开服用4小时</td>
+                </tr>
+                <tr>
+                    <td>帕立瑞韦＋利托那韦＋奥比他韦＋达塞布韦（PrOD）（Viekira pak）；帕立瑞韦＋利托那韦＋奥比他韦（Technivie）</td>
+                    <td>奥比他韦125mg、帕立瑞韦75mg、利托那韦50mg，加达塞布韦250mg（ViekiraPak），无达塞布韦（Technivie）</td>
+                    <td>不能与高度依赖CYP3A代谢的药物，以及CYP3A和CYP2L8强诱导剂和CYP2C8的抑制剂合用。若存在对利托那韦的高度过敏（如中毒坏死表皮松解症、史－约综合征），不能服用。同利他韦林合用可出现乏力、恶心、瘙痒、其他皮肤反应、失眠和衰弱。警示：肝功能失代偿和肝衰竭（包括肝移植或死亡）大多见于重度肝硬化患者</td>
+                </tr>
+                <tr>
+                    <td>西美瑞韦（Olysio）</td>
+                    <td>150mg po qd，与食物同服，联合利巴韦林和干扰素</td>
+                    <td>NS3/4A抑制剂。需对基因型1a患者筛查有关Q80K多态性；如存在，需更换药物。禁用于孕妇和配偶怀孕的男性（安全分级C），同利巴韦林联用需谨慎（安全分级X）。有轻中重度肾功能损害者无须调整剂量。对轻度肝功能损害无须调整剂量。常见不良反应包括（与利巴韦林和干扰素联用），皮疹、瘙痒、恶心。CYP3A抑制剂影响西美瑞韦的血药浓度</td>
+                </tr>
+                <tr>
+                    <td>索磷布韦（Sovaldi）</td>
+                    <td>400mg po qd，与食物同服，同时服用聚乙二醇干扰素和利巴韦林。复方制剂见来迪派韦</td>
+                    <td>NS5B抑制剂，用于1、2、3、4基因型HCV。对等待肝移植患者和HIV-1/HCV共感染者有效，轻中度肾损害无须调整剂量。轻中或重度肝功能损害无须调整剂量。常见不良反应（合用利巴韦林和干扰素）：乏力、头痛、恶心、失眠、贫血。利福平和贯叶连翘（圣约翰草）可能影响索磷布韦浓度</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🔖 特色检索标签</h3>
+        <span class="tag disease">丙型肝炎</span>
+        <span class="tag disease">HCV</span>
+        <span class="tag disease">肝硬化</span>
+        <span class="tag disease">肝移植</span>
+        <span class="tag disease">肝功能失代偿</span>
+        <span class="tag disease">肝衰竭</span>
+        <span class="tag drug">来迪派韦</span>
+        <span class="tag drug">索磷布韦</span>
+        <span class="tag drug">维帕他韦</span>
+        <span class="tag drug">伏西瑞韦</span>
+        <span class="tag drug">帕立瑞韦</span>
+        <span class="tag drug">利托那韦</span>
+        <span class="tag drug">奥比他韦</span>
+        <span class="tag drug">达塞布韦</span>
+        <span class="tag drug">西美瑞韦</span>
+        <span class="tag drug">利巴韦林</span>
+        <span class="tag drug">干扰素</span>
+        <span class="tag drug">聚乙二醇干扰素</span>
+        <span class="tag drug">NS5A抑制剂</span>
+        <span class="tag drug">NS5B抑制剂</span>
+        <span class="tag drug">NS3/4A抑制剂</span>
+        <span class="tag drug">CYP3A</span>
+        <span class="tag drug">CYP2C8</span>
+        <span class="tag drug">CYP2L8</span>
+        <span class="tag bacteria">HIV-1</span>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <h3>📋 快速复制</h3>
+        <div class="copy-box">
+            <input type="text" id="copyInput" value="表14B（4）抗病毒药物（非HIV）；丙型肝炎直接作用药物；来迪派韦索磷布韦维帕他韦伏西瑞韦帕立瑞韦利托那韦奥比他韦达塞布韦西美瑞韦；HCV；=469" readonly>
+            <button id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">第 469 页</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">关键词：抗病毒药物 非HIV 丙型肝炎 直接作用药物 HCV 来迪派韦 索磷布韦 维帕他韦 伏西瑞韦 帕立瑞韦 利托那韦 奥比他韦 达塞布韦 西美瑞韦 NS5A抑制剂 NS5B抑制剂 NS3/4A抑制剂</div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取现有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const pageInfo = {
+                title: '表14B（4）抗病毒药物（非HIV）',
+                url: '469.html',
+                pageNum: '469',
+                category: '抗病毒药物'
+            };
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === pageInfo.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(pageInfo);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题：' + pageInfo.title + '\n页码：' + pageInfo.pageNum);
+        }
+    </script>
+</body>
+</html>

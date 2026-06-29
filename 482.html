@@ -1,0 +1,498 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表14C(5)成年HIV/AIDS患者初始抗反转录病毒治疗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-format {
+            font-size: 26px;
+            color: #c0392b;
+            margin: 10px 0;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-top: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .note-section {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 6px 20px rgba(238,90,90,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .page-info {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 20px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="481.html" class="page-btn">⬅ 上一页</a>
+            <a href="483.html" class="page-btn">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <!-- 标题区域 -->
+    <div class="title-wrapper">
+        <div class="main-title">表14C(5) 成年HIV/AIDS患者初始抗反转录病毒治疗</div>
+        <div class="title-format">~~~~~HIV抗反转录病毒治疗参考表*****</div>
+        <div class="sub-title">抗反转录病毒药物的部分特点（CPE=脑脊液穿透效力：1～4）</div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        <span class="page-number">当前页码：482</span>
+    </div>
+    
+    <!-- 表格区域 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>通用名/商品名</th>
+                    <th>药物剂型</th>
+                    <th>成人常用剂量<br>&食物影响</th>
+                    <th>口服吸收率<br>(%)</th>
+                    <th>血清T₁/₂<br>(h)</th>
+                    <th>细胞内T₁/₂<br>(h)</th>
+                    <th>CPE*</th>
+                    <th>清除</th>
+                    <th>主要不良反应/说明<br>(表14D)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">多替拉韦/拉米夫定<br>(Dovato)</td>
+                    <td>薄膜包裹片剂：<br>DTG 50mg +<br>3TC 300mg</td>
+                    <td>1片 po qd，<br>与食物同服<br>或不与食物同服</td>
+                    <td>见每个<br>药物的说明</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>基线存在M184V<br>或M184I变异者<br>避免用。<br>HBV/HIV共感染者<br>禁用，除非HBV<br>已进行针对治疗</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">恩曲他滨<br>(FTC, Emtriva)</td>
+                    <td>200mg胶囊；<br>10mg/ml口服液</td>
+                    <td>200mg po qd，<br>进食无妨</td>
+                    <td>95(胶囊)，<br>75(口服液)</td>
+                    <td>约10</td>
+                    <td>39</td>
+                    <td>3</td>
+                    <td>肾脏排泄<br>86%</td>
+                    <td>耐受良好：偶见<br>头痛、恶心、<br>呕吐和腹泻，<br>皮疹少见。<br>皮肤色素沉着。<br>和拉米夫定的<br>结构稍有不同<br>(5-F取代)。<br>停用FTC后<br>乙肝加重。<br>乙肝患者停用<br>FTC后至少<br>监测数月，<br>部分患者需<br>抗乙肝病毒治疗</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">恩曲他滨/替诺<br>福韦酯<br>(Truvada)</td>
+                    <td>薄膜包裹片剂：<br>FTC 200mg +<br>TDF 300mg</td>
+                    <td>1片 po qd，<br>用于CrCl≥<br>50ml/min者，<br>进食无妨</td>
+                    <td>92/25</td>
+                    <td>10/17</td>
+                    <td>—</td>
+                    <td>参见每<br>个药物<br>的说明</td>
+                    <td>主要经<br>肾脏排泄</td>
+                    <td>参见每个药物<br>的说明。<br>黑框警告：<br>停用FTC后，<br>乙肝加重；<br>HBV/HIV<br>共感染者的<br>最佳治疗选择</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">恩曲他滨/替诺<br>福韦/依非韦伦<br>(Atripla)</td>
+                    <td>薄膜包裹片剂：<br>FTC 200mg +<br>TDF 300mg +<br>依非韦伦600mg</td>
+                    <td>1片 po qd，<br>空腹，最好<br>在睡前。<br>禁用于CrCl<<br>50ml/min者</td>
+                    <td>见每个<br>药物的说明</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>年龄<18岁的<br>患者不推荐<br>使用。<br>(见各药警告)。<br>有停药后乙肝<br>加重的报道；<br>部分患者需要<br>抗乙肝治疗<br>(首选替诺福韦)。<br>妊娠安全级别D：<br>可引起胎儿伤害。<br>妊娠或育龄妇女<br>避免使用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">恩曲他滨/替诺<br>福韦/利匹韦林<br>(Complera/<br>Eviplera)</td>
+                    <td>薄膜包裹片剂：<br>FTC 200mg +<br>TDF 300mg +<br>RPL 25mg</td>
+                    <td>1片 qd，<br>餐中服用</td>
+                    <td>见每个<br>药物的说明</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>参见各药的<br>说明。最好用于<br>HIV RNA<<br>1×10⁵拷贝/毫升<br>的患者。<br>禁与PPI联用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note-section">
+        <strong>注：</strong>1. 核苷类或核苷酸类反转录酶抑制剂(NRTI)的部分特点(续)<br>
+        *CPE(中枢神经系统穿透效力)值；1=低穿透，2、3=中等穿透，4=高穿透至中枢神经系统 (AIDS 25: 357, 2011)。
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tag-cloud">
+            <span class="tag disease">HIV</span>
+            <span class="tag disease">AIDS</span>
+            <span class="tag drug">多替拉韦</span>
+            <span class="tag drug">拉米夫定</span>
+            <span class="tag drug">Dovato</span>
+            <span class="tag drug">恩曲他滨</span>
+            <span class="tag drug">FTC</span>
+            <span class="tag drug">Emtriva</span>
+            <span class="tag drug">替诺福韦酯</span>
+            <span class="tag drug">TDF</span>
+            <span class="tag drug">Truvada</span>
+            <span class="tag drug">依非韦伦</span>
+            <span class="tag drug">Atripla</span>
+            <span class="tag drug">利匹韦林</span>
+            <span class="tag drug">RPL</span>
+            <span class="tag drug">Complera</span>
+            <span class="tag drug">Eviplera</span>
+            <span class="tag drug">3TC</span>
+            <span class="tag drug">DTG</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="HIV抗反转录病毒治疗参考表；表14C(5)成年HIV/AIDS患者初始抗反转录病毒治疗；HIV、AIDS、多替拉韦、拉米夫定、Dovato、恩曲他滨、FTC、Emtriva、替诺福韦酯、TDF、Truvada、依非韦伦、Atripla、利匹韦林、RPL、Complera、Eviplera、3TC、DTG；=482" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("✅ 已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("✅ 已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            const pageData = {
+                title: "HIV抗反转录病毒治疗参考表",
+                url: window.location.href,
+                category: "抗感染药物"
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageData.url);
+            if (exists) {
+                alert("❤️ 该页面已在收藏夹中！");
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同域）
+            alert("⭐ 已添加到收藏！\n页面：HIV抗反转录病毒治疗参考表\n类目：抗感染药物");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10A(11)抗感染药物的剂量和不良反应-氟喹诺酮类(续)及截短侧耳素类*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f8 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮容器 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5a67d8;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(90, 103, 216, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #4c51bf;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c5282;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+            min-width: 900px;
+        }
+        
+        /* 表头样式 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 表格内容样式 */
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 分类行样式 */
+        .category-row {
+            background: #e2e8f0 !important;
+            font-weight: bold;
+            color: #2d3748;
+            font-size: 14px;
+        }
+        
+        .category-row td {
+            padding: 12px;
+            border-bottom: 2px solid #cbd5e0;
+        }
+        
+        /* 第一列 - 药品名称 */
+        td:first-child {
+            background: #ebf4ff;
+            font-weight: 600;
+            color: #2c5282;
+            width: 20%;
+            min-width: 170px;
+        }
+        
+        tr:nth-child(even) td:first-child {
+            background: #e1effe;
+        }
+        
+        .category-row td:first-child {
+            background: #e2e8f0 !important;
+        }
+        
+        /* 第二列 - 剂量 */
+        td:nth-child(2) {
+            color: #2d3748;
+            width: 28%;
+            min-width: 240px;
+        }
+        
+        /* 第三列 - 不良反应 */
+        td:nth-child(3) {
+            color: #4a5568;
+            width: 52%;
+        }
+        
+        /* 强调文字 */
+        .highlight {
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .ref {
+            color: #718096;
+            font-style: italic;
+            font-size: 12px;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fed7e2;
+            color: #97266d;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(72, 187, 120, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 15px;
+            color: #4a5568;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .page-number a {
+            color: #4a90d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.5);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3748;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 200;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 16px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 10px 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="323.html" class="nav-btn">◀ 上一页</a>
+        <a href="325.html" class="nav-btn">下一页 ▶</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~表10A(11)抗感染药物的剂量和不良反应-氟喹诺酮类(续)及截短侧耳素类*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类，药品，通用名（商品名）</th>
+                    <th>成人常规剂量*</th>
+                    <th>不良反应，说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">氟喹诺酮类（FQ）（续）</td>
+                </tr>
+                <tr>
+                    <td>莫西沙星（Avelox）</td>
+                    <td>400mg po或iv qd。注：肥胖者无须增加剂量<span class="ref">（JAC 66: 2330, 2011）</span><br>滴眼液（Vigamox）</td>
+                    <td>
+                        <span class="highlight">肌腱病：</span>年龄&gt;60岁者，在所有跟腱断裂中2%～6%归因于氟喹诺酮类药<span class="ref">（ArIM 163: 1801, 2003）</span>。在合用激素、肾病或（心脏、肺、肾脏）移植后，其危险性增加<span class="ref">（CID 36: 1404, 2003）</span><br><br>
+                        <span class="highlight">络合：</span>口服氟喹诺酮药物与多价阳离子（Ca²⁺、Mg²⁺、Fe²⁺、Zn²⁺）络合的风险增加。避免服用乳制品、复合维生素片<span class="ref">[Clin Pharmacokinet 40（Suppl 1）33: 2001]</span><br><br>
+                        <span class="highlight">过敏反应：</span>罕见（1:50000）。IgE介导：荨麻疹，过敏。3例莫西沙星速发型过敏反应的患者能耐受环丙沙星<span class="ref">（Ann Pharmacother 44: 740, 2010）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>氧氟沙星（Floxin）</td>
+                    <td>200～400mg po bid<br>滴眼液（Oculfox）</td>
+                    <td>
+                        <span class="highlight">重症肌无力：</span>任何氟喹诺酮类药物均可使重症肌无力患者的肌无力症状加重<br><br>
+                        <span class="highlight">视网膜剥脱：</span>缺少一致性数据支持<br><br>
+                        <span class="highlight">腕管综合征：</span>药物流行病学研究显示应用氟喹诺酮类药物可增加腕管综合征的发生风险<span class="ref">（CID 65: 684, 2017）</span><br><br>
+                        <span class="highlight">假性脑瘤：</span>据报道可明显增加发生风险（4～6倍）<span class="ref">（Neurology 2017; 89: 892）</span><br><br>
+                        <span class="highlight">主动脉瘤撕裂：</span>风险比为1.2～2.9<span class="ref">（BMJ 360: K678, 2018）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>普卢利沙星（Prulifloxacin）<br>（在可获得的地区）<span class="ref">参见Drugs 64: 2221, 2004</span></td>
+                    <td>片剂：250mg和600mg<br>常用剂量：600mg po qd</td>
+                    <td>
+                        <span class="highlight">禁忌证：</span>乳糜泻、妊娠、哺乳、癫痫病史者<br><br>
+                        <span class="highlight">不良反应：</span>与其他氟喹诺酮类相似
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">截短侧耳素类</td>
+                </tr>
+                <tr>
+                    <td>来法莫林（Xenleta）</td>
+                    <td>成人：600mg po q8h或150mg iv q12h。<br>如果有重度肝功能损伤，延长给药间隔</td>
+                    <td>
+                        <span class="highlight">不良反应：</span>恶心、呕吐、腹泻（包括艰难梭菌毒素相关性结肠炎），口服给药时更易出现<br><br>
+                        <span class="highlight">妊娠：</span>可能导致胎儿伤害，使用前检查是否妊娠。哺乳安全性未知<br><br>
+                        <span class="highlight">药物相互作用：</span>因为涉及CYP450转运蛋白，存在许多药物相互作用。可以延长QTc，特别是当相互作用增加来法莫林或其他药物血清浓度时
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">肥胖</span>
+            <span class="tag tag-disease">跟腱断裂</span>
+            <span class="tag tag-disease">肾病</span>
+            <span class="tag tag-disease">心脏移植</span>
+            <span class="tag tag-disease">肺移植</span>
+            <span class="tag tag-disease">肾脏移植</span>
+            <span class="tag tag-disease">重症肌无力</span>
+            <span class="tag tag-disease">视网膜剥脱</span>
+            <span class="tag tag-disease">腕管综合征</span>
+            <span class="tag tag-disease">假性脑瘤</span>
+            <span class="tag tag-disease">主动脉瘤撕裂</span>
+            <span class="tag tag-disease">乳糜泻</span>
+            <span class="tag tag-disease">妊娠</span>
+            <span class="tag tag-disease">哺乳</span>
+            <span class="tag tag-disease">癫痫</span>
+            <span class="tag tag-disease">重度肝功能损伤</span>
+            <span class="tag tag-disease">艰难梭菌毒素相关性结肠炎</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">莫西沙星</span>
+            <span class="tag tag-drug">Avelox</span>
+            <span class="tag tag-drug">Vigamox</span>
+            <span class="tag tag-drug">氧氟沙星</span>
+            <span class="tag tag-drug">Floxin</span>
+            <span class="tag tag-drug">Oculfox</span>
+            <span class="tag tag-drug">普卢利沙星</span>
+            <span class="tag tag-drug">Prulifloxacin</span>
+            <span class="tag tag-drug">来法莫林</span>
+            <span class="tag tag-drug">Xenleta</span>
+            <span class="tag tag-drug">氟喹诺酮</span>
+            <span class="tag tag-drug">环丙沙星</span>
+            <span class="tag tag-drug">截短侧耳素</span>
+            <!-- 细菌/微生物相关 -->
+            <span class="tag tag-bacteria">肌腱病</span>
+            <span class="tag tag-bacteria">过敏反应</span>
+            <span class="tag tag-bacteria">荨麻疹</span>
+            <span class="tag tag-bacteria">IgE介导</span>
+            <span class="tag tag-bacteria">多价阳离子络合</span>
+            <span class="tag tag-bacteria">CYP450</span>
+            <span class="tag tag-bacteria">QTc延长</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<a href="324.html">324</a>
+    </div>
+    
+    <!-- 关键词与复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表10A(11)抗感染药物的剂量和不良反应；氟喹诺酮类；截短侧耳素类；莫西沙星；氧氟沙星；普卢利沙星；来法莫林；肌腱病；重症肌无力；主动脉瘤撕裂；艰难梭菌；CYP450；=324" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('已添加到收藏！');
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '表10A(11)抗感染药物的剂量和不良反应-氟喹诺酮类(续)及截短侧耳素类',
+                    url: '324.html',
+                    pageNum: '324'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('已取消收藏！');
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '324.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '324.html');
+            const btn = document.getElementById('favBtn');
+            
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                showToast('搜索: ' + text);
+                // 这里可以添加实际的搜索跳转逻辑
+            });
+        });
+    </script>
+</body>
+</html>

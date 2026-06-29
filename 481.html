@@ -1,0 +1,485 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抗HIV药物剂量与药代动力学参考表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .page-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-format {
+            font-size: 26px;
+            color: #c0392b;
+            margin: 10px 0;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-top: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .note-section {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 6px 20px rgba(238,90,90,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .page-info {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .page-number {
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .title-format {
+                font-size: 20px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .header-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .page-nav {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航区域 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="480.html" class="page-btn">⬅ 上一页</a>
+            <a href="482.html" class="page-btn">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <!-- 标题区域 -->
+    <div class="title-wrapper">
+        <div class="main-title">抗HIV药物剂量与药代动力学参数参考</div>
+        <div class="title-format">~~~~~抗HIV药物参考表*****</div>
+        <div class="sub-title">含阿巴卡韦、多替拉韦、卡博特韦、利匹韦林等复方制剂</div>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        <span class="page-number">当前页码：481</span>
+    </div>
+    
+    <!-- 表格区域 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>通用名/商品名</th>
+                    <th>药物剂型</th>
+                    <th>成人常用剂量<br>&食物影响</th>
+                    <th>口服吸收率<br>(%)</th>
+                    <th>血清T₁/₂<br>(h)</th>
+                    <th>细胞内T₁/₂<br>(h)</th>
+                    <th>CPE*</th>
+                    <th>清除</th>
+                    <th>主要不良反应/说明<br>(表14D)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">阿巴卡韦/拉米夫定/<br>多替拉韦<br>(Triumeq)</td>
+                    <td>薄膜裹片剂：<br>ABC 600mg +<br>3TC 300mg +<br>DTG 50mg</td>
+                    <td>1片 qd</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿巴卡韦/拉米夫定/<br>齐多夫定<br>(Trizivir)</td>
+                    <td>薄膜包裹片剂：<br>ABC 300mg +<br>3TC 150mg +<br>ZDV 300mg</td>
+                    <td>1片 bid<br>(体重<40kg、<br>CrCl<50ml/min<br>和肝功能不全者<br>不推荐)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">多替拉韦/利匹韦林<br>(Juluca)</td>
+                    <td>薄膜包裹片剂：<br>DTG 50mg +<br>RPV 25mg</td>
+                    <td>1片 qd，<br>餐中服用</td>
+                    <td>见每个<br>药物的说明</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>既往有DTV或RPV<br>变态反应者禁用，<br>不能与多非利特或<br>其他一些显著降低<br>利匹韦林血药浓度<br>的药物合用。<br>警告：严重皮肤反应<br>和变态反应(皮疹)，<br>以及由DTV和RPV<br>导致的肝损伤。<br>常见不良反应：<br>腹泻和头痛</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">卡博特韦(CAB)/<br>利匹韦林(RPV)<br>(Cabenuva)</td>
+                    <td>针剂：<br>CAB 200mg/ml +<br>RPV 300mg/ml</td>
+                    <td>CAB 600mg(3ml) im +<br>RPV 900mg(3ml) im，<br>1个月后同样剂量，<br>然后每隔1个月<br>注射1次<br>(第4、6、8……个月)。<br>可以口服导入：<br>CAB 30mg po +<br>RPV 25mg po qd，<br>餐中服用，<br>然后开始注射</td>
+                    <td>ND</td>
+                    <td>7天</td>
+                    <td>ND</td>
+                    <td>4</td>
+                    <td>UGT 1A1</td>
+                    <td>每个药物的禁忌证<br>相似(RPV和DTG)，<br>与CAB相似</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note-section">
+        <strong>注：</strong>*CPE(中枢神经系统穿透效力)值；1=低穿透，2、3=中等穿透，4=高穿透至中枢神经系统 (AIDS 25: 357, 2011)。
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tag-cloud">
+            <span class="tag disease">HIV</span>
+            <span class="tag disease">AIDS</span>
+            <span class="tag drug">阿巴卡韦</span>
+            <span class="tag drug">拉米夫定</span>
+            <span class="tag drug">多替拉韦</span>
+            <span class="tag drug">齐多夫定</span>
+            <span class="tag drug">利匹韦林</span>
+            <span class="tag drug">卡博特韦</span>
+            <span class="tag drug">Triumeq</span>
+            <span class="tag drug">Trizivir</span>
+            <span class="tag drug">Juluca</span>
+            <span class="tag drug">Cabenuva</span>
+            <span class="tag drug">ABC</span>
+            <span class="tag drug">3TC</span>
+            <span class="tag drug">DTG</span>
+            <span class="tag drug">ZDV</span>
+            <span class="tag drug">RPV</span>
+            <span class="tag drug">CAB</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗HIV药物参考表；抗HIV药物剂量与药代动力学参数参考；HIV、AIDS、阿巴卡韦、拉米夫定、多替拉韦、齐多夫定、利匹韦林、卡博特韦、Triumeq、Trizivir、Juluca、Cabenuva；=481" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("✅ 已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("✅ 已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            const pageData = {
+                title: "抗HIV药物参考表",
+                url: window.location.href,
+                category: "抗感染药物"
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageData.url);
+            if (exists) {
+                alert("❤️ 该页面已在收藏夹中！");
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（如果同域）
+            alert("⭐ 已添加到收藏！\n页面：抗HIV药物参考表\n类目：抗感染药物");
+        }
+    </script>
+</body>
+</html>

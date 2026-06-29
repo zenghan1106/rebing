@@ -1,0 +1,488 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>疥疮治疗方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #e74c3c;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #e74c3c;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .prev-btn, .next-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2874a6;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #eaf2f8;
+        }
+        
+        td, th {
+            border: 1px solid #bdc3c7;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9f9;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+        
+        /* 特殊行样式 */
+        .notice-row {
+            background-color: #fef9e7 !important;
+            color: #7d6608;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 180px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border: 1px solid #e74c3c;
+        }
+        
+        .tag-drug {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #2ecc71;
+        }
+        
+        .tag-bacteria {
+            background-color: #d6eaf8;
+            color: #1a5276;
+            border: 1px solid #3498db;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #8e44ad;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        /* 注释 */
+        .note {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            font-size: 13px;
+            color: #7d6608;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 5px;
+            }
+            
+            td, th {
+                padding: 6px 5px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        <div class="page-nav">
+            <a href="430.html" class="nav-btn prev-btn">上一页</a>
+            <a href="432.html" class="nav-btn next-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="page-title">疥疮治疗方案</div>
+    <div class="sub-title">表 13A（17续）寄生虫感染的治疗</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:10%">疾病</th>
+                    <th style="width:10%">病原体</th>
+                    <th style="width:30%">备选药物</th>
+                    <th style="width:25%">备选药物</th>
+                    <th style="width:25%">说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="disease-name">
+                        疥疮<br>
+                        免疫功能正常者<br>
+                        <em>参见MMWR 64 (RR-3): 1, 2015; NEJM 362: 717, 2010</em>
+                    </td>
+                    <td>疥螨</td>
+                    <td>
+                        5%苄氯菊酯霜剂（ELIMITE）敷于指（趾）甲下。涂于从下颌到脚趾的整个皮肤，包括甲下皮肤。保留8～14小时，1～2周后重复给药。可安全用于2个月以上的儿童
+                    </td>
+                    <td>
+                        伊维菌素200μg/kg po（与食物同服）×1剂<br><br>
+                        效果略差的选择：10%克罗米通乳膏，敷24小时，清洗后再敷24小时
+                    </td>
+                    <td>
+                        修剪指甲。洗手后须再次涂抹药膏。治疗密切接触者，衣物清洗后热烘干。除去疥螨后瘙痒仍可能持续2周
+                    </td>
+                </tr>
+                <tr>
+                    <td class="disease-name">
+                        AIDS和人T淋巴细胞病毒（HTLV）感染者（CD4细胞＜0.15×10⁹/L），体弱的或发育障碍的患者<br><br>
+                        （挪威疥疮。——见注解）
+                    </td>
+                    <td>疥螨</td>
+                    <td>
+                        挪威疥疮：5%苄氯菊酯软膏qd×7d，然后每周2次，直至痊愈。加服伊维菌素（剂量见备选药物栏）
+                    </td>
+                    <td>
+                        伊维菌素200μg/kg po，d1、d2、d8、d9、d15＋苄氯菊酯软膏。d22、d29，有可能还要服用伊维菌素
+                    </td>
+                    <td>
+                        AIDS患者的挪威疥疮：广泛结痂皮，可类似银屑病，无瘙痒<br><br>
+                        高度接触传染，隔离！
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong>表中名词缩写见第2页。
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">疥疮</span>
+            <span class="tag tag-disease">挪威疥疮</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">苄氯菊酯</span>
+            <span class="tag tag-drug">伊维菌素</span>
+            <span class="tag tag-drug">克罗米通</span>
+            <!-- 病原体/寄生虫标签 -->
+            <span class="tag tag-bacteria">疥螨</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">431</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：疥疮、挪威疥疮、疥螨、苄氯菊酯、伊维菌素、克罗米通、免疫功能正常者、AIDS、HTLV、治疗方案
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const pageTitle = "疥疮治疗方案";
+        const subTitle = "表 13A（17续）寄生虫感染的治疗";
+        const keywords = "疥疮；挪威疥疮；疥螨；苄氯菊酯；伊维菌素；克罗米通；免疫功能正常者；AIDS；HTLV";
+        const pageNum = "431";
+        
+        document.getElementById('copyText').value = pageTitle + "；" + subTitle + "；" + keywords + "=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById('copyText');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                alert('已复制到剪贴板：' + copyText.value);
+            } catch (err) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert('已复制到剪贴板：' + copyText.value);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                category: '疥疮治疗方案',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过localStorage传递）
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: url,
+                category: '疥疮治疗方案'
+            }));
+            
+            alert('已添加到收藏！\n标题：' + title + '\n链接：' + url);
+            
+            // 改变按钮颜色表示已收藏
+            document.querySelector('.favorite-btn').style.backgroundColor = '#f39c12';
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                alert('搜索标签：' + text);
+                // 实际应用中可以跳转到搜索页面
+            });
+        });
+    </script>
+</body>
+</html>

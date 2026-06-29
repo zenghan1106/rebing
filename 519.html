@@ -1,0 +1,546 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表15C 有基础心脏病患者中细菌性心内膜炎的预防性抗感染治疗*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        .prev-btn {
+            right: 100px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.4);
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 10px 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin: 0 10px 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 5px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a3d6e;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background: #e8f0fe;
+        }
+        
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d0d7de;
+            vertical-align: top;
+        }
+        
+        td {
+            color: #444;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        
+        td li {
+            margin: 4px 0;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            margin: 15px 5px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            margin: 20px 5px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 页码 */
+        .page-num {
+            text-align: center;
+            font-size: 16px;
+            color: #2c5aa0;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f4f8;
+            border-radius: 8px;
+        }
+        
+        .keywords span {
+            color: #2c5aa0;
+            font-weight: 500;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 5px;
+            padding: 20px 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffe0e0;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-disease:hover {
+            background: #f5b7b1;
+        }
+        
+        .tag-antibiotic {
+            background: #e0f7e0;
+            color: #27ae60;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-antibiotic:hover {
+            background: #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #e0e7ff;
+            color: #3498db;
+            border: 1px solid #a9cce3;
+        }
+        
+        .tag-bacteria:hover {
+            background: #a9cce3;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 上一页按钮 -->
+    <button class="nav-btn prev-btn" onclick="location.href='518.html'">← 上一页</button>
+    
+    <!-- 下一页按钮 -->
+    <button class="nav-btn next-btn" onclick="location.href='520.html'">下一页 →</button>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表15C 有基础心脏病患者中细菌性心内膜炎的预防性抗感染治疗*****</h1>
+    
+    <div class="sub-title">
+        参考更新的美国心脏病学会（AHA）指南：Circulation 2021; 143: e963-e968。<br>
+        牙科操作的抗生素预防现在针对那些一旦发生心内膜炎会出现最灾难性后果的个体。在胃肠道或泌尿生殖道操作时预防心内膜炎不再专门论述。下面是采纳或反映了AHA的推荐。解释和精确的详细内容参见原始文献。
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:22%">具有任何以下与心内膜炎相关的高危心脏疾病的患者</th>
+                    <th style="width:22%">接受以下牙科操作的患者</th>
+                    <th style="width:19%">接受以下侵入性呼吸道操作的患者</th>
+                    <th style="width:22%">接受侵入性胃肠道或泌尿生殖道操作的患者</th>
+                    <th style="width:15%">接受涉及感染的皮肤和软组织操作的患者</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>人工心瓣膜</td>
+                    <td>任何牙龈组织、牙周区域或口腔黏膜穿孔的操作</td>
+                    <td>气道黏膜切开</td>
+                    <td>不再推荐单纯为预防心内膜炎用药，但以下情况预防用药是合理的：</td>
+                    <td>治疗方案覆盖葡萄球菌和β溶血性链球菌</td>
+                </tr>
+                <tr>
+                    <td>既往感染性心内膜炎病史</td>
+                    <td>预防用药推荐**（见后面的牙科操作方案表）</td>
+                    <td>考虑预防用药（见牙科操作推荐方案表）</td>
+                    <td>对有肠球菌尿路感染的患者：</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>先天性心脏病合并以下任何情况：</td>
+                    <td>常规麻醉剂注射（除非需经过感染部位）、牙科X线检查、乳牙脱落、调整牙齿校正装置或置入校正支架或取出装置时不推荐预防用药</td>
+                    <td>或</td>
+                    <td>• 在择期泌尿生殖道操作前治疗</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>• 应用假体材料完全修复的心脏缺陷（仅1～6个月）</td>
+                    <td></td>
+                    <td>治疗确定的感染</td>
+                    <td>• 非择期操作围手术期应用覆盖肠球菌的药物*</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>• 部分纠正但邻近假体材料仍有残余缺陷</td>
+                    <td></td>
+                    <td>预防用药推荐（针对口腔菌丛见牙科操作方案表，但考虑存在金黄色葡萄球菌可能时需覆盖葡萄球菌）</td>
+                    <td>对存在泌尿生殖道或胃肠道感染或那些接受围手术期抗生素预防手术部位感染或脓毒症的患者</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>• 未纠正的发绀性先天性心脏病</td>
+                    <td></td>
+                    <td></td>
+                    <td>• 覆盖围手术期的有抗肠球菌活性的药物是合理的*</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>• 手术建立的分流或导管</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>心脏移植后的瓣膜病［心室辅助装置患者是否获益不清楚（CID 64: 222, 2017）］</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <strong>注：</strong>* 抗肠球菌的药物包括青霉素、氨苄西林、阿莫西林、万古霉素及其他。如果可以的话，进行药物敏感性检查（针对高度耐药的病原菌见表5）。<br>
+        ** 2008年AHA/ACC指南针对瓣膜性心脏病更新的重点是使用"是合理的"这一描述以反映证据等级（Circulation 118: 887, 2008）。
+    </div>
+    
+    <!-- 底部区域：编辑框、复制按钮、页码、关键词 -->
+    <div class="bottom-section">
+        <div class="copy-row">
+            <input type="text" class="copy-input" id="copyText" value="表15C 有基础心脏病患者中细菌性心内膜炎的预防性抗感染治疗；参考更新的美国心脏病学会（AHA）指南；心内膜炎；抗生素预防；牙科操作；呼吸道操作；胃肠道操作；泌尿生殖道操作；皮肤软组织操作；人工心瓣膜；感染性心内膜炎；先天性心脏病；心脏移植；青霉素；氨苄西林；阿莫西林；万古霉素；葡萄球菌；链球菌；肠球菌；=519" readonly>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+        
+        <div class="page-num">页码：519</div>
+        
+        <div class="keywords">
+            <span>关键词：</span>心内膜炎 | 抗生素预防 | 牙科操作 | 呼吸道操作 | 胃肠道操作 | 泌尿生殖道操作 | 人工心瓣膜 | 先天性心脏病 | 青霉素 | 氨苄西林 | 阿莫西林 | 万古霉素 | 葡萄球菌 | 链球菌 | 肠球菌
+        </div>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">心内膜炎</span>
+            <span class="tag tag-disease">感染性心内膜炎</span>
+            <span class="tag tag-disease">人工心瓣膜</span>
+            <span class="tag tag-disease">先天性心脏病</span>
+            <span class="tag tag-disease">发绀性先天性心脏病</span>
+            <span class="tag tag-disease">心脏移植</span>
+            <span class="tag tag-disease">瓣膜病</span>
+            <span class="tag tag-disease">心脏缺陷</span>
+            
+            <!-- 抗生素药物标签 -->
+            <span class="tag tag-antibiotic">青霉素</span>
+            <span class="tag tag-antibiotic">氨苄西林</span>
+            <span class="tag tag-antibiotic">阿莫西林</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">抗生素预防</span>
+            <span class="tag tag-antibiotic">抗肠球菌药物</span>
+            <span class="tag tag-antibiotic">预防用药</span>
+            
+            <!-- 细菌标签 -->
+            <span class="tag tag-bacteria">葡萄球菌</span>
+            <span class="tag tag-bacteria">金黄色葡萄球菌</span>
+            <span class="tag tag-bacteria">β溶血性链球菌</span>
+            <span class="tag tag-bacteria">链球菌</span>
+            <span class="tag tag-bacteria">肠球菌</span>
+            <span class="tag tag-bacteria">口腔菌丛</span>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    alert('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能 - 添加到index.html的收藏类目
+        function addToFavorites() {
+            const pageData = {
+                title: '表15C 有基础心脏病患者中细菌性心内膜炎的预防性抗感染治疗',
+                url: '519.html',
+                category: '收藏',
+                tags: ['心内膜炎', '抗生素预防', '心脏病', 'AHA指南']
+            };
+            
+            // 获取已收藏的页面
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageData.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加到收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            alert('已添加到收藏！\n标题：' + pageData.title + '\n请在index.html中查看收藏类目。');
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                alert('搜索标签：' + keyword);
+                // 实际应用中可以跳转到搜索结果页
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~神经系统手术预防用药指南*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2e75b6;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .section-title {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .dosage {
+            color: #27ae60;
+        }
+        
+        .note-highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+        }
+        
+        .tag {
+            background: #17a2b8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tag.disease {
+            background: #e74c3c;
+        }
+        
+        .tag.antibiotic {
+            background: #27ae60;
+        }
+        
+        .tag.bacteria {
+            background: #9b59b6;
+        }
+        
+        .copy-section {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .page-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="514.html" class="nav-btn">← 上一页</a>
+            <a href="516.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~神经系统手术预防用药指南*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:25%">手术类型</th>
+                    <th style="width:35%">预防用药</th>
+                    <th style="width:40%">备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="section-title">神经系统手术操作</td>
+                </tr>
+                <tr>
+                    <td>清洁、无植入物，如择期开颅手术</td>
+                    <td>
+                        清洁有假体的手术：<span class="drug-name">头孢唑林</span> <span class="dosage">2g iv 单次</span>（手术超过4小时重复给药）<br><br>
+                        清洁-污染手术：（<span class="drug-name">头孢唑啉</span> <span class="dosage">2g iv</span> 或 <span class="drug-name">头孢呋辛</span> <span class="dosage">1.5g iv</span>）单次（手术超过4小时重复给药）+ <span class="drug-name">甲硝唑</span> <span class="dosage">500mg iv 单次</span><br><br>
+                        清洁-污染手术：<span class="drug-name">氨苄西林舒巴坦</span> <span class="dosage">3g iv 单次</span>（手术超过2小时重复给药）
+                    </td>
+                    <td>
+                        <span class="drug-name">万古霉素</span>或β内酰胺过敏患者的备选方案是<span class="drug-name">克林霉素</span> <span class="dosage">900mg iv</span>。<br>
+                        如CrCl＞30ml/min <span class="drug-name">头孢唑林</span>按q4h重复给药，如CrCl≤30ml/min按q8h
+                    </td>
+                </tr>
+                <tr>
+                    <td>清洁、污染（经过鼻窦或鼻咽部）</td>
+                    <td>
+                        <span class="drug-name">克林霉素</span> <span class="dosage">900mg iv（单剂）</span>
+                    </td>
+                    <td>
+                        英国推荐<span class="drug-name">阿莫西林-克拉维酸</span> <span class="dosage">1.2g iv</span><sup>NUS</sup>或（<span class="drug-name">头孢呋辛</span> <span class="dosage">1.5g iv</span> + <span class="drug-name">甲硝唑</span> <span class="dosage">0.5g iv</span>）
+                    </td>
+                </tr>
+                <tr>
+                    <td>脑脊液短路术，鞘内泵装置</td>
+                    <td>
+                        <span class="drug-name">头孢唑林</span> <span class="dosage">1～2g</span>（体重＜120kg）或<span class="dosage">3g</span>（体重＞120kg）iv单次。<br><br>
+                        备选：<span class="drug-name">万古霉素</span> <span class="dosage">1g iv 单次</span>；体重＞90kg的患者，<span class="drug-name">万古霉素</span> <span class="dosage">1.5g iv 单剂</span>或<span class="drug-name">克林霉素</span> <span class="dosage">900mg iv</span>
+                    </td>
+                    <td>
+                        在一家<span class="note-highlight">MRSA</span>感染流行率较高的医院进行的随机研究显示，<span class="drug-name">万古霉素</span>比<span class="drug-name">头孢唑林</span>在预防脑脊液短路手术感染上更有效（<em>J Hosp Infect</em> 69: 337, 2008）。<br>
+                        如CrCl＞30ml/min <span class="drug-name">头孢唑林</span>按q4h重复给药，如CrCl≤30ml/min按q8h
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <p style="text-align:center;color:#666;font-size:12px;margin-bottom:20px;">注：表中名词缩写见第2页。</p>
+    
+    <div class="tags-container">
+        <span class="tag disease">择期开颅手术</span>
+        <span class="tag disease">脑脊液短路术</span>
+        <span class="tag disease">鞘内泵装置</span>
+        <span class="tag antibiotic">头孢唑林</span>
+        <span class="tag antibiotic">头孢唑啉</span>
+        <span class="tag antibiotic">头孢呋辛</span>
+        <span class="tag antibiotic">甲硝唑</span>
+        <span class="tag antibiotic">氨苄西林舒巴坦</span>
+        <span class="tag antibiotic">克林霉素</span>
+        <span class="tag antibiotic">万古霉素</span>
+        <span class="tag antibiotic">阿莫西林-克拉维酸</span>
+        <span class="tag bacteria">MRSA</span>
+        <span class="tag bacteria">β内酰胺过敏</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="神经系统手术预防用药指南；择期开颅手术；脑脊液短路术；鞘内泵装置；头孢唑林；头孢呋辛；甲硝唑；氨苄西林舒巴坦；克林霉素；万古霉素；阿莫西林-克拉维酸；MRSA；β内酰胺过敏；=515" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-info">
+        <p>页码：515</p>
+    </div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function addToFavorite() {
+            const title = document.title.replace(/~~~~~|/g, '').replace(/\*\*\*\*\*/g, '');
+            const favoriteData = {
+                title: title,
+                url: window.location.href,
+                category: '神经系统手术用药'
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === favoriteData.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            favorites.push(favoriteData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 更新index.html的收藏（通过localStorage传递）
+            localStorage.setItem('newFavorite', JSON.stringify(favoriteData));
+            
+            alert('已添加到收藏！\n标题：' + title + '\n类目：神经系统手术用药');
+        }
+    </script>
+</body>
+</html>

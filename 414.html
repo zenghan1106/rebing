@@ -1,0 +1,677 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弓形虫病治疗方案表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+            background-color: #f5f9ff;
+            background-image: linear-gradient(135deg, #f5f9ff 0%, #eef5ff 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题格式 ~~~~~标题***** */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            border-left: 5px solid #2980b9;
+            border-right: 5px solid #2980b9;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #2980b9;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #2980b9;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-bottom: 20px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: #2980b9;
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* 合并单元格的表头 */
+        .header-main {
+            background: #2980b9;
+            color: white;
+            font-size: 18px;
+            padding: 12px;
+        }
+        
+        /* 单元格样式 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #d4e6f1;
+            vertical-align: top;
+        }
+        
+        td {
+            background: #fafcff;
+        }
+        
+        tr:nth-child(even) td {
+            background: #f0f7ff;
+        }
+        
+        tr:hover td {
+            background: #e8f4f8;
+        }
+        
+        /* 病原体列 */
+        .pathogen-cell {
+            font-weight: bold;
+            color: #1a5276;
+            background: #d6eaf8 !important;
+            min-width: 120px;
+        }
+        
+        /* 药物名称高亮 */
+        .drug-name {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .drug-name-alt {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 注释区域 */
+        .note-section {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f39c12;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #27ae60;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 30px 0 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2980b9;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #d5f5e3;
+            color: #27ae60;
+            border: 1px solid #abebc6;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #2980b9;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词和页码区域 */
+        .footer-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .keywords-area {
+            margin-bottom: 20px;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .keywords-content {
+            color: #5d6d7e;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2980b9;
+            padding: 15px;
+            background: #ebf5fb;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        /* 复制编辑框区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2980b9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #fafcff;
+        }
+        
+        .copy-btn {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #1a5276;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 成功提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 8px;
+            }
+            
+            thead th {
+                font-size: 14px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 上一页/下一页按钮 -->
+    <div class="nav-btns">
+        <a href="413.html" class="nav-btn">← 上一页</a>
+        <a href="415.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 标题 ~~~~~标题***** -->
+    <h1 class="page-title" id="mainTitle">弓形虫病治疗方案表</h1>
+    <p class="subtitle" id="subTitle">表13A（3）寄生虫感染：原虫——肠道外（续）</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width:15%;">病原体</th>
+                    <th colspan="2" class="header-main">推荐方案</th>
+                    <th rowspan="2" style="width:30%;">说明</th>
+                </tr>
+                <tr>
+                    <th style="width:27%;">首选药物</th>
+                    <th style="width:28%;">备选药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="pathogen-cell" colspan="4" style="text-align:center;">
+                        刚地弓形虫（弓形虫病）由于乙胺嘧啶价格昂贵，TMP-SMX最常用，如果可能，大多数专家更愿意使用乙胺嘧啶/磺胺嘧啶
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">免疫功能正常患者（儿童剂量，见参考文献）</td>
+                    <td colspan="2">
+                        <!-- 空 -->
+                    </td>
+                    <td>
+                        <!-- 空 -->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">急性疾病伴淋巴结肿大者</td>
+                    <td colspan="2">
+                        除非有严重/持续性症状或重要器官受损的证据，否则无须特殊治疗
+                    </td>
+                    <td>
+                        <!-- 空 -->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">输血后感染（实验室事故）</td>
+                    <td colspan="2">
+                        按照活动性脉络膜视网膜炎治疗
+                    </td>
+                    <td>
+                        <!-- 空 -->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">活动性脉络膜视网膜炎，脑膜炎，糖皮质激素或细胞毒性药物引起的抵抗力下降</td>
+                    <td colspan="2">
+                        （<span class="drug-name">乙胺嘧啶</span>200mg po qd×1d，然后50～75mg qd）+（<span class="drug-name">磺胺嘧啶</span>1.0～1.5g po qid）（见表注）+（<span class="drug-name-alt">亚叶酸</span>5～20mg 3次/w），见说明<br><br>
+                        至症状/体征消失后再治疗1～2周，乙胺嘧啶停药后，继续用亚叶酸1周<br><br>
+                        因复发常见，<span class="drug-name">TMP/SMX</span>（双倍剂量）1片q12h×45d，然后1片qod×311d（Am J Ophth 213: 195 2020）
+                    </td>
+                    <td>
+                        先天性弓形虫病、成人弓形虫脑膜炎以及脉络膜视网膜炎，加<span class="drug-name-alt">泼尼松</span>1mg/（kg·d），分2次，直到脑脊液蛋白浓度下降，或危及视力的炎症消退。根据全血细胞计数结果调整亚叶酸剂量
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">孕妇急性感染<br>参见CID 47: 554, 2008</td>
+                    <td colspan="2">
+                        若妊娠＜18周：<span class="drug-name-alt">螺旋霉素</span>1g po q8h至妊娠16～18周；若羊水PCR阴性，可停药；若PCR仍阳性，按下列方案治疗<br><br>
+                        若妊娠＞18周和胎儿感染（经羊水PCR阳性证实）：<span class="drug-name">乙胺嘧啶</span>50mg po q12h×2d，然后50mg/d + <span class="drug-name">磺胺嘧啶</span>75mg/kg，单次负荷量，然后50mg/kg q12h（最大剂量4g/d）+ <span class="drug-name-alt">亚叶酸</span>10～20mg po qd；至少治疗4周或至分娩
+                    </td>
+                    <td>
+                        在商业实验室筛查患者的血清IgG/IgM抗体：IgG阳性/IgM阴性，既往曾经感染过；IgG阳性/IgM阳性，血清学阳转。关于螺旋霉素，可咨询雷明顿弓形虫血清实验室：650-853-4828或remingtonlab@sutterhealth.org
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">胎儿/先天性</td>
+                    <td colspan="2">
+                        处理较为复杂。<span class="drug-name">乙胺嘧啶</span>+<span class="drug-name">磺胺嘧啶</span>+<span class="drug-name-alt">亚叶酸</span>治疗，见说明
+                    </td>
+                    <td>
+                        详见Lx 363: 1965, 2004<br><br>
+                        建议专家会诊（312-513-6365，rmcleod@bsd.uchicago.edu）
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note-section">
+        <strong>注：</strong>*关于药物来源见表13D，222页。表中名词缩写见第2页。
+    </div>
+    
+    <!-- 标签区域（疾病、抗生素药物、细菌） -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">弓形虫病</span>
+            <span class="tag tag-disease">先天性弓形虫病</span>
+            <span class="tag tag-disease">急性疾病</span>
+            <span class="tag tag-disease">淋巴结肿大</span>
+            <span class="tag tag-disease">输血后感染</span>
+            <span class="tag tag-disease">活动性脉络膜视网膜炎</span>
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-disease">孕妇急性感染</span>
+            <span class="tag tag-disease">胎儿感染</span>
+            <span class="tag tag-disease">先天性感染</span>
+            <span class="tag tag-drug">乙胺嘧啶</span>
+            <span class="tag tag-drug">磺胺嘧啶</span>
+            <span class="tag tag-drug">TMP-SMX</span>
+            <span class="tag tag-drug">螺旋霉素</span>
+            <span class="tag tag-drug">亚叶酸</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-bacteria">刚地弓形虫</span>
+            <span class="tag tag-bacteria">弓形虫</span>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码区域（网页底部） -->
+    <div class="footer-section">
+        <div class="keywords-area">
+            <span class="keywords-label">🔍 关键词</span>
+            <div class="keywords-content" id="keywords">
+                弓形虫病治疗方案；刚地弓形虫；乙胺嘧啶；磺胺嘧啶；TMP-SMX；螺旋霉素；亚叶酸；泼尼松；免疫功能正常；急性疾病；淋巴结肿大；输血后感染；脉络膜视网膜炎；脑膜炎；孕妇感染；胎儿感染；先天性感染；CID 47；Am J Ophth
+            </div>
+        </div>
+        
+        <div class="page-number" id="pageNum">414</div>
+        
+        <!-- 复制编辑框 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 页面信息
+        const pageInfo = {
+            title: '弓形虫病治疗方案表',
+            subtitle: '表13A（3）寄生虫感染：原虫——肠道外（续）',
+            keywords: '弓形虫病治疗方案；刚地弓形虫；乙胺嘧啶；磺胺嘧啶；TMP-SMX；螺旋霉素；亚叶酸；泼尼松；免疫功能正常；急性疾病；淋巴结肿大；输血后感染；脉络膜视网膜炎；脑膜炎；孕妇感染；胎儿感染；先天性感染；CID 47；Am J Ophth',
+            pageNum: '414'
+        };
+        
+        // 初始化复制输入框内容
+        function initCopyInput() {
+            const content = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+            document.getElementById('copyInput').value = content;
+        }
+        
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(input.value).then(() => {
+                showToast();
+            }).catch(() => {
+                // 降级方案
+                document.execCommand('copy');
+                showToast();
+            });
+        }
+        
+        // 显示提示
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            if (isFav) {
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+                
+                // 保存到localStorage，模拟添加到index收藏类目
+                const favData = {
+                    title: pageInfo.title,
+                    url: window.location.href,
+                    pageNum: pageInfo.pageNum,
+                    addTime: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                // 避免重复
+                const exists = favorites.some(f => f.pageNum === pageInfo.pageNum);
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    
+                    // 同时保存到index收藏标记（模拟）
+                    localStorage.setItem('index_favorite_' + pageInfo.pageNum, JSON.stringify(favData));
+                }
+                
+                showToastCustom('已添加到收藏！');
+            } else {
+                btn.innerHTML = '⭐';
+                btn.title = '点击收藏';
+                
+                // 移除收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== pageInfo.pageNum);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                localStorage.removeItem('index_favorite_' + pageInfo.pageNum);
+                
+                showToastCustom('已取消收藏！');
+            }
+        }
+        
+        // 自定义提示
+        function showToastCustom(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            toast.style.background = '#e74c3c';
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toast.textContent = '已复制到剪贴板！';
+                toast.style.background = '#27ae60';
+            }, 2000);
+        }
+        
+        // 检查收藏状态
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.pageNum === pageInfo.pageNum);
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                btn.title = '已收藏';
+            }
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initCopyInput();
+            checkFavoriteStatus();
+        });
+    </script>
+</body>
+</html>

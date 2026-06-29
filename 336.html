@@ -1,0 +1,555 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表10D 部分抗生素延长或持续给药方案*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background-color: #1a5276;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #2874a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background-color: #3498db;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .favorite-btn.favorited {
+            background-color: #f39c12;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .intro-text {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #444;
+        }
+        
+        .intro-text p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 15px;
+        }
+        
+        thead {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 3px solid #2980b9;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        
+        .stability-info {
+            color: #555;
+        }
+        
+        .dose-info {
+            color: #2c3e50;
+        }
+        
+        .note-info {
+            color: #444;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: #d4e6f1;
+            color: #1a5276;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag.disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.antibiotic {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border-color: #abebc6;
+        }
+        
+        .tag.bacteria {
+            background-color: #fdebd0;
+            color: #9c640c;
+            border-color: #f9e79f;
+        }
+        
+        .copy-section {
+            background-color: rgba(255,255,255,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2ecc71;
+        }
+        
+        .copy-btn.copied {
+            background-color: #3498db;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 10px 8px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="335.html" class="nav-btn">上一页</a>
+            <a href="337.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表10D 部分抗生素延长或持续给药方案*****</h1>
+    
+    <!-- 引言文字 -->
+    <div class="intro-text">
+        <p>延长或持续输注β-内酰胺类抗菌药物至少与间隔给药等效。因此，此类方案近来得到已发表的数据支持，可以成为抗生素管理项目的一部分。</p>
+        <p>采用持续静脉输注需考虑抗生素的稳定性。影响稳定性的因素包括药物浓度、静脉输注稀释液（如生理盐水或5%葡萄糖液）、输液装置以及保存温度（P&T 36: 723, 2011）。由于便携式输液泵贴近身体，所以使抗生素温度受到体温影响近于37℃而不是室温25℃。碳青霉烯类尤其不稳定，可能需要将输液泵进行冷包装隔垫或增加更换输液袋、加液器的频率。</p>
+        <p>一项基于观察性研究的荟萃分析发现，与标准间歇给药方案相比，延长或持续输注碳青霉烯类药物或哌拉西林-他唑巴坦（汇总数据）的患者死亡率降低。当分别考虑延长输注和持续输注方案时，结果相似。哌拉西林-他唑巴坦有死亡率的受益而碳青霉烯类无改变（CID 56: 272, 2013）。死亡率的降低可能至少部分归因于研究环境所带来的更密切的专业监护。在另一项小规模前瞻性随机对照研究中，持续输注哌拉西林-他唑巴坦和美罗培南组较间歇输注组临床治愈率更高，且呈现死亡率降低的趋势（CID 56: 236, 2013）。</p>
+    </div>
+    
+    <!-- 主表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">药物/方法</th>
+                <th style="width: 32%;">最小稳定性</th>
+                <th style="width: 25%;">推荐剂量</th>
+                <th style="width: 25%;">说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="drug-name">氨苄西林-舒巴坦</span><br>
+                    （延长输注）
+                </td>
+                <td class="stability-info">
+                    @ 37℃：在生理盐水中24小时时，氨苄西林＞77%，舒巴坦93%（IJAA 6: 531, 1996）<br><br>
+                    @ 25℃：8小时（生理盐水）<br><br>
+                    @ 4℃：48小时（生理盐水）<br><br>
+                    （氨苄西林/舒巴坦浓度≤30mg/15mg每ml）
+                </td>
+                <td class="dose-info">
+                    9g（6g氨苄西林＋3g舒巴坦）iv q8h 输注4小时以上
+                </td>
+                <td class="note-info">
+                    推荐剂量用于治疗不动杆菌引起的呼吸机相关肺炎。大剂量安全有效（Scand J ID 39: 38, 2007; J Infect 56: 432, 2008）。舒巴坦大剂量、延长输注得到计算机模拟研究结果支持（Eur J Pharm Sci 136: 104940, 2019）。推荐剂量用于肾功能正常的患者
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="drug-name">头孢唑啉</span><br>
+                    （持续输注）
+                </td>
+                <td class="stability-info">
+                    使用弹性输液泵装置（Infusor LV），头孢唑啉3g或6g溶于250ml 5%葡萄糖溶液或生理盐水中。装有抗生素的输液装置需冷藏保存，用前取出，置于贴身收纳袋中佩戴，夜间可放置在床头柜（Clin Ther 2018; 40: 664）<br><br>
+                    @ 4℃：72小时<br>
+                    @ 35℃：12小时，之后<br>
+                    @ 25℃：12小时<br><br>
+                    使用易泵弹性输液泵，头孢唑啉6g溶于250ml。在真实使用条件下头孢唑啉稳定性可维持24小时（JAC 2017; 72: 1462）
+                </td>
+                <td class="dose-info">
+                    30mg/kg iv，输注1小时（起始剂量），之后80～100mg/kg（输注24小时）qd。<br><br>
+                    肾功能不全时，剂量见说明
+                </td>
+                <td class="note-info">
+                    根据162例菌血症或心内膜炎患者经持续输注头孢唑啉的数据结果，推算出不同eGFR水平的目标稳态血药浓度分别为40μg/ml、60μg/ml或80μg/ml（AAC 2019; 63: e00806-19）
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 页码 -->
+    <div class="page-number">336</div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag disease">呼吸机相关肺炎</span>
+            <span class="tag disease">菌血症</span>
+            <span class="tag disease">心内膜炎</span>
+            <!-- 抗生素药物标签 -->
+            <span class="tag antibiotic">氨苄西林-舒巴坦</span>
+            <span class="tag antibiotic">头孢唑啉</span>
+            <span class="tag antibiotic">哌拉西林-他唑巴坦</span>
+            <span class="tag antibiotic">美罗培南</span>
+            <span class="tag antibiotic">碳青霉烯类</span>
+            <span class="tag antibiotic">β-内酰胺类</span>
+            <!-- 细菌标签 -->
+            <span class="tag bacteria">不动杆菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <div class="copy-title">📋 快速复制</div>
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表10D 部分抗生素延长或持续给药方案；部分抗生素延长或持续给药方案；氨苄西林-舒巴坦；头孢唑啉；哌拉西林-他唑巴坦；美罗培南；碳青霉烯类；β-内酰胺类；不动杆菌；呼吸机相关肺炎；菌血症；心内膜炎；延长输注；持续输注；=336" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">★</button>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showToast('已复制到剪贴板！');
+                    document.getElementById('copyBtn').textContent = '已复制';
+                    document.getElementById('copyBtn').classList.add('copied');
+                    setTimeout(() => {
+                        document.getElementById('copyBtn').textContent = '复制';
+                        document.getElementById('copyBtn').classList.remove('copied');
+                    }, 2000);
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 显示提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+                showToast('已收藏！将添加到index收藏类目');
+                
+                // 保存收藏信息到localStorage，供index.html读取
+                const favoriteData = {
+                    title: '表10D 部分抗生素延长或持续给药方案',
+                    url: '336.html',
+                    page: '336',
+                    tags: ['氨苄西林-舒巴坦', '头孢唑啉', '延长输注', '持续输注'],
+                    timestamp: new Date().toISOString()
+                };
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '336.html');
+                if (!exists) {
+                    favorites.push(favoriteData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '★';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '336.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '336.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '❤';
+            }
+        };
+    </script>
+</body>
+</html>

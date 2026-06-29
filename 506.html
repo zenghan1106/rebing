@@ -1,0 +1,553 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表14F(2)丙型肝炎治疗方案和疗效*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #5cb85c, #449d44);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .main-title {
+            text-align: center;
+            color: #1a3a5c;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px 0 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .sub-title {
+            text-align: center;
+            color: #4a6fa5;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: rgba(74, 144, 217, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799, #2989d8);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a4a7a;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #d0d7de;
+            text-align: center;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .gene-type {
+            font-weight: bold;
+            color: #1a5276;
+            background: #ebf5fb;
+        }
+        
+        .scheme-name {
+            color: #2874a6;
+            font-weight: 500;
+        }
+        
+        .note-text {
+            text-align: left;
+            color: #555;
+            font-size: 12px;
+        }
+        
+        .merge-cell {
+            background: #f0f7ff;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 280px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            transition: transform 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ffd93d, #f9ca24);
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #fafbfc;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            margin-bottom: 15px;
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            color: #1565c0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag.disease {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            color: #c2185b;
+            border-color: #f48fb1;
+        }
+        
+        .tag.drug {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #2e7d32;
+            border-color: #a5d6a7;
+        }
+        
+        .tag.bacteria {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: #ef6c00;
+            border-color: #ffcc80;
+        }
+        
+        .keywords-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        
+        .keywords-title {
+            color: #1a5276;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        .page-number {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 200;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            tbody td {
+                font-size: 12px;
+                padding: 8px 5px;
+            }
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="header-bar">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-btns">
+            <a href="505.html" class="nav-btn">← 上一页</a>
+            <a href="507.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表14F(2)丙型肝炎治疗方案和疗效*****</h1>
+    <p class="sub-title">丙型肝炎推荐治疗方案（P=首选方案，A=备选方案，方案见前页）</p>
+    
+    <!-- 单独HCV感染 -->
+    <div class="section-title">单独HCV感染</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>基因型</th>
+                    <th>方案</th>
+                    <th>肝硬化</th>
+                    <th>疗程（周）</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="gene-type" rowspan="3">1～6</td>
+                    <td class="scheme-name">丙通沙1片po qd</td>
+                    <td>有或无</td>
+                    <td>12</td>
+                    <td class="note-text" rowspan="3">全基因型直接作用药物</td>
+                </tr>
+                <tr>
+                    <td class="scheme-name" rowspan="2">艾诺全3片po qd</td>
+                    <td>无</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>有</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td class="gene-type" rowspan="4">1a</td>
+                    <td class="scheme-name">丙通沙1片po qd</td>
+                    <td>有或无</td>
+                    <td>12</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="scheme-name" rowspan="2">夏帆宁1片po qd</td>
+                    <td>无*</td>
+                    <td>8</td>
+                    <td class="note-text" rowspan="2">*无HIV感染、无肝硬化、HCV RNA<6×10⁶拷贝/毫升的患者<br>**HIV共感染、代偿期肝硬化、HCV RNA>6×10⁶拷贝/毫升的患者</td>
+                </tr>
+                <tr>
+                    <td>有**</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td class="scheme-name">艾诺全3片po qd</td>
+                    <td>有或无</td>
+                    <td>8</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="gene-type" rowspan="4">1b</td>
+                    <td class="scheme-name">丙通沙1片po qd</td>
+                    <td>有或无</td>
+                    <td>12</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="scheme-name" rowspan="2">夏帆宁1片po qd</td>
+                    <td>无*</td>
+                    <td>8</td>
+                    <td class="note-text" rowspan="2">*无HIV感染、无肝硬化、HCV RNA<6×10⁶拷贝/毫升的患者<br>**HIV共感染、代偿期肝硬化、HCV RNA>6×10⁶拷贝/毫升的患者</td>
+                </tr>
+                <tr>
+                    <td>有**</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td class="scheme-name">艾诺全3片po qd</td>
+                    <td>有或无</td>
+                    <td>8</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="gene-type" rowspan="2">2</td>
+                    <td class="scheme-name">丙通沙1片po qd</td>
+                    <td>有或无</td>
+                    <td>12</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="scheme-name">艾诺全3片po qd</td>
+                    <td>有或无</td>
+                    <td>8</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="表14F(2)丙型肝炎治疗方案和疗效；丙型肝炎推荐治疗方案；单独HCV感染；丙通沙；艾诺全；夏帆宁；择必达；=506" readonly>
+        <button class="copy-btn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag disease">丙型肝炎</span>
+            <span class="tag disease">HCV感染</span>
+            <span class="tag disease">肝硬化</span>
+            <span class="tag drug">丙通沙</span>
+            <span class="tag drug">艾诺全</span>
+            <span class="tag drug">夏帆宁</span>
+            <span class="tag drug">择必达</span>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords-content">
+            丙型肝炎 | HCV | 基因型 | 丙通沙 | 艾诺全 | 夏帆宁 | 择必达 | 直接作用药物 | DAA | 疗程 | 肝硬化 | HIV共感染 | HCV RNA
+        </div>
+        <div class="page-number">页码：506</div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✅ 已复制到剪贴板');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 已复制到剪贴板');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFav = localStorage.getItem('fav_506') === 'true';
+            
+            if (!isFav) {
+                localStorage.setItem('fav_506', 'true');
+                // 保存到index的收藏数据
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const item = {
+                    title: '表14F(2)丙型肝炎治疗方案和疗效',
+                    url: '506.html',
+                    page: '506'
+                };
+                // 避免重复
+                favorites = favorites.filter(f => f.page !== '506');
+                favorites.push(item);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                showToast('❤️ 已添加到收藏');
+            } else {
+                localStorage.setItem('fav_506', 'false');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.page !== '506');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                showToast('💔 已取消收藏');
+            }
+        }
+        
+        // 初始化收藏状态
+        window.onload = function() {
+            const isFav = localStorage.getItem('fav_506') === 'true';
+            const btn = document.getElementById('favoriteBtn');
+            if (isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        };
+    </script>
+</body>
+</html>

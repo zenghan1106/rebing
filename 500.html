@@ -1,0 +1,570 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~利托那韦融合抑制剂及CCR5辅受体抑制剂不良反应表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .page-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-page {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-fav {
+            position: fixed;
+            right: 20px;
+            bottom: 120px;
+            background: #e74c3c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 100;
+            border: none;
+        }
+        
+        .btn-fav:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #5d6d7e;
+            margin-bottom: 20px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+            color: white;
+            padding: 16px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #34495e;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+            white-space: nowrap;
+            background: #f0f4f8;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-size: 16px;
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .black-box {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .category-row {
+            background: #fff3e0 !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #e65100;
+            font-size: 15px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .bottom-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #5d6d7e;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #1a5276;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f0f4f8;
+            border-radius: 10px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+            white-space: nowrap;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-copy:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-copy.copied {
+            background: #2ecc71;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            td:first-child {
+                font-size: 14px;
+                white-space: normal;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .btn-fav {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="top-nav">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        <div class="page-btns">
+            <a href="499.html" class="btn btn-page">← 上一页</a>
+            <a href="501.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()" title="点击收藏">★</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~利托那韦融合抑制剂及CCR5辅受体抑制剂不良反应表*****</h1>
+    <p class="sub-title">抗反转录病毒药物和不良反应——利托那韦、融合抑制剂及CCR5辅受体抑制剂类药物安全性数据</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称：通用名（商品名）</th>
+                    <th>常见不良反应</th>
+                    <th>最重要的不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="drug-name">利托那韦（Norvir）</span><br>
+                        <span style="font-size:12px;color:#666;">（目前主要用于提高其他抗反转录病毒药物的浓度，原因是足量利托那韦的毒性和药物相互作用多）</span>
+                    </td>
+                    <td>
+                        胃肠道：口内常有苦味，用巧克力奶、安素或Advera送服可减轻；恶心（23%），减少初始剂量可减少恶心；呕吐（13%），腹泻（15%）。唇周感觉异常（5%～6%）。剂量超过100mg bid时胃肠道不良反应和血脂异常增加
+                    </td>
+                    <td>
+                        <span class="black-box">黑框警告：</span>有许多重要的药物相互作用，抑制P450 CYP3A和CYP2D6系统，可危及生命。有数例报道同时使用利托那韦和皮质类固醇的患者发生医源性库欣综合征，包括吸入、硬膜外注射或单剂肌内注射皮质类固醇。史-约综合征、中毒性表皮坏死性变态反应罕见。有Ⅰ度（及更严重）房室传导阻滞和胰腺炎的报道。肝毒性，包括致死性。治疗中需严密监测LFT，尤其是既往存在肝病者，包括乙肝和丙肝
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">融合抑制剂</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">恩夫韦地</span><br>
+                        <span style="font-size:12px;color:#666;">（T20，Fuzeon）</span>
+                    </td>
+                    <td>
+                        局部注射部位反应（98%至少有一处注射部位反应，4%因此停药），疼痛和不适、硬结、红斑、结节、囊肿、瘙痒和瘀斑。腹泻（32%），恶心（23%），乏力（20%）
+                    </td>
+                    <td>
+                        细菌性肺炎的发生率增加（3.2/100人年），超敏反应≤1%（皮疹、发热、恶心和呕吐、寒战、畏寒、低血压和肝转氨酶升高）；再次用药也可出现。有报道停药后仍持续存在皮肤色斑内含有恩夫韦地肽的淀粉样物质沉积
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">CCR5辅受体抑制剂</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">马拉维诺（Selzentry）</span>
+                    </td>
+                    <td>
+                        和其他背景ARV药物一起：咳嗽（13%），发热（12%），皮疹（10%），腹痛（8%）。眩晕、肌痛、关节痛。上呼吸道感染和HSV感染风险增加
+                    </td>
+                    <td>
+                        <span class="black-box">黑框警告：</span>肝毒性。可先有过敏表现（皮疹、嗜酸性粒细胞增多或IgE水平增高）。乙型肝炎或丙型肝炎患者慎用。心肌缺血/梗死（1.3%）。可导致血压下降、体位性晕厥，尤其在肾功能不全患者。和CYP3A诱导剂/抑制剂有显著相互作用。长期使用恶性肿瘤发生风险不明。上市后有史-约综合征的报道。初治患者临床试验的安全性总体较好
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击图片中文字即可检索）</div>
+        <div>
+            <span class="tag tag-disease">苦味</span>
+            <span class="tag tag-disease">恶心</span>
+            <span class="tag tag-disease">呕吐</span>
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">唇周感觉异常</span>
+            <span class="tag tag-disease">血脂异常</span>
+            <span class="tag tag-disease">医源性库欣综合征</span>
+            <span class="tag tag-disease">房室传导阻滞</span>
+            <span class="tag tag-disease">胰腺炎</span>
+            <span class="tag tag-disease">肝毒性</span>
+            <span class="tag tag-disease">注射部位反应</span>
+            <span class="tag tag-disease">疼痛</span>
+            <span class="tag tag-disease">硬结</span>
+            <span class="tag tag-disease">红斑</span>
+            <span class="tag tag-disease">结节</span>
+            <span class="tag tag-disease">囊肿</span>
+            <span class="tag tag-disease">瘙痒</span>
+            <span class="tag tag-disease">瘀斑</span>
+            <span class="tag tag-disease">乏力</span>
+            <span class="tag tag-disease">细菌性肺炎</span>
+            <span class="tag tag-disease">超敏反应</span>
+            <span class="tag tag-disease">皮疹</span>
+            <span class="tag tag-disease">发热</span>
+            <span class="tag tag-disease">寒战</span>
+            <span class="tag tag-disease">畏寒</span>
+            <span class="tag tag-disease">低血压</span>
+            <span class="tag tag-disease">肝转氨酶升高</span>
+            <span class="tag tag-disease">淀粉样物质沉积</span>
+            <span class="tag tag-disease">咳嗽</span>
+            <span class="tag tag-disease">腹痛</span>
+            <span class="tag tag-disease">眩晕</span>
+            <span class="tag tag-disease">肌痛</span>
+            <span class="tag tag-disease">关节痛</span>
+            <span class="tag tag-disease">上呼吸道感染</span>
+            <span class="tag tag-disease">嗜酸性粒细胞增多</span>
+            <span class="tag tag-disease">心肌缺血</span>
+            <span class="tag tag-disease">梗死</span>
+            <span class="tag tag-disease">血压下降</span>
+            <span class="tag tag-disease">体位性晕厥</span>
+            <span class="tag tag-disease">肾功能不全</span>
+            <span class="tag tag-disease">恶性肿瘤</span>
+            <span class="tag tag-disease">史-约综合征</span>
+            <span class="tag tag-drug">利托那韦</span>
+            <span class="tag tag-drug">Norvir</span>
+            <span class="tag tag-drug">恩夫韦地</span>
+            <span class="tag tag-drug">T20</span>
+            <span class="tag tag-drug">Fuzeon</span>
+            <span class="tag tag-drug">马拉维诺</span>
+            <span class="tag tag-drug">Selzentry</span>
+            <span class="tag tag-drug">CYP3A</span>
+            <span class="tag tag-drug">CYP2D6</span>
+            <span class="tag tag-drug">P450</span>
+            <span class="tag tag-drug">皮质类固醇</span>
+            <span class="tag tag-drug">ARV</span>
+            <span class="tag tag-drug">LFT</span>
+            <span class="tag tag-drug">Advera</span>
+            <span class="tag tag-bacteria">乙肝</span>
+            <span class="tag tag-bacteria">丙肝</span>
+            <span class="tag tag-bacteria">乙型肝炎</span>
+            <span class="tag tag-bacteria">丙型肝炎</span>
+            <span class="tag tag-bacteria">HSV</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>利托那韦；Norvir；恩夫韦地；T20；Fuzeon；融合抑制剂；马拉维诺；Selzentry；CCR5辅受体抑制剂；抗反转录病毒药物；ARV；黑框警告；CYP3A；CYP2D6；P450；药物相互作用；医源性库欣综合征；史-约综合征；中毒性表皮坏死；房室传导阻滞；胰腺炎；肝毒性；细菌性肺炎；超敏反应；淀粉样物质沉积；心肌缺血；梗死；血压下降；体位性晕厥；肾功能不全；恶性肿瘤；HSV；乙肝；丙肝；乙型肝炎；丙型肝炎
+        </div>
+        
+        <div class="page-num">页码：500</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="利托那韦融合抑制剂及CCR5辅受体抑制剂不良反应表；抗反转录病毒药物和不良反应——利托那韦、融合抑制剂及CCR5辅受体抑制剂类药物安全性数据；利托那韦；Norvir；恩夫韦地；T20；Fuzeon；融合抑制剂；马拉维诺；Selzentry；CCR5辅受体抑制剂；抗反转录病毒药物；ARV；黑框警告；CYP3A；CYP2D6；P450；药物相互作用；医源性库欣综合征；史-约综合征；中毒性表皮坏死；房室传导阻滞；胰腺炎；肝毒性；细菌性肺炎；超敏反应；淀粉样物质沉积；心肌缺血；梗死；血压下降；体位性晕厥；肾功能不全；恶性肿瘤；HSV；乙肝；丙肝；乙型肝炎；丙型肝炎=500" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const pageData = {
+                title: '利托那韦融合抑制剂及CCR5辅受体抑制剂不良反应表',
+                url: '500.html',
+                category: '收藏',
+                tags: ['利托那韦', '恩夫韦地', '马拉维诺', '融合抑制剂', 'CCR5辅受体抑制剂', '抗反转录病毒药物']
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageData.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏区域（如果同域）
+            alert('✓ 已添加到收藏！\n页面：' + pageData.title + '\n请在首页查看收藏内容。');
+        }
+        
+        // 标签点击检索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                // 模拟检索，实际可连接搜索功能
+                alert('正在检索：' + keyword);
+                // window.location.href = 'search.html?q=' + encodeURIComponent(keyword);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~寄生虫病药物治疗方案表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-btn:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.next {
+            background: #f0ad4e;
+            box-shadow: 0 4px 15px rgba(240, 173, 78, 0.3);
+        }
+
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            line-height: 1.6;
+        }
+
+        .main-title .highlight {
+            color: #e74c3c;
+            font-size: 26px;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            padding: 18px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1px solid #1a5276;
+        }
+
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* 单元格样式 */
+        td {
+            padding: 14px 12px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s;
+        }
+
+        /* 病原体列加粗 */
+        td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            min-width: 140px;
+        }
+
+        /* 推荐方案合并单元格 */
+        .merge-header {
+            background: #3498db;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* 子表头 */
+        .sub-header {
+            background: #5dade2;
+            color: white;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* 注释区域 */
+        .notes {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .notes p {
+            margin-bottom: 8px;
+        }
+
+        /* 标签区域 */
+        .tags-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 疾病标签 - 红色系 */
+        .tag-disease {
+            background: #fadbd8;
+            color: #c0392b;
+        }
+
+        .tag-disease:hover {
+            background: #f5b7b1;
+        }
+
+        /* 药物标签 - 绿色系 */
+        .tag-drug {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+
+        .tag-drug:hover {
+            background: #abebc6;
+        }
+
+        /* 病原体/细菌标签 - 紫色系 */
+        .tag-bacteria {
+            background: #e8daef;
+            color: #8e44ad;
+        }
+
+        .tag-bacteria:hover {
+            background: #d2b4de;
+        }
+
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .copy-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #f8f9fa;
+            width: calc(100% - 100px);
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(245, 87, 108, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .fav-btn.active {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        /* 页码信息 */
+        .page-info {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #7f8c8d;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .page-number {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 18px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+
+            .main-title .highlight {
+                font-size: 22px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            td, th {
+                padding: 10px 8px;
+            }
+
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .tag {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .copy-input {
+                width: 100%;
+            }
+
+            .fav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-btns">
+        <a href="418.html" class="nav-btn">◀ 上一页</a>
+        <a href="420.html" class="nav-btn next">下一页 ▶</a>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+
+    <!-- 标题 -->
+    <h1 class="main-title">
+        ~~~~~<span class="highlight">寄生虫病药物治疗方案表</span>*****
+    </h1>
+
+    <!-- 表格容器 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">病原体</th>
+                    <th colspan="2">推荐方案</th>
+                    <th rowspan="2">说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选药物</th>
+                    <th class="sub-header">备选药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>拟蚓蛔线虫<br>(Ascaris lumbricoides,<br>蛔虫病)<br>Ln 367: 1521,<br>2006</td>
+                    <td>阿苯达唑 400mg po 单剂，或甲苯达唑 100mg po bid×3d 或 500mg po 单剂</td>
+                    <td>伊维菌素 150～200μg/kg po 单剂</td>
+                    <td>单次给药的效果综述 (JAMA 299: 1937, 2008)，甲苯达唑 500mg 片剂不普及</td>
+                </tr>
+                <tr>
+                    <td>菲律宾毛细线虫<br>(Capillaria philippinensis)<br>(毛细线虫病)</td>
+                    <td>阿苯达唑 400mg po bid×10d</td>
+                    <td>甲苯达唑 500mg po qd×20d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>蠕形住肠线虫<br>(Enterobius vermicularis)<br>(蛲虫)</td>
+                    <td>甲苯达唑 500mg po×1剂，2周后重复，或双氢萘酸噻嘧啶 11mg/kg 基质（最大剂量1g）po×1剂；2周后重复</td>
+                    <td>阿苯达唑 400mg po 单剂，2周后重复</td>
+                    <td>不良反应见表13B，220页。家庭成员均需治疗</td>
+                </tr>
+                <tr>
+                    <td>筒线虫病<br>(Gongylonemiasis)<br>成虫位于口腔黏膜</td>
+                    <td>外科手术切除</td>
+                    <td>阿苯达唑 400mg/d po×3d</td>
+                    <td>参见 CID 32: 1378, 2001; J Helminth 80: 425, 2006</td>
+                </tr>
+                <tr>
+                    <td>钩虫<br>[美洲板口线虫及十二指肠钩口线虫<br>(Necator americanus &<br>Ancylostoma duodenale)]</td>
+                    <td>阿苯达唑 400mg po qd×3d</td>
+                    <td>甲苯达唑 500mg po qd×3d 或双氢萘酸噻嘧啶 11mg/(kg·d) po qd×3d，最大剂量1g</td>
+                    <td>注意：伊维菌素无效。公共卫生项目采用单剂疗法，治愈率低，阿苯达唑3日疗法优于甲苯达唑3日疗法 (PLoS One 6: e25003, 2011)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>*关于药物来源见表13D，222页。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">蛔虫病</span>
+            <span class="tag tag-disease">毛细线虫病</span>
+            <span class="tag tag-disease">蛲虫病</span>
+            <span class="tag tag-disease">筒线虫病</span>
+            <span class="tag tag-disease">钩虫病</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">阿苯达唑</span>
+            <span class="tag tag-drug">甲苯达唑</span>
+            <span class="tag tag-drug">伊维菌素</span>
+            <span class="tag tag-drug">双氢萘酸噻嘧啶</span>
+            <!-- 病原体标签 -->
+            <span class="tag tag-bacteria">拟蚓蛔线虫</span>
+            <span class="tag tag-bacteria">菲律宾毛细线虫</span>
+            <span class="tag tag-bacteria">蠕形住肠线虫</span>
+            <span class="tag tag-bacteria">筒线虫</span>
+            <span class="tag tag-bacteria">美洲板口线虫</span>
+            <span class="tag tag-bacteria">十二指肠钩口线虫</span>
+        </div>
+    </div>
+
+    <!-- 页码信息 -->
+    <div class="page-info">
+        当前页码：<span class="page-number">419</span>
+    </div>
+
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-wrapper">
+            <input type="text" class="copy-input" id="copyInput" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+
+    <script>
+        // 页面信息配置
+        const pageInfo = {
+            title: "寄生虫病药物治疗方案表",
+            subtitle: "线虫类寄生虫感染用药指南",
+            keywords: "蛔虫病、毛细线虫病、蛲虫病、筒线虫病、钩虫病、阿苯达唑、甲苯达唑、伊维菌素、双氢萘酸噻嘧啶",
+            pageNum: "419"
+        };
+
+        // 初始化复制输入框内容
+        const copyContentText = `${pageInfo.title}；${pageInfo.subtitle}；${pageInfo.keywords}=${pageInfo.pageNum}`;
+        document.getElementById('copyInput').value = copyContentText;
+
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999); // 移动端兼容
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                }).catch(() => {
+                    // 降级方案
+                    document.execCommand('copy');
+                    showCopied();
+                });
+            } catch (e) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        // 收藏功能（使用localStorage模拟）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const currentPage = {
+                title: pageInfo.title,
+                url: '419.html',
+                pageNum: pageInfo.pageNum
+            };
+
+            const index = favorites.findIndex(f => f.url === currentPage.url);
+            
+            if (index === -1) {
+                favorites.push(currentPage);
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+                alert('已收藏！页面已添加到收藏列表');
+            } else {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.innerHTML = '⭐';
+                alert('已取消收藏');
+            }
+
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html（实际项目中需要后端支持）
+            updateIndexFavorites(favorites);
+        }
+
+        // 模拟更新index.html的收藏（实际需后端）
+        function updateIndexFavorites(favorites) {
+            // 这里仅作演示，实际需要通过AJAX或后端API实现
+            console.log('收藏列表已更新:', favorites);
+            // 存储到localStorage，index.html页面可以读取
+            localStorage.setItem('favoritesData', JSON.stringify(favorites));
+        }
+
+        // 初始化收藏状态
+        function initFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favorites.some(f => f.url === '419.html')) {
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                // 模拟搜索，实际可跳转到搜索页面
+                alert(`正在搜索: ${text}`);
+                // 或者: window.location.href = `search.html?q=${encodeURIComponent(text)}`;
+            });
+        });
+
+        // 页面加载时初始化
+        window.onload = function() {
+            initFavorite();
+        };
+    </script>
+</body>
+</html>

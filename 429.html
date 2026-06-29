@@ -1,0 +1,516 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~脑室内NCC与裂头蚴病治疗方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #4cae4c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-favorite {
+            background: #f0ad4e;
+            color: white;
+            position: fixed;
+            right: 20px;
+            bottom: 120px;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(240, 173, 78, 0.4);
+        }
+        
+        .btn-favorite:hover {
+            background: #ec971f;
+            transform: scale(1.05);
+        }
+        
+        .btn-favorite.active {
+            background: #d9534f;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-title {
+            font-size: 28px;
+            color: #2c5aa0;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #5a7a9a;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(31, 97, 172, 0.15);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #1a4d85;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        th, td {
+            padding: 12px;
+            border: 1px solid #d0d7de;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+            transition: background 0.3s;
+        }
+        
+        td {
+            color: #444;
+        }
+        
+        .pathogen-name {
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .note-text {
+            color: #7d6608;
+            background: #fef9e7;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .ref-text {
+            color: #2874a6;
+            font-style: italic;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            background: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c5aa0;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #fde8e8;
+            color: #c0392b;
+            border: 1px solid #f5b7b1;
+        }
+        
+        .tag-drug {
+            background: #e8f6f3;
+            color: #1e8449;
+            border: 1px solid #a9dfbf;
+        }
+        
+        .tag-bacteria {
+            background: #eaf2f8;
+            color: #2874a6;
+            border: 1px solid #aed6f1;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        .keywords-label {
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 8px;
+        }
+        
+        .keyword-list {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #2c5aa0;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e8f4fd;
+            border-radius: 10px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            background: #fafbfc;
+        }
+        
+        .btn-copy {
+            background: #6c5ce7;
+            color: white;
+            padding: 12px 25px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #5b4cdb;
+            transform: translateY(-2px);
+        }
+        
+        .copy-hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+        
+        /* 注释 */
+        .footnote {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fffbeb;
+            border-radius: 10px;
+            border: 1px solid #f5d0a9;
+            color: #7d6608;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 顶部导航 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="428.html" class="btn btn-nav">← 上一页</a>
+            <a href="430.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~脑室内NCC与裂头蚴病治疗方案*****</h1>
+        <p class="sub-title">寄生虫感染的治疗 | 脑室内NCC、裂头蚴病</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 22%;">病原体</th>
+                    <th style="width: 26%;">首选药物</th>
+                    <th style="width: 26%;">备选药物</th>
+                    <th style="width: 26%;">说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="pathogen-name">脑室内NCC</span>
+                    </td>
+                    <td>
+                        无论有无梗阻，均可选择神经内镜取出病灶。若无法手术，可用<span class="drug-name">阿苯达唑</span>＋<span class="drug-name">地塞米松</span>，密切观察注意有无CSF梗阻
+                    </td>
+                    <td>
+                        <span class="drug-name">阿苯达唑</span>＋<span class="drug-name">地塞米松</span>（见上文）；若不能行神经内镜，用药前做VP分流术
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="pathogen-name">裂头蚴病</span>［拟曼氏迭宫绦虫<br>
+                        <em>(Spirometra mansonoides)</em>］幼虫<br>
+                        包囊：感染源为蛙/蛇
+                    </td>
+                    <td colspan="2">
+                        外科手术切除。无有效抗寄生虫药物。皮下包块可予<span class="drug-name">乙醇</span>注射
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="footnote">
+        <strong>注：</strong>表中名词缩写见第2页。
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <div>
+                <span class="tag tag-disease">脑室内NCC</span>
+                <span class="tag tag-disease">裂头蚴病</span>
+                <span class="tag tag-bacteria">拟曼氏迭宫绦虫</span>
+                <span class="tag tag-bacteria">Spirometra mansonoides</span>
+                <span class="tag tag-drug">阿苯达唑</span>
+                <span class="tag tag-drug">地塞米松</span>
+                <span class="tag tag-drug">乙醇</span>
+            </div>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-label">🔍 关键词</div>
+            <div class="keyword-list">
+                脑室内NCC、裂头蚴病、拟曼氏迭宫绦虫、Spirometra mansonoides、阿苯达唑、地塞米松、乙醇、神经内镜、VP分流术、CSF梗阻、外科手术、皮下包块、蛙、蛇
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：429
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="脑室内NCC与裂头蚴病治疗方案；寄生虫感染的治疗 | 脑室内NCC、裂头蚴病；脑室内NCC、裂头蚴病、拟曼氏迭宫绦虫、Spirometra mansonoides、阿苯达唑、地塞米松、乙醇、神经内镜、VP分流术、CSF梗阻、外科手术、皮下包块、蛙、蛇=429" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        <p class="copy-hint">点击复制按钮，可将标题、副标题、关键词及页码信息复制到剪贴板</p>
+    </div>
+
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.btn-copy');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✅ 已复制';
+                btn.style.background = '#27ae60';
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#6c5ce7';
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能（使用localStorage）
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const pageInfo = {
+                title: '脑室内NCC与裂头蚴病治疗方案',
+                url: '429.html',
+                tags: ['脑室内NCC', '裂头蚴病', '拟曼氏迭宫绦虫', '阿苯达唑', '地塞米松', '乙醇']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.url === pageInfo.url);
+            
+            if (exists) {
+                favorites = favorites.filter(f => f.url !== pageInfo.url);
+                btn.innerHTML = '⭐ 收藏';
+                btn.classList.remove('active');
+                alert('已取消收藏');
+            } else {
+                favorites.push(pageInfo);
+                btn.innerHTML = '❤️ 已收藏';
+                btn.classList.add('active');
+                alert('已添加到收藏！请在index.html页面查看收藏列表');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favoriteBtn');
+            if (favorites.find(f => f.url === '429.html')) {
+                btn.innerHTML = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        };
+    </script>
+</body>
+</html>

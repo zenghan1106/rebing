@@ -1,0 +1,498 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寄生虫感染的治疗-美洲锥虫病与异尖线虫病</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-btn:hover {
+            background: #357abd;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .title-format {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a3a5c;
+        }
+        
+        thead th.sub-header {
+            background: #4a7fb5;
+            font-size: 13px;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #e8eaf6;
+            font-weight: bold;
+            color: #1a237e;
+            font-size: 13px;
+        }
+        
+        .pathogen-cell {
+            background: #e3f2fd;
+            font-weight: 500;
+        }
+        
+        .drug-name {
+            color: #1565c0;
+            font-weight: 600;
+        }
+        
+        .dose-info {
+            color: #2e7d32;
+        }
+        
+        .note-cell {
+            background: #fff8e1;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 18px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 4px;
+            border-radius: 16px;
+            font-size: 12px;
+            border: 1px solid;
+        }
+        
+        .tag.disease {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ffcdd2;
+        }
+        
+        .tag.drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag.parasite {
+            background: #fff3e0;
+            color: #e65100;
+            border-color: #ffe0b2;
+        }
+        
+        .copy-section {
+            margin: 18px 0;
+            padding: 18px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 180px;
+            padding: 10px 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .copy-btn.copied {
+            background: #5cb85c;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            padding: 12px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            color: #4a90d9;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #ffd700;
+            color: #333;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .table-note {
+            font-size: 11px;
+            color: #666;
+            margin-top: 8px;
+            padding: 8px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="417.html" class="nav-btn">上一页</a>
+            <a href="419.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <div class="title-wrapper">
+        <span class="title-format">~~~~~</span>
+        <span class="main-title">寄生虫感染的治疗-美洲锥虫病与异尖线虫病</span>
+        <span class="title-format">*****</span>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">病原体</th>
+                    <th colspan="2">推荐方案</th>
+                    <th rowspan="2">说明</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">首选药物</th>
+                    <th class="sub-header">备选药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="section-header">原虫——肠道外/锥虫病（续）</td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">
+                        <strong>克氏锥虫（T.cruzi）（美洲锥虫病）</strong>急性或慢性感染的临床分期及治疗指征参见JAMA 2024 Jun 18；331（23）：2037。苄硝唑（www.benznidazole.com）。美国市场销售参见www.benznidazole.com。超说明书用于2～12岁FDA批准范围外的年龄群体并在＜18岁儿童超说明书使用硝呋莫司。PAHO治疗指南：https://iris.paho.org/bitstream/handle/10665.2/49653/9789275120439_eng.pdf
+                    </td>
+                    <td>
+                        <strong>成人（年龄≥12岁）：</strong><br>
+                        <span class="drug-name">苄硝唑</span><span class="dose-info">5～7mg/（kg·d）分2次po q12h×60d</span><br><br>
+                        <strong>儿童（年龄＜12岁）：</strong><br>
+                        <span class="drug-name">苄硝唑</span><span class="dose-info">7.5mg/（kg·d）分2次po q12h×60d</span><br><br>
+                        苄硝唑12.5mg和100mg片剂批准用于2～12岁儿童<br><br>
+                        初步研究显示短程苄硝唑治疗方案前景乐观<br>
+                        • 2w或4w 100mg po tid 3期治疗方案即将启动
+                    </td>
+                    <td>
+                        <strong>成人：</strong><span class="drug-name">硝呋替莫</span><span class="dose-info">8～10mg/（kg·d）分次口服qid×120d</span><br><br>
+                        <strong>儿童：硝呋替莫</strong><br>
+                        • ＞41kg <span class="dose-info">8～10mg/（kg·d）分次口服qid×120d</span><br>
+                        • ＜41kg <span class="dose-info">10～20mg/（kg·d）</span><br><br>
+                        不良反应见表13B，参见CID 2016；63：1056<br><br>
+                        <strong>诊断：</strong>对于血库筛查结果呈阳性者（OrthoEIA试剂盒），确诊需经过两次基于不同抗原和/或不同技术的血清确证实验［EIA和免疫印迹（TESA）］。非血库筛查：EIA（Wiener试剂盒）加TESA/IFA确证；CDC有提供。许多美国商业实验室使用的Hemagen或InbiosEIA试剂盒在中美洲人群中检测假阳性高。商业实验室EIA法检测阳性者，在治疗前需经CDC确证试验
+                    </td>
+                    <td class="note-cell">
+                        因不良反应可不按体重给予苄硝唑300mg qd×60d，或者用300mg qd，但延长疗程至总剂量相当于5mg/（kg·d）×60d（NEJM 373：456，2015）。心脏移植后免疫抑制治疗会诱发慢性恰加斯病再活动；可通过器官移植或输血感染。妊娠禁用苄硝唑。为了减少不良反应，缩短疗程治疗方案正在研究中
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="section-header">线虫——肠道（原虫）嗜酸性粒细胞增多？考虑类圆线虫病、弓蛔虫病和丝虫病，见表13C</td>
+                </tr>
+                <tr>
+                    <td class="pathogen-cell">
+                        <strong>简单异尖线虫（Anisakis simplex）</strong>（异尖线虫病）。异尖线虫病（Anisakiasis）与异尖线虫科病（Anisakidosis）不同，其他：佩氏异尖线虫、抹香鲸异尖线虫，迷惑伪新地线虫
+                    </td>
+                    <td>
+                        内镜或外科手术摘除虫体。抗简单异尖线虫IgE抗体试验可帮助诊断。无驱虫治疗
+                    </td>
+                    <td>
+                        个案报道中<span class="drug-name">阿苯达唑</span>可能有效
+                    </td>
+                    <td class="note-cell">
+                        生食鲱鱼、鲑鱼、鲭鱼、鳕鱼、鱿鱼可患异尖线虫病。类似的情况可发生于生食鳕鱼、大比目鱼、红鲷鱼感染伪新地线虫
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag disease">美洲锥虫病</span>
+        <span class="tag disease">异尖线虫病</span>
+        <span class="tag disease">恰加斯病</span>
+        <span class="tag disease">Anisakiasis</span>
+        <span class="tag parasite">克氏锥虫</span>
+        <span class="tag parasite">T.cruzi</span>
+        <span class="tag parasite">简单异尖线虫</span>
+        <span class="tag parasite">Anisakis simplex</span>
+        <span class="tag parasite">佩氏异尖线虫</span>
+        <span class="tag parasite">抹香鲸异尖线虫</span>
+        <span class="tag parasite">迷惑伪新地线虫</span>
+        <span class="tag drug">苄硝唑</span>
+        <span class="tag drug">硝呋替莫</span>
+        <span class="tag drug">阿苯达唑</span>
+        <span class="tag disease">类圆线虫病</span>
+        <span class="tag disease">弓蛔虫病</span>
+        <span class="tag disease">丝虫病</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="footer">
+        <p>页码：<span class="page-number">418</span></p>
+        <p style="margin-top:6px; color:#888;">表13A（11）寄生虫感染的治疗</p>
+    </div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        // 设置复制框内容
+        const title = "寄生虫感染的治疗-美洲锥虫病与异尖线虫病";
+        const subtitle = "表13A（11）寄生虫感染的治疗";
+        const keywords = "美洲锥虫病；异尖线虫病；恰加斯病；Anisakiasis；克氏锥虫；T.cruzi；简单异尖线虫；Anisakis simplex；佩氏异尖线虫；抹香鲸异尖线虫；迷惑伪新地线虫；苄硝唑；硝呋替莫；阿苯达唑；类圆线虫病；弓蛔虫病；丝虫病；";
+        const pageNum = "418";
+        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            const pageInfo = {
+                title: title,
+                url: window.location.href,
+                pageNum: pageNum
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (isFav) {
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                btn.title = '已收藏';
+                alert('已添加到收藏！');
+            } else {
+                favorites = favorites.filter(f => f.url !== pageInfo.url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                btn.title = '收藏';
+            }
+        }
+        
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === window.location.href);
+            if (isFav) {
+                document.getElementById('favBtn').classList.add('active');
+                document.getElementById('favBtn').title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~成人HIV患者初始推荐及替代治疗方案*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            background-image: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #357abd;
+        }
+        
+        .btn-nav {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #4cae4c;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .btn-favorite:hover {
+            background-color: #ec971f;
+        }
+        
+        .btn-favorite.active {
+            background-color: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background-color: #1e88e5;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1565c0;
+        }
+        
+        tbody td {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .category-cell {
+            background-color: #e8f5e9;
+            font-weight: bold;
+            color: #2e7d32;
+            text-align: center;
+        }
+        
+        .subcategory-cell {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+        
+        .drug-name {
+            color: #1565c0;
+            font-weight: 500;
+        }
+        
+        .component-cell {
+            background-color: #f3e5f5;
+            color: #6a1b9a;
+        }
+        
+        .note-cell {
+            background-color: #e0f7fa;
+            color: #006064;
+        }
+        
+        .tags-section {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-bacteria {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #90caf9;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fafafa;
+        }
+        
+        .btn-copy {
+            background-color: #7e57c2;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #673ab7;
+        }
+        
+        .btn-copy.copied {
+            background-color: #4caf50;
+        }
+        
+        .keywords-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .page-number {
+            color: #1e88e5;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+            
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            tbody td {
+                padding: 6px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="476.html" class="btn btn-nav">上一页</a>
+            <a href="478.html" class="btn btn-nav">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~成人HIV患者初始推荐及替代治疗方案*****</h1>
+    
+    <!-- 表格容器 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">频次和剂型</th>
+                    <th>药物/剂量</th>
+                    <th>成分</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="10" class="category-cell">备选</td>
+                    <td rowspan="3" class="subcategory-cell">含非核苷类反转录<br>酶抑制剂，多药片</td>
+                    <td>依非韦仑（EFV）1片qd +（达可挥或舒发泰或Epzicom/Kivexa）<br>1片qd</td>
+                    <td rowspan="10">
+                        达可挥：恩曲他滨+丙酚替诺福韦<br>
+                        舒发泰：恩曲他滨+富马酸替诺<br>福韦<br>
+                        Epzicom/Kivexa：阿巴卡韦+拉米<br>夫定/r：利托那韦<br>
+                        Prezcibix：达芦那韦+可比司他
+                    </td>
+                    <td rowspan="10" class="note-cell">
+                        Epzicom/Kivexa：临睡前服用。<br>
+                        病毒载量>1×10⁵拷贝/毫升时，<br>避免使用。仅用于HLA-B*5701<br>阴性者，见警示。含利匹韦<br>林的方案不能用于病毒载<br>量>1×10⁵拷贝/毫升患者（与<br>DTG合用除外）
+                    </td>
+                </tr>
+                <tr>
+                    <td>利匹韦林（RPV）1片qd +（达可挥或舒发泰或Epzicom/Kivexa）<br>1片qd</td>
+                </tr>
+                <tr>
+                    <td>多拉维林1片qd +（达可挥或舒发泰或Epzicom/Kivexa）1片qd</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="subcategory-cell">含蛋白酶抑制剂（增<br>强剂型），多药片</td>
+                    <td>Evotaz 1片qd +（达可挥或舒发泰或Epzicom/Kivexa）1片qd</td>
+                </tr>
+                <tr>
+                    <td>阿扎那韦/r 1片qd +（达可挥或舒发泰或Epzicom/Kivexa）1片qd</td>
+                </tr>
+                <tr>
+                    <td>Prezcibix 1片qd +（达可挥或舒发泰或Epzicom/Kivexa）1片qd</td>
+                </tr>
+                <tr>
+                    <td>达芦那韦/r 1片qd +（达可挥或舒发泰或Epzicom/Kivexa）1片qd</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="subcategory-cell">含整合酶抑制剂，<br>多药片</td>
+                    <td>达可挥1片qd + 拉替拉韦（RAL）600mg（2片）qd</td>
+                </tr>
+                <tr>
+                    <td>舒发泰1片qd + 拉替拉韦（RAL）600mg（2片）qd</td>
+                </tr>
+                <tr>
+                    <td>舒发泰1片qd + 多替拉韦（DTG）1片qd</td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="3" class="subcategory-cell">双药片</td>
+                    <td>Epzicom/Kivexa + 多替拉韦各1片qd</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>多替拉韦 +（拉米夫定或恩曲他滨）各1片qd</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>多替拉韦 + 利匹韦林各1片qd</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="subcategory-cell">双药（注射）</td>
+                    <td>Cabenuva 2 im 每月1次，2个月；然后隔月1次</td>
+                    <td>卡博韦特+利匹韦林</td>
+                    <td class="note-cell">"直接注射"；需要耐药性检<br>测，没有达芦那韦和利匹韦<br>林耐药。无HBV共感染</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">HIV</span>
+            <span class="tag tag-disease">HBV</span>
+            <span class="tag tag-drug">依非韦仑</span>
+            <span class="tag tag-drug">EFV</span>
+            <span class="tag tag-drug">利匹韦林</span>
+            <span class="tag tag-drug">RPV</span>
+            <span class="tag tag-drug">多拉维林</span>
+            <span class="tag tag-drug">达可挥</span>
+            <span class="tag tag-drug">舒发泰</span>
+            <span class="tag tag-drug">Epzicom</span>
+            <span class="tag tag-drug">Kivexa</span>
+            <span class="tag tag-drug">Evotaz</span>
+            <span class="tag tag-drug">阿扎那韦</span>
+            <span class="tag tag-drug">Prezcibix</span>
+            <span class="tag tag-drug">达芦那韦</span>
+            <span class="tag tag-drug">拉替拉韦</span>
+            <span class="tag tag-drug">RAL</span>
+            <span class="tag tag-drug">多替拉韦</span>
+            <span class="tag tag-drug">DTG</span>
+            <span class="tag tag-drug">拉米夫定</span>
+            <span class="tag tag-drug">恩曲他滨</span>
+            <span class="tag tag-drug">Cabenuva</span>
+            <span class="tag tag-drug">卡博韦特</span>
+            <span class="tag tag-drug">恩曲他滨</span>
+            <span class="tag tag-drug">丙酚替诺福韦</span>
+            <span class="tag tag-drug">富马酸替诺福韦</span>
+            <span class="tag tag-drug">阿巴卡韦</span>
+            <span class="tag tag-drug">利托那韦</span>
+            <span class="tag tag-drug">可比司他</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="成人HIV患者初始推荐及替代治疗方案；HIV、抗病毒治疗、依非韦仑、利匹韦林、多替拉韦、拉替拉韦、达芦那韦、阿巴卡韦、拉米夫定、恩曲他滨、替诺福韦、卡博韦特、Cabenuva；=477" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="keywords-section">
+        <p>关键词：HIV | 抗病毒治疗 | 依非韦仑 | 利匹韦林 | 多替拉韦 | 拉替拉韦 | 达芦那韦 | 阿巴卡韦 | 拉米夫定 | 恩曲他滨 | 替诺福韦 | 卡博韦特 | Cabenuva</p>
+        <p style="margin-top: 10px;">页码：<span class="page-number">477</span></p>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = '已复制';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    const btn = document.getElementById('copyBtn');
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isFavorited = btn.classList.contains('active');
+            
+            if (!isFavorited) {
+                // 添加到收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '成人HIV患者初始推荐及替代治疗方案',
+                    url: window.location.href,
+                    pageNum: '477'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.pageNum === '477');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+                
+                // 尝试更新index.html的收藏
+                updateIndexFavorite(pageInfo);
+            } else {
+                // 取消收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.pageNum !== '477');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                btn.textContent = '⭐ 收藏';
+                btn.classList.remove('active');
+            }
+        }
+        
+        // 更新index.html的收藏（通过localStorage通信）
+        function updateIndexFavorite(pageInfo) {
+            localStorage.setItem('latestFavorite', JSON.stringify(pageInfo));
+            localStorage.setItem('favoriteUpdate', Date.now().toString());
+        }
+        
+        // 检查是否已收藏
+        function checkFavoriteStatus() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.pageNum === '477');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.textContent = '❤️ 已收藏';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        document.addEventListener('DOMContentLoaded', checkFavoriteStatus);
+    </script>
+</body>
+</html>

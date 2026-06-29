@@ -1,0 +1,501 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~丙型肝炎治疗方案和疗效-HCV感染治疗指南*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #2874a6;
+            margin-top: 8px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        .section-header {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+        }
+        
+        .note-text {
+            color: #444;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .tags-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #1a5276;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #2e86de;
+        }
+        
+        .bottom-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 15px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .fav-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(231,76,60,0.4);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #c0392b;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .fav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="503.html" class="page-btn">← 上一页</a>
+            <a href="505.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <div class="title-section">
+        <h1 class="main-title">~~~~~丙型肝炎治疗方案和疗效-HCV感染治疗指南*****</h1>
+        <p class="subtitle">表14F 丙型肝炎治疗方案和疗效</p>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">项目</th>
+                    <th style="width: 75%;">内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" class="section-header">HCV感染治疗适应证</td>
+                </tr>
+                <tr>
+                    <td>适应证说明</td>
+                    <td class="note-text">所有慢性HCV感染患者均有治疗指征。对于晚期肝纤维化（F3/F4）患者和已有HCV合并症的患者应立即开始治疗。药物治疗和疗程基于基因分型。聚乙二醇干扰素已不再推荐；首选治疗方案为所有直接抗病毒药物（DAA），合用或不合用利巴韦林。急性HCV感染也有DAA药物短程治疗指征。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header">治疗反应定义</td>
+                </tr>
+                <tr>
+                    <td>治疗结束时应答（ETR）</td>
+                    <td class="note-text">治疗结束时HCV RNA阴性</td>
+                </tr>
+                <tr>
+                    <td>复发</td>
+                    <td class="note-text">治疗结束时HCV RNA阴性（ETR），但是停止治疗24周之内病毒反弹（可测出）</td>
+                </tr>
+                <tr>
+                    <td>持续病毒学应答（SVR）</td>
+                    <td class="note-text">治愈！治疗结束时和停药12～24周后HCV RNA持续阴性</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header">HCV治疗方案</td>
+                </tr>
+                <tr>
+                    <td>肝活检</td>
+                    <td class="note-text">肝活检是确定HCV感染阶段的"金标准"，某些情况下有助于确定HCV治疗的最佳药物、剂量和疗程。不能进行活检时，常采用无创性方法评价进展期纤维化或肝硬化的相对可能性。Fibroscan（弹性成像）是评价肝纤维化的首选。弹性成像值>10kPa与肝脏显著纤维化（F3或F4）相关。</td>
+                </tr>
+                <tr>
+                    <td>耐药检测</td>
+                    <td class="note-text">基因型耐药分析能确定与某些DAA（直接作用药物，如蛋白酶抑制剂）敏感性下降有关的多态性。耐药检测仅推荐用于之前使用NS5A或蛋白酶抑制剂治疗失败的患者。</td>
+                </tr>
+                <tr>
+                    <td>失代偿性肝硬化</td>
+                    <td class="note-text">失代偿性肝硬化患者必经由肝病专家进行治疗，因为接受HCV治疗后有迅速出现临床恶化的风险。</td>
+                </tr>
+                <tr>
+                    <td>黑框警告</td>
+                    <td class="note-text">关于所有DAA的黑框警告：据报道，HBV、HCV共感染且未接受抗HBV治疗的患者，在使用DAA治疗时或治疗后，可出现HBV再激活，甚至急性重型肝炎。对于HCV、HBV合并感染，HBsAg阳性、且未开始抗HBV治疗的患者，推荐DAA期间和启动DAA前监测HBV DNA水平，并给予抗HBV治疗。见HBV治疗。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header">慢性HCV患者的初始治疗</td>
+                </tr>
+                <tr>
+                    <td>药物更新提示</td>
+                    <td class="note-text">药物和治疗方案不断更新，参见web.stanfordguide.com和www.hcvguidelines.org。</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="section-header">药物/缩写 | 商品名 | 剂型/剂量</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">达拉他韦（DCV）</td>
+                    <td class="note-text">商品名：Daklinza<br>60mg片剂qd。注意：当使用CYP3A4强抑制剂时，如一些ARV药物，剂量降至30mg/d；当使用弱、中度CYP3A诱导剂时，剂量需增至90mg/d。禁与CYP3A强诱导剂联用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">艾尔巴韦/格拉瑞韦</td>
+                    <td class="note-text">商品名：择必达<br>固定剂量组合片剂（艾尔巴韦50mg+格拉瑞韦100mg）1片po qd</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">格卡瑞韦/哌仑他韦</td>
+                    <td class="note-text">商品名：艾诺全<br>固定剂量组合片剂（格卡瑞韦100mg+哌仑他韦40mg）3片po qd，餐中服</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">帕立瑞韦/利托那韦+奥比他韦（PrO）</td>
+                    <td class="note-text">商品名：Technivie<br>固定剂量组合片剂（帕立瑞韦150mg/利托那韦100mg+奥比他韦25mg）1片po qd</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">HCV</span>
+            <span class="tag">丙型肝炎</span>
+            <span class="tag">DAA</span>
+            <span class="tag">利巴韦林</span>
+            <span class="tag">达拉他韦</span>
+            <span class="tag">DCV</span>
+            <span class="tag">Daklinza</span>
+            <span class="tag">艾尔巴韦</span>
+            <span class="tag">格拉瑞韦</span>
+            <span class="tag">择必达</span>
+            <span class="tag">格卡瑞韦</span>
+            <span class="tag">哌仑他韦</span>
+            <span class="tag">艾诺全</span>
+            <span class="tag">帕立瑞韦</span>
+            <span class="tag">利托那韦</span>
+            <span class="tag">奥比他韦</span>
+            <span class="tag">Technivie</span>
+            <span class="tag">HBV</span>
+            <span class="tag">HCV RNA</span>
+            <span class="tag">ETR</span>
+            <span class="tag">SVR</span>
+            <span class="tag">Fibroscan</span>
+            <span class="tag">CYP3A4</span>
+            <span class="tag">ARV</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>丙型肝炎、HCV治疗、直接抗病毒药物、DAA、达拉他韦、艾尔巴韦、格拉瑞韦、格卡瑞韦、哌仑他韦、帕立瑞韦、利托那韦、奥比他韦、持续病毒学应答、SVR、肝纤维化、耐药检测
+        </div>
+        <div class="page-number">504</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="丙型肝炎治疗方案和疗效-HCV感染治疗指南；表14F 丙型肝炎治疗方案和疗效；丙型肝炎、HCV治疗、直接抗病毒药物、DAA、达拉他韦、艾尔巴韦、格拉瑞韦、格卡瑞韦、哌仑他韦、帕立瑞韦、利托那韦、奥比他韦、持续病毒学应答、SVR、肝纤维化、耐药检测；=504" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+    <script>
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(() => {
+                alert("已复制到剪贴板！");
+            }).catch(err => {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById("favBtn");
+            const isFav = btn.classList.toggle("active");
+            
+            const pageInfo = {
+                title: "丙型肝炎治疗方案和疗效-HCV感染治疗指南",
+                url: "504.html",
+                pageNum: "504"
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            
+            if (isFav) {
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem("favorites", JSON.stringify(favorites));
+                }
+                alert("已收藏！页面已添加到收藏列表");
+            } else {
+                favorites = favorites.filter(f => f.url !== pageInfo.url);
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+                alert("已取消收藏");
+            }
+        }
+        
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            const isFav = favorites.some(f => f.url === "504.html");
+            if (isFav) {
+                document.getElementById("favBtn").classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>

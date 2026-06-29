@@ -1,0 +1,547 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗病毒治疗方案表*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 15px;
+            background: #fff;
+            color: #4a90d9;
+            border: 1px solid #4a90d9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .nav-btn:hover {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .prev-btn {
+            right: 100px;
+        }
+        
+        .next-btn {
+            right: 15px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 20px 0;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid #357abd;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            line-height: 1.6;
+            color: #444;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4fd;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 0 auto 25px;
+            max-width: 100%;
+        }
+        
+        .notes p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 6px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 0 auto 25px;
+            max-width: 100%;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tag-group {
+            margin-bottom: 15px;
+        }
+        
+        .tag-group-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease:hover {
+            background: #1976d2;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #388e3c;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .tag-drug:hover {
+            background: #388e3c;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 1px solid #ffe0b2;
+        }
+        
+        .tag-bacteria:hover {
+            background: #f57c00;
+            color: white;
+        }
+        
+        /* 关键词和页码 */
+        .footer-info {
+            text-align: center;
+            padding: 20px 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 0 auto 25px;
+            max-width: 100%;
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .page-number {
+            font-size: 14px;
+            color: #4a90d9;
+            font-weight: 600;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 0 auto 30px;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #357abd;
+        }
+        
+        .copy-btn.copied {
+            background: #4caf50;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 55px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 85px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页 -->
+    <a href="441.html" class="nav-btn prev-btn">← 上一页</a>
+    
+    <!-- 下一页 -->
+    <a href="443.html" class="nav-btn next-btn">下一页 →</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~抗病毒治疗方案表（截至2023年1月）*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 30%;">病毒/疾病<br>处境、严重程度、疾病进展的风险</th>
+                    <th style="width: 35%;">药物/剂量<br>治疗（截至2023年1月）</th>
+                    <th style="width: 35%;">不良反应/说明<br>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>不住院或住院、无症状</td>
+                    <td>推荐免疫抑制人群和年龄＞65岁人群给予治疗</td>
+                    <td>临床密切观察</td>
+                </tr>
+                <tr>
+                    <td>不住院、轻-中度、非疾病进展高危患者</td>
+                    <td>推荐免疫抑制人群和年龄＞65岁人群给予治疗</td>
+                    <td>临床密切观察</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <p><strong>注：</strong>1 HSCT＝造血干细胞移植。</p>
+        <p><strong>*</strong> 所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        
+        <div class="tag-group">
+            <div class="tag-group-label">疾病：</div>
+            <div class="tags">
+                <span class="tag tag-disease">无症状</span>
+                <span class="tag tag-disease">轻-中度</span>
+                <span class="tag tag-disease">非疾病进展高危</span>
+            </div>
+        </div>
+        
+        <div class="tag-group">
+            <div class="tag-group-label">药物/治疗：</div>
+            <div class="tags">
+                <span class="tag tag-drug">免疫抑制治疗</span>
+                <span class="tag tag-drug">年龄＞65岁治疗</span>
+                <span class="tag tag-drug">临床密切观察</span>
+            </div>
+        </div>
+        
+        <div class="tag-group">
+            <div class="tag-group-label">特殊人群：</div>
+            <div class="tags">
+                <span class="tag tag-bacteria">免疫抑制人群</span>
+                <span class="tag tag-bacteria">年龄＞65岁人群</span>
+                <span class="tag tag-bacteria">肾功能正常者</span>
+                <span class="tag tag-bacteria">成人</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="footer-info">
+        <div class="keywords">
+            <strong>关键词：</strong>抗病毒治疗；免疫抑制；高龄患者；临床观察；造血干细胞移植；HSCT；肾功能；剂量调整
+        </div>
+        <div class="page-number">页码：442</div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="抗病毒治疗方案表（截至2023年1月）；免疫抑制；高龄患者；临床观察；HSCT；=442" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <script>
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制！';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过打开index并传递参数）
+            alert('已添加到收藏！\n标题：' + title + '\n请在首页查看收藏类目。');
+            
+            // 尝试向index.html发送消息
+            try {
+                const indexWindow = window.open('index.html', '_blank');
+                if (indexWindow) {
+                    setTimeout(() => {
+                        indexWindow.postMessage({
+                            type: 'addFavorite',
+                            data: { title: title, url: url }
+                        }, '*');
+                    }, 1000);
+                }
+            } catch(e) {
+                console.log('无法自动同步到index.html，请手动刷新首页查看收藏。');
+            }
+        }
+        
+        // 标签点击搜索
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                alert('搜索标签：' + text);
+                // 实际应用中这里可以跳转到搜索结果页
+            });
+        });
+    </script>
+</body>
+</html>

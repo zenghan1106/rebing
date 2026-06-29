@@ -1,0 +1,608 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~HIV-1、HBV和HCV暴露后预防*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #6ab0de;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e0e6ed;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .section-header {
+            background: #1a5276;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .section-header td {
+            padding: 12px 10px;
+        }
+        
+        .col-status {
+            width: 22%;
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        .col-hbsag-pos {
+            width: 26%;
+            color: #2874a6;
+        }
+        
+        .col-hbsag-neg {
+            width: 22%;
+            color: #2874a6;
+        }
+        
+        .col-unknown {
+            width: 30%;
+            color: #555;
+        }
+        
+        .notes {
+            background: #fff8e6;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 12px;
+            line-height: 1.8;
+            color: #666;
+            border-left: 4px solid #f0ad4e;
+        }
+        
+        .notes p {
+            margin-bottom: 8px;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #d4edda;
+            color: #155724;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .tag:hover {
+            background: #c3e6cb;
+            transform: scale(1.05);
+        }
+        
+        .tag-disease {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        
+        .tag-disease:hover {
+            background: #f5c6cb;
+        }
+        
+        .tag-virus {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+        
+        .tag-virus:hover {
+            background: #bee5eb;
+        }
+        
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #17a2b8;
+        }
+        
+        .keywords {
+            text-align: center;
+            padding: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.5);
+        }
+        
+        .favorite-btn.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        .info-box {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2e86c1;
+        }
+        
+        .info-box p {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .bullet-list {
+            padding-left: 20px;
+        }
+        
+        .bullet-list li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .sub-list {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .sub-list li {
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-btns {
+                justify-content: center;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="520.html" class="nav-btn">上一页</a>
+            <a href="522.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1 class="title">~~~~~HIV-1、HBV和HCV暴露后预防*****</h1>
+    
+    <div class="table-container">
+        <div class="info-box">
+            <p><strong>职业暴露于有传染风险的HBV/HCV和/或HIV-1血、阴茎/阴道分泌物或其他潜在感染性的体液或组织（如针刺伤）</strong></p>
+            <p>关于职业暴露的免费咨询，致电（热线）1-888-448-4911（相关信息也可在www.aidsinfo.nih.gov网站获得）</p>
+        </div>
+        
+        <div class="info-box">
+            <p><strong>一般处理步骤</strong></p>
+            <ul class="bullet-list">
+                <li>即刻清洗伤口/冲洗黏膜（不建议应用腐蚀性药物或挤压伤口，缺少关于消毒剂作用的数据）</li>
+                <li>按如下评估风险：①暴露的性质；②根据病史、危险行为，HBV、HCV及HIV的检测以明确或评估暴露源；③评估和检测暴露者的HBV、HCV和HIV状态</li>
+            </ul>
+        </div>
+        
+        <p style="padding: 10px; font-weight: bold; color: #1a5276;">HBV职业暴露的预防 MMWR 67; 1-31, 2018（https://www.cdc.gov/mmwr/volumes/67/rr/rr6701a1.htm）</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="col-status">暴露者疫苗接种状态</th>
+                    <th colspan="3" class="col-plan">暴露源</th>
+                </tr>
+                <tr>
+                    <th class="col-hbsag-pos">HBsAg阳性</th>
+                    <th class="col-hbsag-neg">HBsAg阴性</th>
+                    <th class="col-unknown">未知或无法检测</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-status">未接种疫苗</td>
+                    <td class="col-hbsag-pos">予HBIG 0.06ml/kg im并启动疫苗接种</td>
+                    <td class="col-hbsag-neg">启动乙肝疫苗接种</td>
+                    <td class="col-unknown">启动乙肝疫苗接种</td>
+                </tr>
+                <tr>
+                    <td class="col-status">已接种疫苗<br>（抗体状态未知）</td>
+                    <td class="col-hbsag-pos">检测暴露者的HBsAb：<br>如效价≥10mIU/ml，无须特殊处理<br>如效价＜10mIU/ml，予HBIG＋1剂乙肝疫苗<sup>2</sup></td>
+                    <td class="col-hbsag-neg">无须特殊处理</td>
+                    <td class="col-unknown">检测暴露者的HBsAb：<br>如效价≥10mIU/ml，无须特殊处理<sup>1</sup><br>如效价＜10mIU/ml，予HBIG＋1剂乙肝疫苗<sup>2</sup></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="notes">
+            <p><strong>注：</strong></p>
+            <p>1 曾感染HBV者对再感染免疫，无须暴露后预防。</p>
+            <p>对已知疫苗应答者（效价≥10mIU/ml），目前不再建议检测抗体水平或予加强剂量。已知对首个全程乙肝疫苗无应答（效价＜10mIU/ml）且暴露源HBsAg阳性或者怀疑高危暴露源——予HBIG并再次启动疫苗接种或间隔1个月予2剂HBIG。对第2个全程疫苗接种无应答者，最好在发生新暴露后予2剂HBIG。如果已知高危暴露源，按HBsAg阳性暴露源处理。</p>
+            <p>2 随访以评估疫苗应答或确保完成全程疫苗接种。</p>
+        </div>
+        
+        <div class="info-box" style="margin-top: 15px;">
+            <p><strong>HBV非职业暴露或潜伏乙肝再活动</strong></p>
+            <p><strong>非职业暴露</strong></p>
+            <ul class="bullet-list">
+                <li>暴露于HBsAg阳性者的血液或生殖道分泌物
+                    <ul class="sub-list">
+                        <li>经皮肤（咬伤、针刺）</li>
+                        <li>性侵</li>
+                    </ul>
+                </li>
+                <li>24小时内启动预防用药，或者在性暴露和肠道外暴露后不超过7天内启动预防</li>
+                <li>按职业暴露指南应用HBIG和乙肝疫苗</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">HIV-1</span>
+            <span class="tag tag-disease">HBV</span>
+            <span class="tag tag-disease">HCV</span>
+            <span class="tag tag-disease">职业暴露</span>
+            <span class="tag tag-disease">针刺伤</span>
+            <span class="tag tag-disease">非职业暴露</span>
+            <span class="tag tag-disease">潜伏乙肝再活动</span>
+            <span class="tag tag-disease">性侵</span>
+            <span class="tag tag-virus">HBsAg</span>
+            <span class="tag tag-virus">HBsAb</span>
+            <span class="tag">HBIG</span>
+            <span class="tag">乙肝疫苗</span>
+            <span class="tag">疫苗接种</span>
+            <span class="tag">AHA</span>
+            <span class="tag">MMWR</span>
+            <span class="tag">CDC</span>
+            <span class="tag">aidsinfo</span>
+            <span class="tag">NIH</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">复制</button>
+    </div>
+    
+    <div class="page-number">521</div>
+    
+    <div class="keywords">
+        关键词：HIV-1；HBV；HCV；暴露后预防；职业暴露；乙肝疫苗；HBIG；HBsAg；针刺伤；血液暴露；性暴露
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 设置复制输入框内容
+        const title = "HIV-1、HBV和HCV暴露后预防";
+        const subtitle = "表15D 职业暴露与非职业暴露预防指南";
+        const keywords = "HIV-1；HBV；HCV；暴露后预防；职业暴露；乙肝疫苗；HBIG；HBsAg；针刺伤；血液暴露；性暴露";
+        const pageNum = "521";
+        const copyContent = `${title}；${subtitle}；${keywords}；=${pageNum}`;
+        document.getElementById('copyInput').value = copyContent;
+        
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            showToast('内容已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        let isFavorited = false;
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            isFavorited = !isFavorited;
+            
+            if (isFavorited) {
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+                showToast('已添加到收藏');
+                saveToIndex();
+            } else {
+                btn.innerHTML = '☆';
+                btn.classList.remove('active');
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 保存到index.html的收藏类目
+        function saveToIndex() {
+            const favoriteData = {
+                title: title,
+                url: '521.html',
+                pageNum: pageNum,
+                timestamp: new Date().toISOString()
+            };
+            
+            // 获取已有的收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.find(f => f.url === '521.html');
+            if (!exists) {
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.find(f => f.url === '521.html');
+            if (exists) {
+                isFavorited = true;
+                const btn = document.getElementById('favoriteBtn');
+                btn.innerHTML = '★';
+                btn.classList.add('active');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        checkFavorite();
+    </script>
+</body>
+</html>

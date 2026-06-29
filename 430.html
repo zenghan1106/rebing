@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体外寄生虫感染治疗方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 10px;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #e74c3c;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #e74c3c;
+            margin-left: 10px;
+        }
+        
+        /* 副标题 */
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .prev-btn, .next-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            font-size: 13px;
+        }
+        
+        /* 表头蓝色 */
+        thead th {
+            background-color: #2874a6;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #eaf2f8;
+        }
+        
+        td, th {
+            border: 1px solid #bdc3c7;
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9f9;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+        
+        /* 特殊行样式 */
+        .notice-row {
+            background-color: #fef9e7 !important;
+            color: #7d6608;
+        }
+        
+        .disease-name {
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 180px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #fadbd8;
+            color: #943126;
+            border: 1px solid #e74c3c;
+        }
+        
+        .tag-drug {
+            background-color: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #2ecc71;
+        }
+        
+        .tag-bacteria {
+            background-color: #d6eaf8;
+            color: #1a5276;
+            border: 1px solid #3498db;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .copy-btn {
+            padding: 10px 20px;
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #8e44ad;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 5px;
+            }
+            
+            td, th {
+                padding: 6px 5px;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        <div class="page-nav">
+            <a href="429.html" class="nav-btn prev-btn">上一页</a>
+            <a href="431.html" class="nav-btn next-btn">下一页</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="page-title">体外寄生虫感染的治疗</div>
+    <div class="sub-title">表 13A（17）寄生虫感染的治疗</div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:8%">疾病</th>
+                    <th style="width:10%">病原体</th>
+                    <th style="width:32%">备选药物</th>
+                    <th style="width:25%">备选药物</th>
+                    <th style="width:25%">说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="notice-row">
+                    <td colspan="5">
+                        <strong>体外寄生虫</strong> 文献：CID 36: 1355, 2003; Ln 363: 889, 2004。
+                        <strong>注意：</strong>由于有潜在的神经毒性和再生障碍性贫血的风险，<strong>不推荐使用六氯化苯（lindane）</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="disease-name">
+                        头虱<br>
+                        <em>Med Lett 54: 61, 2012</em>
+                    </td>
+                    <td>
+                        人头虱<br>
+                        通常因目前药物不能杀死虫卵而需重复治疗
+                    </td>
+                    <td>
+                        1%苄氯菊酯洗液：洗发液洗头，干后10分钟给药；9～10天后重复一次。或0.5%马拉硫磷洗液（Ovide）：涂于干头发上，保留8～12小时，然后用洗发液洗净；给药2次，相隔7～9天；或0.9%多杀菌素悬液用于感染部位，10分钟后洗净（85%有效），必要时7天后重复治疗。用细齿梳移除幼虫，并且在7～10天后重复
+                    </td>
+                    <td>
+                        伊维菌素200～400μg/kg po×1剂；以后每隔7天重复，共3剂，有效率95%（JID 193: 474, 2006）。局部应用0.5%伊维菌素洗液，有效率75%<br><br>
+                        马拉硫磷：有报道称使用1～2次，每次20分，有效率98%（Ped Derm 21: 670, 2004）。含乙醇，易燃<br><br>
+                        苯甲醇：有效率76%
+                    </td>
+                    <td>
+                        苄氯菊酯：治愈率78%，耐药性在逐渐增多，5%苄氯菊酯疗效并无优势<br><br>
+                        多杀菌素：有效，但昂贵。用热水清洗帽子、围巾、上衣及寝具，然后用热烘干机烘干20分钟以上
+                    </td>
+                </tr>
+                <tr>
+                    <td class="disease-name">阴虱</td>
+                    <td>耻阴虱</td>
+                    <td>
+                        阴毛：苄氯菊酯或马拉硫磷，与头虱相同。剃除阴毛
+                    </td>
+                    <td>
+                        眼睑：凡士林糊剂外用qid×10d，或1%黄色氧化汞qid×14d
+                    </td>
+                    <td>
+                        不能用六氯化苯。性伴侣至少治疗30天
+                    </td>
+                </tr>
+                <tr>
+                    <td class="disease-name">体虱</td>
+                    <td>人体虱</td>
+                    <td colspan="3">
+                        没有用于人体的药物。体虱在衣服的缝隙处寄生、产卵。丢弃衣服；如果不能丢弃，用1%马拉硫磷粉剂或0.5%苄氯菊酯粉剂处理衣服。在流浪者收容所，使用伊维菌素治疗获得成功：d0、d7、d14各予12mg po（JID 193: 474, 2006）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="disease-name">蝇蛆病</td>
+                    <td>苍蝇幼虫所致</td>
+                    <td colspan="3">
+                        通常表现为皮肤、皮下小结节伴中央凹陷。治疗：用凡士林、指甲油、美容霜或培根封住凹陷处，阻止气体交换。当幼虫爬出时，将其去除。<em>参见 Clin Microbiol Rev 25: 79, 2012</em>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">★</button>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">头虱</span>
+            <span class="tag tag-disease">阴虱</span>
+            <span class="tag tag-disease">体虱</span>
+            <span class="tag tag-disease">蝇蛆病</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">苄氯菊酯</span>
+            <span class="tag tag-drug">马拉硫磷</span>
+            <span class="tag tag-drug">多杀菌素</span>
+            <span class="tag tag-drug">伊维菌素</span>
+            <span class="tag tag-drug">苯甲醇</span>
+            <span class="tag tag-drug">凡士林</span>
+            <span class="tag tag-drug">氧化汞</span>
+            <!-- 病原体/寄生虫标签 -->
+            <span class="tag tag-bacteria">人头虱</span>
+            <span class="tag tag-bacteria">耻阴虱</span>
+            <span class="tag tag-bacteria">人体虱</span>
+            <span class="tag tag-bacteria">苍蝇幼虫</span>
+        </div>
+    </div>
+    
+    <!-- 底部编辑框和复制功能 -->
+    <div class="footer-section">
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">430</div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：体外寄生虫、头虱、阴虱、体虱、蝇蛆病、苄氯菊酯、马拉硫磷、伊维菌素、多杀菌素、治疗方案
+    </div>
+    
+    <script>
+        // 设置复制框内容
+        const pageTitle = "体外寄生虫感染的治疗";
+        const subTitle = "表 13A（17）寄生虫感染的治疗";
+        const keywords = "头虱；阴虱；体虱；蝇蛆病；苄氯菊酯；马拉硫磷；伊维菌素；多杀菌素；人头虱；耻阴虱；人体虱；苍蝇幼虫";
+        const pageNum = "430";
+        
+        document.getElementById('copyText').value = pageTitle + "；" + subTitle + "；" + keywords + "=" + pageNum;
+        
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById('copyText');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                alert('已复制到剪贴板：' + copyText.value);
+            } catch (err) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert('已复制到剪贴板：' + copyText.value);
+                });
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已存在
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                category: '体外寄生虫感染治疗',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏（通过localStorage传递）
+            localStorage.setItem('newFavorite', JSON.stringify({
+                title: title,
+                url: url,
+                category: '体外寄生虫感染治疗'
+            }));
+            
+            alert('已添加到收藏！\n标题：' + title + '\n链接：' + url);
+            
+            // 改变按钮颜色表示已收藏
+            document.querySelector('.favorite-btn').style.backgroundColor = '#f39c12';
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                alert('搜索标签：' + text);
+                // 实际应用中可以跳转到搜索页面
+            });
+        });
+    </script>
+</body>
+</html>

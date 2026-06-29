@@ -1,10 +1,10 @@
-```html
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~表1(23) 临床抗微生物治疗的初始选择-梅毒晚期神经梅毒HIV妊娠梅毒*****</title>
+    <title>~~~~~表1(23)临床抗微生物治疗的初始选择-梅毒晚期及特殊人群*****</title>
     <style>
         * {
             margin: 0;
@@ -13,393 +13,629 @@
         }
         
         body {
-            font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif;
-            background-color: #faf8f5;
+            font-family: "Microsoft YaHei", "SimHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             color: #333;
-            padding: 20px;
             line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
         }
         
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .nav-left {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-right {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 8px 16px;
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
             border: none;
-            border-radius: 4px;
+            padding: 10px 18px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
             transition: all 0.3s;
         }
         
-        .btn-home {
-            background-color: #4a90d9;
-            color: white;
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
         }
         
-        .btn-home:hover {
-            background-color: #357abd;
-        }
-        
-        .btn-nav {
-            background-color: #5cb85c;
-            color: white;
-        }
-        
-        .btn-nav:hover {
-            background-color: #449d44;
-        }
-        
-        .copy-section {
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
             display: flex;
-            align-items: center;
             gap: 10px;
-            margin-bottom: 20px;
-            width: 100%;
         }
         
-        .copy-input {
-            flex: 1;
-            height: 36px;
-            padding: 0 12px;
-            border: 2px solid #4a90d9;
-            border-radius: 4px;
-            font-size: 13px;
-            color: #555;
-        }
-        
-        .btn-copy {
-            background-color: #f0ad4e;
+        .nav-btn {
+            background: #4a90d9;
             color: white;
-            padding: 8px 20px;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,217,0.3);
+            transition: all 0.3s;
         }
         
-        .btn-copy:hover {
-            background-color: #ec971f;
+        .nav-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
         }
         
-        .main-title {
+        /* 标题 */
+        .page-title {
             text-align: center;
             font-size: 22px;
             font-weight: bold;
             color: #1a5276;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #eaf2f8;
-            border-radius: 8px;
-            border-left: 5px solid #4a90d9;
+            margin: 70px 0 25px 0;
+            padding: 0 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
+            background: white;
+            font-size: 12px;
         }
         
-        thead {
-            background-color: #2e75b6;
-            color: white;
-        }
-        
+        /* 表头 - 蓝色 */
         thead th {
-            padding: 14px 10px;
-            font-size: 15px;
-            font-weight: bold;
+            background: #2e86c1;
+            color: white;
+            padding: 15px 10px;
             text-align: center;
+            font-weight: bold;
+            font-size: 14px;
             border: 1px solid #1a5276;
         }
         
-        tbody td {
-            padding: 12px 10px;
-            border: 1px solid #ddd;
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
             font-size: 13px;
+            font-weight: bold;
+        }
+        
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px 8px;
             vertical-align: top;
         }
         
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
+        td {
+            background: #fafbfc;
         }
         
-        tbody tr:hover {
-            background-color: #e8f4f8;
+        tbody tr:nth-child(even) td {
+            background: #f4f6f7;
         }
         
-        .section-header {
-            background-color: #d6eaf8 !important;
-            font-weight: bold;
-            color: #1a5276;
-            font-size: 14px !important;
+        tbody tr:hover td {
+            background: #e8f4f8;
         }
         
-        .sub-header {
-            background-color: #ebf5fb !important;
-            font-weight: bold;
-            color: #2874a6;
-        }
-        
-        .highlight-drug {
-            color: #c0392b;
+        /* 分类行 */
+        .category-row {
+            background: #d5e8d4 !important;
+            color: #1e8449;
             font-weight: bold;
         }
         
-        .highlight-bacteria {
-            color: #8e44ad;
-            font-weight: bold;
+        .category-row td {
+            background: #d5e8d4 !important;
         }
         
-        .highlight-disease {
-            color: #d35400;
-            font-weight: bold;
-        }
-        
-        .note-text {
-            color: #555;
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
             font-style: italic;
         }
         
-        .warning-text {
+        /* 剂量标注 */
+        .dosage {
+            color: #c0392b;
+            font-weight: 500;
+        }
+        
+        /* 警示 */
+        .warning {
             color: #e74c3c;
             font-weight: bold;
         }
         
-        .ref-text {
-            color: #27ae60;
-            font-style: italic;
+        /* 分隔线 */
+        .divider {
+            border-top: 2px dashed #bdc3c7;
+            margin: 8px 0;
         }
         
-        .keywords-section {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: #fef9e7;
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 15px;
+            border: 2px solid #3498db;
             border-radius: 8px;
-            border: 1px solid #f9e79f;
-        }
-        
-        .keywords-title {
-            font-weight: bold;
-            color: #b7950b;
-            margin-bottom: 10px;
             font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
         }
         
-        .keywords-content {
-            color: #7d6608;
+        .copy-input:focus {
+            border-color: #2e86c1;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 13px;
-            line-height: 2;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
         }
         
+        .tag-disease {
+            background: #fdebd0;
+            color: #d35400;
+            border: 1px solid #f5b041;
+        }
+        
+        .tag-drug {
+            background: #d5e8d4;
+            color: #1e8449;
+            border: 1px solid #82c91e;
+        }
+        
+        .tag-bacteria {
+            background: #d4e6f1;
+            color: #2874a6;
+            border: 1px solid #5dade2;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.favorited {
+            background: #f39c12;
+        }
+        
+        /* 页码 */
         .page-number {
             text-align: center;
-            margin-top: 20px;
-            font-size: 16px;
-            color: #555;
-            font-weight: bold;
+            font-size: 20px;
+            color: #5d6d7e;
+            margin: 20px 0;
+            font-weight: 600;
         }
         
-        .footer-info {
+        /* 关键词 */
+        .keywords {
             text-align: center;
-            margin-top: 15px;
-            color: #888;
+            color: #7f8c8d;
             font-size: 12px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+            line-height: 1.8;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 2000;
+            display: none;
+            pointer-events: none;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 17px;
+                margin-top: 75px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            th, td {
+                padding: 8px 5px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 5px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+                min-width: unset;
+            }
+            
+            .copy-box {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <div class="header-bar">
-        <div class="nav-left">
-            <button class="btn btn-home" onclick="window.location.href='index.html'">返回首页</button>
-        </div>
-        <div class="nav-right">
-            <button class="btn btn-nav" onclick="goToPage(-1)">上一页</button>
-            <button class="btn btn-nav" onclick="goToPage(1)">下一页</button>
-        </div>
-    </div>
+    <!-- 返回首页 -->
+    <button class="home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
     
-    <!-- 复制功能区 -->
-    <div class="copy-section">
-        <input type="text" class="copy-input" id="copyText" readonly>
-        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <button class="nav-btn" onclick="location.href='60.html'">← 上一页</button>
+        <button class="nav-btn" onclick="location.href='62.html'">下一页 →</button>
     </div>
     
     <!-- 标题 -->
-    <div class="main-title">~~~~~表1(23) 临床抗微生物治疗的初始选择-梅毒晚期神经梅毒HIV妊娠梅毒*****</div>
+    <h1 class="page-title">~~~~~表1(23) 临床抗微生物治疗的初始选择-梅毒晚期及特殊人群*****</h1>
     
-    <!-- 表格内容 -->
-    <table>
-        <thead>
-            <tr>
-                <th style="width: 18%;">解剖学部位/<br>诊断/特定情况</th>
-                <th style="width: 18%;">病原体（通常）</th>
-                <th style="width: 32%;">推荐治疗方案</th>
-                <th style="width: 32%;">辅助诊断或治疗方法及说明</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="section-header">
-                <td colspan="4">
-                    生殖道/女性和男性/梅毒（续）
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="highlight-disease">病程1年以上</span>（病程不明的潜伏梅毒、心血管梅毒、晚期良性梅毒瘤）
-                </td>
-                <td>
-                    青霉素脱敏方法见表7，89页
-                </td>
-                <td>
-                    <b>首选方案：</b><br>
-                    <span class="highlight-drug">苄星青霉素G</span>240万U im 1次/周×3周，总量720万U（若此药短缺，替代方案见说明）<br><br>
-                    <b>备选方案：</b><br>
-                    <span class="highlight-drug">多西环素</span>100mg po bid×28d或<span class="highlight-drug">四环素</span>500mg po qid×28d；也可选择<span class="highlight-drug">头孢曲松</span>1g iv或im qd×10～14d，建议感染科医师会诊
-                </td>
-                <td>
-                    腰穿指征（CDC）：有神经系统症状，治疗失败，眼或耳受累，有其他梅毒活动证据（主动脉炎、梅毒瘤、虹膜炎）<br><br>
-                    神经梅毒（NEJM 381:1358, 2019）。<span class="highlight-drug">阿莫西林</span>±<span class="highlight-drug">丙磺舒</span>的小规模RCT（CID 77:779, 2023）。血清学治愈：<span class="highlight-drug">阿莫西林</span>500mg tid单药90.4%，而<span class="highlight-drug">阿莫西林</span>1g tid＋<span class="highlight-drug">丙磺舒</span>250mg tid 94.4%。如使用替代治疗方案，必须随访血清学反应疗效
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="highlight-disease">神经梅毒</span>：非常难治，包括眼梅毒（球后视神经炎）
-                </td>
-                <td>
-                    -
-                </td>
-                <td>
-                    <b>首选方案：</b><br>
-                    <span class="highlight-drug">苄星青霉素</span>1800万～2400万U/d持续静脉滴注，或<span class="highlight-drug">苄星青霉素G</span>300万～400万U iv q4h×10～14d<br><br>
-                    <b>备选方案：</b><br>
-                    （<span class="highlight-drug">普鲁卡因青霉素</span>240万U im qd＋<span class="highlight-drug">丙磺舒</span>0.5g po qid）×10～14d（CID 71:267, 2020）
-                </td>
-                <td>
-                    <span class="highlight-drug">头孢曲松</span>2g iv或im qd×14d（Lancet Inf Dis 21:1441, 2021）。青霉素过敏者：青霉素脱敏，或请感染科会诊。血清学疗效标准：6～12个月后VDRL效价下降至原来的1/4以下
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="highlight-disease">HIV感染（艾滋病）</span><br><br>
-                    CDC性传播疾病指南：MMWR 70:1, 2021
-                </td>
-                <td>
-                    -
-                </td>
-                <td>
-                    治疗与未感染HIV者相同，应密切随访。对早期神经梅毒的患者，无论CD4细胞多少，都需治疗10～14天
-                </td>
-                <td>
-                    近期指南参见https://www.cdc.gov/std/treatment-guidelines/syphilis.htm<br><br>
-                    脑脊液VDRL阴性，但白细胞＞20×10⁹/L的患者，按神经梅毒治疗。虽然特异性低，对于HIV(+)患者，CSF白细胞5～20×10⁹/L，按神经梅毒治疗
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="highlight-disease">妊娠和梅毒</span>
-                </td>
-                <td>
-                    -
-                </td>
-                <td>
-                    与非妊娠相同，有人建议在<span class="highlight-drug">苄星青霉素G</span>首剂治疗后1周重复给药（240万U）×1剂，尤其是妊娠晚期或Ⅱ期梅毒患者<br><br>
-                    <b>备选方案：</b><br>
-                    应做青霉素皮试；必要时脱敏处理，因为静脉青霉素是唯一证实有效的治疗
-                </td>
-                <td>
-                    每月定量检测VDRL，若升高4倍应重复治疗。<span class="warning-text">禁用多西环素和四环素；不推荐使用红霉素，因其对胎儿治疗失败率高</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <!-- 关键词区域 -->
-    <div class="keywords-section">
-        <div class="keywords-title">%%%%%检索标签?????</div>
-        <div class="keywords-content">
-            <span class="highlight-disease">梅毒</span>；<span class="highlight-disease">晚期梅毒</span>；<span class="highlight-disease">潜伏梅毒</span>；<span class="highlight-disease">心血管梅毒</span>；<span class="highlight-disease">良性梅毒瘤</span>；<span class="highlight-disease">神经梅毒</span>；<span class="highlight-disease">眼梅毒</span>；<span class="highlight-disease">球后视神经炎</span>；<span class="highlight-disease">HIV梅毒</span>；<span class="highlight-disease">艾滋病梅毒</span>；<span class="highlight-disease">妊娠梅毒</span>；
-            <span class="highlight-bacteria">梅毒螺旋体</span>；<span class="highlight-bacteria">苍白密螺旋体</span>；
-            <span class="highlight-drug">苄星青霉素G</span>；<span class="highlight-drug">多西环素</span>；<span class="highlight-drug">四环素</span>；<span class="highlight-drug">头孢曲松</span>；<span class="highlight-drug">普鲁卡因青霉素</span>；<span class="highlight-drug">丙磺舒</span>；<span class="highlight-drug">阿莫西林</span>；<span class="highlight-drug">红霉素</span>；
-            青霉素脱敏；腰穿指征；脑脊液VDRL；血清学随访；VDRL效价；药物短缺；青霉素过敏；妊娠禁用
-        </div>
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 14%;">解剖学部位/<br>诊断/特定情况</th>
+                    <th style="width: 16%;">病原体（通常）</th>
+                    <th style="width: 35%;">首选方案</th>
+                    <th style="width: 35%;">备选方案§</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="5">
+                        生殖道/女性和男性/梅毒（续）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        病程1年以上<br>（病程不明的潜伏<br>梅毒、心血管梅<br>毒、晚期良性梅<br>毒瘤）
+                    </td>
+                    <td>
+                        青霉素脱敏方法<span class="reference">见表7，<br>89页</span>
+                    </td>
+                    <td>
+                        苄星青霉素G <span class="dosage">240万U im<br>1次/周×3周</span>，总量720万U<br>（若此药短缺，替代方案见<br>说明）
+                    </td>
+                    <td>
+                        多西环素 <span class="dosage">100mg po<br>bid×28d</span>或四环素<br>
+                        <span class="dosage">500mg po qid×28d</span>；<br>也可选择头孢曲<br>松 <span class="dosage">1g iv或im qd×<br>10～14d</span>，建议感染<br>科医师会诊
+                    </td>
+                    <td style="width: 30%;">
+                        腰穿指征（CDC）：有神经系统症状，治疗失败，眼或耳受<br>累，有其他梅毒活动证据（主动脉炎、梅毒瘤、虹膜炎）<br><br>
+                        神经梅毒（<span class="reference">NEJM 381: 1358, 2019</span>）。阿莫西林±丙磺<br>舒的小规模RCT（<span class="reference">CID 77: 779, 2023</span>）。血清学治愈：阿<br>莫西林 <span class="dosage">500mg tid</span> 单药90.4%，而阿莫西林 <span class="dosage">1g tid</span> + 丙磺舒<br>
+                        <span class="dosage">250mg tid</span> 94.4%。如使用替代治疗方案，必须随访血清学<br>反应疗效
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        神经梅毒：非常难<br>治，包括眼梅毒<br>（球后视神经炎）
+                    </td>
+                    <td>
+                        <!-- 同前 -->
+                    </td>
+                    <td>
+                        苄星青霉素 <span class="dosage">1800万～2400<br>万U/d</span> 持续静脉滴注，或苄星<br>青霉素G <span class="dosage">300万～400万U iv<br>q4h×10～14d</span>
+                    </td>
+                    <td>
+                        （普鲁卡因青霉素<br>
+                        <span class="dosage">240万U im qd</span> + 丙磺舒<br>
+                        <span class="dosage">0.5g po qid</span>）×10～<br>14d（<span class="reference">CID 71: 267,<br>2020</span>）
+                    </td>
+                    <td>
+                        头孢曲松 <span class="dosage">2g iv或im qd×14d</span>（<span class="reference">Lancet Inf Dis 21: 1441,<br>2021</span>）。青霉素过敏者：青霉素脱敏，或请感染科会诊。<br>血清学疗效标准：6～12个月后VDRL效价下降至原来的<br>1/4以下
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        HIV感染（艾滋病）<br><br>
+                        CDC性传播疾<br>病指南：<span class="reference">MMWR<br>70: 1, 2021</span>
+                    </td>
+                    <td>
+                        <!-- 同前 -->
+                    </td>
+                    <td colspan="2">
+                        治疗与未感染HIV者相同，应密切随访。对早期<br>神经梅毒的患者，无论CD4细胞多少，都需治疗<br>10～14天
+                    </td>
+                    <td>
+                        近期指南参见 <span class="reference">https://www.cdc.gov/std/treatment-guidelines/<br>syphilis.htm</span><br><br>
+                        脑脊液VDRL阴性，但白细胞＞20×10⁹/L的患者，按神<br>经梅毒治疗。虽然特异性低，对于HIV（+）患者，CSF<br>白细胞5～20×10⁹/L，按神经梅毒治疗
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        妊娠和梅毒
+                    </td>
+                    <td>
+                        <!-- 同前 -->
+                    </td>
+                    <td>
+                        与非妊娠相同，有人建议在<br>苄星青霉素G首剂治疗后1<br>周重复给药（<span class="dosage">240万U</span>）×<br>1剂，尤其是妊娠晚期或Ⅱ<br>期梅毒患者
+                    </td>
+                    <td>
+                        应做青霉素皮试；必<br>要时脱敏处理，因为<br>静脉青霉素是唯一证<br>实有效的治疗
+                    </td>
+                    <td>
+                        每月定量检测VDRL，若升高4倍应重复治疗。<span class="warning">禁用多西</span><br><span class="warning">环素和四环素</span>；<span class="warning">不推荐使用红霉素，因其对胎儿治疗失败</span><br><span class="warning">率高</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     
     <!-- 页码 -->
-    <div class="page-number" id="pageNumber">27</div>
+    <div class="page-number">61</div>
     
-    <div class="footer-info">
-        临床抗微生物治疗指南 | 表1(23) | 梅毒晚期、神经梅毒、HIV及妊娠梅毒治疗方案
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyInput" value="表1(23)临床抗微生物治疗的初始选择；梅毒晚期及特殊人群；潜伏梅毒；心血管梅毒；晚期良性梅毒；神经梅毒；眼梅毒；球后视神经炎；HIV感染；艾滋病；妊娠和梅毒；梅毒螺旋体；苄星青霉素；多西环素；四环素；头孢曲松；普鲁卡因青霉素；丙磺舒；阿莫西林；红霉素；VDRL；CSF；=61" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyText()">📋 复制</button>
+        </div>
     </div>
     
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病/情况 -->
+            <span class="tag tag-disease">潜伏梅毒</span>
+            <span class="tag tag-disease">心血管梅毒</span>
+            <span class="tag tag-disease">晚期良性梅毒</span>
+            <span class="tag tag-disease">神经梅毒</span>
+            <span class="tag tag-disease">眼梅毒</span>
+            <span class="tag tag-disease">球后视神经炎</span>
+            <span class="tag tag-disease">HIV感染</span>
+            <span class="tag tag-disease">艾滋病</span>
+            <span class="tag tag-disease">妊娠和梅毒</span>
+            <!-- 细菌/病原体 -->
+            <span class="tag tag-bacteria">梅毒螺旋体</span>
+            <!-- 药物 -->
+            <span class="tag tag-drug">苄星青霉素</span>
+            <span class="tag tag-drug">多西环素</span>
+            <span class="tag tag-drug">四环素</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">普鲁卡因青霉素</span>
+            <span class="tag tag-drug">丙磺舒</span>
+            <span class="tag tag-drug">阿莫西林</span>
+            <span class="tag tag-drug">红霉素</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：临床抗微生物治疗 | 初始选择 | 梅毒 | 晚期梅毒 | 潜伏梅毒 | 心血管梅毒 | 神经梅毒 | 眼梅毒 | 球后视神经炎 | HIV感染 | 艾滋病 | 妊娠 | 青霉素脱敏 | 苄星青霉素 | 头孢曲松 | 丙磺舒 | 阿莫西林 | VDRL | CSF | 腰穿指征 | 血清学疗效 | 胎儿治疗失败
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
     <script>
-        // 获取当前页码
-        function getCurrentPage() {
-            const path = window.location.pathname;
-            const filename = path.substring(path.lastIndexOf('/') + 1);
-            const pageNum = filename.replace('.html', '');
-            return parseInt(pageNum) || 27;
-        }
-        
-        // 页面跳转
-        function goToPage(offset) {
-            const current = getCurrentPage();
-            const target = current + offset;
-            if (target > 0) {
-                window.location.href = target + '.html';
-            }
-        }
-        
-        // 设置复制框内容
-        function setCopyText() {
-            const current = getCurrentPage();
-            const title = '表1(23) 临床抗微生物治疗的初始选择-梅毒晚期神经梅毒HIV妊娠梅毒';
-            const subtitle = '病程1年以上梅毒、神经梅毒、HIV感染梅毒、妊娠梅毒的治疗方案';
-            const keywords = '梅毒；晚期梅毒；潜伏梅毒；心血管梅毒；良性梅毒瘤；神经梅毒；眼梅毒；球后视神经炎；HIV梅毒；妊娠梅毒；梅毒螺旋体；苄星青霉素G；多西环素；四环素；头孢曲松；普鲁卡因青霉素；丙磺舒；阿莫西林；青霉素脱敏；脑脊液VDRL';
-            const text = title + '；' + subtitle + '；' + keywords + '=' + current;
-            document.getElementById('copyText').value = text;
-        }
-        
-        // 复制到剪贴板
-        function copyToClipboard() {
-            const input = document.getElementById('copyText');
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyInput');
             input.select();
             input.setSelectionRange(0, 99999);
             
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(input.value).then(() => {
-                    alert('已复制到剪贴板：' + input.value);
-                }).catch(err => {
-                    document.execCommand('copy');
-                    alert('已复制到剪贴板');
+                    showCopySuccess();
+                }).catch(() => {
+                    fallbackCopy();
                 });
             } else {
-                document.execCommand('copy');
-                alert('已复制到剪贴板');
+                fallbackCopy();
             }
         }
         
-        // 初始化
-        window.onload = function() {
-            setCopyText();
-        };
+        function fallbackCopy() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            document.execCommand('copy');
+            showCopySuccess();
+        }
+        
+        function showCopySuccess() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            showToast('已复制到剪贴板');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFavorited = btn.classList.contains('favorited');
+            
+            if (!isFavorited) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '★';
+                showToast('已添加到收藏');
+                
+                // 保存到localStorage，用于index页面读取
+                const favData = {
+                    title: '表1(23)临床抗微生物治疗的初始选择-梅毒晚期及特殊人群',
+                    url: '61.html',
+                    category: '临床抗微生物治疗',
+                    tags: ['梅毒', '晚期梅毒', '潜伏梅毒', '神经梅毒', '眼梅毒', 'HIV感染', '妊娠', '心血管梅毒']
+                };
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === '61.html');
+                if (!exists) {
+                    favorites.push(favData);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '☆';
+                showToast('已取消收藏');
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '61.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '61.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('favorited');
+                btn.innerHTML = '★';
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
     </script>
 </body>
 </html>
-```

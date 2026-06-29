@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表12B（2）抗分枝杆菌药物的剂量及不良反应</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        .container { max-width: 100%; margin: 0 auto; }
+        
+        /* 顶部导航 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .nav-btn:active { transform: translateY(0); }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        /* 表格样式 */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .content-table thead {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .content-table th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .content-table tr:nth-child(even) { background: #f8f9fa; }
+        .content-table tr:hover { background: #e8f4f8; }
+        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
+        
+        /* 标签 */
+        .tags-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 编辑框 */
+        .edit-section {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .edit-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn { background: #28a745; color: white; }
+        .copy-btn:hover { background: #218838; }
+        .favorite-btn { background: #ffc107; color: #333; }
+        .favorite-btn:hover { background: #e0a800; }
+        .favorite-btn.active { background: #ff6b6b; color: white; }
+        
+        /* 页码 */
+        .page-footer {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        /* 收藏提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-top">
+            <a href="index.html" class="nav-btn">🏠 首页</a>
+            <div>
+                <a href="395.html" class="nav-btn">⬅️ 上一页</a>
+                <a href="397.html" class="nav-btn">下一页 ➡️</a>
+            </div>
+        </div>
+        
+        <h1 class="main-title">~~~~~表12B（2）抗分枝杆菌药物的剂量及不良反应*****</h1>
+        
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>药物（商品名）</th>
+                    <th>常规剂量</th>
+                    <th>给药途径/原发耐药率（RES），美国</th>
+                    <th>不良反应、毒性及注意事项</th>
+                    <th>监测</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>二线药物（较一线药物使用不便和/或疗效差）<br>阿米卡星（Amikin）（iv针剂）</td>
+                    <td>7.5～10mg/kg qd（对细胞外病原体有杀菌作用）</td>
+                    <td>RES：（估计0.1%）<br>iv或im（每支500mg）</td>
+                    <td>表10C，166页<br>qd或tid给药，毒性相似（CID 38：1538，2004）</td>
+                    <td>每月查听力。患者若情况稳定，每周查血清肌酐或尿素氮</td>
+                </tr>
+                <tr>
+                    <td>阿米卡星脂质体混悬液（吸入用）</td>
+                    <td>每天1次经口吸入</td>
+                    <td>吸入</td>
+                    <td>呼吸道不良反应风险：过敏、肺泡炎、咯血、气管痉挛</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>贝达喹啉（Sirturo）（100mg片剂）参见JAC 69：2310，2014 NEJM 371：723，2014 CID 60：188，2015</td>
+                    <td>直接督导治疗（DOT）：400mg qd×2w，之后200mg，3次/w×22w，与食物一起服用。必须和其他抗结核药联合使用</td>
+                    <td>和其他抗结核药无交叉耐药；必须和其他抗结核药联合应用，以防耐药突变的选择</td>
+                    <td>常见：恶心、呕吐、关节痛、头痛、高尿酸血症。转氨酶升高。贝达喹啉在临床试验中是多药联合治疗方案中的一部分，因此不良反应常见，但难以归结于某一特定药物。已有耐药的报道：CID 2018，66：1625</td>
+                    <td>中度QTc间期延长（24周疗程平均为10～16ms）。有潜在风险导致胰腺炎、肌病、心肌损伤、严重肝毒性</td>
+                </tr>
+                <tr>
+                    <td>硫酸卷曲霉素（Capastat sulfate）</td>
+                    <td>1g [15mg/（kg·d）] qd单剂</td>
+                    <td>RES：0.1%（0%～0.9%）<br>im或iv</td>
+                    <td>肾毒性（36%）、耳毒性（听力障碍11%）、嗜酸性粒细胞增多、白细胞减少、皮疹、发热、低钾血症、神经肌肉传导阻滞</td>
+                    <td>每月查听力。每2周查血清肌酐或尿素氮</td>
+                </tr>
+                <tr>
+                    <td>环丙沙星（Cipro）（250mg、500mg、750mg片剂）</td>
+                    <td>750mg bid</td>
+                    <td>500mg或750mg缓释片po，iv（每支200～400mg）</td>
+                    <td>结核并非FDA批准的环丙沙星适应证。环丙沙星血清目标浓度4～6μg/ml。副作用见表10A，159页</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <td>氯法齐明（Lamprene）（50mg、100mg胶囊）</td>
+                    <td>50mg/d（无督导）+300 mg/m（在督导下）或100mg/d</td>
+                    <td>50mg po（进餐时服用）</td>
+                    <td>皮肤：色素沉着（红褐斑）75%～100%，干燥20%，瘙痒5%。胃肠道：腹痛50%（极个别严重至需腹腔镜探查），脾梗死（极罕见），肠梗阻（极罕见），消化道出血（极罕见）。眼：结膜刺激，视网膜晶体沉积；导致QTc间期延长的潜在风险</td>
+                    <td>无</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p style="font-size: 12px; color: #666; margin: 10px 0;">注：1注意：AIDS合并肠病患者可致抗分枝杆菌药物吸收不良。有关不良反应的综述，AJRCCM 167：1472，2003。<br>2 RES＝结核分枝杆菌的耐药百分比。<br>*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>§平均耐药率范围（拉美裔、亚裔及＜10岁的患者要高于均值）。<br>表中名词缩写见第2页。</p>
+        
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 关键词标签</div>
+            <div class="tags">
+                <span class="tag">二线药物</span>
+                <span class="tag">阿米卡星</span>
+                <span class="tag">Amikin</span>
+                <span class="tag">阿米卡星脂质体</span>
+                <span class="tag">贝达喹啉</span>
+                <span class="tag">Sirturo</span>
+                <span class="tag">硫酸卷曲霉素</span>
+                <span class="tag">环丙沙星</span>
+                <span class="tag">Cipro</span>
+                <span class="tag">氯法齐明</span>
+                <span class="tag">Lamprene</span>
+                <span class="tag">抗分枝杆菌药物</span>
+            </div>
+        </div>
+        
+        <div class="edit-section">
+            <textarea class="edit-box" id="editBox">表12B（2）抗分枝杆菌药物的剂量及不良反应；二线药物；阿米卡星；Amikin；阿米卡星脂质体；贝达喹啉；Sirturo；硫酸卷曲霉素；环丙沙星；Cipro；氯法齐明；Lamprene；抗分枝杆菌药物；=199</textarea>
+            <div class="btn-row">
+                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
+                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="page-number">第 199 页</div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        function copyContent() {
+            const editBox = document.getElementById('editBox');
+            editBox.select();
+            document.execCommand('copy');
+            showToast('✅ 已复制到剪贴板');
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const title = document.querySelector('.main-title').textContent;
+            const pageNum = 199;
+            
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            const index = favorites.findIndex(f => f.page === pageNum);
+            
+            if (index > -1) {
+                favorites.splice(index, 1);
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                showToast('已取消收藏');
+            } else {
+                favorites.push({ page: pageNum, title: title });
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                showToast('已添加到收藏');
+            }
+            
+            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
+            updateIndexFavorites();
+        }
+        
+        function checkFavorite() {
+            const btn = document.getElementById('favBtn');
+            const pageNum = 199;
+            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            
+            if (favorites.some(f => f.page === pageNum)) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        }
+        
+        function updateIndexFavorites() {
+            // 这个函数会在 index.html 中同步更新收藏列表
+            // 通过 localStorage 事件自动同步
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2002);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

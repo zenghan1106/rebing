@@ -1,0 +1,656 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~整合酶抑制剂黏附抑制剂及衣壳抑制剂不良反应表*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .page-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-page {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-fav {
+            position: fixed;
+            right: 20px;
+            bottom: 120px;
+            background: #e74c3c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            z-index: 100;
+            border: none;
+        }
+        
+        .btn-fav:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .sub-title {
+            text-align: center;
+            font-size: 14px;
+            color: #5d6d7e;
+            margin-bottom: 20px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+            color: white;
+            padding: 16px 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        td {
+            padding: 14px 12px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #34495e;
+            vertical-align: top;
+        }
+        
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+            white-space: nowrap;
+            background: #f0f4f8;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-size: 16px;
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .black-box {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .category-row {
+            background: #fff3e0 !important;
+        }
+        
+        .category-row td {
+            font-weight: bold;
+            color: #e65100;
+            font-size: 15px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        .tag-bacteria {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .bottom-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #5d6d7e;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #1a5276;
+        }
+        
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f0f4f8;
+            border-radius: 10px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+        
+        .btn-copy {
+            background: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+            white-space: nowrap;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-copy:hover {
+            background: #8e44ad;
+        }
+        
+        .btn-copy.copied {
+            background: #2ecc71;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            td:first-child {
+                font-size: 14px;
+                white-space: normal;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .btn-fav {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="top-nav">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        <div class="page-btns">
+            <a href="500.html" class="btn btn-page">← 上一页</a>
+            <a href="502.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()" title="点击收藏">★</button>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~整合酶抑制剂黏附抑制剂及衣壳抑制剂不良反应表*****</h1>
+    <p class="sub-title">表14D（4）抗反转录病毒药物和不良反应——整合酶抑制剂、黏附抑制剂及衣壳抑制剂类药物安全性数据</p>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物名称：通用名（商品名）</th>
+                    <th>常见不良反应</th>
+                    <th>最重要的不良反应</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">整合酶抑制剂</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">比克替拉韦</span><br>
+                        <span style="font-size:12px;color:#666;">（必妥维的成分）</span>
+                    </td>
+                    <td>
+                        报道至少5%患者出现：恶心、腹泻、头痛。因抑制肌酐从近端小管分泌，可引起血清肌酐升高0.10～0.15mg/dl（不代表GFR下降）
+                    </td>
+                    <td>
+                        <span class="black-box">黑框警告：</span>停药可能会使HBV共感染者肝炎恶化。CD4细胞＜150/ml的初治患者应监测免疫重建炎症综合征
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">卡博特韦（Vcabria）</span><br>
+                        <span style="font-size:12px;color:#666;">与注射用利匹韦林组成复合药物，商品名Cabenuva</span>
+                    </td>
+                    <td>
+                        头痛、恶心、梦境异常、焦虑、失眠，均＜1%
+                    </td>
+                    <td>
+                        变态反应（皮疹、发热、乏力、不适、疲劳、肌痛、关节痛、水疱、黏膜受累、结膜炎、面部水肿、肝炎、嗜酸性粒细胞增多、血管性水肿、呼吸困难）、肝毒性、抑郁
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">多替拉韦（Tivicay）</span>
+                    </td>
+                    <td>
+                        失眠和头痛（2%～4%）
+                    </td>
+                    <td>
+                        有皮疹、肝受损的报道。ALT/AST增加203%。与肌酐竞争肾小管分泌，致血清肌酐平均增加0.1mg/dl（GFR无变化）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">埃替拉韦＋可比司他（Stribild）</span>
+                    </td>
+                    <td>
+                        恶心和腹泻是最常见的两种不良反应。可比司他抑制近端肾小管酶，致血清肌酐上升0.10～0.15mg/dl，不代表GFR下降
+                    </td>
+                    <td>
+                        <span class="black-box">黑框警告：</span>同利托那韦、替诺福韦（TDF和TAF）。罕有乳酸酸中毒综合征。由于肾毒性，eGFR＜70ml/min的患者禁用。连续监测血清肌酐、尿蛋白和尿糖。如果血肌酐比基线水平升高＞0.4mg/dl，停药
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">拉替拉韦（Isentress）</span>
+                    </td>
+                    <td>
+                        腹泻、头痛、失眠、恶心。在HBV或HCV共感染者转氨酶升高更常见
+                    </td>
+                    <td>
+                        可发生变态反应。皮疹、史-约综合征、中毒性表皮坏死松解症均有报道。有肝衰竭的报道。CK增高、肌病和横纹肌溶解症。4例抑郁症的患者服药出现抑郁症加重，经调整精神科用药后均能继续服用拉替拉韦。咀嚼片含苯丙氨酸
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">黏附抑制剂</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">福斯特拉韦（Rukobia）</span>
+                    </td>
+                    <td>
+                        头痛、皮疹、恶心、呕吐、腹泻、疲劳、乏力
+                    </td>
+                    <td>
+                        免疫重建炎症综合征、QT间期延长、HBV或HCV共感染者转氨酶升高、潜在的药物相互作用
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">伊巴珠单抗（Trogarzo）</span>
+                    </td>
+                    <td>
+                        腹泻、头晕、恶心、皮疹
+                    </td>
+                    <td>
+                        关注免疫重建炎症综合征
+                    </td>
+                </tr>
+                <tr class="category-row">
+                    <td colspan="3">衣壳抑制剂</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="drug-name">来那卡帕韦（Sunlenca）</span>
+                    </td>
+                    <td>
+                        注射部位反应、恶心、免疫重建炎症综合征
+                    </td>
+                    <td>
+                        多种药物相互作用
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击图片中文字即可检索）</div>
+        <div>
+            <span class="tag tag-disease">恶心</span>
+            <span class="tag tag-disease">腹泻</span>
+            <span class="tag tag-disease">头痛</span>
+            <span class="tag tag-disease">血清肌酐升高</span>
+            <span class="tag tag-disease">肝炎恶化</span>
+            <span class="tag tag-disease">免疫重建炎症综合征</span>
+            <span class="tag tag-disease">梦境异常</span>
+            <span class="tag tag-disease">焦虑</span>
+            <span class="tag tag-disease">失眠</span>
+            <span class="tag tag-disease">变态反应</span>
+            <span class="tag tag-disease">皮疹</span>
+            <span class="tag tag-disease">发热</span>
+            <span class="tag tag-disease">乏力</span>
+            <span class="tag tag-disease">不适</span>
+            <span class="tag tag-disease">疲劳</span>
+            <span class="tag tag-disease">肌痛</span>
+            <span class="tag tag-disease">关节痛</span>
+            <span class="tag tag-disease">水疱</span>
+            <span class="tag tag-disease">黏膜受累</span>
+            <span class="tag tag-disease">结膜炎</span>
+            <span class="tag tag-disease">面部水肿</span>
+            <span class="tag tag-disease">嗜酸性粒细胞增多</span>
+            <span class="tag tag-disease">血管性水肿</span>
+            <span class="tag tag-disease">呼吸困难</span>
+            <span class="tag tag-disease">肝毒性</span>
+            <span class="tag tag-disease">抑郁</span>
+            <span class="tag tag-disease">肝受损</span>
+            <span class="tag tag-disease">乳酸酸中毒综合征</span>
+            <span class="tag tag-disease">肾毒性</span>
+            <span class="tag tag-disease">肝衰竭</span>
+            <span class="tag tag-disease">CK增高</span>
+            <span class="tag tag-disease">肌病</span>
+            <span class="tag tag-disease">横纹肌溶解症</span>
+            <span class="tag tag-disease">抑郁症加重</span>
+            <span class="tag tag-disease">呕吐</span>
+            <span class="tag tag-disease">头晕</span>
+            <span class="tag tag-disease">QT间期延长</span>
+            <span class="tag tag-disease">注射部位反应</span>
+            <span class="tag tag-disease">转氨酶升高</span>
+            <span class="tag tag-disease">史-约综合征</span>
+            <span class="tag tag-disease">中毒性表皮坏死松解症</span>
+            <span class="tag tag-drug">整合酶抑制剂</span>
+            <span class="tag tag-drug">比克替拉韦</span>
+            <span class="tag tag-drug">必妥维</span>
+            <span class="tag tag-drug">卡博特韦</span>
+            <span class="tag tag-drug">Vcabria</span>
+            <span class="tag tag-drug">利匹韦林</span>
+            <span class="tag tag-drug">Cabenuva</span>
+            <span class="tag tag-drug">多替拉韦</span>
+            <span class="tag tag-drug">Tivicay</span>
+            <span class="tag tag-drug">埃替拉韦</span>
+            <span class="tag tag-drug">可比司他</span>
+            <span class="tag tag-drug">Stribild</span>
+            <span class="tag tag-drug">拉替拉韦</span>
+            <span class="tag tag-drug">Isentress</span>
+            <span class="tag tag-drug">利托那韦</span>
+            <span class="tag tag-drug">替诺福韦</span>
+            <span class="tag tag-drug">TDF</span>
+            <span class="tag tag-drug">TAF</span>
+            <span class="tag tag-drug">黏附抑制剂</span>
+            <span class="tag tag-drug">福斯特拉韦</span>
+            <span class="tag tag-drug">Rukobia</span>
+            <span class="tag tag-drug">伊巴珠单抗</span>
+            <span class="tag tag-drug">Trogarzo</span>
+            <span class="tag tag-drug">衣壳抑制剂</span>
+            <span class="tag tag-drug">来那卡帕韦</span>
+            <span class="tag tag-drug">Sunlenca</span>
+            <span class="tag tag-bacteria">HBV</span>
+            <span class="tag tag-bacteria">HCV</span>
+        </div>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>整合酶抑制剂；黏附抑制剂；衣壳抑制剂；比克替拉韦；必妥维；卡博特韦；Vcabria；利匹韦林；Cabenuva；多替拉韦；Tivicay；埃替拉韦；可比司他；Stribild；拉替拉韦；Isentress；福斯特拉韦；Rukobia；伊巴珠单抗；Trogarzo；来那卡帕韦；Sunlenca；抗反转录病毒药物；黑框警告；HBV；HCV；免疫重建炎症综合征；肾毒性；肝毒性；乳酸酸中毒；横纹肌溶解症；QT间期延长；药物相互作用；史-约综合征；中毒性表皮坏死松解症
+        </div>
+        
+        <div class="page-num">页码：501</div>
+        
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="整合酶抑制剂黏附抑制剂及衣壳抑制剂不良反应表；表14D（4）抗反转录病毒药物和不良反应——整合酶抑制剂、黏附抑制剂及衣壳抑制剂类药物安全性数据；整合酶抑制剂；黏附抑制剂；衣壳抑制剂；比克替拉韦；必妥维；卡博特韦；Vcabria；利匹韦林；Cabenuva；多替拉韦；Tivicay；埃替拉韦；可比司他；Stribild；拉替拉韦；Isentress；福斯特拉韦；Rukobia；伊巴珠单抗；Trogarzo；来那卡帕韦；Sunlenca；抗反转录病毒药物；黑框警告；HBV；HCV；免疫重建炎症综合征；肾毒性；肝毒性；乳酸酸中毒；横纹肌溶解症；QT间期延长；药物相互作用；史-约综合征；中毒性表皮坏死松解症=501" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <script>
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const pageData = {
+                title: '整合酶抑制剂黏附抑制剂及衣壳抑制剂不良反应表',
+                url: '501.html',
+                category: '收藏',
+                tags: ['整合酶抑制剂', '黏附抑制剂', '衣壳抑制剂', '比克替拉韦', '多替拉韦', '拉替拉韦', '卡博特韦', '福斯特拉韦', '伊巴珠单抗', '来那卡帕韦']
+            };
+            
+            // 获取已有收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === pageData.url);
+            if (exists) {
+                alert('该页面已在收藏中！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push(pageData);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏区域（如果同域）
+            alert('✓ 已添加到收藏！\n页面：' + pageData.title + '\n请在首页查看收藏内容。');
+        }
+        
+        // 标签点击检索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                // 模拟检索，实际可连接搜索功能
+                alert('正在检索：' + keyword);
+                // window.location.href = 'search.html?q=' + encodeURIComponent(keyword);
+            });
+        });
+    </script>
+</body>
+</html>

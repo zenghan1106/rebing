@@ -29,6 +29,7 @@ var AUTHORIZED_MACHINES = [
  'MAC-02EBA54B',  // 示例：已授权的设备
  'MAC-70A562DB',  // 示例：已授权的设备
  'MAC-1CE9C128',  // 示例：已授权的设备
+ 'MAC-562A3395',  // 示例：已授权的设备
   // 在此添加更多已授权设备...
 ];
 
@@ -194,21 +195,10 @@ function checkStoredAuth() {
     return false;
   }
 
-  var currentCode = generateMachineCode();
-  var currentFp = generateDeviceFingerprint();
-
-  // 双重验证：机器码 + 设备指纹
-  if (auth.code === currentCode && auth.fp === currentFp) {
-    console.log('授权验证通过（已记住此设备）');
-    return true;
-  }
-
-  // 机器码不匹配，可能是设备更换了
-  if (auth.code !== currentCode) {
-    console.log('设备指纹不匹配，需要重新验证');
-  }
-
-  return false;
+  // ✅ 简化验证：只要授权记录存在且未过期，就通过验证
+  // 不再检查机器码或设备指纹（避免手机MAC地址随机化问题）
+  console.log('✓ 本地授权验证通过（免MAC验证）');
+  return true;
 }
 
 // ============ 清除授权 ============

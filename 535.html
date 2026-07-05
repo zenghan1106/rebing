@@ -1,0 +1,944 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>儿童抗生素剂量表（>28日龄）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .nav-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-page {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #5a6268;
+        }
+        
+        /* 标题样式 */
+        .title-wrapper {
+            text-align: center;
+            margin: 50px 0 30px 0;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .title-decorator {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #2471a3;
+            vertical-align: middle;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        
+        /* 分类列 - 第一列 */
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            background: #ebf5fb;
+            width: 12%;
+            min-width: 100px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        /* 药物名列 */
+        td:nth-child(2) {
+            width: 15%;
+            min-width: 120px;
+            font-weight: 600;
+        }
+        
+        /* 剂量列 */
+        td:nth-child(3) {
+            width: 58%;
+            min-width: 300px;
+        }
+        
+        /* 最大日剂量列 */
+        td:nth-child(4) {
+            width: 15%;
+            min-width: 80px;
+            text-align: center;
+            font-weight: 600;
+            color: #c0392b;
+        }
+        
+        /* 特殊文字颜色 */
+        .drug-name {
+            color: #8e44ad;
+            font-weight: 700;
+        }
+        
+        .drug-class {
+            color: #2980b9;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .disease {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .bacteria {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: #d35400;
+            font-weight: 600;
+        }
+        
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .note {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        /* 竖排文字 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 2px;
+            margin: 0 auto;
+            white-space: nowrap;
+        }
+        
+        /* 子分类行 */
+        .subclass-row td:first-child {
+            background: #d6eaf8;
+            color: #2874a6;
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+        
+        .image-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #219a52;
+        }
+        
+        .btn-copy.copied {
+            background: #e74c3c;
+        }
+        
+        /* 收藏按钮 */
+        .btn-favorite {
+            background: #f39c12;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 15px;
+        }
+        
+        .btn-favorite:hover {
+            background: #e67e22;
+        }
+        
+        .btn-favorite.active {
+            background: #e74c3c;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 15px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag-drug {
+            background: #8e44ad;
+        }
+        
+        .tag-disease {
+            background: #c0392b;
+        }
+        
+        .tag-bacteria {
+            background: #27ae60;
+        }
+        
+        .tag-test {
+            background: #d35400;
+        }
+        
+        .tag-other {
+            background: #2980b9;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .nav-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .nav-left, .nav-right {
+                position: static;
+            }
+            
+            .title-wrapper {
+                margin-top: 20px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            td {
+                padding: 6px 4px;
+            }
+            
+            td:first-child {
+                min-width: 80px;
+            }
+            
+            td:nth-child(2) {
+                min-width: 100px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="534.html" class="btn btn-page">← 上一页</a>
+            <a href="536.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decorator">~~~~~</span>
+            儿童抗生素剂量表（>28日龄）
+            <span class="title-decorator">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/药物</th>
+                    <th>药物名称</th>
+                    <th>剂量（>28日龄）</th>
+                    <th>最大日剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2" class="drug-class">达托霉素<br>（复杂皮肤软组织感染）</td>
+                    <td class="drug-name">达托霉素</td>
+                    <td>
+                        12～17岁：5mg/kg（输注30分钟以上），q24h<br>
+                        7～11岁：7mg/kg（输注30分钟以上），q24h<br>
+                        2～6岁：9mg/kg（输注60分钟以上），q24h<br>
+                        1～<2岁：10mg/kg（输注60分钟以上），q24h<br>
+                        <span class="note">（疗程均为≤14天）</span>
+                    </td>
+                    <td rowspan="2">—</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">达托霉素<br>（金葡菌菌血症）</td>
+                    <td>
+                        12～17岁：7mg/kg（输注30分钟以上），q24h<br>
+                        7～11岁：9mg/kg（输注30分钟以上），q24h<br>
+                        1～6岁：12mg/kg（输注60分钟以上），q24h<br>
+                        <span class="note">（疗程均为≤42天）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="drug-class">奥利万星</td>
+                    <td class="drug-name">奥利万星</td>
+                    <td>安全性和有效性未确立</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td class="drug-class">替考拉宁</td>
+                    <td class="drug-name">替考拉宁</td>
+                    <td>
+                        0～≤2个月：16mg/kg iv×1剂，然后8mg/kg iv q24h<br>
+                        2月龄～≤12岁：10mg/kg iv q12h×3剂，然后6～10mg/kg iv q24h
+                    </td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td class="drug-class">特拉万星</td>
+                    <td class="drug-name">特拉万星</td>
+                    <td>安全性和有效性未确定</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" class="drug-class">万古霉素</td>
+                    <td class="drug-name">万古霉素（iv）</td>
+                    <td>
+                        60～80mg/（kg·d）（分次，q6～8h）。目标AUC 400～600μg/ml×h，或谷浓度10～15μg/ml
+                    </td>
+                    <td rowspan="2">—</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">万古霉素<br>（口服治疗难辨梭菌）</td>
+                    <td>40mg/（kg·d）（分次，q6h）</td>
+                </tr>
+                <tr>
+                    <td class="drug-class">甘氨酰环素类</td>
+                    <td class="drug-name">替加环素</td>
+                    <td>
+                        <span class="warning">避免使用，但如果不得不用：</span><br>
+                        8～11岁：1.2mg/kg q12h<br>
+                        12～17岁：50mg/kg q12h
+                    </td>
+                    <td>100mg</td>
+                </tr>
+                <tr>
+                    <td class="drug-class">酮内酯类</td>
+                    <td class="drug-name">泰利霉素</td>
+                    <td>安全性和有效性未确定</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="drug-class">林可霉素类</td>
+                    <td class="drug-name">克林霉素（po）</td>
+                    <td>30～40mg/（kg·d）（分次，q6～8h）</td>
+                    <td rowspan="3">—</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">克林霉素（iv）</td>
+                    <td>20～40mg/（kg·d）（分次，q6～8h）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">林可霉素</td>
+                    <td>10～20mg/（kg·d）（分次，q8～12h）</td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="drug-class">大环内酯类</td>
+                    <td class="drug-name">阿奇霉素（po）</td>
+                    <td>5～12mg/（kg·d）（qd）</td>
+                    <td rowspan="4">1g</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿奇霉素（iv）</td>
+                    <td>10mg/（kg·d）（qd）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">克拉霉素</td>
+                    <td>15mg/（kg·d）（分次，q12h）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">红霉素（po，iv）</td>
+                    <td>40～50mg/（kg·d）（分次，q6h）</td>
+                </tr>
+                <tr>
+                    <td class="drug-class">费达霉素</td>
+                    <td class="drug-name">费达霉素</td>
+                    <td>
+                        口服混悬液，>6月龄：<br>
+                        体重4～<7kg：80mg（2ml）bid<br>
+                        体重7～<9kg：120mg（3ml）bid<br>
+                        体重9～<12.5kg：160mg（4ml）bid<br>
+                        体重≥12.5kg：200mg（5ml）bid
+                    </td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <div class="image-container" onclick="openModal()">
+            <img src="535.jpg" alt="儿童抗生素剂量表图片">
+            <span class="image-hint">🔍 点击放大</span>
+        </div>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImg" src="535.jpg" alt="放大图片">
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 收藏按钮 -->
+        <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="儿童抗生素剂量表（>28日龄）；达托霉素；奥利万星；替考拉宁；特拉万星；万古霉素；替加环素；泰利霉素；克林霉素；林可霉素；阿奇霉素；克拉霉素；红霉素；费达霉素；复杂皮肤软组织感染；金葡菌菌血症；难辨梭菌；=535" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">535</div>
+        
+        <!-- 标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签：</div>
+            <div class="tags-container">
+                <span class="tag tag-drug">达托霉素</span>
+                <span class="tag tag-drug">奥利万星</span>
+                <span class="tag tag-drug">替考拉宁</span>
+                <span class="tag tag-drug">特拉万星</span>
+                <span class="tag tag-drug">万古霉素</span>
+                <span class="tag tag-drug">替加环素</span>
+                <span class="tag tag-drug">泰利霉素</span>
+                <span class="tag tag-drug">克林霉素</span>
+                <span class="tag tag-drug">林可霉素</span>
+                <span class="tag tag-drug">阿奇霉素</span>
+                <span class="tag tag-drug">克拉霉素</span>
+                <span class="tag tag-drug">红霉素</span>
+                <span class="tag tag-drug">费达霉素</span>
+                <span class="tag tag-disease">复杂皮肤软组织感染</span>
+                <span class="tag tag-disease">金葡菌菌血症</span>
+                <span class="tag tag-bacteria">金葡菌</span>
+                <span class="tag tag-bacteria">难辨梭菌</span>
+            </div>
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="535.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 图片放大功能
+        function openModal() {
+            document.getElementById('imageModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            const isActive = btn.classList.contains('active');
+            
+            if (!isActive) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '儿童抗生素剂量表（>28日龄）',
+                    url: '535.html',
+                    pageNum: '535'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '535.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏区域（如果同源）
+                updateIndexFavorites(pageInfo);
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '535.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        function updateIndexFavorites(pageInfo) {
+            // 通过localStorage事件通知其他页面
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: 'add',
+                data: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFavorited = favorites.some(f => f.url === '535.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+        
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

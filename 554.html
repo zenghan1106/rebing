@@ -1,0 +1,651 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表16（13）儿科剂量（年龄>28日龄）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 50%, #fff5ee 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            color: #2c3e50;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        .category-cell {
+            background: #e8f4f8;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .dosage {
+            color: #27ae60;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 16px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 8px 5px;
+            }
+            
+            tbody td {
+                padding: 6px 5px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="553.html" class="nav-btn">⬅ 上一页</a>
+            <a href="555.html" class="nav-btn">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表16（13）儿科剂量（年龄>28日龄）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/药物</th>
+                    <th>剂量（>28日龄）</th>
+                    <th>最大日剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="category-cell">抗病毒药物</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category-cell">抗病毒药物（冠状病毒）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Bamlanivimab + Etesevimab</td>
+                    <td class="dosage">合用作为单一药物静脉输注，剂量根据体重：<br>40kg：Bam 700mg + Ete 1400mg<br>>20~<40kg：Bam 350mg + Ete 700mg<br>>12~20kg：Bam 175mg + Ete 350mg<br>1~12kg：Bam 12mg/kg + Ete 24mg/kg</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">巴瑞替尼（JAK抑制剂）</td>
+                    <td class="dosage">≥9岁：4mg q24h<br>2~<9岁：2mg q24h<br><2岁：未批准使用</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Bebtelovimab</td>
+                    <td class="dosage">≥12岁，体重≥40kg：175mg iv</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Casirivimab + Imdevimab</td>
+                    <td class="dosage">≥12岁，体重≥40kg：Casirivimab 600mg iv，Imdevimab 600mg iv</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">莫诺拉韦</td>
+                    <td class="dosage">安全性和有效性未确定</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">奈玛特韦/利托那韦</td>
+                    <td class="dosage">≥12岁，体重≥40kg：奈玛特韦/利托那韦 300mg/100mg q12h×5d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Pemivibart</td>
+                    <td class="dosage">≥12岁，体重≥40kg：4500mg iv（可每3个月重复）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">瑞德西韦</td>
+                    <td class="dosage"><28日龄，体重≥1.5kg：2.5mg/kg第1天，然后1.25mg/kg q24h<br>≥28日龄，体重1.5~<3kg：2.5mg/kg第1天，然后1.25mg/kg q24h<br>≥28日龄，体重3到<40kg：5mg/kg第1天，然后2.5mg/kg q24h<br>体重≥40kg：200mg第1天，然后100mg q24h<br>疗程：5天（无须机械通气/ECMO）<br>10天（需机械通气/ECMO）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Sotrovimab</td>
+                    <td class="dosage">≥12岁，体重≥40kg：500mg iv</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Tixagevimab + Cilgavimab</td>
+                    <td class="dosage">≥12岁，体重≥40kg：Tix 150mg im + Cil 150mg im</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">托珠单抗（抗IL-6单抗）</td>
+                    <td class="dosage">≥2岁，体重<30kg：12mg/kg iv<br>≥2岁，体重≥30kg：8mg iv</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">托法替布</td>
+                    <td class="dosage">COVID治疗研究的患者≥18岁<br>（NEJM 2021，385：406）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Vilobelimab</td>
+                    <td class="dosage">安全性和有效性未确定</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category-cell">抗病毒药物（埃博拉病毒）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Ansuvimab-zykl</td>
+                    <td class="dosage">50mg/kg iv 单次输注（60分钟以上）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Inmazeb</td>
+                    <td class="dosage">50mg/kg（全部3种单抗）iv 单次输注</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">冠状病毒</span>
+            <span class="tag tag-disease">埃博拉病毒</span>
+            <span class="tag tag-disease">COVID</span>
+            <span class="tag tag-drug">Bamlanivimab</span>
+            <span class="tag tag-drug">Etesevimab</span>
+            <span class="tag tag-drug">巴瑞替尼</span>
+            <span class="tag tag-drug">Bebtelovimab</span>
+            <span class="tag tag-drug">Casirivimab</span>
+            <span class="tag tag-drug">Imdevimab</span>
+            <span class="tag tag-drug">莫诺拉韦</span>
+            <span class="tag tag-drug">奈玛特韦</span>
+            <span class="tag tag-drug">利托那韦</span>
+            <span class="tag tag-drug">Pemivibart</span>
+            <span class="tag tag-drug">瑞德西韦</span>
+            <span class="tag tag-drug">Sotrovimab</span>
+            <span class="tag tag-drug">Tixagevimab</span>
+            <span class="tag tag-drug">Cilgavimab</span>
+            <span class="tag tag-drug">托珠单抗</span>
+            <span class="tag tag-drug">托法替布</span>
+            <span class="tag tag-drug">Vilobelimab</span>
+            <span class="tag tag-drug">Ansuvimab</span>
+            <span class="tag tag-drug">Inmazeb</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="表16（13）儿科剂量（年龄>28日龄）；抗病毒药物；冠状病毒；埃博拉病毒；儿科剂量；=554" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">页码：554</div>
+    
+    <div class="keywords">
+        关键词：表16（13）儿科剂量（年龄>28日龄）；抗病毒药物；冠状病毒；埃博拉病毒；COVID；Bamlanivimab；Etesevimab；巴瑞替尼；Bebtelovimab；Casirivimab；Imdevimab；莫诺拉韦；奈玛特韦；利托那韦；Pemivibart；瑞德西韦；Sotrovimab；Tixagevimab；Cilgavimab；托珠单抗；托法替布；Vilobelimab；Ansuvimab；Inmazeb；JAK抑制剂；IL-6单抗；ECMO；机械通气
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="554.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板：' + input.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板');
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.toggle('active');
+            
+            const title = document.title.replace(/~~~~~|*****|/g, '').trim();
+            const pageNum = '554';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (btn.classList.contains('active')) {
+                const exists = favorites.find(f => f.page === pageNum);
+                if (!exists) {
+                    favorites.push({
+                        title: title,
+                        page: pageNum,
+                        url: '554.html',
+                        category: '儿科剂量表'
+                    });
+                }
+                alert('已添加到收藏！');
+            } else {
+                favorites = favorites.filter(f => f.page !== pageNum);
+                alert('已取消收藏！');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageNum = '554';
+            if (favorites.find(f => f.page === pageNum)) {
+                document.getElementById('favoriteBtn').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

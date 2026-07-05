@@ -1,0 +1,789 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表21（续）美国旅行疫苗剂量与接种方案摘要</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #e3f2fd 50%, #fff3e0 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5d6d7e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 15px 0 25px;
+        }
+        
+        .main-title {
+            font-size: 20px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-decorator {
+            color: #e74c3c;
+            font-size: 22px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 疫苗名称列 - 绿色 */
+        .vaccine-name {
+            color: #1e8449;
+            font-weight: bold;
+            min-width: 150px;
+        }
+        
+        /* 商品名列 - 紫色 */
+        .product-name {
+            color: #7d3c98;
+            min-width: 160px;
+        }
+        
+        /* 年龄列 - 棕色 */
+        .age-group {
+            color: #935116;
+            min-width: 100px;
+        }
+        
+        /* 剂量列 - 红色 */
+        .dosage {
+            color: #c0392b;
+            min-width: 100px;
+        }
+        
+        /* 接种途径列 - 黄色背景 */
+        .route {
+            background: #fef9e7 !important;
+            color: #b7950b;
+            min-width: 80px;
+        }
+        
+        /* 接种方案列 - 蓝色 */
+        .schedule {
+            color: #2874a6;
+            min-width: 160px;
+        }
+        
+        /* 加强针列 - 深绿 */
+        .booster {
+            color: #145a32;
+            min-width: 140px;
+        }
+        
+        .notes-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .notes-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .notes-content {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .notes-content p {
+            margin-bottom: 6px;
+        }
+        
+        .image-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+        
+        .image-section img:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-caption {
+            color: #666;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #d5f5e3;
+            color: #1e8449;
+        }
+        
+        .tag-vaccine {
+            background: #e8daef;
+            color: #6c3483;
+        }
+        
+        .tag-bacteria {
+            background: #fdebd0;
+            color: #935116;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #1e8449;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            background: #c0392b;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 8px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 15px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 5px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="640.html" class="nav-btn">← 上一页</a>
+            <a href="642.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decorator">~~~~~</span>
+            表21（续）美国旅行疫苗剂量与接种方案摘要
+            <span class="title-decorator">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>疫苗</th>
+                    <th>商品名<br>（制造商）</th>
+                    <th>年龄</th>
+                    <th>剂量</th>
+                    <th>接种途径</th>
+                    <th>接种方案</th>
+                    <th>加强针</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="vaccine-name"></td>
+                    <td class="product-name"></td>
+                    <td class="age-group">≥16岁</td>
+                    <td class="dosage">0.5ml</td>
+                    <td class="route">肌内注射</td>
+                    <td class="schedule">第0天、第14天～第3个月、第2剂后第5～12个月，各1剂</td>
+                    <td class="booster"></td>
+                </tr>
+                <tr>
+                    <td class="vaccine-name">伤寒疫苗<br>（口服减毒活疫苗）</td>
+                    <td class="product-name">Vivotif（Bavarian Nordic）</td>
+                    <td class="age-group">≥6岁</td>
+                    <td class="dosage">1粒⁶</td>
+                    <td class="route">口服</td>
+                    <td class="schedule">第0、第2天、第4天、第6天，各1粒</td>
+                    <td class="booster">5年后重复基础系列</td>
+                </tr>
+                <tr>
+                    <td class="vaccine-name">伤寒Vi多糖疫苗</td>
+                    <td class="product-name">Typhim Vi（赛诺菲巴斯德）</td>
+                    <td class="age-group">≥2岁</td>
+                    <td class="dosage">0.5ml</td>
+                    <td class="route">肌内注射</td>
+                    <td class="schedule">1剂</td>
+                    <td class="booster">2年后加强</td>
+                </tr>
+                <tr>
+                    <td class="vaccine-name">黄热病疫苗</td>
+                    <td class="product-name">多数行程不推荐⁷˙⁸</td>
+                    <td class="age-group">—</td>
+                    <td class="dosage">—</td>
+                    <td class="route">—</td>
+                    <td class="schedule">—</td>
+                    <td class="booster">—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释部分 -->
+    <div class="notes-section">
+        <div class="notes-title">📋 注释说明</div>
+        <div class="notes-content">
+            <p>注：ELU＝甲型肝炎灭活疫苗ELISA单位（ELISA units of inactivated HAV）；HAV＝甲型肝炎病毒（hepatitis A virus）；HBsAg＝乙型肝炎表面抗原（hepatitis B surface antigen）；U＝甲型肝炎抗原单位（units HAV antigen）。</p>
+            <p>1 必须在医疗机构内接种。</p>
+            <p>2 基于12～17岁青少年抗体持久性的有力数据，建议超说明书在接种2年后进行加强针接种［FDA和免疫实践咨询委员会（ACIP）尚未审议该数据］。</p>
+            <p>3 血液透析及其他免疫受损患者的剂量差异请参考处方信息。</p>
+            <p>4 适用于持续存在日本脑炎病毒暴露风险的情况。</p>
+            <p>5 当需同日接种MenB和MenACWY初始剂量时，可选择MenABCWY（Penbraya）（但MenB不作为特定旅行疫苗）。</p>
+            <p>6 必须在35.6～46.4°F（2～8°C）冷藏保存；使用不超过98.6°F（37°C）的冷液体送服。</p>
+            <p>7 6～8月龄及≥60岁为黄热病疫苗预防接种禁忌，＜6月龄为绝对禁忌。</p>
+            <p>8 YF Vax提供单剂量和多剂量（5剂量）瓶装。</p>
+        </div>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <img src="641.jpg" alt="表21（续）美国旅行疫苗剂量与接种方案摘要" onclick="openModal()">
+        <p class="image-caption">点击图片可放大查看</p>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img src="641.jpg" alt="放大图片">
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">641</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">伤寒</span>
+            <span class="tag tag-disease">黄热病</span>
+            <span class="tag tag-disease">甲型肝炎</span>
+            <span class="tag tag-disease">乙型肝炎</span>
+            <span class="tag tag-disease">日本脑炎</span>
+            <!-- 疫苗/药物标签 -->
+            <span class="tag tag-vaccine">Vivotif</span>
+            <span class="tag tag-vaccine">Typhim Vi</span>
+            <span class="tag tag-vaccine">YF Vax</span>
+            <span class="tag tag-vaccine">Penbraya</span>
+            <!-- 细菌/病原体标签 -->
+            <span class="tag tag-bacteria">伤寒沙门菌</span>
+            <span class="tag tag-bacteria">黄热病毒</span>
+            <span class="tag tag-bacteria">甲型肝炎病毒</span>
+            <span class="tag tag-bacteria">乙型肝炎病毒</span>
+            <span class="tag tag-bacteria">日本脑炎病毒</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表21（续）美国旅行疫苗剂量与接种方案摘要；旅行疫苗、伤寒、黄热病、Vivotif、Typhim Vi、YF Vax、口服减毒活疫苗、多糖疫苗、疫苗接种、剂量方案、加强针、ELU、HAV、HBsAg、ACIP；=641" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="641.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 图片放大功能
+        function openModal() {
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById('copyText');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert('已复制到剪贴板！');
+            }, function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '表21（续）美国旅行疫苗剂量与接种方案摘要',
+                    url: '641.html',
+                    pageNum: '641'
+                };
+                
+                const exists = favorites.some(f => f.url === '641.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！');
+                } else {
+                    alert('已在收藏列表中！');
+                }
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '641.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === '641.html');
+            if (exists) {
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+        
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

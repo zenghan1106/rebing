@@ -247,6 +247,10 @@ function openPage(id) {
   
   // 跳转到 {id}.html
   var url = id + '.html';
+  
+  // ✅ 调试：显示实际跳转的URL
+  alert('调试信息:\n\nID: ' + id + '\nURL: ' + url + '\n\n类型: ' + typeof id);
+  
   console.log('跳转:', url);
   window.location.href = url;
 }

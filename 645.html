@@ -1,0 +1,819 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~药物通用名和商品名列表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-page {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #5a6268;
+        }
+        
+        .btn-fav {
+            background: #ff6b6b;
+            color: white;
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.4);
+        }
+        
+        .btn-fav:hover {
+            background: #ee5a5a;
+            transform: scale(1.05);
+        }
+        
+        .btn-fav.active {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #1a5276;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.4;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #5d6d7e;
+            margin-top: 10px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #2e86de 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 16px 12px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 14px;
+            font-weight: 600;
+            background: #f8f9fa;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            word-wrap: break-word;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 列宽分配 */
+        td:nth-child(1), th:nth-child(1) {
+            width: 33.33%;
+        }
+        
+        td:nth-child(2), th:nth-child(2) {
+            width: 33.33%;
+        }
+        
+        td:nth-child(3), th:nth-child(3) {
+            width: 33.33%;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e3f2fd;
+            color: #1565c0;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: #1565c0;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3e0;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #e65100;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-content {
+            font-size: 13px;
+            color: #5d4037;
+            line-height: 1.8;
+        }
+        
+        /* 页码 */
+        .page-number {
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 50px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            max-width: calc(100% - 120px);
+            padding: 12px 16px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: white;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #219a52;
+        }
+        
+        .btn-copy.copied {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            
+            tbody tr:first-child td {
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                padding: 0 20px;
+            }
+            
+            .copy-input {
+                max-width: 100%;
+                width: 100%;
+            }
+            
+            .nav-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            table {
+                font-size: 11px;
+            }
+            
+            td, th {
+                padding: 6px;
+            }
+            
+            .tag {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="644.html" class="btn btn-page">← 上一页</a>
+            <a href="646.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <h1>~~~~~药物通用名和商品名列表*****</h1>
+        <p class="subtitle">表22（2）药物通用名和商品名对照表</p>
+    </div>
+    
+    <!-- 表格容器 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>商品名：通用药名</th>
+                    <th>商品名：通用药名</th>
+                    <th>商品名：通用药名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Abeicet：两性霉素B-脂质复合体 Ampho B-lipid complex</td>
+                    <td>Baxdela：德拉沙星 Delafloxacin</td>
+                    <td>Descovy：丙酚替诺福韦 tenofovir AF-FTC</td>
+                </tr>
+                <tr>
+                    <td>Actemra：Tocilizumab</td>
+                    <td>Biaxin，Biaxin XL：克拉霉素 Clarithromycin</td>
+                    <td>Delstrigo：Doravirine＋拉米夫定＋替诺福韦 Doravirine＋3TC＋TDF</td>
+                </tr>
+                <tr>
+                    <td>Albenza：阿苯达唑 Albendazole</td>
+                    <td>Biktarvy：比克替拉韦＋恩曲他滨＋丙酚替诺福韦 Bictegravir＋FTC＋TAF</td>
+                    <td>Dificid：非达霉素 Fidaxomicin</td>
+                </tr>
+                <tr>
+                    <td>Aldara：咪喹莫特 Imiquimod</td>
+                    <td>Biltricide：吡喹酮 Praziquantel</td>
+                    <td>Diflucan：氟康唑 Fluconazole</td>
+                </tr>
+                <tr>
+                    <td>Alinia：硝唑尼特 Nitazoxanide</td>
+                    <td>Brexafemme：Ibrexafungerp</td>
+                    <td>Doribax：多尼培南 Doripenem</td>
+                </tr>
+                <tr>
+                    <td>Altabax：瑞他帕林 Retapamulin</td>
+                    <td>Cabenuva：Cabotegravir＋Rilpivirine</td>
+                    <td>Dovato：多替拉韦＋恩曲他滨 Dolutegravir＋Emtricitabine</td>
+                </tr>
+                <tr>
+                    <td>AmBisome：脂质体两性霉素B Ampho B-liposomal</td>
+                    <td>Cancidas：卡泊芬净 Caspofungin</td>
+                    <td>Duricef：头孢羟氨苄 Cefadroxil</td>
+                </tr>
+                <tr>
+                    <td>Amikacin：阿米卡星 Amikacin</td>
+                    <td>Cayston：氨曲南吸入剂 Aztreonam（inhaled）</td>
+                    <td>Dynapen：双氯西林 Dicloxacillin</td>
+                </tr>
+                <tr>
+                    <td>Amoxil：阿莫西林 Amoxicillin</td>
+                    <td>Ceclor，Ceclor CD：头孢克洛 Cefaclor</td>
+                    <td>Ebanga：Ansuvimab-zykl</td>
+                </tr>
+                <tr>
+                    <td>Ancef：头孢唑啉 Cefazolin</td>
+                    <td>Cedax：头孢布烯 Ceftibuten</td>
+                    <td>Edurant：利匹韦林 Rilpivirine</td>
+                </tr>
+                <tr>
+                    <td>Ancobon：氟胞嘧啶 Flucytosine</td>
+                    <td>Cefizox：头孢唑肟 Ceftizoxime</td>
+                    <td>Emtriva：恩曲他滨 Emtricitabine</td>
+                </tr>
+                <tr>
+                    <td>Anspor：头孢拉定 Cephradine</td>
+                    <td>Ceftin：头孢呋辛酯 Cefuroxime axetil</td>
+                    <td>Epclusa：维帕他韦＋索磷布韦 Velpatasvir＋Sofosbuvir</td>
+                </tr>
+                <tr>
+                    <td>Antepar：哌嗪 Piperazine</td>
+                    <td>Cefzil：头孢丙烯 Cefprozil</td>
+                    <td>Epivir，Epivir-HBV：拉米夫定 Lamivudine</td>
+                </tr>
+                <tr>
+                    <td>Antiminth：噻嘧啶哌嗪 Pyrantel pamoate</td>
+                    <td>Cipro，Cipro XR：环丙沙星和缓释剂 Ciprofloxacin and extended release</td>
+                    <td>Epzicom：拉米夫定＋阿巴卡韦 Lamivudine＋Abacavir</td>
+                </tr>
+                <tr>
+                    <td>Aralen：氯喹 Chloroquine</td>
+                    <td>Claforan：头孢噻肟 Cefotaxime</td>
+                    <td>Evusheld：Tixagevimab＋Cilgavimab</td>
+                </tr>
+                <tr>
+                    <td>Arikace：阿米卡星脂质体 Amikacin liposomal</td>
+                    <td>Coartem：蒿甲醚-苯芴醇 Artemether-Lumefantrine</td>
+                    <td>Exelitis：苄硝唑 Benznidazole</td>
+                </tr>
+                <tr>
+                    <td>Asacol：美沙拉嗪 Mesalamine</td>
+                    <td>Coly-Mycin M：多黏菌素甲磺酸钠 Colistimethate</td>
+                    <td>Factive：吉米沙星 Gemifloxacin</td>
+                </tr>
+                <tr>
+                    <td>Atripla：依非韦伦/恩曲他滨/替诺福韦 Efavirenz/Emtricitabine/Tenofovir</td>
+                    <td>Combivir：齐多夫定＋拉米夫定 ZDV＋3TC</td>
+                    <td>Famvir：泛昔洛韦 Famciclovir</td>
+                </tr>
+                <tr>
+                    <td>Augmentin，Augmentin ES-600，Augmentin XR：阿莫西林/克拉维酸 Amox./clav.</td>
+                    <td>Complera：恩曲他滨＋替诺福韦＋利匹韦林 Emtricitabine＋tenofovir＋rilpivirine</td>
+                    <td>Fansidar：乙胺嘧啶＋磺胺多辛 Pyrimethamine＋Sulfadoxine</td>
+                </tr>
+                <tr>
+                    <td>Avelox：莫西沙星 Moxifloxacin</td>
+                    <td>Cresemba：艾沙康唑 Isavuconazole</td>
+                    <td>Fetroja：头孢地尔</td>
+                </tr>
+                <tr>
+                    <td>Avycaz：头孢他啶-阿维巴坦 Ceftazidime-avibactam</td>
+                    <td>Cubicin：达托霉素 Daptomycin</td>
+                    <td>Flagyl：甲硝唑 Metronidazole</td>
+                </tr>
+                <tr>
+                    <td>Azactam：氨曲南 Aztreonam</td>
+                    <td>Cytovene：更昔洛韦 Ganciclovir</td>
+                    <td>Floxin：氧氟沙星 Ofloxacin</td>
+                </tr>
+                <tr>
+                    <td>Azulfidine：柳氮磺吡啶 Sulfasalazine</td>
+                    <td>Daklinza：达卡他韦 Daclatasvir</td>
+                    <td>Flumadine：金刚乙胺 Rimantadine</td>
+                </tr>
+                <tr>
+                    <td>Bactocill：氯匹罗星 Mupirocin</td>
+                    <td>Dalvance：达巴万星 Dalbavancin</td>
+                    <td>Foscavir：膦甲酸钠 Foscarnet</td>
+                </tr>
+                <tr>
+                    <td>Bactrim，Bactrim DS：甲氧苄啶/磺胺甲噁唑 Trimethoprim/Sulfamethoxazole</td>
+                    <td>Daraprim：乙胺嘧啶 Pyrimethamine</td>
+                    <td>Fornax：头孢他啶 Ceftazidime</td>
+                </tr>
+                <tr>
+                    <td>Baraclude：恩替卡韦 Entecavir</td>
+                    <td></td>
+                    <td>Fulvicin：灰黄霉素 Griseofulvin</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Fungizone：两性霉素B Amphotericin B</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签</div>
+            <div class="tags-container">
+                <span class="tag">两性霉素B</span>
+                <span class="tag">阿米卡星</span>
+                <span class="tag">阿莫西林</span>
+                <span class="tag">头孢唑啉</span>
+                <span class="tag">头孢拉定</span>
+                <span class="tag">环丙沙星</span>
+                <span class="tag">头孢噻肟</span>
+                <span class="tag">多黏菌素</span>
+                <span class="tag">达托霉素</span>
+                <span class="tag">更昔洛韦</span>
+                <span class="tag">甲硝唑</span>
+                <span class="tag">氧氟沙星</span>
+                <span class="tag">膦甲酸钠</span>
+                <span class="tag">头孢他啶</span>
+                <span class="tag">两性霉素B</span>
+                <span class="tag">氟康唑</span>
+                <span class="tag">多尼培南</span>
+                <span class="tag">恩曲他滨</span>
+                <span class="tag">拉米夫定</span>
+                <span class="tag">替诺福韦</span>
+                <span class="tag">克拉霉素</span>
+                <span class="tag">吡喹酮</span>
+                <span class="tag">卡泊芬净</span>
+                <span class="tag">氯喹</span>
+            </div>
+        </div>
+        
+        <!-- 关键词区域 -->
+        <div class="keywords-section">
+            <div class="keywords-title">🔍 关键词</div>
+            <div class="keywords-content">
+                药物通用名、商品名、抗生素、抗真菌药、抗病毒药、抗寄生虫药、头孢菌素、喹诺酮类、大环内酯类、氨基糖苷类、碳青霉烯类、多黏菌素、达托霉素、替诺福韦、恩曲他滨、拉米夫定、丙酚替诺福韦、阿巴卡韦、多替拉韦、利匹韦林、比克替拉韦、达卡他韦、维帕他韦、索磷布韦、吉米沙星、莫西沙星、环丙沙星、甲硝唑、氯喹、吡喹酮、阿苯达唑、咪喹莫特、硝唑尼特、乙胺嘧啶、磺胺多辛、金刚乙胺、膦甲酸钠、更昔洛韦、达巴万星、头孢地尔、灰黄霉素、氟胞嘧啶、氨曲南、双氯西林、头孢羟氨苄、头孢克洛、头孢布烯、头孢唑肟、头孢呋辛、头孢丙烯、头孢他啶-阿维巴坦、德拉沙星、艾沙康唑、非达霉素、苄硝唑、恩替卡韦
+            </div>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">645</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="药物通用名和商品名列表；表22（2）药物通用名和商品名对照表；药物通用名、商品名、抗生素、抗真菌药、抗病毒药、抗寄生虫药、头孢菌素、喹诺酮类、大环内酯类、氨基糖苷类、碳青霉烯类、多黏菌素、达托霉素、替诺福韦、恩曲他滨、拉米夫定、丙酚替诺福韦、阿巴卡韦、多替拉韦、利匹韦林、比克替拉韦、达卡他韦、维帕他韦、索磷布韦、吉米沙星、莫西沙星、环丙沙星、甲硝唑、氯喹、吡喹酮、阿苯达唑、咪喹莫特、硝唑尼特、乙胺嘧啶、磺胺多辛、金刚乙胺、膦甲酸钠、更昔洛韦、达巴万星、头孢地尔、灰黄霉素、氟胞嘧啶、氨曲南、双氯西林、头孢羟氨苄、头孢克洛、头孢布烯、头孢唑肟、头孢呋辛、头孢丙烯、头孢他啶-阿维巴坦、德拉沙星、艾沙康唑、非达霉素、苄硝唑、恩替卡韦；=645" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="645.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById("copyBtn");
+            btn.textContent = "✓ 已复制";
+            btn.classList.add("copied");
+            setTimeout(() => {
+                btn.textContent = "📋 复制";
+                btn.classList.remove("copied");
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById("favBtn");
+            const isFav = localStorage.getItem("fav_645") === "true";
+            
+            if (!isFav) {
+                localStorage.setItem("fav_645", "true");
+                localStorage.setItem("fav_645_title", "~~~~~药物通用名和商品名列表*****");
+                localStorage.setItem("fav_645_url", "645.html");
+                btn.textContent = "★ 已收藏";
+                btn.classList.add("active");
+                alert("已添加到收藏！请在 index.html 查看收藏列表。");
+            } else {
+                localStorage.removeItem("fav_645");
+                localStorage.removeItem("fav_645_title");
+                localStorage.removeItem("fav_645_url");
+                btn.textContent = "⭐ 收藏";
+                btn.classList.remove("active");
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const isFav = localStorage.getItem("fav_645") === "true";
+            const btn = document.getElementById("favBtn");
+            if (isFav) {
+                btn.textContent = "★ 已收藏";
+                btn.classList.add("active");
+            }
+        };
+    </script>
+</body>
+</html>

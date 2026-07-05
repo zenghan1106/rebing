@@ -4,27 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~流感病毒治疗药物指南*****</title>
-    
-    <!-- ============ ��������֤ ============ -->
-    <script src="machine_auth_v2.js"></script>
-    <script>
-        // ҳ�����ʱ��֤������
-        window.addEventListener('load', function() {
-            try {
-                initMachineAuth();
-                // ��֤�ɹ���ȷ��ҳ����ʾ
-                document.body.style.display = 'block';
-            } catch(e) {
-                console.log('��������֤ʧ��', e);
-                // ��֤ʧ��ʱ������ҳ��
-                document.body.style.display = 'none';
-            }
-        });
-    </script>
-    <!-- ============ ��֤���� ============ -->
-    
-
+    <title>流感抗病毒药物指南</title>
     <style>
         * {
             margin: 0;
@@ -33,340 +13,404 @@ html
         }
         
         body {
-            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 20px 10px;
             color: #333;
         }
         
-        /* 顶部导航栏 */
-        .nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header {
+            text-align: center;
             margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
+            position: relative;
         }
         
-        .nav-left {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-right {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 10px 20px;
+        .nav-btn {
+            position: absolute;
+            top: 0;
+            padding: 8px 16px;
             border: none;
-            border-radius: 25px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
         }
         
-        .btn-home {
+        .home-btn {
+            left: 0;
             background: #4a90d9;
             color: white;
         }
         
-        .btn-home:hover {
+        .home-btn:hover {
             background: #357abd;
-            transform: translateY(-2px);
         }
         
-        .btn-page {
-            background: #6c5ce7;
+        .page-nav {
+            right: 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6b8e6b;
             color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
         }
         
-        .btn-page:hover {
-            background: #5b4cdb;
-            transform: translateY(-2px);
+        .page-btn:hover {
+            background: #5a7a5a;
         }
         
-        .btn-fav {
-            background: #ff6b6b;
-            color: white;
-            position: fixed;
-            bottom: 200px;
-            right: 20px;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        .prev-btn {
+            right: 80px;
         }
         
-        .btn-fav:hover {
-            background: #ee5a5a;
-            transform: scale(1.05);
+        .next-btn {
+            right: 0;
         }
         
-        .btn-fav.active {
-            background: #ffd93d;
-            color: #333;
-        }
-        
-        /* 标题区域 */
-        .title-section {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .main-title {
-            font-size: 28px;
+        h1 {
+            font-size: 22px;
             color: #1a5276;
+            padding: 15px 0;
+            margin: 0 50px;
+            line-height: 1.6;
+        }
+        
+        .title-format {
+            color: #8e44ad;
             font-weight: bold;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
-        .sub-title {
-            font-size: 16px;
-            color: #5d6d7e;
-        }
-        
-        /* 表格样式 */
         .table-container {
             overflow-x: auto;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            font-size: 14px;
-            line-height: 1.6;
+            min-width: 800px;
         }
         
-        thead {
-            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+        thead th {
+            background: linear-gradient(180deg, #2e86de 0%, #1a5276 100%);
             color: white;
-        }
-        
-        th {
-            padding: 18px 15px;
-            text-align: left;
-            font-size: 18px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e8e8e8;
-            vertical-align: top;
-            word-break: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        tr:nth-child(even) {
-            background: #f8fbff;
-        }
-        
-        tr:hover {
-            background: #e8f4fd;
-        }
-        
-        /* 第一行数据字体加大 */
-        tbody tr:first-child td {
+            padding: 14px 10px;
             font-size: 15px;
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid #1a5276;
         }
         
-        .disease-name {
-            color: #c0392b;
+        thead th:first-child {
+            font-size: 17px;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.8;
+            font-size: 13px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 疾病列 - 棕色 */
+        .disease-cell {
+            color: #8b4513;
+            font-weight: bold;
+            width: 22%;
+            min-width: 180px;
+        }
+        
+        .disease-cell ul {
+            margin: 0;
+            padding-left: 16px;
+        }
+        
+        .disease-cell li {
+            margin-bottom: 6px;
+        }
+        
+        /* 敏感药物列 - 绿色 */
+        .drug-cell {
+            color: #2e7d32;
+            width: 35%;
+            min-width: 280px;
+        }
+        
+        .drug-cell .drug-name {
+            color: #1b5e20;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .drug-cell .dose-info {
+            color: #388e3c;
+            padding-left: 8px;
+        }
+        
+        /* 耐药列 - 红色 */
+        .resist-cell {
+            color: #c62828;
+            width: 12%;
+            min-width: 100px;
             font-weight: bold;
         }
         
-        .drug-name {
-            color: #27ae60;
-            font-weight: 600;
+        /* 备选药物列 - 紫色 */
+        .alt-cell {
+            color: #6a1b9a;
+            width: 31%;
+            min-width: 250px;
         }
         
-        .note-text {
-            color: #7f8c8d;
-            font-size: 13px;
-            margin-top: 15px;
+        .alt-cell .note-item {
+            margin-bottom: 8px;
+            padding-left: 8px;
+            border-left: 3px solid #ce93d8;
+        }
+        
+        /* 特殊标注 */
+        .highlight-yellow {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .highlight-green {
+            background: #c8e6c9;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        /* 竖排文字 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 4px;
+            display: inline-block;
+            padding: 4px;
+        }
+        
+        .image-box {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .image-box img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .tags-section {
+            margin: 20px 0;
             padding: 15px;
-            background: #fef9e7;
+            background: white;
             border-radius: 10px;
-            border-left: 4px solid #f39c12;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
-        /* 标签区域 */
-        .tag-section {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 15px;
-        }
-        
-        .tag-title {
-            font-size: 16px;
-            color: #2c3e50;
+        .tags-title {
+            font-size: 15px;
+            color: #555;
             margin-bottom: 12px;
             font-weight: bold;
         }
         
-        .tags {
+        .tags-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
         
         .tag {
-            padding: 8px 16px;
+            display: inline-block;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            border: none;
         }
         
         .tag-disease {
-            background: #ffeaa7;
-            color: #d63031;
+            background: #fdebd0;
+            color: #935116;
         }
         
         .tag-drug {
-            background: #a8e6cf;
-            color: #00b894;
-        }
-        
-        .tag-virus {
-            background: #dfe6e9;
-            color: #2d3436;
+            background: #d5f5e3;
+            color: #1e8449;
         }
         
         .tag:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
-        /* 底部区域 */
-        .bottom-section {
-            padding: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .keywords {
-            color: #5d6d7e;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        
-        .keywords strong {
-            color: #2c3e50;
-        }
-        
-        .page-number {
-            text-align: center;
-            font-size: 18px;
-            color: #4a90d9;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-        
-        /* 复制区域 */
         .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             display: flex;
-            align-items: center;
             gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
+            align-items: center;
         }
         
         .copy-input {
             flex: 1;
-            min-width: 200px;
-            padding: 12px 15px;
+            padding: 10px 14px;
             border: 2px solid #ddd;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 13px;
+            color: #555;
             background: #fafafa;
         }
         
-        .btn-copy {
-            background: #00b894;
+        .copy-btn {
+            padding: 10px 24px;
+            background: #e74c3c;
             color: white;
-            padding: 12px 25px;
-            white-space: nowrap;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
         }
         
-        .btn-copy:hover {
-            background: #00a383;
+        .copy-btn:hover {
+            background: #c0392b;
         }
         
-        .copy-success {
-            color: #00b894;
-            font-size: 13px;
-            display: none;
+        .copy-btn.copied {
+            background: #27ae60;
         }
         
-        /* 响应式 */
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #f39c12;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(243,156,18,0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            background: #e67e22;
+        }
+        
+        .favorite-btn.active {
+            background: #e74c3c;
+        }
+        
+        .note-footer {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff3cd;
+            border-radius: 8px;
+            color: #856404;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 10px 5px;
             }
             
-            .main-title {
-                font-size: 20px;
+            h1 {
+                font-size: 16px;
+                margin: 0;
+                padding-top: 50px;
             }
             
-            th {
-                font-size: 15px;
-                padding: 12px 10px;
-            }
-            
-            td {
-                padding: 10px;
-                font-size: 13px;
-            }
-            
-            .btn {
-                padding: 8px 15px;
+            .nav-btn, .page-btn {
+                padding: 6px 10px;
                 font-size: 12px;
             }
             
-            .btn-fav {
-                bottom: 150px;
-                right: 10px;
-                padding: 12px 18px;
+            .home-btn {
+                top: 0;
+            }
+            
+            .page-nav {
+                top: 0;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            
+            .favorite-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 固定收藏按钮 -->
-    <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-    
-    <!-- 顶部导航 -->
-    <div class="nav-bar">
-        <div class="nav-left">
-            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
-        </div>
-        <div class="nav-right">
-            <a href="456.html" class="btn btn-page">◀ 上一页</a>
-            <a href="458.html" class="btn btn-page">下一页 ▶</a>
-        </div>
+    <!-- 导航按钮 -->
+    <a href="index.html" class="nav-btn home-btn">← 返回首页</a>
+    <div class="page-nav" style="position: absolute; top: 0; right: 0;">
+        <a href="456.html" class="page-btn prev-btn">← 上一页</a>
+        <a href="458.html" class="page-btn next-btn">下一页 →</a>
     </div>
     
     <!-- 标题 -->
-    <div class="title-section">
-        <h1 class="main-title">~~~~~流感病毒治疗药物指南*****</h1>
-        <p class="sub-title">抗病毒药物敏感性、耐药情况及备选方案参考表</p>
+    <div class="header">
+        <h1><span class="title-format">~~~~~</span>流感抗病毒药物治疗指南<span class="title-format">*****</span></h1>
     </div>
     
     <!-- 表格 -->
@@ -374,82 +418,101 @@ html
         <table>
             <thead>
                 <tr>
-                    <th style="width: 22%;">病毒/疾病</th>
-                    <th style="width: 35%;">敏感（推荐药物/剂量）</th>
-                    <th style="width: 18%;">耐药</th>
-                    <th style="width: 25%;">备选药物/不良反应/说明</th>
+                    <th>病毒/疾病</th>
+                    <th>敏感（推荐药物/剂量）</th>
+                    <th>耐药</th>
+                    <th>备选药物/不良反应/说明</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        <span class="disease-name">• 甲型流感H1N1</span>（现在的季节性H1N1的表现类似于流行性H1N1）<br><br>
-                        <span class="disease-name">• 乙型流感</span><br><br>
-                        <span class="disease-name">• 甲型流感</span>（H1N1 pdm09，2023—2024年流行N3N2）
+                    <td class="disease-cell">
+                        <ul>
+                            <li>甲型流感H1N1（现在的季节性H1N1的表现类似于流行性H1N1）</li>
+                            <li>乙型流感</li>
+                            <li>甲型流感（H1N1 pdm09，2023—2024年流行N3N2）</li>
+                        </ul>
                     </td>
-                    <td>
-                        <span class="drug-name">奥司他韦</span><br>
-                        成人：奥司他韦 75mg po bid×5d<br><br>
-                        儿童（1～12岁）：<br>
-                        婴儿（2周至11个月）：3mg/kg bid×5d<br>
-                        体重≤15kg：30mg bid×5d<br>
-                        体重＞15～23kg：45mg bid×5d<br>
-                        体重＞23～40kg：60mg bid×5d<br>
-                        体重＞40kg：75mg bid×5d<br><br>
-                        或<br><br>
-                        <span class="drug-name">扎那米韦</span> 2喷吸入（每喷5mg）bid×5d，或<br>
-                        <span class="drug-name">巴洛沙韦</span> 40mg po单剂（年龄＞12岁）<br>
-                        80mg po（体重＞80kg），或<br>
-                        <span class="drug-name">帕拉米韦</span> 600mg iv qd×5～10d<br>
-                        注射用扎那米韦见说明<br><br>
-                        <span class="drug-name">Laninamivir</span>（日本上市）：<br>
-                        年龄＜10岁，20mg qd吸入<br>
-                        年龄＞10岁，40mg qd吸入
+                    <td class="drug-cell">
+                        <div class="drug-name">奥司他韦</div>
+                        <div class="dose-info">
+                            成人：奥司他韦 75mg po bid×5d<br>
+                            儿童（1～12岁）：<br>
+                            婴儿（2周至11个月）：3mg/kg bid×5d<br>
+                            体重≤15kg：30mg bid×5d<br>
+                            体重＞15～23kg：45mg bid×5d<br>
+                            体重＞23～40kg：60mg bid×5d<br>
+                            体重＞40kg：75mg bid×5d
+                        </div>
+                        <div style="margin-top:8px; color:#666;">或</div>
+                        <div class="dose-info">
+                            扎那米韦 2喷吸入（每喷5mg）bid×5d，或<br>
+                            巴洛沙韦 40mg po 单剂（年龄＞12岁）<br>
+                            80mg po（体重＞80kg），或<br>
+                            帕拉米韦 600mg iv qd×5～10d<br>
+                            注射用扎那米韦见说明
+                        </div>
+                        <div style="margin-top:10px;">
+                            <div class="drug-name">Laninamivir（日本上市）：</div>
+                            <div class="dose-info">
+                                年龄＜10岁，20mg qd 吸入<br>
+                                年龄＞10岁，40mg qd 吸入
+                            </div>
+                        </div>
                     </td>
-                    <td>
+                    <td class="resist-cell">
                         金刚烷胺和金刚乙胺（100%）
                     </td>
-                    <td>
-                        • 甲型流感H1N1：大剂量奥司他韦（150mg bid）不会更有效<br><br>
-                        • 扎那米韦不推荐用于年龄＜7岁的儿童或有气道高反应性病变的患者<br><br>
-                        • 注射用扎那米韦，在英国已经上市，美国未上市<br><br>
-                        • 乙型流感：一项研究显示巴洛沙韦疗效优于奥司他韦（ID WEEK 20018 LB）。<br><br>
-                        • 糖皮质激素使用和病死率增加有关（JID 212：183，2015）。现阶段应避免使用激素，除非有其他指征<br><br>
-                        奥司他韦和巴洛沙韦体外活性。与CDC进行治疗方案讨论
+                    <td class="alt-cell">
+                        <div class="note-item">甲型流感H1N1：大剂量奥司他韦（150mg bid）不会更有效</div>
+                        <div class="note-item">扎那米韦不推荐用于年龄＜7岁的儿童或有气道高反应性病变的患者</div>
+                        <div class="note-item">注射用扎那米韦，在英国已经上市，美国未上市</div>
+                        <div class="note-item">乙型流感：一项研究显示巴洛沙韦疗效优于奥司他韦（ID WEEK 20018 LB）</div>
+                        <div class="note-item">糖皮质激素使用和病死率增加有关（JID 212:183，2015）。现阶段应避免使用激素，除非有其他指征</div>
+                        <div class="note-item">奥司他韦和巴洛沙韦体外活性。与CDC进行治疗方案讨论</div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <span class="disease-name">禽流感</span><br>
+                    <td class="disease-cell">
+                        禽流感<br>
                         （H5N1，H7N9）
                     </td>
-                    <td>
-                        <span class="drug-name">奥司他韦</span> 75mg po bid（暴露后预防5～10天）（CDC推荐）
+                    <td class="drug-cell">
+                        <div class="dose-info">
+                            奥司他韦 75mg po bid（暴露后预防5～10天）（CDC推荐）
+                        </div>
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td class="resist-cell"></td>
+                    <td class="alt-cell"></td>
                 </tr>
             </tbody>
         </table>
     </div>
     
     <!-- 注释 -->
-    <div class="note-text">
-        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
-        *书中名词缩写见第2页。
+    <div class="note-footer">
+        <strong>注：</strong>*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
+        *文中名词缩写见第2页。
     </div>
     
-    <!-- 检索标签 -->
-    <div class="tag-section">
-        <div class="tag-title">🔍 特色检索标签（点击图片中的关键词快速筛选）</div>
-        <div class="tags">
+    <!-- 图片框 -->
+    <div class="image-box">
+        <img src="457.jpg" alt="流感抗病毒药物参考图" onerror="this.style.display='none'">
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">457</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击筛选）</div>
+        <div class="tags-container">
             <span class="tag tag-disease">甲型流感H1N1</span>
             <span class="tag tag-disease">乙型流感</span>
+            <span class="tag tag-disease">甲型流感</span>
             <span class="tag tag-disease">禽流感</span>
-            <span class="tag tag-virus">H1N1 pdm09</span>
-            <span class="tag tag-virus">H5N1</span>
-            <span class="tag tag-virus">H7N9</span>
-            <span class="tag tag-virus">N3N2</span>
+            <span class="tag tag-disease">H5N1</span>
+            <span class="tag tag-disease">H7N9</span>
             <span class="tag tag-drug">奥司他韦</span>
             <span class="tag tag-drug">扎那米韦</span>
             <span class="tag tag-drug">巴洛沙韦</span>
@@ -460,91 +523,275 @@ html
         </div>
     </div>
     
-    <!-- 底部区域 -->
-    <div class="bottom-section">
-        <div class="keywords">
-            <strong>关键词：</strong>流感病毒、抗病毒治疗、奥司他韦、扎那米韦、巴洛沙韦、帕拉米韦、禽流感、甲型流感、乙型流感、耐药、CDC指南
-        </div>
-        
-        <div class="page-number">页码：457</div>
-        
-        <div class="copy-section">
-            <input type="text" class="copy-input" id="copyText" readonly>
-            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
-            <span class="copy-success" id="copySuccess">✓ 已复制到剪贴板！</span>
-        </div>
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="流感抗病毒药物治疗指南；甲型流感H1N1,乙型流感,甲型流感,禽流感,H5N1,H7N9,奥司他韦,扎那米韦,巴洛沙韦,帕拉米韦,Laninamivir,金刚烷胺,金刚乙胺；=457" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">复制</button>
     </div>
     
-    <script>
-        // 设置复制框内容
-        const title = "流感病毒治疗药物指南";
-        const subtitle = "抗病毒药物敏感性、耐药情况及备选方案参考表";
-        const keywords = "流感病毒、抗病毒治疗、奥司他韦、扎那米韦、巴洛沙韦、帕拉米韦、禽流感、甲型流感、乙型流感、耐药、CDC指南";
-        const pageNum = "457";
-        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">★</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="457.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
         
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
         // 复制功能
         function copyToClipboard() {
-            const copyText = document.getElementById('copyText');
+            const copyText = document.getElementById("copyText");
             copyText.select();
             copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value).then(() => {
-                const success = document.getElementById('copySuccess');
-                success.style.display = 'inline';
-                setTimeout(() => {
-                    success.style.display = 'none';
-                }, 2000);
-            });
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand("copy");
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById("copyBtn");
+            btn.textContent = "已复制!";
+            btn.classList.add("copied");
+            setTimeout(() => {
+                btn.textContent = "复制";
+                btn.classList.remove("copied");
+            }, 2000);
         }
         
         // 收藏功能
-        let isFavorited = false;
         function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            isFavorited = !isFavorited;
+            const btn = document.getElementById("favBtn");
+            const isActive = btn.classList.contains("active");
             
-            if (isFavorited) {
-                btn.classList.add('active');
-                btn.innerHTML = '★ 已收藏';
+            if (!isActive) {
+                btn.classList.add("active");
+                btn.title = "已收藏";
                 
-                // 保存到localStorage（模拟添加到index收藏类目）
+                // 保存到localStorage模拟添加到index收藏
                 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                const currentPage = {
-                    title: '~~~~~流感病毒治疗药物指南*****',
-                    url: window.location.href,
-                    pageNum: '457',
-                    category: '流感病毒'
+                const pageInfo = {
+                    title: "流感抗病毒药物治疗指南",
+                    url: "457.html",
+                    pageNum: "457"
                 };
                 
                 // 检查是否已存在
-                const exists = favorites.some(f => f.pageNum === '457');
+                const exists = favorites.some(f => f.url === pageInfo.url);
                 if (!exists) {
-                    favorites.push(currentPage);
+                    favorites.push(pageInfo);
                     localStorage.setItem('favorites', JSON.stringify(favorites));
                 }
                 
-                alert('已添加到收藏！可在首页收藏类目查看。');
+                alert("已添加到收藏！请在首页查看。");
             } else {
-                btn.classList.remove('active');
-                btn.innerHTML = '⭐ 收藏';
+                btn.classList.remove("active");
+                btn.title = "点击收藏";
                 
-                // 从收藏中移除
                 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                favorites = favorites.filter(f => f.pageNum !== '457');
+                favorites = favorites.filter(f => f.url !== "457.html");
                 localStorage.setItem('favorites', JSON.stringify(favorites));
             }
         }
         
-        // 检查是否已收藏
+        // 页面加载时检查收藏状态
         window.onload = function() {
             const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            if (favorites.some(f => f.pageNum === '457')) {
-                isFavorited = true;
-                const btn = document.getElementById('favBtn');
-                btn.classList.add('active');
-                btn.innerHTML = '★ 已收藏';
+            const isFav = favorites.some(f => f.url === "457.html");
+            if (isFav) {
+                document.getElementById("favBtn").classList.add("active");
+                document.getElementById("favBtn").title = "已收藏";
             }
         };
+        
+        // 标签点击效果
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
     </script>
 </body>
 </html>

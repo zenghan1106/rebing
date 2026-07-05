@@ -1,276 +1,695 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>—_——</title>
+    <title>~~~~~潜伏性结核感染治疗方案表*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 10px;
-            color: #333;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 100%; margin: 0 auto; }
         
-        /* 顶部导航 */
-        .nav-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 15px;
-            background: #fff;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
-            gap: 10px;
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
         }
-        .nav-btn {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
             color: white;
-            text-decoration: none;
-            border-radius: 20px;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
             font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #6b5b95;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
         .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+            background: #5a4a84;
         }
-        .nav-btn:active { transform: translateY(0); }
         
         /* 标题 */
-        .main-title {
+        h1 {
             text-align: center;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            color: #2c3e50;
             font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+            margin: 60px 0 25px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         
-        /* 表格样式 */
-        .content-table {
+        /* 表格容器 */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0 auto 30px;
+            max-width: 1200px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            font-size: 13px;
         }
-        .content-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        
+        /* 表头 */
+        thead {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
             color: white;
         }
-        .content-table th {
-            padding: 12px 10px;
-            text-align: left;
+        
+        thead th {
+            padding: 14px 10px;
+            font-size: 15px;
             font-weight: bold;
+            text-align: center;
+            border: 1px solid #2a6db5;
+        }
+        
+        /* 表头第一行字体更大 */
+        .header-row th {
             font-size: 16px;
-            border-bottom: 3px solid #667eea;
+            padding: 16px 10px;
         }
-        .content-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e8e8e8;
-            font-size: 14px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-        .content-table tr:nth-child(even) { background: #f8f9fa; }
-        .content-table tr:hover { background: #e8f4f8; }
-        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
         
-        /* 标签 */
-        .tags-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        /* 表格内容 */
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #d0d7de;
+            vertical-align: top;
+            line-height: 1.6;
         }
-        .tags-title {
+        
+        /* 病原体/疾病列 - 棕色 */
+        .col-disease {
+            color: #8B4513;
             font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 12px;
+            width: 18%;
+            min-width: 140px;
         }
         
-        /* 编辑框 */
-        .edit-section {
-            background: white;
+        /* 不同情境列 - 紫色 */
+        .col-situation {
+            color: #6b5b95;
+            width: 20%;
+            min-width: 120px;
+        }
+        
+        /* 初始方案列 */
+        .col-initial {
+            width: 32%;
+            min-width: 200px;
+        }
+        
+        /* 替代方案列 */
+        .col-alternative {
+            width: 30%;
+            min-width: 200px;
+        }
+        
+        /* 抗生素药物 - 绿色 */
+        .antibiotic {
+            color: #228B22;
+            font-weight: 600;
+        }
+        
+        /* 细菌相关 - 红色 */
+        .bacteria {
+            color: #DC143C;
+        }
+        
+        /* 注释文字 - 黄色背景高亮 */
+        .note-highlight {
+            background: #fffacd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        /* 行背景色交替 */
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 合并单元格样式 */
+        .merged-cell {
+            background: #fafbfc;
+        }
+        
+        /* 竖排文字 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 3px;
+            margin: 0 auto;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            max-width: 1200px;
+            margin: 0 auto 25px;
             padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.8;
         }
-        .edit-box {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            resize: vertical;
-        }
-        .btn-row {
+        
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: 1200px;
+            margin: 0 auto 25px;
             display: flex;
             gap: 10px;
-            margin-top: 10px;
+            align-items: center;
             flex-wrap: wrap;
         }
-        .action-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .copy-btn { background: #28a745; color: white; }
-        .copy-btn:hover { background: #218838; }
-        .favorite-btn { background: #ffc107; color: #333; }
-        .favorite-btn:hover { background: #e0a800; }
-        .favorite-btn.active { background: #ff6b6b; color: white; }
         
-        /* 页码 */
-        .page-footer {
-            text-align: center;
-            padding: 15px;
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            background: #ee5a5a;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            max-width: 1200px;
+            margin: 0 auto 20px;
+            padding: 20px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .page-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         
-        /* 收藏提示 */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: none;
-            z-index: 1000;
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        .tag-disease {
+            background: #f0e6d3;
+            color: #8B4513;
+            border: 1px solid #d4c4a8;
+        }
+        
+        .tag-antibiotic {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #b8d4be;
+        }
+        
+        .tag-bacteria {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th, .header-row th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-top">
-            <a href="index.html" class="nav-btn">🏠 首页</a>
-            <div>
-                <a href="379.html" class="nav-btn">⬅️ 上一页</a>
-                <a href="381.html" class="nav-btn">➡️ 下一页</a>
-            </div>
-        </div>
-        
-        <h1 class="main-title">~~~~~—_——*****</h1>
-        
-        <table class="content-table"><tbody><tr><td>———</td></tr><tr><td>——</td></tr><tr><td>—_——</td></tr><tr><td>WE TET FR</td></tr><tr><td>Tale | BR</td></tr><tr><td>AN el aaa</td></tr><tr><td>~ fo</td></tr><tr><td>a =</td></tr><tr><td>—_——____-—</td></tr><tr><td>————————</td></tr><tr><td>ie</td></tr><tr><td>ee</td></tr><tr><td>= —</td></tr><tr><td>‘ATI Fe</td></tr><tr><td>—=_—_—— ———</td></tr><tr><td>Sees</td></tr><tr><td>BRAK</td></tr><tr><td>xEUK</td></tr><tr><td>RAITT 4A E+ AE |</td></tr><tr><td>Fae 300mg p po ad re op B, 50mg qd</td></tr><tr><td>pbk Bie gg</td></tr><tr><td>Iai</td></tr><tr><td>, FUER IF</td></tr><tr><td>FRAP UT HA ee a</td></tr><tr><td>P si</td></tr><tr><td>WISI IHN, WHE i AA?</td></tr><tr><td>ERB,</td></tr><tr><td>50me/d</td></tr><tr><td>————— See</td></tr><tr><td>———</td></tr><tr><td>LTBI</td></tr><tr><td>PF</td></tr><tr><td>BE it</td></tr><tr><td>| FFB po ae</td></tr><tr><td>nef (ke + ri EK |</td></tr><tr><td>7 |</td></tr><tr><td>| AM AIT 300m r</td></tr><tr><td>o gd, TERME (RS</td></tr><tr><td>Fa 600 : d: &quot; kabines Om</td></tr><tr><td>(kg + d),</td></tr><tr><td>cchicaeilded</td></tr><tr><td>Ft ,</td></tr><tr><td>Frill eee A] BET</td></tr><tr><td>ee 600me/d ] x4A</td></tr><tr><td>| Sik</td></tr><tr><td>nz )</td></tr><tr><td>— —</td></tr><tr><td>LTBI, ESR A</td></tr><tr><td>| SER MNRAS</td></tr><tr><td>Sv B400met Z RET E15</td></tr><tr><td>g po |</td></tr><tr><td>EMS eck ane ¢ Zz</td></tr><tr><td>15mg/ke BUI</td></tr><tr><td>ARF HMA</td></tr><tr><td>qdX12-FA</td></tr><tr><td>Be 25moe/</td></tr><tr><td>g) qdX12-+F</td></tr><tr><td>EB: PZAR AHS</td></tr><tr><td>RARER AL, (MSE</td></tr><tr><td>Ze, WHAM RAMA A AY E+ CT (CID</td></tr><tr><td>— ———————— oo</td></tr><tr><td>64: 1670, 2017)</td></tr><tr><td>———————— = —————————</td></tr><tr><td>=—</td></tr><tr><td>=. FRRERRGRA (BERGE) REOMERE.</td></tr><tr><td>Ze PZ GS Le 2H.</td></tr></tbody></table>
-        
-        <div class="tags-section">
-            <div class="tags-title">🏷️ 关键词标签</div>
-            <div class="tags"></div>
-        </div>
-        
-        <div class="edit-section">
-            <textarea class="edit-box" id="editBox">—_——；=380</textarea>
-            <div class="btn-row">
-                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
-                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-            </div>
-        </div>
-        
-        <div class="page-footer">
-            <div class="page-number">第 380 页</div>
+    <!-- 返回首页按钮 -->
+    <button class="home-btn" onclick="location.href='index.html'">🏠 返回首页</button>
+    
+    <!-- 上一页/下一页按钮 -->
+    <div class="nav-btns">
+        <button class="nav-btn" onclick="location.href='379.html'">← 上一页</button>
+        <button class="nav-btn" onclick="location.href='381.html'">下一页 →</button>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~潜伏性结核感染治疗方案表*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr class="header-row">
+                    <th rowspan="2">病原体/疾病</th>
+                    <th rowspan="2">不同情境</th>
+                    <th colspan="2">推荐方案</th>
+                </tr>
+                <tr>
+                    <th>初始方案</th>
+                    <th>替代方案</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3" class="col-disease merged-cell">
+                        <span class="bacteria">LTBI</span>，怀疑<span class="antibiotic">异烟肼</span>耐药菌
+                    </td>
+                    <td class="col-situation">妊娠</td>
+                    <td class="col-initial">
+                        每天<span class="antibiotic">利福平</span>治疗4个月或<span class="antibiotic">异烟肼</span>+<span class="antibiotic">利福平</span>治疗3个月。除外活动病变后，可推迟开始治疗时间至产后，除非近期暴露或<span class="bacteria">HIV</span>阳性<br><br>
+                        如治疗包含<span class="antibiotic">INH</span>，则推荐使用<span class="antibiotic">维生素B₆</span> 50mg/d
+                    </td>
+                    <td class="col-alternative">
+                        <span class="antibiotic">异烟肼</span> 300mg po qd + <span class="antibiotic">维生素B₆</span> 50mg qd
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-situation"></td>
+                    <td class="col-initial">
+                        <span class="antibiotic">利福平</span> po qd [成人10mg/(kg·d)，最大剂量600mg/d；儿童10～20mg/(kg·d)，最大剂量600mg/d] ×4个月
+                    </td>
+                    <td class="col-alternative">
+                        <span class="antibiotic">利福布汀</span> 300mg po qd，可用于代替<span class="antibiotic">利福平</span>（在接受抗反转录病毒药物治疗的<span class="bacteria">HIV</span>阳性患者，剂量可能需要根据药物相互作用而进行调整）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-situation">妊娠：建议专家会诊</td>
+                    <td class="col-initial">
+                        <span class="antibiotic">莫西沙星</span> 400mg ± <span class="antibiotic">乙胺丁醇</span> 15mg/kg po qd×12个月
+                    </td>
+                    <td class="col-alternative">
+                        <span class="antibiotic">左氧氟沙星</span> 500mg qd + （<span class="antibiotic">乙胺丁醇</span> 15mg/kg或<span class="antibiotic">吡嗪酰胺</span> 25mg/kg）qd×12个月<br><br>
+                        <span class="note-highlight">注意：PZA联合方案，虽然可能更有效，但耐受性差，可能总体效果不如<span class="antibiotic">左氧氟沙星</span>+<span class="antibiotic">乙胺丁醇</span>（CID 64:1670，2017）</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <strong>注：</strong>*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="潜伏性结核感染治疗方案表;LTBI;异烟肼;利福平;维生素B₆;INH;利福布汀;HIV;莫西沙星;乙胺丁醇;左氧氟沙星;吡嗪酰胺;PZA;=380" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 关键词检索标签（点击图片内文字可检索）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">LTBI</span>
+            <span class="tag tag-disease">潜伏性结核感染</span>
+            <span class="tag tag-antibiotic">异烟肼</span>
+            <span class="tag tag-antibiotic">利福平</span>
+            <span class="tag tag-antibiotic">维生素B₆</span>
+            <span class="tag tag-antibiotic">INH</span>
+            <span class="tag tag-antibiotic">利福布汀</span>
+            <span class="tag tag-antibiotic">莫西沙星</span>
+            <span class="tag tag-antibiotic">乙胺丁醇</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">吡嗪酰胺</span>
+            <span class="tag tag-antibiotic">PZA</span>
+            <span class="tag tag-bacteria">HIV</span>
         </div>
     </div>
     
-    <div class="toast" id="toast"></div>
+    <!-- 页码 -->
+    <div class="page-number">页码：380</div>
     
-    <script>
-        function copyContent() {
-            const editBox = document.getElementById('editBox');
-            editBox.select();
-            document.execCommand('copy');
-            showToast('✅ 已复制到剪贴板');
-        }
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="380.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
         
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            const title = document.querySelector('.main-title').textContent;
-            const pageNum = 380;
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
             
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            const index = favorites.findIndex(f => f.page === pageNum);
-            
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.textContent = '⭐ 收藏';
-                showToast('已取消收藏');
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("已复制到剪贴板！");
+                });
             } else {
-                favorites.push({ page: pageNum, title: title });
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-                showToast('已添加到收藏');
-            }
-            
-            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
-            updateIndexFavorites();
-        }
-        
-        function checkFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageNum = 380;
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            
-            if (favorites.some(f => f.page === pageNum)) {
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
             }
         }
         
-        function updateIndexFavorites() {
-            // 这个函数会在 index.html 中同步更新收藏列表
-            // 通过 localStorage 事件自动同步
+        // 添加到收藏
+        function addToFavorites() {
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            
+            // 尝试使用本地存储模拟收藏功能
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    page: '380'
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！请在 index.html 查看收藏列表。');
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+            
+            // 尝试打开index.html并传递收藏信息
+            try {
+                const indexWindow = window.open('index.html', '_blank');
+            } catch(e) {
+                console.log('无法打开index.html');
+            }
         }
-        
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 2000);
-        }
-        
-        // 页面加载时检查收藏状态
-        window.onload = checkFavorite;
     </script>
 </body>
 </html>

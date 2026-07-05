@@ -1,0 +1,757 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾功能受损成人患者抗感染药物剂量调整续表*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #2c3e50;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .page-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 - 固定右下角 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(245, 87, 108, 0.4);
+            z-index: 1000;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #2874a6;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+        
+        /* 表头 - 蓝色 */
+        thead tr {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        /* 表格第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        /* 数据单元格 */
+        td {
+            padding: 12px 10px;
+            border: 1px solid #d5d8dc;
+            font-size: 13px;
+            line-height: 1.6;
+            vertical-align: top;
+            color: #2c3e50;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 药物名称列加粗 */
+        td:first-child {
+            font-weight: 600;
+            color: #1a5276;
+            min-width: 120px;
+        }
+        
+        /* 注释区域 */
+        .notes-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border-left: 4px solid #2989d8;
+        }
+        
+        .notes-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a5276;
+            margin-bottom: 12px;
+        }
+        
+        .note-item {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            padding-left: 10px;
+        }
+        
+        /* 关键词标签区域 */
+        .tags-section {
+            margin-bottom: 20px;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .tag-bacteria {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .copy-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        #copyInput {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2989d8;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        /* 底部关键词 */
+        .keywords-section {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords {
+            color: #5d6d7e;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            td {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            .home-btn, .page-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .note-item {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="page-nav">
+            <a href="560.html" class="page-btn">← 上一页</a>
+            <a href="562.html" class="page-btn">下一页 →</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">表17A（2）肾功能受损成人患者的抗感染药物剂量调整（续）</h1>
+        <p class="sub-title">氨基糖苷类药物（异帕米星、卡那霉素、新霉素、奈替米星）肾功能不全剂量调整参考</p>
+    </div>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>抗微生物药</th>
+                    <th>半衰期（h）<br>（肾功能正常）</th>
+                    <th>半衰期（h）<br>（终末期肾病）</th>
+                    <th>剂量<br>（肾功能正常）</th>
+                    <th>肌酐清除率或估计的<br>肾小球滤过率（ml/min）</th>
+                    <th>血液透析</th>
+                    <th>CAPD</th>
+                    <th>CRRT</th>
+                    <th>SLED</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>异帕米星<br>（延长给药间<br>隔）</td>
+                    <td>2～3</td>
+                    <td>30～70</td>
+                    <td>8mg/kg q24h</td>
+                    <td>CrCl＞40：无须调整剂量<br>CrCl 20～40：8mg/kg q48h<br>CrCl 10～20：8mg/kg q72h<br>CrCl＜10：8mg/kg q96h</td>
+                    <td>8mg/kg q96h（透后<br>给药）</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                </tr>
+                <tr>
+                    <td>卡那霉素<sup>3</sup><br>（延长给药间<br>隔）</td>
+                    <td>2～3</td>
+                    <td>30～70</td>
+                    <td>15mg/kg q24h</td>
+                    <td>CrCl 60～80：12mg/kg q24h<br>CrCl 40～60：7.5mg/kg q24h<br>CrCl 30～40：4mg/kg q24h<br>CrCl 20～30：7.5mg/kg q48h<br>CrCl 10～20：4mg/kg q48h<br>CrCl＜10：3mg/kg q72h</td>
+                    <td>3mg/kg q72h（透后<br>给药）</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                </tr>
+                <tr>
+                    <td>新霉素<br>（口服不吸收）</td>
+                    <td>2～3</td>
+                    <td>30～70</td>
+                    <td>1g po×3剂<br>（手术前）</td>
+                    <td>肾功能损伤时无须调整剂量</td>
+                    <td>无须调整剂量</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                </tr>
+                <tr>
+                    <td>奈替米星<sup>1,2</sup><br>（传统用法）</td>
+                    <td>2～3</td>
+                    <td>30～70</td>
+                    <td>1.7～2.0mg/kg<br>IM/IV q8h</td>
+                    <td>CrCl＞50：无须调整剂量<br>CrCl 10～50：1.7～2.0mg/kg<br>q12～24h<br>CrCl＜10：1.7～2.0mg/kg q48h</td>
+                    <td>1.7～2.0mg/kg<br>q48h（＋透后额外<br>0.85～1mg/kg）</td>
+                    <td>腹膜炎：<br>0.6mg/kg IP qd</td>
+                    <td>1.7～2.0mg<br>q24h</td>
+                    <td>无数据</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 注释区域 -->
+    <div class="notes-section">
+        <div class="notes-title">📋 注释说明</div>
+        <div class="note-item"><strong>注1：</strong>高流量透析膜可致无法预测的药物清除；需监测透析后血药浓度。</div>
+        <div class="note-item"><strong>注2：</strong>CAPD时药代动力学变化很大，需监测血药浓度。CAPD常用方式：2L透析液置换qid（如阿米卡星：8L×20mg丢失/L＝160mg阿米卡星iv补充qd）。</div>
+        <div class="note-item"><strong>注3：</strong>肾功能损伤时延长给药间隔的剂量推荐：<em>Infect Dis Clin North Am</em> 1989；3：517。</div>
+    </div>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">腹膜炎</span>
+            <span class="tag">异帕米星</span>
+            <span class="tag">卡那霉素</span>
+            <span class="tag">新霉素</span>
+            <span class="tag">奈替米星</span>
+            <span class="tag tag-bacteria">抗感染</span>
+        </div>
+    </div>
+
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <div class="copy-row">
+            <input type="text" id="copyInput" value="肾功能受损成人患者抗感染药物剂量调整续表；异帕米星；卡那霉素；新霉素；奈替米星；腹膜炎；抗感染；肾功能不全；血液透析；CAPD；CRRT；SLED；口服不吸收；延长给药间隔；高流量透析膜；血药浓度监测=561" readonly>
+            <button class="copy-btn" onclick="copyText()">📋 复制</button>
+        </div>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">561</div>
+
+    <!-- 底部关键词 -->
+    <div class="keywords-section">
+        <div class="keywords">
+            关键词：肾功能受损 | 成人患者 | 抗感染药物 | 剂量调整 | 异帕米星 | 卡那霉素 | 新霉素 | 奈替米星 | 氨基糖苷类 | 血液透析 | CAPD | CRRT | SLED | 腹膜炎 | 终末期肾病 | 肌酐清除率 | 口服不吸收 | 高流量透析膜 | 血药浓度监测
+        </div>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="561.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('复制成功！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('复制成功！');
+            }
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.toggle('active');
+            
+            // 获取当前页面信息
+            const title = document.querySelector('.main-title').textContent;
+            const url = window.location.href;
+            const pageNum = '561';
+            
+            // 从localStorage获取收藏列表
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (isFav) {
+                // 添加收藏
+                const exists = favorites.some(f => f.url === url);
+                if (!exists) {
+                    favorites.push({
+                        title: '~~~~~' + title + '*****',
+                        url: url,
+                        pageNum: pageNum,
+                        tags: ['腹膜炎', '异帕米星', '卡那霉素', '新霉素', '奈替米星', '抗感染']
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                showToast('已收藏！');
+            } else {
+                // 取消收藏
+                favorites = favorites.filter(f => f.url !== url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showToast('已取消收藏');
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const url = window.location.href;
+            if (favorites.some(f => f.url === url)) {
+                document.getElementById('favBtn').classList.add('active');
+            }
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = checkFavorite;
+    </script>
+</body>
+</html>

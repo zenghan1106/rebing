@@ -1,0 +1,887 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医学索引B-C英文名称中文名称页码对照表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f0f7f4 0%, #e8f4f8 50%, #fef9e7 100%);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #2980b9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5d6d7e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover, .home-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        .title-wrapper {
+            text-align: center;
+            margin: 15px 0 25px;
+        }
+        
+        .main-title {
+            font-size: 20px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .title-decorator {
+            color: #e74c3c;
+            font-size: 22px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2e86de;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: middle;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 英文名称列 - 紫色 */
+        .english-name {
+            color: #6c3483;
+            font-weight: 500;
+            min-width: 280px;
+        }
+        
+        /* 中文名称列 - 绿色 */
+        .chinese-name {
+            color: #1e8449;
+            min-width: 280px;
+        }
+        
+        /* 页码列 - 棕色 */
+        .page-num {
+            color: #935116;
+            text-align: center;
+            font-weight: 500;
+            min-width: 80px;
+        }
+        
+        /* 缩进样式用于子项 */
+        .indent {
+            padding-left: 30px !important;
+        }
+        
+        /* 字母分隔行 */
+        .letter-separator {
+            background: #d5e8d4 !important;
+            font-weight: bold;
+            text-align: center !important;
+        }
+        
+        .letter-separator td {
+            color: #1e8449;
+            font-size: 14px;
+            padding: 8px;
+        }
+        
+        .image-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+        
+        .image-section img:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-caption {
+            color: #666;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #d5f5e3;
+            color: #1e8449;
+        }
+        
+        .tag-drug {
+            background: #e8daef;
+            color: #6c3483;
+        }
+        
+        .tag-bacteria {
+            background: #fdebd0;
+            color: #935116;
+        }
+        
+        .tag-virus {
+            background: #fadbd8;
+            color: #943126;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #1e8449;
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .favorite-btn.active {
+            background: #c0392b;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 8px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 15px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+            }
+            
+            .english-name, .chinese-name {
+                min-width: 150px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="651.html" class="nav-btn">← 上一页</a>
+            <a href="653.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decorator">~~~~~</span>
+            医学索引B-C英文名称中文名称页码对照表
+            <span class="title-decorator">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文名称</th>
+                    <th>中文名称</th>
+                    <th>页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="english-name">Body lice</td>
+                    <td class="chinese-name">体虱</td>
+                    <td class="page-num">217</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Boils, furunculosis</td>
+                    <td class="chinese-name">疖，疖病</td>
+                    <td class="page-num">59</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Botulism</td>
+                    <td class="chinese-name">肉毒中毒</td>
+                    <td class="page-num">72</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Bowel perforation</td>
+                    <td class="chinese-name">肠穿孔</td>
+                    <td class="page-num">52</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Brain abscess</td>
+                    <td class="chinese-name">脑脓肿</td>
+                    <td class="page-num">8</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Breast surgery, herniorrhaphy, thoracotomy</td>
+                    <td class="chinese-name">乳腺手术，疝修补术，开胸手术</td>
+                    <td class="page-num">265</td>
+                </tr>
+                <tr>
+                    <td class="english-name drug-name">Brincidofovir</td>
+                    <td class="chinese-name">Brincidofovir</td>
+                    <td class="page-num">240</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Bronchiectasis</td>
+                    <td class="chinese-name">支气管扩张</td>
+                    <td class="page-num">42</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Bronchiolitis/wheezy bronchitis</td>
+                    <td class="chinese-name">细支气管炎/喘息性支气管炎</td>
+                    <td class="page-num">41</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Bronchitis</td>
+                    <td class="chinese-name">支气管炎</td>
+                    <td class="page-num">41</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Brucellosis</td>
+                    <td class="chinese-name">布鲁菌病</td>
+                    <td class="page-num">67</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Bubonic plague</td>
+                    <td class="chinese-name">腺鼠疫</td>
+                    <td class="page-num">49</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Buccal cellulitis</td>
+                    <td class="chinese-name">面颊部蜂窝织炎</td>
+                    <td class="page-num">50</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Bunyaviridae</td>
+                    <td class="chinese-name">布尼亚病毒科</td>
+                    <td class="page-num">223</td>
+                </tr>
+                <tr>
+                    <td class="english-name bacteria-name">Burkholderia</td>
+                    <td class="chinese-name">伯克霍尔德菌属</td>
+                    <td class="page-num">45</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Burns</td>
+                    <td class="chinese-name">烧伤</td>
+                    <td class="page-num">59</td>
+                </tr>
+                <tr class="letter-separator">
+                    <td colspan="3">C</td>
+                </tr>
+                <tr>
+                    <td class="english-name drug-name">Cabotegravir</td>
+                    <td class="chinese-name">卡博特韦</td>
+                    <td class="page-num">244, 250</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Canaliculitis</td>
+                    <td class="chinese-name">泪小管炎</td>
+                    <td class="page-num">16</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Candida Stomatitis ("Thrush")</td>
+                    <td class="chinese-name">念珠菌性口炎（鹅口疮）</td>
+                    <td class="page-num">50</td>
+                </tr>
+                <tr>
+                    <td class="english-name">Candidiasis</td>
+                    <td class="chinese-name">念珠菌病</td>
+                    <td class="page-num">29</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Bloodstream infection</td>
+                    <td class="chinese-name indent">血流感染</td>
+                    <td class="page-num">174</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Bloodstream, neutropenic patient</td>
+                    <td class="chinese-name indent">血流感染－中性粒细胞缺乏患者</td>
+                    <td class="page-num">175</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Bloodstream, non-neutropenic patient</td>
+                    <td class="chinese-name indent">血流感染－非中性粒细胞缺乏患者</td>
+                    <td class="page-num">174</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent bacteria-name">Candida auris</td>
+                    <td class="chinese-name indent">耳念珠菌</td>
+                    <td class="page-num">174</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Candida esophagitis</td>
+                    <td class="chinese-name indent">念珠菌性食管炎</td>
+                    <td class="page-num">176</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">CNS Infection</td>
+                    <td class="chinese-name indent">中枢神经系统感染</td>
+                    <td class="page-num">177</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Cutaneous</td>
+                    <td class="chinese-name indent">皮肤性</td>
+                    <td class="page-num">177</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Endocarditis, myocarditis, pericarditis</td>
+                    <td class="chinese-name indent">心内膜炎，心肌炎，心包炎</td>
+                    <td class="page-num">175</td>
+                </tr>
+                <tr>
+                    <td class="english-name indent">Endophthalmitis, chorioretinitis</td>
+                    <td class="chinese-name indent">眼内炎，脉络膜视网膜炎</td>
+                    <td class="page-num">177</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <img src="652.jpg" alt="医学索引B-C英文名称中文名称页码对照表" onclick="openModal()">
+        <p class="image-caption">点击图片可放大查看</p>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img src="652.jpg" alt="放大图片">
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">652</div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">体虱</span>
+            <span class="tag tag-disease">疖</span>
+            <span class="tag tag-disease">疖病</span>
+            <span class="tag tag-disease">肉毒中毒</span>
+            <span class="tag tag-disease">肠穿孔</span>
+            <span class="tag tag-disease">脑脓肿</span>
+            <span class="tag tag-disease">乳腺手术</span>
+            <span class="tag tag-disease">疝修补术</span>
+            <span class="tag tag-disease">开胸手术</span>
+            <span class="tag tag-disease">支气管扩张</span>
+            <span class="tag tag-disease">细支气管炎</span>
+            <span class="tag tag-disease">喘息性支气管炎</span>
+            <span class="tag tag-disease">支气管炎</span>
+            <span class="tag tag-disease">布鲁菌病</span>
+            <span class="tag tag-disease">腺鼠疫</span>
+            <span class="tag tag-disease">面颊部蜂窝织炎</span>
+            <span class="tag tag-disease">烧伤</span>
+            <span class="tag tag-disease">泪小管炎</span>
+            <span class="tag tag-disease">念珠菌性口炎</span>
+            <span class="tag tag-disease">鹅口疮</span>
+            <span class="tag tag-disease">念珠菌病</span>
+            <span class="tag tag-disease">血流感染</span>
+            <span class="tag tag-disease">念珠菌性食管炎</span>
+            <span class="tag tag-disease">中枢神经系统感染</span>
+            <span class="tag tag-disease">皮肤性</span>
+            <span class="tag tag-disease">心内膜炎</span>
+            <span class="tag tag-disease">心肌炎</span>
+            <span class="tag tag-disease">心包炎</span>
+            <span class="tag tag-disease">眼内炎</span>
+            <span class="tag tag-disease">脉络膜视网膜炎</span>
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">Brincidofovir</span>
+            <span class="tag tag-drug">Cabotegravir</span>
+            <span class="tag tag-drug">卡博特韦</span>
+            <!-- 细菌/病原体标签 -->
+            <span class="tag tag-bacteria">Burkholderia</span>
+            <span class="tag tag-bacteria">伯克霍尔德菌属</span>
+            <span class="tag tag-bacteria">Bunyaviridae</span>
+            <span class="tag tag-bacteria">布尼亚病毒科</span>
+            <span class="tag tag-bacteria">Candida auris</span>
+            <span class="tag tag-bacteria">耳念珠菌</span>
+            <span class="tag tag-bacteria">Candida</span>
+            <span class="tag tag-bacteria">念珠菌</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="医学索引B-C英文名称中文名称页码对照表；医学索引、英文名称、中文名称、页码、体虱、疖、肉毒中毒、肠穿孔、脑脓肿、支气管扩张、支气管炎、布鲁菌病、腺鼠疫、烧伤、念珠菌病、血流感染、心内膜炎、心肌炎、心包炎、眼内炎、Brincidofovir、Cabotegravir、卡博特韦、Burkholderia、伯克霍尔德菌属、Candida auris、耳念珠菌；=652" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="652.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 图片放大功能
+        function openModal() {
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById('copyText');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert('已复制到剪贴板！');
+            }, function(err) {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '医学索引B-C英文名称中文名称页码对照表',
+                    url: '652.html',
+                    pageNum: '652'
+                };
+                
+                const exists = favorites.some(f => f.url === '652.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！');
+                } else {
+                    alert('已在收藏列表中！');
+                }
+            } else {
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '652.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已取消收藏！');
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === '652.html');
+            if (exists) {
+                document.getElementById('favBtn').classList.add('active');
+            }
+        };
+        
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

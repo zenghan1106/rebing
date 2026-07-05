@@ -1,0 +1,888 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~英文索引（A部分）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            z-index: 100;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #4cae4c;
+        }
+        
+        .nav-btn.next {
+            background: #f0ad4e;
+        }
+        
+        .nav-btn.next:hover {
+            background: #ec971f;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-size: 28px;
+            color: #2c5282;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: #2b6cb0 !important;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* 表格行 */
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background: #ebf8ff;
+        }
+        
+        td {
+            padding: 12px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        /* 英文名称列 */
+        .en-name {
+            color: #2d3748;
+            font-weight: 500;
+            min-width: 200px;
+        }
+        
+        /* 中文名称列 */
+        .cn-name {
+            color: #4a5568;
+            min-width: 180px;
+        }
+        
+        /* 页码列 */
+        .page-num {
+            color: #e53e3e;
+            font-weight: bold;
+            text-align: center;
+            min-width: 60px;
+            font-size: 15px;
+        }
+        
+        /* 子项缩进 */
+        .sub-item {
+            padding-left: 20px;
+            color: #718096;
+        }
+        
+        /* 分类字母 */
+        .category-letter {
+            background: #edf2f7;
+            color: #2b6cb0;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 12px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 180px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #c53030;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #38a169;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #3182ce;
+        }
+        
+        .copy-btn.copied {
+            background: #38a169;
+        }
+        
+        /* 页码显示 */
+        .page-indicator {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #718096;
+        }
+        
+        .page-indicator span {
+            color: #e53e3e;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-disease:hover {
+            background: #fc8181;
+            color: white;
+        }
+        
+        .tag-drug {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-drug:hover {
+            background: #68d391;
+            color: white;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .tag-bacteria:hover {
+            background: #63b3ed;
+            color: white;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fffaf0;
+            border-radius: 8px;
+            border-left: 4px solid #ed8936;
+        }
+        
+        .keywords-title {
+            font-size: 14px;
+            color: #744210;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-list {
+            font-size: 13px;
+            color: #975a16;
+            line-height: 1.8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 22px;
+                margin: 50px 0 20px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .en-name, .cn-name {
+                min-width: 150px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="647.html" class="nav-btn">← 上一页</a>
+        <a href="649.html" class="nav-btn next">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">★</button>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">~~~~~英文索引（A部分）*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文名称</th>
+                    <th>中文名称</th>
+                    <th>页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="category-letter">A</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Abacavir</td>
+                    <td class="cn-name">阿巴卡韦</td>
+                    <td class="page-num">244</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Abacavir (ABC) /lamivudine (3TC) /dolutegravir (DTV) (Triumeq)</td>
+                    <td class="cn-name">阿巴卡韦/拉米夫定/多替拉韦 (Triumeq)</td>
+                    <td class="page-num">244</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Abacavir (ABC) /lamivudine (3TC) /zidovudine (AZT) (Trizivir)</td>
+                    <td class="cn-name">阿巴卡韦/拉米夫定/齐多夫定 (Trizivir)</td>
+                    <td class="page-num">244</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Abacavir (ABC) /lamivudine (Epzicom or Kivexa)</td>
+                    <td class="cn-name">阿巴卡韦/拉米夫定 (Epzicom或Kivexa)</td>
+                    <td class="page-num">244</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Abdominal actinomycosis</td>
+                    <td class="cn-name">腹腔放线菌病</td>
+                    <td class="page-num">52</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acanthamoeba keratitis</td>
+                    <td class="cn-name">棘阿米巴角膜炎</td>
+                    <td class="page-num">202</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acanthamoeba sp.</td>
+                    <td class="cn-name">棘阿米巴原虫</td>
+                    <td class="page-num">202</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acinetobacter baumannii complex</td>
+                    <td class="cn-name">鲍曼不动杆菌复合群</td>
+                    <td class="page-num">44</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Actinomycosis</td>
+                    <td class="cn-name">放线菌病</td>
+                    <td class="page-num">44</td>
+                </tr>
+                <tr>
+                    <td class="en-name sub-item">"Lumpy jaw"</td>
+                    <td class="cn-name sub-item">牛腭放线菌病</td>
+                    <td class="page-num">50</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Active chorioretinitis</td>
+                    <td class="cn-name">活动性脉络膜视网膜炎</td>
+                    <td class="page-num">209</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acute bacterial exacerbation of chronic bronchitis (ABECB)</td>
+                    <td class="cn-name">慢性支气管炎急性细菌性加重</td>
+                    <td class="page-num">42</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acute complicated UTIs in men and women</td>
+                    <td class="cn-name">男性和女性的急性复杂性尿路感染</td>
+                    <td class="page-num">40</td>
+                </tr>
+                <tr>
+                    <td class="en-name sub-item">Acute uncomplicated cystitis and pyelonephritis in men</td>
+                    <td class="cn-name sub-item">男性急性非复杂性膀胱炎和肾盂肾炎</td>
+                    <td class="page-num">39</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acute uncomplicated cystitis and pyelonephritis in women</td>
+                    <td class="cn-name">女性急性非复杂性膀胱炎和肾盂肾炎</td>
+                    <td class="page-num">38</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Acyclovir</td>
+                    <td class="cn-name">阿昔洛韦</td>
+                    <td class="page-num">236</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Adefovir dipivoxil</td>
+                    <td class="cn-name">阿德福韦二匹伏酯</td>
+                    <td class="page-num">237</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Adenovirus</td>
+                    <td class="cn-name">腺病毒</td>
+                    <td class="page-num">223</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Albendazole</td>
+                    <td class="cn-name">阿苯达唑</td>
+                    <td class="page-num">220</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Allergic bronchopulmonary aspergillosis (ABPA)</td>
+                    <td class="cn-name">变应性支气管肺曲霉菌病</td>
+                    <td class="page-num">173</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Allergic fungal sinusitis</td>
+                    <td class="cn-name">变应性真菌性鼻窦炎</td>
+                    <td class="page-num">173</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Alveolar cyst disease</td>
+                    <td class="cn-name">肺泡囊肿病</td>
+                    <td class="page-num">215</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Amantadine</td>
+                    <td class="cn-name">金刚烷胺</td>
+                    <td class="page-num">239</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Amebiasis</td>
+                    <td class="cn-name">阿米巴病</td>
+                    <td class="page-num">201</td>
+                </tr>
+                <tr>
+                    <td class="en-name">Amebic meningoencephalitis</td>
+                    <td class="cn-name">阿米巴脑膜脑炎</td>
+                    <td class="page-num">202</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码指示 -->
+    <div class="page-indicator">
+        当前页码：<span>648</span>
+    </div>
+    
+    <!-- 底部功能区 -->
+    <div class="bottom-section">
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="英文索引（A部分）；阿巴卡韦；拉米夫定；多替拉韦；齐多夫定；腹腔放线菌病；棘阿米巴角膜炎；棘阿米巴原虫；鲍曼不动杆菌复合群；放线菌病；牛腭放线菌病；活动性脉络膜视网膜炎；慢性支气管炎急性细菌性加重；急性复杂性尿路感染；急性非复杂性膀胱炎；肾盂肾炎；阿昔洛韦；阿德福韦二匹伏酯；腺病毒；阿苯达唑；变应性支气管肺曲霉菌病；变应性真菌性鼻窦炎；肺泡囊肿病；金刚烷胺；阿米巴病；阿米巴脑膜脑炎；=648" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 快速检索标签</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <a href="#Abdominal-actinomycosis" class="tag tag-disease">腹腔放线菌病</a>
+                <a href="#Acanthamoeba-keratitis" class="tag tag-disease">棘阿米巴角膜炎</a>
+                <a href="#Actinomycosis" class="tag tag-disease">放线菌病</a>
+                <a href="#Lumpy-jaw" class="tag tag-disease">牛腭放线菌病</a>
+                <a href="#Active-chorioretinitis" class="tag tag-disease">活动性脉络膜视网膜炎</a>
+                <a href="#ABECB" class="tag tag-disease">慢性支气管炎急性细菌性加重</a>
+                <a href="#UTIs" class="tag tag-disease">急性复杂性尿路感染</a>
+                <a href="#cystitis" class="tag tag-disease">急性非复杂性膀胱炎</a>
+                <a href="#pyelonephritis" class="tag tag-disease">肾盂肾炎</a>
+                <a href="#ABPA" class="tag tag-disease">变应性支气管肺曲霉菌病</a>
+                <a href="#Allergic-fungal-sinusitis" class="tag tag-disease">变应性真菌性鼻窦炎</a>
+                <a href="#Alveolar-cyst-disease" class="tag tag-disease">肺泡囊肿病</a>
+                <a href="#Amebiasis" class="tag tag-disease">阿米巴病</a>
+                <a href="#Amebic-meningoencephalitis" class="tag tag-disease">阿米巴脑膜脑炎</a>
+                
+                <!-- 药物标签 -->
+                <a href="#Abacavir" class="tag tag-drug">阿巴卡韦</a>
+                <a href="#Triumeq" class="tag tag-drug">Triumeq</a>
+                <a href="#Trizivir" class="tag tag-drug">Trizivir</a>
+                <a href="#Epzicom" class="tag tag-drug">Epzicom</a>
+                <a href="#Acyclovir" class="tag tag-drug">阿昔洛韦</a>
+                <a href="#Adefovir" class="tag tag-drug">阿德福韦二匹伏酯</a>
+                <a href="#Albendazole" class="tag tag-drug">阿苯达唑</a>
+                <a href="#Amantadine" class="tag tag-drug">金刚烷胺</a>
+                
+                <!-- 细菌/病原体标签 -->
+                <a href="#Acanthamoeba" class="tag tag-bacteria">棘阿米巴原虫</a>
+                <a href="#Acinetobacter" class="tag tag-bacteria">鲍曼不动杆菌复合群</a>
+                <a href="#Adenovirus" class="tag tag-bacteria">腺病毒</a>
+            </div>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            <div class="keywords-title">🔑 关键词</div>
+            <div class="keywords-list">
+                阿巴卡韦、拉米夫定、多替拉韦、齐多夫定、腹腔放线菌病、棘阿米巴角膜炎、棘阿米巴原虫、鲍曼不动杆菌复合群、放线菌病、牛腭放线菌病、活动性脉络膜视网膜炎、慢性支气管炎急性细菌性加重、急性复杂性尿路感染、急性非复杂性膀胱炎、肾盂肾炎、阿昔洛韦、阿德福韦二匹伏酯、腺病毒、阿苯达唑、变应性支气管肺曲霉菌病、变应性真菌性鼻窦炎、肺泡囊肿病、金刚烷胺、阿米巴病、阿米巴脑膜脑炎
+            </div>
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="648.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ 已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.innerHTML = '♥';
+                btn.title = '已收藏';
+                
+                // 保存到localStorage
+                const favData = {
+                    title: '英文索引（A部分）',
+                    url: '648.html',
+                    category: '英文索引'
+                };
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 尝试更新index.html的收藏（如果同源）
+                try {
+                    updateIndexFavorite(favData);
+                } catch(e) {
+                    console.log('无法自动更新index.html，请手动添加');
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.innerHTML = '★';
+                btn.title = '点击收藏';
+                
+                // 从localStorage移除
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f.url !== '648.html');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 尝试更新index.html的收藏列表
+        function updateIndexFavorite(data) {
+            // 通过postMessage或BroadcastChannel通知index.html
+            if (typeof BroadcastChannel !== 'undefined') {
+                const channel = new BroadcastChannel('favorites_channel');
+                channel.postMessage({
+                    action: 'add',
+                    data: data
+                });
+            }
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.url === '648.html');
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '♥';
+                btn.title = '已收藏';
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        checkFavorite();
+    </script>
+</body>
+</html>

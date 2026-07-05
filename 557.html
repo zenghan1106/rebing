@@ -1,0 +1,695 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表16（15）儿科剂量（年龄>28日龄）- 流感、痘病毒及呼吸道合胞病毒抗病毒药物*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, #f0f7ff 0%, #e6f3ff 30%, #f5f0ff 70%, #fff8f0 100%);
+            min-height: 100vh;
+            padding: 12px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn, .nav-btn {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover, .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 20px;
+            margin: 12px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+            width: 100%;
+            line-height: 1.5;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            font-size: 12px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            white-space: nowrap;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        thead th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #e8e8e8;
+            color: #2c3e50;
+            line-height: 1.8;
+            vertical-align: top;
+        }
+        
+        tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 16px;
+        }
+        
+        tbody tr:last-child td:last-child {
+            border-radius: 0 0 16px 0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+            transition: background 0.3s;
+        }
+        
+        .category-cell {
+            background: linear-gradient(90deg, #e8f4f8 0%, #f0f8ff 100%);
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 13px;
+        }
+        
+        .drug-name {
+            color: #c0392b;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .dosage {
+            color: #27ae60;
+        }
+        
+        .note {
+            color: #8e44ad;
+            font-style: italic;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 18px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #1a5276;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .tag:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+        
+        .tag-drug {
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+        }
+        
+        .tag-virus {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 18px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px;
+            border: 2px solid #4a90d9;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: #f8fbff;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.3);
+        }
+        
+        .page-number {
+            text-align: center;
+            color: #5d6d7e;
+            font-size: 15px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+        
+        .keywords {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+            margin: 12px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 28px;
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.15) rotate(15deg);
+        }
+        
+        .favorite-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #c0392b 100%);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 15px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+                line-height: 1.6;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .tag {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .copy-input {
+                min-width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="556.html" class="nav-btn">⬅ 上一页</a>
+            <a href="558.html" class="nav-btn">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表16（15）儿科剂量（年龄>28日龄）*****</h1>
+    <p class="subtitle">流感、痘病毒及呼吸道合胞病毒抗病毒药物</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/药物</th>
+                    <th>剂量（>28日龄）</th>
+                    <th>最大日剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3" class="category-cell">抗病毒药物（流感）（续）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">奥司他韦（预防）</td>
+                    <td class="dosage"><3月龄：不推荐<br>3～11月龄：3mg/kg qd×10d<br>体重≤15kg：30mg qd×10d<br>体重>15～23kg：45mg qd×10d<br>体重>23～40kg：60mg qd×10d<br>体重>40kg：75mg qd×10d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">帕拉米韦</td>
+                    <td class="dosage">6月龄～12岁：12mg/kg iv×1剂<br>13～18岁：600mg iv×1剂</td>
+                    <td>600mg</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">金刚乙胺</td>
+                    <td class="dosage">≥10岁：使用成人剂量<br>1～<10岁：5mg/kg（最大150mg）po q24h</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">扎那米韦（治疗）</td>
+                    <td class="dosage">≥7岁：10mg（2次5mg吸入）q12h×5d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">扎那米韦（预防）</td>
+                    <td class="dosage">≥5岁：10mg（2次5mg吸入）q24h×10d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category-cell">抗病毒药物（痘病毒）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Brincidofovir</td>
+                    <td class="dosage">体重<10kg：6mg/kg第1天和第8天<br>10kg≤体重<48kg：4mg/kg第1天和第8天<br>体重≥48kg：200mg第1天和第8天</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">特考韦瑞（口服剂量）</td>
+                    <td class="dosage">体重13～<25kg：200mg q12h×14d<br>体重25～<40kg：400mg q12h×14d<br>体重40～<120kg：600mg q12h×14d<br>体重≥120kg：600mg po q8h×14d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">特考韦瑞（静脉剂量）</td>
+                    <td class="dosage">体重13～<35kg：6mg/kg iv q12h×14d<br>体重35～<120kg：200mg iv q12h×14d<br>体重≥120kg：300mg iv q12h×14d</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="category-cell">抗病毒药物（呼吸道合胞病毒）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">尼塞韦单抗</td>
+                    <td class="dosage">新生儿、婴儿出生在或首次进入RSV流行季：<br>体重<5kg：50mg im×1剂<br>体重≥5kg：100mg im×1剂<br>大到24月的儿童再第二次进入RSV流行季仍有重症疾病风险的：<br>200mg im×1剂（以两剂100mg注射）<br>对接受有心肺旁路的心脏手术的儿童，建议再术后情况稳定后再补充予1剂：<br>• 首个RSV季：如果在接受尼塞韦单抗后90天内手术，根据体重予补充剂量。如果超过90天后手术，补充剂量是50mg<br>• 第二个RSV季：如果在接受尼塞韦单抗后90天内手术，补充剂量是200mg。如果超过90天后手术，补充剂量是100mg</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">帕利珠单抗</td>
+                    <td class="dosage">15mg/kg im RSV流行季每月1次</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">流感</span>
+            <span class="tag tag-disease">痘病毒</span>
+            <span class="tag tag-disease">呼吸道合胞病毒</span>
+            <span class="tag tag-disease">RSV</span>
+            <span class="tag tag-disease">带状疱疹</span>
+            <span class="tag tag-disease">单纯疱疹</span>
+            <span class="tag tag-disease">新生儿单纯疱疹</span>
+            <span class="tag tag-disease">单纯疱疹病毒脑炎</span>
+            <span class="tag tag-virus">免疫缺损者</span>
+            <span class="tag tag-drug">奥司他韦</span>
+            <span class="tag tag-drug">帕拉米韦</span>
+            <span class="tag tag-drug">金刚乙胺</span>
+            <span class="tag tag-drug">扎那米韦</span>
+            <span class="tag tag-drug">Brincidofovir</span>
+            <span class="tag tag-drug">特考韦瑞</span>
+            <span class="tag tag-drug">尼塞韦单抗</span>
+            <span class="tag tag-drug">帕利珠单抗</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="表16（15）儿科剂量（年龄>28日龄）；流感；痘病毒；呼吸道合胞病毒；奥司他韦；帕拉米韦；金刚乙胺；扎那米韦；Brincidofovir；特考韦瑞；尼塞韦单抗；帕利珠单抗；=557" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <div class="page-number">页码：557</div>
+    
+    <div class="keywords">
+        关键词：表16（15）；儿科剂量；年龄>28日龄；流感；预防；治疗；痘病毒；呼吸道合胞病毒；RSV；奥司他韦；帕拉米韦；金刚乙胺；扎那米韦；吸入；Brincidofovir；特考韦瑞；口服；静脉；尼塞韦单抗；帕利珠单抗；im；iv；qd；q12h；q8h；流行季；心肺旁路；心脏手术；体重分级
+    </div>
+    
+    <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite()" title="收藏">⭐</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="557.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('✅ 已复制到剪贴板：\n' + input.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert('✅ 已复制到剪贴板');
+            });
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favoriteBtn');
+            btn.classList.toggle('active');
+            
+            const title = '表16（15）儿科剂量（年龄>28日龄）- 流感、痘病毒及呼吸道合胞病毒抗病毒药物';
+            const pageNum = '557';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (btn.classList.contains('active')) {
+                const exists = favorites.find(f => f.page === pageNum);
+                if (!exists) {
+                    favorites.push({
+                        title: title,
+                        page: pageNum,
+                        url: '557.html',
+                        category: '儿科剂量表',
+                        subcategory: '抗病毒药物'
+                    });
+                }
+                alert('⭐ 已添加到收藏！');
+            } else {
+                favorites = favorites.filter(f => f.page !== pageNum);
+                alert('❌ 已取消收藏！');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageNum = '557';
+            if (favorites.find(f => f.page === pageNum)) {
+                document.getElementById('favoriteBtn').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

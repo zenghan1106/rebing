@@ -1,0 +1,942 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~抗感染药物和肝病剂量调整*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+        
+        .fav-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .fav-btn.added {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a3a5c;
+            font-size: 22px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            word-break: break-all;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        
+        .intro-text {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            line-height: 1.8;
+            color: #444;
+            font-size: 14px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            table-layout: fixed;
+        }
+        
+        thead th {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            color: white;
+            padding: 15px 8px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1565c0;
+        }
+        
+        thead th.sub-header {
+            background: linear-gradient(135deg, #42a5f5 0%, #64b5f6 100%);
+            font-size: 14px;
+        }
+        
+        tbody td {
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 抗细菌药物 - 绿色 */
+        .antibacterial {
+            color: #1b5e20;
+            background: #e8f5e9;
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 2px 0;
+            font-weight: 500;
+        }
+        
+        /* 抗真菌药物 - 紫色 */
+        .antifungal {
+            color: #4a148c;
+            background: #f3e5f5;
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 2px 0;
+            font-weight: 500;
+        }
+        
+        /* 抗寄生虫药物 - 棕色 */
+        .antiparasitic {
+            color: #3e2723;
+            background: #efebe9;
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 2px 0;
+            font-weight: 500;
+        }
+        
+        /* 抗病毒药物 - 红色 */
+        .antiviral {
+            color: #b71c1c;
+            background: #ffebee;
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 2px 0;
+            font-weight: 500;
+        }
+        
+        /* 疾病/肝病 - 黄色 */
+        .disease {
+            color: #f57f17;
+            background: #fffde7;
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 2px 0;
+            font-weight: 500;
+        }
+        
+        /* 特殊标记 */
+        .special-mark {
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .col-antibacterial {
+            width: 28%;
+        }
+        
+        .col-antibacterial-sub {
+            width: 14%;
+        }
+        
+        .col-antifungal {
+            width: 14%;
+        }
+        
+        .col-antiparasitic {
+            width: 14%;
+        }
+        
+        .col-antiviral {
+            width: 28%;
+        }
+        
+        .col-antiviral-sub {
+            width: 14%;
+        }
+        
+        .note-text {
+            color: #666;
+            font-size: 12px;
+            margin-top: 15px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+        
+        .image-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .image-container {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .image-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-container img {
+            width: 100%;
+            display: block;
+        }
+        
+        .image-caption {
+            color: #666;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 10px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        
+        .bottom-section {
+            margin-top: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            font-family: monospace;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tag-antibacterial {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+            color: #1b5e20;
+        }
+        
+        .tag-antifungal {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            color: #4a148c;
+        }
+        
+        .tag-antiparasitic {
+            background: linear-gradient(135deg, #d7ccc8 0%, #bcaaa4 100%);
+            color: #3e2723;
+        }
+        
+        .tag-antiviral {
+            background: linear-gradient(135deg, #ffcdd2 0%, #ef9a9a 100%);
+            color: #b71c1c;
+        }
+        
+        .tag-disease {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            color: #f57f17;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a3a5c;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 16px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 4px;
+            }
+            
+            thead th.sub-header {
+                font-size: 12px;
+            }
+            
+            tbody td {
+                padding: 6px 4px;
+                font-size: 11px;
+            }
+            
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .fav-btn {
+                position: relative;
+                top: auto;
+                right: auto;
+                align-self: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <!-- 顶部导航 -->
+    <div class="top-bar">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="631.html" class="nav-btn">⬅ 上一页</a>
+            <a href="633.html" class="nav-btn">下一页 ➡</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~抗感染药物和肝病剂量调整*****</h1>
+    <p class="subtitle">表18 抗感染药物和肝病：剂量调整</p>
+    
+    <!-- 说明文字 -->
+    <div class="intro-text">
+        下列按字母顺序排列的抗细菌药物通过<span class="disease">肝脏</span>排泄/代谢，有<span class="disease">肝脏疾病</span>时可能需要调整剂量。限于篇幅不能详述，请查阅《医师案头参考》（PDR）或药品说明书。以下未列出所有药物。
+    </div>
+    
+    <!-- 主表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2" class="col-antibacterial">抗细菌药物</th>
+                    <th class="col-antifungal">抗真菌药物</th>
+                    <th class="col-antiparasitic">抗寄生虫药物</th>
+                    <th colspan="2" class="col-antiviral">抗病毒药物<sup>§</sup></th>
+                </tr>
+                <tr>
+                    <th class="col-antibacterial-sub sub-header"> </th>
+                    <th class="col-antibacterial-sub sub-header"> </th>
+                    <th class="col-antifungal sub-header"> </th>
+                    <th class="col-antiparasitic sub-header"> </th>
+                    <th class="col-antiviral-sub sub-header"> </th>
+                    <th class="col-antiviral-sub sub-header"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="antibacterial">头孢曲松</span></td>
+                    <td><span class="antibacterial">奈夫西林</span></td>
+                    <td><span class="antifungal">卡泊芬净</span></td>
+                    <td><span class="antiparasitic">苄硝唑</span></td>
+                    <td><span class="antiviral">阿巴卡韦</span></td>
+                    <td><span class="antiviral">茚地那韦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">氯霉素</span></td>
+                    <td><span class="antibacterial">利福布汀</span></td>
+                    <td><span class="antifungal">艾沙康唑</span></td>
+                    <td><span class="antiparasitic">硝呋替莫</span></td>
+                    <td><span class="antiviral">阿扎那韦</span></td>
+                    <td><span class="antiviral">洛匹那韦/利托那韦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">克林霉素</span></td>
+                    <td><span class="antibacterial">利福平</span></td>
+                    <td><span class="antifungal">伊曲康唑</span></td>
+                    <td><span class="antiparasitic">吡喹酮</span></td>
+                    <td><span class="antiviral">达芦那韦</span></td>
+                    <td><span class="antiviral">奈非那韦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">依拉环素</span></td>
+                    <td><span class="antibacterial">泰利霉素<sup class="special-mark">++</sup></span></td>
+                    <td><span class="antifungal">伏立康唑</span></td>
+                    <td></td>
+                    <td><span class="antiviral">依非韦伦</span></td>
+                    <td><span class="antiviral">金刚乙胺</span></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">夫西地酸</span></td>
+                    <td><span class="antibacterial">替加环素</span></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="antiviral">福沙那韦</span></td>
+                    <td><span class="antiviral">利托那韦</span></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">异烟肼</span></td>
+                    <td><span class="antibacterial">替硝唑</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span class="antiviral">托法替布（JAK抑制剂）</span></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">来法莫林（iv）</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><span class="antibacterial">甲硝唑</span></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-text">
+            注：§ 关于抗病毒药物参见 <em>CID 40: 174, 2005</em>。<br>
+            ++ 泰利霉素：肾和<span class="disease">肝衰竭</span>时均需减量。
+        </div>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <div class="image-container" onclick="openModal()">
+            <img src="632.jpg" alt="原始图片" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div style="display:none; padding:50px; background:#f0f0f0; color:#999; text-align:center;">图片加载失败，请确保632.jpg存在于同一目录</div>
+        </div>
+        <p class="image-caption">👆 点击图片可放大查看</p>
+    </div>
+    
+    <!-- 放大模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img src="632.jpg" alt="放大图片">
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 页码 -->
+        <div class="page-number">632</div>
+        
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="抗感染药物和肝病剂量调整；表18抗感染药物和肝病剂量调整；头孢曲松；氯霉素；克林霉素；依拉环素；夫西地酸；异烟肼；来法莫林；甲硝唑；奈夫西林；利福布汀；利福平；泰利霉素；替加环素；替硝唑；卡泊芬净；艾沙康唑；伊曲康唑；伏立康唑；苄硝唑；硝呋替莫；吡喹酮；阿巴卡韦；阿扎那韦；达芦那韦；依非韦伦；福沙那韦；茚地那韦；洛匹那韦/利托那韦；奈非那韦；金刚乙胺；利托那韦；托法替布；肝脏疾病；肝衰竭；=632" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 检索标签（点击筛选）</div>
+            <div class="tags-container">
+                <span class="tag tag-antibacterial">头孢曲松</span>
+                <span class="tag tag-antibacterial">氯霉素</span>
+                <span class="tag tag-antibacterial">克林霉素</span>
+                <span class="tag tag-antibacterial">依拉环素</span>
+                <span class="tag tag-antibacterial">夫西地酸</span>
+                <span class="tag tag-antibacterial">异烟肼</span>
+                <span class="tag tag-antibacterial">来法莫林</span>
+                <span class="tag tag-antibacterial">甲硝唑</span>
+                <span class="tag tag-antibacterial">奈夫西林</span>
+                <span class="tag tag-antibacterial">利福布汀</span>
+                <span class="tag tag-antibacterial">利福平</span>
+                <span class="tag tag-antibacterial">泰利霉素</span>
+                <span class="tag tag-antibacterial">替加环素</span>
+                <span class="tag tag-antibacterial">替硝唑</span>
+                <span class="tag tag-antifungal">卡泊芬净</span>
+                <span class="tag tag-antifungal">艾沙康唑</span>
+                <span class="tag tag-antifungal">伊曲康唑</span>
+                <span class="tag tag-antifungal">伏立康唑</span>
+                <span class="tag tag-antiparasitic">苄硝唑</span>
+                <span class="tag tag-antiparasitic">硝呋替莫</span>
+                <span class="tag tag-antiparasitic">吡喹酮</span>
+                <span class="tag tag-antiviral">阿巴卡韦</span>
+                <span class="tag tag-antiviral">阿扎那韦</span>
+                <span class="tag tag-antiviral">达芦那韦</span>
+                <span class="tag tag-antiviral">依非韦伦</span>
+                <span class="tag tag-antiviral">福沙那韦</span>
+                <span class="tag tag-antiviral">茚地那韦</span>
+                <span class="tag tag-antiviral">洛匹那韦/利托那韦</span>
+                <span class="tag tag-antiviral">奈非那韦</span>
+                <span class="tag tag-antiviral">金刚乙胺</span>
+                <span class="tag tag-antiviral">利托那韦</span>
+                <span class="tag tag-antiviral">托法替布</span>
+                <span class="tag tag-disease">肝脏疾病</span>
+                <span class="tag tag-disease">肝衰竭</span>
+            </div>
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="632.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            if (btn.classList.contains('added')) {
+                btn.classList.remove('added');
+                btn.textContent = '⭐ 收藏';
+                let favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favs = favs.filter(f => f.url !== '632.html');
+                localStorage.setItem('favorites', JSON.stringify(favs));
+                alert('已取消收藏');
+            } else {
+                btn.classList.add('added');
+                btn.textContent = '✅ 已收藏';
+                let favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favs.push({
+                    title: '抗感染药物和肝病剂量调整',
+                    url: '632.html',
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('favorites', JSON.stringify(favs));
+                alert('已添加到收藏！请在index.html查看收藏列表');
+            }
+        }
+        
+        // 检查是否已收藏
+        window.onload = function() {
+            const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const btn = document.getElementById('favBtn');
+            if (favs.some(f => f.url === '632.html')) {
+                btn.classList.add('added');
+                btn.textContent = '✅ 已收藏';
+            }
+        };
+        
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            try {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } catch (err) {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✅ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '📋 复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 图片放大
+        function openModal() {
+            document.getElementById('imageModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>

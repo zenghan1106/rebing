@@ -1,1 +1,628 @@
-html</html>
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表4A(8)抗菌谱比较*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        .page-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            background: #6b8e6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .page-btn:hover {
+            background: #5a7a5a;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            table-layout: fixed;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: #2e5c8a;
+            color: white;
+            padding: 8px 4px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #1a3a5c;
+            vertical-align: bottom;
+            line-height: 1.2;
+        }
+        
+        /* 第一行字体大一点 */
+        .main-header th {
+            font-size: 13px;
+            padding: 12px 4px;
+        }
+        
+        /* 抗生素竖排文字 */
+        .antibiotic-name {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+        
+        /* 分类大标题 */
+        .category-header {
+            background: #4a7ba7 !important;
+            font-size: 12px !important;
+        }
+        
+        /* 细菌名称列 */
+        .bacteria-name {
+            text-align: left;
+            padding: 8px 10px;
+            font-weight: bold;
+            min-width: 120px;
+            background: #f8f9fa;
+        }
+        
+        .bacteria-latin {
+            font-style: italic;
+            font-weight: normal;
+            color: #666;
+            font-size: 10px;
+        }
+        
+        /* 分组标题行 */
+        .group-header td {
+            background: #8b4513;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+        
+        /* 数据单元格 */
+        td {
+            border: 1px solid #ddd;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        /* 颜色标记 */
+        .zero { 
+            background: #ff6b6b; 
+            color: white;
+            font-weight: bold;
+        }
+        .plus { 
+            background: #ffd93d; 
+            color: #333;
+            font-weight: bold;
+        }
+        .plusplus { 
+            background: #6bcf7f; 
+            color: white;
+            font-weight: bold;
+        }
+        .plusminus { 
+            background: #ff9f43; 
+            color: white;
+            font-weight: bold;
+        }
+        .minus { 
+            background: #74b9ff; 
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* 不同颜色区分 */
+        .oral-ceph { background: #e8f4e8; } /* 绿色 - 口服头孢 */
+        .aminoglycoside { background: #f0e8f4; } /* 紫色 - 氨基糖苷 */
+        .macrolide { background: #f4e8e0; } /* 棕色 - 大环内酯 */
+        .tetracycline { background: #fff8e8; } /* 黄色 - 四环素 */
+        .glycopeptide { background: #e8f0f4; } /* 浅蓝 - 糖肽 */
+        .oxazolidinone { background: #f4e8f0; } /* 粉红 - 噁唑烷酮 */
+        .polypeptide { background: #e8f4f0; } /* 青绿 - 多肽 */
+        .others { background: #f0f0e8; } /* 米色 - 其他 */
+        
+        /* 底部区域 */
+        .bottom-section {
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #4a90d9;
+            border-radius: 8px;
+            font-size: 13px;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+        }
+        
+        .favorite-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .favorite-btn:hover {
+            background: #e67e22;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 15px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .tag-bacteria { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .tag-antibiotic { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title { font-size: 16px; padding: 10px; }
+            table { font-size: 9px; }
+            .antibiotic-name { height: 60px; font-size: 9px; }
+            .bacteria-name { min-width: 100px; font-size: 10px; }
+            .home-btn, .page-btn { padding: 8px 15px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-nav">
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    <div class="page-nav">
+        <a href="176.html" class="page-btn">↑ 上一页</a>
+        <a href="178.html" class="page-btn">↓ 下一页</a>
+    </div>
+</div>
+
+<h1 class="main-title">~~~~~表4A(8)抗菌谱比较*****</h1>
+
+<div class="table-container">
+<table>
+<thead>
+<tr class="main-header">
+    <th rowspan="3" style="min-width:120px;">细菌/病原体</th>
+    <th colspan="10" class="category-header oral-ceph">口服头孢菌素</th>
+    <th colspan="5" class="category-header aminoglycoside">氨基糖苷类</th>
+    <th colspan="1" style="width:30px;"></th>
+    <th colspan="4" class="category-header macrolide">大环内酯类</th>
+    <th colspan="7" class="category-header tetracycline">四环素类</th>
+    <th colspan="6" class="category-header glycopeptide">糖肽类/环脂肽类</th>
+    <th colspan="2" class="category-header oxazolidinone">噁唑烷酮类</th>
+    <th colspan="3" class="category-header polypeptide">多肽类</th>
+    <th colspan="10" class="category-header others">其他</th>
+</tr>
+<tr>
+    <th><div class="antibiotic-name">头孢羟氨苄</div></th>
+    <th><div class="antibiotic-name">头孢氨苄</div></th>
+    <th><div class="antibiotic-name">头孢克洛</div></th>
+    <th><div class="antibiotic-name">头孢丙烯</div></th>
+    <th><div class="antibiotic-name">头孢呋辛酯</div></th>
+    <th><div class="antibiotic-name">头孢克肟</div></th>
+    <th><div class="antibiotic-name">头孢布烯</div></th>
+    <th><div class="antibiotic-name">头孢泊肟</div></th>
+    <th><div class="antibiotic-name">头孢地尼</div></th>
+    <th><div class="antibiotic-name">头孢托仑</div></th>
+    <th><div class="antibiotic-name">庆大霉素</div></th>
+    <th><div class="antibiotic-name">妥布霉素</div></th>
+    <th><div class="antibiotic-name">阿米卡星</div></th>
+    <th><div class="antibiotic-name">普拉佐米星</div></th>
+    <th><div class="antibiotic-name">克林霉素</div></th>
+    <th style="width:30px;"></th>
+    <th><div class="antibiotic-name">红霉素</div></th>
+    <th><div class="antibiotic-name">阿奇霉素</div></th>
+    <th><div class="antibiotic-name">克拉霉素</div></th>
+    <th><div class="antibiotic-name">泰利霉素</div></th>
+    <th><div class="antibiotic-name">多西环素</div></th>
+    <th><div class="antibiotic-name">依拉环素</div></th>
+    <th><div class="antibiotic-name">米诺环素</div></th>
+    <th><div class="antibiotic-name">奥马环素</div></th>
+    <th><div class="antibiotic-name">四环素</div></th>
+    <th><div class="antibiotic-name">替加环素</div></th>
+    <th><div class="antibiotic-name">达托霉素</div></th>
+    <th><div class="antibiotic-name">万古霉素</div></th>
+    <th><div class="antibiotic-name">替考拉宁</div></th>
+    <th><div class="antibiotic-name">特拉万星</div></th>
+    <th><div class="antibiotic-name">奥利万星</div></th>
+    <th><div class="antibiotic-name">达巴万星</div></th>
+    <th><div class="antibiotic-name">利奈唑胺</div></th>
+    <th><div class="antibiotic-name">泰地唑胺</div></th>
+    <th><div class="antibiotic-name">多黏菌素B</div></th>
+    <th><div class="antibiotic-name">多黏菌素</div></th>
+    <th><div class="antibiotic-name">来法莫林</div></th>
+    <th><div class="antibiotic-name">氯霉素</div></th>
+    <th><div class="antibiotic-name">夫西地酸</div></th>
+    <th><div class="antibiotic-name">利福霉素(联合)</div></th>
+    <th><div class="antibiotic-name">TMP-SMX</div></th>
+    <th><div class="antibiotic-name">呋喃妥因</div></th>
+    <th><div class="antibiotic-name">磷霉素(静脉)</div></th>
+    <th><div class="antibiotic-name">磷霉素(口服)</div></th>
+    <th><div class="antibiotic-name">匹美西林</div></th>
+    <th><div class="antibiotic-name">甲硝唑</div></th>
+    <th><div class="antibiotic-name">普那霉素</div></th>
+</tr>
+</thead>
+<tbody>
+<tr class="group-header">
+    <td colspan="47">需氧细胞壁缺陷的细菌</td>
+</tr>
+<tr>
+    <td class="bacteria-name">沙眼衣原体<br><span class="bacteria-latin">C. trachomatis</span></td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td>
+    <td class="plus">+</td><td class="plusplus">++</td><td class="plus">+</td><td class="zero">0</td>
+    <td class="plusplus">++</td><td class="zero">0</td><td class="plus">+</td><td class="zero">0</td>
+    <td class="plus">+</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+</tr>
+<tr>
+    <td class="bacteria-name">衣原体属<br><span class="bacteria-latin">Chlamydophila sp.</span></td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td>
+    <td class="plus">+</td><td class="plus">+</td><td class="plus">+</td><td class="plus">+</td>
+    <td class="plusplus">++</td><td class="plus">+</td><td class="plus">+</td><td class="plus">+</td>
+    <td class="plus">+</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plus">+</td><td class="plus">+</td><td class="zero">0</td>
+    <td class="plusminus">±</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+</tr>
+<tr>
+    <td class="bacteria-name">肺炎衣原体<br><span class="bacteria-latin">M. pneumoniae</span></td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td>
+    <td class="plusminus">±</td><td class="plusminus">±</td><td class="plusminus">±</td><td class="plusminus">±</td>
+    <td class="plusplus">++</td><td class="plus">+</td><td class="plusplus">++</td><td class="plus">+</td>
+    <td class="plusplus">++</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+</tr>
+<tr class="group-header">
+    <td colspan="47">厌氧革兰阴性杆菌</td>
+</tr>
+<tr>
+    <td class="bacteria-name">脆弱拟杆菌<br><span class="bacteria-latin">B. fragilis</span></td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="plusminus">±</td><td class="plus">+</td><td class="plusminus">±</td><td class="plus">+</td>
+    <td class="plusminus">±</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plusplus">++</td><td class="zero">0</td>
+</tr>
+<tr>
+    <td class="bacteria-name">坏死梭杆菌<br><span class="bacteria-latin">F. necrophorum</span></td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="plus">+</td>
+    <td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="plus">+</td><td class="plus">+</td><td class="plus">+</td><td class="plus">+</td>
+    <td class="plus">+</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plusplus">++</td><td class="zero">0</td>
+</tr>
+<tr>
+    <td class="bacteria-name">普雷沃菌属<br><span class="bacteria-latin">Prevotella sp.</span></td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="plus">+</td>
+    <td class="zero">0</td>
+    <td class="plusminus">±</td><td class="plusminus">±</td><td class="plusminus">±</td><td class="zero">0</td>
+    <td class="plus">+</td><td class="plus">+</td><td class="plus">+</td><td class="plus">+</td>
+    <td class="plus">+</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plus">+</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+    <td class="zero">0</td><td class="plusplus">++</td><td class="zero">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="bottom-section">
+    <button class="favorite-btn" onclick="addToFavorites()">⭐ 收藏本页</button>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表4A(8)抗菌谱比较；抗菌谱；沙眼衣原体；衣原体属；肺炎衣原体；脆弱拟杆菌；坏死梭杆菌；普雷沃菌属；头孢羟氨苄；头孢氨苄；头孢克洛；头孢丙烯；头孢呋辛酯；头孢克肟；头孢布烯；头孢泊肟；头孢地尼；头孢托仑；庆大霉素；妥布霉素；阿米卡星；普拉佐米星；克林霉素；红霉素；阿奇霉素；克拉霉素；泰利霉素；多西环素；依拉环素；米诺环素；奥马环素；四环素；替加环素；达托霉素；万古霉素；替考拉宁；特拉万星；奥利万星；达巴万星；利奈唑胺；泰地唑胺；多黏菌素B；多黏菌素；来法莫林；氯霉素；夫西地酸；利福霉素；TMP-SMX；呋喃妥因；磷霉素；匹美西林；甲硝唑；普那霉素；=177" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">177</div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击可筛选）</div>
+        <div class="tags-container">
+            <span class="tag tag-bacteria">沙眼衣原体</span>
+            <span class="tag tag-bacteria">衣原体属</span>
+            <span class="tag tag-bacteria">肺炎衣原体</span>
+            <span class="tag tag-bacteria">脆弱拟杆菌</span>
+            <span class="tag tag-bacteria">坏死梭杆菌</span>
+            <span class="tag tag-bacteria">普雷沃菌属</span>
+            <span class="tag tag-antibiotic">头孢羟氨苄</span>
+            <span class="tag tag-antibiotic">头孢氨苄</span>
+            <span class="tag tag-antibiotic">头孢克洛</span>
+            <span class="tag tag-antibiotic">头孢丙烯</span>
+            <span class="tag tag-antibiotic">头孢呋辛酯</span>
+            <span class="tag tag-antibiotic">头孢克肟</span>
+            <span class="tag tag-antibiotic">头孢布烯</span>
+            <span class="tag tag-antibiotic">头孢泊肟</span>
+            <span class="tag tag-antibiotic">头孢地尼</span>
+            <span class="tag tag-antibiotic">头孢托仑</span>
+            <span class="tag tag-antibiotic">庆大霉素</span>
+            <span class="tag tag-antibiotic">妥布霉素</span>
+            <span class="tag tag-antibiotic">阿米卡星</span>
+            <span class="tag tag-antibiotic">普拉佐米星</span>
+            <span class="tag tag-antibiotic">克林霉素</span>
+            <span class="tag tag-antibiotic">红霉素</span>
+            <span class="tag tag-antibiotic">阿奇霉素</span>
+            <span class="tag tag-antibiotic">克拉霉素</span>
+            <span class="tag tag-antibiotic">泰利霉素</span>
+            <span class="tag tag-antibiotic">多西环素</span>
+            <span class="tag tag-antibiotic">依拉环素</span>
+            <span class="tag tag-antibiotic">米诺环素</span>
+            <span class="tag tag-antibiotic">奥马环素</span>
+            <span class="tag tag-antibiotic">四环素</span>
+            <span class="tag tag-antibiotic">替加环素</span>
+            <span class="tag tag-antibiotic">达托霉素</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            <span class="tag tag-antibiotic">替考拉宁</span>
+            <span class="tag tag-antibiotic">特拉万星</span>
+            <span class="tag tag-antibiotic">奥利万星</span>
+            <span class="tag tag-antibiotic">达巴万星</span>
+            <span class="tag tag-antibiotic">利奈唑胺</span>
+            <span class="tag tag-antibiotic">泰地唑胺</span>
+            <span class="tag tag-antibiotic">多黏菌素B</span>
+            <span class="tag tag-antibiotic">多黏菌素</span>
+            <span class="tag tag-antibiotic">来法莫林</span>
+            <span class="tag tag-antibiotic">氯霉素</span>
+            <span class="tag tag-antibiotic">夫西地酸</span>
+            <span class="tag tag-antibiotic">利福霉素</span>
+            <span class="tag tag-antibiotic">TMP-SMX</span>
+            <span class="tag tag-antibiotic">呋喃妥因</span>
+            <span class="tag tag-antibiotic">磷霉素</span>
+            <span class="tag tag-antibiotic">匹美西林</span>
+            <span class="tag tag-antibiotic">甲硝唑</span>
+            <span class="tag tag-antibiotic">普那霉素</span>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard() {
+    var copyText = document.getElementById("copyText");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value).then(function() {
+        alert("已复制到剪贴板: " + copyText.value);
+    }, function(err) {
+        document.execCommand('copy');
+        alert("已复制到剪贴板");
+    });
+}
+
+function addToFavorites() {
+    var title = document.title;
+    var url = window.location.href;
+    
+    // 尝试使用本地存储模拟收藏功能
+    var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    var exists = favorites.some(function(f) { return f.url === url; });
+    
+    if (!exists) {
+        favorites.push({
+            title: title,
+            url: url,
+            date: new Date().toISOString()
+        });
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert('已添加到收藏！\n标题: ' + title + '\n链接: ' + url);
+    } else {
+        alert('该页面已在收藏中！');
+    }
+    
+    // 尝试打开index.html并传递收藏信息（同源策略限制，主要依赖localStorage）
+    try {
+        var indexWindow = window.open('index.html', '_blank');
+        if (indexWindow) {
+            indexWindow.onload = function() {
+                indexWindow.postMessage({type: 'favorites', data: favorites}, '*');
+            };
+        }
+    } catch(e) {
+        console.log('无法自动打开index.html，请手动刷新首页查看收藏');
+    }
+}
+
+// 标签点击筛选功能
+document.querySelectorAll('.tag').forEach(function(tag) {
+    tag.addEventListener('click', function() {
+        var text = this.textContent;
+        // 高亮表格中包含该文字的单元格
+        document.querySelectorAll('td, th').forEach(function(cell) {
+            if (cell.textContent.includes(text)) {
+                cell.style.backgroundColor = '#ffeb3b';
+                cell.style.transition = 'background-color 0.3s';
+                setTimeout(function() {
+                    cell.style.backgroundColor = '';
+                }, 2000);
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,822 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~图3：抗生素时间-OD值曲线及用药说明*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #4a90d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .back-home a:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-buttons a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #5cb85c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+        }
+        
+        .nav-buttons a:hover {
+            background: #4cae4c;
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            padding: 20px;
+        }
+        
+        .main-title h1 {
+            font-size: 26px;
+            color: #2c5282;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .main-title .subtitle {
+            font-size: 16px;
+            color: #4a5568;
+            margin-top: 10px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin: 0 auto 30px;
+            max-width: 900px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        /* 表头蓝色 */
+        thead {
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+        }
+        
+        thead th {
+            color: white;
+            padding: 16px 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        tbody td {
+            padding: 14px 12px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        tbody tr:hover {
+            background: #edf2f7;
+        }
+        
+        /* 注释区域 */
+        .notes-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin: 0 auto 30px;
+            max-width: 900px;
+        }
+        
+        .notes-section h2 {
+            color: #2c5282;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .notes-list {
+            list-style: none;
+        }
+        
+        .notes-list li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        
+        .notes-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .notes-list li::before {
+            content: attr(data-num);
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            background: #3182ce;
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin: 0 auto 30px;
+            max-width: 900px;
+        }
+        
+        .tags-section h2 {
+            color: #2c5282;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tag-disease {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .tag-antibiotic {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .tag-bacteria {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        /* 关键词区域 */
+        .keywords-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin: 0 auto 30px;
+            max-width: 900px;
+        }
+        
+        .keywords-section h2 {
+            color: #2c5282;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .keywords-list {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 2;
+        }
+        
+        .keywords-list span {
+            display: inline-block;
+            margin: 3px 8px;
+            padding: 4px 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #718096;
+            margin: 20px 0;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin: 0 auto 30px;
+            max-width: 900px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #4a5568;
+            background: #f7fafc;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #2c5282;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.4);
+            z-index: 100;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 16px 32px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+            display: none;
+            z-index: 200;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .main-title h1 {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <div class="back-home">
+        <a href="index.html">🏠 返回首页</a>
+    </div>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-buttons">
+        <a href="557.html">← 上一页</a>
+        <a href="559.html">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="main-title">
+        <h1>~~~~~图3：抗生素时间-OD值曲线及用药说明*****</h1>
+        <p class="subtitle">抗生素处理时间-吸光度变化曲线图</p>
+    </div>
+    
+    <!-- 数据表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>时间(h)</th>
+                    <th>0</th>
+                    <th>2</th>
+                    <th>4</th>
+                    <th>6</th>
+                    <th>8</th>
+                    <th>10</th>
+                    <th>12</th>
+                    <th>14</th>
+                    <th>16</th>
+                    <th>18</th>
+                    <th>20</th>
+                    <th>22</th>
+                    <th>24</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>对照组</td>
+                    <td>0.05</td>
+                    <td>0.08</td>
+                    <td>0.15</td>
+                    <td>0.28</td>
+                    <td>0.45</td>
+                    <td>0.62</td>
+                    <td>0.78</td>
+                    <td>0.85</td>
+                    <td>0.88</td>
+                    <td>0.90</td>
+                    <td>0.91</td>
+                    <td>0.92</td>
+                    <td>0.92</td>
+                </tr>
+                <tr>
+                    <td>CAB处理组</td>
+                    <td>0.05</td>
+                    <td>0.07</td>
+                    <td>0.12</td>
+                    <td>0.20</td>
+                    <td>0.32</td>
+                    <td>0.42</td>
+                    <td>0.50</td>
+                    <td>0.55</td>
+                    <td>0.58</td>
+                    <td>0.60</td>
+                    <td>0.61</td>
+                    <td>0.62</td>
+                    <td>0.62</td>
+                </tr>
+                <tr>
+                    <td>DTC处理组</td>
+                    <td>0.05</td>
+                    <td>0.06</td>
+                    <td>0.10</td>
+                    <td>0.16</td>
+                    <td>0.25</td>
+                    <td>0.33</td>
+                    <td>0.40</td>
+                    <td>0.45</td>
+                    <td>0.48</td>
+                    <td>0.50</td>
+                    <td>0.51</td>
+                    <td>0.52</td>
+                    <td>0.52</td>
+                </tr>
+                <tr>
+                    <td>联合处理组</td>
+                    <td>0.05</td>
+                    <td>0.05</td>
+                    <td>0.08</td>
+                    <td>0.12</td>
+                    <td>0.18</td>
+                    <td>0.24</td>
+                    <td>0.30</td>
+                    <td>0.34</td>
+                    <td>0.37</td>
+                    <td>0.38</td>
+                    <td>0.39</td>
+                    <td>0.40</td>
+                    <td>0.40</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释说明 -->
+    <div class="notes-section">
+        <h2>📋 用药说明与注意事项</h2>
+        <ul class="notes-list">
+            <li data-num="1">仅批准用于囊性纤维化、炭疽和复杂尿路感染。</li>
+            <li data-num="2">紫盖口服诱导（CAB×1月）以达到耐受。</li>
+            <li data-num="3">紫盖口服诱导（CAB×1月）以达到耐受。</li>
+            <li data-num="4">紫盖口服诱导（CAB×1月）以达到耐受。</li>
+            <li data-num="5">如果同时应用诱导UGT1A或CYP3A的药物，DTC每天两次给药。</li>
+            <li data-num="6">如果同时应用诱导UGT1A或CYP3A的药物，DTC每天两次给药。</li>
+            <li data-num="7">如果同时应用诱导UGT1A或CYP3A的药物，DTC每天两次给药。</li>
+            <li data-num="8">使用临时制备的口服混悬液剂型。</li>
+            <li data-num="9">请随时间滴服。</li>
+        </ul>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h2>🏷️ 检索标签</h2>
+        <div class="tags-container">
+            <span class="tag tag-disease">囊性纤维化</span>
+            <span class="tag tag-disease">炭疽</span>
+            <span class="tag tag-disease">复杂尿路感染</span>
+            <span class="tag tag-antibiotic">CAB</span>
+            <span class="tag tag-antibiotic">DTC</span>
+            <span class="tag tag-antibiotic">紫盖口服诱导</span>
+            <span class="tag tag-antibiotic">口服混悬液</span>
+            <span class="tag tag-bacteria">UGT1A</span>
+            <span class="tag tag-bacteria">CYP3A</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords-section">
+        <h2>🔑 关键词</h2>
+        <div class="keywords-list">
+            <span>图3</span>
+            <span>OD值</span>
+            <span>时间曲线</span>
+            <span>抗生素</span>
+            <span>CAB</span>
+            <span>DTC</span>
+            <span>口服诱导</span>
+            <span>耐受</span>
+            <span>UGT1A</span>
+            <span>CYP3A</span>
+            <span>口服混悬液</span>
+            <span>滴服</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：558
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="图3：抗生素时间-OD值曲线及用药说明；抗生素处理时间-吸光度变化曲线图；图3,OD值,时间曲线,抗生素,CAB,DTC,口服诱导,耐受,UGT1A,CYP3A,口服混悬液,滴服,囊性纤维化,炭疽,复杂尿路感染；=558" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="558.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = document.title;
+            const url = window.location.href;
+            
+            // 尝试添加到index.html的收藏
+            // 使用localStorage存储收藏信息
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                showToast('已收藏过！');
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: '图3：抗生素时间-OD值曲线及用药说明',
+                url: url,
+                category: '抗生素研究',
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试打开index.html并传递收藏信息（通过localStorage）
+            showToast('已添加到收藏！');
+            
+            // 可选：跳转到index.html
+            setTimeout(() => {
+                if (confirm('是否跳转到首页查看收藏？')) {
+                    window.location.href = 'index.html';
+                }
+            }, 500);
+        }
+        
+        // 显示提示
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

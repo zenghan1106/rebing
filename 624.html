@@ -1,0 +1,1001 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表17A(34)肾功能受损成人患者的抗感染药物剂量调整*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 217, 0.4);
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 20px;
+            background: #5a67d8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+        
+        .nav-btn:hover {
+            background: #4c51bf;
+            transform: translateY(-2px);
+        }
+        
+        .prev-btn {
+            right: 140px;
+        }
+        
+        .next-btn {
+            right: 20px;
+        }
+        
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a365d;
+            margin: 60px 0 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            line-height: 1.6;
+        }
+        
+        .main-title .title-mark {
+            color: #e53e3e;
+            font-size: 28px;
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        
+        /* 表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        .data-table thead {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
+            color: white;
+        }
+        
+        .data-table thead th {
+            padding: 16px 12px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a5276;
+            white-space: nowrap;
+        }
+        
+        .data-table tbody td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        .data-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 颜色定义 - 抗生素绿色 */
+        .antibiotic {
+            color: #2e7d32;
+            font-weight: 600;
+            background: #e8f5e9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 疾病紫色 */
+        .disease {
+            color: #7b1fa2;
+            font-weight: 600;
+            background: #f3e5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 细菌棕色 */
+        .bacteria {
+            color: #8d6e63;
+            font-weight: 600;
+            background: #efebe9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 红色强调 */
+        .highlight-red {
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        /* 黄色警告 */
+        .warning-yellow {
+            background: #fff9c4;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 注释区域 */
+        .notes-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .notes-title {
+            font-size: 18px;
+            color: #1e5799;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+        
+        .note-item {
+            padding: 8px 0;
+            line-height: 1.8;
+            font-size: 13px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .note-item:last-child {
+            border-bottom: none;
+        }
+        
+        .note-num {
+            display: inline-block;
+            background: #1e5799;
+            color: white;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 12px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        /* 竖排文字 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 4px;
+            padding: 10px 5px;
+            margin: 0 auto;
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-section img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* 底部编辑框区域 */
+        .footer-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .copy-area {
+            display: flex;
+            gap: 15px;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: #fafafa;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 关键词标签 */
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1e5799;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin: 6px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag-antibiotic {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-disease {
+            background: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag-bacteria {
+            background: #efebe9;
+            color: #8d6e63;
+            border: 1px solid #bcaaa4;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .fav-btn.active {
+            background: linear-gradient(135deg, #ffd93d 0%, #f6ad55 100%);
+        }
+        
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            font-size: 16px;
+            display: none;
+            z-index: 3000;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-title {
+                font-size: 16px;
+                margin-top: 80px;
+            }
+            
+            .data-table {
+                font-size: 11px;
+            }
+            
+            .data-table thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            .data-table tbody td {
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .prev-btn {
+                right: 120px;
+            }
+            
+            .copy-area {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <a href="623.html" class="nav-btn prev-btn">◀ 上一页</a>
+    <a href="625.html" class="nav-btn next-btn">下一页 ▶</a>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">
+        <span class="title-mark">~~~~~</span>
+        表17A（34）肾功能受损成人患者的抗感染药物剂量调整
+        <span class="title-mark">*****</span>
+    </h1>
+    
+    <!-- 主表格 -->
+    <div class="table-wrapper">
+        <table class="data-table" id="mainTable">
+            <thead>
+                <tr>
+                    <th style="width: 8%;">序号</th>
+                    <th style="width: 15%;">抗感染药物<br>（抗生素）</th>
+                    <th style="width: 12%;">肾功能状态<br>/eGFR<br>ml/(min·1.73m²)</th>
+                    <th style="width: 15%;">常规剂量</th>
+                    <th style="width: 20%;">肾功能受损剂量调整</th>
+                    <th style="width: 15%;">透析相关调整</th>
+                    <th style="width: 15%;">备注/监测</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表格数据行 - 基于图片中的注释信息构建 -->
+                <tr>
+                    <td>1</td>
+                    <td><span class="antibiotic">阿米卡星</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>延长给药间隔</td>
+                    <td>HD后补充；CAPD: <span class="warning-yellow">8L×20mg丢失/L=160mg iv补充qd</span></td>
+                    <td><span class="highlight-red">高流量透析膜可致无法预测的药物清除；需监测透析后血药浓度</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="antibiotic">恩替卡韦</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>-</td>
+                    <td><span class="warning-yellow">剂量小于0.5mg时使用恩替卡韦混悬液</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="antibiotic">头孢哌酮</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td><span class="highlight-red">无须调整剂量</span></td>
+                    <td>需要可单独予额外剂量</td>
+                    <td>肾功能损伤时无须调整</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="antibiotic">复方磺胺甲噁唑<br>（TMP-SMX）</span></td>
+                    <td>损伤</td>
+                    <td>基于<span class="antibiotic">TMP</span>成分</td>
+                    <td>中度到重度损伤时考虑调整</td>
+                    <td>-</td>
+                    <td>剂量基于TMP成分</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="antibiotic">万古霉素</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>HD</td>
+                    <td><span class="highlight-red">目标峰值血清浓度：20～100μg/ml</span>；推荐治疗药物监测</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="antibiotic">药物</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>-</td>
+                    <td>快速输注导致血肌酐升高；可因干扰检测导致血肌酐假性升高</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="antibiotic">药物</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>CRRT</td>
+                    <td><span class="highlight-red">所有CRRT时均需的负荷量：2g</span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="antibiotic">药物</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>APD</td>
+                    <td>间歇腹膜透析(APD)参见文献</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><span class="antibiotic">药物</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>CRRT</td>
+                    <td>获得40%fT>MIC, MIC=2, 流率35ml/(kg·h)</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><span class="antibiotic">药物</span></td>
+                    <td>损伤</td>
+                    <td>常规</td>
+                    <td>调整</td>
+                    <td>-</td>
+                    <td>获得40%fT>MIC, MIC=2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释区域 -->
+    <div class="notes-section">
+        <h2 class="notes-title">📋 注释说明</h2>
+        <div class="note-item"><span class="note-num">1</span>高流量透析膜可致无法预测的药物清除；需监测透析后血药浓度。</div>
+        <div class="note-item"><span class="note-num">2</span>CAPD时药代动力学变化很大，需监测血药浓度。CAPD常用方式：2L透析液置换qid（如<span class="antibiotic">阿米卡星</span>：8L×20mg丢失/L＝160mg <span class="antibiotic">阿米卡星</span> iv 补充qd）。</div>
+        <div class="note-item"><span class="note-num">3</span>肾功能损伤时延长给药间隔的剂量推荐：<em>Infect Dis Clin North Am 1989; 3: 517</em>。</div>
+        <div class="note-item"><span class="note-num">4</span>可因干扰检测导致血肌酐假性升高。</div>
+        <div class="note-item"><span class="note-num">5</span>肝病时可能须调整剂量。</div>
+        <div class="note-item"><span class="note-num">6</span><em>Antimicrob Agents Chemother 2019; 63: e01427-19</em>.</div>
+        <div class="note-item"><span class="note-num">7</span>血液透析的推荐默认每周3次透析。</div>
+        <div class="note-item"><span class="note-num">8</span>目标峰值血清浓度：20～100μg/ml。</div>
+        <div class="note-item"><span class="note-num">9</span>推荐治疗药物监测。</div>
+        <div class="note-item"><span class="note-num">10</span>目标峰值血清浓度：20～35μg/ml。</div>
+        <div class="note-item"><span class="note-num">11</span>快速输注导致血肌酐升高。</div>
+        <div class="note-item"><span class="note-num">12</span>儿童血液透析参见 <em>Clin Infect Dis 2010; 50: 1427</em>。</div>
+        <div class="note-item"><span class="note-num">13</span><em>Can J Kidney Health Dis 2018; 5: 2054358118792229</em>.</div>
+        <div class="note-item"><span class="note-num">14</span>剂量小于0.5mg时使用<span class="antibiotic">恩替卡韦</span>混悬液。</div>
+        <div class="note-item"><span class="note-num">15</span>血液透析、持续肾脏替代的推荐：<em>Am J Health Syst Pharm 2020; 77: 835-863</em>.</div>
+        <div class="note-item"><span class="note-num">16</span>eGFR表示估计的肾小球滤过率 [ml/(min·1.73m²)]。</div>
+        <div class="note-item"><span class="note-num">17</span>需要的话可以单独予额外的<span class="antibiotic">头孢哌酮</span>（肾功能损伤时<span class="highlight-red">无须调整头孢哌酮剂量</span>）。</div>
+        <div class="note-item"><span class="note-num">18</span>剂量基于TMP成分。</div>
+        <div class="note-item"><span class="note-num">19</span><em>Indian J Pharmacol 2013; 45: 330</em>.</div>
+        <div class="note-item"><span class="note-num">20</span>中度到重度损伤时考虑调整剂量。</div>
+        <div class="note-item"><span class="note-num">21</span><em>Antimicrob Agents Chemother 2014; 58: 94</em>.</div>
+        <div class="note-item"><span class="note-num">22</span><em>J Crit Care 2024; 85: 154924</em>.</div>
+        <div class="note-item"><span class="note-num">23</span><em>Antimicrob Agents Chemother 2019; 64: e01655-19</em>.</div>
+        <div class="note-item"><span class="note-num">24</span>研究显示血药浓度升高（<em>Eur J Clin Pharmacol 1992; 42: 671</em>）。</div>
+        <div class="note-item"><span class="note-num">25</span><span class="highlight-red">所有CRRT时均需的负荷量：2g</span>。</div>
+        <div class="note-item"><span class="note-num">26</span><em>Ann Pharmacother 2013; 47: 1342</em>.</div>
+        <div class="note-item"><span class="note-num">27</span><em>Pharmaceutics 2022; 14: 842</em>.</div>
+        <div class="note-item"><span class="note-num">28</span>间歇腹膜透析（APD）参见 <em>Br J Clin Pharmacol 2015; 79: 624</em>。</div>
+        <div class="note-item"><span class="note-num">29</span>获得40%fT>MIC, MIC=2, 流率35ml/(kg·h)（<em>Blood Purif 2023; 52: 503</em>）。</div>
+        <div class="note-item"><span class="note-num">30</span>获得40%fT>MIC, MIC=2（<em>Crit Care 2018; 22: 25</em>）。</div>
+        <div class="note-item"><span class="note-num">31</span>专家意见（未发表数据）。</div>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <p style="color: #666; margin-bottom: 15px; font-size: 14px;">📷 点击图片可放大查看</p>
+        <img src="624.jpg" alt="表17A(34)肾功能受损成人患者的抗感染药物剂量调整" onclick="openModal(this)" id="tableImage">
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <img class="modal-content" id="modalImg">
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">
+        页码：<strong>624</strong>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="footer-section">
+        <h3 style="color: #1e5799; margin-bottom: 15px; font-size: 16px;">📋 复制页面信息</h3>
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="表17A（34）肾功能受损成人患者的抗感染药物剂量调整；肾功能受损；抗感染药物；剂量调整；阿米卡星；恩替卡韦；头孢哌酮；复方磺胺甲噁唑；TMP；万古霉素；CAPD；血液透析；CRRT；APD；eGFR；=624" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 关键词标签 -->
+    <div class="tags-section">
+        <h3 class="tags-title">🏷️ 检索标签（点击可筛选）</h3>
+        <div id="tagsContainer">
+            <!-- 抗生素标签 - 绿色 -->
+            <span class="tag tag-antibiotic">阿米卡星</span>
+            <span class="tag tag-antibiotic">恩替卡韦</span>
+            <span class="tag tag-antibiotic">头孢哌酮</span>
+            <span class="tag tag-antibiotic">TMP</span>
+            <span class="tag tag-antibiotic">复方磺胺甲噁唑</span>
+            <span class="tag tag-antibiotic">万古霉素</span>
+            
+            <!-- 疾病/状态标签 - 紫色 -->
+            <span class="tag tag-disease">肾功能受损</span>
+            <span class="tag tag-disease">肾功能损伤</span>
+            <span class="tag tag-disease">肝病</span>
+            <span class="tag tag-disease">中度到重度损伤</span>
+            
+            <!-- 细菌相关 - 棕色 -->
+            <span class="tag tag-bacteria">抗感染</span>
+            <span class="tag tag-bacteria">MIC</span>
+            
+            <!-- 透析方式 -->
+            <span class="tag tag-antibiotic">CAPD</span>
+            <span class="tag tag-antibiotic">血液透析</span>
+            <span class="tag tag-antibiotic">CRRT</span>
+            <span class="tag tag-antibiotic">APD</span>
+            <span class="tag tag-antibiotic">间歇腹膜透析</span>
+            
+            <!-- 其他 -->
+            <span class="tag tag-disease">eGFR</span>
+            <span class="tag tag-disease">血肌酐</span>
+            <span class="tag tag-disease">血药浓度</span>
+            <span class="tag tag-disease">治疗药物监测</span>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="624.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 图片放大功能
+        function openModal(img) {
+            document.getElementById('modalImg').src = img.src;
+            document.getElementById('imageModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById('copyText');
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showToast('✅ 复制成功！');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✅ 复制成功！');
+            }
+        }
+        
+        // 提示消息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                showToast('⭐ 已添加到收藏！');
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('624')) {
+                    favorites.push('624');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏（同源策略限制，实际需后端支持）
+                updateIndexFavorite();
+            } else {
+                showToast('已取消收藏');
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(f => f !== '624');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 更新index.html收藏（模拟）
+        function updateIndexFavorite() {
+            // 此功能需要配合后端或Service Worker实现
+            // 这里使用localStorage记录收藏状态
+            localStorage.setItem('page_624_favorite', 'true');
+            localStorage.setItem('page_624_title', '表17A（34）肾功能受损成人患者的抗感染药物剂量调整');
+            localStorage.setItem('page_624_url', '624.html');
+        }
+        
+        // 检查收藏状态
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('624')) {
+                document.getElementById('favBtn').classList.add('active');
+            }
+        }
+        
+        // 标签筛选功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                showToast(`🔍 筛选: ${keyword}`);
+                // 这里可以实现表格筛选逻辑
+                filterTable(keyword);
+            });
+        });
+        
+        function filterTable(keyword) {
+            const rows = document.querySelectorAll('#mainTable tbody tr');
+            rows.forEach(row => {
+                const text = row.textContent;
+                if (text.includes(keyword)) {
+                    row.style.display = '';
+                    row.style.background = '#fff9c4';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            // 3秒后恢复
+            setTimeout(() => {
+                rows.forEach(row => {
+                    row.style.display = '';
+                    row.style.background = '';
+                });
+            }, 3000);
+        }
+        
+        // 初始化
+        window.onload = function() {
+            checkFavorite();
+        };
+        
+        // ESC关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

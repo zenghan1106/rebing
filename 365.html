@@ -1,276 +1,740 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>——____</title>
+    <title>~~~~~青霉菌病与暗色丝孢霉病抗微生物药物治疗*****</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8f5 100%);
             min-height: 100vh;
             padding: 10px;
             color: #333;
         }
-        .container { max-width: 100%; margin: 0 auto; }
         
-        /* 顶部导航 */
-        .nav-top {
+        .nav-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
-            background: #fff;
-            border-radius: 8px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             flex-wrap: wrap;
-            gap: 10px;
-        }
-        .nav-btn {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
-        }
-        .nav-btn:active { transform: translateY(0); }
-        
-        /* 标题 */
-        .main-title {
-            text-align: center;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+            gap: 8px;
         }
         
-        /* 表格样式 */
-        .content-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
-        .content-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-        }
-        .content-table th {
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: bold;
-            font-size: 16px;
-            border-bottom: 3px solid #667eea;
-        }
-        .content-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e8e8e8;
-            font-size: 14px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-        .content-table tr:nth-child(even) { background: #f8f9fa; }
-        .content-table tr:hover { background: #e8f4f8; }
-        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
-        
-        /* 标签 */
-        .tags-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .tags-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        /* 编辑框 */
-        .edit-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .edit-box {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            resize: vertical;
-        }
-        .btn-row {
+        .nav-left, .nav-right {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
         }
-        .action-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 20px;
+        
+        .btn {
+            padding: 8px 16px;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        .copy-btn { background: #28a745; color: white; }
-        .copy-btn:hover { background: #218838; }
-        .favorite-btn { background: #ffc107; color: #333; }
-        .favorite-btn:hover { background: #e0a800; }
-        .favorite-btn.active { background: #ff6b6b; color: white; }
-        
-        /* 页码 */
-        .page-footer {
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .page-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
         
-        /* 收藏提示 */
-        .toast {
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #6c5ce7;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #5b4cdb;
+        }
+        
+        .btn-fav {
+            background: #ff7675;
+            color: white;
             position: fixed;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: none;
+            right: 20px;
             z-index: 1000;
+            box-shadow: 0 4px 12px rgba(255,118,117,0.4);
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 15px;
+        }
+        
+        .btn-fav:hover {
+            background: #fd6363;
+            transform: scale(1.05);
+        }
+        
+        .btn-fav.active {
+            background: #00b894;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d3436;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            border-left: 5px solid #0984e3;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            table-layout: fixed;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #0984e3, #74b9ff);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #74b9ff;
+        }
+        
+        thead th:first-child {
+            width: 26%;
+        }
+        
+        thead th:nth-child(2) {
+            width: 24%;
+        }
+        
+        thead th:nth-child(3) {
+            width: 24%;
+        }
+        
+        thead th:last-child {
+            width: 26%;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #dfe6e9;
+            vertical-align: top;
+            line-height: 1.7;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 疾病 - 绿色 */
+        .disease {
+            color: #27ae60;
+            font-weight: bold;
+            background: rgba(39,174,96,0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 细菌/病原菌 - 紫色 */
+        .bacteria {
+            color: #8e44ad;
+            font-weight: bold;
+            background: rgba(142,68,173,0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 抗生素/药物 - 棕色 */
+        .antibiotic {
+            color: #a0522d;
+            font-weight: bold;
+            background: rgba(160,82,45,0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* 红色强调 */
+        .highlight-red {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 黄色标记 */
+        .mark-yellow {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #2d3436;
+        }
+        
+        .sub-header {
+            background: #dfe6e9;
+            color: #2d3436;
+            font-size: 14px;
+        }
+        
+        .sub-header th {
+            padding: 10px;
+            border: 1px solid #b2bec3;
+        }
+        
+        .note {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            font-size: 12px;
+            color: #636e72;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 12px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background: #d5f5e3;
+            color: #27ae60;
+        }
+        
+        .tag-bacteria {
+            background: #e8daef;
+            color: #8e44ad;
+        }
+        
+        .tag-antibiotic {
+            background: #f6ddcc;
+            color: #a0522d;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #2d3436;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 2px solid #74b9ff;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2d3436;
+            background: #f8f9fa;
+        }
+        
+        .btn-copy {
+            background: #00b894;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .btn-copy:hover {
+            background: #00a383;
+        }
+        
+        .btn-copy.copied {
+            background: #fdcb6e;
+            color: #2d3436;
+        }
+        
+        /* 竖排文字样式 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 4px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 17px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 10px 6px;
+            }
+            
+            tbody td {
+                padding: 8px 6px;
+                line-height: 1.6;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .btn-fav {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-top">
-            <a href="index.html" class="nav-btn">🏠 首页</a>
-            <div>
-                <a href="364.html" class="nav-btn">⬅️ 上一页</a>
-                <a href="366.html" class="nav-btn">➡️ 下一页</a>
-            </div>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
         </div>
-        
-        <h1 class="main-title">~~~~~——____*****</h1>
-        
-        <table class="content-table"><tbody><tr><td>——</td></tr><tr><td>—=s</td></tr><tr><td>——____</td></tr><tr><td>——</td></tr><tr><td>———— —</td></tr><tr><td>—= ———— as</td></tr><tr><td>——</td></tr><tr><td>ie WA Wits</td></tr><tr><td>BRAD / tae be / SLAM</td></tr><tr><td>Si ee</td></tr><tr><td>a aa ee</td></tr><tr><td>a —=—=— ==</td></tr><tr><td>Tela</td></tr><tr><td>——</td></tr><tr><td>————</td></tr><tr><td>SEER (Hes</td></tr><tr><td>OR, REARS |</td></tr><tr><td>a =~</td></tr><tr><td>BOS ~10r (</td></tr><tr><td>od) x</td></tr><tr><td>SF ie A A</td></tr><tr><td>SEMREARE</td></tr><tr><td>IDS BLK SSA eT te</td></tr><tr><td>BE )</td></tr><tr><td>| 2w, aR IG</td></tr><tr><td>{Ft</td></tr><tr><td>fy ae ee J0me/ | peas 200</td></tr><tr><td>mg po tidx3</td></tr><tr><td>| #</td></tr><tr><td>3 ohio sino RAAKHWAA, WE</td></tr><tr><td>Ax Pa WE AIDS #825 6 J BO 38 Hk ee</td></tr><tr><td>fa he</td></tr><tr><td>d*10¥</td></tr><tr><td>bid * 12 w,</td></tr><tr><td>co BE</td></tr><tr><td>+ SEAL Ra aR ah fee</td></tr><tr><td>, 7% Ja 200mg/d po;</td></tr><tr><td>200mg</td></tr><tr><td>C7t</td></tr><tr><td>(eae SABRES )</td></tr><tr><td>HIVES RHE</td></tr><tr><td>200m¢ po qd (</td></tr><tr><td>TH )</td></tr><tr><td>SS</td></tr><tr><td>———SSSSEEE===_</td></tr><tr><td>iv) (8</td></tr><tr><td>Sia —=—==——=—=—=——_—_—_===</td></tr><tr><td>WED</td></tr><tr><td>ieAS DP</td></tr><tr><td>mie</td></tr><tr><td>D 43: 1060, 2006)</td></tr><tr><td>“Fe té</td></tr><tr><td>“nse, 28. GHAR</td></tr><tr><td>EX FRAT ARRORE | wn</td></tr><tr><td>6meg,</td></tr><tr><td>po</td></tr><tr><td>(KIEL</td></tr><tr><td>Ub EME</td></tr><tr><td>(Med Mycd 48: 769,</td></tr><tr><td>bid X 1d,</td></tr><tr><td>Clin Microbiol Rev 27; 52, 2014 )</td></tr><tr><td>400m</td></tr><tr><td>po peti i&gt; ie</td></tr><tr><td>| 2010; Med</td></tr><tr><td>ol 43: 81, &quot;2005). EAN SITE</td></tr><tr><td>Si RAKES HME</td></tr><tr><td>FE I</td></tr><tr><td>gun</td></tr><tr><td>pe ) 400 m po bid</td></tr><tr><td>Aaah. BR</td></tr><tr><td>25) BUR</td></tr><tr><td>RE</td></tr><tr><td>B.</td></tr><tr><td>He</td></tr><tr><td>— —————————————e</td></tr><tr><td>—=</td></tr><tr><td>———</td></tr><tr><td>EE</td></tr><tr><td>SSS — ee $e</td></tr><tr><td>TE: * Br Hee LEM,</td></tr><tr><td>(PARSER) MEE RS.</td></tr><tr><td>serif eS 8 2 TL,</td></tr></tbody></table>
-        
-        <div class="tags-section">
-            <div class="tags-title">🏷️ 关键词标签</div>
-            <div class="tags"></div>
-        </div>
-        
-        <div class="edit-section">
-            <textarea class="edit-box" id="editBox">——____；=365</textarea>
-            <div class="btn-row">
-                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
-                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-            </div>
-        </div>
-        
-        <div class="page-footer">
-            <div class="page-number">第 365 页</div>
+        <div class="nav-right">
+            <a href="364.html" class="btn btn-nav">⬅ 上一页</a>
+            <a href="366.html" class="btn btn-nav">下一页 ➡</a>
         </div>
     </div>
     
-    <div class="toast" id="toast"></div>
+    <!-- 标题 -->
+    <h1>~~~~~青霉菌病与暗色丝孢霉病抗微生物药物治疗*****</h1>
     
-    <script>
-        function copyContent() {
-            const editBox = document.getElementById('editBox');
-            editBox.select();
-            document.execCommand('copy');
-            showToast('✅ 已复制到剪贴板');
-        }
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">感染类型/病原菌/感染部位</th>
+                    <th colspan="2">抗微生物药物选择</th>
+                    <th rowspan="2">说明</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>首选药物</th>
+                    <th>替代药物</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="disease">青霉菌病</span>（<span class="bacteria">马尔尼菲篮状菌</span>，旧称<span class="bacteria">马尔尼菲青霉菌</span>）<br><br>
+                        东南亚<span class="disease">AIDS</span>患者常见的播散性真菌感染（尤其在泰国和越南）
+                    </td>
+                    <td>
+                        <span class="antibiotic">两性霉素B</span>0.5～1.0mg/(kg·d)×2w，然后用<span class="antibiotic">伊曲康唑</span>400mg/d×10w，再然后200mg/d po；<span class="disease">HIV</span>感染者需长期使用
+                    </td>
+                    <td>
+                        非重症患者用<span class="antibiotic">伊曲康唑</span>口服溶液200mg po tid×3d，然后200mg po bid×12w，再然后200mg po qd（不能口服者改iv）（口服溶液吸收较好）
+                    </td>
+                    <td>
+                        <span class="disease">青霉菌病</span>是东南亚<span class="disease">AIDS</span>患者仅次于<span class="disease">结核病</span>和<span class="disease">隐球菌脑膜炎</span>的第3种最常见的机会性感染。表现为长期发热、淋巴结肿大和肝大。皮肤结节呈脐形（类似<span class="disease">隐球菌感染</span>或<span class="disease">传染性软疣</span>）<br><br>
+                        初步证据显示<span class="antibiotic">伏立康唑</span>有效（<em>CID 43：1060，2006</em>）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="disease">暗色丝孢霉病</span>、<span class="disease">黑霉</span>、<span class="disease">暗色孢真菌</span><br><br>
+                        （见<em>Clin Microbiol Rev 27：52，2014</em>）<br><br>
+                        与临床相关最多的有<span class="bacteria">外瓶霉属</span>、<span class="bacteria">枝孢霉属</span>、<span class="bacteria">梨孢霉</span>、<span class="bacteria">Cyphellophora</span>、<span class="bacteria">着色真菌属</span>、<span class="bacteria">瓶霉属</span>、<span class="bacteria">喙枝孢霉属</span>
+                    </td>
+                    <td>
+                        外科手术＋<span class="antibiotic">伊曲康唑</span>口服溶液400mg/d po，疗程未定，可能要6个月<sup class="mark-yellow">NAI</sup>
+                    </td>
+                    <td>
+                        <span class="antibiotic">伏立康唑</span>6mg/kg po bid×1d，然后4mg/kg po bid或<span class="antibiotic">泊沙康唑</span>（悬液）400mg po bid
+                    </td>
+                    <td>
+                        <span class="antibiotic">伏立康唑</span>和<span class="antibiotic">泊沙康唑</span>均被证实有效（<em>Med Mycd 48：769，2010；Med Mycol 43：81，2005</em>），通常作为外科手术治疗的辅助。建议做<span class="highlight-red">抗真菌药物敏感试验</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        注：*所有推荐剂量仅针对成人（除非特别注明）和肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-info">365</div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签（点击筛选）</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">青霉菌病</span>
+            <span class="tag tag-disease">AIDS</span>
+            <span class="tag tag-disease">结核病</span>
+            <span class="tag tag-disease">隐球菌脑膜炎</span>
+            <span class="tag tag-disease">隐球菌感染</span>
+            <span class="tag tag-disease">传染性软疣</span>
+            <span class="tag tag-disease">暗色丝孢霉病</span>
+            <span class="tag tag-disease">黑霉</span>
+            <span class="tag tag-disease">暗色孢真菌</span>
+            <span class="tag tag-disease">HIV</span>
+            <span class="tag tag-bacteria">马尔尼菲篮状菌</span>
+            <span class="tag tag-bacteria">马尔尼菲青霉菌</span>
+            <span class="tag tag-bacteria">外瓶霉属</span>
+            <span class="tag tag-bacteria">枝孢霉属</span>
+            <span class="tag tag-bacteria">梨孢霉</span>
+            <span class="tag tag-bacteria">Cyphellophora</span>
+            <span class="tag tag-bacteria">着色真菌属</span>
+            <span class="tag tag-bacteria">瓶霉属</span>
+            <span class="tag tag-bacteria">喙枝孢霉属</span>
+            <span class="tag tag-antibiotic">两性霉素B</span>
+            <span class="tag tag-antibiotic">伊曲康唑</span>
+            <span class="tag tag-antibiotic">伏立康唑</span>
+            <span class="tag tag-antibiotic">泊沙康唑</span>
+        </div>
+    </div>
+    
+    <!-- 复制编辑框 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="青霉菌病与暗色丝孢霉病抗微生物药物治疗；青霉菌病、AIDS、结核病、隐球菌脑膜炎、隐球菌感染、传染性软疣、暗色丝孢霉病、黑霉、暗色孢真菌、HIV、马尔尼菲篮状菌、马尔尼菲青霉菌、外瓶霉属、枝孢霉属、梨孢霉、Cyphellophora、着色真菌属、瓶霉属、喙枝孢霉属、两性霉素B、伊曲康唑、伏立康唑、泊沙康唑；=365" readonly>
+        <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="365.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
         
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            const title = document.querySelector('.main-title').textContent;
-            const pageNum = 365;
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
             
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            const index = favorites.findIndex(f => f.page === pageNum);
-            
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.textContent = '⭐ 收藏';
-                showToast('已取消收藏');
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    showCopied();
+                });
             } else {
-                favorites.push({ page: pageNum, title: title });
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-                showToast('已添加到收藏');
-            }
-            
-            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
-            updateIndexFavorites();
-        }
-        
-        function checkFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageNum = 365;
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            
-            if (favorites.some(f => f.page === pageNum)) {
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
+                document.execCommand("copy");
+                showCopied();
             }
         }
         
-        function updateIndexFavorites() {
-            // 这个函数会在 index.html 中同步更新收藏列表
-            // 通过 localStorage 事件自动同步
+        function showCopied() {
+            const btn = document.getElementById("copyBtn");
+            btn.textContent = "✓ 已复制";
+            btn.classList.add("copied");
+            setTimeout(() => {
+                btn.textContent = "📋 复制";
+                btn.classList.remove("copied");
+            }, 2000);
         }
         
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 2000);
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById("favBtn");
+            const isFav = btn.classList.contains("active");
+            
+            if (!isFav) {
+                btn.classList.add("active");
+                btn.textContent = "❤️ 已收藏";
+                
+                // 保存到localStorage
+                let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+                const pageInfo = {
+                    title: "青霉菌病与暗色丝孢霉病抗微生物药物治疗",
+                    url: "365.html",
+                    page: "365"
+                };
+                
+                // 避免重复添加
+                const exists = favorites.some(f => f.url === pageInfo.url);
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem("favorites", JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏（通过postMessage或共享存储）
+                localStorage.setItem("index_favorites_update", JSON.stringify(favorites));
+                
+                setTimeout(() => {
+                    alert("已添加到收藏！请在首页查看收藏列表。");
+                }, 100);
+            } else {
+                btn.classList.remove("active");
+                btn.textContent = "⭐ 收藏";
+                
+                let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+                favorites = favorites.filter(f => f.url !== "365.html");
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+                localStorage.setItem("index_favorites_update", JSON.stringify(favorites));
+            }
         }
         
         // 页面加载时检查收藏状态
-        window.onload = checkFavorite;
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+            const isFav = favorites.some(f => f.url === "365.html");
+            if (isFav) {
+                const btn = document.getElementById("favBtn");
+                btn.classList.add("active");
+                btn.textContent = "❤️ 已收藏";
+            }
+        };
     </script>
 </body>
 </html>

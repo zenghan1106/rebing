@@ -1,276 +1,751 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12A sR RAT</title>
+    <title>~~~~~表12A 分枝杆菌感染的治疗*****</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 10px;
-            color: #333;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 100%; margin: 0 auto; }
         
-        /* 顶部导航 */
-        .nav-top {
+        body {
+            font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .nav-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
-            background: #fff;
-            border-radius: 8px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             flex-wrap: wrap;
             gap: 10px;
         }
-        .nav-btn {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
-        }
-        .nav-btn:active { transform: translateY(0); }
         
-        /* 标题 */
-        .main-title {
-            text-align: center;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
-        }
-        
-        /* 表格样式 */
-        .content-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
-        .content-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-        }
-        .content-table th {
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: bold;
-            font-size: 16px;
-            border-bottom: 3px solid #667eea;
-        }
-        .content-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e8e8e8;
-            font-size: 14px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-        .content-table tr:nth-child(even) { background: #f8f9fa; }
-        .content-table tr:hover { background: #e8f4f8; }
-        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
-        
-        /* 标签 */
-        .tags-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .tags-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        /* 编辑框 */
-        .edit-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .edit-box {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            resize: vertical;
-        }
-        .btn-row {
+        .nav-left {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
         }
-        .action-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 20px;
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        .copy-btn { background: #28a745; color: white; }
-        .copy-btn:hover { background: #218838; }
-        .favorite-btn { background: #ffc107; color: #333; }
-        .favorite-btn:hover { background: #e0a800; }
-        .favorite-btn.active { background: #ff6b6b; color: white; }
-        
-        /* 页码 */
-        .page-footer {
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .page-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-family: inherit;
         }
         
-        /* 收藏提示 */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
+        .btn-home {
+            background-color: #4a90d9;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: none;
-            z-index: 1000;
+        }
+        
+        .btn-page {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 200px;
+            right: 15px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            padding: 0;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: #d4e6f1;
+            border-radius: 10px;
+            border: 2px solid #5dade2;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            min-width: 700px;
+        }
+        
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            vertical-align: top;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+        
+        .col-section {
+            width: 25%;
+            background-color: #eafaf1;
+            font-weight: bold;
+            color: #1a5276;
+            font-size: 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .col-content {
+            width: 75%;
+            background-color: #fffef0;
+        }
+        
+        /* 药物/检测方法 - 绿色 */
+        .drug {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 疾病 - 紫色 */
+        .disease {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        /* 细菌/病原体 - 棕色 */
+        .bacteria {
+            color: #a0522d;
+            font-weight: bold;
+        }
+        
+        /* 严重不良反应/注意事项 - 红色 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 数值/剂量 - 蓝色 */
+        .value {
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        /* 机构/指南 - 橙色 */
+        .org {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background-color: #fcf3cf;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline;
+        }
+        
+        ul.custom-list {
+            margin: 8px 0;
+            padding-left: 25px;
+        }
+        
+        ul.custom-list li {
+            margin-bottom: 6px;
+        }
+        
+        .note-footer {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag-disease {
+            background-color: #f5eef8;
+            color: #8e44ad;
+            border-color: #d7bde2;
+        }
+        
+        .tag-drug {
+            background-color: #eafaf1;
+            color: #27ae60;
+            border-color: #abebc6;
+        }
+        
+        .tag-bacteria {
+            background-color: #fdf2e9;
+            color: #a0522d;
+            border-color: #edbb99;
+        }
+        
+        .tag-test {
+            background-color: #e8f8f5;
+            color: #16a085;
+            border-color: #a3e4d7;
+        }
+        
+        .tag-org {
+            background-color: #fef9e7;
+            color: #b7950b;
+            border-color: #f9e79f;
+        }
+        
+        .tag-symptom {
+            background-color: #fdedec;
+            color: #c0392b;
+            border-color: #f5b7b1;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #5d6d7e;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #5dade2;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-family: inherit;
+        }
+        
+        .btn-copy {
+            background-color: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 15px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 15px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .table-container {
+                overflow-x: scroll;
+            }
+            
+            table {
+                min-width: 600px;
+            }
+            
+            .col-section {
+                width: 20%;
+            }
+            
+            .col-content {
+                width: 80%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-top">
-            <a href="index.html" class="nav-btn">🏠 首页</a>
-            <div>
-                <a href="376.html" class="nav-btn">⬅️ 上一页</a>
-                <a href="378.html" class="nav-btn">➡️ 下一页</a>
-            </div>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
         </div>
-        
-        <h1 class="main-title">~~~~~12A sR RAT*****</h1>
-        
-        <table class="content-table"><tbody><tr><td>12A sR RAT</td></tr><tr><td>Senate</td></tr><tr><td>a ,</td></tr><tr><td>(ID</td></tr><tr><td>» AT</td></tr><tr><td>DC)</td></tr><tr><td>N64: el, 2017,</td></tr><tr><td>Se</td></tr><tr><td>ae (T</td></tr><tr><td>), BIPF</td></tr><tr><td>est ey 1 6, 2010).</td></tr><tr><td>IT Coe</td></tr><tr><td>fe PPD) 48 — 72 //Me</td></tr><tr><td>PARE RT tant -</td></tr><tr><td>a |</td></tr><tr><td>le =</td></tr><tr><td>AEE</td></tr><tr><td>“tt all, *</td></tr><tr><td>ee 15n</td></tr><tr><td>g/d,</td></tr><tr><td>2% FSi</td></tr><tr><td>Gre</td></tr><tr><td>1B</td></tr><tr><td>* tx changer psirhe</td></tr><tr><td>B#= 10mm</td></tr><tr><td>be</td></tr><tr><td>3}</td></tr><tr><td>any</td></tr><tr><td>et</td></tr><tr><td>BF</td></tr><tr><td>i WBE</td></tr><tr><td>FETA (</td></tr><tr><td>a8) ea</td></tr><tr><td>e Ae</td></tr><tr><td>=&gt; 150 ne.</td></tr><tr><td>B fy aad</td></tr><tr><td>Hea</td></tr><tr><td>iS bea</td></tr><tr><td>iil</td></tr><tr><td>tke</td></tr><tr><td>OD ha HE a SS EB</td></tr><tr><td>i?</td></tr><tr><td>&lt;10mm,; |</td></tr><tr><td>a |</td></tr><tr><td>opie PPD</td></tr><tr><td>Jk</td></tr><tr><td>on</td></tr><tr><td>ye!</td></tr><tr><td>Ruut</td></tr><tr><td>cif</td></tr><tr><td>74 Do</td></tr><tr><td>Jb</td></tr><tr><td>A-sTe</td></tr><tr><td>= ay lie</td></tr><tr><td>= 10mrr</td></tr><tr><td>Pra</td></tr><tr><td>= =</td></tr><tr><td>ky Ji ls SB</td></tr><tr><td>is)</td></tr><tr><td>BrELTST Fe hiring</td></tr><tr><td>» “DIE</td></tr><tr><td>me hLPPD AG</td></tr><tr><td>fina.</td></tr><tr><td>B+\ER</td></tr><tr><td>(IGR:</td></tr><tr><td>i.) IG</td></tr><tr><td>iy</td></tr><tr><td>il]</td></tr><tr><td>rep fa</td></tr><tr><td>ai</td></tr><tr><td>ER</td></tr><tr><td>“, 4)</td></tr><tr><td>ke &amp;</td></tr><tr><td>SLATE</td></tr><tr><td>ep Hl J</td></tr><tr><td>308:</td></tr><tr><td>241, 2012 I</td></tr><tr><td>fi</td></tr><tr><td>5):</td></tr><tr><td>R59 (</td></tr><tr><td>: a 2010 ak</td></tr><tr><td>AYyix!</td></tr><tr><td>‘Te’</td></tr><tr><td>ay</td></tr><tr><td>( Oxford.</td></tr><tr><td>Immur</td></tr><tr><td>@iticty</td></tr><tr><td>AKIN</td></tr><tr><td>Gold</td></tr><tr><td>(QFT-G )</td></tr><tr><td>it doar</td></tr><tr><td>RAN =</td></tr><tr><td>Qiagen );</td></tr><tr><td>ay</td></tr><tr><td>STstT</td></tr><tr><td>e CDC</td></tr><tr><td>ee</td></tr><tr><td>we</td></tr><tr><td>isk</td></tr><tr><td>APS</td></tr><tr><td>Sh (</td></tr><tr><td>5}</td></tr><tr><td>&lt;3),</td></tr><tr><td>—|</td></tr><tr><td>IG)</td></tr><tr><td>BCG</td></tr><tr><td>Tab</td></tr><tr><td>a CDC</td></tr><tr><td>TAREE</td></tr><tr><td>Re</td></tr><tr><td>BCGH BS itikt!</td></tr><tr><td>4ETST. SPIE</td></tr><tr><td>~~? }</td></tr><tr><td>te</td></tr><tr><td>a, WA</td></tr><tr><td>A]</td></tr><tr><td>ILS</td></tr><tr><td>» {81</td></tr><tr><td>Nii</td></tr><tr><td>THR</td></tr><tr><td>flier’ &amp;</td></tr><tr><td>ap 1h)</td></tr><tr><td>BE</td></tr><tr><td>al</td></tr><tr><td>vs</td></tr><tr><td>—F, ce</td></tr><tr><td>ye</td></tr><tr><td>TEAR</td></tr><tr><td>Ay</td></tr><tr><td>iD Das 234, wu ne</td></tr><tr><td>pass</td></tr><tr><td>hE</td></tr><tr><td>i=</td></tr><tr><td>0.35</td></tr><tr><td>ml</td></tr><tr><td>BAR</td></tr><tr><td>| PE AS</td></tr><tr><td>ae</td></tr><tr><td>fT fi</td></tr><tr><td>(Am J Respir</td></tr><tr><td>Care Med 188,</td></tr><tr><td>i 1005</td></tr><tr><td>2013 % va I</td></tr><tr><td>7 ) TT</td></tr><tr><td>fy</td></tr><tr><td>59 (</td></tr><tr><td>&lt;: 201 0;</td></tr><tr><td>224], 2012;</td></tr><tr><td>1G</td></tr><tr><td>(208</td></tr><tr><td>IC 54: B45, 20165</td></tr><tr><td>a:</td></tr><tr><td>=|</td></tr><tr><td>A; @</td></tr><tr><td>PLICOR</td></tr><tr><td>Poe</td></tr><tr><td>— AE is</td></tr><tr><td>an)</td></tr><tr><td>DAE</td></tr><tr><td>yoo</td></tr><tr><td>Bd</td></tr><tr><td>BMY i=—9 5%, 5</td></tr><tr><td>tT PA</td></tr><tr><td>I= 95%,</td></tr><tr><td>A fica</td></tr><tr><td>40%5-—</td></tr><tr><td>Y {</td></tr><tr><td>MWR 38s 7,</td></tr><tr><td>N09:</td></tr><tr><td>1 49: 46. pre</td></tr><tr><td>al 60% - a - 90% Y Chino By</td></tr><tr><td>&gt; WPOR I RAE</td></tr><tr><td>PCR</td></tr><tr><td>muh EZ ap RET</td></tr><tr><td>vssebtcfiuddrconiaral btetinantentddtvalion- weeidihcntch atin} $ hoes Ta</td></tr><tr><td>(eis ), eee ete</td></tr><tr><td>77 —e ( JChin Micrabrol Si: 3225,</td></tr><tr><td>2073 Va</td></tr></tbody></table>
-        
-        <div class="tags-section">
-            <div class="tags-title">🏷️ 关键词标签</div>
-            <div class="tags"></div>
-        </div>
-        
-        <div class="edit-section">
-            <textarea class="edit-box" id="editBox">12A sR RAT；=377</textarea>
-            <div class="btn-row">
-                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
-                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-            </div>
-        </div>
-        
-        <div class="page-footer">
-            <div class="page-number">第 377 页</div>
+        <div class="nav-right">
+            <a href="376.html" class="btn btn-page">上一页</a>
+            <a href="378.html" class="btn btn-page">下一页</a>
         </div>
     </div>
     
-    <div class="toast" id="toast"></div>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorite()" title="收藏">★</button>
     
-    <script>
-        function copyContent() {
-            const editBox = document.getElementById('editBox');
-            editBox.select();
-            document.execCommand('copy');
-            showToast('✅ 已复制到剪贴板');
+    <!-- 标题 -->
+    <h1>~~~~~表12A 分枝杆菌感染的治疗*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-section">分类/项目</th>
+                    <th class="col-content">详细内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-section">
+                        结核分枝杆菌的诊断更新指南
+                    </td>
+                    <td class="col-content">
+                        <span class="org">IDSA</span>、<span class="org">ATS</span>、<span class="org">CDC</span>：<span class="ref">CID 64: el, 2017</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-section">
+                        结核菌素皮肤试验（TST）
+                    </td>
+                    <td class="col-content">
+                        即<span class="drug">PPD</span>（<span class="ref">Chest 138: 1456, 2010</span>）。<span class="value">5U TST</span>（中等强度PPD）<span class="value">48～72小时</span>判断阳性的标准：
+                        <ul class="custom-list">
+                            <li>硬结直径<span class="value">≥5mm</span>：<span class="disease">HIV阳性</span>，<span class="disease">免疫抑制</span>，<span class="drug">泼尼松</span><span class="value">≥15mg/d</span>，胸部X线片显示<span class="disease">陈旧性结核</span>，近期与<span class="disease">结核患者</span>有密切接触等情况者；</li>
+                            <li>硬结直径<span class="value">≥10mm</span>：出生于美国以外的地区，来自<span class="disease">结核高发区</span>，<span class="disease">静脉吸毒者</span>，<span class="disease">低收入人群</span>，<span class="disease">住养老院者</span>，<span class="disease">慢性病患者</span>，<span class="disease">硅沉着病（硅肺病）</span>患者；</li>
+                            <li>硬结直径<span class="value">≥15mm</span>：健康人。</li>
+                        </ul>
+                        检测延迟阳性的二阶段法：如第1次PPD阳性但硬结直径<span class="value">＜10mm</span>，<span class="value">1周后</span>重复中等强度PPD试验一次。若儿时接种过<span class="drug">卡介苗</span>，对第2次PPD也可有反应。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-section">
+                        儿童时接种卡介苗
+                    </td>
+                    <td class="col-content">
+                        若硬结直径<span class="value">≥10mm</span>且来自<span class="disease">结核高发区</span>者，应视为感染<span class="bacteria">结核分枝杆菌</span>。之前<span class="drug">卡介苗</span>接种可导致二阶段TST反应加剧效应，不推荐做常规PPD无反应性试验。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-section">
+                        干扰素-γ释放试验（IGRA）
+                    </td>
+                    <td class="col-content">
+                        IGRA通过检测机体免疫细胞在<span class="bacteria">结核分枝杆菌抗原</span>的刺激下释放<span class="drug">IFN-γ</span>，判断机体对<span class="bacteria">结核分枝杆菌抗原</span>的敏感性［综述参见<span class="ref">JAMA 308: 241, 2012</span>和<span class="ref">MMWR 59 (RR-5): 1, 2010</span>］。
+                        <ul class="custom-list">
+                            <li>批准的试验有<span class="drug">T-SPOT.TB</span>（Oxford Immunotec），<span class="drug">QuantiFERON-TB Gold</span>（<span class="drug">QFT-G</span>）和<span class="drug">QuantiFERON-TB Gold Plus</span>（Qiagen）；</li>
+                            <li>可在所有适用<span class="drug">TST</span>的情景下替代<span class="drug">TST</span>；</li>
+                            <li><span class="org">CDC</span>建议在大多数情况下优先选择<span class="drug">IGRA</span>而非<span class="drug">TST</span>。但<span class="value">5岁以下</span>儿童除外（部分专家建议将除外年龄调整为<span class="value">＜3岁</span>）。</li>
+                        </ul>
+                        IGRA对<span class="bacteria">结核分枝杆菌</span>相对特异，与<span class="drug">BCG</span>及多数非结核分枝杆菌无交叉反应。<span class="org">CDC</span>建议对于不能复诊测量<span class="drug">TST</span>结果或曾接种<span class="drug">BCG</span>的患者优选<span class="drug">IGRA</span>而非<span class="drug">TST</span>。对于近期接触<span class="disease">结核</span>者，两者均可选用，无优劣之分，但<span class="drug">IGRA</span>没有"增强效应"，在随访复测中更具优势。
+                        <ul class="custom-list">
+                            <li>关于<span class="disease">结核职业暴露</span>的检测两者也无优劣之分；</li>
+                            <li>与<span class="drug">TST</span>一样，<span class="drug">IGRA</span>测定在低流行人群中可出现假阳性（<span class="ref">CID 53: 234, 2011</span>）；</li>
+                            <li>制造商设定的<span class="drug">QFT-GIT</span> <span class="drug">IFN-γ</span>阈值<span class="value">＞0.35 IU/ml</span>在低流行区可能过低，导致阳性率和转阳率虚高，更高的阳性阈值可能更适当（<span class="ref">Am J Respir Crit Care Med 188: 1005, 2013</span>）。有关<span class="drug">IGRA</span>的详细讨论参见<span class="ref">MMWR 59 (RR-5), 2010; JAMA 308: 241, 2012</span>。关于<span class="drug">IGRA</span>假阳性参见<span class="ref">JCM 54: 845, 2016</span>。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-section">
+                        结核分枝杆菌快速（24小时以内）诊断试验
+                    </td>
+                    <td class="col-content">
+                        ①<span class="drug">结核分枝杆菌直接扩增试验</span>扩增和检测<span class="bacteria">结核菌核糖体RNA</span>；②<span class="drug">AMPLICOR结核分枝杆菌试验</span>扩增和检测<span class="bacteria">结核菌DNA</span>。对于抗酸杆菌染色阳性的痰标本，两者敏感性和特异性均<span class="value">＞95%</span>，对于阴性标本，特异性仍<span class="value">＞95%</span>，但敏感性仅为<span class="value">40%～77%</span>（<span class="ref">MMWR 58: 7, 2009; CID 49: 46, 2009</span>）到<span class="value">60%～90%</span>（<span class="ref">http://www.cdc.gov/tb/publications/guidelines/amplification-tests/default.htm</span>）；③<span class="drug">COBAS TaqMan MTB检测</span>：呼吸道标本应用实时PCR技术检测<span class="bacteria">结核分枝杆菌</span>（美国市场没有），同其他快速检测方法一致（<span class="ref">JClin Microbiol 51: 3225, 2013</span>）。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：377
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签（点击可检索）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">HIV阳性</span>
+            <span class="tag tag-disease">免疫抑制</span>
+            <span class="tag tag-disease">陈旧性结核</span>
+            <span class="tag tag-disease">结核患者</span>
+            <span class="tag tag-disease">结核高发区</span>
+            <span class="tag tag-disease">静脉吸毒者</span>
+            <span class="tag tag-disease">低收入人群</span>
+            <span class="tag tag-disease">住养老院者</span>
+            <span class="tag tag-disease">慢性病患者</span>
+            <span class="tag tag-disease">硅沉着病</span>
+            <span class="tag tag-disease">硅肺病</span>
+            <span class="tag tag-disease">结核</span>
+            <span class="tag tag-disease">结核职业暴露</span>
+            
+            <!-- 药物/检测标签 -->
+            <span class="tag tag-drug">PPD</span>
+            <span class="tag tag-drug">卡介苗</span>
+            <span class="tag tag-drug">泼尼松</span>
+            <span class="tag tag-drug">IFN-γ</span>
+            <span class="tag tag-drug">BCG</span>
+            <span class="tag tag-drug">TST</span>
+            <span class="tag tag-drug">IGRA</span>
+            <span class="tag tag-drug">T-SPOT.TB</span>
+            <span class="tag tag-drug">QuantiFERON-TB Gold</span>
+            <span class="tag tag-drug">QFT-G</span>
+            <span class="tag tag-drug">QuantiFERON-TB Gold Plus</span>
+            <span class="tag tag-drug">QFT-GIT</span>
+            <span class="tag tag-drug">结核分枝杆菌直接扩增试验</span>
+            <span class="tag tag-drug">AMPLICOR结核分枝杆菌试验</span>
+            <span class="tag tag-drug">COBAS TaqMan MTB检测</span>
+            
+            <!-- 细菌/病原体标签 -->
+            <span class="tag tag-bacteria">结核分枝杆菌</span>
+            <span class="tag tag-bacteria">结核菌核糖体RNA</span>
+            <span class="tag tag-bacteria">结核菌DNA</span>
+            <span class="tag tag-bacteria">非结核分枝杆菌</span>
+            <span class="tag tag-bacteria">抗酸杆菌</span>
+            
+            <!-- 机构标签 -->
+            <span class="tag tag-org">IDSA</span>
+            <span class="tag tag-org">ATS</span>
+            <span class="tag tag-org">CDC</span>
+            <span class="tag tag-org">Oxford Immunotec</span>
+            <span class="tag tag-org">Qiagen</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表12A 分枝杆菌感染的治疗；结核分枝杆菌；结核菌素皮肤试验；TST；PPD；干扰素-γ释放试验；IGRA；T-SPOT.TB；QuantiFERON-TB Gold；QFT-G；QuantiFERON-TB Gold Plus；QFT-GIT；结核分枝杆菌直接扩增试验；AMPLICOR结核分枝杆菌试验；COBAS TaqMan MTB检测；卡介苗；BCG；泼尼松；IFN-γ；HIV阳性；免疫抑制；陈旧性结核；结核患者；结核高发区；静脉吸毒者；低收入人群；住养老院者；慢性病患者；硅沉着病；硅肺病；结核；结核职业暴露；非结核分枝杆菌；抗酸杆菌；IDSA；ATS；CDC；Oxford Immunotec；Qiagen；=377" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="377.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
         }
         
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            const title = document.querySelector('.main-title').textContent;
-            const pageNum = 377;
+        function addToFavorite() {
+            var title = document.title;
+            var url = window.location.href;
             
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            const index = favorites.findIndex(f => f.page === pageNum);
-            
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.textContent = '⭐ 收藏';
-                showToast('已取消收藏');
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, "");
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
             } else {
-                favorites.push({ page: pageNum, title: title });
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-                showToast('已添加到收藏');
-            }
-            
-            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
-            updateIndexFavorites();
-        }
-        
-        function checkFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageNum = 377;
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            
-            if (favorites.some(f => f.page === pageNum)) {
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
+                var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                var exists = favorites.some(function(f) {
+                    return f.url === url;
+                });
+                
+                if (!exists) {
+                    favorites.push({
+                        title: title,
+                        url: url,
+                        date: new Date().toLocaleString()
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！\n标题：' + title + '\n可在index.html的收藏类目下查看。');
+                } else {
+                    alert('该页面已在收藏中！');
+                }
             }
         }
         
-        function updateIndexFavorites() {
-            // 这个函数会在 index.html 中同步更新收藏列表
-            // 通过 localStorage 事件自动同步
-        }
-        
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 2000);
-        }
-        
-        // 页面加载时检查收藏状态
-        window.onload = checkFavorite;
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                var keyword = this.textContent;
+                alert('搜索关键词：' + keyword);
+            });
+        });
     </script>
 </body>
 </html>

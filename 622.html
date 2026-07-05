@@ -1,0 +1,957 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾功能受损成人患者抗感染药物剂量调整表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f0e8 100%);
+            color: #333;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        /* 导航按钮区域 */
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-page {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        .btn-page:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
+        }
+        .btn-fav {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+        .btn-fav:hover {
+            transform: scale(1.1);
+        }
+        /* 标题样式 */
+        .main-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            line-height: 1.5;
+        }
+        .sub-title {
+            text-align: center;
+            font-size: 16px;
+            color: #5d4037;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 12px;
+        }
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            border: 1px solid #0d47a1;
+            white-space: nowrap;
+            line-height: 1.4;
+        }
+        /* 分类行样式 */
+        .category-row td {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #0d47a1;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px 8px;
+            text-align: left;
+            border: 1px solid #90caf9;
+        }
+        /* 第一行数据字体大一点 */
+        tbody tr:first-child td {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        td {
+            padding: 10px 8px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        tr:hover {
+            background: #e3f2fd;
+        }
+        /* 列宽调整 */
+        .col-drug {
+            min-width: 110px;
+            max-width: 130px;
+        }
+        .col-half-normal {
+            min-width: 120px;
+            max-width: 140px;
+        }
+        .col-half-renal {
+            min-width: 120px;
+            max-width: 140px;
+        }
+        .col-dose {
+            min-width: 110px;
+            max-width: 140px;
+        }
+        .col-crcl {
+            min-width: 220px;
+            max-width: 300px;
+        }
+        .col-dialysis {
+            min-width: 80px;
+            max-width: 100px;
+            text-align: center;
+        }
+        .col-capd {
+            min-width: 75px;
+            max-width: 95px;
+            text-align: center;
+        }
+        .col-crrt {
+            min-width: 75px;
+            max-width: 95px;
+            text-align: center;
+        }
+        .col-sled {
+            min-width: 75px;
+            max-width: 95px;
+            text-align: center;
+        }
+        /* 药物名称颜色 - 绿色 */
+        .drug-name {
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .drug-sub {
+            color: #558b2f;
+            font-size: 11px;
+        }
+        /* 成分颜色 - 紫色 */
+        .component {
+            color: #7b1fa2;
+            font-weight: 600;
+        }
+        /* 禁用/特殊状态 - 红色 */
+        .forbidden {
+            color: #c62828;
+            font-weight: bold;
+        }
+        /* 慎用 - 棕色 */
+        .caution {
+            color: #8d6e63;
+            font-weight: bold;
+        }
+        /* 正常/可用 - 深棕色 */
+        .normal {
+            color: #5d4037;
+        }
+        /* 数据/数值 - 黄色背景突出 */
+        .data-value {
+            background: rgba(255, 235, 59, 0.25);
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+        /* 无数据 - 灰色 */
+        .no-data {
+            color: #9e9e9e;
+        }
+        /* 竖排文字样式（用于长药物名） */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            margin: 0 auto;
+        }
+        /* 页码区域 */
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        /* 编辑框区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .copy-input {
+            flex: 1;
+            max-width: calc(100% - 120px);
+            padding: 12px;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            background: #fafafa;
+        }
+        .btn-copy {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-copy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(238, 90, 36, 0.4);
+        }
+        /* 标签区域 */
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .tag-drug {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+            color: #1b5e20;
+        }
+        .tag-component {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            color: #4a148c;
+        }
+        .tag-condition {
+            background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+            color: #e65100;
+        }
+        /* 图片区域 */
+        .image-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image-container {
+            display: inline-block;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+            max-width: 100%;
+        }
+        .image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 900px;
+            display: block;
+        }
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 8px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .main-title {
+                font-size: 18px;
+                padding: 10px;
+            }
+            .sub-title {
+                font-size: 14px;
+            }
+            table {
+                font-size: 10px;
+            }
+            thead th {
+                font-size: 11px;
+                padding: 8px 5px;
+            }
+            td {
+                padding: 6px 5px;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .copy-section {
+                flex-direction: column;
+            }
+            .copy-input {
+                max-width: 100%;
+                width: 100%;
+            }
+            .col-crcl {
+                min-width: 180px;
+            }
+            .drug-name {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="621.html" class="btn btn-page">⬅ 上一页</a>
+            <a href="623.html" class="btn btn-page">下一页 ➡</a>
+        </div>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~肾功能受损成人患者抗感染药物剂量调整表*****</h1>
+    <div class="sub-title">表17A（33） 抗反转录病毒药物/固定剂量复方制剂（续）</div>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-drug">抗微生物药</th>
+                    <th class="col-half-normal">半衰期（h）<br>（肾功能正常）</th>
+                    <th class="col-half-renal">半衰期（h）<br>（终末期肾病）</th>
+                    <th class="col-dose">剂量<br>（肾功能正常）</th>
+                    <th class="col-crcl">肌酐清除率或估计的<br>肾小球滤过率（ml/min）</th>
+                    <th class="col-dialysis">血液透析</th>
+                    <th class="col-capd">CAPD</th>
+                    <th class="col-crrt">CRRT</th>
+                    <th class="col-sled">SLED</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="9">抗反转录病毒药物/固定剂量复方制剂（续）</td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Genvoya</span><br>
+                        <span class="drug-sub">(EVG/FTC/<br>TAF/Cobi)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">EVG:</span> <span class="data-value">12.9</span><br>
+                        <span class="component">FTC:</span> <span class="data-value">10</span><br>
+                        <span class="component">TAF:</span> <span class="data-value">0.51</span><br>
+                        <span class="component">Cobi:</span> <span class="data-value">3～4</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="component">EVG:</span> <span class="data-value">12.9</span><br>
+                        <span class="component">FTC:</span> <span class="data-value">10</span><br>
+                        <span class="component">TAF:</span> <span class="data-value">0.51</span><br>
+                        <span class="component">Cobi:</span> <span class="data-value">3～4</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">1片 po q24h</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">CrCl ≥ 30:</span> <span class="data-value">1片 po q24h</span><br>
+                        <span class="forbidden">CrCl < 30: 禁用</span>
+                    </td>
+                    <td class="col-dialysis"><span class="forbidden">禁用</span></td>
+                    <td class="col-capd"><span class="forbidden">禁用</span></td>
+                    <td class="col-crrt"><span class="forbidden">禁用</span></td>
+                    <td class="col-sled"><span class="forbidden">禁用</span></td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Juluca</span><br>
+                        <span class="drug-sub">(DTG/<br>RPV)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">DTG:</span> <span class="data-value">14</span><br>
+                        <span class="component">RPV:</span> <span class="data-value">45～50</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="component">DTG:</span> <span class="no-data">无数据</span><br>
+                        <span class="component">RPV:</span> <span class="no-data">无数据</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">1片 po q24h</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">CrCl ≥ 30:</span> <span class="data-value">1片 q24h</span><br>
+                        <span class="caution">CrCl < 30: 慎用</span>
+                    </td>
+                    <td class="col-dialysis"><span class="caution">慎用</span></td>
+                    <td class="col-capd"><span class="caution">慎用</span></td>
+                    <td class="col-crrt"><span class="caution">慎用</span></td>
+                    <td class="col-sled"><span class="no-data">无数据</span></td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Kaletra</span><br>
+                        <span class="drug-sub">(LPV/<br>RTV)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">LPV:</span> <span class="data-value">6.9</span><br>
+                        <span class="component">RTV:</span> <span class="data-value">3～5</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="no-data">无数据</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">2片 po q12h</span><br>
+                        <span class="normal">(每片含LPV200mg,</span><br>
+                        <span class="normal">RV 50mg)</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">肾功能损伤时无须调整剂量</span>
+                    </td>
+                    <td class="col-dialysis"><span class="no-data">无数据</span></td>
+                    <td class="col-capd"><span class="no-data">无数据</span></td>
+                    <td class="col-crrt"><span class="no-data">无数据</span></td>
+                    <td class="col-sled"><span class="no-data">无数据</span></td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Odefsey</span><br>
+                        <span class="drug-sub">(RPV/<br>FTC/TAF)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">RPV:</span> <span class="data-value">45～50</span><br>
+                        <span class="component">FTC:</span> <span class="data-value">10</span><br>
+                        <span class="component">TAF:</span> <span class="data-value">0.51</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="component">RPV:</span> <span class="no-data">无数据</span><br>
+                        <span class="component">FTC:</span> <span class="data-value">>10</span><br>
+                        <span class="component">TAF:</span> <span class="no-data">无数据</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">1片 po q24h</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">CrCl ≥ 30:</span> <span class="data-value">1片 q24h</span><br>
+                        <span class="forbidden">CrCl < 30: 禁用</span>
+                    </td>
+                    <td class="col-dialysis"><span class="forbidden">禁用</span></td>
+                    <td class="col-capd"><span class="forbidden">禁用</span></td>
+                    <td class="col-crrt"><span class="forbidden">禁用</span></td>
+                    <td class="col-sled"><span class="forbidden">禁用</span></td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Prezcobix</span><br>
+                        <span class="drug-sub">(DRV/<br>Cobi)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">DRV:</span> <span class="data-value">15</span><br>
+                        <span class="component">Cobi:</span> <span class="data-value">3～4</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="component">DRV:</span> <span class="no-data">无数据</span><br>
+                        <span class="component">Cobi:</span> <span class="no-data">无数据</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">1片 po q24h</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">肾功能损伤时无须调整剂量</span>
+                    </td>
+                    <td class="col-dialysis"><span class="forbidden">禁用</span></td>
+                    <td class="col-capd"><span class="forbidden">禁用</span></td>
+                    <td class="col-crrt"><span class="forbidden">禁用</span></td>
+                    <td class="col-sled"><span class="forbidden">禁用</span></td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Stribild</span><br>
+                        <span class="drug-sub">(EVG/Cobi/<br>FTC/TDF)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">EVG:</span> <span class="data-value">12.9</span><br>
+                        <span class="component">Cobi:</span> <span class="data-value">3～4</span><br>
+                        <span class="component">FTC:</span> <span class="data-value">10</span><br>
+                        <span class="component">TDF:</span> <span class="data-value">17</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="component">EVG:</span> <span class="no-data">无数据</span><br>
+                        <span class="component">Cobi:</span> <span class="no-data">无数据</span><br>
+                        <span class="component">FTC:</span> <span class="data-value">>10</span><br>
+                        <span class="component">TDF:</span> <span class="data-value">延长</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">1片 po q24h</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">CrCl ≥ 70:</span> <span class="data-value">1片 q24h</span><br>
+                        <span class="forbidden">开始治疗前CrCl < 70: 禁用</span><br>
+                        <span class="forbidden">治疗过程中CrCl < 50: 停用</span>
+                    </td>
+                    <td class="col-dialysis"></td>
+                    <td class="col-capd"><span class="forbidden">禁用</span></td>
+                    <td class="col-crrt"><span class="forbidden">禁用</span></td>
+                    <td class="col-sled"><span class="forbidden">禁用</span></td>
+                </tr>
+                <tr>
+                    <td class="col-drug">
+                        <span class="drug-name">Symfi,</span><br>
+                        <span class="drug-name">Symfi Lo</span><br>
+                        <span class="drug-sub">(EFV/3TC/<br>TDF)</span>
+                    </td>
+                    <td class="col-half-normal">
+                        <span class="component">EFV:</span> <span class="data-value">4～55</span><br>
+                        <span class="component">3TC:</span> <span class="data-value">5～7</span><br>
+                        <span class="component">TDF:</span> <span class="data-value">17</span>
+                    </td>
+                    <td class="col-half-renal">
+                        <span class="component">EFV:</span> <span class="no-data">无数据</span><br>
+                        <span class="component">3TC:</span> <span class="data-value">15～35</span><br>
+                        <span class="component">TDF:</span> <span class="data-value">延长</span>
+                    </td>
+                    <td class="col-dose">
+                        <span class="normal">1片 po q24h</span>
+                    </td>
+                    <td class="col-crcl">
+                        <span class="normal">CrCl ≥ 50:</span> <span class="data-value">1片 q24h</span><br>
+                        <span class="forbidden">CrCl < 50: 禁用</span>
+                    </td>
+                    <td class="col-dialysis"><span class="forbidden">禁用</span></td>
+                    <td class="col-capd"><span class="forbidden">禁用</span></td>
+                    <td class="col-crrt"><span class="forbidden">禁用</span></td>
+                    <td class="col-sled"><span class="forbidden">禁用</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页码 -->
+    <div class="page-number">622</div>
+
+    <!-- 编辑框和复制按钮 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="肾功能受损成人患者抗感染药物剂量调整表；抗反转录病毒药物,固定剂量复方制剂,Genvoya,Juluca,Kaletra,Odefsey,Prezcobix,Stribild,Symfi,Symfi Lo,EVG,FTC,TAF,Cobi,DTG,RPV,LPV,RTV,DRV,EFV,3TC,TDF,肾功能受损,终末期肾病,血液透析,CAPD,CRRT,SLED；=622" readonly>
+        <button class="btn-copy" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()" title="点击收藏">⭐</button>
+
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-drug">Genvoya</span>
+            <span class="tag tag-drug">Juluca</span>
+            <span class="tag tag-drug">Kaletra</span>
+            <span class="tag tag-drug">Odefsey</span>
+            <span class="tag tag-drug">Prezcobix</span>
+            <span class="tag tag-drug">Stribild</span>
+            <span class="tag tag-drug">Symfi</span>
+            <span class="tag tag-drug">Symfi Lo</span>
+            <span class="tag tag-component">EVG</span>
+            <span class="tag tag-component">FTC</span>
+            <span class="tag tag-component">TAF</span>
+            <span class="tag tag-component">Cobi</span>
+            <span class="tag tag-component">DTG</span>
+            <span class="tag tag-component">RPV</span>
+            <span class="tag tag-component">LPV</span>
+            <span class="tag tag-component">RTV</span>
+            <span class="tag tag-component">DRV</span>
+            <span class="tag tag-component">EFV</span>
+            <span class="tag tag-component">3TC</span>
+            <span class="tag tag-component">TDF</span>
+            <span class="tag tag-condition">肾功能受损</span>
+            <span class="tag tag-condition">终末期肾病</span>
+            <span class="tag tag-condition">血液透析</span>
+            <span class="tag tag-condition">CAPD</span>
+            <span class="tag tag-condition">CRRT</span>
+            <span class="tag tag-condition">SLED</span>
+        </div>
+    </div>
+
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <div class="image-container" onclick="openModal()">
+            <img src="622.jpg" alt="肾功能受损成人患者抗感染药物剂量调整表原图">
+        </div>
+    </div>
+
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img src="622.jpg" alt="放大图片">
+    </div>
+
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="622.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板: " + copyText.value);
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板!");
+            });
+        }
+
+        // 添加到收藏
+        function addToFavorites() {
+            const title = document.title;
+            const url = window.location.href;
+            const pageNum = "622";
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                timestamp: new Date().toISOString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            alert('⭐ 已添加到收藏！\n页面：' + title + '\n页码：' + pageNum);
+            
+            if (confirm('是否跳转到首页查看收藏？')) {
+                window.location.href = 'index.html?fav=' + encodeURIComponent(title) + '&page=' + pageNum;
+            }
+        }
+
+        // 图片模态框
+        function openModal() {
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

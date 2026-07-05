@@ -1,0 +1,716 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾功能受损成人患者的抗感染药物剂量调整-头孢洛生他唑巴坦与头孢洛林*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            background-color: #f5f9ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-nav {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background-color: #1976D2;
+        }
+        
+        .btn-favorite {
+            background-color: #FF9800;
+            color: white;
+            position: fixed;
+            bottom: 180px;
+            right: 15px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .btn-favorite:hover {
+            background-color: #F57C00;
+            transform: scale(1.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #E3F2FD;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            min-width: 1400px;
+        }
+        
+        thead {
+            background-color: #1565C0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #0D47A1;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 10px 8px;
+            border: 1px solid #BBDEFB;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #E3F2FD;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+        
+        tbody tr:hover {
+            background-color: #BBDEFB;
+        }
+        
+        .section-header {
+            background-color: #E8EAF6 !important;
+            font-weight: bold;
+            color: #1A237E;
+            font-size: 14px;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #0D47A1;
+            font-size: 14px;
+        }
+        
+        .half-life {
+            color: #1565C0;
+        }
+        
+        .dose {
+            color: #2E7D32;
+            font-weight: bold;
+        }
+        
+        .crcl {
+            color: #6A1B9A;
+        }
+        
+        .dialysis {
+            color: #C62828;
+        }
+        
+        .note {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            border-radius: 5px;
+            font-size: 13px;
+            color: #E65100;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 5px;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background-color: #FFCDD2;
+            color: #C62828;
+        }
+        
+        .tag-drug {
+            background-color: #C8E6C9;
+            color: #2E7D32;
+        }
+        
+        .tag-bacteria {
+            background-color: #BBDEFB;
+            color: #1565C0;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 2px solid #BBDEFB;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+        }
+        
+        .btn-copy {
+            background-color: #9C27B0;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background-color: #7B1FA2;
+        }
+        
+        .btn-copy.copied {
+            background-color: #4CAF50;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .keywords span {
+            color: #1565C0;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 8px 5px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px 5px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="568.html" class="btn btn-nav">← 上一页</a>
+            <a href="570.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorite()" title="收藏">⭐</button>
+    
+    <!-- 标题 -->
+    <h1>~~~~~肾功能受损成人患者的抗感染药物剂量调整-头孢洛生他唑巴坦与头孢洛林*****</h1>
+    
+    <!-- 表格容器 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>抗微生物药</th>
+                    <th>半衰期(h)<br>(肾功能正常)</th>
+                    <th>半衰期(h)<br>(终末期肾病)</th>
+                    <th>剂量<br>(肾功能正常)</th>
+                    <th>肌酐清除率或估计的<br>肾小球滤过率(ml/min)</th>
+                    <th>血液透析</th>
+                    <th>CAPD</th>
+                    <th>CRRT</th>
+                    <th>SLED</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">头孢洛生-他唑巴坦</td>
+                    <td class="half-life">
+                        头孢洛生3.1
+                    </td>
+                    <td class="half-life">
+                        头孢洛生40
+                    </td>
+                    <td class="dose">
+                        腹腔(IAI)/尿<br>
+                        路感染(UTI)：<br>
+                        1.5g iv q8h<br>
+                        医院获得性肺<br>
+                        炎(HAP/VAP)：<br>
+                        3g iv q8h
+                    </td>
+                    <td class="crcl">
+                        CrCl > 50：无须调整剂量<br>
+                        CrCl 30～50：<br>
+                        IAI/UTI：750mg q8h<br>
+                        HAP/VAP：1.5g q8h<br>
+                        CrCl 15～29：<br>
+                        IAI/UTI：375mg q8h<br>
+                        HAP/VAP：750mg q8h<br>
+                        CrCl < 15 on HD：<em>参见透析时的推荐</em>
+                    </td>
+                    <td class="dialysis">
+                        IAI/UTI：750mg负<br>
+                        荷量，然后150mg<br>
+                        q8h（透后给药）<br>
+                        HAP/VAP：2.25g<br>
+                        q8h负荷量，<br>
+                        450mg q8h（透后<br>
+                        给药）
+                    </td>
+                    <td class="dialysis">无数据</td>
+                    <td class="dialysis">
+                        CVVHF：3g×<br>
+                        1剂，然后750mg<br>
+                        q8h<sup>23</sup>
+                    </td>
+                    <td class="dialysis">无数据</td>
+                </tr>
+                <tr class="section-header">
+                    <td colspan="9">头孢菌素，iv，抗MRSA</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢洛林</td>
+                    <td class="half-life">2.7</td>
+                    <td class="half-life">无数据</td>
+                    <td class="dose">600mg iv q12h</td>
+                    <td class="crcl">
+                        CrCl > 50：无须调整剂量<br>
+                        CrCl 30～50：400mg q12h<br>
+                        CrCl 15～30：300mg q12h<br>
+                        CrCl < 15：200mg q12h
+                    </td>
+                    <td class="dialysis">200mg q12h</td>
+                    <td class="dialysis">无数据</td>
+                    <td class="dialysis">
+                        70kg的患者，<br>
+                        透析流率3L/h：<br>
+                        400mg q12h<br>
+                        (Pharmacother<br>
+                        2021；41：205)
+                    </td>
+                    <td class="dialysis">无数据</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="note">
+        <strong>注：</strong><br>
+        5 肝病时可能须调整剂量。<br>
+        17 需要的话可以单独予额外的头孢哌酮（肾功能损伤时无须调整头孢哌酮剂量）。<br>
+        23 <em>Antimicrob Agents Chemother</em> 2019；64：e01655-19.
+    </div>
+    
+    <!-- 检索标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔍 检索标签</div>
+        <div>
+            <span class="tag tag-disease" onclick="searchTag('肾功能受损')">肾功能受损</span>
+            <span class="tag tag-disease" onclick="searchTag('终末期肾病')">终末期肾病</span>
+            <span class="tag tag-disease" onclick="searchTag('血液透析')">血液透析</span>
+            <span class="tag tag-disease" onclick="searchTag('CAPD')">CAPD</span>
+            <span class="tag tag-disease" onclick="searchTag('CRRT')">CRRT</span>
+            <span class="tag tag-disease" onclick="searchTag('SLED')">SLED</span>
+            <span class="tag tag-disease" onclick="searchTag('CVVHF')">CVVHF</span>
+            <span class="tag tag-disease" onclick="searchTag('IAI')">IAI</span>
+            <span class="tag tag-disease" onclick="searchTag('UTI')">UTI</span>
+            <span class="tag tag-disease" onclick="searchTag('HAP')">HAP</span>
+            <span class="tag tag-disease" onclick="searchTag('VAP')">VAP</span>
+            <span class="tag tag-drug" onclick="searchTag('头孢洛生')">头孢洛生</span>
+            <span class="tag tag-drug" onclick="searchTag('他唑巴坦')">他唑巴坦</span>
+            <span class="tag tag-drug" onclick="searchTag('头孢洛生-他唑巴坦')">头孢洛生-他唑巴坦</span>
+            <span class="tag tag-drug" onclick="searchTag('头孢洛林')">头孢洛林</span>
+            <span class="tag tag-bacteria" onclick="searchTag('抗MRSA')">抗MRSA</span>
+            <span class="tag tag-bacteria" onclick="searchTag('头孢菌素')">头孢菌素</span>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">569</div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="肾功能受损成人患者的抗感染药物剂量调整-头孢洛生他唑巴坦与头孢洛林；头孢洛生；他唑巴坦；头孢洛生-他唑巴坦；头孢洛林；肾功能受损；终末期肾病；血液透析；CAPD；CRRT；SLED；CVVHF；IAI；UTI；HAP；VAP；抗MRSA；头孢菌素；=569" readonly>
+        <button class="btn btn-copy" onclick="copyText()">复制</button>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        关键词：<span>头孢洛生</span>、<span>他唑巴坦</span>、<span>头孢洛生-他唑巴坦</span>、<span>头孢洛林</span>、<span>抗MRSA</span>、<span>肾功能调整</span>、<span>IAI</span>、<span>UTI</span>、<span>HAP</span>、<span>VAP</span>、<span>CVVHF</span>
+    </div>
+
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="569.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyText() {
+            const input = document.getElementById('copyText');
+            input.select();
+            document.execCommand('copy');
+            
+            const btn = document.querySelector('.btn-copy');
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = '复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 标签搜索功能
+        function searchTag(tag) {
+            alert('搜索标签: ' + tag);
+        }
+        
+        // 收藏功能
+        function addToFavorite() {
+            const title = document.title.replace(/~~~~~|/g, '').replace(/\*\*\*\*\*/g, '');
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '抗生素剂量表',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏！\n标题: ' + title + '\n请在首页查看收藏列表。');
+            
+            if (window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'addFavorite',
+                    data: { title: title, url: url }
+                }, '*');
+            }
+        }
+        
+        // 页面加载时设置复制框内容
+        window.onload = function() {
+            const pageNum = '569';
+            const title = '肾功能受损成人患者的抗感染药物剂量调整-头孢洛生他唑巴坦与头孢洛林';
+            const keywords = '头孢洛生；他唑巴坦；头孢洛生-他唑巴坦；头孢洛林；肾功能受损；终末期肾病；血液透析；CAPD；CRRT；SLED；CVVHF；IAI；UTI；HAP；VAP；抗MRSA；头孢菌素';
+            document.getElementById('copyText').value = title + '；' + keywords + '；=' + pageNum;
+        };
+    </script>
+</body>
+</html>

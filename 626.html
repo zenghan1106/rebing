@@ -1,0 +1,724 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表17C 肥胖患者抗微生物药物剂量*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2ecc71;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 15px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+        
+        /* 说明文字 */
+        .description {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            font-size: 14px;
+            color: #34495e;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 20px;
+            max-width: 1400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+        
+        /* 单元格 */
+        td, th {
+            border: 1px solid #d5dbdb;
+            padding: 12px 14px;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+        
+        /* 药物列 */
+        .drug-name {
+            background: #ebf5fb;
+            font-weight: 600;
+            color: #1a5276;
+            width: 15%;
+            white-space: nowrap;
+        }
+        
+        /* 剂量列 */
+        .dosage {
+            width: 25%;
+            color: #2c3e50;
+        }
+        
+        /* 说明列 */
+        .note {
+            width: 60%;
+            color: #34495e;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        /* 复制功能区域 */
+        .copy-wrapper {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 50px;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #85c1e9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            color: #2c3e50;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+        }
+        
+        .copy-btn.copied {
+            background: #2ecc71;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.faved {
+            background: #f39c12;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 1400px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #922b21;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #1e8449;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #1a5276;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        
+        .keywords strong {
+            color: #2c3e50;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            .description {
+                font-size: 13px;
+                padding: 12px 15px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            td, th {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-wrapper {
+                padding: 0 20px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .fav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="625.html" class="nav-btn">← 上一页</a>
+        <a href="627.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表17C 肥胖患者抗微生物药物剂量*****</h1>
+    
+    <!-- 说明文字 -->
+    <div class="description">
+        肥胖患者数量在增加。直观上，一些药物的标准剂量在肥胖患者可能不能达到有效血清浓度。肥胖患者有效剂量的相关数据正在逐渐增多。虽然有些数据需要进一步验证，下表反映了当前所了解的情况。肥胖定义为较理想体重（Ideal BW）≥20%或者体重指数（BMI）＞30。剂量＝肥胖患者建议按体重计算剂量，或已知的特定剂量。通常，表中没有的药物提示已发表文献中没有相关信息。
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>药物</th>
+                    <th>剂量</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-name">阿昔洛韦</td>
+                    <td class="dosage">应用校正体重（见说明）</td>
+                    <td class="note">来自7名肥胖志愿者的未发表数据（Davis等，ICAAC摘要，1991）提示要根据理想体重，但更新更可靠的药代动力学数据提示根据校正体重用药暴露水平更接近正常人群（AAC 60: 1830，2016）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">氨基糖苷类</td>
+                    <td class="dosage">应用校正体重</td>
+                    <td class="note">校正体重＝理想体重＋0.4（实际体重－理想体重）。参见Pharmacother 27: 1081，2007<br>一旦血流动力学稳定，下调剂量</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">脂质体两性霉素B</td>
+                    <td class="dosage">应用校正体重，但重症患者要考虑应用实际体重</td>
+                    <td class="note">推荐基于一项对238例患者临床结局的回顾性分析（AAC 2021；65: e02366-20）。早期小样本PK研究的数据支持在体重≥100kg者应用固定剂量（500mg，如目标剂量为5mg/kg），研究还提示对所有肥胖患者应用实际体重都不是最佳策略（CID 2020；70: 2013）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">阿尼芬净</td>
+                    <td class="dosage">数据不足以做出确定推荐</td>
+                    <td class="note">药代动力学模型显示在体重＞140kg的患者负荷量和维持剂量增加25%可达到和非肥胖患者接受通常剂量类似的药物暴露水平（AAC 62: e00063-18，2018）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">蒿甲醚－本芴醇</td>
+                    <td class="dosage">无须调整剂量</td>
+                    <td class="note">数据来源于一项在健康志愿者中进行的PK研究［6例体重正常，7例超重（平均BMI 28.2），3例肥胖（平均BMI 33.9）］。只有1例BMI＞35。小样本有限结论（IJAA 2022；59: 106482）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">卡泊芬净</td>
+                    <td class="dosage">数据不足以做出确定推荐</td>
+                    <td class="note">积累的数据提示肥胖患者卡泊芬净暴露量降低，但支持理想剂量调整策略的证据有限（Am J Health Syst Pharm 2023；80: 503）。有建议根据体重调整剂量（负荷量2mg/kg，之后1.25mg/kg q24h）（AAC 2020；64: e00905-20）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">626</div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-wrapper">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="表17C 肥胖患者抗微生物药物剂量；肥胖、抗微生物药物、校正体重、理想体重、BMI、阿昔洛韦、氨基糖苷类、脂质体两性霉素B、阿尼芬净、蒿甲醚-本芴醇、卡泊芬净；=626" readonly>
+            <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+        </div>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肥胖</span>
+            <span class="tag tag-disease">理想体重</span>
+            <span class="tag tag-disease">BMI</span>
+            <span class="tag tag-drug">阿昔洛韦</span>
+            <span class="tag tag-drug">氨基糖苷类</span>
+            <span class="tag tag-drug">脂质体两性霉素B</span>
+            <span class="tag tag-drug">阿尼芬净</span>
+            <span class="tag tag-drug">蒿甲醚</span>
+            <span class="tag tag-drug">本芴醇</span>
+            <span class="tag tag-drug">卡泊芬净</span>
+            <span class="tag tag-bacteria">抗微生物药物</span>
+            <span class="tag tag-bacteria">校正体重</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>肥胖患者、抗微生物药物、药物剂量、校正体重、理想体重、BMI、阿昔洛韦、氨基糖苷类、脂质体两性霉素B、阿尼芬净、蒿甲醚-本芴醇、卡泊芬净、药代动力学、暴露量
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="626.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '📋 复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能（使用localStorage模拟）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const key = 'fav_626';
+            const isFaved = localStorage.getItem(key);
+            
+            if (isFaved) {
+                localStorage.removeItem(key);
+                btn.classList.remove('faved');
+                btn.innerHTML = '⭐';
+                alert('已取消收藏');
+            } else {
+                const favData = {
+                    title: '表17C 肥胖患者抗微生物药物剂量',
+                    url: '626.html',
+                    category: '药物剂量',
+                    date: new Date().toISOString()
+                };
+                localStorage.setItem(key, JSON.stringify(favData));
+                
+                // 同时存入收藏列表
+                let favList = JSON.parse(localStorage.getItem('favorites') || '[]');
+                // 避免重复
+                favList = favList.filter(item => item.url !== '626.html');
+                favList.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favList));
+                
+                btn.classList.add('faved');
+                btn.innerHTML = '❤️';
+                alert('已添加到收藏！\n（注：实际同步到index.html需要后端支持，当前使用浏览器本地存储）');
+            }
+        }
+        
+        // 初始化收藏状态
+        function initFav() {
+            const btn = document.getElementById('favBtn');
+            if (localStorage.getItem('fav_626')) {
+                btn.classList.add('faved');
+                btn.innerHTML = '❤️';
+            }
+        }
+        
+        initFav();
+    </script>
+</body>
+</html>

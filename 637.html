@@ -1,0 +1,775 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~检验报告：细菌培养及药敏试验结果*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background-color: #f0f8ff;
+            background-image: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn {
+            background-color: #4a90d9;
+            color: white;
+        }
+        
+        .home-btn:hover {
+            background-color: #357abd;
+        }
+        
+        .page-btn {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .page-btn:hover {
+            background-color: #449d44;
+        }
+        
+        .fav-btn {
+            background-color: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .fav-btn:hover {
+            background-color: #ec971f;
+        }
+        
+        .fav-btn.active {
+            background-color: #d9534f;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 28px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        thead {
+            background-color: #2e86de;
+            color: white;
+        }
+        
+        th {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+            word-break: break-all;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .first-row {
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #e8f4f8 !important;
+        }
+        
+        .sensitive {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .resistant {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .intermediate {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            color: #2e86de;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: white;
+            display: inline-block;
+        }
+        
+        .tag-disease {
+            background-color: #e74c3c;
+        }
+        
+        .tag-bacteria {
+            background-color: #9b59b6;
+        }
+        
+        .tag-antibiotic {
+            background-color: #27ae60;
+        }
+        
+        .copy-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #2e86de;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1a5276;
+        }
+        
+        .copy-btn.copied {
+            background-color: #27ae60;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .keywords-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            th, td {
+                padding: 8px 5px;
+                font-size: 12px;
+            }
+            
+            .first-row {
+                font-size: 14px;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn">返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="636.html" class="nav-btn page-btn">上一页</a>
+            <a href="638.html" class="nav-btn page-btn">下一页</a>
+        </div>
+    </div>
+    
+    <button class="nav-btn fav-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    
+    <h1>~~~~~检验报告：细菌培养及药敏试验结果*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>结果</th>
+                    <th>参考值</th>
+                    <th>单位</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="first-row">
+                    <td>标本类型</td>
+                    <td>痰液</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>细菌培养结果</td>
+                    <td>肺炎克雷伯菌</td>
+                    <td>阴性</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>菌落计数</td>
+                    <td>≥10⁵ CFU/mL</td>
+                    <td>&lt;10⁴</td>
+                    <td>CFU/mL</td>
+                </tr>
+                <tr>
+                    <td>阿米卡星</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>庆大霉素</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>妥布霉素</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>氨苄西林</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>氨苄西林/舒巴坦</td>
+                    <td class="intermediate">中介(I)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>哌拉西林</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>哌拉西林/他唑巴坦</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢唑林</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢呋辛</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢曲松</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢他啶</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢吡肟</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>氨曲南</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>亚胺培南</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>美罗培南</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>环丙沙星</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>左氧氟沙星</td>
+                    <td class="sensitive">敏感(S)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>复方新诺明</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>头孢西丁</td>
+                    <td class="resistant">耐药(R)</td>
+                    <td>敏感</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>ESBLs检测</td>
+                    <td class="resistant">阳性(+)</td>
+                    <td>阴性</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肺炎</span>
+            <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+            <span class="tag tag-antibiotic">阿米卡星</span>
+            <span class="tag tag-antibiotic">庆大霉素</span>
+            <span class="tag tag-antibiotic">妥布霉素</span>
+            <span class="tag tag-antibiotic">氨苄西林</span>
+            <span class="tag tag-antibiotic">哌拉西林</span>
+            <span class="tag tag-antibiotic">哌拉西林/他唑巴坦</span>
+            <span class="tag tag-antibiotic">头孢他啶</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">亚胺培南</span>
+            <span class="tag tag-antibiotic">美罗培南</span>
+            <span class="tag tag-antibiotic">环丙沙星</span>
+            <span class="tag tag-antibiotic">左氧氟沙星</span>
+            <span class="tag tag-antibiotic">复方新诺明</span>
+            <span class="tag tag-antibiotic">头孢西丁</span>
+            <span class="tag tag-antibiotic">氨曲南</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="检验报告：细菌培养及药敏试验结果；肺炎；肺炎克雷伯菌；阿米卡星；庆大霉素；妥布霉素；氨苄西林；哌拉西林；头孢他啶；亚胺培南；美罗培南；环丙沙星；左氧氟沙星；=637" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">
+        页码：<strong>637</strong>
+    </div>
+    
+    <div class="keywords-section">
+        <p class="keywords">
+            关键词：肺炎克雷伯菌、ESBLs、超广谱β-内酰胺酶、药敏试验、抗生素敏感、抗生素耐药、碳青霉烯类、头孢菌素、氨基糖苷类、喹诺酮类
+        </p>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="637.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制!';
+            btn.classList.add('copied');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isFav = btn.classList.contains('active');
+            
+            if (!isFav) {
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+                
+                // 保存到localStorage
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const pageInfo = {
+                    title: '检验报告：细菌培养及药敏试验结果',
+                    url: window.location.href,
+                    pageNum: '637'
+                };
+                
+                // 检查是否已存在
+                const exists = favorites.some(f => f.pageNum === '637');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                alert('已添加到收藏！');
+            } else {
+                btn.classList.remove('active');
+                btn.textContent = '⭐ 收藏';
+                
+                // 从localStorage移除
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const updated = favorites.filter(f => f.pageNum !== '637');
+                localStorage.setItem('favorites', JSON.stringify(updated));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const isFav = favorites.some(f => f.pageNum === '637');
+            
+            if (isFav) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.textContent = '❤️ 已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

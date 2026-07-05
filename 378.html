@@ -1,276 +1,752 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WARIS</title>
+    <title>~~~~~表12A 分枝杆菌感染的治疗（续）- Xpert MTB/RIF及接触结核分枝杆菌治疗方案*****</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 10px;
-            color: #333;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 100%; margin: 0 auto; }
         
-        /* 顶部导航 */
-        .nav-top {
+        body {
+            font-family: "Microsoft YaHei", "SimSun", Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .nav-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
-            background: #fff;
-            border-radius: 8px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             flex-wrap: wrap;
             gap: 10px;
         }
-        .nav-btn {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
-        }
-        .nav-btn:active { transform: translateY(0); }
         
-        /* 标题 */
-        .main-title {
-            text-align: center;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
-        }
-        
-        /* 表格样式 */
-        .content-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
-        .content-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-        }
-        .content-table th {
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: bold;
-            font-size: 16px;
-            border-bottom: 3px solid #667eea;
-        }
-        .content-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e8e8e8;
-            font-size: 14px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-        .content-table tr:nth-child(even) { background: #f8f9fa; }
-        .content-table tr:hover { background: #e8f4f8; }
-        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
-        
-        /* 标签 */
-        .tags-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .tags-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        /* 编辑框 */
-        .edit-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .edit-box {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            resize: vertical;
-        }
-        .btn-row {
+        .nav-left {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
         }
-        .action-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 20px;
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 18px;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        .copy-btn { background: #28a745; color: white; }
-        .copy-btn:hover { background: #218838; }
-        .favorite-btn { background: #ffc107; color: #333; }
-        .favorite-btn:hover { background: #e0a800; }
-        .favorite-btn.active { background: #ff6b6b; color: white; }
-        
-        /* 页码 */
-        .page-footer {
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .page-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-family: inherit;
         }
         
-        /* 收藏提示 */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
+        .btn-home {
+            background-color: #4a90d9;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: none;
-            z-index: 1000;
+        }
+        
+        .btn-page {
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 200px;
+            right: 15px;
+            z-index: 100;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            padding: 0;
+        }
+        
+        .btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: #d4e6f1;
+            border-radius: 10px;
+            border: 2px solid #5dade2;
+        }
+        
+        .intro-text {
+            background-color: #eaf2f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 2;
+            font-size: 14px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            min-width: 900px;
+        }
+        
+        thead th {
+            background-color: #2e86c1;
+            color: white;
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #1a5276;
+        }
+        
+        thead th.sub-header {
+            background-color: #5dade2;
+            font-size: 14px;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #bdc3c7;
+            vertical-align: top;
+            line-height: 1.9;
+            font-size: 13px;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f6f3;
+        }
+        
+        .col-pathogen {
+            width: 18%;
+            background-color: #eafaf1;
+        }
+        
+        .col-situation {
+            width: 22%;
+            background-color: #fef9e7;
+        }
+        
+        .col-initial {
+            width: 22%;
+            background-color: #e8f8f5;
+        }
+        
+        .col-followup {
+            width: 38%;
+            background-color: #fffef0;
+        }
+        
+        /* 药物 - 绿色 */
+        .drug {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        /* 疾病 - 紫色 */
+        .disease {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        /* 细菌/病原体 - 棕色 */
+        .bacteria {
+            color: #a0522d;
+            font-weight: bold;
+        }
+        
+        /* 严重不良反应/注意事项 - 红色 */
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        /* 数值/剂量 - 蓝色 */
+        .value {
+            color: #1a5276;
+            font-weight: bold;
+        }
+        
+        /* 机构/组织 - 橙色 */
+        .org {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        
+        /* 检测方法 - 青色 */
+        .test {
+            color: #16a085;
+            font-weight: bold;
+        }
+        
+        .ref {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .note-footer {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .tag-disease {
+            background-color: #f5eef8;
+            color: #8e44ad;
+            border-color: #d7bde2;
+        }
+        
+        .tag-drug {
+            background-color: #eafaf1;
+            color: #27ae60;
+            border-color: #abebc6;
+        }
+        
+        .tag-bacteria {
+            background-color: #fdf2e9;
+            color: #a0522d;
+            border-color: #edbb99;
+        }
+        
+        .tag-test {
+            background-color: #e8f8f5;
+            color: #16a085;
+            border-color: #a3e4d7;
+        }
+        
+        .tag-org {
+            background-color: #fef9e7;
+            color: #b7950b;
+            border-color: #f9e79f;
+        }
+        
+        .tag-symptom {
+            background-color: #fdedec;
+            color: #c0392b;
+            border-color: #f5b7b1;
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #5d6d7e;
+            font-weight: bold;
+        }
+        
+        .copy-section {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #5dade2;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-family: inherit;
+        }
+        
+        .btn-copy {
+            background-color: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 4px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 14px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 8px 6px;
+            }
+            
+            tbody td {
+                font-size: 11px;
+                padding: 8px 6px;
+            }
+            
+            .btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .table-container {
+                overflow-x: scroll;
+            }
+            
+            table {
+                min-width: 750px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-top">
-            <a href="index.html" class="nav-btn">🏠 首页</a>
-            <div>
-                <a href="377.html" class="nav-btn">⬅️ 上一页</a>
-                <a href="379.html" class="nav-btn">➡️ 下一页</a>
-            </div>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
         </div>
-        
-        <h1 class="main-title">~~~~~WARIS*****</h1>
-        
-        <table class="content-table"><tbody><tr><td>WARIS</td></tr><tr><td>— FL Pie eee AE a</td></tr><tr><td>eee ios thietaicictiee C22</td></tr><tr><td>pee</td></tr><tr><td>pati a ay i.</td></tr><tr><td>F) wine</td></tr><tr><td>We. J</td></tr><tr><td>T9929, HUREVEA</td></tr><tr><td>Fae</td></tr><tr><td>72.5% (</td></tr><tr><td>1363: 1005, 2018 je A at</td></tr><tr><td>SAT</td></tr><tr><td>AY</td></tr><tr><td>iar Ay</td></tr><tr><td>EMER RE</td></tr><tr><td>ahs ss:</td></tr><tr><td>AHEFE (</td></tr><tr><td>46 Pied 736, 2011 1</td></tr><tr><td>bert</td></tr><tr><td>/RIF Ultr</td></tr><tr><td>pert Uli</td></tr><tr><td>Cx</td></tr><tr><td>dL</td></tr><tr><td>ect L</td></tr><tr><td>Dis 018 Jans 1 bien: 76 ~ 84)</td></tr><tr><td>ane</td></tr><tr><td>= J</td></tr><tr><td>sete</td></tr><tr><td>je</td></tr><tr><td>UF</td></tr><tr><td>TSE</td></tr><tr><td>od;</td></tr><tr><td>bE Fy</td></tr><tr><td>nie</td></tr><tr><td>t | Lancet Infect</td></tr><tr><td>¥ 5. 2018 Jans I 18 (1): O75</td></tr><tr><td>———</td></tr><tr><td>= =</td></tr><tr><td>Sa</td></tr><tr><td>——</td></tr><tr><td>———</td></tr><tr><td>———</td></tr><tr><td>————</td></tr><tr><td>ee iis</td></tr><tr><td>———— ————</td></tr><tr><td>i——</td></tr><tr><td>GAR</td></tr><tr><td>BR</td></tr><tr><td>Ariel</td></tr><tr><td>—=————=</td></tr><tr><td>__ — SSE ——— Se</td></tr><tr><td>—_—_—_—_—__&lt;</td></tr><tr><td>—_= —_——S==</td></tr><tr><td>———</td></tr><tr><td>—————————</td></tr><tr><td>————</td></tr><tr><td>——— et oe</td></tr><tr><td>_—</td></tr><tr><td>tc</td></tr><tr><td>TH,</td></tr><tr><td>= ic</td></tr><tr><td>——___—_——</td></tr><tr><td>————__—_____—_</td></tr><tr><td>es</td></tr><tr><td>——————=—</td></tr><tr><td>— &lt;&lt;</td></tr><tr><td>—_——_—_——_—— &gt;</td></tr><tr><td>———</td></tr><tr><td>ee</td></tr><tr><td>SR ee a ee</td></tr><tr><td>—— Ss</td></tr><tr><td>———</td></tr><tr><td>——</td></tr><tr><td>——a</td></tr><tr><td>=a</td></tr><tr><td>ay dpalil</td></tr><tr><td>&amp;~ 10</td></tr><tr><td>Blin</td></tr><tr><td>4 «“d)X</td></tr><tr><td>T:</td></tr><tr><td>i&gt; 6</td></tr><tr><td>LL. M4TSTE</td></tr><tr><td>( Mycobacterium t robe er-</td></tr><tr><td>2% Hd AEX Ae</td></tr><tr><td>8 ~ 10w |</td></tr><tr><td>ra</td></tr><tr><td>tf</td></tr><tr><td>; a0</td></tr><tr><td>TH</td></tr><tr><td>— —</td></tr><tr><td>= iy in</td></tr><tr><td>LAs</td></tr><tr><td>srr mM</td></tr><tr><td>aa</td></tr><tr><td>iyi</td></tr><tr><td>nlosis) Th</td></tr><tr><td>a = TST</td></tr><tr><td>(i</td></tr><tr><td>THE</td></tr><tr><td>Fee</td></tr><tr><td>Fi</td></tr><tr><td>10.</td></tr><tr><td>6A</td></tr><tr><td>(Sn</td></tr><tr><td>4-7-5 )</td></tr><tr><td>IG</td></tr><tr><td>PALE (</td></tr><tr><td>a io 2)</td></tr><tr><td>+ 10</td></tr><tr><td>A | 20me/ (k</td></tr><tr><td>*d)</td></tr><tr><td>Ds</td></tr><tr><td>; ie</td></tr><tr><td>Gil He ea</td></tr><tr><td>| BPepZ</td></tr><tr><td>=&gt;</td></tr><tr><td>(Ni</td></tr><tr><td>a )</td></tr><tr><td>| a7e:</td></tr><tr><td>| |</td></tr><tr><td>ser teSse cS. es a SQEESE SS eStats Bante eee eeennnnnsee- ——=—-+ Ss eS TES eee [ee een see eteheneiehatbenenetenetan teen —— [a ee &lt;= eae i ei = nr</td></tr><tr><td>Pe</td></tr><tr><td>3)</td></tr><tr><td>As ~ 1</td></tr><tr><td>Le</td></tr><tr><td>8 —~ 10/a</td></tr><tr><td>Has TST</td></tr><tr><td>= eT)</td></tr><tr><td>ta</td></tr><tr><td>ee (#</td></tr><tr><td>Sm</td></tr><tr><td>cE 9</td></tr><tr><td>Wake</td></tr><tr><td>©. =</td></tr><tr><td>ae</td></tr><tr><td>lledliciemateaiitediendamtentiont</td></tr><tr><td>ae eee mr ae ae ms Se ara ay a Ay a a = St a a a te sie jon ini</td></tr><tr><td>_———— minis d</td></tr><tr><td>‘ST, #f8</td></tr><tr><td>i a a es</td></tr><tr><td>= ocean asegdasae enna a ae ee</td></tr><tr><td>22 Se ee eee</td></tr><tr><td>ie</td></tr><tr><td>1A ABE</td></tr><tr><td>12% ~ 4%</td></tr><tr><td>tr</td></tr><tr><td>th!</td></tr><tr><td>EE Re</td></tr><tr><td>| f</td></tr><tr><td>BY</td></tr><tr><td>a (WE</td></tr><tr><td>Fa! =}</td></tr><tr><td>ery</td></tr><tr><td>i i</td></tr><tr><td>7 nite L BI #74</td></tr><tr><td>CH</td></tr><tr><td>——</td></tr><tr><td>————</td></tr><tr><td>ae</td></tr><tr><td>= i</td></tr><tr><td>———</td></tr><tr><td>= —_—_=—==</td></tr><tr><td>&amp;~ 10</td></tr><tr><td>—S</td></tr><tr><td>T/IG</td></tr><tr><td>——————</td></tr><tr><td>————</td></tr><tr><td>Saar</td></tr><tr><td>—= ee</td></tr><tr><td>=: *F</td></tr><tr><td>Ce</td></tr><tr><td>dF</td></tr><tr><td>EAH) RF</td></tr><tr><td>We a</td></tr><tr><td>FF AR</td></tr><tr><td>HB 2H</td></tr></tbody></table>
-        
-        <div class="tags-section">
-            <div class="tags-title">🏷️ 关键词标签</div>
-            <div class="tags"></div>
-        </div>
-        
-        <div class="edit-section">
-            <textarea class="edit-box" id="editBox">WARIS；=378</textarea>
-            <div class="btn-row">
-                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
-                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-            </div>
-        </div>
-        
-        <div class="page-footer">
-            <div class="page-number">第 378 页</div>
+        <div class="nav-right">
+            <a href="377.html" class="btn btn-page">上一页</a>
+            <a href="379.html" class="btn btn-page">下一页</a>
         </div>
     </div>
     
-    <div class="toast" id="toast"></div>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorite()" title="收藏">★</button>
     
-    <script>
-        function copyContent() {
-            const editBox = document.getElementById('editBox');
-            editBox.select();
-            document.execCommand('copy');
-            showToast('✅ 已复制到剪贴板');
+    <!-- 标题 -->
+    <h1>~~~~~表12A 分枝杆菌感染的治疗（续）- Xpert MTB/RIF及接触结核分枝杆菌治疗方案*****</h1>
+    
+    <!-- 引言文字 -->
+    <div class="intro-text">
+        <span class="test">Xpert MTB/RIF</span>是一种用于检测痰涂片阴性患者痰标本中<span class="bacteria">结核分枝杆菌</span>的快速（<span class="value">2小时</span>）诊断试验，还同时检测<span class="drug">利福平（RIF）</span>的耐药性。其特异性为<span class="value">99.2%</span>，敏感性为<span class="value">72.5%</span>（<span class="ref">NEJM 363: 1005, 2010</span>）。目前基于抗体及ELISA技术的快速试验由于准确性不及传统显微镜检±培养，<span class="org">WHO</span>不推荐（<span class="ref">Lancet ID 11: 736, 2011</span>）。<br><br>
+        
+        <span class="test">Xpert MTB/RIF Ultra（Xpert Ultra）</span>（美国未上市）［<span class="ref">Lancet Infect Dis 2018 Jan; 18 (1): 76～84</span>］：在痰涂阴性患者、<span class="disease">儿科患者</span>、<span class="disease">HIV感染者</span>和<span class="disease">肺外感染者</span>中检测敏感性高于<span class="test">Xpert MTB/RIF</span>，特异性略低于<span class="test">Xpert MTB/RIF</span>。<span class="org">WHO</span>推荐用于疑诊<span class="disease">结核性脑膜炎</span>的初始诊断［<span class="ref">Lancet Infect Dis. 2018 Jan; 18 (1): 68-75</span>］。
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">病原体/疾病</th>
+                    <th rowspan="2">不同情境</th>
+                    <th colspan="2">推荐方案*</th>
+                </tr>
+                <tr>
+                    <th class="sub-header">初始强化治疗</th>
+                    <th class="sub-header">后续巩固治疗</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-pathogen" rowspan="3">
+                        <div style="font-weight:bold; color:#1a5276;">Ⅰ.接触结核分枝杆菌</div>
+                        （<span class="bacteria">Mycobacterium tuberculosis</span>）<br>
+                        而且基线<span class="test">TST/IGRA</span>阴性<br>
+                        （潜在传染性病例的家庭成员和其他密切接触者）
+                    </td>
+                    <td class="col-situation">
+                        <span class="disease">新生儿</span>——必须治疗<br><br>
+                        <span class="warning">注意：</span>如有发热、基线胸部X线片异常（<span class="disease">胸腔积液</span>、<span class="disease">肺门淋巴结增大</span>、<span class="disease">渗出物</span>），按<span class="disease">活动性结核</span>治疗，而不是<span class="drug">异烟肼</span>单药
+                    </td>
+                    <td class="col-initial">
+                        <span class="drug">异烟肼</span>［<span class="value">10mg/(kg·d)</span>×<span class="value">8～10w</span>］<br><br>
+                        <span class="drug">利福平</span> <span class="value">10～20mg/(kg·d)</span> 也是一种选择（<span class="ref">NEJM 379: 454, 2018</span>）
+                    </td>
+                    <td class="col-followup">
+                        <span class="value">8～10周后</span>重复<span class="test">TST</span>：对于接触时月龄<span class="value">＞6个月</span>婴儿，如果<span class="test">TST</span>阴性且胸部X线片正常，停用<span class="drug">异烟肼</span>；如果<span class="test">TST</span>硬结直径<span class="value">≥5mm</span>或月龄<span class="value">≤6个月</span>，<span class="drug">异烟肼</span>治疗疗程<span class="value">9个月</span>（如使用<span class="drug">利福平</span>，疗程为<span class="value">4个月</span>）。如果复查胸部X线片异常，按<span class="disease">活动性结核感染</span>治疗
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-situation">
+                        <span class="value">5岁以下</span>儿童应予治疗
+                    </td>
+                    <td class="col-initial">
+                        最初<span class="value">8～10w</span>同新生儿
+                    </td>
+                    <td class="col-followup">
+                        若<span class="value">8～10周后</span>重复<span class="test">TST</span>阴性，则停止治疗。若重复<span class="test">TST</span>阳性（硬结<span class="value">＞5mm</span>），则继续<span class="drug">异烟肼</span>治疗，总疗程<span class="value">9个月</span>。若起初未予<span class="drug">异烟肼</span>，<span class="value">3个月后</span>重复<span class="test">TST</span>，若阳性则用<span class="drug">异烟肼</span>治疗<span class="value">9个月</span>（<span class="ref">见本表下文Ⅱ</span>）
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-situation">
+                        较大儿童和成人：第1年的感染风险为<span class="value">2%～4%</span>
+                    </td>
+                    <td class="col-initial">
+                        —
+                    </td>
+                    <td class="col-followup">
+                        对于感染进展风险高的患者（如<span class="disease">HIV阳性</span>、<span class="disease">免疫抑制</span>或接受<span class="disease">免疫抑制治疗</span>者）且无活动性感染证据时，应按<span class="disease">LTBI</span>方案治疗（<span class="ref">见下文</span>）。如果<span class="value">8～10周</span>重复<span class="test">TST/IGRA</span>结果为阴性无须治疗
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 表注 -->
+    <div class="note-footer">
+        <strong>注：</strong>*所有推荐剂量仅针对成人（除非特别注明）及肾功能正常者。<br>
+        表中名词缩写见第2页。
+    </div>
+    
+    <!-- 页码信息 -->
+    <div class="page-info">
+        页码：378
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签（点击可检索）</div>
+        <div class="tags-container">
+            <!-- 疾病标签 -->
+            <span class="tag tag-disease">新生儿</span>
+            <span class="tag tag-disease">胸腔积液</span>
+            <span class="tag tag-disease">肺门淋巴结增大</span>
+            <span class="tag tag-disease">渗出物</span>
+            <span class="tag tag-disease">活动性结核</span>
+            <span class="tag tag-disease">活动性结核感染</span>
+            <span class="tag tag-disease">儿科患者</span>
+            <span class="tag tag-disease">HIV感染者</span>
+            <span class="tag tag-disease">肺外感染者</span>
+            <span class="tag tag-disease">结核性脑膜炎</span>
+            <span class="tag tag-disease">HIV阳性</span>
+            <span class="tag tag-disease">免疫抑制</span>
+            <span class="tag tag-disease">免疫抑制治疗</span>
+            <span class="tag tag-disease">LTBI</span>
+            
+            <!-- 药物标签 -->
+            <span class="tag tag-drug">利福平</span>
+            <span class="tag tag-drug">RIF</span>
+            <span class="tag tag-drug">异烟肼</span>
+            
+            <!-- 细菌/病原体标签 -->
+            <span class="tag tag-bacteria">结核分枝杆菌</span>
+            <span class="tag tag-bacteria">Mycobacterium tuberculosis</span>
+            
+            <!-- 检测方法标签 -->
+            <span class="tag tag-test">Xpert MTB/RIF</span>
+            <span class="tag tag-test">Xpert Ultra</span>
+            <span class="tag tag-test">Xpert MTB/RIF Ultra</span>
+            <span class="tag tag-test">TST</span>
+            <span class="tag tag-test">IGRA</span>
+            <span class="tag tag-test">ELISA</span>
+            
+            <!-- 机构标签 -->
+            <span class="tag tag-org">WHO</span>
+        </div>
+    </div>
+    
+    <!-- 复制区域 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表12A 分枝杆菌感染的治疗（续）- Xpert MTB/RIF及接触结核分枝杆菌治疗方案；结核分枝杆菌；Mycobacterium tuberculosis；利福平；RIF；异烟肼；Xpert MTB/RIF；Xpert Ultra；Xpert MTB/RIF Ultra；TST；IGRA；ELISA；WHO；新生儿；胸腔积液；肺门淋巴结增大；渗出物；活动性结核；活动性结核感染；儿科患者；HIV感染者；肺外感染者；结核性脑膜炎；HIV阳性；免疫抑制；免疫抑制治疗；LTBI；=378" readonly>
+        <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="378.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
         }
         
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            const title = document.querySelector('.main-title').textContent;
-            const pageNum = 378;
+        function addToFavorite() {
+            var title = document.title;
+            var url = window.location.href;
             
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            const index = favorites.findIndex(f => f.page === pageNum);
-            
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.textContent = '⭐ 收藏';
-                showToast('已取消收藏');
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, "");
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
             } else {
-                favorites.push({ page: pageNum, title: title });
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-                showToast('已添加到收藏');
-            }
-            
-            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
-            updateIndexFavorites();
-        }
-        
-        function checkFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageNum = 378;
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            
-            if (favorites.some(f => f.page === pageNum)) {
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
+                var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                var exists = favorites.some(function(f) {
+                    return f.url === url;
+                });
+                
+                if (!exists) {
+                    favorites.push({
+                        title: title,
+                        url: url,
+                        date: new Date().toLocaleString()
+                    });
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert('已添加到收藏！\n标题：' + title + '\n可在index.html的收藏类目下查看。');
+                } else {
+                    alert('该页面已在收藏中！');
+                }
             }
         }
         
-        function updateIndexFavorites() {
-            // 这个函数会在 index.html 中同步更新收藏列表
-            // 通过 localStorage 事件自动同步
-        }
-        
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 2000);
-        }
-        
-        // 页面加载时检查收藏状态
-        window.onload = checkFavorite;
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                var keyword = this.textContent;
+                alert('搜索关键词：' + keyword);
+            });
+        });
     </script>
 </body>
 </html>

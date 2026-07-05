@@ -1,0 +1,789 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表17B 肾功能不全时无须调整剂量的药物*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #2ecc71;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 25px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 20px;
+            max-width: 1400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1a5276 0%, #2874a6 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+        
+        /* 子表头 */
+        .sub-header {
+            background: #5dade2 !important;
+            color: white;
+            font-size: 14px !important;
+            padding: 10px 8px !important;
+        }
+        
+        /* 单元格 */
+        td, th {
+            border: 1px solid #d5dbdb;
+            padding: 8px 10px;
+            vertical-align: top;
+        }
+        
+        /* 分类列 */
+        .category-cell {
+            background: #ebf5fb;
+            font-weight: 600;
+            color: #1a5276;
+            text-align: center;
+            width: 12%;
+        }
+        
+        /* 药物列表单元格 */
+        .drug-cell {
+            line-height: 1.8;
+        }
+        
+        .drug-cell span {
+            display: inline;
+        }
+        
+        .drug-cell span::after {
+            content: "、";
+        }
+        
+        .drug-cell span:last-child::after {
+            content: "";
+        }
+        
+        /* 备注 */
+        .notes {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 15px 20px;
+            background: #fef9e7;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+            font-size: 13px;
+            color: #7d6608;
+            line-height: 2;
+        }
+        
+        .notes p {
+            margin: 5px 0;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #5d6d7e;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        /* 编辑框区域 */
+        .copy-section {
+            max-width: calc(100% - 100px);
+            margin: 20px auto;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #85c1e9;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            color: #2c3e50;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #c0392b;
+        }
+        
+        .copy-btn.copied {
+            background: #2ecc71;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.faved {
+            background: #f39c12;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 1400px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fadbd8;
+            color: #922b21;
+        }
+        
+        .tag-drug {
+            background: #d4efdf;
+            color: #1e8449;
+        }
+        
+        .tag-bacteria {
+            background: #d6eaf8;
+            color: #1a5276;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词 */
+        .keywords {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+        
+        .keywords strong {
+            color: #2c3e50;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+                margin-top: 70px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 8px;
+            }
+            
+            .sub-header {
+                font-size: 12px !important;
+            }
+            
+            td, th {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                max-width: calc(100% - 40px);
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .fav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="624.html" class="nav-btn">← 上一页</a>
+        <a href="626.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表17B 肾功能不全时无须调整剂量的药物*****</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">抗细菌药物</th>
+                    <th>抗真菌药物</th>
+                    <th>抗结核药物</th>
+                    <th colspan="2">抗病毒药物</th>
+                    <th>抗寄生虫药物</th>
+                </tr>
+                <tr class="sub-header">
+                    <th>类别一</th>
+                    <th>类别二</th>
+                    <th></th>
+                    <th></th>
+                    <th>类别一</th>
+                    <th>类别二</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="drug-cell">
+                        <span>阿奇霉素</span>
+                        <span>头孢曲松</span>
+                        <span>氯霉素</span>
+                        <span>克林霉素</span>
+                        <span>双氯西林</span>
+                        <span>多西环素</span>
+                        <span>依拉环素</span>
+                        <span>红霉素</span>
+                        <span>非达米星</span>
+                        <span>夫西地酸</span>
+                        <span>来法莫林</span>
+                        <span>利奈唑胺³</span>
+                    </td>
+                    <td class="drug-cell">
+                        <span>米诺环素</span>
+                        <span>莫西沙星</span>
+                        <span>萘夫西林</span>
+                        <span>奥玛环素</span>
+                        <span>奥利万星</span>
+                        <span>匹美西林</span>
+                        <span>多黏菌素B</span>
+                        <span>利福霉素SV</span>
+                        <span>利福昔明</span>
+                        <span>噻克硝唑</span>
+                        <span>泰地唑胺</span>
+                        <span>替加环素</span>
+                    </td>
+                    <td class="drug-cell">
+                        <span>两性霉素B</span>
+                        <span>阿尼芬净</span>
+                        <span>卡泊芬净</span>
+                        <span>艾瑞芬净</span>
+                        <span>硫酸艾莎康唑</span>
+                        <span>伊曲康唑口服液</span>
+                        <span>酮康唑</span>
+                        <span>米卡芬净¹</span>
+                        <span>泊沙康唑，限口服剂型</span>
+                        <span>伏立康唑，限口服剂型</span>
+                    </td>
+                    <td class="drug-cell">
+                        <span>贝达喹啉</span>
+                        <span>异烟肼</span>
+                        <span>利福平</span>
+                        <span>利福喷丁</span>
+                    </td>
+                    <td class="drug-cell">
+                        <span>阿巴卡韦</span>
+                        <span>阿扎那韦</span>
+                        <span>Bamlanivimab-Etesevimab</span>
+                        <span>Bebtelovimab</span>
+                        <span>布林西多福韦</span>
+                        <span>Casirivimab-Imdevimab</span>
+                        <span>可比司他</span>
+                        <span>达拉他韦</span>
+                        <span>达芦那韦</span>
+                        <span>地拉韦定</span>
+                        <span>多替拉韦</span>
+                        <span>依非韦仑</span>
+                        <span>丙通沙（索磷布韦-维帕他韦）</span>
+                        <span>依曲韦林</span>
+                        <span>福沙那韦</span>
+                        <span>福斯坦沙韦</span>
+                        <span>夏帆宁（索磷布韦-来迪派韦）²</span>
+                        <span>伊巴利珠单抗</span>
+                        <span>茚地那韦</span>
+                        <span>干扰素α-2a，2b</span>
+                    </td>
+                    <td class="drug-cell">
+                        <span>洛匹那韦</span>
+                        <span>艾诺全（格卡瑞韦/哌仑他韦）</span>
+                        <span>莫诺拉韦</span>
+                        <span>奈非那韦</span>
+                        <span>奈韦拉平</span>
+                        <span>拉替拉韦</span>
+                        <span>瑞德西韦</span>
+                        <span>利巴韦林</span>
+                        <span>利匹韦林</span>
+                        <span>利托那韦</span>
+                        <span>沙奎那韦</span>
+                        <span>西美瑞韦</span>
+                        <span>索磷布韦²</span>
+                        <span>索托维单抗</span>
+                        <span>特考韦瑞</span>
+                        <span>替拉那韦</span>
+                        <span>沃士韦（索磷布韦-维帕他韦-伏西瑞韦）</span>
+                        <span>择必达（艾尔巴韦-格拉瑞韦）</span>
+                    </td>
+                    <td class="drug-cell">
+                        <span>阿苯达唑</span>
+                        <span>青蒿琥酯</span>
+                        <span>非昔硝唑</span>
+                        <span>甲氟喹</span>
+                        <span>巴龙霉素</span>
+                        <span>乙胺嘧啶</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 备注 -->
+    <div class="notes">
+        <p>注：1 米卡芬净：CRRT时考虑增加剂量。</p>
+        <p>　　2 无CrCl＜30ml/min时的数据。</p>
+        <p>　　3 增加骨髓毒性风险。</p>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">625</div>
+    
+    <!-- 复制功能 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="表17B 肾功能不全时无须调整剂量的药物；肾功能不全、抗细菌药物、抗真菌药物、抗结核药物、抗病毒药物、抗寄生虫药物；=625" readonly>
+        <button class="copy-btn" id="copyBtn" onclick="copyContent()">📋 复制</button>
+    </div>
+    
+    <!-- 标签 -->
+    <div class="tags-section">
+        <div class="tags-title">🔖 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">肾功能不全</span>
+            <span class="tag tag-drug">阿奇霉素</span>
+            <span class="tag tag-drug">头孢曲松</span>
+            <span class="tag tag-drug">两性霉素B</span>
+            <span class="tag tag-drug">卡泊芬净</span>
+            <span class="tag tag-drug">异烟肼</span>
+            <span class="tag tag-drug">利福平</span>
+            <span class="tag tag-drug">阿巴卡韦</span>
+            <span class="tag tag-drug">瑞德西韦</span>
+            <span class="tag tag-drug">索磷布韦</span>
+            <span class="tag tag-drug">阿苯达唑</span>
+            <span class="tag tag-drug">青蒿琥酯</span>
+            <span class="tag tag-bacteria">抗细菌药物</span>
+            <span class="tag tag-bacteria">抗真菌药物</span>
+            <span class="tag tag-bacteria">抗结核药物</span>
+            <span class="tag tag-bacteria">抗病毒药物</span>
+            <span class="tag tag-bacteria">抗寄生虫药物</span>
+        </div>
+    </div>
+    
+    <!-- 关键词 -->
+    <div class="keywords">
+        <strong>关键词：</strong>肾功能不全、无须调整剂量、抗细菌药物、抗真菌药物、抗结核药物、抗病毒药物、抗寄生虫药物、抗生素、CRRT、骨髓毒性
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="625.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyContent() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✓ 已复制';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = '📋 复制';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+        
+        // 收藏功能（使用localStorage模拟）
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const key = 'fav_625';
+            const isFaved = localStorage.getItem(key);
+            
+            if (isFaved) {
+                localStorage.removeItem(key);
+                btn.classList.remove('faved');
+                btn.innerHTML = '⭐';
+                alert('已取消收藏');
+            } else {
+                const favData = {
+                    title: '表17B 肾功能不全时无须调整剂量的药物',
+                    url: '625.html',
+                    category: '药物剂量',
+                    date: new Date().toISOString()
+                };
+                localStorage.setItem(key, JSON.stringify(favData));
+                
+                // 同时存入收藏列表
+                let favList = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favList.push(favData);
+                localStorage.setItem('favorites', JSON.stringify(favList));
+                
+                btn.classList.add('faved');
+                btn.innerHTML = '❤️';
+                alert('已添加到收藏！\n（注：实际应用中需要后端支持才能同步到index.html）');
+            }
+        }
+        
+        // 初始化收藏状态
+        function initFav() {
+            const btn = document.getElementById('favBtn');
+            if (localStorage.getItem('fav_625')) {
+                btn.classList.add('faved');
+                btn.innerHTML = '❤️';
+            }
+        }
+        
+        initFav();
+    </script>
+</body>
+</html>

@@ -1,1 +1,1350 @@
-html</html>
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表4A(3)抗菌谱比较-肠杆菌科细菌*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(92, 184, 92, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #449d44;
+            transform: translateY(-2px);
+        }
+        
+        /* 标题 */
+        .main-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 60px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* 表格容器 - 横向滚动 */
+        .table-wrapper {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 auto 30px;
+            max-width: 1400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+        
+        .table-scroll {
+            overflow-x: auto;
+            min-width: 100%;
+        }
+        
+        table {
+            border-collapse: collapse;
+            font-size: 10px;
+            line-height: 1.3;
+            min-width: 1800px;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);
+            color: white;
+            padding: 6px 3px;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid #1565c0;
+            white-space: nowrap;
+            min-width: 28px;
+            max-width: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* 大类表头 */
+        .category-header {
+            background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%) !important;
+            font-size: 11px !important;
+            padding: 8px 4px !important;
+        }
+        
+        /* 第一行大字体 */
+        .header-row th {
+            font-size: 11px !important;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 4px 3px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        td {
+            min-width: 28px;
+            height: 32px;
+        }
+        
+        /* 细菌名称列 - 固定宽度 */
+        .bacteria-name {
+            min-width: 120px;
+            max-width: 150px;
+            text-align: left;
+            padding-left: 8px;
+            font-size: 10px;
+            background: #f5f5f5;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+        
+        .bacteria-name .latin {
+            font-style: italic;
+            color: #666;
+            font-size: 9px;
+        }
+        
+        /* 细菌 - 紫色 */
+        .bacteria {
+            color: #7b1fa2;
+            font-weight: 500;
+        }
+        
+        /* 抗生素 - 棕色 */
+        .antibiotic {
+            color: #5d4037;
+            font-weight: bold;
+        }
+        
+        /* 敏感度标记 */
+        .sens-0 { /* 0 - 耐药/无效 */
+            background: #ffcdd2;
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .sens-1 { /* ± - 轻度敏感 */
+            background: #fff9c4;
+            color: #f57f17;
+            font-weight: bold;
+        }
+        
+        .sens-2 { /* + - 中度敏感 */
+            background: #c8e6c9;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .sens-3 { /* ++ - 高度敏感 */
+            background: #a5d6a7;
+            color: #1b5e20;
+            font-weight: bold;
+        }
+        
+        .sens-na { /* ? - 不确定 */
+            background: #e0e0e0;
+            color: #616161;
+            font-weight: bold;
+        }
+        
+        /* 分类行 */
+        .section-row td {
+            background: #e3f2fd !important;
+            color: #1565c0;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: left;
+            padding-left: 15px;
+            position: sticky;
+            left: 0;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #555;
+            background: #f5f5f5;
+        }
+        
+        .copy-btn {
+            background: #ff7043;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #f4511e;
+            transform: translateY(-2px);
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            background: #ffca28;
+            color: #5d4037;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .fav-btn:hover {
+            background: #ffb300;
+            transform: translateY(-2px);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin: 15px 0;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-bacteria {
+            background: #e1bee7;
+            color: #7b1fa2;
+        }
+        
+        .tag-antibiotic {
+            background: #d7ccc8;
+            color: #5d4037;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 图例说明 */
+        .legend-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .legend-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .legend-items {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        
+        .legend-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 16px;
+                margin-top: 80px;
+            }
+            
+            table {
+                font-size: 9px;
+                min-width: 1400px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                top: 60px;
+                right: 10px;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html"><button class="home-btn">← 返回首页</button></a>
+    
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <a href="171.html"><button class="nav-btn">← 上一页</button></a>
+        <a href="173.html"><button class="nav-btn">下一页 →</button></a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="main-title">~~~~~表4A(3)抗菌谱比较-肠杆菌科细菌*****</h1>
+    
+    <!-- 图例 -->
+    <div class="bottom-section">
+        <div class="legend-section">
+            <div class="legend-title">📊 敏感度图例</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-box sens-0">0</div>
+                    <span>耐药/无效</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box sens-1">±</div>
+                    <span>轻度敏感</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box sens-2">+</div>
+                    <span>中度敏感</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box sens-3">++</div>
+                    <span>高度敏感</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box sens-na">?</div>
+                    <span>不确定</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-wrapper">
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2" style="min-width: 130px; position: sticky; left: 0; z-index: 20; background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%);">细菌名称</th>
+                        <th colspan="9" class="category-header">口服头孢菌素</th>
+                        <th colspan="4" class="category-header">氨基糖苷类</th>
+                        <th colspan="5" class="category-header">大环内酯类</th>
+                        <th colspan="5" class="category-header">四环素类</th>
+                        <th colspan="6" class="category-header">糖肽类/环脂肽类</th>
+                        <th colspan="2" class="category-header">噁唑烷酮类</th>
+                        <th colspan="3" class="category-header">多肽类</th>
+                        <th colspan="8" class="category-header">其他</th>
+                    </tr>
+                    <tr class="header-row">
+                        <!-- 口服头孢菌素 -->
+                        <th class="antibiotic">头孢羟氨苄</th>
+                        <th class="antibiotic">头孢氨苄</th>
+                        <th class="antibiotic">头孢克洛</th>
+                        <th class="antibiotic">头孢丙烯</th>
+                        <th class="antibiotic">头孢呋辛酯</th>
+                        <th class="antibiotic">头孢泊肟酯</th>
+                        <th class="antibiotic">头孢地尼</th>
+                        <th class="antibiotic">头孢托仑</th>
+                        <th class="antibiotic">头孢卡品酯</th>
+                        <!-- 氨基糖苷类 -->
+                        <th class="antibiotic">庆大霉素</th>
+                        <th class="antibiotic">妥布霉素</th>
+                        <th class="antibiotic">阿米卡星</th>
+                        <th class="antibiotic">普拉佐米星</th>
+                        <!-- 大环内酯类 -->
+                        <th class="antibiotic">克林霉素</th>
+                        <th class="antibiotic">红霉素</th>
+                        <th class="antibiotic">阿奇霉素</th>
+                        <th class="antibiotic">克拉霉素</th>
+                        <th class="antibiotic">泰利霉素</th>
+                        <!-- 四环素类 -->
+                        <th class="antibiotic">多西环素</th>
+                        <th class="antibiotic">依拉环素</th>
+                        <th class="antibiotic">米诺环素</th>
+                        <th class="antibiotic">四环素</th>
+                        <th class="antibiotic">替加环素</th>
+                        <!-- 糖肽类/环脂肽类 -->
+                        <th class="antibiotic">万古霉素</th>
+                        <th class="antibiotic">达托霉素</th>
+                        <th class="antibiotic">奥利万星</th>
+                        <th class="antibiotic">特拉万星</th>
+                        <th class="antibiotic">达巴万星</th>
+                        <th class="antibiotic">利奈唑胺</th>
+                        <!-- 噁唑烷酮类 -->
+                        <th class="antibiotic">特地唑胺</th>
+                        <th class="antibiotic">泰地唑胺</th>
+                        <!-- 多肽类 -->
+                        <th class="antibiotic">多黏菌素B</th>
+                        <th class="antibiotic">多黏菌素</th>
+                        <th class="antibiotic">来法莫林</th>
+                        <!-- 其他 -->
+                        <th class="antibiotic">氨曲南</th>
+                        <th class="antibiotic">夫西地酸</th>
+                        <th class="antibiotic">利福霉素（联合）</th>
+                        <th class="antibiotic">呋喃妥因</th>
+                        <th class="antibiotic">磷霉素（口服）</th>
+                        <th class="antibiotic">匹美西林</th>
+                        <th class="antibiotic">甲硝唑</th>
+                        <th class="antibiotic">替硝唑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 产气克雷伯菌 -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">产气克雷伯菌</span><br>
+                            <span class="latin">K. aerogenes</span>
+                        </td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                    
+                    <!-- 产酸克雷伯菌(S) -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">产酸克雷伯菌(S)</span><br>
+                            <span class="latin">K. oxytoca (S)</span>
+                        </td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                    
+                    <!-- 肺炎克雷伯菌(S) -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">肺炎克雷伯菌(S)</span><br>
+                            <span class="latin">K. pneumoniae (S)</span>
+                        </td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                    
+                    <!-- 克雷伯菌属(ESBL) -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">克雷伯菌属(ESBL)</span><br>
+                            <span class="latin">Klebsiella sp. (ESBL)</span>
+                        </td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                    </tr>
+                    
+                    <!-- 摩根摩根菌 -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">摩根摩根菌</span><br>
+                            <span class="latin">M. morganii</span>
+                        </td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-na">?</td>
+                    </tr>
+                    
+                    <!-- 奇异变形杆菌 -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">奇异变形杆菌</span><br>
+                            <span class="latin">P. mirabilis</span>
+                        </td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-na">?</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                    
+                    <!-- 普通变形杆菌 -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">普通变形杆菌</span><br>
+                            <span class="latin">P. vulgaris</span>
+                        </td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-na">?</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                    
+                    <!-- 普鲁威登菌属 -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">普鲁威登菌属</span><br>
+                            <span class="latin">Providencia sp.</span>
+                        </td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-na">?</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                    
+                    <!-- 沙门菌属 -->
+                    <tr>
+                        <td class="bacteria-name">
+                            <span class="bacteria">沙门菌属</span><br>
+                            <span class="latin">Salmonella sp.</span>
+                        </td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-1">±</td>
+                        <td class="sens-2">+</td>
+                        <td class="sens-0">0</td>
+                        <td class="sens-0">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- 页码 -->
+    <div class="page-number">172</div>
+    
+    <!-- 复制区域 -->
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="表4A(3)抗菌谱比较-肠杆菌科细菌；产气克雷伯菌、产酸克雷伯菌、肺炎克雷伯菌、克雷伯菌属ESBL、摩根摩根菌、奇异变形杆菌、普通变形杆菌、普鲁威登菌属、沙门菌属；头孢羟氨苄、头孢氨苄、头孢克洛、头孢丙烯、头孢呋辛酯、头孢泊肟酯、头孢地尼、头孢托仑、头孢卡品酯、庆大霉素、妥布霉素、阿米卡星、普拉佐米星、克林霉素、红霉素、阿奇霉素、克拉霉素、泰利霉素、多西环素、依拉环素、米诺环素、四环素、替加环素、万古霉素、达托霉素、奥利万星、特拉万星、达巴万星、利奈唑胺、特地唑胺、泰地唑胺、多黏菌素B、多黏菌素、来法莫林、氨曲南、夫西地酸、利福霉素联合、呋喃妥因、磷霉素口服、匹美西林、甲硝唑、替硝唑；=172" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+            <button class="fav-btn" onclick="addToFavorites()">⭐ 收藏</button>
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <div class="tags-title">🏷️ 检索标签（点击快速定位）</div>
+            <div class="tags-container">
+                <!-- 细菌标签 - 紫色 -->
+                <span class="tag tag-bacteria">产气克雷伯菌</span>
+                <span class="tag tag-bacteria">K. aerogenes</span>
+                <span class="tag tag-bacteria">产酸克雷伯菌</span>
+                <span class="tag tag-bacteria">K. oxytoca</span>
+                <span class="tag tag-bacteria">肺炎克雷伯菌</span>
+                <span class="tag tag-bacteria">K. pneumoniae</span>
+                <span class="tag tag-bacteria">克雷伯菌属ESBL</span>
+                <span class="tag tag-bacteria">Klebsiella sp.</span>
+                <span class="tag tag-bacteria">摩根摩根菌</span>
+                <span class="tag tag-bacteria">M. morganii</span>
+                <span class="tag tag-bacteria">奇异变形杆菌</span>
+                <span class="tag tag-bacteria">P. mirabilis</span>
+                <span class="tag tag-bacteria">普通变形杆菌</span>
+                <span class="tag tag-bacteria">P. vulgaris</span>
+                <span class="tag tag-bacteria">普鲁威登菌属</span>
+                <span class="tag tag-bacteria">Providencia sp.</span>
+                <span class="tag tag-bacteria">沙门菌属</span>
+                <span class="tag tag-bacteria">Salmonella sp.</span>
+                
+                <!-- 抗生素标签 - 棕色 -->
+                <span class="tag tag-antibiotic">头孢羟氨苄</span>
+                <span class="tag tag-antibiotic">头孢氨苄</span>
+                <span class="tag tag-antibiotic">头孢克洛</span>
+                <span class="tag tag-antibiotic">头孢丙烯</span>
+                <span class="tag tag-antibiotic">头孢呋辛酯</span>
+                <span class="tag tag-antibiotic">头孢泊肟酯</span>
+                <span class="tag tag-antibiotic">头孢地尼</span>
+                <span class="tag tag-antibiotic">头孢托仑</span>
+                <span class="tag tag-antibiotic">头孢卡品酯</span>
+                <span class="tag tag-antibiotic">庆大霉素</span>
+                <span class="tag tag-antibiotic">妥布霉素</span>
+                <span class="tag tag-antibiotic">阿米卡星</span>
+                <span class="tag tag-antibiotic">普拉佐米星</span>
+                <span class="tag tag-antibiotic">克林霉素</span>
+                <span class="tag tag-antibiotic">红霉素</span>
+                <span class="tag tag-antibiotic">阿奇霉素</span>
+                <span class="tag tag-antibiotic">克拉霉素</span>
+                <span class="tag tag-antibiotic">泰利霉素</span>
+                <span class="tag tag-antibiotic">多西环素</span>
+                <span class="tag tag-antibiotic">依拉环素</span>
+                <span class="tag tag-antibiotic">米诺环素</span>
+                <span class="tag tag-antibiotic">四环素</span>
+                <span class="tag tag-antibiotic">替加环素</span>
+                <span class="tag tag-antibiotic">万古霉素</span>
+                <span class="tag tag-antibiotic">达托霉素</span>
+                <span class="tag tag-antibiotic">奥利万星</span>
+                <span class="tag tag-antibiotic">特拉万星</span>
+                <span class="tag tag-antibiotic">达巴万星</span>
+                <span class="tag tag-antibiotic">利奈唑胺</span>
+                <span class="tag tag-antibiotic">特地唑胺</span>
+                <span class="tag tag-antibiotic">泰地唑胺</span>
+                <span class="tag tag-antibiotic">多黏菌素B</span>
+                <span class="tag tag-antibiotic">多黏菌素</span>
+                <span class="tag tag-antibiotic">来法莫林</span>
+                <span class="tag tag-antibiotic">氨曲南</span>
+                <span class="tag tag-antibiotic">夫西地酸</span>
+                <span class="tag tag-antibiotic">利福霉素</span>
+                <span class="tag tag-antibiotic">呋喃妥因</span>
+                <span class="tag tag-antibiotic">磷霉素</span>
+                <span class="tag tag-antibiotic">匹美西林</span>
+                <span class="tag tag-antibiotic">甲硝唑</span>
+                <span class="tag tag-antibiotic">替硝唑</span>
+            </div>
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="172.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("✅ 已复制到剪贴板！");
+                }).catch(function(err) {
+                    document.execCommand('copy');
+                    alert("✅ 已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand('copy');
+                alert("✅ 已复制到剪贴板！");
+            }
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            const title = "表4A(3)抗菌谱比较-肠杆菌科细菌";
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert("⚠️ 该页面已在收藏夹中！");
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                date: new Date().toISOString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("⭐ 已添加到收藏！\n\n页面信息：\n标题：" + title + "\n链接：" + url);
+        }
+        
+        // 标签点击高亮功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const text = this.textContent;
+                
+                document.querySelectorAll('.highlight-yellow').forEach(el => {
+                    el.classList.remove('highlight-yellow');
+                });
+                
+                const walker = document.createTreeWalker(
+                    document.querySelector('table'),
+                    NodeFilter.SHOW_TEXT,
+                    null,
+                    false
+                );
+                
+                let node;
+                while (node = walker.nextNode()) {
+                    if (node.textContent.includes(text)) {
+                        const parent = node.parentElement;
+                        if (parent.tagName !== 'TD' && parent.tagName !== 'TH') {
+                            parent.classList.add('highlight-yellow');
+                        } else {
+                            parent.classList.add('highlight-yellow');
+                        }
+                    }
+                }
+                
+                document.querySelector('.table-wrapper').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,841 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学索引-Amikacin至Appendicitis*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #2c3e50;
+        }
+        
+        /* 导航按钮区域 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-page {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .btn-favorite {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-title {
+            font-size: 24px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #5d6d7e;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e8eaf6;
+            vertical-align: top;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+        
+        tr:hover {
+            background: #e3f2fd;
+            transition: background 0.3s;
+        }
+        
+        .page-num {
+            color: #e74c3c;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .indent {
+            padding-left: 30px !important;
+            color: #5d6d7e;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 80px;
+        }
+        
+        .keywords {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #5d6d7e;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e88e5;
+            margin-bottom: 20px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            max-width: calc(100% - 100px);
+            padding: 12px 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .btn-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #bbdefb;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-bacteria {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .tag:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 备注 */
+        .note {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 18px;
+            }
+            
+            th {
+                font-size: 13px;
+                padding: 12px 8px;
+            }
+            
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                max-width: calc(100% - 80px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="648.html" class="btn btn-page">← 上一页</a>
+            <a href="650.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorites()">❤️ 收藏</button>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~医学索引-Amikacin至Appendicitis*****</h1>
+        <p class="sub-title">抗生素与感染性疾病检索表 | 页码：333</p>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40%;">英文名称</th>
+                    <th style="width: 45%;">中文名称</th>
+                    <th style="width: 15%;">页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amikacin</td>
+                    <td>阿米卡星</td>
+                    <td class="page-num">199</td>
+                </tr>
+                <tr>
+                    <td>Aminoglycoside once-daily and multiple-daily dosing regimens</td>
+                    <td>氨基糖苷类每天1次和每天多次给药方案</td>
+                    <td class="page-num">166</td>
+                </tr>
+                <tr>
+                    <td>Amnionitis</td>
+                    <td>羊膜炎</td>
+                    <td class="page-num">27</td>
+                </tr>
+                <tr>
+                    <td>Amoxicillin</td>
+                    <td>阿莫西林</td>
+                    <td class="page-num">150</td>
+                </tr>
+                <tr>
+                    <td>Amoxicillin-clavulanate</td>
+                    <td>阿莫西林/克拉维酸</td>
+                    <td class="page-num">150</td>
+                </tr>
+                <tr>
+                    <td>Ampicillin</td>
+                    <td>氨苄西林</td>
+                    <td class="page-num">150</td>
+                </tr>
+                <tr>
+                    <td>Ampicillin-sulbactam</td>
+                    <td>氨苄西林/舒巴坦</td>
+                    <td class="page-num">151</td>
+                </tr>
+                <tr>
+                    <td>Angiostrongylus cantonensis (angiostrongyliasis)</td>
+                    <td>钩端螺旋体（钩端螺旋体病）</td>
+                    <td class="page-num">212</td>
+                </tr>
+                <tr>
+                    <td>Anidulafungin</td>
+                    <td>阿尼芬净</td>
+                    <td class="page-num">186</td>
+                </tr>
+                <tr>
+                    <td>Anisakiasis</td>
+                    <td>异尖线虫病</td>
+                    <td class="page-num">211</td>
+                </tr>
+                <tr>
+                    <td>Anisakis simplex</td>
+                    <td>单一异尖线虫</td>
+                    <td class="page-num">211</td>
+                </tr>
+                <tr>
+                    <td>Anthrax</td>
+                    <td>炭疽</td>
+                    <td class="page-num"></td>
+                </tr>
+                <tr>
+                    <td class="indent">cutaneous</td>
+                    <td class="indent">皮肤炭疽</td>
+                    <td class="page-num">56</td>
+                </tr>
+                <tr>
+                    <td class="indent">prophylaxis</td>
+                    <td class="indent">预防</td>
+                    <td class="page-num">45</td>
+                </tr>
+                <tr>
+                    <td class="indent">systemic</td>
+                    <td class="indent">全身性</td>
+                    <td class="page-num">45</td>
+                </tr>
+                <tr>
+                    <td>Antibiotic prophylaxis to prevent surgical infections</td>
+                    <td>外科手术切口感染的抗生素预防</td>
+                    <td class="page-num">262</td>
+                </tr>
+                <tr>
+                    <td>Antimicrobial agents associated with photosensitivity</td>
+                    <td>与光过敏相关的抗微生物药物</td>
+                    <td class="page-num">165</td>
+                </tr>
+                <tr>
+                    <td>Antimicrobial prophylaxis</td>
+                    <td>抗微生物药物的预防性使用</td>
+                    <td class="page-num">260</td>
+                </tr>
+                <tr>
+                    <td>Antimony compounds</td>
+                    <td>锑化合物</td>
+                    <td class="page-num">218</td>
+                </tr>
+                <tr>
+                    <td>Antiretroviral drugs and adverse Effects</td>
+                    <td>抗逆转录病毒药物和副作用</td>
+                    <td class="page-num">252</td>
+                </tr>
+                <tr>
+                    <td>Antiretroviral therapy (ART) in treatment-naïve adults (HIV/AIDS)</td>
+                    <td>成人初治艾滋病患者的抗逆转录病毒治疗</td>
+                    <td class="page-num">241</td>
+                </tr>
+                <tr>
+                    <td>Aortic and/or mitral valve-MRSA</td>
+                    <td>主动脉瓣和/或二尖瓣-耐甲氧西林金黄色葡萄球菌</td>
+                    <td class="page-num">32</td>
+                </tr>
+                <tr>
+                    <td>Aphthous stomatitis</td>
+                    <td>阿弗他口炎</td>
+                    <td class="page-num">50</td>
+                </tr>
+                <tr>
+                    <td>Appendicitis</td>
+                    <td>阑尾炎</td>
+                    <td class="page-num"></td>
+                </tr>
+                <tr>
+                    <td class="indent">acute, perforation, peritonitis, shock</td>
+                    <td class="indent">急性，穿孔，腹膜炎，休克</td>
+                    <td class="page-num">23</td>
+                </tr>
+                <tr>
+                    <td class="indent">acute, uncomplicated</td>
+                    <td class="indent">急性，单纯性</td>
+                    <td class="page-num">23</td>
+                </tr>
+                <tr>
+                    <td class="indent">pediatric</td>
+                    <td class="indent">儿科</td>
+                    <td class="page-num">52</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <p class="note">注：抗生素选择需因地制宜并考虑替代药物。</p>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：阿米卡星；阿莫西林；氨苄西林；阿尼芬净；炭疽；阑尾炎；羊膜炎；异尖线虫病；阿弗他口炎；抗逆转录病毒；MRSA；抗生素预防
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">649</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="医学索引-Amikacin至Appendicitis；抗生素与感染性疾病检索表；阿米卡星；阿莫西林；氨苄西林；阿尼芬净；炭疽；阑尾炎；羊膜炎；异尖线虫病；阿弗他口炎；抗逆转录病毒；MRSA；抗生素预防；=649" readonly>
+            <button class="btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        
+        <!-- 特色检索标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔍 特色检索标签（点击图片中的文字快速检索）</div>
+            <div class="tags-container">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">羊膜炎</span>
+                <span class="tag tag-disease">钩端螺旋体病</span>
+                <span class="tag tag-disease">异尖线虫病</span>
+                <span class="tag tag-disease">炭疽</span>
+                <span class="tag tag-disease">皮肤炭疽</span>
+                <span class="tag tag-disease">阿弗他口炎</span>
+                <span class="tag tag-disease">阑尾炎</span>
+                <span class="tag tag-disease">急性穿孔腹膜炎休克</span>
+                <span class="tag tag-disease">急性单纯性阑尾炎</span>
+                <span class="tag tag-disease">儿科阑尾炎</span>
+                <span class="tag tag-disease">HIV/AIDS</span>
+                
+                <!-- 抗生素/药物标签 -->
+                <span class="tag tag-drug">阿米卡星</span>
+                <span class="tag tag-drug">氨基糖苷类</span>
+                <span class="tag tag-drug">阿莫西林</span>
+                <span class="tag tag-drug">阿莫西林/克拉维酸</span>
+                <span class="tag tag-drug">氨苄西林</span>
+                <span class="tag tag-drug">氨苄西林/舒巴坦</span>
+                <span class="tag tag-drug">阿尼芬净</span>
+                <span class="tag tag-drug">锑化合物</span>
+                <span class="tag tag-drug">抗逆转录病毒药物</span>
+                
+                <!-- 细菌标签 -->
+                <span class="tag tag-bacteria">耐甲氧西林金黄色葡萄球菌</span>
+                <span class="tag tag-bacteria">MRSA</span>
+                <span class="tag tag-bacteria">单一异尖线虫</span>
+                <span class="tag tag-bacteria">钩端螺旋体</span>
+            </div>
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="649.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "医学索引-Amikacin至Appendicitis";
+            const url = window.location.href;
+            const pageNum = "649";
+            
+            // 尝试使用localStorage存储收藏
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            // 检查是否已收藏
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
+            }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "医学索引",
+                date: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试同步到index.html（通过BroadcastChannel或共享worker）
+            if (typeof BroadcastChannel !== 'undefined') {
+                const channel = new BroadcastChannel('favorites_channel');
+                channel.postMessage({
+                    action: 'add',
+                    data: { title: title, url: url, pageNum: pageNum }
+                });
+            }
+            
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum + "\n\n提示：请确保index.html页面已打开以同步收藏。");
+        }
+        
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                // 在当前页高亮搜索
+                highlightText(keyword);
+            });
+        });
+        
+        // 高亮文本
+        function highlightText(keyword) {
+            // 移除之前的高亮
+            document.querySelectorAll('.highlight').forEach(el => {
+                el.outerHTML = el.innerHTML;
+            });
+            
+            // 简单的滚动到第一个匹配项
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.textContent.includes(keyword) && node.parentElement.tagName !== 'SCRIPT' && node.parentElement.tagName !== 'STYLE') {
+                    const span = document.createElement('span');
+                    span.className = 'highlight';
+                    span.style.background = '#ffeb3b';
+                    span.style.padding = '2px 4px';
+                    span.style.borderRadius = '3px';
+                    
+                    const regex = new RegExp(`(${keyword})`, 'g');
+                    const parts = node.textContent.split(regex);
+                    
+                    const fragment = document.createDocumentFragment();
+                    parts.forEach((part, i) => {
+                        if (part === keyword) {
+                            const mark = document.createElement('mark');
+                            mark.style.background = '#ffeb3b';
+                            mark.style.padding = '2px 4px';
+                            mark.style.borderRadius = '3px';
+                            mark.textContent = part;
+                            fragment.appendChild(mark);
+                        } else {
+                            fragment.appendChild(document.createTextNode(part));
+                        }
+                    });
+                    
+                    node.parentNode.replaceChild(fragment, node);
+                    
+                    // 滚动到第一个匹配
+                    const firstMark = document.querySelector('mark');
+                    if (firstMark) {
+                        firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

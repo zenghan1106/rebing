@@ -1,0 +1,702 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表17A（13）肾功能受损成人患者的抗感染药物剂量调整</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* 返回首页按钮 */
+        .back-home {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+        }
+        
+        .back-home a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-buttons {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+        
+        .nav-buttons a {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-left: 5px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        /* 收藏按钮 */
+        .favorite-btn {
+            position: fixed;
+            bottom: 320px;
+            right: 10px;
+            z-index: 100;
+        }
+        
+        .favorite-btn button {
+            padding: 10px 15px;
+            background-color: #FF9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* 标题格式 */
+        .page-title {
+            text-align: center;
+            margin: 50px 0 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        
+        .title-format {
+            font-size: 20px;
+            color: #1565C0;
+            font-weight: bold;
+        }
+        
+        /* 表格样式 */
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            font-size: 12px;
+        }
+        
+        .main-table th {
+            background-color: #1565C0;
+            color: white;
+            padding: 10px 5px;
+            text-align: center;
+            border: 1px solid #0D47A1;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .main-table td {
+            padding: 8px 5px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        /* 第一行字体大一点 */
+        .main-table tr:first-child th {
+            font-size: 15px;
+        }
+        
+        /* 分类标题行 */
+        .category-row {
+            background-color: #E3F2FD;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        /* 抗生素名字竖排 */
+        .vertical-text {
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+        
+        /* 颜色定义 */
+        .antibiotic-name {
+            color: #2E7D32;
+            font-weight: bold;
+        }
+        
+        .disease-bacteria {
+            color: #7B1FA2;
+        }
+        
+        .dosage-info {
+            color: #E65100;
+        }
+        
+        .kidney-info {
+            color: #C62828;
+        }
+        
+        .dialysis-info {
+            color: #F9A825;
+            background-color: #FFFDE7;
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .image-section img {
+            width: 100%;
+            max-width: 800px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+        
+        .copy-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .copy-section input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #1565C0;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .copy-section button {
+            padding: 10px 20px;
+            background-color: #1565C0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* 关键词标签 */
+        .keywords-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #E8F5E9;
+            border-radius: 10px;
+        }
+        
+        .keywords-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2E7D32;
+        }
+        
+        .keyword-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .keyword-tag.disease {
+            background-color: #7B1FA2;
+        }
+        
+        .keyword-tag.bacteria {
+            background-color: #E65100;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 注释 */
+        .note {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #FFF3E0;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #E65100;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 12px;
+                padding: 5px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-top: 60px;
+            }
+            
+            .main-table {
+                font-size: 10px;
+            }
+            
+            .main-table th, .main-table td {
+                padding: 5px 3px;
+            }
+            
+            .back-home a, .nav-buttons a {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页按钮 -->
+    <div class="back-home">
+        <a href="index.html">返回首页</a>
+    </div>
+
+    <!-- 上一页下一页按钮 -->
+    <div class="nav-buttons">
+        <a href="582.html">上一页</a>
+        <a href="584.html">下一页</a>
+    </div>
+
+    <!-- 收藏按钮 -->
+    <div class="favorite-btn">
+        <button onclick="addToFavorite()">收藏</button>
+    </div>
+
+    <!-- 标题 -->
+    <div class="page-title">
+        <span class="title-format">~~~~~表17A（13）肾功能受损成人患者的抗感染药物剂量调整*****</span>
+    </div>
+
+    <!-- 主表格 -->
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th style="width: 8%;">抗微生物药</th>
+                <th style="width: 10%;">半衰期（h）<br>（肾功能正常）</th>
+                <th style="width: 10%;">半衰期（h）<br>（终末期肾病）</th>
+                <th style="width: 15%;">剂量<br>（肾功能正常）</th>
+                <th style="width: 18%;">肌酐清除率或估计的<br>肾小球滤过率（ml/min）</th>
+                <th style="width: 10%;">血液透析</th>
+                <th style="width: 8%;">CAPD</th>
+                <th style="width: 8%;">CRRT</th>
+                <th style="width: 7%;">SLED</th>
+                <th style="width: 6%;">CCr</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 克林霉素 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">克林霉素</span></td>
+                <td class="dosage-info">2.4</td>
+                <td class="kidney-info">不变</td>
+                <td class="dosage-info">900mg iv q8h<br>150～450mg<br>po q6h</td>
+                <td class="kidney-info">肾功能损伤时<span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+            <!-- 红霉素基质，酯 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">红霉素基质，酯</span></td>
+                <td class="dosage-info">2～4</td>
+                <td class="kidney-info">5～6</td>
+                <td class="dosage-info">250～500mg<br>po q6h</td>
+                <td class="kidney-info">肾功能损伤时<span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+            <!-- 非达霉素 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">非达霉素</span></td>
+                <td class="dosage-info">2</td>
+                <td class="kidney-info">不变</td>
+                <td class="dosage-info">200mg po q12h</td>
+                <td class="kidney-info">肾功能损伤时<span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+            <!-- 林可霉素 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">林可霉素</span></td>
+                <td class="dosage-info">5.4</td>
+                <td class="kidney-info">无数据</td>
+                <td class="dosage-info">0.6～1g iv<br>q8～12h</td>
+                <td class="kidney-info">
+                    CrCl ≥30：<span class="disease-bacteria">无须调整剂量</span><br>
+                    CrCl &lt;30：<span class="dosage-info">常规剂量的25%～30%</span>
+                </td>
+                <td class="dialysis-info">透析不能清除</td>
+                <td class="dialysis-info">透析不能清除</td>
+                <td class="dialysis-info">无数据</td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+            <!-- 泰利霉素 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">泰利霉素</span></td>
+                <td class="dosage-info">10</td>
+                <td class="kidney-info">15</td>
+                <td class="dosage-info">800mg po q24h</td>
+                <td class="kidney-info">
+                    CrCl ≥30：<span class="disease-bacteria">无须调整剂量</span><br>
+                    CrCl &lt;30：<span class="dosage-info">600mg q24h</span>
+                </td>
+                <td class="dialysis-info">
+                    <span class="dosage-info">600mg q24h</span><br>
+                    （透析日透后给药）
+                </td>
+                <td class="dialysis-info">无数据</td>
+                <td class="dialysis-info">无数据</td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+            <!-- 分类行：其他抗菌药物 -->
+            <tr class="category-row">
+                <td colspan="10">其他抗菌药物</td>
+            </tr>
+            <!-- 炭疽免疫球蛋白 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">炭疽免疫球蛋白</span></td>
+                <td class="dosage-info">24～28天</td>
+                <td class="kidney-info">无数据</td>
+                <td class="dosage-info">420IU×1剂</td>
+                <td class="kidney-info">肾功能损伤时<span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info">无数据</td>
+                <td class="dialysis-info">无数据</td>
+                <td class="dialysis-info">无数据</td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+            <!-- 氯霉素 -->
+            <tr>
+                <td class="antibiotic-name"><span class="vertical-text">氯霉素</span></td>
+                <td class="dosage-info">4.1</td>
+                <td class="kidney-info">不变</td>
+                <td class="dosage-info">50～100mg/(kg·d)<br>po/iv（分次，q6h）</td>
+                <td class="kidney-info">肾功能损伤时<span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info"><span class="disease-bacteria">无须调整剂量</span></td>
+                <td class="dialysis-info">无数据</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 注释 -->
+    <div class="note">
+        注：5 肝病时可能须调整剂量。
+    </div>
+
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <img src="583.jpg" alt="表17A（13）肾功能受损成人患者的抗感染药物剂量调整" onclick="window.open(this.src, '_blank')">
+    </div>
+
+    <!-- 底部编辑框和复制按钮 -->
+    <div class="bottom-section">
+        <div class="copy-section">
+            <input type="text" id="copyContent" value="表17A（13）肾功能受损成人患者的抗感染药物剂量调整；肾功能受损；成人患者；抗感染药物；剂量调整；肝病；克林霉素；红霉素；非达霉素；林可霉素；泰利霉素；炭疽免疫球蛋白；氯霉素；大环内酯类；氮杂内酯类；林可酰胺类；酮内酯类；血液透析；CAPD；CRRT；SLED；炭疽；=583" readonly>
+            <button onclick="copyToClipboard()">复制</button>
+        </div>
+
+        <!-- 关键词标签 -->
+        <div class="keywords-section">
+            <div class="keywords-title">检索标签（点击可检索）：</div>
+            <span class="keyword-tag">克林霉素</span>
+            <span class="keyword-tag">红霉素</span>
+            <span class="keyword-tag">非达霉素</span>
+            <span class="keyword-tag">林可霉素</span>
+            <span class="keyword-tag">泰利霉素</span>
+            <span class="keyword-tag">炭疽免疫球蛋白</span>
+            <span class="keyword-tag">氯霉素</span>
+            <span class="keyword-tag disease">炭疽</span>
+            <span class="keyword-tag disease">肝病</span>
+            <span class="keyword-tag disease">肾功能受损</span>
+            <span class="keyword-tag disease">终末期肾病</span>
+            <span class="keyword-tag">大环内酯类</span>
+            <span class="keyword-tag">氮杂内酯类</span>
+            <span class="keyword-tag">林可酰胺类</span>
+            <span class="keyword-tag">酮内酯类</span>
+            <span class="keyword-tag">血液透析</span>
+            <span class="keyword-tag">CAPD</span>
+            <span class="keyword-tag">CRRT</span>
+            <span class="keyword-tag">SLED</span>
+            <span class="keyword-tag">eGFR</span>
+            <span class="keyword-tag">CrCl</span>
+        </div>
+
+        <!-- 页码 -->
+        <div class="page-number">583</div>
+    </div>
+
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="583.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyContent");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                // 兼容旧浏览器
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+
+        // 收藏功能
+        function addToFavorite() {
+            var title = "表17A（13）肾功能受损成人患者的抗感染药物剂量调整";
+            var url = window.location.href;
+            
+            // 尝试添加到index的收藏类目
+            var favoriteData = {
+                title: title,
+                url: url,
+                pageNum: "583"
+            };
+            
+            // 保存到localStorage，以便index.html可以读取
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var exists = favorites.some(function(f) { return f.url === url; });
+            
+            if (!exists) {
+                favorites.push(favoriteData);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert("已添加到收藏！请在首页查看。");
+            } else {
+                alert("该页面已在收藏中！");
+            }
+        }
+    </script>
+
+</body>
+</html>

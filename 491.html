@@ -4,27 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~抗HIV CCR-5辅助受体拮抗剂药物信息表*****</title>
-    
-    <!-- ============ ��������֤ ============ -->
-    <script src="machine_auth_v2.js"></script>
-    <script>
-        // ҳ�����ʱ��֤������
-        window.addEventListener('load', function() {
-            try {
-                initMachineAuth();
-                // ��֤�ɹ���ȷ��ҳ����ʾ
-                document.body.style.display = 'block';
-            } catch(e) {
-                console.log('��������֤ʧ��', e);
-                // ��֤ʧ��ʱ������ҳ��
-                document.body.style.display = 'none';
-            }
-        });
-    </script>
-    <!-- ============ ��֤���� ============ -->
-    
-
+    <title>~~~~~表14C（9）成年HIV/AIDS患者初始抗反转录病毒治疗-CCR-5辅助受体拮抗剂*****</title>
     <style>
         * {
             margin: 0;
@@ -33,205 +13,272 @@ html
         }
         
         body {
-            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-            min-height: 100vh;
-            padding: 10px;
             color: #333;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+        
+        /* 导航按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
         }
         
         .nav-btn {
-            position: fixed;
-            padding: 10px 18px;
+            background: #5cb85c;
+            color: white;
+            padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
-            color: white;
             font-size: 14px;
-            font-weight: bold;
-            z-index: 1000;
-            transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
         }
         
         .nav-btn:hover {
+            background: #4cae4c;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        .home-btn {
-            top: 15px;
-            left: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .nav-btn.next {
+            background: #f0ad4e;
         }
         
-        .prev-btn {
-            top: 15px;
-            right: 100px;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        .nav-btn.next:hover {
+            background: #ec971f;
         }
         
-        .next-btn {
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
-        }
-        
-        .favorite-btn {
-            position: fixed;
-            bottom: 120px;
-            right: 15px;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        .favorite-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-        
-        .favorite-btn.active {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-        }
-        
-        h1 {
+        /* 标题 */
+        .main-title {
             text-align: center;
-            color: #1a5276;
             font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
             margin: 60px 0 20px 0;
             padding: 15px;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.9);
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            word-break: break-all;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
         
+        /* 表格容器 */
         .table-container {
             overflow-x: auto;
-            margin: 0 -5px;
+            margin: 20px 0;
+            background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            font-size: 13px;
-            line-height: 1.6;
+            min-width: 1200px;
         }
         
-        thead {
-            background: linear-gradient(135deg, #1e5799 0%, #2980b9 100%);
-            color: white;
-        }
-        
+        /* 表头 */
         thead th {
-            padding: 15px 10px;
-            text-align: center;
+            background: #2e6da4;
+            color: white;
+            font-size: 16px;
             font-weight: bold;
-            font-size: 15px;
-            border: 1px solid #1a5276;
+            padding: 14px 10px;
+            text-align: center;
+            border: 1px solid #1a4a7a;
             white-space: nowrap;
         }
         
-        tbody td {
+        /* 分类行 */
+        .category-row {
+            background: #d9edf7 !important;
+            color: #31708f;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .category-row td {
             padding: 12px 10px;
-            border: 1px solid #ddd;
-            vertical-align: top;
-            color: #2c3e50;
+            border: 1px solid #bce8f1;
+        }
+        
+        /* 数据行 */
+        tbody tr {
+            background: #fff;
         }
         
         tbody tr:nth-child(even) {
-            background: #f8f9fa;
+            background: #f9f9f9;
         }
         
         tbody tr:hover {
             background: #e8f4f8;
         }
         
-        .section-header {
-            background: #d5e8d4;
-            font-weight: bold;
-            color: #1a5276;
-            font-size: 14px;
-        }
-        
-        .section-header td {
-            padding: 10px 15px;
-            border: 1px solid #aaa;
-        }
-        
-        .drug-name {
-            font-weight: bold;
-            color: #1a5276;
-            font-size: 14px;
-        }
-        
-        .note {
-            font-size: 12px;
-            color: #5d6d7e;
-            margin-top: 15px;
-            padding: 12px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 8px;
-            line-height: 1.8;
-        }
-        
-        .tags-section {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 12px;
-        }
-        
-        .tags-title {
-            font-size: 16px;
-            color: #1a5276;
-            margin-bottom: 12px;
-            font-weight: bold;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 6px 14px;
-            margin: 5px;
-            border-radius: 20px;
+        td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
             font-size: 13px;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        
+        /* 药物名称竖排 */
+        .drug-name {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: bold;
+            font-size: 14px;
+            color: #8B4513;
+            min-width: 30px;
+            max-width: 40px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        /* 颜色标记 */
+        .drug-name-cell {
+            background: #fff8e7;
+        }
+        
+        .disease-cell {
+            color: #c0392b;
+            font-weight: 500;
+        }
+        
+        .bacteria-cell {
+            color: #8e44ad;
+        }
+        
+        .antibiotic-cell {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        /* 列宽调整 */
+        .col-drug {
+            width: 5%;
+            min-width: 50px;
+        }
+        
+        .col-form {
+            width: 12%;
+            min-width: 140px;
+        }
+        
+        .col-dose {
+            width: 18%;
+            min-width: 200px;
+        }
+        
+        .col-absorb {
+            width: 6%;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .col-half {
+            width: 6%;
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .col-cpe {
+            width: 4%;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .col-clear {
+            width: 20%;
+            min-width: 220px;
+        }
+        
+        .col-adverse {
+            width: 25%;
+            min-width: 280px;
+        }
+        
+        /* 注释行 */
+        .note-row {
+            background: #f5f5f5;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .note-row td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #e74c3c;
             color: white;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            z-index: 1000;
+            transition: all 0.3s;
         }
         
-        .tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        .fav-btn:hover {
+            transform: scale(1.1);
+            background: #c0392b;
         }
         
-        .tag.disease {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        .fav-btn.active {
+            background: #f39c12;
         }
         
-        .tag.bacteria {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-        
-        .copy-section {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.9);
+        /* 底部区域 */
+        .bottom-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.95);
             border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         
@@ -239,205 +286,473 @@ html
             flex: 1;
             min-width: 200px;
             padding: 12px 15px;
-            border: 2px solid #ddd;
+            border: 2px solid #4a90d9;
             border-radius: 8px;
-            font-size: 13px;
-            color: #333;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        
-        .copy-input:focus {
-            border-color: #2980b9;
+            font-size: 14px;
+            color: #555;
         }
         
         .copy-btn {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #4a90d9;
             color: white;
+            padding: 12px 30px;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
+            font-size: 14px;
+            transition: all 0.3s;
         }
         
         .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            background: #357abd;
         }
         
         .copy-btn.copied {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            background: #5cb85c;
         }
         
-        .page-info {
+        /* 页码 */
+        .page-num {
             text-align: center;
-            margin-top: 15px;
-            padding: 10px;
-            color: #5d6d7e;
-            font-size: 14px;
-        }
-        
-        .page-number {
-            font-weight: bold;
-            color: #1a5276;
             font-size: 16px;
+            color: #666;
+            margin: 15px 0;
+            font-weight: bold;
         }
         
+        /* 关键词标签 */
+        .tags-section {
+            margin-top: 20px;
+        }
+        
+        .tags-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background: #ffeaa7;
+            color: #d63031;
+            border: 1px solid #fdcb6e;
+        }
+        
+        .tag-drug {
+            background: #55efc4;
+            color: #00b894;
+            border: 1px solid #00b894;
+        }
+        
+        .tag-bacteria {
+            background: #dfe6e9;
+            color: #6c5ce7;
+            border: 1px solid #a29bfe;
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .image-container {
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .image-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+        }
+        
+        /* 响应式 */
         @media (max-width: 768px) {
-            body {
-                padding: 5px;
-            }
-            
-            h1 {
-                font-size: 18px;
-                margin-top: 70px;
-            }
-            
-            table {
-                font-size: 12px;
+            .main-title {
+                font-size: 16px;
+                margin-top: 80px;
             }
             
             thead th {
-                font-size: 13px;
+                font-size: 14px;
                 padding: 10px 6px;
             }
             
-            tbody td {
+            td {
+                font-size: 12px;
                 padding: 8px 6px;
             }
             
-            .nav-btn {
-                padding: 8px 12px;
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
                 font-size: 12px;
             }
             
-            .prev-btn {
-                right: 80px;
-            }
-            
-            .copy-input {
-                width: 100%;
+            .fav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 导航按钮 -->
-    <a href="index.html" class="nav-btn home-btn">🏠 返回首页</a>
-    <a href="490.html" class="nav-btn prev-btn">← 上一页</a>
-    <a href="492.html" class="nav-btn next-btn">下一页 →</a>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="490.html" class="nav-btn">← 上一页</a>
+        <a href="492.html" class="nav-btn next">下一页 →</a>
+    </div>
     
     <!-- 收藏按钮 -->
-    <button class="favorite-btn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
+    <button class="fav-btn" onclick="toggleFavorite()" title="点击收藏">☆</button>
     
     <!-- 标题 -->
-    <h1>~~~~~抗HIV CCR-5辅助受体拮抗剂药物信息表*****</h1>
+    <h1 class="main-title">~~~~~表14C（9）成年HIV/AIDS患者初始抗反转录病毒治疗-CCR-5辅助受体拮抗剂*****</h1>
     
     <!-- 表格 -->
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>通用名/商品名</th>
-                    <th>药物剂型</th>
-                    <th>成人常用剂量&食物影响</th>
-                    <th>口服吸收率<br>(%)</th>
-                    <th>血清T₁/₂<br>(h)</th>
-                    <th>CPE*</th>
-                    <th>清除</th>
-                    <th>主要不良反应/说明<br>(表14D)</th>
+                    <th class="col-drug">通用名/商品名</th>
+                    <th class="col-form">药物剂型</th>
+                    <th class="col-dose">成人常用剂量&食物影响</th>
+                    <th class="col-absorb">口服吸收率(%)</th>
+                    <th class="col-half">血清T₁/₂(h)</th>
+                    <th class="col-cpe">CPE*</th>
+                    <th class="col-clear">清除</th>
+                    <th class="col-adverse">主要不良反应/说明（表14D）</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="section-header">
+                <!-- CCR-5辅助受体拮抗剂 -->
+                <tr class="category-row">
                     <td colspan="8">5.CCR-5辅助受体拮抗剂的部分特征</td>
                 </tr>
+                <!-- 马拉维诺 -->
                 <tr>
-                    <td class="drug-name">马拉维诺<br>(Selzentry)</td>
+                    <td class="drug-name-cell">
+                        <div class="drug-name antibiotic-cell">马拉维诺（Selzentry）</div>
+                    </td>
                     <td>150mg、300mg薄膜包裹片剂</td>
                     <td>与进食无关：<br>150mg po bid，如果合用的药物中包括CYP3A抑制剂，包括PI<br>300mg po bid，联合用药无显著相互作用时，包括NRTI、奈韦拉平<br>600mg po bid，如果合用的药物中有CYP3A诱导剂，包括依非韦伦（无CYP3A强效抑制剂）</td>
                     <td>口服300mg，约33%</td>
-                    <td>14～18</td>
+                    <td>14~18</td>
                     <td>3</td>
                     <td>经CYP3A和P-糖蛋白代谢。代谢产物（经CYP3A代谢）经粪便排出体外的量超过经尿排出量</td>
-                    <td>黑框警告：肝毒性，可能先表现为皮疹、嗜酸性细胞和IgE增高。注：MVC试验没有发现肝毒性。黑框警告源于对CCR-5类药物效应的担心<br>缺乏肝、肾功能不全的资料；但肝、肾功能不全时，使用应谨慎，因可增加血压下降的风险<br>目前批准用于多重耐药的经治患者。使用前应行病毒嗜性检测，明确是否为CCR-5嗜性病毒，因为治疗失败与存在CXCR-4或混合嗜性病毒有关</td>
+                    <td class="disease-cell">黑框警告：肝毒性，可能先表现为皮疹、嗜酸性细胞和IgE增高。注：MVC试验没有发现肝毒性。黑框警告源于对CCR-5类药物效应的担心<br><br>缺乏肝、肾功能不全的资料；但肝、肾功能不全时，使用应谨慎，因可增加血压下降的风险<br><br>目前批准用于多重耐药的经治患者。使用前应行病毒嗜性检测，明确是否为CCR-5嗜性病毒，因为治疗失败与存在CXCR-4或混合嗜性病毒有关</td>
+                </tr>
+                <!-- 注释 -->
+                <tr class="note-row">
+                    <td colspan="8">注：*CPE（中枢神经系统穿透效力）值；1=低穿透，2、3=中等穿透，4=高穿透至中枢神经系统（AIDS 25：357，2011）。</td>
                 </tr>
             </tbody>
         </table>
     </div>
     
-    <!-- 注释 -->
-    <div class="note">
-        <strong>注：</strong>*CPE（中枢神经系统穿透效力）值：1＝低穿透，2、3＝中等穿透，4＝高穿透至中枢神经系统（<em>AIDS 25：357，2011</em>）。
-    </div>
-    
-    <!-- 检索标签 -->
-    <div class="tags-section">
-        <div class="tags-title">🔍 特色检索标签</div>
-        <span class="tag disease">HIV</span>
-        <span class="tag disease">AIDS</span>
-        <span class="tag disease">艾滋病</span>
-        <span class="tag">马拉维诺</span>
-        <span class="tag">Selzentry</span>
-        <span class="tag">CCR-5</span>
-        <span class="tag">辅助受体拮抗剂</span>
-        <span class="tag">CYP3A</span>
-        <span class="tag">P-糖蛋白</span>
-        <span class="tag">PI</span>
-        <span class="tag">NRTI</span>
-        <span class="tag">奈韦拉平</span>
-        <span class="tag">依非韦伦</span>
-        <span class="tag">黑框警告</span>
-        <span class="tag">肝毒性</span>
-        <span class="tag">皮疹</span>
-        <span class="tag">嗜酸性细胞</span>
-        <span class="tag">IgE</span>
-        <span class="tag">MVC</span>
-        <span class="tag">血压下降</span>
-        <span class="tag">多重耐药</span>
-        <span class="tag">经治患者</span>
-        <span class="tag">病毒嗜性</span>
-        <span class="tag">CCR-5嗜性</span>
-        <span class="tag">CXCR-4</span>
-        <span class="tag">混合嗜性</span>
-        <span class="tag">CPE</span>
-        <span class="tag">中枢神经系统穿透</span>
-    </div>
-    
-    <!-- 复制功能 -->
-    <div class="copy-section">
-        <input type="text" class="copy-input" id="copyText" readonly>
-        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
-    </div>
-    
-    <!-- 页码信息 -->
-    <div class="page-info">
-        页码：<span class="page-number">491</span>
-    </div>
-    
-    <script>
-        // 设置复制框内容
-        const title = "抗HIV CCR-5辅助受体拮抗剂药物信息表";
-        const subtitle = "马拉维诺(Selzentry)药物参数及使用注意事项";
-        const keywords = "HIV;AIDS;艾滋病;马拉维诺;Selzentry;CCR-5;辅助受体拮抗剂;CYP3A;P-糖蛋白;PI;NRTI;奈韦拉平;依非韦伦;黑框警告;肝毒性;皮疹;嗜酸性细胞;IgE;MVC;血压下降;多重耐药;经治患者;病毒嗜性;CCR-5嗜性;CXCR-4;混合嗜性;CPE;中枢神经系统穿透";
-        const pageNum = "491";
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="表14C（9）成年HIV/AIDS患者初始抗反转录病毒治疗-CCR-5辅助受体拮抗剂；HIV；AIDS；马拉维诺；Selzentry；CCR-5；肝毒性；皮疹；嗜酸性细胞；IgE；血压下降；多重耐药；CXCR-4；CYP3A；P-糖蛋白；NRTI；奈韦拉平；依非韦伦；=491" readonly>
+            <button class="copy-btn" onclick="copyText()">复制</button>
+        </div>
         
-        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
+        <!-- 页码 -->
+        <div class="page-num">页码：491</div>
         
+        <!-- 关键词标签 -->
+        <div class="tags-section">
+            <div class="tags-title">关键词标签（点击图片中的文字可检索）：</div>
+            <div class="tags">
+                <!-- 疾病标签 -->
+                <span class="tag tag-disease">HIV</span>
+                <span class="tag tag-disease">AIDS</span>
+                <span class="tag tag-disease">肝毒性</span>
+                <span class="tag tag-disease">皮疹</span>
+                <span class="tag tag-disease">嗜酸性细胞</span>
+                <span class="tag tag-disease">IgE</span>
+                <span class="tag tag-disease">血压下降</span>
+                <span class="tag tag-disease">多重耐药</span>
+                <!-- 药物标签 -->
+                <span class="tag tag-drug">马拉维诺</span>
+                <span class="tag tag-drug">Selzentry</span>
+                <span class="tag tag-drug">CCR-5</span>
+                <span class="tag tag-drug">NRTI</span>
+                <span class="tag tag-drug">奈韦拉平</span>
+                <span class="tag tag-drug">依非韦伦</span>
+                <!-- 其他标签 -->
+                <span class="tag tag-bacteria">CYP3A</span>
+                <span class="tag tag-bacteria">P-糖蛋白</span>
+                <span class="tag tag-bacteria">CXCR-4</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 原图展示 -->
+    <div class="image-section">
+        <div class="image-container" onclick="openModal()">
+            <img src="491.jpg" alt="表14C（9）成年HIV/AIDS患者初始抗反转录病毒治疗-CCR-5辅助受体拮抗剂" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div style="display:none; padding: 40px; background: #f0f0f0; color: #999; align-items: center; justify-content: center;">
+                图片加载失败，请确保491.jpg存在于同一目录
+            </div>
+        </div>
+        <p style="margin-top: 10px; color: #666; font-size: 14px;">点击图片可放大查看</p>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <img src="491.jpg" alt="放大图片">
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="491.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
         // 复制功能
-        function copyToClipboard() {
+        function copyText() {
             const input = document.getElementById('copyText');
             input.select();
             input.setSelectionRange(0, 99999);
             
-            if (navigator.clipboard) {
+            try {
                 navigator.clipboard.writeText(input.value).then(() => {
                     showCopied();
                 });
-            } else {
+            } catch (err) {
                 document.execCommand('copy');
                 showCopied();
             }
@@ -445,71 +760,77 @@ html
         
         function showCopied() {
             const btn = document.querySelector('.copy-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '✅ 已复制';
+            const originalText = btn.textContent;
+            btn.textContent = '已复制!';
             btn.classList.add('copied');
-            
             setTimeout(() => {
-                btn.innerHTML = originalText;
+                btn.textContent = originalText;
                 btn.classList.remove('copied');
             }, 2000);
         }
         
         // 收藏功能
-        let isFavorited = false;
-        
         function toggleFavorite() {
-            const btn = document.querySelector('.favorite-btn');
-            isFavorited = !isFavorited;
+            const btn = document.querySelector('.fav-btn');
+            const isFav = btn.classList.toggle('active');
+            btn.textContent = isFav ? '★' : '☆';
+            btn.title = isFav ? '已收藏' : '点击收藏';
             
-            if (isFavorited) {
-                btn.classList.add('active');
-                btn.innerHTML = '❤️';
-                btn.title = '已收藏';
-                
-                // 保存到localStorage，用于index页面读取
-                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                const currentPage = {
-                    title: '~~~~~抗HIV CCR-5辅助受体拮抗剂药物信息表*****',
-                    url: '491.html',
-                    category: '抗感染药物',
-                    date: new Date().toLocaleDateString('zh-CN')
-                };
-                
-                // 避免重复添加
-                const exists = favorites.some(f => f.url === currentPage.url);
-                if (!exists) {
-                    favorites.push(currentPage);
-                    localStorage.setItem('favorites', JSON.stringify(favorites));
+            // 保存到localStorage
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const pageInfo = {
+                title: '表14C（9）成年HIV/AIDS患者初始抗反转录病毒治疗-CCR-5辅助受体拮抗剂',
+                url: '491.html',
+                pageNum: '491'
+            };
+            
+            if (isFav) {
+                if (!favorites.find(f => f.url === '491.html')) {
+                    favorites.push(pageInfo);
                 }
-                
-                alert('已添加到收藏！\n标题：抗HIV CCR-5辅助受体拮抗剂药物信息表\n类目：抗感染药物');
             } else {
-                btn.classList.remove('active');
-                btn.innerHTML = '⭐';
-                btn.title = '点击收藏';
-                
-                // 从收藏中移除
-                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                favorites = favorites.filter(f => f.url !== '491.html');
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                
-                alert('已取消收藏');
+                const idx = favorites.findIndex(f => f.url === '491.html');
+                if (idx > -1) favorites.splice(idx, 1);
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // 尝试更新index.html的收藏
+            updateIndexFavorites(favorites);
+        }
+        
+        function updateIndexFavorites(favorites) {
+            // 通过localStorage传递收藏数据给index页面
+            localStorage.setItem('favorites_updated', Date.now());
+        }
+        
+        // 检查是否已收藏
+        function checkFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.find(f => f.url === '491.html')) {
+                const btn = document.querySelector('.fav-btn');
+                btn.classList.add('active');
+                btn.textContent = '★';
+                btn.title = '已收藏';
             }
         }
         
-        // 页面加载时检查是否已收藏
-        window.onload = function() {
-            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            const isFav = favorites.some(f => f.url === '491.html');
-            if (isFav) {
-                isFavorited = true;
-                const btn = document.querySelector('.favorite-btn');
-                btn.classList.add('active');
-                btn.innerHTML = '❤️';
-                btn.title = '已收藏';
-            }
-        };
+        // 图片模态框
+        function openModal() {
+            document.getElementById('imageModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', checkFavorite);
+        
+        // ESC关闭模态框
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
     </script>
 </body>
 </html>

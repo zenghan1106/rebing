@@ -1,0 +1,804 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表22 药物通用名和商品名列表*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 25px 15px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 26px;
+            color: #1a5276;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            background: #2e86c1;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(46,134,193,0.3);
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+        }
+        
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            padding: 8px 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(39,174,96,0.3);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background: #1e8449;
+            transform: translateY(-2px);
+        }
+        
+        .fav-btn {
+            position: fixed;
+            bottom: 180px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(231,76,60,0.4);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fav-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 25px;
+            max-width: 1200px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead th {
+            background: #2e86c1;
+            color: white;
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1a5276;
+        }
+        
+        tbody td {
+            padding: 10px 12px;
+            border: 1px solid #d5dbdb;
+            vertical-align: top;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .col1 { width: 33.33%; }
+        .col2 { width: 33.33%; }
+        .col3 { width: 33.34%; }
+        
+        .drug-name {
+            color: #1a5276;
+            font-weight: 600;
+        }
+        
+        .trade-name {
+            color: #7d3c98;
+        }
+        
+        .tags-section {
+            max-width: 1200px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #2e86c1;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 6px 14px;
+            background: #e8f4f8;
+            color: #1a5276;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2e86c1;
+            color: white;
+        }
+        
+        .tag.disease {
+            background: #fdebd0;
+            color: #9a7d0a;
+            border-color: #f9e79f;
+        }
+        
+        .tag.disease:hover {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .tag.bacteria {
+            background: #fadbd8;
+            color: #922b21;
+            border-color: #f5b7b1;
+        }
+        
+        .tag.bacteria:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .copy-section {
+            max-width: 1200px;
+            margin: 0 auto 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #d5dbdb;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            background: #f8f9fa;
+        }
+        
+        .copy-btn {
+            padding: 12px 24px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #1e8449;
+        }
+        
+        .copy-btn.copied {
+            background: #2e86c1;
+        }
+        
+        .page-info {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .keywords-section {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            color: #2e86c1;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .keywords {
+            color: #5d6d7e;
+            font-size: 13px;
+            line-height: 2;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            tbody td {
+                padding: 8px;
+            }
+            
+            .nav-buttons {
+                position: static;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .home-btn {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+            
+            .nav-btn, .home-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .fav-btn {
+                bottom: 200px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="location.href='641.html'">← 上一页</button>
+        <button class="nav-btn" onclick="location.href='643.html'">下一页 →</button>
+    </div>
+    
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">★</button>
+    
+    <div class="header">
+        <h1>~~~~~表22 药物通用名和商品名列表*****</h1>
+    </div>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="col1">商品名：通用药名</th>
+                    <th class="col2">商品名：通用药名</th>
+                    <th class="col3">商品名：通用药名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="drug-name">阿巴卡韦</span> <span class="trade-name">Abacavir: Ziagen</span></td>
+                    <td><span class="drug-name">巴瑞替尼</span> <span class="trade-name">Baricitinib: Olumiant（艾乐明）</span></td>
+                    <td><span class="drug-name">头孢吡普</span> <span class="trade-name">Ceftobiprole: Zeftera</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿巴卡韦+拉米夫定</span> <span class="trade-name">Abacavir+Lamivudine: Epzicom</span></td>
+                    <td><span class="drug-name">贝达喹啉</span> <span class="trade-name">Bedaquiline: Sirturo</span></td>
+                    <td><span class="drug-name">头孢他啶-他唑巴坦</span> <span class="trade-name">Ceftolozane-Tazobactam: Zerbaxa</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿巴卡韦+拉米夫定+多替拉韦</span> <span class="trade-name">Abacavir+Lamivudine+Dolutegravir: Triumeq</span></td>
+                    <td><span class="drug-name">苯硝唑</span> <span class="trade-name">Benznidazole: Exeltis, Abarax</span></td>
+                    <td><span class="drug-name">头孢曲松</span> <span class="trade-name">Ceftriaxone: Rocephin</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿巴卡韦+拉米夫定+齐多夫定</span> <span class="trade-name">Abacavir+Lamivudine+Zidovudine: Trizivir</span></td>
+                    <td><span class="drug-name">贝洛托木单抗</span> <span class="trade-name">Bezlotoxumab: Zinplava</span></td>
+                    <td><span class="drug-name">头孢呋辛</span> <span class="trade-name">Cefuroxime: Zinacef, Ceftin</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿昔洛韦</span> <span class="trade-name">Acyclovir: Zovirax</span></td>
+                    <td><span class="drug-name">比克替拉韦+恩曲他滨+丙酚替诺福韦</span> <span class="trade-name">Bictegravir+FTC+TAF: Biktarvy（必妥维）</span></td>
+                    <td><span class="drug-name">头孢氨苄</span> <span class="trade-name">Cephalexin: Keflex</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿德福韦</span> <span class="trade-name">Adefovir: Hepsera（贺维力）</span></td>
+                    <td><span class="drug-name">布西多福韦</span> <span class="trade-name">Brincidofovir: Tembexa</span></td>
+                    <td><span class="drug-name">头孢噻肟</span> <span class="trade-name">Cefotaxime: Anspor, Velosef</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿苯达唑</span> <span class="trade-name">Albendazole: Albenza</span></td>
+                    <td><span class="drug-name">卡博特韦+利匹韦林</span> <span class="trade-name">Cabotegravir+Rilpivirine: Cabenuva</span></td>
+                    <td><span class="drug-name">氯喹</span> <span class="trade-name">Chloroquine: Aralen</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">金刚烷胺</span> <span class="trade-name">Amantadine: Symmetrel</span></td>
+                    <td><span class="drug-name">卡那单抗</span> <span class="trade-name">Canakinumab: Ilaris</span></td>
+                    <td><span class="drug-name">西多福韦</span> <span class="trade-name">Cidofovir: Vistide</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿米卡星</span> <span class="trade-name">Amikacin: Amkin</span></td>
+                    <td><span class="drug-name">卡博特韦+利匹韦林</span> <span class="trade-name">Casivirimab+Indevimab: REGEN-COV</span></td>
+                    <td><span class="drug-name">环丙沙星</span> <span class="trade-name">Ciprofloxacin: Cipro, Cipro XR</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿米卡星脂质体</span> <span class="trade-name">Amikacin liposomal: Arikayce</span></td>
+                    <td><span class="drug-name">卡泊芬净</span> <span class="trade-name">Caspofungin: Cancidas（科赛斯）</span></td>
+                    <td><span class="drug-name">克拉霉素</span> <span class="trade-name">Clarithromycin: Biaxin, Biaxin XL</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿莫西林</span> <span class="trade-name">Amoxicillin: Amoxil, Polymox</span></td>
+                    <td><span class="drug-name">头孢克洛</span> <span class="trade-name">Cefaclor: Ceclor, Ceclor CD（希克劳缓释片）</span></td>
+                    <td><span class="drug-name">氯法齐明</span> <span class="trade-name">Clofazimine: Lamprene</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿莫西林缓释片</span> <span class="trade-name">Amoxicillin extended release: Moxatag</span></td>
+                    <td><span class="drug-name">头孢羟氨苄</span> <span class="trade-name">Cefadroxil: Duricef</span></td>
+                    <td><span class="drug-name">克林霉素</span> <span class="trade-name">Clindamycin: Cleocin</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿莫西林/克拉维酸</span> <span class="trade-name">Amoxicillin-Clav: Augmentin, Augmentin ES-600, Augmentin XR</span></td>
+                    <td><span class="drug-name">头孢唑啉</span> <span class="trade-name">Cefazolin: Ancef, Kefzol</span></td>
+                    <td><span class="drug-name">克霉唑</span> <span class="trade-name">Clotrimazole: Lotrimin, Mycelex</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">两性霉素B</span> <span class="trade-name">Amphotericin B: Fungizone</span></td>
+                    <td><span class="drug-name">头孢地尼</span> <span class="trade-name">Cefdinir: Omnicef</span></td>
+                    <td><span class="drug-name">氯唑西林</span> <span class="trade-name">Cloxacillin: Tegopen</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">脂质体两性霉素B</span> <span class="trade-name">Ampho B-liposomal: AmBisome</span></td>
+                    <td><span class="drug-name">头孢托仑酯</span> <span class="trade-name">Cefditoren pivoxil: Spectracef</span></td>
+                    <td><span class="drug-name">多粘菌素甲磺酸钠</span> <span class="trade-name">Colistimethate: Coly-Mycin M</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">两性霉素B-脂质复合体</span> <span class="trade-name">Ampho B-lipid complex: Abelcet</span></td>
+                    <td><span class="drug-name">头孢吡肟</span> <span class="trade-name">Cefepime: Maxipime（马斯平）</span></td>
+                    <td><span class="drug-name">环丝氨酸</span> <span class="trade-name">Cycloserine: Seromycin</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">氨苄西林</span> <span class="trade-name">Ampicillin: Omnipen, Polycillin</span></td>
+                    <td><span class="drug-name">头孢地尔</span> <span class="trade-name">Cefiderocol: Fetroja</span></td>
+                    <td><span class="drug-name">达卡他韦</span> <span class="trade-name">Daclatasvir: Daklinza</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">氨苄西林/舒巴坦</span> <span class="trade-name">Ampicillin/Sulbactam: Unasyn</span></td>
+                    <td><span class="drug-name">头孢克肟</span> <span class="trade-name">Cefixime: Suprax</span></td>
+                    <td><span class="drug-name">达托霉素</span> <span class="trade-name">Daptomycin: Cubicin</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿替韦单抗</span> <span class="trade-name">Atoltivimab-zykl: Ebanga</span></td>
+                    <td><span class="drug-name">头孢哌酮-舒巴坦</span> <span class="trade-name">Cefoperazone-Sulbactam: Sulperazon</span></td>
+                    <td><span class="drug-name">达巴万星</span> <span class="trade-name">Dalbavancin: Dalvance</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">蒿甲醚-本芴醇</span> <span class="trade-name">Artemether-Lumefantrine: Coartem</span></td>
+                    <td><span class="drug-name">头孢噻肟</span> <span class="trade-name">Cefotaxime: Claforan</span></td>
+                    <td><span class="drug-name">达仑那韦</span> <span class="trade-name">Darunavir: Prezista</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿扎那韦</span> <span class="trade-name">Atazanavir: Reyataz</span></td>
+                    <td><span class="drug-name">头孢替坦</span> <span class="trade-name">Cefotetan: Cefotan</span></td>
+                    <td><span class="drug-name">达仑那韦+可比司他+恩曲他滨+丙酚替诺福韦</span> <span class="trade-name">Darunavir+Cobi+FTC+TAF: Symtuza（绥美凯）</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿托伐醌</span> <span class="trade-name">Atovaquone: Mepron</span></td>
+                    <td><span class="drug-name">头孢西丁</span> <span class="trade-name">Cefoxitin: Mefoxin</span></td>
+                    <td><span class="drug-name">德拉沙星</span> <span class="trade-name">Delafloxacin: Baxdela</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿托伐醌+氯胍</span> <span class="trade-name">Atovaquone+Proguanil: Malarone</span></td>
+                    <td><span class="drug-name">头孢泊肟酯</span> <span class="trade-name">Cefpodoxime proxetil: Vantin</span></td>
+                    <td><span class="drug-name">双氯西林</span> <span class="trade-name">Dicloxacillin: Dynapen</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿奇霉素</span> <span class="trade-name">Azithromycin: Zithromax</span></td>
+                    <td><span class="drug-name">头孢丙烯</span> <span class="trade-name">Cefprozil: Cefzil</span></td>
+                    <td><span class="drug-name">乙胺嗪</span> <span class="trade-name">Diethylcarbamazine: Hetrazan</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">阿奇霉素缓释制剂</span> <span class="trade-name">Azithromycin ER: Zmax</span></td>
+                    <td><span class="drug-name">头孢他啶</span> <span class="trade-name">Ceftazidime: Fortaz, Tazicef, Tazidime</span></td>
+                    <td><span class="drug-name">糠酸二氟尼特</span> <span class="trade-name">Diloxanide furoate: Furamide</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">氨曲南</span> <span class="trade-name">Aztreonam: Azactam, Cayston</span></td>
+                    <td><span class="drug-name">头孢他啶-阿维巴坦</span> <span class="trade-name">Ceftazidime-Avibactam: Avycaz</span></td>
+                    <td><span class="drug-name">多替拉韦</span> <span class="trade-name">Dolutegravir: Tivicay</span></td>
+                </tr>
+                <tr>
+                    <td><span class="drug-name">巴洛沙韦酯</span> <span class="trade-name">Baloxavir marboxil: Xofluza</span></td>
+                    <td><span class="drug-name">头孢布烯</span> <span class="trade-name">Ceftibuten: Cedax</span></td>
+                    <td><span class="drug-name">多替拉韦+恩曲他滨</span> <span class="trade-name">Dolutegravir+Emtricitabine: Dovato</span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span class="drug-name">头孢唑肟</span> <span class="trade-name">Ceftizoxime: Cefizox</span></td>
+                    <td><span class="drug-name">多替拉韦+利匹韦林</span> <span class="trade-name">Dolutegravir+Rilpivirine: Juluca</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div class="tags-container">
+            <span class="tag">阿巴卡韦</span>
+            <span class="tag">阿昔洛韦</span>
+            <span class="tag">阿德福韦</span>
+            <span class="tag">阿莫西林</span>
+            <span class="tag">两性霉素B</span>
+            <span class="tag">氨苄西林</span>
+            <span class="tag">阿奇霉素</span>
+            <span class="tag">氨曲南</span>
+            <span class="tag">巴洛沙韦酯</span>
+            <span class="tag">巴瑞替尼</span>
+            <span class="tag">贝达喹啉</span>
+            <span class="tag">比克替拉韦</span>
+            <span class="tag">布西多福韦</span>
+            <span class="tag">卡泊芬净</span>
+            <span class="tag">头孢吡普</span>
+            <span class="tag">头孢他啶</span>
+            <span class="tag">头孢曲松</span>
+            <span class="tag">头孢呋辛</span>
+            <span class="tag">头孢氨苄</span>
+            <span class="tag">氯喹</span>
+            <span class="tag">西多福韦</span>
+            <span class="tag">环丙沙星</span>
+            <span class="tag">克拉霉素</span>
+            <span class="tag">氯法齐明</span>
+            <span class="tag">克林霉素</span>
+            <span class="tag">克霉唑</span>
+            <span class="tag">多粘菌素</span>
+            <span class="tag">环丝氨酸</span>
+            <span class="tag">达卡他韦</span>
+            <span class="tag">达托霉素</span>
+            <span class="tag">达巴万星</span>
+            <span class="tag">达仑那韦</span>
+            <span class="tag">德拉沙星</span>
+            <span class="tag">双氯西林</span>
+            <span class="tag">多替拉韦</span>
+            <span class="tag disease">HIV</span>
+            <span class="tag disease">艾滋病</span>
+            <span class="tag disease">结核</span>
+            <span class="tag disease">疟疾</span>
+            <span class="tag disease">真菌感染</span>
+            <span class="tag disease">细菌感染</span>
+            <span class="tag disease">病毒感染</span>
+            <span class="tag bacteria">金黄色葡萄球菌</span>
+            <span class="tag bacteria">铜绿假单胞菌</span>
+            <span class="tag bacteria">大肠杆菌</span>
+            <span class="tag bacteria">肺炎链球菌</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表22 药物通用名和商品名列表；药物通用名；商品名；抗生素；抗病毒；抗真菌；=642" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-info">
+        页码：642
+    </div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <div class="keywords">
+            阿巴卡韦、阿昔洛韦、阿德福韦、阿苯达唑、金刚烷胺、阿米卡星、阿莫西林、两性霉素B、氨苄西林、阿替韦单抗、蒿甲醚-本芴醇、阿扎那韦、阿托伐醌、阿奇霉素、氨曲南、巴洛沙韦酯、巴瑞替尼、贝达喹啉、苯硝唑、贝洛托木单抗、比克替拉韦、布西多福韦、卡博特韦、卡那单抗、卡泊芬净、头孢吡普、头孢他啶-他唑巴坦、头孢曲松、头孢呋辛、头孢氨苄、头孢噻肟、氯喹、西多福韦、环丙沙星、克拉霉素、氯法齐明、克林霉素、克霉唑、氯唑西林、多粘菌素甲磺酸钠、环丝氨酸、达卡他韦、达托霉素、达巴万星、达仑那韦、德拉沙星、双氯西林、乙胺嗪、糠酸二氟尼特、多替拉韦
+        </div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="642.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        function addToFavorites() {
+            const title = document.querySelector('h1').textContent;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                category: '药物列表',
+                date: new Date().toLocaleString('zh-CN')
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            const btn = document.querySelector('.fav-btn');
+            btn.style.background = '#f39c12';
+            btn.innerHTML = '✓';
+            alert('已添加到收藏！');
+            
+            setTimeout(function() {
+                btn.innerHTML = '★';
+                btn.style.background = '#e74c3c';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

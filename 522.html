@@ -4,27 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~潜伏HBV再活动与HCV暴露处理指南*****</title>
-    
-    <!-- ============ ��������֤ ============ -->
-    <script src="machine_auth_v2.js"></script>
-    <script>
-        // ҳ�����ʱ��֤������
-        window.addEventListener('load', function() {
-            try {
-                initMachineAuth();
-                // ��֤�ɹ���ȷ��ҳ����ʾ
-                document.body.style.display = 'block';
-            } catch(e) {
-                console.log('��������֤ʧ��', e);
-                // ��֤ʧ��ʱ������ҳ��
-                document.body.style.display = 'none';
-            }
-        });
-    </script>
-    <!-- ============ ��֤���� ============ -->
-    
-
+    <title>潜伏HBV再活动与HCV暴露</title>
     <style>
         * {
             margin: 0;
@@ -33,42 +13,45 @@ html
         }
         
         body {
-            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             min-height: 100vh;
             padding: 20px;
             color: #333;
         }
         
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 30px;
-        }
-        
         /* 导航按钮 */
-        .nav-top {
+        .nav-buttons {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .nav-left {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .nav-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
             gap: 10px;
         }
         
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            padding: 8px 16px;
             border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
         
         .btn-home {
@@ -80,270 +63,359 @@ html
             background: #357abd;
         }
         
-        .btn-nav {
-            background: #6c9bcf;
+        .btn-page {
+            background: #6c757d;
             color: white;
         }
         
-        .btn-nav:hover {
-            background: #5a8bbd;
+        .btn-page:hover {
+            background: #5a6268;
         }
         
-        .btn-favorite {
-            background: #f0a030;
+        /* 标题样式 */
+        .title-wrapper {
+            text-align: center;
+            margin: 50px 0 30px 0;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            color: #1a5276;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .title-decorator {
+            color: #e74c3c;
+            font-size: 20px;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        /* 表头 */
+        thead tr {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
             color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            border: 1px solid #2471a3;
+        }
+        
+        /* 表格内容 */
+        tbody tr {
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        /* 第一列样式 - 分类标题 */
+        td:first-child {
+            font-weight: bold;
+            color: #1a5276;
+            background: #ebf5fb;
+            width: 18%;
+            min-width: 120px;
+        }
+        
+        /* 内容列 */
+        td:nth-child(2) {
+            width: 82%;
+        }
+        
+        /* 特殊文字颜色 */
+        .disease {
+            color: #c0392b;
+            font-weight: 600;
+        }
+        
+        .drug {
+            color: #8e44ad;
+            font-weight: 600;
+        }
+        
+        .bacteria {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .test {
+            color: #d35400;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: #2980b9;
+            font-weight: 600;
+        }
+        
+        /* 列表样式 */
+        td ul {
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        
+        td li {
+            margin-bottom: 8px;
+            list-style-type: disc;
+        }
+        
+        td li li {
+            list-style-type: circle;
+            margin-bottom: 4px;
+        }
+        
+        /* 引用文献 */
+        .reference {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+        
+        .image-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
             position: fixed;
-            bottom: 30px;
-            right: 30px;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(240,160,48,0.3);
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            white-space: nowrap;
+        }
+        
+        .btn-copy:hover {
+            background: #219a52;
+        }
+        
+        .btn-copy.copied {
+            background: #e74c3c;
+        }
+        
+        /* 收藏按钮 */
+        .btn-favorite {
+            background: #f39c12;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 15px;
         }
         
         .btn-favorite:hover {
-            background: #e09020;
+            background: #e67e22;
         }
         
         .btn-favorite.active {
             background: #e74c3c;
         }
         
-        .nav-right {
-            display: flex;
-            gap: 10px;
-        }
-        
-        /* 标题 */
-        h1 {
+        /* 页码 */
+        .page-number {
             text-align: center;
-            color: #2c5282;
-            font-size: 22px;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: linear-gradient(90deg, #ebf8ff 0%, #bee3f8 50%, #ebf8ff 100%);
-            border-radius: 12px;
-            border-left: 5px solid #3182ce;
-        }
-        
-        /* 表格样式 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-        
-        thead tr {
-            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
-            color: white;
-        }
-        
-        thead th {
-            padding: 16px 15px;
-            text-align: left;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
-        tbody tr {
-            border-bottom: 1px solid #e2e8f0;
-            transition: background 0.2s;
-        }
-        
-        tbody tr:hover {
-            background: #f7fafc;
-        }
-        
-        tbody td {
-            padding: 14px 15px;
-            line-height: 1.8;
-            color: #2d3748;
-        }
-        
-        tbody tr:nth-child(even) {
-            background: #f8fafc;
-        }
-        
-        tbody tr:nth-child(even):hover {
-            background: #edf2f7;
-        }
-        
-        /* 列表样式 */
-        .content-list {
-            margin: 0;
-            padding-left: 0;
-            list-style: none;
-        }
-        
-        .content-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .content-list li::before {
-            content: "●";
-            position: absolute;
-            left: 0;
-            color: #3182ce;
-            font-size: 12px;
-        }
-        
-        .sub-list {
-            margin: 8px 0 8px 20px;
-            padding-left: 0;
-            list-style: none;
-        }
-        
-        .sub-list li {
-            padding-left: 18px;
-            margin-bottom: 6px;
-        }
-        
-        .sub-list li::before {
-            content: "○";
-            color: #63b3ed;
-        }
-        
-        .highlight {
-            background: #fef3c7;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        
-        .ref {
-            color: #718096;
-            font-style: italic;
-            font-size: 13px;
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 15px;
         }
         
         /* 标签区域 */
         .tags-section {
-            margin: 25px 0;
-            padding: 20px;
-            background: #f0f7ff;
-            border-radius: 12px;
-            border: 1px solid #bee3f8;
+            margin-top: 15px;
         }
         
         .tags-title {
             font-size: 14px;
-            color: #2c5282;
-            margin-bottom: 12px;
-            font-weight: 600;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
         
-        .tags {
+        .tags-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .tag {
             display: inline-block;
-            padding: 8px 16px;
-            background: white;
-            border: 2px solid #3182ce;
-            color: #3182ce;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 13px;
+            color: white;
             font-weight: 500;
-            transition: all 0.3s;
         }
         
-        .tag:hover {
-            background: #3182ce;
-            color: white;
+        .tag-disease {
+            background: #e74c3c;
         }
         
-        /* 底部区域 */
-        .bottom-section {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
+        .tag-drug {
+            background: #8e44ad;
         }
         
-        .copy-section {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        .tag-test {
+            background: #d35400;
         }
         
-        .copy-input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 15px;
-            border: 2px solid #cbd5e0;
-            border-radius: 8px;
-            font-size: 14px;
-            background: #f7fafc;
+        .tag-virus {
+            background: #27ae60;
         }
         
-        .btn-copy {
-            background: #38a169;
-            color: white;
-            padding: 12px 24px;
-        }
-        
-        .btn-copy:hover {
-            background: #2f855a;
-        }
-        
-        .btn-copy.copied {
-            background: #718096;
-        }
-        
-        /* 页码和关键词 */
-        .page-info {
-            text-align: center;
-            padding: 15px;
-            background: #edf2f7;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .page-number {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2c5282;
-        }
-        
-        .keywords {
-            text-align: center;
-            color: #718096;
-            font-size: 13px;
-            margin-top: 10px;
+        .tag-other {
+            background: #2980b9;
         }
         
         /* 响应式 */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
             
-            .container {
-                padding: 15px;
+            .nav-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
             }
             
-            h1 {
-                font-size: 16px;
+            .nav-left, .nav-right {
+                position: static;
             }
             
-            thead th {
-                font-size: 15px;
-                padding: 12px 10px;
+            .title-wrapper {
+                margin-top: 20px;
             }
             
-            tbody td {
-                padding: 10px;
-                font-size: 13px;
+            .main-title {
+                font-size: 18px;
             }
             
-            .btn {
-                padding: 8px 14px;
+            table {
                 font-size: 12px;
+            }
+            
+            td {
+                padding: 8px;
+            }
+            
+            td:first-child {
+                min-width: 100px;
             }
             
             .copy-section {
@@ -357,152 +429,364 @@ html
     </style>
 </head>
 <body>
-    <!-- 收藏按钮 -->
-    <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-    
-    <div class="container">
-        <!-- 顶部导航 -->
-        <div class="nav-top">
+    <!-- 导航按钮 -->
+    <div class="nav-buttons">
+        <div class="nav-left">
             <a href="index.html" class="btn btn-home">← 返回首页</a>
-            <div class="nav-right">
-                <a href="521.html" class="btn btn-nav">↑ 上一页</a>
-                <a href="523.html" class="btn btn-nav">↓ 下一页</a>
-            </div>
         </div>
-        
-        <!-- 标题 -->
-        <h1>~~~~~潜伏HBV再活动与HCV暴露处理指南*****</h1>
-        
-        <!-- 表格 -->
+        <div class="nav-right">
+            <a href="521.html" class="btn btn-page">← 上一页</a>
+            <a href="523.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-wrapper">
+        <h1 class="main-title">
+            <span class="title-decorator">~~~~~</span>
+            潜伏HBV再活动与HCV暴露
+            <span class="title-decorator">*****</span>
+        </h1>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>项目内容</th>
+                    <th colspan="2">潜伏HBV再活动与HCV暴露处理指南</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td>潜伏HBV再活动<br><span class="reference">(AnIM 164: 30&64, 2016)</span></td>
                     <td>
-                        <strong style="color: #2c5282; font-size: 16px;">潜伏HBV再活动</strong> <span class="ref">(AnIM 164: 30&64, 2016)</span>
-                        <ul class="content-list">
-                            <li>患某些恶性肿瘤、类风湿关节炎和血管炎，需要接受含有抗CD20单克隆抗体方案治疗的患者，有潜伏HBV再活动的风险</li>
-                            <li>使用FDA批准的两种抗CD20药物：奥法木单抗（Arzerra）和利妥昔单抗（Rituxan）使患者处于HBV再活动风险中</li>
-                            <li>开始应用抗CD20药物前，通过检测HBsAg和抗HBc-IgG筛查潜伏性HBV感染，并可能需要HIV PCR检测。HBsAg和/或抗HBc-IgG（+）=隐匿性乙型肝炎</li>
-                            <li><span class="highlight">如果患者有潜伏性（隐匿性）HBV感染且必须接受抗CD20药物治疗，需同时予有效的抗HBV药物（见表14E）</span></li>
+                        <ul>
+                            <li>患某些<span class="disease">恶性肿瘤</span>、<span class="disease">类风湿关节炎</span>和<span class="disease">血管炎</span>，需要接受含有<span class="drug">抗CD20单克隆抗体</span>方案治疗的患者，有潜伏<span class="bacteria">HBV</span>再活动的风险</li>
+                            <li>使用FDA批准的两种<span class="drug">抗CD20药物</span>：<span class="drug">奥法木单抗（Arzerra）</span>和<span class="drug">利妥昔单抗（Rituxan）</span>使患者处于<span class="bacteria">HBV</span>再活动风险中</li>
+                            <li>开始应用<span class="drug">抗CD20药物</span>前，通过检测<span class="test">HBsAg</span>和<span class="test">抗HBc-IgG</span>筛查潜伏性<span class="bacteria">HBV</span>感染，并可能需要<span class="test">HIV PCR</span>检测。<span class="test">HBsAg</span>和/或<span class="test">抗HBc-IgG（+）</span>=<span class="highlight">隐匿性乙型肝炎</span></li>
+                            <li>如果患者有潜伏性（隐匿性）<span class="bacteria">HBV</span>感染且必须接受<span class="drug">抗CD20药物</span>治疗，需同时予有效的<span class="drug">抗HBV药物</span>（见表14E）</li>
                         </ul>
                     </td>
                 </tr>
                 <tr>
+                    <td>HCV暴露<br><span class="reference">[MMWR July 24, 2020/69(6): 1-8]</span></td>
                     <td>
-                        <strong style="color: #2c5282; font-size: 16px;">HCV暴露</strong> <span class="ref">[MMWR July 24, 2020/69 (6): 1-8]</span>
-                        <ul class="content-list">
-                            <li>确定暴露者并尽可能同时确定暴露源的HCV抗体的状态
-                                <ul class="sub-list">
-                                    <li>如果暴露源阳性或未知而暴露者阴性：暴露后3～6周随访检测HCV RNA（感染1～3周后在血液中可检测出）</li>
-                                    <li>如果阴性：6个月时再次检测抗HCV-Ab（此时可同时检测HBV），如果阳性，检测HCV RNA</li>
+                        <ul>
+                            <li>确定暴露者并尽可能同时确定暴露源的<span class="test">HCV抗体</span>的状态
+                                <ul>
+                                    <li>如果暴露源阳性或未知而暴露者阴性：暴露后3～6周随访检测<span class="test">HCV RNA</span>（感染1～3周后在血液中可检测出）</li>
+                                    <li>如果阴性：6个月时再次检测<span class="test">抗HCV-Ab</span>（此时可同时检测<span class="test">HBV</span>），如果阳性，检测<span class="test">HCV RNA</span></li>
                                 </ul>
                             </li>
-                            <li>HCV RNA阳性应根据急性HCV感染指南予直接作用抗病毒药物（DAA）治疗</li>
+                            <li><span class="test">HCV RNA</span>阳性应根据急性<span class="bacteria">HCV</span>感染指南予<span class="drug">直接作用抗病毒药物（DAA）</span>治疗</li>
                         </ul>
-                        <div style="margin-top: 10px; padding: 10px; background: #fff5f5; border-radius: 6px; color: #c53030; font-weight: 500;">
-                            无推荐的预防用药
-                        </div>
+                        <p style="margin-top: 10px; color: #c0392b; font-weight: bold;">无推荐的预防用药</p>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <div class="image-container" onclick="openModal()">
+            <img src="522.jpg" alt="潜伏HBV再活动与HCV暴露指南图片">
+            <span class="image-hint">🔍 点击放大</span>
+        </div>
+    </div>
+    
+    <!-- 图片放大模态框 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImg" src="522.jpg" alt="放大图片">
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 收藏按钮 -->
+        <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
         
-        <!-- 标签区域 -->
-        <div class="tags-section">
-            <div class="tags-title">🔖 特色检索标签</div>
-            <div class="tags">
-                <span class="tag">HBV</span>
-                <span class="tag">HCV</span>
-                <span class="tag">乙型肝炎</span>
-                <span class="tag">丙型肝炎</span>
-                <span class="tag">抗CD20单克隆抗体</span>
-                <span class="tag">奥法木单抗</span>
-                <span class="tag">Arzerra</span>
-                <span class="tag">利妥昔单抗</span>
-                <span class="tag">Rituxan</span>
-                <span class="tag">HBsAg</span>
-                <span class="tag">抗HBc-IgG</span>
-                <span class="tag">HIV PCR</span>
-                <span class="tag">隐匿性乙型肝炎</span>
-                <span class="tag">抗HBV药物</span>
-                <span class="tag">HCV RNA</span>
-                <span class="tag">抗HCV-Ab</span>
-                <span class="tag">DAA</span>
-                <span class="tag">直接作用抗病毒药物</span>
-            </div>
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="潜伏HBV再活动与HCV暴露；HBV；HCV；抗CD20单克隆抗体；奥法木单抗；利妥昔单抗；HBsAg；抗HBc-IgG；HCV RNA；DAA；=522" readonly>
+            <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
         </div>
         
-        <!-- 底部区域 -->
-        <div class="bottom-section">
-            <!-- 复制功能 -->
-            <div class="copy-section">
-                <input type="text" class="copy-input" id="copyText" readonly>
-                <button class="btn btn-copy" id="copyBtn" onclick="copyToClipboard()">复制</button>
-            </div>
-            
-            <!-- 页码 -->
-            <div class="page-info">
-                <div class="page-number">522</div>
-            </div>
-            
-            <!-- 关键词 -->
-            <div class="keywords">
-                关键词：HBV再活动 | HCV暴露 | 抗CD20单克隆抗体 | 奥法木单抗 | 利妥昔单抗 | 隐匿性乙型肝炎 | DAA治疗 | 无预防用药
+        <!-- 页码 -->
+        <div class="page-number">522</div>
+        
+        <!-- 标签 -->
+        <div class="tags-section">
+            <div class="tags-title">🔖 检索标签：</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">恶性肿瘤</span>
+                <span class="tag tag-disease">类风湿关节炎</span>
+                <span class="tag tag-disease">血管炎</span>
+                <span class="tag tag-virus">HBV</span>
+                <span class="tag tag-virus">HCV</span>
+                <span class="tag tag-drug">抗CD20单克隆抗体</span>
+                <span class="tag tag-drug">奥法木单抗</span>
+                <span class="tag tag-drug">Arzerra</span>
+                <span class="tag tag-drug">利妥昔单抗</span>
+                <span class="tag tag-drug">Rituxan</span>
+                <span class="tag tag-test">HBsAg</span>
+                <span class="tag tag-test">抗HBc-IgG</span>
+                <span class="tag tag-test">HIV PCR</span>
+                <span class="tag tag-drug">抗HBV药物</span>
+                <span class="tag tag-test">HCV抗体</span>
+                <span class="tag tag-test">HCV RNA</span>
+                <span class="tag tag-test">抗HCV-Ab</span>
+                <span class="tag tag-drug">DAA</span>
+                <span class="tag tag-drug">直接作用抗病毒药物</span>
+                <span class="tag tag-other">隐匿性乙型肝炎</span>
             </div>
         </div>
     </div>
     
-    <script>
-        // 设置复制框内容
-        const title = "潜伏HBV再活动与HCV暴露处理指南";
-        const subtitle = "抗CD20治疗患者的HBV筛查与HCV暴露后管理";
-        const keywords = "HBV;HCV;抗CD20单克隆抗体;奥法木单抗;利妥昔单抗;隐匿性乙型肝炎;DAA;无预防用药";
-        const pageNum = "522";
-        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="522.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 图片放大功能
+        function openModal() {
+            document.getElementById('imageModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
         
         // 复制功能
         function copyToClipboard() {
-            const input = document.getElementById('copyText');
+            const input = document.getElementById('copyInput');
             input.select();
             input.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(input.value).then(() => {
-                const btn = document.getElementById('copyBtn');
-                btn.textContent = '已复制';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = '复制';
-                    btn.classList.remove('copied');
-                }, 2000);
-            });
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(function() {
+                    showCopied();
+                });
+            } else {
+                document.execCommand('copy');
+                showCopied();
+            }
+        }
+        
+        function showCopied() {
+            const btn = document.getElementById('copyBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '已复制！';
+            btn.classList.add('copied');
+            
+            setTimeout(function() {
+                btn.textContent = originalText;
+                btn.classList.remove('copied');
+            }, 2000);
         }
         
         // 收藏功能
         function toggleFavorite() {
             const btn = document.getElementById('favoriteBtn');
-            const isFav = btn.classList.contains('active');
+            const isActive = btn.classList.contains('active');
             
-            if (!isFav) {
+            if (!isActive) {
                 btn.classList.add('active');
                 btn.textContent = '❤️ 已收藏';
                 
-                // 保存到localStorage（模拟添加到index收藏类目）
+                // 保存到localStorage
                 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                const item = {
-                    title: '~~~~~潜伏HBV再活动与HCV暴露处理指南*****',
+                const pageInfo = {
+                    title: '潜伏HBV再活动与HCV暴露',
                     url: '522.html',
-                    page: '522'
+                    pageNum: '522'
                 };
-                // 避免重复
-                favorites = favorites.filter(f => f.url !== item.url);
-                favorites.push(item);
-                localStorage.setItem('favorites', JSON.stringify(favorites));
                 
-                alert('已添加到收藏！请在首页查看收藏类目。');
+                // 检查是否已存在
+                const exists = favorites.some(f => f.url === '522.html');
+                if (!exists) {
+                    favorites.push(pageInfo);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                
+                // 尝试更新index.html的收藏区域（如果同源）
+                updateIndexFavorites(pageInfo);
             } else {
                 btn.classList.remove('active');
                 btn.textContent = '⭐ 收藏';
@@ -513,15 +797,32 @@ html
             }
         }
         
+        function updateIndexFavorites(pageInfo) {
+            // 通过localStorage事件通知其他页面
+            localStorage.setItem('favoriteUpdate', JSON.stringify({
+                action: 'add',
+                data: pageInfo,
+                timestamp: Date.now()
+            }));
+        }
+        
         // 页面加载时检查收藏状态
         window.onload = function() {
             const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            const btn = document.getElementById('favoriteBtn');
-            if (favorites.some(f => f.url === '522.html')) {
+            const isFavorited = favorites.some(f => f.url === '522.html');
+            if (isFavorited) {
+                const btn = document.getElementById('favoriteBtn');
                 btn.classList.add('active');
                 btn.textContent = '❤️ 已收藏';
             }
         };
+        
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>

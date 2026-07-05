@@ -1,327 +1,712 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>表13A 寄生虫感染的治疗</title>
+    <title>~~~~~表13A 寄生虫感染的治疗*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 10px;
-            color: #333;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 100%; margin: 0 auto; }
         
-        /* 顶部导航 */
-        .nav-top {
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
-            background: #fff;
-            border-radius: 8px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             flex-wrap: wrap;
             gap: 10px;
         }
-        .nav-btn {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        .home-btn {
+            background-color: #2196F3;
             color: white;
-            text-decoration: none;
-            border-radius: 20px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
         }
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
-        }
-        .nav-btn:active { transform: translateY(0); }
         
-        /* 标题 */
-        .main-title {
-            text-align: center;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background-color: #4CAF50;
             color: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
         }
         
-        /* 表格样式 */
-        .content-table {
+        .page-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a237e;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            border: 2px solid #2196F3;
+        }
+        
+        .notice-section {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #5d4037;
+        }
+        
+        .notice-section p {
+            margin-bottom: 8px;
+        }
+        
+        table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
-        .content-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-        }
-        .content-table th {
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: bold;
-            font-size: 16px;
-            border-bottom: 3px solid #667eea;
-        }
-        .content-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e8e8e8;
-            font-size: 14px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-        .content-table tr:nth-child(even) { background: #f8f9fa; }
-        .content-table tr:hover { background: #e8f4f8; }
-        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
-        
-        /* 标签 */
-        .tags-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            background-color: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            table-layout: fixed;
         }
-        .tags-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        thead {
+            background-color: #1565C0;
             color: white;
-            border-radius: 20px;
+        }
+        
+        thead th {
+            padding: 15px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #0d47a1;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+            font-size: 13px;
+            word-wrap: break-word;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+        
+        tbody tr:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .pathogen-col {
+            width: 22%;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .first-drug-col {
+            width: 28%;
+            color: #2e7d32;
+        }
+        
+        .alt-drug-col {
+            width: 28%;
+            color: #7b1fa2;
+        }
+        
+        .note-col {
+            width: 22%;
+            color: #5d4037;
+        }
+        
+        .sub-header {
+            background-color: #e8eaf6;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .disease-name {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .drug-name {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .alt-drug {
+            color: #7b1fa2;
+            font-weight: bold;
+        }
+        
+        .dosage {
+            color: #e65100;
+        }
+        
+        .reference {
+            color: #546e7a;
+            font-style: italic;
             font-size: 12px;
         }
         
-        /* 编辑框 */
-        .edit-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .edit-box {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #667eea;
+        .tags-section {
+            background-color: #e8f5e9;
+            border: 1px solid #4CAF50;
             border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            resize: vertical;
+            padding: 15px;
+            margin-bottom: 20px;
         }
-        .btn-row {
+        
+        .tags-title {
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin: 3px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .tag.disease {
+            background-color: #f44336;
+        }
+        
+        .tag.bacteria {
+            background-color: #9c27b0;
+        }
+        
+        .tag.drug {
+            background-color: #2196F3;
+        }
+        
+        .copy-section {
+            background-color: #fff3e0;
+            border: 1px solid #ff9800;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
             display: flex;
+            align-items: center;
             gap: 10px;
-            margin-top: 10px;
             flex-wrap: wrap;
         }
-        .action-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .copy-btn { background: #28a745; color: white; }
-        .copy-btn:hover { background: #218838; }
-        .favorite-btn { background: #ffc107; color: #333; }
-        .favorite-btn:hover { background: #e0a800; }
-        .favorite-btn.active { background: #ff6b6b; color: white; }
         
-        /* 页码 */
-        .page-footer {
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #ff9800;
+            border-radius: 5px;
+            font-size: 13px;
+            background-color: white;
         }
+        
+        .copy-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
         .page-number {
+            text-align: center;
             font-size: 18px;
             font-weight: bold;
-            color: #667eea;
+            color: #1565C0;
+            margin: 15px 0;
         }
         
-        /* 收藏提示 */
-        .toast {
+        .favorite-btn {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
+            bottom: 30px;
+            right: 30px;
+            background-color: #e91e63;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: none;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
             z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            background-color: #c2185b;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 10px 5px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px 5px;
+            }
+            
+            .pathogen-col, .first-drug-col, .alt-drug-col, .note-col {
+                width: auto;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+        }
+        
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-top">
-            <a href="index.html" class="nav-btn">🏠 首页</a>
-            <div>
-                <a href="399.html" class="nav-btn">⬅️ 上一页</a>
-                <a href="401.html" class="nav-btn">下一页 ➡️</a>
-            </div>
-        </div>
-        
-        <h1 class="main-title">~~~~~表13A 寄生虫感染的治疗*****</h1>
-        
-        <div style="background: white; padding: 15px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">市场上买不到的抗寄生虫药物来源见表13D。</p>
-            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">如下资源可从位于亚特兰大的美国疾病控制与预防中心（CDC）获得，网址：www.cdc.gov。除疟疾外，寄生虫病的综合资讯电话：+1-404-718-4745（日间），+1-770-488-7100（非工作时间）。CDC药物服务处工作时间：上午8:00—下午4:30。电话：+1-404-639-3670，传真：+1-404-639-3717，网址：www.cdc.gov/laboratory/drugservice/index.html。疟疾：预防（+1-770-488-7788），治疗（+1-770-488-7788）；非工作时间（+1-770-488-7100）；免费电话（美国）+1-855-856-4713；网址：www.cdc.gov/malaria。</p>
-            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">注意：所有剂量为肾功能正常的成人剂量（除非特别说明）。多数治疗方案并未获得FDA批准。</p>
-            <p style="font-size: 14px; line-height: 1.6;">对于注册药物，建议查阅包装内的说明书，核对剂量和不良反应。偶尔，上市后数据可能更改剂量，与包装内说明书有所不同。</p>
-        </div>
-        
-        <table class="content-table">
-            <thead>
-                <tr>
-                    <th>病原体</th>
-                    <th>推荐方案</th>
-                    <th>说明</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="3"><strong>原虫——肠道（非致病性：哈门内阿米巴E.hartmani，迪斯帕阿米巴E.dispar，莫什科夫斯基阿米巴E.moshkovskii，结肠阿米巴E.coli，布氏嗜碘内阿米巴Iodamoeba buetschlii，微小内蜒阿米巴Endolimax nana），迈氏唇鞭毛虫Chilomastix mesnili）</strong></td>
-                </tr>
-                <tr>
-                    <td>结肠肠袋虫Balantidium coli<br>综述：Acta Trop 2021 Jul 31；223：106069</td>
-                    <td>首选药物：四环素500mg po qid×10d<br><br>备选药物：甲硝唑750mg po tid×5d</td>
-                    <td>另一备选药物：双碘喹啉650mg po tid×20d</td>
-                </tr>
-                <tr>
-                    <td>人芽囊虫Blastocystis hominis<br>RCT研究显示治疗不获益（J Travel Med 2023 Feb 18；30（1）：taac143）</td>
-                    <td>甲硝唑1.5g po（顿服）qd×10d，或750mg po tid×10d（尚不确定是否需要治疗）</td>
-                    <td>备选：双碘喹啉650mg po tid×20d，或TMP-SMX（双剂量）1片po bid×7d，或硝唑尼特500mg po bid×3d</td>
-                    <td>近期研究模式转变（Trends Parasitol 2024 Sep；40（9）：775），非致病性宏基因组学证据</td>
-                </tr>
-                <tr>
-                    <td>微小隐孢子虫和人隐孢子虫Cryptosporidium parvum & hominis<br>疗效欠佳<br>参见Ln ID 15：85，2015</td>
-                    <td>免疫功能正常-无HIV患者：硝唑尼特500mg po bid×3d（昂贵）</td>
-                    <td>合并免疫缺陷的HIV患者：有效抗病毒治疗是最好的疗法，和安慰剂相比，硝唑尼特无临床和寄生虫学疗效</td>
-                    <td>硝唑尼特：已批准儿童口服溶液制剂和500mg片剂用于免疫功能正常成人<br>参见CID 40：1173，2005<br><br>人隐孢子虫可引起感染后眼痛、关节痛、反复头痛和构音障碍（CID 39：504，2004）</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <div class="tags-section">
-            <div class="tags-title">🏷️ 关键词标签</div>
-            <div class="tags">
-                <span class="tag">寄生虫感染</span>
-                <span class="tag">原虫</span>
-                <span class="tag">肠道寄生虫</span>
-                <span class="tag">结肠肠袋虫</span>
-                <span class="tag">人芽囊虫</span>
-                <span class="tag">微小隐孢子虫</span>
-                <span class="tag">人隐孢子虫</span>
-                <span class="tag">四环素</span>
-                <span class="tag">甲硝唑</span>
-                <span class="tag">双碘喹啉</span>
-                <span class="tag">TMP-SMX</span>
-                <span class="tag">硝唑尼特</span>
-                <span class="tag">HIV</span>
-            </div>
-        </div>
-        
-        <div class="edit-section">
-            <textarea class="edit-box" id="editBox">表13A 寄生虫感染的治疗；寄生虫感染；原虫；肠道寄生虫；结肠肠袋虫；人芽囊虫；微小隐孢子虫；人隐孢子虫；四环素；甲硝唑；双碘喹啉；TMP-SMX；硝唑尼特；HIV；=201</textarea>
-            <div class="btn-row">
-                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
-                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-            </div>
-        </div>
-        
-        <div class="page-footer">
-            <div class="page-number">第 201 页</div>
+    <div class="header">
+        <a href="index.html" class="home-btn">返回首页</a>
+        <div class="nav-buttons">
+            <a href="399.html" class="nav-btn">上一页</a>
+            <a href="401.html" class="nav-btn">下一页</a>
         </div>
     </div>
     
-    <div class="toast" id="toast"></div>
+    <div class="page-title">~~~~~表13A 寄生虫感染的治疗*****</div>
     
-    <script>
-        function copyContent() {
-            const editBox = document.getElementById('editBox');
-            editBox.select();
-            document.execCommand('copy');
-            showToast('✅ 已复制到剪贴板');
+    <div class="notice-section">
+        <p><strong>市场上买不到的抗寄生虫药物来源见表13D。</strong></p>
+        <p>如下资源可从位于亚特兰大的美国疾病控制与预防中心（CDC）获得，网址：www.cdc.gov。除疟疾外，寄生虫病的综合资讯电话：+1-404-718-4745（日间），+1-770-488-7100（非工作时间）。CDC药物服务处工作时间：上午8:00—下午4:30。电话：+1-404-639-3670，传真：+1-404-639-3717，网址：www.cdc.gov/laboratory/drugservice/index.html。疟疾：预防（+1-770-488-7788），治疗（+1-770-488-7788）；非工作时间（+1-770-488-7100）；免费电话（美国）+1-855-856-4713；网址：www.cdc.gov/malaria。</p>
+        <p><strong>注意：</strong>所有剂量为肾功能正常的成人剂量（除非特别说明）。多数治疗方案并未获得FDA批准。</p>
+        <p>对于注册药物，建议查阅包装内的说明书，核对剂量和不良反应。偶尔，上市后数据可能更改剂量，与包装内说明书有所不同。</p>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="pathogen-col" style="font-size: 18px;">病原体</th>
+                <th colspan="2" class="first-drug-col" style="font-size: 18px;">推荐方案</th>
+                <th class="note-col" style="font-size: 18px;">说明</th>
+            </tr>
+            <tr>
+                <th class="pathogen-col"></th>
+                <th class="first-drug-col">首选药物</th>
+                <th class="alt-drug-col">备选药物</th>
+                <th class="note-col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sub-header">
+                <td colspan="4">原虫——肠道（非致病性：哈门内阿米巴<span class="disease-name">E. hartmani</span>，迪斯帕阿米巴<span class="disease-name">E. dispar</span>，莫什科夫斯基阿米巴<span class="disease-name">E. moshkovskii</span>，结肠阿米巴<span class="disease-name">E. coli</span>，布氏嗜碘内阿米巴<span class="disease-name">Iodamoeba buetschlii</span>，微小内蜒阿米巴<span class="disease-name">Endolimax nana</span>），迈氏唇鞭毛虫<span class="disease-name">Chilomastix mesnili</span>）</td>
+            </tr>
+            <tr>
+                <td class="pathogen-col">
+                    <span class="disease-name">结肠肠袋虫</span><br>
+                    <span class="bacteria-name" style="color: #9c27b0;">Balantidium coli</span><br><br>
+                    综述：<span class="reference">Acta Trop 2021 Jul 31; 223: 106069</span>
+                </td>
+                <td class="first-drug-col">
+                    <span class="drug-name">四环素</span><br>
+                    <span class="dosage">500mg po qid×10d</span>
+                </td>
+                <td class="alt-drug-col">
+                    <span class="alt-drug">甲硝唑</span><br>
+                    <span class="dosage">750mg po tid×5d</span>
+                </td>
+                <td class="note-col">
+                    另一备选药物：<span class="alt-drug">双碘喹啉</span><br>
+                    <span class="dosage">650mg po tid×20d</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="pathogen-col">
+                    <span class="disease-name">人芽囊虫</span><br>
+                    <span class="bacteria-name" style="color: #9c27b0;">Blastocystis hominis</span><br><br>
+                    RCT研究显示治疗不获益<br>
+                    <span class="reference">(J Travel Med 2023 Feb 18; 30 (1): taac143)</span>
+                </td>
+                <td class="first-drug-col">
+                    <span class="drug-name">甲硝唑</span><br>
+                    <span class="dosage">1.5g po（顿服）qd×10d，</span><br>
+                    或<span class="dosage">750mg po tid×10d</span><br>
+                    （尚不确定是否需要治疗）
+                </td>
+                <td class="alt-drug-col">
+                    备选：<span class="alt-drug">双碘喹啉</span><sup>*</sup><br>
+                    <span class="dosage">650mg po tid×20d，</span><br>
+                    或<span class="alt-drug">TMP-SMX</span><br>
+                    （双剂量）<span class="dosage">1片po bid×7d，</span><br>
+                    或<span class="alt-drug">硝唑尼特</span><br>
+                    <span class="dosage">500mg po bid×3d</span>
+                </td>
+                <td class="note-col">
+                    近期研究模式转变<br>
+                    <span class="reference">(Trends Parasitol 2024 Sep; 40 (9): 775)</span>，<br>
+                    非致病性宏基因组学证据
+                </td>
+            </tr>
+            <tr>
+                <td class="pathogen-col">
+                    <span class="disease-name">微小隐孢子虫和人隐孢子虫</span><br>
+                    <span class="bacteria-name" style="color: #9c27b0;">Cryptosporidium parvum & hominis</span><br><br>
+                    疗效欠佳<br><br>
+                    参见<span class="reference">CID 15: 85, 2015</span>
+                </td>
+                <td class="first-drug-col">
+                    免疫功能正常-无HIV患者：<br>
+                    <span class="drug-name">硝唑尼特</span><br>
+                    <span class="dosage">500mg po bid×3d</span><br>
+                    （昂贵）
+                </td>
+                <td class="alt-drug-col">
+                    合并免疫缺陷的HIV患者：<br>
+                    有效抗病毒治疗是最好的疗法，<br>
+                    和安慰剂相比，<br>
+                    硝唑尼特无临床和寄生虫学疗效
+                </td>
+                <td class="note-col">
+                    <span class="drug-name">硝唑尼特</span>：已批准儿童口服溶液制剂和500mg片剂用于免疫功能正常成人<br><br>
+                    参见<span class="reference">CID 40: 1173, 2005</span><br><br>
+                    <span class="disease-name">人隐孢子虫</span>可引起感染后眼痛、关节痛、反复头痛和构音障碍<br>
+                    <span class="reference">(CID 39: 504, 2004)</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="page-number">400</div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击可快速定位）：</div>
+        <span class="tag disease">结肠肠袋虫</span>
+        <span class="tag bacteria">Balantidium coli</span>
+        <span class="tag drug">四环素</span>
+        <span class="tag drug">甲硝唑</span>
+        <span class="tag drug">双碘喹啉</span>
+        <span class="tag disease">人芽囊虫</span>
+        <span class="tag bacteria">Blastocystis hominis</span>
+        <span class="tag drug">TMP-SMX</span>
+        <span class="tag drug">硝唑尼特</span>
+        <span class="tag disease">微小隐孢子虫</span>
+        <span class="tag disease">人隐孢子虫</span>
+        <span class="tag bacteria">Cryptosporidium parvum</span>
+        <span class="tag bacteria">Cryptosporidium hominis</span>
+        <span class="tag disease">哈门内阿米巴</span>
+        <span class="tag bacteria">E. hartmani</span>
+        <span class="tag disease">迪斯帕阿米巴</span>
+        <span class="tag bacteria">E. dispar</span>
+        <span class="tag disease">莫什科夫斯基阿米巴</span>
+        <span class="tag bacteria">E. moshkovskii</span>
+        <span class="tag disease">结肠阿米巴</span>
+        <span class="tag bacteria">E. coli</span>
+        <span class="tag disease">布氏嗜碘内阿米巴</span>
+        <span class="tag bacteria">Iodamoeba buetschlii</span>
+        <span class="tag disease">微小内蜒阿米巴</span>
+        <span class="tag bacteria">Endolimax nana</span>
+        <span class="tag disease">迈氏唇鞭毛虫</span>
+        <span class="tag bacteria">Chilomastix mesnili</span>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表13A 寄生虫感染的治疗；寄生虫感染；抗寄生虫药物；四环素；甲硝唑；双碘喹啉；TMP-SMX；硝唑尼特；结肠肠袋虫；人芽囊虫；微小隐孢子虫；人隐孢子虫；=400" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()">⭐ 收藏</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="400.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }, function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
         }
         
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            const title = document.querySelector('.main-title').textContent;
-            const pageNum = 201;
+        function addToFavorite() {
+            var title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
             
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            const index = favorites.findIndex(f => f.page === pageNum);
+            var exists = favorites.some(function(f) {
+                return f.url === url;
+            });
             
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.textContent = '⭐ 收藏';
-                showToast('已取消收藏');
-            } else {
-                favorites.push({ page: pageNum, title: title });
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-                showToast('已添加到收藏');
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
             }
             
-            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
-            updateIndexFavorites();
-        }
-        
-        function checkFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageNum = 201;
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
+            favorites.push({
+                title: title,
+                url: url,
+                category: '寄生虫感染治疗',
+                date: new Date().toLocaleString()
+            });
             
-            if (favorites.some(f => f.page === pageNum)) {
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert('已添加到收藏夹！\n标题：' + title + '\n分类：寄生虫感染治疗');
         }
         
-        function updateIndexFavorites() {
-            // 这个函数会在 index.html 中同步更新收藏列表
-            // 通过 localStorage 事件自动同步
-        }
-        
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 2000);
-        }
-        
-        // 页面加载时检查收藏状态
-        window.onload = checkFavorite;
+        // 标签点击搜索功能
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                var text = this.textContent;
+                alert('搜索标签：' + text);
+            });
+        });
     </script>
 </body>
 </html>

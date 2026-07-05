@@ -24,549 +24,614 @@ html
     </script>
     <!-- ============ ��֤���� ============ -->
     
-
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #f0f7f4 0%, #e8f5e9 50%, #fff8e1 100%);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
             min-height: 100vh;
-            padding: 10px;
+            padding: 20px;
             color: #333;
         }
-        
-        .top-bar {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 10px;
         }
-        
-        .home-btn {
-            background: #4a90d9;
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 14px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 2px 6px rgba(74,144,217,0.3);
         }
-        
-        .home-btn:hover {
-            background: #357abd;
-        }
-        
         .nav-btns {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
-        
-        .nav-btn {
-            background: #5cb85c;
+        .btn-nav {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 14px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 2px 6px rgba(92,184,92,0.3);
         }
-        
-        .nav-btn:hover {
-            background: #4cae4c;
-        }
-        
-        .title-box {
-            text-align: center;
-            margin: 15px 0 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .main-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #1a5276;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .sub-title {
-            font-size: 16px;
-            color: #2874a6;
-            font-weight: 600;
-        }
-        
-        .table-wrap {
-            overflow-x: auto;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            font-size: 13px;
-        }
-        
-        thead th {
-            background: #2e75b6;
+        .btn-fav {
+            position: fixed;
+            right: 20px;
+            bottom: 200px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            padding: 14px 10px;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        h1 {
             text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            border: 1px solid #1a5276;
-            white-space: nowrap;
-        }
-        
-        tbody td {
-            padding: 12px 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-            vertical-align: top;
-            line-height: 1.7;
             color: #2c3e50;
-        }
-        
-        tbody tr:nth-child(even) {
-            background: #f8fbff;
-        }
-        
-        tbody tr:hover {
-            background: #e1f0fa;
-        }
-        
-        .section-header {
-            background: #d4e6f1 !important;
-            font-weight: bold;
-            color: #1a5276;
-            text-align: left !important;
-            padding-left: 15px !important;
-        }
-        
-        .col-pathogen {
-            width: 35%;
-            min-width: 200px;
-        }
-        
-        .col-treatment {
-            width: 35%;
-            min-width: 200px;
-        }
-        
-        .col-note {
-            width: 30%;
-            min-width: 180px;
-        }
-        
-        .bullet-list {
-            margin: 0;
-            padding-left: 18px;
-        }
-        
-        .bullet-list li {
-            margin-bottom: 6px;
-        }
-        
-        .sub-list {
-            margin: 4px 0;
-            padding-left: 16px;
-            list-style-type: circle;
-        }
-        
-        .sub-list li {
-            margin-bottom: 4px;
-        }
-        
-        .ref-text {
-            color: #666;
-            font-size: 12px;
-            font-style: italic;
-        }
-        
-        .drug-name {
-            color: #c0392b;
-            font-weight: 600;
-        }
-        
-        .tags-section {
+            font-size: 22px;
             margin: 20px 0;
             padding: 15px;
             background: rgba(255,255,255,0.8);
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        .tags-title {
-            font-size: 15px;
-            color: #1a5276;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
-        
-        .tag {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
             font-size: 13px;
-            margin: 4px;
-            cursor: pointer;
-            transition: transform 0.2s;
+        }
+        thead th {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
             color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
         }
-        
-        .tag:hover {
-            transform: scale(1.05);
-        }
-        
-        .tag.disease {
-            background: #e74c3c;
-        }
-        
-        .tag.drug {
-            background: #27ae60;
-        }
-        
-        .tag.bacteria {
-            background: #8e44ad;
-        }
-        
-        .bottom-area {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 10px;
-        }
-        
-        .keywords-box {
-            margin-bottom: 15px;
-            padding: 12px;
-            background: #fef9e7;
-            border-radius: 8px;
-            border-left: 4px solid #f39c12;
-        }
-        
-        .keywords-label {
-            font-size: 13px;
-            color: #7f8c8d;
-            margin-bottom: 6px;
-        }
-        
-        .keywords {
-            font-size: 14px;
-            color: #2c3e50;
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            vertical-align: top;
             line-height: 1.8;
         }
-        
-        .page-num {
-            text-align: center;
-            font-size: 18px;
-            color: #1a5276;
-            font-weight: bold;
-            margin: 15px 0;
-            padding: 10px;
-            background: rgba(46,117,182,0.1);
-            border-radius: 8px;
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
         }
-        
-        .copy-box {
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        .section-title {
+            background: #e8eaf6 !important;
+            font-weight: bold;
+            color: #1a237e;
+            font-size: 14px;
+        }
+        .disease {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .drug {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        .bacteria {
+            color: #7b1fa2;
+            font-weight: bold;
+        }
+        .note {
+            color: #5d4037;
+            font-size: 12px;
+        }
+        .ref {
+            color: #1976d2;
+            font-style: italic;
+        }
+        .img-container {
+            margin: 30px auto;
+            text-align: center;
+            max-width: 100%;
+        }
+        .img-container img {
+            width: 95%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            cursor: zoom-in;
+            transition: transform 0.3s;
+        }
+        .img-container img:hover {
+            transform: scale(1.02);
+        }
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .tags-title {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tag-disease {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+        .tag-drug {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        .tag-bacteria {
+            background: #e1bee7;
+            color: #7b1fa2;
+        }
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .copy-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
             flex-wrap: wrap;
         }
-        
         .copy-input {
             flex: 1;
             min-width: 200px;
             padding: 12px 15px;
-            border: 2px solid #2e75b6;
-            border-radius: 8px;
+            border: 2px solid #4a90d9;
+            border-radius: 10px;
             font-size: 14px;
-            color: #2c3e50;
-            background: #fff;
+            outline: none;
         }
-        
-        .copy-btn {
-            background: #e67e22;
+        .btn-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 12px 25px;
+            border-radius: 10px;
             cursor: pointer;
+            font-size: 14px;
             white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(230,126,34,0.3);
         }
-        
-        .copy-btn:hover {
-            background: #d35400;
+        .page-num {
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-weight: bold;
         }
-        
-        .copy-btn.copied {
-            background: #27ae60;
-        }
-        
-        .fav-btn {
+        .modal {
+            display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: #e74c3c;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 10px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
             color: white;
-            border: none;
-            font-size: 24px;
+            font-size: 40px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(231,76,60,0.4);
-            z-index: 1000;
-            transition: transform 0.2s;
         }
-        
-        .fav-btn:hover {
-            transform: scale(1.1);
+        ul {
+            margin: 5px 0;
+            padding-left: 20px;
         }
-        
-        .fav-btn.active {
-            background: #c0392b;
+        li {
+            margin: 3px 0;
         }
-        
         @media (max-width: 768px) {
-            .main-title {
+            body {
+                padding: 10px;
+            }
+            h1 {
                 font-size: 18px;
             }
-            .sub-title {
-                font-size: 14px;
+            table {
+                font-size: 11px;
             }
             thead th {
                 font-size: 14px;
-                padding: 10px 6px;
+                padding: 10px 5px;
             }
             tbody td {
-                padding: 10px 6px;
-                font-size: 12px;
+                padding: 8px 5px;
             }
             .tag {
                 font-size: 12px;
-                padding: 5px 10px;
-            }
-            .copy-input {
-                width: 100%;
-            }
-            .fav-btn {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
+                padding: 6px 12px;
             }
         }
     </style>
 </head>
 <body>
-
-    <div class="top-bar">
-        <a href="index.html" class="home-btn">🏠 返回首页</a>
+    <div class="header">
+        <a href="index.html" class="btn-home">🏠 返回首页</a>
         <div class="nav-btns">
-            <a href="508.html" class="nav-btn">← 上一页</a>
-            <a href="510.html" class="nav-btn">下一页 →</a>
+            <a href="508.html" class="btn-nav">← 上一页</a>
+            <a href="510.html" class="btn-nav">下一页 →</a>
         </div>
     </div>
-
-    <div class="title-box">
-        <div class="main-title">~~~~~表15A特定细菌感染的抗生素预防*****</div>
-        <div class="sub-title">B群链球菌病(GBS) | 新生儿 | 孕妇-分娩期抗微生物预防措施</div>
-    </div>
-
-    <div class="table-wrap">
+    
+    <button class="btn-fav" onclick="addFavorite()" title="收藏">⭐</button>
+    
+    <h1>~~~~~表15A特定细菌感染的抗生素预防*****</h1>
+    
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th class="col-pathogen">病原体/疾病/病情分类</th>
-                    <th class="col-treatment">预防性治疗的药物/剂量/给药途径/疗程</th>
-                    <th class="col-note">备注</th>
+                    <th style="width:35%">病原体/疾病/病情分类</th>
+                    <th style="width:35%">预防性治疗的药物/剂量/给药途径/疗程</th>
+                    <th style="width:30%">备注</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="3" class="section-header">
-                        B群链球菌病(GBS)，新生儿：治疗方法 [CDC指南：MMWR 59(RR-10):1,2010; CID 2017;65(S2):S143]
+                    <td colspan="3" class="section-title">
+                        <span class="bacteria">B群链球菌病（GBS）</span>，<span class="disease">新生儿</span>：治疗方法 [<span class="ref">CDC指南：MMWR 59（RR-10）：1，2010；CID 2017；65（S2）：S143</span>]
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <strong>孕妇-分娩期抗微生物预防措施</strong>
-                        <ul class="bullet-list">
-                            <li>所有孕妇在第35～37周进行阴道和直肠拭子GBS筛查（除非已存在其他预防用药指征——本次妊娠期有GBS菌尿或之前分娩的婴儿有侵袭性GBS病；即使如此，培养也有助于药敏试验）。使用传递用培养基，GBS在室温下可存活长达96小时。如拭子培养阳性，分娩时需要预防性治疗</li>
-                            <li>之前分娩的婴儿有侵袭性GBS感染，或本次妊娠期有GBS菌尿，分娩时需要预防性治疗</li>
-                            <li>GBS状况未知，但有以下任何情况：(a)分娩时妊娠&lt;37周[参见MMWR 59(RR-10):1,2010,早产和胎膜早破处理流程图]，或(b)羊膜破裂时间≥18小时，或(c)分娩时体温≥38℃。如果怀疑羊膜炎，使用对GBS有活性的广谱抗生素覆盖</li>
-                            <li>分娩期NAAT检测GBS阳性需要预防性治疗</li>
+                        <span class="disease">孕妇-分娩期抗微生物预防措施</span><br>
+                        <ul>
+                            <li>所有孕妇在第35～37周进行阴道和直肠拭子<span class="bacteria">GBS</span>筛查（除非已存在其他预防用药指征——本次妊娠期有<span class="bacteria">GBS</span>菌尿或之前分娩的婴儿有侵袭性<span class="bacteria">GBS</span>病；即使如此，培养也有助于药敏试验）。使用传递用培养基，<span class="bacteria">GBS</span>在室温下可存活长达96小时。如拭子培养阳性，分娩时需要预防性治疗</li>
+                            <li>之前分娩的婴儿有侵袭性<span class="bacteria">GBS</span>感染，或本次妊娠期有<span class="bacteria">GBS</span>菌尿，分娩时需要预防性治疗</li>
+                            <li><span class="bacteria">GBS</span>状况未知，但有以下任何情况：（a）分娩时妊娠&lt;37周 [<span class="ref">参见MMWR 59（RR-10）：1，2010，早产和胎膜早破处理流程图</span>]，或（b）羊膜破裂时间≥18小时，或（c）分娩时体温≥38℃。如果怀疑<span class="disease">羊膜炎</span>，使用对<span class="bacteria">GBS</span>有活性的广谱抗生素覆盖</li>
+                            <li>分娩期NAAT检测<span class="bacteria">GBS</span>阳性需要预防性治疗</li>
                             <li>除非存在其他指征不予治疗的情况：妊娠35～37周阴道/直肠拭子培养阴性或在产程发动前羊膜完整时行剖宫产（采用标准手术预防）</li>
                         </ul>
                     </td>
                     <td>
-                        <strong>分娩期预防新生儿早发GBS病的方案</strong><br>
-                        <span class="drug-name">青霉素G</span>500万单位iv（起始剂量），然后250万～300万U iv q4h直至完成分娩<br><br>
-                        备选药物：<span class="drug-name">氨苄西林</span>2g iv（起始剂量），然后1g iv q4h直至完成分娩<br><br>
-                        青霉素过敏患者：
-                        <ul class="sub-list">
-                            <li>非高度过敏患者：<span class="drug-name">头孢唑啉</span>2g iv（起始剂量），然后1g iv q8h至完成分娩</li>
+                        <span class="disease">分娩期预防新生儿早发GBS病</span>的方案<br>
+                        <span class="drug">青霉素G</span>500万单位iv（起始剂量），然后250万～300万U iv q4h直至完成分娩<br>
+                        备选药物：<span class="drug">氨苄西林</span>2g iv（起始剂量），然后1g iv q4h直至完成分娩<br>
+                        <span class="drug">青霉素</span>过敏患者：<br>
+                        <ul>
+                            <li>非高度过敏患者：<span class="drug">头孢唑啉</span>2g iv（起始剂量），然后1g iv q8h至完成分娩</li>
                             <li>β-内酰胺高度过敏患者：
-                                <ul class="sub-list">
-                                    <li>如GBS对<span class="drug-name">克林霉素</span>和<span class="drug-name">红霉素</span>均敏感，或红霉素耐药但经D区试验（或相当的方法）确定对克林霉素敏感，无诱导耐药：<span class="drug-name">克林霉素</span>900mg iv q8h至完成分娩</li>
-                                    <li>如果GBS药敏未知，不排除克林霉素诱导耐药，或克林霉素也过敏：<span class="drug-name">万古霉素</span>1g iv q12h至完成分娩</li>
+                                <ul>
+                                    <li>如<span class="bacteria">GBS</span>对<span class="drug">克林霉素</span>和<span class="drug">红霉素</span>均敏感，或<span class="drug">红霉素</span>耐药但经D区试验（或相当的方法）确定对<span class="drug">克林霉素</span>敏感，无诱导耐药：<span class="drug">克林霉素</span>900mg iv q8h至完成分娩</li>
+                                    <li>如果<span class="bacteria">GBS</span>药敏未知，不排除<span class="drug">克林霉素</span>诱导耐药，或<span class="drug">克林霉素</span>也过敏：<span class="drug">万古霉素</span>1g iv q12h至完成分娩</li>
                                 </ul>
                             </li>
                         </ul>
                     </td>
-                    <td>
-                        参见MMWR 59(RR-10):1,2010的详细流程图
-                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>接受预防治疗的母亲分娩的新生儿</td>
+                    <td><span class="ref">参见MMWR 59（RR-10）：1，2010的详细流程图</span></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>
-                        <strong>接受预防治疗的母亲分娩的新生儿</strong>
+                        <span class="disease">未足月、胎膜早破的早产儿</span>：<span class="bacteria">GBS</span>阴性孕妇<br>
+                        （<span class="ref">Cochrane Database Rev 12：CD00：1058，2013；Obstet Gyn 124：515：2014；Am J Ob-Gyn 207：475.2012</span>）
                     </td>
-                    <td colspan="2">
-                        参见MMWR 59(RR-10):1,2010的详细流程图
-                    </td>
-                </tr>
-                <tr>
                     <td>
-                        <strong>未足月、胎膜早破的早产儿：GBS阴性孕妇</strong><br>
-                        <span class="ref-text">(Cochrane Database Rev 12; CD00:1058,2013; Obstet Gyn 124:515;2014; Am J Ob-Gyn 207:475,2012)</span>
-                    </td>
-                    <td colspan="2">
-                        <strong>首选方案：</strong><br>
+                        首选方案：<br>
                         无抗生素过敏<br>
-                        <span class="drug-name">阿奇霉素</span>1g po×1＋<span class="drug-name">氨苄西林</span>2g iv q6h×48h，然后<span class="drug-name">阿莫西林</span>250mg po q8h×5d<br><br>
-                        <strong>备选方案：</strong><br>
-                        青霉素轻度过敏：<span class="drug-name">阿奇霉素</span>1g po×1＋<span class="drug-name">头孢唑林</span>1g iv q6h×48h，然后<span class="drug-name">头孢拉定</span>500mg po q6h×5d<br>
-                        IgE介导的青霉素过敏：<span class="drug-name">阿奇霉素</span>1g po×1＋<span class="drug-name">克林霉素</span>900mg iv q8h×48h＋<span class="drug-name">庆大霉素</span>5mg/kg iv q24h×2剂，然后<span class="drug-name">克林霉素</span>300mg po q8h×5d<br>
-                        IgE介导青霉素过敏同时B群链球菌对克林霉素耐药：<span class="drug-name">阿奇霉素</span>1g po×1＋<span class="drug-name">万古霉素</span>20mg/kg iv q8h（最大剂量2g）×48h
+                        <span class="drug">阿奇霉素</span>1g po×1＋<span class="drug">氨苄西林</span>2g iv q6h×48h，然后<span class="drug">阿莫西林</span>250mg po q8h×5d<br>
+                        备选方案：<br>
+                        <span class="drug">青霉素</span>轻度过敏：<span class="drug">阿奇霉素</span>1g po×1＋<span class="drug">头孢唑林</span>1g iv q6h×48h，然后<span class="drug">头孢拉定</span>500mg po q6h×5d<br>
+                        IgE介导的<span class="drug">青霉素</span>过敏：<span class="drug">阿奇霉素</span>1g po×1＋<span class="drug">克林霉素</span>900mg iv q8h×48h＋<span class="drug">庆大霉素</span>5mg/kg iv q24h×2剂，然后<span class="drug">克林霉素</span>300mg po q8h×5d<br>
+                        IgE介导<span class="drug">青霉素</span>过敏同时<span class="bacteria">B群链球菌</span>对<span class="drug">克林霉素</span>耐药：<span class="drug">阿奇霉素</span>1g po×1＋<span class="drug">万古霉素</span>20mg/kg iv q8h（最大剂量2g）×48h
                     </td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
+    
     <div class="tags-section">
-        <div class="tags-title">🔍 检索标签（点击筛选）</div>
-        <span class="tag disease">B群链球菌病</span>
-        <span class="tag disease">GBS</span>
-        <span class="tag disease">新生儿</span>
-        <span class="tag disease">孕妇</span>
-        <span class="tag disease">早产</span>
-        <span class="tag disease">胎膜早破</span>
-        <span class="tag disease">羊膜炎</span>
-        <span class="tag drug">青霉素G</span>
-        <span class="tag drug">氨苄西林</span>
-        <span class="tag drug">阿莫西林</span>
-        <span class="tag drug">头孢唑啉</span>
-        <span class="tag drug">头孢唑林</span>
-        <span class="tag drug">头孢拉定</span>
-        <span class="tag drug">克林霉素</span>
-        <span class="tag drug">红霉素</span>
-        <span class="tag drug">万古霉素</span>
-        <span class="tag drug">阿奇霉素</span>
-        <span class="tag drug">庆大霉素</span>
-        <span class="tag bacteria">B群链球菌</span>
+        <div class="tags-title">🏷️ 检索标签</div>
+        <span class="tag tag-bacteria">B群链球菌病</span>
+        <span class="tag tag-bacteria">GBS</span>
+        <span class="tag tag-bacteria">B群链球菌</span>
+        <span class="tag tag-disease">新生儿</span>
+        <span class="tag tag-disease">孕妇</span>
+        <span class="tag tag-disease">羊膜炎</span>
+        <span class="tag tag-disease">未足月</span>
+        <span class="tag tag-disease">胎膜早破的早产儿</span>
+        <span class="tag tag-drug">青霉素G</span>
+        <span class="tag tag-drug">氨苄西林</span>
+        <span class="tag tag-drug">青霉素</span>
+        <span class="tag tag-drug">头孢唑啉</span>
+        <span class="tag tag-drug">克林霉素</span>
+        <span class="tag tag-drug">红霉素</span>
+        <span class="tag tag-drug">万古霉素</span>
+        <span class="tag tag-drug">阿奇霉素</span>
+        <span class="tag tag-drug">阿莫西林</span>
+        <span class="tag tag-drug">头孢拉定</span>
+        <span class="tag tag-drug">庆大霉素</span>
     </div>
-
-    <div class="bottom-area">
-        <div class="keywords-box">
-            <div class="keywords-label">关键词：</div>
-            <div class="keywords">特定细菌感染的抗生素预防、B群链球菌病、GBS、新生儿、孕妇、分娩期、抗微生物预防、青霉素G、氨苄西林、阿莫西林、头孢唑啉、克林霉素、红霉素、万古霉素、阿奇霉素、庆大霉素、头孢拉定、头孢唑林、胎膜早破、早产、羊膜炎、CDC指南、药敏试验</div>
+    
+    <div class="page-num">509</div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表15A特定细菌感染的抗生素预防；B群链球菌病、GBS、B群链球菌、新生儿、孕妇、羊膜炎、未足月、胎膜早破的早产儿、青霉素G、氨苄西林、青霉素、头孢唑啉、克林霉素、红霉素、万古霉素、阿奇霉素、阿莫西林、头孢拉定、庆大霉素；=509" readonly>
+        <button class="btn-copy" onclick="copyText()">📋 复制</button>
+    </div>
+    
+    <div class="img-container">
+        <img src="509.jpg" alt="表15A特定细菌感染的抗生素预防" onclick="openModal()">
+    </div>
+    
+    <div class="modal" id="imgModal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img src="509.jpg" alt="放大图片">
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="509.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
         </div>
         
-        <div class="page-num">509</div>
-        
-        <div class="copy-box">
-            <input type="text" class="copy-input" id="copyInput" readonly>
-            <button class="copy-btn" id="copyBtn" onclick="doCopy()">📋 复制</button>
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
         </div>
     </div>
+</div>
 
-    <button class="fav-btn" id="favBtn" onclick="toggleFav()" title="收藏">⭐</button>
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
 
-    <script>
-        // 设置复制框内容
-        const title = "表15A特定细菌感染的抗生素预防";
-        const subtitle = "B群链球菌病(GBS)|新生儿|孕妇-分娩期抗微生物预防措施";
-        const keywords = "特定细菌感染的抗生素预防、B群链球菌病、GBS、新生儿、孕妇、分娩期、抗微生物预防、青霉素G、氨苄西林、阿莫西林、头孢唑啉、克林霉素、红霉素、万古霉素、阿奇霉素、庆大霉素、头孢拉定、头孢唑林、胎膜早破、早产、羊膜炎、CDC指南、药敏试验";
-        const pageNum = "509";
-        document.getElementById('copyInput').value = title + "；" + subtitle + "；" + keywords + "；=" + pageNum;
-
-        // 复制功能
-        function doCopy() {
-            const input = document.getElementById('copyInput');
-            input.select();
-            input.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(input.value).then(() => {
-                const btn = document.getElementById('copyBtn');
-                btn.textContent = '✓ 已复制';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = '📋 复制';
-                    btn.classList.remove('copied');
-                }, 2000);
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyText() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
             });
         }
-
-        // 收藏功能（保存到localStorage，index.html可读取）
-        function toggleFav() {
-            const btn = document.getElementById('favBtn');
-            const pageData = {
-                title: title,
-                subtitle: subtitle,
-                url: '509.html',
-                pageNum: pageNum,
-                tags: ['B群链球菌病','GBS','新生儿','孕妇','早产','胎膜早破','羊膜炎','青霉素G','氨苄西林','阿莫西林','头孢唑啉','头孢唑林','头孢拉定','克林霉素','红霉素','万古霉素','阿奇霉素','庆大霉素','B群链球菌']
-            };
-            
-            let favorites = JSON.parse(localStorage.getItem('fav_pages') || '[]');
-            const idx = favorites.findIndex(f => f.url === '509.html');
-            
-            if (idx === -1) {
-                favorites.push(pageData);
-                btn.classList.add('active');
-                btn.innerHTML = '❤️';
-                alert('已收藏！可在首页查看');
-            } else {
-                favorites.splice(idx, 1);
-                btn.classList.remove('active');
-                btn.innerHTML = '⭐';
-                alert('已取消收藏');
-            }
-            localStorage.setItem('fav_pages', JSON.stringify(favorites));
+        
+        function openModal() {
+            document.getElementById("imgModal").style.display = "flex";
         }
-
-        // 初始化收藏状态
-        (function initFav() {
-            const favorites = JSON.parse(localStorage.getItem('fav_pages') || '[]');
-            const btn = document.getElementById('favBtn');
-            if (favorites.find(f => f.url === '509.html')) {
-                btn.classList.add('active');
-                btn.innerHTML = '❤️';
+        
+        function closeModal() {
+            document.getElementById("imgModal").style.display = "none";
+        }
+        
+        function addFavorite() {
+            var title = document.title;
+            var url = window.location.href;
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var exists = favorites.some(function(f) { return f.url === url; });
+            if (!exists) {
+                favorites.push({title: title, url: url, date: new Date().toLocaleString()});
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert('已添加到收藏！');
+            } else {
+                alert('已经在收藏列表中！');
             }
-        })();
+        }
     </script>
-
 </body>
 </html>

@@ -1,0 +1,717 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表20A破伤风预防伤口分型免疫接种*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 标题 */
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 70px 0 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        
+        /* 表格容器 */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0 -5px;
+        }
+        
+        /* 主表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        /* 表头 */
+        thead {
+            background: linear-gradient(135deg, #2e86c1 0%, #1a5276 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #1a5276;
+        }
+        
+        /* 第一行字体大一点 */
+        thead tr:first-child th {
+            font-size: 16px;
+            padding: 16px 10px;
+        }
+        
+        /* 单元格 */
+        td, th {
+            padding: 12px 10px;
+            border: 1px solid #d5d8dc;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        /* 注释区域 */
+        .notes {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            font-size: 13px;
+        }
+        
+        .notes h3 {
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .notes p {
+            margin-bottom: 10px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .notes sup {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-section h3 {
+            color: #1a5276;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #fdebd0;
+            color: #9c640c;
+            border: 1px solid #f0b27a;
+        }
+        
+        .tag-bacteria {
+            background: #d5f5e3;
+            color: #1e8449;
+            border: 1px solid #82e0aa;
+        }
+        
+        .tag-drug {
+            background: #d6eaf8;
+            color: #2471a3;
+            border: 1px solid #85c1e9;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* 关键词和页码 */
+        .footer-info {
+            margin-top: 25px;
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .keywords {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        
+        .keywords span {
+            color: #2e86c1;
+            font-weight: 500;
+        }
+        
+        .page-number {
+            color: #1a5276;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 编辑框和复制 */
+        .copy-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #d5d8dc;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #555;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .copy-btn.copied {
+            background: #7f8c8d;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(231, 76, 60, 0.4);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        .fav-btn.active {
+            background: #f39c12;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            td, th {
+                padding: 8px 6px;
+            }
+            
+            .nav-btns {
+                position: relative;
+                top: auto;
+                right: auto;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .home-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">🏠 返回首页</a>
+    
+    <!-- 上一页下一页 -->
+    <div class="nav-btns">
+        <a href="635.html" class="nav-btn">← 上一页</a>
+        <a href="637.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 标题 -->
+    <h1>~~~~~表20A 破伤风的预防、伤口分型和免疫接种*****</h1>
+    
+    <!-- 主表格 -->
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">临床特征</th>
+                    <th colspan="2">有破伤风倾向</th>
+                    <th colspan="2">无破伤风倾向</th>
+                </tr>
+                <tr>
+                    <th colspan="2">创伤时间</th>
+                    <th colspan="2">>6小时</th>
+                    <th colspan="2">≤6小时</th>
+                </tr>
+                <tr>
+                    <th colspan="2">伤口外形</th>
+                    <th colspan="2">星状，撕脱</th>
+                    <th colspan="2">线形</th>
+                </tr>
+                <tr>
+                    <th colspan="2">深度</th>
+                    <th colspan="2">>1cm</th>
+                    <th colspan="2">≤1cm</th>
+                </tr>
+                <tr>
+                    <th colspan="2">创伤原因</th>
+                    <th colspan="2">枪弹伤、挤压伤、烧伤、冻伤</th>
+                    <th colspan="2">锐利创面（玻璃、刀）</th>
+                </tr>
+                <tr>
+                    <th colspan="2">坏死组织</th>
+                    <th colspan="2">有</th>
+                    <th colspan="2">无</th>
+                </tr>
+                <tr>
+                    <th colspan="2">污染物（污物、唾液等）</th>
+                    <th colspan="2">有</th>
+                    <th colspan="2">无</th>
+                </tr>
+                <tr>
+                    <th colspan="6" style="font-size: 16px; background: #1a5276;">免疫接种时间安排</th>
+                </tr>
+                <tr>
+                    <th rowspan="2">破伤风免疫接种史</th>
+                    <th colspan="2">污染的、有破伤风倾向的伤口</th>
+                    <th colspan="2">清洁的、无破伤风倾向的伤口</th>
+                </tr>
+                <tr>
+                    <th>Td<sup>1,2</sup></th>
+                    <th>破伤风<br>免疫球蛋白</th>
+                    <th>Td</th>
+                    <th>破伤风<br>免疫球蛋白</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>不清楚或<3剂<sup>3</sup></td>
+                    <td>接种</td>
+                    <td>接种</td>
+                    <td>接种</td>
+                    <td>不接种</td>
+                </tr>
+                <tr>
+                    <td>≥3剂</td>
+                    <td>不接种<sup>4</sup></td>
+                    <td>不接种</td>
+                    <td>不接种<sup>5</sup></td>
+                    <td>不接种</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 注释 -->
+    <div class="notes">
+        <h3>注：</h3>
+        <p><sup>1</sup> Td = 吸附破伤风和白喉类毒素（成人）；既往未接种Tdap（白喉、百日咳、破伤风三联疫苗）的成人，如有免疫接种指征，给予单剂Tdap（MMWR 61: 468, 2012）。</p>
+        <p><sup>2</sup> 2<7岁儿童，若无禁忌，均应接种TdaP；年龄≥7岁者，首选Td而不是单纯予破伤风类毒素。如需加强免疫，可以给予单剂Tdap。</p>
+        <p><sup>3</sup> 未完成免疫接种的患者必须接种。</p>
+        <p><sup>4</sup> 若距离最后一次加强免疫>5年，接种。</p>
+        <p><sup>5</sup> 若距离最后一次加强免疫>10年，接种。</p>
+    </div>
+    
+    <!-- 特色检索标签 -->
+    <div class="tags-section">
+        <h3>🏷️ 特色检索标签</h3>
+        <div class="tags">
+            <span class="tag tag-disease">破伤风</span>
+            <span class="tag tag-bacteria">破伤风梭菌</span>
+            <span class="tag tag-drug">Td</span>
+            <span class="tag tag-drug">Tdap</span>
+            <span class="tag tag-drug">TdaP</span>
+            <span class="tag tag-drug">破伤风免疫球蛋白</span>
+            <span class="tag tag-drug">白喉类毒素</span>
+            <span class="tag tag-disease">白喉</span>
+            <span class="tag tag-disease">百日咳</span>
+        </div>
+    </div>
+    
+    <!-- 编辑框和复制 -->
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="表20A 破伤风的预防、伤口分型和免疫接种；破伤风、破伤风梭菌、Td、Tdap、TdaP、破伤风免疫球蛋白、白喉类毒素、白喉、百日咳；=636" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <!-- 关键词和页码 -->
+    <div class="footer-info">
+        <div class="keywords">
+            关键词：<span>破伤风</span>、<span>破伤风梭菌</span>、<span>Td</span>、<span>Tdap</span>、<span>TdaP</span>、<span>破伤风免疫球蛋白</span>、<span>白喉类毒素</span>、<span>白喉</span>、<span>百日咳</span>
+        </div>
+        <div class="page-number">636</div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="636.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // 收藏功能
+        function toggleFavorite() {
+            const btn = document.getElementById('favBtn');
+            const isActive = btn.classList.toggle('active');
+            if (isActive) {
+                btn.innerHTML = '★';
+                btn.title = '已收藏';
+                // 保存到localStorage模拟添加到index收藏
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                if (!favorites.includes('636')) {
+                    favorites.push('636');
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                }
+                alert('已添加到收藏！');
+            } else {
+                btn.innerHTML = '☆';
+                btn.title = '收藏';
+                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                favorites = favorites.filter(id => id !== '636');
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
+        }
+        
+        // 页面加载时检查收藏状态
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favorites.includes('636')) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★';
+                btn.title = '已收藏';
+            }
+        };
+    </script>
+</body>
+</html>

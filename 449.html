@@ -4,7 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~HSV脑炎与生殖器疱疹抗病毒治疗指南*****</title>
+    <title>单纯疱疹病毒治疗指南 - 抗病毒药物与剂量</title>
     <style>
         * {
             margin: 0;
@@ -13,404 +13,387 @@ html
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             min-height: 100vh;
             padding: 20px 10px;
             color: #333;
         }
         
-        .top-bar {
+        /* 导航按钮 */
+        .nav-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
             gap: 10px;
         }
         
-        .home-btn {
-            background: #4a90d9;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s;
-        }
-        
-        .home-btn:hover {
-            background: #357abd;
-            transform: translateY(-2px);
-        }
-        
-        .nav-buttons {
+        .nav-left {
             display: flex;
             gap: 10px;
         }
         
-        .nav-btn {
-            background: #5cb85c;
-            color: white;
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         
-        .nav-btn:hover {
-            background: #4cae4c;
-            transform: translateY(-2px);
+        .btn-home {
+            background: #4a90d9;
+            color: white;
         }
         
-        .main-title {
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-nav {
+            background: #5cb85c;
+            color: white;
+        }
+        
+        .btn-nav:hover {
+            background: #449d44;
+        }
+        
+        .btn-fav {
+            background: #f0ad4e;
+            color: white;
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-fav:hover {
+            background: #ec971f;
+        }
+        
+        /* 标题 */
+        .page-title {
             text-align: center;
-            font-size: 22px;
-            color: #2c3e50;
             margin: 20px 0;
-            padding: 15px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
             line-height: 1.6;
         }
         
-        .subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-            font-style: italic;
+        .title-format {
+            color: #e74c3c;
+            font-size: 24px;
         }
         
+        /* 表格容器 */
         .table-container {
             overflow-x: auto;
             margin: 20px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            font-size: 13px;
+            min-width: 800px;
         }
         
+        /* 表头 */
         thead th {
-            background: #2e6da4;
+            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
             color: white;
-            padding: 15px 10px;
+            padding: 15px 12px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
-            position: sticky;
-            top: 0;
+            border: 1px solid #1a4d85;
         }
         
-        tbody td {
-            padding: 12px 10px;
-            border: 1px solid #e0e0e0;
+        /* 表格单元格 */
+        td, th {
+            padding: 12px;
+            border: 1px solid #ddd;
             vertical-align: top;
             line-height: 1.8;
         }
         
-        tbody tr:nth-child(even) {
-            background: #f8fafc;
-        }
-        
-        tbody tr:hover {
-            background: #e8f4fd;
-        }
-        
-        .disease-name {
-            font-weight: bold;
-            color: #c0392b;
+        /* 第一行特殊样式 */
+        .first-row td {
             font-size: 15px;
-            margin-bottom: 8px;
         }
         
-        .note-row {
-            background: #fff8e6 !important;
+        /* 列宽设置 */
+        .col-virus {
+            width: 28%;
+            min-width: 220px;
         }
         
-        .note-row td {
-            color: #856404;
-            font-size: 12px;
+        .col-drug {
+            width: 32%;
+            min-width: 260px;
         }
         
-        .source-text {
+        .col-effect {
+            width: 40%;
+            min-width: 320px;
+        }
+        
+        /* 颜色标记 */
+        .disease-name {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .virus-name {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+        
+        .drug-name {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .drug-name-vertical {
+            color: #27ae60;
+            font-weight: bold;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            display: inline-block;
+            padding: 5px;
+        }
+        
+        .highlight-brown {
+            color: #8b4513;
+            font-weight: bold;
+        }
+        
+        .highlight-red {
+            color: #e74c3c;
+        }
+        
+        .highlight-yellow {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        /* 子标题行 */
+        .section-title {
+            background: #f8f9fa;
             font-weight: bold;
             color: #2c3e50;
-            font-size: 14px;
-            margin: 15px 0 10px;
-            padding: 10px;
-            background: rgba(46,109,164,0.1);
+            font-size: 15px;
+        }
+        
+        /* 备注 */
+        .note {
+            margin: 15px 0;
+            padding: 12px;
+            background: #e8f4f8;
             border-radius: 8px;
-            text-align: center;
-        }
-        
-        .tags-section {
-            margin: 30px 0 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .tags-title {
-            font-size: 16px;
-            color: #2e6da4;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 8px 16px;
-            margin: 5px;
-            border-radius: 20px;
+            border-left: 4px solid #3498db;
             font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
+            color: #555;
         }
         
-        .tag-disease {
-            background: #ffebee;
-            color: #c62828;
-            border: 1px solid #ef9a9a;
-        }
-        
-        .tag-drug {
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 1px solid #90caf9;
-        }
-        
-        .tag-bacteria {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #a5d6a7;
-        }
-        
-        .tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        
+        /* 底部区域 */
         .bottom-section {
             margin-top: 30px;
             padding: 20px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         
-        .keywords-area {
-            margin-bottom: 20px;
-        }
-        
-        .keywords-title {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        
-        .keywords-content {
-            color: #2c3e50;
-            font-size: 13px;
-            line-height: 2;
-        }
-        
-        .page-number {
-            text-align: center;
-            font-size: 18px;
-            color: #2e6da4;
-            font-weight: bold;
-            margin: 15px 0;
-            padding: 10px;
-            background: #f0f4f8;
-            border-radius: 8px;
-        }
-        
-        .copy-section {
+        /* 复制区域 */
+        .copy-area {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: 20px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         
         .copy-input {
             flex: 1;
             min-width: 200px;
-            padding: 12px 15px;
+            padding: 10px 15px;
             border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #555;
-        }
-        
-        .copy-btn {
-            background: #f0ad4e;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
+            background: #f8f9fa;
         }
         
-        .copy-btn:hover {
-            background: #ec971f;
-            transform: translateY(-2px);
-        }
-        
-        .copy-btn.copied {
+        .btn-copy {
             background: #5cb85c;
-        }
-        
-        .fav-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #e74c3c;
             color: white;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
-            transition: all 0.3s;
-            z-index: 1000;
+            padding: 10px 20px;
         }
         
-        .fav-btn:hover {
-            transform: scale(1.1) rotate(10deg);
+        .btn-copy:hover {
+            background: #449d44;
         }
         
-        .fav-btn.active {
-            background: #c0392b;
+        /* 标签区域 */
+        .tags-section {
+            margin-top: 15px;
         }
         
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
+        .tags-title {
             font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            z-index: 1001;
+            color: #666;
+            margin-bottom: 10px;
         }
         
-        .toast.show {
-            opacity: 1;
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
+        .tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-disease {
+            background: #ffebee;
+            color: #c0392b;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .tag-drug {
+            background: #e8f5e9;
+            color: #27ae60;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .tag-virus {
+            background: #f3e5f5;
+            color: #8e44ad;
+            border: 1px solid #ce93d8;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
         @media (max-width: 768px) {
             body {
                 padding: 10px 5px;
             }
             
-            .main-title {
+            .page-title {
                 font-size: 18px;
-                padding: 10px;
             }
             
-            thead th {
-                font-size: 14px;
-                padding: 10px 5px;
+            td, th {
+                padding: 8px;
+                font-size: 13px;
             }
             
-            tbody td {
-                padding: 8px 5px;
-                font-size: 12px;
-            }
-            
-            .tag {
-                font-size: 12px;
+            .btn {
                 padding: 6px 12px;
+                font-size: 12px;
             }
             
-            .top-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .nav-buttons {
-                justify-content: center;
-            }
-            
-            .copy-section {
-                flex-direction: column;
-            }
-            
-            .copy-input {
-                width: 100%;
+            table {
+                min-width: 600px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-fav" onclick="addToFavorites()">⭐ 收藏</button>
+    
     <!-- 顶部导航 -->
-    <div class="top-bar">
-        <a href="index.html" class="home-btn">🏠 返回首页</a>
-        <div class="nav-buttons">
-            <a href="448.html" class="nav-btn">← 上一页</a>
-            <a href="450.html" class="nav-btn">下一页 →</a>
+    <div class="nav-top">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">← 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="448.html" class="btn btn-nav">← 上一页</a>
+            <a href="450.html" class="btn btn-nav">下一页 →</a>
         </div>
     </div>
     
     <!-- 标题 -->
-    <h1 class="main-title">~~~~~HSV脑炎与生殖器疱疹抗病毒治疗指南*****</h1>
-    <div class="subtitle">生殖器疱疹：性传播疾病治疗指南：MMWR 70（RR4）：1，2021</div>
+    <h1 class="page-title">
+        <span class="title-format">~~~~~</span>
+        单纯疱疹病毒治疗指南 - 抗病毒药物与剂量
+        <span class="title-format">*****</span>
+    </h1>
     
     <!-- 表格 -->
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th style="width: 28%;">病毒/疾病</th>
-                    <th style="width: 32%;">药物/剂量</th>
-                    <th style="width: 40%;">不良反应/说明</th>
+                    <th class="col-virus">病毒/疾病</th>
+                    <th class="col-drug">药物/剂量</th>
+                    <th class="col-effect">不良反应/说明</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- 第一行：脑炎 -->
+                <tr class="first-row">
                     <td>
-                        <div class="disease-name">脑炎</div>
-                        HSV 1型是散发性脑炎最常见的病因。神经系统后遗症的康复及存活状况取决于启动治疗时的精神状态。应早诊断、早治疗
+                        <span class="disease-name">脑炎</span><br>
+                        <span class="virus-name">HSV 1型</span>是散发性脑炎最常见的病因。神经系统后遗症的康复及存活状况取决于启动治疗时的精神状态。应早诊断、早治疗
                     </td>
                     <td>
-                        阿昔洛韦10.0～12.5mg/kg iv q8h（输注1小时以上）×14～21d；年龄＜12岁儿童，20mg/kg q8h。肥胖患者的剂量不清楚。为减少大剂量的肾毒性风险，每次给药均输注1小时以上应当是合理的。病态肥胖患者使用"校正"体重，校正体重＝理想体重＋0.4（实际体重－理想体重）
+                        <span class="drug-name">阿昔洛韦</span>10.0～12.5mg/kg iv q8h（输注1小时以上）×14～21d；年龄&lt;12岁儿童，20mg/kg q8h。肥胖患者的剂量不清楚。为减少大剂量的肾毒性风险，每次给药均输注1小时以上应当是合理的。病态肥胖患者使用"校正"体重，校正体重＝理想体重＋0.4（实际体重－理想体重）
                     </td>
                     <td>
-                        阿昔洛韦治疗使病死率从＞70%下降至19%。PCR法检测CSF中HSV-1 DNA的诊断特异性为100%，敏感性为75%～98%。8/33（25%）的患者起病前3天的CSF PCR阴性，与CSF蛋白低和白细胞＜10×10⁶/L有关，但3天内全部转阳性。可在治疗成功后出现自身免疫性脑炎（NMDA受体抗体相关）。HSV-DNA阴性。糖皮质激素治疗
+                        阿昔洛韦治疗使病死率从&gt;70%下降至19%。PCR法检测CSF中<span class="virus-name">HSV-1 DNA</span>的诊断特异性为100%，敏感性为75%～98%。8/33（25%）的患者起病前3天的CSF PCR阴性，与CSF蛋白低和白细胞&lt;10×10⁶/L有关，但3天内全部转阳性。可在治疗成功后出现自身免疫性脑炎（NMDA受体抗体相关）。HSV-DNA阴性。糖皮质激素治疗
                     </td>
                 </tr>
+                <!-- 生殖器疱疹标题行 -->
+                <tr class="section-title">
+                    <td colspan="3">
+                        生殖器疱疹：性传播疾病治疗指南：<span class="highlight-brown">MMWR 70（RR4）：1，2021</span>
+                    </td>
+                </tr>
+                <!-- 原发初次发作 -->
                 <tr>
                     <td rowspan="3">
-                        <div class="disease-name">生殖器疱疹</div>
-                        原发（初次发作）
+                        <span class="disease-name">原发（初次发作）</span>
                     </td>
                     <td>
-                        阿昔洛韦（Zovirax或仿制药）400mg po tid×7～10d
+                        <span class="drug-name">阿昔洛韦</span>（Zovirax或仿制药）400mg po tid×7～10d
                     </td>
                     <td>
                         提前2天症状和体征好转，提前4天病变愈合，局部病毒排放缩短7天。不能预防复发。仅重症患者：5mg/kg iv q8h×5～7d
@@ -418,7 +401,7 @@ html
                 </tr>
                 <tr>
                     <td>
-                        伐昔洛韦（Valtrex）1000mg po bid×7～10d
+                        <span class="drug-name">伐昔洛韦</span>（Valtrex）1000mg po bid×7～10d
                     </td>
                     <td>
                         是阿昔洛韦的酯剂，吸收好，生物利用度比阿昔洛韦高3～5倍
@@ -426,157 +409,286 @@ html
                 </tr>
                 <tr>
                     <td>
-                        泛昔洛韦（Famvir）250mg po bid或tid×7～10d
+                        <span class="drug-name">泛昔洛韦</span>（Famvir）250mg po bid或tid×7～10d
                     </td>
                     <td>
                         代谢为具有活性的喷昔洛韦，不良反应和抗病毒活性与阿昔洛韦相似。泛昔洛韦250mg po tid与阿昔洛韦200mg 5次/d相当
-                    </td>
-                </tr>
-                <tr class="note-row">
-                    <td colspan="3">
-                        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
-                        表中名词缩写见第2页。
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     
-    <!-- 检索标签 -->
-    <div class="tags-section">
-        <div class="tags-title">🔍 检索标签（点击可筛选）</div>
-        <div>
-            <span class="tag tag-disease">脑炎</span>
-            <span class="tag tag-disease">生殖器疱疹</span>
-            <span class="tag tag-disease">性传播疾病</span>
-            <span class="tag tag-disease">自身免疫性脑炎</span>
-            <span class="tag tag-disease">散发性脑炎</span>
-            <span class="tag tag-drug">阿昔洛韦</span>
-            <span class="tag tag-drug">Zovirax</span>
-            <span class="tag tag-drug">伐昔洛韦</span>
-            <span class="tag tag-drug">Valtrex</span>
-            <span class="tag tag-drug">泛昔洛韦</span>
-            <span class="tag tag-drug">Famvir</span>
-            <span class="tag tag-drug">喷昔洛韦</span>
-            <span class="tag tag-drug">糖皮质激素</span>
-            <span class="tag tag-bacteria">HSV</span>
-            <span class="tag tag-bacteria">HSV 1型</span>
-            <span class="tag tag-bacteria">HSV-DNA</span>
-            <span class="tag tag-bacteria">NMDA受体抗体</span>
-        </div>
+    <!-- 备注 -->
+    <div class="note">
+        <strong>注：</strong>*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
+        表中名词缩写见第2页。
     </div>
     
     <!-- 底部区域 -->
     <div class="bottom-section">
-        <div class="keywords-area">
-            <div class="keywords-title">关键词：</div>
-            <div class="keywords-content">
-                HSV脑炎、生殖器疱疹、阿昔洛韦、伐昔洛韦、泛昔洛韦、抗病毒治疗、性传播疾病、PCR检测、CSF、NMDA受体抗体、糖皮质激素、肾毒性、生物利用度、喷昔洛韦
-            </div>
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyText" value="单纯疱疹病毒治疗指南 - 抗病毒药物与剂量；脑炎、生殖器疱疹、阿昔洛韦、伐昔洛韦、泛昔洛韦、HSV 1型、Zovirax、Valtrex、Famvir=449" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
         </div>
         
+        <!-- 页码 -->
         <div class="page-number">449</div>
         
-        <div class="copy-section">
-            <input type="text" class="copy-input" id="copyText" readonly>
-            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">📋 复制</button>
+        <!-- 标签 -->
+        <div class="tags-section">
+            <div class="tags-title">检索标签（点击可检索）：</div>
+            <div class="tags-container">
+                <span class="tag tag-disease">脑炎</span>
+                <span class="tag tag-disease">生殖器疱疹</span>
+                <span class="tag tag-virus">HSV 1型</span>
+                <span class="tag tag-drug">阿昔洛韦</span>
+                <span class="tag tag-drug">伐昔洛韦</span>
+                <span class="tag tag-drug">泛昔洛韦</span>
+                <span class="tag tag-drug">Zovirax</span>
+                <span class="tag tag-drug">Valtrex</span>
+                <span class="tag tag-drug">Famvir</span>
+            </div>
         </div>
     </div>
     
-    <!-- 收藏按钮 -->
-    <button class="fav-btn" id="favBtn" onclick="toggleFavorite()" title="点击收藏">⭐</button>
-    
-    <!-- 提示框 -->
-    <div class="toast" id="toast"></div>
-    
-    <script>
-        // 设置复制框内容
-        const title = "HSV脑炎与生殖器疱疹抗病毒治疗指南";
-        const subtitle = "生殖器疱疹：性传播疾病治疗指南：MMWR 70（RR4）：1，2021";
-        const keywords = "HSV脑炎、生殖器疱疹、阿昔洛韦、伐昔洛韦、泛昔洛韦、抗病毒治疗、性传播疾病、PCR检测、CSF、NMDA受体抗体、糖皮质激素、肾毒性、生物利用度、喷昔洛韦";
-        const pageNum = "449";
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="449.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
         
-        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
         
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
         // 复制功能
         function copyToClipboard() {
-            const input = document.getElementById('copyText');
-            input.select();
-            input.setSelectionRange(0, 99999);
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
             
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(input.value).then(() => {
-                    showCopied();
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("已复制到剪贴板！");
                 });
             } else {
-                document.execCommand('copy');
-                showCopied();
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
             }
         }
         
-        function showCopied() {
-            const btn = document.getElementById('copyBtn');
-            btn.textContent = '✓ 已复制';
-            btn.classList.add('copied');
-            showToast('已复制到剪贴板！');
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            const title = "单纯疱疹病毒治疗指南 - 抗病毒药物与剂量";
+            const url = window.location.href;
+            const pageNum = "449";
             
-            setTimeout(() => {
-                btn.textContent = '📋 复制';
-                btn.classList.remove('copied');
-            }, 2000);
-        }
-        
-        // 收藏功能（使用localStorage）
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageInfo = {
-                title: title,
-                subtitle: subtitle,
-                url: window.location.href,
-                pageNum: pageNum,
-                tags: ['脑炎', '生殖器疱疹', '阿昔洛韦', '伐昔洛韦', '泛昔洛韦', 'HSV', 'HSV 1型']
-            };
-            
+            // 尝试添加到localStorage（模拟收藏功能）
             let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            const exists = favorites.findIndex(f => f.pageNum === pageNum);
             
-            if (exists >= 0) {
-                favorites.splice(exists, 1);
-                btn.classList.remove('active');
-                showToast('已取消收藏');
-            } else {
-                favorites.push(pageInfo);
-                btn.classList.add('active');
-                showToast('已收藏！请在index.html查看收藏列表');
-                
-                // 同时存储收藏列表供index.html使用
-                localStorage.setItem('favorites_html', JSON.stringify(favorites));
+            // 检查是否已收藏
+            const exists = favorites.some(fav => fav.url === url);
+            if (exists) {
+                alert("该页面已在收藏夹中！");
+                return;
             }
+            
+            // 添加收藏
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: "抗病毒治疗",
+                date: new Date().toLocaleDateString()
+            });
             
             localStorage.setItem('favorites', JSON.stringify(favorites));
+            alert("已添加到收藏！\n标题：" + title + "\n页码：" + pageNum);
+            
+            // 尝试更新index.html的收藏（需要同源策略支持）
+            console.log("收藏信息：", {title, url, pageNum});
         }
         
-        // 检查是否已收藏
-        function checkFavorite() {
-            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            const btn = document.getElementById('favBtn');
-            if (favorites.find(f => f.pageNum === pageNum)) {
-                btn.classList.add('active');
-            }
-        }
-        
-        // 显示提示
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
-        }
-        
-        // 初始化
-        checkFavorite();
+        // 标签点击检索功能
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const keyword = this.textContent;
+                alert('检索关键词：' + keyword + '\n（在实际应用中可跳转到搜索结果页）');
+            });
+        });
     </script>
 </body>
 </html>

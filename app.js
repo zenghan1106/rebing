@@ -249,9 +249,7 @@ function openPage(id) {
   // 跳转到 {id}.html
   var url = id + '.html';
 
-  // ✅ 调试:显示实际跳转的URL
-  alert('调试信息:\n\nID: ' + id + '\nURL: ' + url + '\n\n类型: ' + typeof id);
-
+  // ✅ 调试信息已删除（原alert弹窗）
   console.log('跳转:', url);
   window.location.href = url;
 }
@@ -302,7 +300,7 @@ function addNew() {
   var keywords = document.getElementById('addKeywords').value.trim();
 
   if (!id || !keywords) {
-    alert('请输入ID和关键词');
+    showToast('请输入ID和关键词');
     return;
   }
 
@@ -316,7 +314,7 @@ function addNew() {
   // 保存到localStorage
   localStorage.setItem('rebing_data', JSON.stringify(allData));
 
-  alert('添加成功!');
+  showToast('添加成功！');
   closeModal('addModal');
 
   // 重新渲染
@@ -333,7 +331,7 @@ function startVoice() {
   // 检查浏览器支持
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
-    alert('当前浏览器不支持语音输入\n\n请使用以下浏览器:\n• Chrome (推荐)\n• Edge\n• Safari');
+    showToast('当前浏览器不支持语音输入');
     return;
   }
 
@@ -417,21 +415,21 @@ function startVoice() {
     var errorMsg = '';
     switch(event.error) {
       case 'not-allowed':
-        errorMsg = '请允许使用麦克风\n\n操作方法:\n点击浏览器地址栏左侧的🔒图标 → 允许麦克风权限';
+        errorMsg = '请允许使用麦克风';
         break;
       case 'network':
-        errorMsg = '网络错误,请检查网络连接\n\n语音识别需要联网使用';
+        errorMsg = '网络错误,请检查网络连接';
         break;
       case 'no-speech':
         errorMsg = '未检测到语音,请重试';
         break;
       case 'audio-capture':
-        errorMsg = '无法访问麦克风\n\n请检查:\n• 麦克风是否已连接\n• 其他程序是否正在使用麦克风';
+        errorMsg = '无法访问麦克风';
         break;
       default:
         errorMsg = '识别失败,请重试';
     }
-    alert(errorMsg);
+    showToast(errorMsg);
   };
 
   recognition.onend = function() {
@@ -447,7 +445,7 @@ function startVoice() {
   } catch(e) {
     clearTimeout(timeoutId);
     console.error('启动失败:', e);
-    alert('启动失败,请重试');
+    showToast('启动失败,请重试');
   }
 }
 

@@ -1,0 +1,905 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~医学术语索引表（抗生素与疾病）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        /* 返回首页按钮 */
+        .home-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 上一页/下一页按钮 */
+        .nav-btns {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: #4a90d9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn:hover {
+            background: #357abd;
+        }
+        
+        /* 标题 */
+        .page-title {
+            text-align: center;
+            margin: 60px 0 30px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            color: #e74c3c;
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            color: #e74c3c;
+            margin-left: 10px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            margin: 0 auto 30px;
+            max-width: 1200px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        /* 表头 */
+        thead th {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        /* 表头第一行 */
+        thead tr:first-child th {
+            font-size: 18px;
+        }
+        
+        /* 列宽设置 */
+        th:nth-child(1), td:nth-child(1) {
+            width: 35%;
+        }
+        
+        th:nth-child(2), td:nth-child(2) {
+            width: 40%;
+        }
+        
+        th:nth-child(3), td:nth-child(3) {
+            width: 25%;
+        }
+        
+        /* 单元格 */
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 14px;
+            line-height: 1.6;
+            word-wrap: break-word;
+            vertical-align: middle;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* 疾病 - 绿色 */
+        .disease {
+            color: #27ae60;
+            background: rgba(39, 174, 96, 0.08);
+        }
+        
+        /* 抗生素药物 - 紫色 */
+        .antibiotic {
+            color: #8e44ad;
+            background: rgba(142, 68, 173, 0.08);
+        }
+        
+        /* 其他药物/治疗 - 棕色 */
+        .treatment {
+            color: #a0522d;
+            background: rgba(160, 82, 45, 0.08);
+        }
+        
+        /* 感染类型 - 红色 */
+        .infection {
+            color: #c0392b;
+            background: rgba(192, 57, 43, 0.08);
+        }
+        
+        /* 手术/操作 - 黄色/橙色 */
+        .surgery {
+            color: #d35400;
+            background: rgba(211, 84, 0, 0.08);
+        }
+        
+        /* 页码列样式 */
+        .page-num {
+            color: #3498db;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        /* 收藏按钮 */
+        .fav-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fav-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+        
+        /* 图片区域 */
+        .image-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            text-align: center;
+        }
+        
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .image-section img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* 图片放大模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 95%;
+            max-height: 85%;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* 底部编辑框区域 */
+        .bottom-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        /* 标签区域 */
+        .tags-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .tag-disease {
+            background: #d5f5e3;
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+        
+        .tag-antibiotic {
+            background: #e8daef;
+            color: #8e44ad;
+            border: 1px solid #8e44ad;
+        }
+        
+        .tag-infection {
+            background: #fadbd8;
+            color: #c0392b;
+            border: 1px solid #c0392b;
+        }
+        
+        .tag-surgery {
+            background: #fdebd0;
+            color: #d35400;
+            border: 1px solid #d35400;
+        }
+        
+        /* 页码显示 */
+        .page-indicator {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                margin-top: 80px;
+            }
+            
+            td, th {
+                padding: 8px;
+                font-size: 13px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .fav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+        
+        /* 竖排文字（用于超长抗生素名） */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            margin: 0 auto;
+            max-height: 120px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 返回首页</a>
+    
+    <!-- 上一页/下一页 -->
+    <div class="nav-btns">
+        <a href="652.html" class="nav-btn">← 上一页</a>
+        <a href="654.html" class="nav-btn">下一页 →</a>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="addToFavorites()" title="收藏">★</button>
+
+    <!-- 标题 -->
+    <h1 class="page-title">医学术语索引表（抗生素与疾病）</h1>
+    
+    <!-- 页码指示 -->
+    <div class="page-indicator">页码：653</div>
+
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>英文名称</th>
+                    <th>中文名称</th>
+                    <th>页码</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="disease">
+                    <td>Neonatal candidiasis</td>
+                    <td>新生儿念珠菌病</td>
+                    <td class="page-num">177</td>
+                </tr>
+                <tr class="disease">
+                    <td>Oropharyngeal candidiasis</td>
+                    <td>口咽部念珠菌病</td>
+                    <td class="page-num">176</td>
+                </tr>
+                <tr class="infection">
+                    <td>Osteomyelitis</td>
+                    <td>骨髓炎</td>
+                    <td class="page-num">175</td>
+                </tr>
+                <tr class="infection">
+                    <td>Peritonitis (chronic)</td>
+                    <td>腹膜炎（慢性）</td>
+                    <td class="page-num">177</td>
+                </tr>
+                <tr class="infection">
+                    <td>Septic arthritis</td>
+                    <td>化脓性关节炎</td>
+                    <td class="page-num">175</td>
+                </tr>
+                <tr class="infection">
+                    <td>Urinary tract infections</td>
+                    <td>尿路感染</td>
+                    <td class="page-num">177</td>
+                </tr>
+                <tr class="infection">
+                    <td>Vulvovaginitis</td>
+                    <td>外阴阴道炎</td>
+                    <td class="page-num">176</td>
+                </tr>
+                <tr class="infection">
+                    <td>CAPD Peritonitis</td>
+                    <td>持续非卧床腹膜透析腹膜炎</td>
+                    <td class="page-num">325</td>
+                </tr>
+                <tr class="disease">
+                    <td>Capillariasis</td>
+                    <td>毛细线虫病</td>
+                    <td class="page-num">211</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Capreomycin sulfate</td>
+                    <td>硫酸卷曲霉素</td>
+                    <td class="page-num">199</td>
+                </tr>
+                <tr class="treatment">
+                    <td>Capsid Inhibitor</td>
+                    <td>衣壳抑制剂</td>
+                    <td class="page-num">251</td>
+                </tr>
+                <tr class="surgery">
+                    <td>Cardiovascular Surgery</td>
+                    <td>心血管手术</td>
+                    <td class="page-num">262</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Caspofungin</td>
+                    <td>卡泊芬净</td>
+                    <td class="page-num">185</td>
+                </tr>
+                <tr class="infection">
+                    <td>Catheter related blood stream infections</td>
+                    <td>导管相关血流感染</td>
+                    <td class="page-num">73</td>
+                </tr>
+                <tr class="disease">
+                    <td>Cat-scratch disease</td>
+                    <td>猫抓病</td>
+                    <td class="page-num">49, 64</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefaclor</td>
+                    <td>头孢克洛</td>
+                    <td class="page-num">154</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefadroxil</td>
+                    <td>头孢羟氨苄</td>
+                    <td class="page-num">154</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefazolin</td>
+                    <td>头孢唑啉</td>
+                    <td class="page-num">152</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefdinir</td>
+                    <td>头孢地尼</td>
+                    <td class="page-num">154</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefditoren pivoxil</td>
+                    <td>头孢妥仑匹酯</td>
+                    <td class="page-num">154</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefepime</td>
+                    <td>头孢吡肟</td>
+                    <td class="page-num">153</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefiderocol</td>
+                    <td>头孢地尔</td>
+                    <td class="page-num">154, 167</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefixime</td>
+                    <td>头孢克肟</td>
+                    <td class="page-num">154</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefoperazone-sulbactam</td>
+                    <td>头孢哌酮-舒巴坦</td>
+                    <td class="page-num">152</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefotaxime</td>
+                    <td>头孢噻肟</td>
+                    <td class="page-num">152</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefotetan</td>
+                    <td>头孢替坦</td>
+                    <td class="page-num">152</td>
+                </tr>
+                <tr class="antibiotic">
+                    <td>Cefoxitin</td>
+                    <td>头孢西丁</td>
+                    <td class="page-num">152</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 图片区域 -->
+    <div class="image-section">
+        <img src="653.jpg" alt="医学术语索引图" onclick="openModal()" id="sourceImg">
+    </div>
+    
+    <!-- 图片模态框 -->
+    <div id="imgModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签（点击图片中出现的术语快速检索）</div>
+        <div>
+            <span class="tag tag-disease">新生儿念珠菌病</span>
+            <span class="tag tag-disease">口咽部念珠菌病</span>
+            <span class="tag tag-infection">骨髓炎</span>
+            <span class="tag tag-infection">腹膜炎</span>
+            <span class="tag tag-infection">化脓性关节炎</span>
+            <span class="tag tag-infection">尿路感染</span>
+            <span class="tag tag-infection">外阴阴道炎</span>
+            <span class="tag tag-infection">持续非卧床腹膜透析腹膜炎</span>
+            <span class="tag tag-disease">毛细线虫病</span>
+            <span class="tag tag-antibiotic">硫酸卷曲霉素</span>
+            <span class="tag tag-treatment">衣壳抑制剂</span>
+            <span class="tag tag-surgery">心血管手术</span>
+            <span class="tag tag-antibiotic">卡泊芬净</span>
+            <span class="tag tag-infection">导管相关血流感染</span>
+            <span class="tag tag-disease">猫抓病</span>
+            <span class="tag tag-antibiotic">头孢克洛</span>
+            <span class="tag tag-antibiotic">头孢羟氨苄</span>
+            <span class="tag tag-antibiotic">头孢唑啉</span>
+            <span class="tag tag-antibiotic">头孢地尼</span>
+            <span class="tag tag-antibiotic">头孢妥仑匹酯</span>
+            <span class="tag tag-antibiotic">头孢吡肟</span>
+            <span class="tag tag-antibiotic">头孢地尔</span>
+            <span class="tag tag-antibiotic">头孢克肟</span>
+            <span class="tag tag-antibiotic">头孢哌酮-舒巴坦</span>
+            <span class="tag tag-antibiotic">头孢噻肟</span>
+            <span class="tag tag-antibiotic">头孢替坦</span>
+            <span class="tag tag-antibiotic">头孢西丁</span>
+        </div>
+    </div>
+
+    <!-- 底部编辑框 -->
+    <div class="bottom-section">
+        <div class="copy-box">
+            <input type="text" class="copy-input" id="copyText" value="医学术语索引表（抗生素与疾病）；新生儿念珠菌病,口咽部念珠菌病,骨髓炎,腹膜炎,化脓性关节炎,尿路感染,外阴阴道炎,持续非卧床腹膜透析腹膜炎,毛细线虫病,硫酸卷曲霉素,衣壳抑制剂,心血管手术,卡泊芬净,导管相关血流感染,猫抓病,头孢克洛,头孢羟氨苄,头孢唑啉,头孢地尼,头孢妥仑匹酯,头孢吡肟,头孢地尔,头孢克肟,头孢哌酮-舒巴坦,头孢噻肟,头孢替坦,头孢西丁；=653" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="653.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板
+        function copyToClipboard() {
+            var copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value).then(function() {
+                alert("已复制到剪贴板！");
+            }).catch(function(err) {
+                document.execCommand('copy');
+                alert("已复制到剪贴板！");
+            });
+        }
+        
+        // 图片模态框
+        function openModal() {
+            document.getElementById("imgModal").style.display = "block";
+            document.getElementById("modalImg").src = "653.jpg";
+        }
+        
+        function closeModal() {
+            document.getElementById("imgModal").style.display = "none";
+        }
+        
+        // 收藏功能
+        function addToFavorites() {
+            // 获取当前页面信息
+            var title = document.title;
+            var url = window.location.href;
+            
+            // 尝试添加到本地存储的收藏列表
+            var favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            var pageInfo = {
+                title: title,
+                url: url,
+                pageNum: '653',
+                category: '医学术语索引'
+            };
+            
+            // 检查是否已收藏
+            var exists = favorites.some(function(f) {
+                return f.url === url;
+            });
+            
+            if (!exists) {
+                favorites.push(pageInfo);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 尝试更新index.html的收藏（如果同目录下可访问）
+                alert('★ 已收藏！\n页面已添加到收藏列表。\n标题：' + title + '\n页码：653');
+            } else {
+                alert('该页面已在收藏列表中！');
+            }
+        }
+        
+        // 标签点击检索功能
+        document.querySelectorAll('.tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                var keyword = this.textContent;
+                // 在页面内高亮包含该关键词的行
+                var rows = document.querySelectorAll('tbody tr');
+                var found = false;
+                rows.forEach(function(row) {
+                    if (row.textContent.includes(keyword)) {
+                        row.style.background = '#fff3cd';
+                        row.scrollIntoView({behavior: 'smooth', block: 'center'});
+                        found = true;
+                    } else {
+                        row.style.background = '';
+                    }
+                });
+                
+                if (!found) {
+                    alert('未找到包含 "' + keyword + '" 的内容');
+                }
+                
+                // 3秒后清除高亮
+                setTimeout(function() {
+                    rows.forEach(function(row) {
+                        row.style.background = '';
+                    });
+                }, 3000);
+            });
+        });
+        
+        // ESC关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

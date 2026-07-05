@@ -3,8 +3,8 @@ html
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~乳头瘤病毒疣治疗方案指南*****</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>~~~~~乳头瘤病毒疣治疗方案*****</title>
     
     <!-- ============ ��������֤ ============ -->
     <script src="machine_auth_v2.js"></script>
@@ -24,7 +24,6 @@ html
     </script>
     <!-- ============ ��֤���� ============ -->
     
-
     <style>
         * {
             margin: 0;
@@ -33,446 +32,421 @@ html
         }
         
         body {
-            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+            background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
             min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            padding: 15px 8px 30px;
+            color: #1e293b;
         }
         
-        /* 顶部导航栏 */
-        .nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .nav-left {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-right {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
+        /* 返回首页 */
+        .home-btn {
+            position: fixed;
+            top: 12px;
+            left: 10px;
+            background: #0ea5e9;
+            color: white;
+            padding: 9px 16px;
+            border-radius: 20px;
             text-decoration: none;
-            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(14,165,233,0.3);
+            z-index: 100;
+            transition: all 0.3s;
         }
-        
-        .btn-home {
-            background: #4a90d9;
-            color: white;
-        }
-        
-        .btn-home:hover {
-            background: #357abd;
+        .home-btn:hover {
+            background: #0284c7;
             transform: translateY(-2px);
         }
         
-        .btn-page {
-            background: #6c5ce7;
+        /* 导航按钮 */
+        .nav-btn {
+            position: fixed;
+            top: 12px;
+            background: #64748b;
             color: white;
+            padding: 9px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(100,116,139,0.3);
+            z-index: 100;
+            transition: all 0.3s;
         }
-        
-        .btn-page:hover {
-            background: #5b4cdb;
+        .nav-btn:hover {
+            background: #475569;
             transform: translateY(-2px);
         }
+        .prev-btn { right: 95px; }
+        .next-btn { right: 10px; }
         
-        .btn-fav {
-            background: #ff6b6b;
-            color: white;
+        /* 收藏按钮 */
+        .fav-btn {
             position: fixed;
             bottom: 200px;
-            right: 20px;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            right: 12px;
+            background: #f43f5e;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(244,63,94,0.35);
+            z-index: 100;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fav-btn:hover {
+            transform: scale(1.12);
+        }
+        .fav-btn.active {
+            background: #fbbf24;
+            color: #78350f;
         }
         
-        .btn-fav:hover {
-            background: #ee5a5a;
-            transform: scale(1.05);
-        }
-        
-        .btn-fav.active {
-            background: #ffd93d;
-            color: #333;
-        }
-        
-        /* 标题区域 */
-        .title-section {
+        /* 标题 */
+        h1 {
             text-align: center;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            color: #0c4a6e;
+            font-size: 20px;
+            margin: 55px 0 20px 0;
+            padding: 0 10px;
+            line-height: 1.5;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         
-        .main-title {
-            font-size: 28px;
-            color: #1a5276;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        
-        .sub-title {
-            font-size: 16px;
-            color: #5d6d7e;
-        }
-        
-        /* 表格样式 */
-        .table-container {
+        /* 表格容器 */
+        .table-wrap {
             overflow-x: auto;
-            margin-bottom: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin: 0 auto 20px;
+            max-width: 100%;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            -webkit-overflow-scrolling: touch;
         }
         
         table {
             width: 100%;
-            border-collapse: collapse;
-            background: white;
-            font-size: 14px;
-            line-height: 1.6;
+            min-width: 360px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            font-size: 12px;
+            table-layout: fixed;
         }
         
-        thead {
-            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
-            color: white;
-        }
-        
+        /* 表头蓝色 */
         th {
-            padding: 18px 15px;
-            text-align: left;
-            font-size: 18px;
-            font-weight: bold;
-            white-space: nowrap;
+            background: #0369a1;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            font-size: 13px;
+            line-height: 1.4;
         }
+        th:first-child { border-radius: 14px 0 0 0; }
+        th:last-child { border-radius: 0 14px 0 0; }
         
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e8e8e8;
-            vertical-align: top;
-            word-break: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        tr:nth-child(even) {
-            background: #f8fbff;
-        }
-        
-        tr:hover {
-            background: #e8f4fd;
-        }
-        
-        /* 第一行数据字体加大 */
-        tbody tr:first-child td {
-            font-size: 15px;
-        }
-        
-        .disease-name {
-            color: #c0392b;
-            font-weight: bold;
-        }
-        
-        .drug-name {
-            color: #27ae60;
+        /* 第一行字体大 */
+        tr:first-child td {
+            font-size: 14px;
             font-weight: 600;
         }
         
-        .note-text {
-            color: #7f8c8d;
-            font-size: 13px;
-            margin-top: 15px;
-            padding: 15px;
-            background: #fef9e7;
-            border-radius: 10px;
-            border-left: 4px solid #f39c12;
+        td, th {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            text-align: left;
+            vertical-align: top;
+            word-wrap: break-word;
+            line-height: 1.7;
+        }
+        td:first-child, th:first-child { border-left: 1px solid #e2e8f0; }
+        
+        tr:nth-child(even) { background: #f8fafc; }
+        tr:hover { background: #e0f2fe; }
+        
+        /* 颜色定义 - 疾病紫色，药物绿色，病毒棕色，说明红色，高亮黄色底色 */
+        .disease { color: #7c3aed; font-weight: 600; }           /* 紫色-疾病 */
+        .virus { color: #92400e; font-weight: 600; }             /* 棕色-病毒 */
+        .drug { color: #059669; font-weight: 600; }              /* 绿色-药物/抗生素 */
+        .note { color: #dc2626; }                                /* 红色-说明/不良反应 */
+        .highlight-yellow { background: #fef3c7 !important; }    /* 黄色底色高亮 */
+        
+        /* 竖排文字 */
+        .vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            margin: 0 auto;
+            letter-spacing: 4px;
+            padding: 8px 2px;
+            line-height: 1.2;
         }
         
-        /* 标签区域 */
-        .tag-section {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 15px;
+        /* 子标题行 */
+        .subheader {
+            background: #dbeafe !important;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .subheader td { border-bottom: 2px solid #93c5fd; }
+        
+        /* 注释行 */
+        .footnote {
+            background: #f1f5f9 !important;
+            font-size: 11px !important;
+            color: #475569;
+        }
+        .footnote td {
+            padding: 12px 10px;
+            line-height: 1.8;
         }
         
-        .tag-title {
-            font-size: 16px;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            font-weight: bold;
+        /* 图片框 */
+        .img-box {
+            margin: 25px auto;
+            text-align: center;
+            max-width: 100%;
+            padding: 0 5px;
         }
-        
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .tag {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .tag-disease {
-            background: #ffeaa7;
-            color: #d63031;
-        }
-        
-        .tag-drug {
-            background: #a8e6cf;
-            color: #00b894;
-        }
-        
-        .tag-virus {
-            background: #dfe6e9;
-            color: #2d3436;
-        }
-        
-        .tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        .img-box img {
+            width: 98%;
+            max-width: 820px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
         
         /* 底部区域 */
-        .bottom-section {
-            padding: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 15px;
-            margin-bottom: 15px;
+        .bottom-area {
+            margin-top: 25px;
+            padding: 20px 15px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
         
-        .keywords {
-            color: #5d6d7e;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        
-        .keywords strong {
-            color: #2c3e50;
-        }
-        
-        .page-number {
+        /* 页码 */
+        .page-num {
             text-align: center;
-            font-size: 18px;
-            color: #4a90d9;
-            font-weight: bold;
-            margin: 15px 0;
+            color: #475569;
+            font-size: 15px;
+            margin-bottom: 18px;
+            font-weight: 500;
         }
+        
+        /* 标签 */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tag {
+            padding: 7px 18px;
+            border-radius: 22px;
+            font-size: 13px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .tag-disease { background: #7c3aed; }
+        .tag-virus { background: #92400e; }
+        .tag-drug { background: #059669; }
         
         /* 复制区域 */
-        .copy-section {
+        .copy-area {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 15px;
+            justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
+            margin-top: 15px;
         }
-        
         .copy-input {
-            flex: 1;
-            min-width: 200px;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
+            width: calc(100% - 110px);
+            max-width: 580px;
+            padding: 14px 16px;
+            border: 2px solid #cbd5e1;
             border-radius: 10px;
             font-size: 13px;
-            background: #fafafa;
+            color: #334155;
+            background: #f8fafc;
+            outline: none;
         }
-        
-        .btn-copy {
-            background: #00b894;
+        .copy-input:focus { border-color: #0ea5e9; }
+        .copy-btn {
+            padding: 14px 28px;
+            background: #0ea5e9;
             color: white;
-            padding: 12px 25px;
-            white-space: nowrap;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(14,165,233,0.25);
+        }
+        .copy-btn:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+        }
+        .copy-btn.copied {
+            background: #10b981;
         }
         
-        .btn-copy:hover {
-            background: #00a383;
-        }
-        
-        .copy-success {
-            color: #00b894;
-            font-size: 13px;
+        /* 提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15,23,42,0.9);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 15px;
             display: none;
+            z-index: 200;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
         }
         
         /* 响应式 */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .main-title {
-                font-size: 20px;
-            }
-            
-            th {
-                font-size: 15px;
-                padding: 12px 10px;
-            }
-            
-            td {
-                padding: 10px;
-                font-size: 13px;
-            }
-            
-            .btn {
-                padding: 8px 15px;
-                font-size: 12px;
-            }
-            
-            .btn-fav {
-                bottom: 150px;
-                right: 10px;
-                padding: 12px 18px;
-            }
+        @media (max-width: 480px) {
+            h1 { font-size: 17px; margin-top: 50px; }
+            table { font-size: 11px; min-width: 320px; }
+            td, th { padding: 8px 6px; }
+            .nav-btn, .home-btn { font-size: 12px; padding: 8px 12px; }
+            .prev-btn { right: 82px; }
+            .copy-input { width: calc(100% - 95px); padding: 12px; }
+            .copy-btn { padding: 12px 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- 固定收藏按钮 -->
-    <button class="btn btn-fav" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    <!-- 返回首页 -->
+    <a href="index.html" class="home-btn">← 首页</a>
     
-    <!-- 顶部导航 -->
-    <div class="nav-bar">
-        <div class="nav-left">
-            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
-        </div>
-        <div class="nav-right">
-            <a href="458.html" class="btn btn-page">◀ 上一页</a>
-            <a href="460.html" class="btn btn-page">下一页 ▶</a>
-        </div>
-    </div>
+    <!-- 上一页下一页 -->
+    <a href="458.html" class="nav-btn prev-btn">上一页</a>
+    <a href="460.html" class="nav-btn next-btn">下一页</a>
+    
+    <!-- 收藏按钮 -->
+    <button class="fav-btn" onclick="toggleFav()" title="收藏">☆</button>
     
     <!-- 标题 -->
-    <div class="title-section">
-        <h1 class="main-title">~~~~~乳头瘤病毒疣治疗方案指南*****</h1>
-        <p class="sub-title">外生殖器疣、宫颈疣、阴道疣、尿道疣、肛门疣及皮肤乳头状瘤治疗参考</p>
-    </div>
+    <h1>~~~~~乳头瘤病毒疣治疗方案*****</h1>
     
     <!-- 表格 -->
-    <div class="table-container">
-        <table>
+    <div class="table-wrap">
+        <table id="dataTable">
             <thead>
                 <tr>
-                    <th style="width: 22%;">病毒/疾病</th>
-                    <th style="width: 38%;">药物/剂量</th>
-                    <th style="width: 40%;">不良反应/说明</th>
+                    <th style="width:22%">病毒/疾病</th>
+                    <th style="width:38%">药物/剂量</th>
+                    <th style="width:40%">不良反应/说明</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- 乳头瘤病毒：疣 总述 -->
+                <tr class="subheader">
                     <td colspan="3">
-                        <span class="disease-name">乳头瘤病毒：疣</span><br>
-                        外生殖器疣<br>
+                        <span class="virus">乳头瘤病毒：疣</span>
+                    </td>
+                </tr>
+                <!-- 外生殖器疣 -->
+                <tr>
+                    <td>
+                        <span class="disease">外生殖器疣</span><br>
                         另见肛管疣
                     </td>
-                </tr>
-                <tr>
-                    <td></td>
                     <td>
-                        可由患者自己实施的治疗：<br><br>
-                        <span class="drug-name">普达非洛</span>（0.5%溶液或凝胶）：局部涂bid×3d，第4天停用，上述循环重复4个疗程，或<br><br>
-                        <span class="drug-name">5%咪喹莫特霜</span>：局部涂，每周3次，16周<br><br>
-                        <span class="drug-name">Sinecatechins</span>：仅用于外生殖器疣，每天3次，直至有效或出现不良反应<br><br>
-                        需由医务人员实施的治疗：<br><br>
-                        液氮冷冻：每1～2周重复，或<br>
-                        <span class="drug-name">三氯醋酸（TCA）</span>：如需要可每周重复，或<br>
-                        手术切除
+                        可由患者自己实施的治疗：<br>
+                        <span class="drug">普达非洛</span>（0.5%溶液或凝胶）：局部涂bid×3d，第4天停用，上述循环重复4个疗程，或<br><br>
+                        <span class="drug">5%咪喹莫特霜</span>：局部涂，每周3次，16周<br><br>
+                        <span class="drug">Sinecatechins</span>：仅用于外生殖器疣，每天3次，直至有效或出现不良反应<br><br>
+                        需由医务人员实施的治疗：<br>
+                        <span class="drug">液氮冷冻</span>：每1～2周重复，或<br>
+                        <span class="drug">三氯醋酸（TCA）</span>：如需要可每周重复，或<br>
+                        <span class="drug">手术切除</span>
                     </td>
-                    <td>
-                        <span class="drug-name">普达非洛</span>：价廉和安全（孕妇安全性未确定）。用药后局部轻度刺激<br><br>
-                        <span class="drug-name">咪喹莫特</span>：轻、中度发红和刺激。局部咪喹莫特治疗外阴上皮内恶性肿瘤有效。孕妇安全性未确定<br><br>
-                        <span class="drug-name">Sinecatechins</span>：局部刺激，发红、疼痛和瘙痒<br><br>
-                        冷冻治疗：水疱和局部皮肤坏死常见<br><br>
-                        鬼臼酯树脂：因为已有低毒性治疗药物，现已不推荐使用<br><br>
-                        <span class="drug-name">TCA</span>：具有腐蚀性。可引起附近正常皮肤的严重疼痛。可用肥皂水或苏打水中和
+                    <td class="note">
+                        <span class="drug">普达非洛</span>：价廉和安全（孕妇安全性未确定）。用药后局部轻度刺激<br><br>
+                        <span class="drug">咪喹莫特</span>：轻、中度发红和刺激。局部咪喹莫特治疗外阴上皮内恶性肿瘤有效。孕妇安全性未确定<br><br>
+                        <span class="drug">Sinecatechins</span>：局部刺激，发红、疼痛和瘙痒<br><br>
+                        <span class="drug">冷冻治疗</span>：水疱和局部皮肤坏死常见<br><br>
+                        <span class="drug">鬼臼酯树脂</span>：因为已有低毒性治疗药物，现已不推荐使用<br><br>
+                        <span class="drug">TCA</span>：具有腐蚀性。可引起附近正常皮肤的严重疼痛。可用肥皂水或苏打水中和
                     </td>
                 </tr>
+                <!-- 宫颈疣 -->
                 <tr>
-                    <td>
-                        <span class="disease-name">宫颈疣</span>
-                    </td>
-                    <td>
-                        会发展成肿瘤，需随访
-                    </td>
-                    <td>
-                        建议妇科会诊
-                    </td>
+                    <td><span class="disease">宫颈疣</span></td>
+                    <td>会发展成肿瘤，需随访</td>
+                    <td class="note">建议妇科会诊</td>
                 </tr>
+                <!-- 阴道疣 -->
                 <tr>
-                    <td>
-                        <span class="disease-name">阴道疣</span>
-                    </td>
-                    <td>
-                        液氮冷冻治疗或TCA
-                    </td>
+                    <td><span class="disease">阴道疣</span></td>
+                    <td><span class="drug">液氮冷冻治疗</span>或<span class="drug">TCA</span></td>
                     <td></td>
                 </tr>
+                <!-- 尿道疣 -->
                 <tr>
-                    <td>
-                        <span class="disease-name">尿道疣</span>
-                    </td>
-                    <td>
-                        液氮冷冻治疗
-                    </td>
+                    <td><span class="disease">尿道疣</span></td>
+                    <td><span class="drug">液氮冷冻治疗</span></td>
                     <td></td>
                 </tr>
+                <!-- 肛门疣 -->
                 <tr>
-                    <td>
-                        <span class="disease-name">肛门疣</span>
-                    </td>
-                    <td>
-                        液氮冷冻治疗、TCA或手术切除
-                    </td>
-                    <td>
-                        建议肛门镜检查以发现直肠疣：筛查直肠肿瘤
-                    </td>
+                    <td><span class="disease">肛门疣</span></td>
+                    <td><span class="drug">液氮冷冻治疗</span>、<span class="drug">TCA</span>或<span class="drug">手术切除</span></td>
+                    <td class="note">建议肛门镜检查以发现直肠疣；筛查直肠肿瘤</td>
                 </tr>
+                <!-- 皮肤乳头状瘤 -->
                 <tr>
+                    <td><span class="disease">皮肤乳头状瘤</span></td>
                     <td>
-                        <span class="disease-name">皮肤乳头状瘤</span>
+                        <span class="drug">α-乳白蛋白</span>、<span class="drug">油酸</span>（取自人乳）涂局部qd×3w
                     </td>
-                    <td>
-                        <span class="drug-name">α-乳白蛋白、油酸</span>（取自人乳）涂局部qd×3w
-                    </td>
-                    <td>
+                    <td class="note">
                         同安慰剂比较，病损缩小，复发减少（P＜0.001）（NEJM 350：2663，2004）。需要进一步研究
+                    </td>
+                </tr>
+                <!-- 注释 -->
+                <tr class="footnote">
+                    <td colspan="3">
+                        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
+                        表中名词缩写见第2页。
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     
-    <!-- 注释 -->
-    <div class="note-text">
-        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>
-        *表中名词缩写见第2页。
+    <!-- 图片框 -->
+    <div class="img-box">
+        <img src="459.jpg" alt="乳头瘤病毒疣治疗方案原始图片" onerror="this.style.display='none';this.parentElement.innerHTML='<p style=\'color:#64748b;font-size:13px;\'>图片加载失败</p>'">
     </div>
     
-    <!-- 检索标签 -->
-    <div class="tag-section">
-        <div class="tag-title">🔍 特色检索标签（点击图片中的关键词快速筛选）</div>
-        <div class="tags">
+    <!-- 底部区域 -->
+    <div class="bottom-area">
+        <!-- 页码 -->
+        <div class="page-num">页码：459</div>
+        
+        <!-- 标签 - 仅使用图片中出现的文字 -->
+        <div class="tags" id="tags">
             <span class="tag tag-virus">乳头瘤病毒</span>
             <span class="tag tag-disease">疣</span>
             <span class="tag tag-disease">外生殖器疣</span>
@@ -484,99 +458,281 @@ html
             <span class="tag tag-drug">普达非洛</span>
             <span class="tag tag-drug">咪喹莫特</span>
             <span class="tag tag-drug">Sinecatechins</span>
+            <span class="tag tag-drug">液氮冷冻</span>
             <span class="tag tag-drug">三氯醋酸</span>
             <span class="tag tag-drug">TCA</span>
+            <span class="tag tag-drug">手术切除</span>
+            <span class="tag tag-drug">鬼臼酯树脂</span>
             <span class="tag tag-drug">α-乳白蛋白</span>
             <span class="tag tag-drug">油酸</span>
-            <span class="tag tag-drug">鬼臼酯树脂</span>
+        </div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-area">
+            <input type="text" class="copy-input" id="copyInput" 
+                   value="乳头瘤病毒疣治疗方案；乳头瘤病毒；疣；外生殖器疣；宫颈疣；阴道疣；尿道疣；肛门疣；皮肤乳头状瘤；普达非洛；咪喹莫特；Sinecatechins；液氮冷冻；三氯醋酸；TCA；手术切除；鬼臼酯树脂；α-乳白蛋白；油酸=459" readonly>
+            <button class="copy-btn" onclick="doCopy()">复制</button>
         </div>
     </div>
     
-    <!-- 底部区域 -->
-    <div class="bottom-section">
-        <div class="keywords">
-            <strong>关键词：</strong>乳头瘤病毒、HPV、疣、外生殖器疣、宫颈疣、阴道疣、尿道疣、肛门疣、皮肤乳头状瘤、普达非洛、咪喹莫特、Sinecatechins、液氮冷冻、三氯醋酸、TCA、α-乳白蛋白、油酸、NEJM
+    <!-- 提示 -->
+    <div class="toast" id="toast"></div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="459.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
         </div>
         
-        <div class="page-number">页码：459</div>
-        
-        <div class="copy-section">
-            <input type="text" class="copy-input" id="copyText" readonly>
-            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
-            <span class="copy-success" id="copySuccess">✓ 已复制到剪贴板！</span>
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
         </div>
     </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
     
-    <script>
-        // 设置复制框内容
-        const title = "乳头瘤病毒疣治疗方案指南";
-        const subtitle = "外生殖器疣、宫颈疣、阴道疣、尿道疣、肛门疣及皮肤乳头状瘤治疗参考";
-        const keywords = "乳头瘤病毒、HPV、疣、外生殖器疣、宫颈疣、阴道疣、尿道疣、肛门疣、皮肤乳头状瘤、普达非洛、咪喹莫特、Sinecatechins、液氮冷冻、三氯醋酸、TCA、α-乳白蛋白、油酸、NEJM";
-        const pageNum = "459";
-        document.getElementById('copyText').value = title + "；" + subtitle + "；" + keywords + "=" + pageNum;
-        
-        // 复制功能
-        function copyToClipboard() {
-            const copyText = document.getElementById('copyText');
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(copyText.value).then(() => {
-                const success = document.getElementById('copySuccess');
-                success.style.display = 'inline';
-                setTimeout(() => {
-                    success.style.display = 'none';
-                }, 2000);
-            });
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
         }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
         
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
         // 收藏功能
-        let isFavorited = false;
-        function toggleFavorite() {
-            const btn = document.getElementById('favBtn');
-            isFavorited = !isFavorited;
+        function toggleFav() {
+            const btn = document.querySelector('.fav-btn');
+            const isActive = btn.classList.toggle('active');
+            btn.innerHTML = isActive ? '★' : '☆';
+            btn.title = isActive ? '已收藏' : '收藏';
+            showToast(isActive ? '已添加到收藏' : '已取消收藏');
             
-            if (isFavorited) {
-                btn.classList.add('active');
-                btn.innerHTML = '★ 已收藏';
-                
-                // 保存到localStorage（模拟添加到index收藏类目）
-                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                const currentPage = {
-                    title: '~~~~~乳头瘤病毒疣治疗方案指南*****',
-                    url: window.location.href,
-                    pageNum: '459',
-                    category: '抗病毒治疗'
-                };
-                
-                // 检查是否已存在
-                const exists = favorites.some(f => f.pageNum === '459');
-                if (!exists) {
-                    favorites.push(currentPage);
-                    localStorage.setItem('favorites', JSON.stringify(favorites));
-                }
-                
-                alert('已添加到收藏！可在首页收藏类目查看。');
+            let favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (isActive) {
+                if (!favs.includes('459')) favs.push('459');
             } else {
-                btn.classList.remove('active');
-                btn.innerHTML = '⭐ 收藏';
-                
-                // 从收藏中移除
-                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                favorites = favorites.filter(f => f.pageNum !== '459');
-                localStorage.setItem('favorites', JSON.stringify(favorites));
+                favs = favs.filter(f => f !== '459');
             }
+            localStorage.setItem('favorites', JSON.stringify(favs));
         }
         
         // 检查是否已收藏
         window.onload = function() {
-            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            if (favorites.some(f => f.pageNum === '459')) {
-                isFavorited = true;
-                const btn = document.getElementById('favBtn');
+            const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+            if (favs.includes('459')) {
+                const btn = document.querySelector('.fav-btn');
                 btn.classList.add('active');
-                btn.innerHTML = '★ 已收藏';
+                btn.innerHTML = '★';
+                btn.title = '已收藏';
             }
         };
+        
+        // 复制功能
+        function doCopy() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            const btn = document.querySelector('.copy-btn');
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('已复制到剪贴板');
+                    btn.classList.add('copied');
+                    btn.textContent = '已复制';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.textContent = '复制';
+                    }, 2000);
+                }).catch(() => {
+                    fallbackCopy(input, btn);
+                });
+            } else {
+                fallbackCopy(input, btn);
+            }
+        }
+        
+        function fallbackCopy(input, btn) {
+            try {
+                document.execCommand('copy');
+                showToast('已复制到剪贴板');
+                btn.classList.add('copied');
+                btn.textContent = '已复制';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.textContent = '复制';
+                }, 2000);
+            } catch(e) {
+                showToast('复制失败，请手动复制');
+            }
+        }
+        
+        // 提示
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 2000);
+        }
     </script>
 </body>
 </html>

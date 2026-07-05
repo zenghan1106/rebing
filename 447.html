@@ -4,7 +4,7 @@ html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~~~~~CMV视网膜炎及治疗指南*****</title>
+    <title>CMV治疗指南表格</title>
     <style>
         * {
             margin: 0;
@@ -13,20 +13,32 @@ html
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            padding: 20px 15px;
-            color: #2c3e50;
+            padding: 20px;
+            color: #333;
         }
         
-        .nav-top {
+        .header-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
         
         .btn {
@@ -41,142 +53,193 @@ html
         }
         
         .btn-home {
-            background: #3498db;
+            background: #4a90d9;
             color: white;
         }
         
         .btn-home:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .nav-right {
-            display: flex;
-            gap: 10px;
+            background: #357abd;
         }
         
         .btn-nav {
-            background: #27ae60;
+            background: #6c5ce7;
             color: white;
         }
         
         .btn-nav:hover {
-            background: #1e8449;
-            transform: translateY(-2px);
+            background: #5b4cdb;
         }
         
         .btn-favorite {
-            background: #e74c3c;
+            background: #e17055;
             color: white;
             position: fixed;
-            bottom: 80px;
+            bottom: 200px;
             right: 20px;
             z-index: 100;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 4px 15px rgba(225, 112, 85, 0.4);
         }
         
         .btn-favorite:hover {
-            background: #c0392b;
-            transform: scale(1.05);
+            background: #d63031;
         }
         
-        .btn-favorite.active {
-            background: #f39c12;
+        .btn-copy {
+            background: #00b894;
+            color: white;
+            padding: 12px 25px;
         }
         
-        h1 {
+        .btn-copy:hover {
+            background: #00a085;
+        }
+        
+        .title-section {
             text-align: center;
-            color: #1a5276;
-            font-size: 22px;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            line-height: 1.6;
+            margin: 30px 0;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2d3436;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .title-format {
+            font-size: 14px;
+            color: #636e72;
+            letter-spacing: 2px;
         }
         
         .table-container {
-            background: white;
+            overflow-x: auto;
+            margin: 20px 0;
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            background: white;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
-        }
-        
-        thead {
-            background: linear-gradient(135deg, #1e5799 0%, #2989d8 100%);
-            color: white;
+            background: white;
         }
         
         thead th {
-            padding: 15px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 15px;
             text-align: left;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
         }
         
         tbody td {
-            padding: 14px 12px;
-            border-bottom: 1px solid #eef2f7;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
             vertical-align: top;
-            line-height: 1.7;
+            line-height: 1.8;
         }
         
         tbody tr:hover {
-            background: #f8fbff;
+            background: #f8f9fa;
         }
         
-        tbody tr:last-child td {
-            border-bottom: none;
+        tbody tr:nth-child(even) {
+            background: #fafbfc;
         }
         
-        .section-header {
-            background: #e8f4f8;
-            font-weight: 600;
-            color: #1a5276;
+        tbody tr:nth-child(even):hover {
+            background: #f0f1f2;
         }
         
-        .note-section {
-            background: #fff8e7;
-        }
-        
-        .highlight {
+        .col-disease {
+            width: 28%;
             color: #c0392b;
             font-weight: 600;
         }
         
-        .drug-name {
-            color: #8e44ad;
-            font-weight: 600;
-        }
-        
-        .dosage {
+        .col-drug {
+            width: 32%;
             color: #27ae60;
         }
         
-        .tags-container {
+        .col-note {
+            width: 40%;
+            color: #8e44ad;
+        }
+        
+        .highlight-cmv {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        
+        .highlight-drug {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .highlight-note {
+            color: #8e44ad;
+        }
+        
+        .full-width-row td {
+            background: #fff3cd;
+            color: #856404;
+            font-weight: 500;
+        }
+        
+        .full-width-row:hover td {
+            background: #ffeeba;
+        }
+        
+        .reference {
+            color: #e67e22;
+            font-style: italic;
+        }
+        
+        .footer-section {
+            margin-top: 30px;
+            padding: 20px;
             background: white;
             border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
         }
         
         .tags-title {
             font-size: 16px;
-            color: #1a5276;
+            font-weight: bold;
+            color: #2d3436;
             margin-bottom: 15px;
-            font-weight: 600;
         }
         
-        .tags {
+        .tags-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
@@ -186,90 +249,58 @@ html
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         
         .tag-disease {
-            background: #fdebd0;
-            color: #9c640c;
+            background: #ffeaa7;
+            color: #d63031;
         }
         
         .tag-disease:hover {
-            background: #f5cba7;
+            background: #fdcb6e;
         }
         
         .tag-drug {
-            background: #e8daef;
-            color: #7d3c98;
+            background: #a8e6cf;
+            color: #00b894;
         }
         
         .tag-drug:hover {
-            background: #d2b4de;
+            background: #74b9ff;
+            color: #0984e3;
         }
         
         .tag-virus {
-            background: #d5f5e3;
-            color: #1e8449;
+            background: #dfe6e9;
+            color: #636e72;
         }
         
         .tag-virus:hover {
-            background: #abebc6;
+            background: #b2bec3;
         }
         
-        .copy-section {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-        
-        .copy-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        #copyInput {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #dde1e7;
-            border-radius: 10px;
-            font-size: 13px;
-            color: #2c3e50;
-            width: calc(100% - 100px);
-        }
-        
-        .btn-copy {
-            background: #3498db;
-            color: white;
-            white-space: nowrap;
-        }
-        
-        .btn-copy:hover {
-            background: #2980b9;
-        }
-        
-        .btn-copy.copied {
-            background: #27ae60;
-        }
-        
-        .page-info {
+        .page-number {
             text-align: center;
-            color: #7f8c8d;
+            margin-top: 15px;
             font-size: 14px;
-            margin-bottom: 15px;
+            color: #636e72;
         }
         
-        .keywords {
-            text-align: center;
-            color: #95a5a6;
-            font-size: 12px;
+        .note-section {
+            margin-top: 15px;
             padding: 15px;
-            background: white;
+            background: #e8f4f8;
             border-radius: 10px;
-            margin-bottom: 15px;
+            border-left: 4px solid #4a90d9;
+        }
+        
+        .note-section p {
+            color: #2c3e50;
+            font-size: 13px;
+            line-height: 1.8;
         }
         
         @media (max-width: 768px) {
@@ -277,216 +308,390 @@ html
                 padding: 10px;
             }
             
-            h1 {
-                font-size: 18px;
-            }
-            
-            table {
-                font-size: 12px;
+            .main-title {
+                font-size: 20px;
             }
             
             thead th {
-                font-size: 13px;
-                padding: 12px 8px;
+                font-size: 14px;
+                padding: 12px 10px;
             }
             
             tbody td {
-                padding: 10px 8px;
+                padding: 10px;
+                font-size: 13px;
             }
             
             .btn {
                 padding: 8px 15px;
-                font-size: 13px;
+                font-size: 12px;
+            }
+            
+            .col-disease, .col-drug, .col-note {
+                min-width: 150px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="nav-top">
-        <a href="index.html" class="btn btn-home">← 返回首页</a>
+    <!-- 导航区域 -->
+    <div class="header-nav">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">返回首页</a>
+        </div>
         <div class="nav-right">
-            <a href="446.html" class="btn btn-nav">← 上一页</a>
-            <a href="448.html" class="btn btn-nav">下一页 →</a>
+            <a href="446.html" class="btn btn-nav">上一页</a>
+            <a href="448.html" class="btn btn-nav">下一页</a>
         </div>
     </div>
     
-    <button class="btn btn-favorite" id="favoriteBtn" onclick="toggleFavorite()">⭐ 收藏</button>
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorites()">收藏</button>
     
-    <h1>~~~~~CMV视网膜炎及治疗指南*****</h1>
+    <!-- 标题区域 -->
+    <div class="title-section">
+        <h1 class="main-title">~~~~~CMV治疗指南表格*****</h1>
+        <p class="title-format">~~~~~巨细胞病毒感染治疗方案与药物剂量参考*****</p>
+    </div>
     
+    <!-- 表格区域 -->
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th style="width: 28%;">病毒/疾病</th>
-                    <th style="width: 32%;">药物/剂量</th>
-                    <th style="width: 40%;">不良反应/说明</th>
+                    <th class="col-disease">病毒/疾病</th>
+                    <th class="col-drug">药物/剂量</th>
+                    <th class="col-note">不良反应/说明</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        <span class="highlight">CMV：视网膜炎</span><br><br>
+                    <td class="col-disease">
+                        <span class="highlight-cmv">CMV：视网膜炎</span><br><br>
                         是HIV/AIDS患者最常见眼部并发症。ART治疗后，CD4＞0.2×10⁹/L，很少发生。如果未开始ART，ART不迟于CMV治疗2周后。参见：aidsinfo.nih.gov/guidelines<br><br>
-                        <span class="highlight">CMV免疫重建视网膜炎：</span>ART开始后新发生的视网膜炎。不必停用ART或缬更昔洛韦。无须糖皮质激素治疗
+                        <span class="highlight-cmv">CMV免疫重建视网膜炎：</span>ART开始后新发生的视网膜炎。不必停用ART或缬更昔洛韦。无须糖皮质激素治疗
                     </td>
-                    <td>
-                        <span class="highlight">若不危及视力：</span><br>
-                        <span class="drug-name">缬更昔洛韦</span> <span class="dosage">900mg po bid×14～21d</span>，与食物同服，然后<span class="dosage">900mg po qd</span>，直至CD4＞0.1×10⁹/L，维持6个月以上<br><br>
-                        <span class="highlight">若危及视力（见说明）：</span><br>
-                        <span class="drug-name">缬更昔洛韦</span>＋眼内注射<span class="drug-name">更昔洛韦</span> <span class="dosage">2mg（7～10天内1～4剂）</span>
+                    <td class="col-drug">
+                        <span class="highlight-drug">若不危及视力：</span><br>
+                        <span class="highlight-drug">缬更昔洛韦</span>900mg po bid×14～21d，与食物同服，然后900mg po qd，直至CD4＞0.1×10⁹/L，维持6个月以上<br><br>
+                        <span class="highlight-drug">若危及视力（见说明）：</span><br>
+                        <span class="highlight-drug">缬更昔洛韦</span>＋眼内注射<span class="highlight-drug">更昔洛韦</span>2mg（7～10天内1～4剂）
                     </td>
-                    <td>
-                        <span class="highlight">危及视力：</span>病灶距视小凹＜1500μm或靠近视盘<br><br>
-                        如果不能使用缬更昔洛韦，<span class="drug-name">更昔洛韦</span> <span class="dosage">5mg/kg iv q12h×14～21d</span>，然后<span class="dosage">5mg/kg iv qd</span><br><br>
-                        如果怀疑更昔洛韦耐药：<span class="drug-name">膦甲酸钠</span>（<span class="dosage">60mg/kg q8h</span>，或<span class="dosage">90mg/kg q12h</span>）×14～21d。更昔洛韦眼内埋植剂已停供
+                    <td class="col-note">
+                        <span class="highlight-note">危及视力：</span>病灶距视小凹＜1500μm或靠近视盘<br><br>
+                        如果不能使用<span class="highlight-drug">缬更昔洛韦</span>，<span class="highlight-drug">更昔洛韦</span>5mg/kg iv q12h×14～21d，然后5mg/kg iv qd<br><br>
+                        如果怀疑<span class="highlight-drug">更昔洛韦</span>耐药：<span class="highlight-drug">膦甲酸钠</span>（60mg/kg q8h，或90mg/kg q12h）×14～21d。<span class="highlight-drug">更昔洛韦</span>眼内埋植剂已停供
                     </td>
                 </tr>
-                <tr class="note-section">
+                <tr class="full-width-row">
                     <td colspan="3">
-                        <span class="highlight">移植患者的CMV：</span>CMV预防用药见表15E。CMV病可以表现为有或无终末器官受累的CMV综合征。CMV治疗指南。<span class="drug-name">更昔洛韦</span> <span class="dosage">5mg/kg iv q12h</span>或<span class="drug-name">缬更昔洛韦</span> <span class="dosage">900mg po q12h</span>均是有效的治疗选择。疗程应个体化。持续治疗直至：①CMV PCR阴性。②临床症状缓解。③至少治疗2～3周。对于近期接受高剂量免疫抑制治疗（如淋巴细胞耗竭抗体）及有过严重CMV病或＞1次CMV病发作的患者，应进行二级预防（<span class="drug-name">缬更昔洛韦</span> <span class="dosage">900mg qd</span>）1～3个月。造血干细胞移植患者也应考虑二级预防，但需权衡感染复发的风险与药物毒性之间的利弊。<span class="drug-name">布新福韦</span>（Brincidofovir）对移植患者没有抗CMV活性。<span class="drug-name">马立巴韦</span>（Maribavir）（<span class="dosage">400mg po bid</span>）是成人或12岁以上儿童（体重＞35kg）难治性病例的新的治疗选择
+                        <span class="highlight-cmv">移植患者的CMV：</span>CMV预防用药见表15E。CMV病可以表现为有或无终末器官受累的CMV综合征。CMV治疗指南。<span class="highlight-drug">更昔洛韦</span>5mg/kg iv q12h或<span class="highlight-drug">缬更昔洛韦</span>900mg po q12h均是有效的治疗选择。疗程应个体化。持续治疗直至：①CMV PCR阴性。②临床症状缓解。③至少治疗2～3周。对于近期接受高剂量免疫抑制治疗（如淋巴细胞耗竭抗体）及有过严重CMV病或＞1次CMV病发作的患者，应进行二级预防（<span class="highlight-drug">缬更昔洛韦</span>900mg qd）1～3个月。造血干细胞移植患者也应考虑二级预防，但需权衡感染复发的风险与药物毒性之间的利弊。<span class="highlight-drug">布新福韦</span>（Brincidofovir）对移植患者没有抗CMV活性。<span class="highlight-drug">马立巴韦</span>（Maribavir）（400mg po bid）是成人或12岁以上儿童（体重＞35kg）难治性病例的新的治疗选择
+                    </td>
+                </tr>
+                <tr class="full-width-row">
+                    <td colspan="3">
+                        <span class="highlight-cmv">妊娠期CMV：</span>大规模临床试验证实大剂量免疫球蛋白无效 <span class="reference">（NEJM 385：436，2021）</span>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="background: #fdebd0;">
-                        <span class="highlight">妊娠期CMV：</span>大规模临床试验证实大剂量免疫球蛋白无效（NEJM 385: 436, 2021）
+                    <td class="col-disease">
+                        <span class="highlight-cmv">CMV：先天性/新生儿</span><br>
+                        有症状
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="highlight">CMV：先天性/新生儿有症状</span>
+                    <td class="col-drug">
+                        <span class="highlight-drug">缬更昔洛韦</span>16mg/kg po bid×6个月
                     </td>
-                    <td>
-                        <span class="drug-name">缬更昔洛韦</span> <span class="dosage">16mg/kg po bid×6个月</span>
-                    </td>
-                    <td>
-                        有症状的30日龄前新生儿对比6周龄新生儿治疗6个月后预后更好，不良反应没有差异（NEJM 372: 933, 2015）。监测中性粒细胞减少
-                    </td>
-                </tr>
-                <tr style="background: #f8f9fa;">
-                    <td colspan="3" style="font-size: 12px; color: #7f8c8d;">
-                        注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。表中名词缩写见第2页。
+                    <td class="col-note">
+                        有症状的30日龄前新生儿对比6周龄新生儿治疗6个月后预后更好，不良反应没有差异 <span class="reference">（NEJM 372：933，2015）</span>。监测中性粒细胞减少
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     
-    <div class="tags-container">
-        <div class="tags-title">🏷️ 检索标签</div>
-        <div class="tags">
-            <span class="tag tag-disease">CMV视网膜炎</span>
-            <span class="tag tag-disease">HIV/AIDS</span>
-            <span class="tag tag-disease">免疫重建视网膜炎</span>
-            <span class="tag tag-disease">移植患者CMV</span>
-            <span class="tag tag-disease">妊娠期CMV</span>
-            <span class="tag tag-disease">先天性CMV</span>
-            <span class="tag tag-disease">新生儿CMV</span>
-            <span class="tag tag-drug">缬更昔洛韦</span>
-            <span class="tag tag-drug">更昔洛韦</span>
-            <span class="tag tag-drug">膦甲酸钠</span>
-            <span class="tag tag-drug">布新福韦</span>
-            <span class="tag tag-drug">马立巴韦</span>
-            <span class="tag tag-virus">CMV</span>
-            <span class="tag tag-virus">巨细胞病毒</span>
-        </div>
+    <!-- 注释区域 -->
+    <div class="note-section">
+        <p>注：*所有推荐剂量仅针对成人（除非特别说明）及肾功能正常者。<br>表中名词缩写见第2页。</p>
     </div>
     
-    <div class="copy-section">
-        <div class="copy-row">
-            <input type="text" id="copyInput" readonly>
+    <!-- 底部功能区 -->
+    <div class="footer-section">
+        <!-- 复制功能 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="CMV治疗指南表格；巨细胞病毒感染治疗方案与药物剂量参考；CMV；视网膜炎；缬更昔洛韦；更昔洛韦；膦甲酸钠；布新福韦；马立巴韦；先天性CMV；新生儿CMV；移植患者CMV；妊娠期CMV；=447" readonly>
             <button class="btn btn-copy" onclick="copyToClipboard()">复制</button>
         </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">
+            页码：447
+        </div>
+        
+        <!-- 标签区域 -->
+        <div class="tags-section">
+            <p class="tags-title">检索标签（点击快速定位）：</p>
+            <div class="tags-container">
+                <span class="tag tag-virus">CMV</span>
+                <span class="tag tag-disease">视网膜炎</span>
+                <span class="tag tag-disease">免疫重建视网膜炎</span>
+                <span class="tag tag-disease">先天性CMV</span>
+                <span class="tag tag-disease">新生儿CMV</span>
+                <span class="tag tag-disease">移植患者CMV</span>
+                <span class="tag tag-disease">妊娠期CMV</span>
+                <span class="tag tag-disease">CMV综合征</span>
+                <span class="tag tag-drug">缬更昔洛韦</span>
+                <span class="tag tag-drug">更昔洛韦</span>
+                <span class="tag tag-drug">膦甲酸钠</span>
+                <span class="tag tag-drug">布新福韦</span>
+                <span class="tag tag-drug">马立巴韦</span>
+                <span class="tag tag-virus">HIV/AIDS</span>
+                <span class="tag tag-disease">终末器官受累</span>
+            </div>
+        </div>
     </div>
     
-    <div class="page-info">页码：447</div>
-    
-    <div class="keywords">
-        关键词：CMV；视网膜炎；更昔洛韦；缬更昔洛韦；膦甲酸钠；马立巴韦；HIV；AIDS；移植；先天性；新生儿；免疫重建；ART；CD4
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="447.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
     </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
     
-    <script>
-        // 设置复制输入框内容
-        const pageTitle = "CMV视网膜炎及治疗指南";
-        const subtitle = "HIV/AIDS患者CMV视网膜炎、移植患者CMV、先天性新生儿CMV治疗";
-        const keywords = "CMV；视网膜炎；更昔洛韦；缬更昔洛韦；膦甲酸钠；马立巴韦；HIV；AIDS；移植；先天性；新生儿";
-        const pageNum = "447";
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
         
-        document.getElementById('copyInput').value = `${pageTitle}；${subtitle}；${keywords}=${pageNum}`;
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
         
-        // 复制功能
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板功能
         function copyToClipboard() {
-            const input = document.getElementById('copyInput');
-            input.select();
-            input.setSelectionRange(0, 99999);
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
             
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(input.value).then(() => {
-                    showCopied();
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(copyText.value).then(function() {
+                    alert("内容已复制到剪贴板！");
+                }).catch(function(err) {
+                    document.execCommand('copy');
+                    alert("内容已复制到剪贴板！");
                 });
             } else {
                 document.execCommand('copy');
-                showCopied();
+                alert("内容已复制到剪贴板！");
             }
-        }
-        
-        function showCopied() {
-            const btn = document.querySelector('.btn-copy');
-            btn.textContent = '✓ 已复制';
-            btn.classList.add('copied');
-            setTimeout(() => {
-                btn.textContent = '复制';
-                btn.classList.remove('copied');
-            }, 2000);
         }
         
         // 收藏功能
-        let isFavorited = false;
-        
-        function toggleFavorite() {
-            isFavorited = !isFavorited;
-            const btn = document.getElementById('favoriteBtn');
+        function addToFavorites() {
+            const title = "CMV治疗指南表格";
+            const url = window.location.href;
             
-            if (isFavorited) {
-                btn.textContent = '❤️ 已收藏';
-                btn.classList.add('active');
-                
-                // 保存到localStorage模拟添加到index收藏
+            // 尝试添加到浏览器收藏夹
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(title, url, "");
+            } else if (window.external && ('AddFavorite' in window.external)) {
+                window.external.AddFavorite(url, title);
+            } else {
+                // 保存到localStorage作为index页面可以读取的收藏
                 let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                const currentPage = {
-                    title: '~~~~~CMV视网膜炎及治疗指南*****',
-                    url: window.location.href,
-                    pageNum: '447'
+                const newFavorite = {
+                    title: title,
+                    url: url,
+                    category: 'CMV治疗',
+                    date: new Date().toLocaleDateString()
                 };
                 
                 // 检查是否已存在
-                const exists = favorites.some(f => f.pageNum === '447');
+                const exists = favorites.some(f => f.url === url);
                 if (!exists) {
-                    favorites.push(currentPage);
+                    favorites.push(newFavorite);
                     localStorage.setItem('favorites', JSON.stringify(favorites));
+                    alert("已添加到收藏！请在首页查看收藏内容。");
+                } else {
+                    alert("该页面已在收藏夹中！");
                 }
-                
-                alert('已添加到收藏！可在首页查看。');
-            } else {
-                btn.textContent = '⭐ 收藏';
-                btn.classList.remove('active');
-                
-                let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-                favorites = favorites.filter(f => f.pageNum !== '447');
-                localStorage.setItem('favorites', JSON.stringify(favorites));
             }
         }
         
-        // 检查是否已收藏
-        window.onload = function() {
-            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-            if (favorites.some(f => f.pageNum === '447')) {
-                isFavorited = true;
-                const btn = document.getElementById('favoriteBtn');
-                btn.textContent = '❤️ 已收藏';
-                btn.classList.add('active');
-            }
-        };
+        // 标签点击滚动到对应内容
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const tagText = this.textContent;
+                // 简单的视觉反馈
+                this.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
     </script>
 </body>
 </html>

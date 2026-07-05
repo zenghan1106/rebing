@@ -1,276 +1,674 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>n!</title>
+    <title>~~~~~妊娠和儿童孢子丝菌病抗微生物药物选择*****</title>
+    
+    <!-- ============ ��������֤ ============ -->
+    <script src="machine_auth_v2.js"></script>
+    <script>
+        // ҳ�����ʱ��֤������
+        window.addEventListener('load', function() {
+            try {
+                initMachineAuth();
+                // ��֤�ɹ���ȷ��ҳ����ʾ
+                document.body.style.display = 'block';
+            } catch(e) {
+                console.log('��������֤ʧ��', e);
+                // ��֤ʧ��ʱ������ҳ��
+                document.body.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- ============ ��֤���� ============ -->
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             min-height: 100vh;
-            padding: 10px;
+            padding: 20px;
             color: #333;
         }
-        .container { max-width: 100%; margin: 0 auto; }
         
-        /* 顶部导航 */
-        .nav-top {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
-            background: #fff;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .nav-btn {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
-        }
-        .nav-btn:active { transform: translateY(0); }
         
-        /* 标题 */
-        .main-title {
-            text-align: center;
-            padding: 20px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .home-btn {
+            background: #4a90d9;
             color: white;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .home-btn:hover {
+            background: #357abd;
+        }
+        
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-btn:hover {
+            background: #5b4cdb;
+        }
+        
+        .page-title {
+            text-align: center;
             font-size: 22px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+            color: #2c3e50;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            border-left: 5px solid #3498db;
         }
         
-        /* 表格样式 */
-        .content-table {
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            font-size: 13px;
         }
-        .content-table thead {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-        }
-        .content-table th {
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: bold;
-            font-size: 16px;
-            border-bottom: 3px solid #667eea;
-        }
-        .content-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e8e8e8;
-            font-size: 14px;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-        }
-        .content-table tr:nth-child(even) { background: #f8f9fa; }
-        .content-table tr:hover { background: #e8f4f8; }
-        .content-table tr:first-child td { font-size: 16px; font-weight: bold; color: #1e3c72; }
         
-        /* 标签 */
-        .tags-section {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .tags-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            margin: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        thead th {
+            background: #3498db;
             color: white;
-            border-radius: 20px;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            border: 1px solid #2980b9;
+        }
+        
+        thead th:first-child {
+            width: 22%;
+        }
+        
+        thead th:nth-child(2) {
+            width: 39%;
+        }
+        
+        thead th:nth-child(3) {
+            width: 39%;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        .category-cell {
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .drug-name {
+            color: #6a1b9a;
+            font-weight: bold;
+        }
+        
+        .disease-name {
+            color: #c62828;
+            font-weight: bold;
+        }
+        
+        .bacteria-name {
+            color: #ef6c00;
+            font-weight: bold;
+        }
+        
+        .dosage {
+            color: #1565c0;
+        }
+        
+        .note-text {
+            color: #546e7a;
             font-size: 12px;
         }
         
-        /* 编辑框 */
-        .edit-section {
-            background: white;
+        .note-section {
+            background: #fff3e0;
             padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .edit-box {
-            width: 100%;
-            min-height: 100px;
-            padding: 12px;
-            border: 2px solid #667eea;
             border-radius: 8px;
-            font-size: 14px;
-            font-family: monospace;
-            resize: vertical;
+            margin-top: 15px;
+            border-left: 4px solid #ff9800;
         }
-        .btn-row {
+        
+        .note-section p {
+            color: #e65100;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        .tags-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tag-disease {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+        
+        .tag-drug {
+            background: #e1bee7;
+            color: #6a1b9a;
+        }
+        
+        .tag-bacteria {
+            background: #ffe0b2;
+            color: #ef6c00;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .copy-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             display: flex;
             gap: 10px;
-            margin-top: 10px;
+            align-items: center;
             flex-wrap: wrap;
         }
-        .action-btn {
+        
+        .copy-input {
             flex: 1;
-            min-width: 100px;
-            padding: 10px 20px;
-            border: none;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #3498db;
             border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .copy-btn { background: #28a745; color: white; }
-        .copy-btn:hover { background: #218838; }
-        .favorite-btn { background: #ffc107; color: #333; }
-        .favorite-btn:hover { background: #e0a800; }
-        .favorite-btn.active { background: #ff6b6b; color: white; }
-        
-        /* 页码 */
-        .page-footer {
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .page-number {
-            font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 13px;
+            color: #2c3e50;
         }
         
-        /* 收藏提示 */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
+        .copy-btn {
+            background: #27ae60;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            display: none;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background: #219a52;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s;
             z-index: 1000;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+            background: #c0392b;
+        }
+        
+        .favorite-btn.active {
+            background: #f39c12;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 16px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 5px;
+            }
+            
+            tbody td {
+                padding: 8px 5px;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-btns {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="nav-top">
-            <a href="index.html" class="nav-btn">🏠 首页</a>
-            <div>
-                <a href="368.html" class="nav-btn">⬅️ 上一页</a>
-                <a href="370.html" class="nav-btn">➡️ 下一页</a>
-            </div>
-        </div>
-        
-        <h1 class="main-title">~~~~~n!*****</h1>
-        
-        <table class="content-table"><tbody><tr><td>n!</td></tr><tr><td>SS</td></tr><tr><td>ia]</td></tr><tr><td>“pe</td></tr><tr><td>ak,</td></tr><tr><td>Ti</td></tr><tr><td>api</td></tr><tr><td>fame}</td></tr><tr><td>—=—</td></tr><tr><td>S=—=</td></tr><tr><td>if</td></tr><tr><td>ae.</td></tr><tr><td>Lege</td></tr><tr><td>het</td></tr><tr><td>——</td></tr><tr><td>Fl</td></tr><tr><td>anf</td></tr><tr><td>iW</td></tr><tr><td>if</td></tr><tr><td>ms</td></tr><tr><td>os</td></tr><tr><td>oe</td></tr><tr><td>ee</td></tr><tr><td>——</td></tr><tr><td>——</td></tr><tr><td>oni Stes</td></tr><tr><td>ee!</td></tr><tr><td>“Hi</td></tr><tr><td>&lt;=</td></tr><tr><td>==</td></tr><tr><td>— 1</td></tr><tr><td>emg fas</td></tr><tr><td>hl</td></tr><tr><td>a=</td></tr><tr><td>aa</td></tr><tr><td>et</td></tr><tr><td>cE</td></tr><tr><td>a |</td></tr><tr><td>==</td></tr><tr><td>fail</td></tr><tr><td>Ij</td></tr><tr><td>as</td></tr><tr><td>ss</td></tr><tr><td>hel</td></tr><tr><td>fy</td></tr><tr><td>Beli</td></tr><tr><td>ih</td></tr><tr><td>can</td></tr><tr><td>Ie</td></tr><tr><td>(eal)</td></tr><tr><td>nn</td></tr><tr><td>EI</td></tr><tr><td>ES</td></tr><tr><td>parts</td></tr><tr><td>ta</td></tr><tr><td>fe</td></tr><tr><td>He</td></tr><tr><td>=!</td></tr><tr><td>ttf</td></tr><tr><td>al</td></tr><tr><td>pe</td></tr><tr><td>ii</td></tr><tr><td>(ee</td></tr><tr><td>ti</td></tr><tr><td>ial i</td></tr><tr><td>tat</td></tr><tr><td>i=</td></tr><tr><td>Etat]</td></tr><tr><td>Lott</td></tr><tr><td>By</td></tr><tr><td>aI</td></tr><tr><td>cl</td></tr><tr><td>Eag</td></tr><tr><td>40</td></tr><tr><td>wai</td></tr><tr><td>ie</td></tr><tr><td>==</td></tr><tr><td>we</td></tr><tr><td>“Pe</td></tr><tr><td>NG</td></tr><tr><td>as</td></tr><tr><td>Bie</td></tr><tr><td>Saat</td></tr><tr><td>Ha</td></tr><tr><td>nei</td></tr><tr><td>YS.</td></tr><tr><td>ere</td></tr><tr><td>Pet</td></tr><tr><td>i ———— 1</td></tr><tr><td>=a</td></tr><tr><td>ESE</td></tr><tr><td>it</td></tr><tr><td>He</td></tr><tr><td>Ref:</td></tr><tr><td>i=,</td></tr><tr><td>_—a nl</td></tr><tr><td>—_————=</td></tr><tr><td>al a</td></tr><tr><td>p= ie</td></tr><tr><td>am}</td></tr><tr><td>‘al</td></tr><tr><td>ah</td></tr><tr><td>oe es</td></tr><tr><td>ons</td></tr><tr><td>Bi</td></tr><tr><td>al</td></tr><tr><td>iB</td></tr><tr><td>aa</td></tr><tr><td>=r}</td></tr><tr><td>ra</td></tr><tr><td>i=</td></tr><tr><td>ii</td></tr><tr><td>ij</td></tr><tr><td>fara</td></tr><tr><td>——</td></tr><tr><td>os</td></tr><tr><td>sft ERs</td></tr><tr><td>2!</td></tr><tr><td>OMS Se aR es a ea</td></tr></tbody></table>
-        
-        <div class="tags-section">
-            <div class="tags-title">🏷️ 关键词标签</div>
-            <div class="tags"></div>
-        </div>
-        
-        <div class="edit-section">
-            <textarea class="edit-box" id="editBox">n!；=369</textarea>
-            <div class="btn-row">
-                <button class="action-btn copy-btn" onclick="copyContent()">📋 复制内容</button>
-                <button class="action-btn favorite-btn" id="favBtn" onclick="toggleFavorite()">⭐ 收藏</button>
-            </div>
-        </div>
-        
-        <div class="page-footer">
-            <div class="page-number">第 369 页</div>
+    <div class="header">
+        <a href="index.html" class="home-btn">← 返回首页</a>
+        <div class="nav-btns">
+            <a href="368.html" class="nav-btn">← 上一页</a>
+            <a href="370.html" class="nav-btn">下一页 →</a>
         </div>
     </div>
     
-    <div class="toast" id="toast"></div>
+    <h1 class="page-title">~~~~~妊娠和儿童孢子丝菌病抗微生物药物选择*****</h1>
     
-    <script>
-        function copyContent() {
-            const editBox = document.getElementById('editBox');
-            editBox.select();
-            document.execCommand('copy');
-            showToast('✅ 已复制到剪贴板');
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>感染类型/病原菌/感染部位</th>
+                    <th>首选药物</th>
+                    <th>替代药物</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="category-cell">
+                        <span class="disease-name">妊娠</span>和<span class="disease-name">儿童</span>
+                        <br>
+                        <span class="bacteria-name">孢子丝菌病</span>
+                    </td>
+                    <td>
+                        <span class="disease-name">妊娠</span>：<span class="drug-name">皮肤-局部热疗</span>。<br>
+                        严重：<span class="drug-name">两性霉素B脂质体</span><br>
+                        <span class="dosage">3～5mg/kg iv qd</span>。<br>
+                        <span style="color:#c62828;">避免用伊曲康唑</span>
+                    </td>
+                    <td>
+                        <span class="disease-name">儿童</span>：<span class="disease-name">皮肤病变</span>：<br>
+                        <span class="drug-name">伊曲康唑</span><br>
+                        <span class="dosage">6～10mg/(kg·d)</span>，<br>
+                        最大剂量<span class="dosage">400mg</span>。<br>
+                        替代治疗用<span class="drug-name">SSKI</span>，<br>
+                        从<span class="dosage">1滴tid</span>逐渐增加，<br>
+                        最大剂量为每千克<span class="dosage">1滴</span><br>
+                        或每千克<span class="dosage">40～50滴tid</span>，<br>
+                        二者之间取最低的有效剂量
+                    </td>
+                    <td>
+                        <span class="disease-name">儿童播散性孢子丝菌病</span>：<br>
+                        标准<span class="drug-name">两性霉素B</span><br>
+                        <span class="dosage">0.7mg/kg iv qd</span>，<br>
+                        有效后换用<span class="drug-name">伊曲康唑</span><br>
+                        <span class="dosage">6～10mg/kg</span><br>
+                        （最大剂量<span class="dosage">400mg</span>）<span class="dosage">qd</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="note-section">
+        <p>注：*所有推荐剂量针对成人（除非特别注明）及假设肾功能正常。</p>
+        <p>表中名词缩写见第2页。</p>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🔍 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag tag-disease">妊娠</span>
+            <span class="tag tag-disease">儿童</span>
+            <span class="tag tag-disease">皮肤病变</span>
+            <span class="tag tag-disease">播散性孢子丝菌病</span>
+            <span class="tag tag-bacteria">孢子丝菌</span>
+            <span class="tag tag-drug">两性霉素B脂质体</span>
+            <span class="tag tag-drug">伊曲康唑</span>
+            <span class="tag tag-drug">SSKI</span>
+            <span class="tag tag-drug">局部热疗</span>
+        </div>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyInput" value="妊娠和儿童孢子丝菌病抗微生物药物选择；妊娠；儿童；皮肤病变；播散性孢子丝菌病；孢子丝菌；两性霉素B脂质体；伊曲康唑；SSKI；局部热疗；=369" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+    </div>
+    
+    <div class="page-number">页码：369</div>
+    
+    <button class="favorite-btn" id="favBtn" onclick="toggleFavorite()" title="收藏">☆</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="369.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(function() {
+                alert('已复制到剪贴板！');
+            }, function() {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            });
         }
         
         function toggleFavorite() {
             const btn = document.getElementById('favBtn');
-            const title = document.querySelector('.main-title').textContent;
-            const pageNum = 369;
-            
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            const index = favorites.findIndex(f => f.page === pageNum);
-            
-            if (index > -1) {
-                favorites.splice(index, 1);
-                btn.classList.remove('active');
-                btn.textContent = '⭐ 收藏';
-                showToast('已取消收藏');
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '★';
+                btn.title = '已收藏';
+                // 添加到index.html的收藏类目
+                addToIndexFavorites();
+                alert('已添加到收藏！');
             } else {
-                favorites.push({ page: pageNum, title: title });
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
-                showToast('已添加到收藏');
-            }
-            
-            localStorage.setItem('rebing_favorites', JSON.stringify(favorites));
-            updateIndexFavorites();
-        }
-        
-        function checkFavorite() {
-            const btn = document.getElementById('favBtn');
-            const pageNum = 369;
-            let favorites = JSON.parse(localStorage.getItem('rebing_favorites') || '[]');
-            
-            if (favorites.some(f => f.page === pageNum)) {
-                btn.classList.add('active');
-                btn.textContent = '❤️ 已收藏';
+                btn.innerHTML = '☆';
+                btn.title = '收藏';
+                alert('已取消收藏！');
             }
         }
         
-        function updateIndexFavorites() {
-            // 这个函数会在 index.html 中同步更新收藏列表
-            // 通过 localStorage 事件自动同步
+        function addToIndexFavorites() {
+            // 将收藏信息存储到localStorage，供index.html读取
+            const favoriteInfo = {
+                title: '妊娠和儿童孢子丝菌病抗微生物药物选择',
+                url: '369.html',
+                tags: ['妊娠', '儿童', '孢子丝菌病', '两性霉素B脂质体', '伊曲康唑']
+            };
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === favoriteInfo.url);
+            if (!exists) {
+                favorites.push(favoriteInfo);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
         }
         
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 2000);
-        }
-        
-        // 页面加载时检查收藏状态
-        window.onload = checkFavorite;
+        // 页面加载时检查是否已收藏
+        window.onload = function() {
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === '369.html');
+            if (exists) {
+                const btn = document.getElementById('favBtn');
+                btn.classList.add('active');
+                btn.innerHTML = '★';
+                btn.title = '已收藏';
+            }
+        };
     </script>
 </body>
 </html>

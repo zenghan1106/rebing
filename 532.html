@@ -1,0 +1,626 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>头孢菌素类儿科剂量表-273</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .page-title::before {
+            content: "~~~~~";
+            margin-right: 10px;
+        }
+        
+        .page-title::after {
+            content: "*****";
+            margin-left: 10px;
+        }
+        
+        /* 按钮样式 */
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-nav {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-favorite {
+            background-color: #e74c3c;
+            color: white;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            min-width: 800px;
+        }
+        
+        thead {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        thead th {
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        
+        tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9ff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .category-row {
+            background-color: #e8f4f8 !important;
+            font-weight: bold;
+            color: #1a5276;
+        }
+        
+        .subcategory {
+            padding-left: 20px;
+            color: #2874a6;
+        }
+        
+        .drug-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .dose-info {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .max-dose {
+            color: #c0392b;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* 标签样式 */
+        .tags-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .tag-disease {
+            background-color: #fce4ec;
+            color: #c2185b;
+            border-color: #f8bbd9;
+        }
+        
+        .tag-bacteria {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+        
+        .tag-antibiotic {
+            background-color: #fff3e0;
+            color: #e65100;
+            border-color: #ffe0b2;
+        }
+        
+        /* 底部编辑框 */
+        .footer-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            width: calc(100% - 100px);
+        }
+        
+        .btn-copy {
+            background-color: #9b59b6;
+            color: white;
+            padding: 12px 25px;
+        }
+        
+        .page-number {
+            text-align: center;
+            margin-top: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 18px;
+                padding: 12px;
+            }
+            
+            thead th {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+            
+            tbody td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部按钮 -->
+    <div class="top-buttons">
+        <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        <div>
+            <a href="531.html" class="btn btn-nav">← 上一页</a>
+            <a href="533.html" class="btn btn-nav">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <h1 class="page-title">头孢菌素类儿科剂量表（续）</h1>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/药物</th>
+                    <th>剂量（>28日龄）</th>
+                    <th>最大日剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="3">抗菌药物/头孢菌素类（续）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢哌酮-舒巴坦（严重感染）</td>
+                    <td class="dose-info">160mg/(kg·d)（分次，q6～12h）<br>[1:1比例，80mg/(kg·d)头孢哌酮]<br>或<br>240mg/(kg·d)（分次，q6～12h）<br>[1:2比例，160mg/(kg·d)头孢哌酮]</td>
+                    <td class="max-dose">-</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢噻肟（标准量）</td>
+                    <td class="dose-info">0～7日龄：100～150mg/(kg·d)（分次，q8～12h）<br>8～28日龄：150～200mg/(kg·d)（分次，q6～8h）<br>>28日龄：150～200mg/(kg·d)（分次，q6～8h）</td>
+                    <td class="max-dose">-</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢噻肟（脑膜炎）</td>
+                    <td class="dose-info">>38日龄：225～300mg/(kg·d)（分次，q6～8h）</td>
+                    <td class="max-dose">-</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢匹罗</td>
+                    <td class="dose-info">安全性和有效性未确定</td>
+                    <td class="max-dose">-</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢洛林</td>
+                    <td class="dose-info">0～<2月龄（限皮肤感染）：6mg/kg q8h（妊娠≥34周，出生后≥12日龄）<br>2月龄～<2岁：8mg/kg q8h<br>2～<18岁，体重≤33kg：12mg/kg q8h<br>2～<18岁，体重>33kg：400mg q8h或600mg q12h</td>
+                    <td class="max-dose">-</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢他啶（标准量）</td>
+                    <td class="dose-info">150～200mg/(kg·d)（分次，q8h）</td>
+                    <td class="max-dose">6g</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢他啶（囊性纤维化）</td>
+                    <td class="dose-info">300mg/(kg·d)（分次，q6h）</td>
+                    <td class="max-dose">6g</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢他啶-阿维巴坦</td>
+                    <td class="dose-info">2～<18岁：62.5（50/12.5）mg/kg q8h<br>6月龄～<2岁：62.5（50/12.5）mg/kg q8h<br>3～<6月龄：50（40/10）mg/kg q8h</td>
+                    <td class="max-dose">2.5g</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢唑肟</td>
+                    <td class="dose-info">150～200mg/(kg·d)（分次，q6～8h）</td>
+                    <td class="max-dose">-</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">头孢吡罗</td>
+                    <td class="dose-info">社区获得性肺炎，eGFR≥50ml/（min·1.73m²）<br>3月龄～<12岁：20mg/kg（最大667mg）q8h×7～14天<br>12～<18岁：13.3mg/kg（最大667mg）q8h×7～14天<br>社区获得性肺炎，eGFR<50ml/（min·1.73m²）<br>2～<6岁（根据eGFR）：<br>30～<50ml/min：13.3mg/kg（最大333mg）q12h<br>15～<30ml/min：13.3mg/kg（最大333mg）q24h<br>6～<12岁（根据eGFR）：<br>30～<50ml/min：10mg/kg（最大667mg）q12h<br>15～<30ml/min：10mg/kg（最大333mg）q24h<br><15ml/min：无数据<br>12～<18岁（根据eGFR）：<br>30～<50ml/min：10mg/kg（最大667mg）q12h<br>15～<30ml/min：10mg/kg（最大333mg）q24h<br><15ml/min：无数据</td>
+                    <td class="max-dose">-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 标签区域 -->
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 检索标签</div>
+        <div>
+            <span class="tag tag-disease">严重感染</span>
+            <span class="tag tag-disease">脑膜炎</span>
+            <span class="tag tag-disease">皮肤感染</span>
+            <span class="tag tag-disease">囊性纤维化</span>
+            <span class="tag tag-disease">社区获得性肺炎</span>
+            <span class="tag tag-antibiotic">头孢哌酮-舒巴坦</span>
+            <span class="tag tag-antibiotic">头孢噻肟</span>
+            <span class="tag tag-antibiotic">头孢匹罗</span>
+            <span class="tag tag-antibiotic">头孢洛林</span>
+            <span class="tag tag-antibiotic">头孢他啶</span>
+            <span class="tag tag-antibiotic">头孢他啶-阿维巴坦</span>
+            <span class="tag tag-antibiotic">头孢唑肟</span>
+            <span class="tag tag-antibiotic">头孢吡罗</span>
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addToFavorites()">⭐ 收藏</button>
+    
+    <!-- 底部区域 -->
+    <div class="footer-section">
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" value="头孢菌素类儿科剂量表（续）；头孢菌素；儿科剂量；抗生素；严重感染；脑膜炎；皮肤感染；囊性纤维化；社区获得性肺炎；=273" readonly>
+            <button class="btn btn-copy" onclick="copyToClipboard()">📋 复制</button>
+        </div>
+        <div class="page-number">页码：273</div>
+    </div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="532.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制到剪贴板
+        function copyToClipboard() {
+            const copyText = document.getElementById("copyText");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    alert("已复制到剪贴板！");
+                });
+            } else {
+                document.execCommand("copy");
+                alert("已复制到剪贴板！");
+            }
+        }
+        
+        // 添加到收藏
+        function addToFavorites() {
+            const title = document.querySelector('.page-title').textContent.replace(/[~*]/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '273';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '抗生素',
+                date: new Date().toLocaleDateString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            alert('已添加到收藏！请在首页查看收藏列表。');
+            
+            try {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.postMessage({
+                        type: 'addFavorite',
+                        data: { title, url, pageNum }
+                    }, '*');
+                }
+            } catch(e) {
+                console.log('无法向父窗口发送消息');
+            }
+        }
+        
+        window.addEventListener('message', function(e) {
+            if (e.data.type === 'addFavorite') {
+                console.log('收到收藏请求', e.data.data);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,688 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾功能受损成人患者的抗感染药物剂量调整-抗反转录病毒药物固定剂量复方制剂续*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+        }
+        
+        /* 顶部导航栏 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-left {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-home {
+            background: #4a90d9;
+            color: white;
+        }
+        
+        .btn-home:hover {
+            background: #357abd;
+        }
+        
+        .btn-page {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-page:hover {
+            background: #5a6268;
+        }
+        
+        .btn-favorite {
+            background: #e74c3c;
+            color: white;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-favorite:hover {
+            background: #c0392b;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+        }
+        
+        .main-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }
+        
+        /* 表格容器 */
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 800px;
+        }
+        
+        /* 表头样式 - 蓝色 */
+        thead th {
+            background: linear-gradient(180deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #2a6da3;
+            white-space: nowrap;
+        }
+        
+        /* 第一行字体大一点 */
+        tbody tr:first-child td {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        /* 分类行样式 */
+        .category-row {
+            background: #e8f4f8 !important;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .category-row td {
+            padding: 10px 8px;
+            border: 1px solid #bcd;
+            font-size: 14px;
+        }
+        
+        /* 普通单元格 */
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        
+        /* 药物名称列 */
+        .drug-name {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #f8f9fa;
+            white-space: nowrap;
+        }
+        
+        /* 斑马纹 */
+        tbody tr:not(.category-row):nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        tbody tr:not(.category-row):hover {
+            background: #e8f4f8;
+        }
+        
+        /* 长文本换行 */
+        .wrap-text {
+            max-width: 200px;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+        
+        /* 底部区域 */
+        .bottom-section {
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        /* 标签样式 */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid #bbdefb;
+        }
+        
+        /* 页码 */
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        /* 复制区域 */
+        .copy-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: monospace;
+        }
+        
+        .btn-copy {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+        }
+        
+        .btn-copy:hover {
+            background: #218838;
+        }
+        
+        /* 关键词 */
+        .keywords {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            padding: 10px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .main-title {
+                font-size: 15px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th {
+                font-size: 12px;
+                padding: 8px 4px;
+            }
+            
+            td {
+                padding: 5px;
+            }
+            
+            .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="index.html" class="btn btn-home">🏠 返回首页</a>
+        </div>
+        <div class="nav-right">
+            <a href="619.html" class="btn btn-page">← 上一页</a>
+            <a href="621.html" class="btn btn-page">下一页 →</a>
+        </div>
+    </div>
+    
+    <!-- 标题 -->
+    <div class="title-section">
+        <div class="main-title">~~~~~表17A（32）肾功能受损成人患者的抗感染药物剂量调整*****</div>
+        <div class="sub-title">抗反转录病毒药物/固定剂量复方制剂（续）</div>
+    </div>
+    
+    <!-- 表格 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>抗微生物药</th>
+                    <th>半衰期(h)<br>(肾功能正常)</th>
+                    <th>半衰期(h)<br>(终末期肾病)</th>
+                    <th>剂量<br>(肾功能正常)</th>
+                    <th>肌酐清除率或估计的<br>肾小球滤过率(ml/min)</th>
+                    <th>血液透析</th>
+                    <th>CAPD</th>
+                    <th>CRRT</th>
+                    <th>SLED</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-row">
+                    <td colspan="9">抗反转录病毒药物/固定剂量复方制剂（续）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Biktarvy<br>(BIC/<br>FTC/TAF)<br>(必妥维)</td>
+                    <td class="wrap-text">BIC: 17.3<br>FTC: 10<br>TAF: 0.51</td>
+                    <td class="wrap-text">BIC: 无数据<br>FTC: ＞10<br>TAF: 无数据</td>
+                    <td>1片 po q24h</td>
+                    <td class="wrap-text">CrCl≥30: 1片 q24h<br>CrCl＜30: 禁用（见血液透析）</td>
+                    <td class="wrap-text">血液透析中，病毒学抑制:<br>1片 q24h（透析日透后给药）<br>血液透析中，病毒学未抑制: 禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Cabenuva<br>(CAB/RPV)<br>(im)</td>
+                    <td class="wrap-text">CAB: 5.6～11.5周<br>RPV: 13～28周</td>
+                    <td class="wrap-text">CAB: 无数据<br>RPV: 无数据</td>
+                    <td class="wrap-text">CAB: 600mg×1剂，然后400mg每月1次<br>RPV: 900mg×1剂，然后600mg每月1次</td>
+                    <td class="wrap-text">CrCl≥30: 无须调整剂量<br>CrCl＜30: 无须调整剂量，监测毒性</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Cimduo<br>(3TC/TDF)</td>
+                    <td class="wrap-text">3TC: 5～7<br>TDF: 17</td>
+                    <td class="wrap-text">3TC: 15～35<br>TDF: 延长</td>
+                    <td>1片 po q24h</td>
+                    <td class="wrap-text">CrCl≥50: 1片 q24h<br>CrCl＜50: 禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Combivir<br>(3TC/ZDV)</td>
+                    <td class="wrap-text">3TC: 5～7<br>ZDV: 0.5～3.0</td>
+                    <td class="wrap-text">3TC: 15～35<br>ZDV: 1.3～3.0</td>
+                    <td>1片 po q12h</td>
+                    <td class="wrap-text">CrCl≥50: 1片 q24h<br>CrCl＜50: 禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Complera,<br>Eviplera<br>(RPV/FTC/<br>TDF)</td>
+                    <td class="wrap-text">RPV: 45～50<br>FTC: 10<br>TDF: 17</td>
+                    <td class="wrap-text">RPV: 无数据<br>FTC: ＞10<br>TDF: 延长</td>
+                    <td>1片 po q24h</td>
+                    <td class="wrap-text">CrCl≥50: 1片 q24h<br>CrCl＜50: 禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Delstrigo<br>(DOR/3TC/<br>TDF)</td>
+                    <td class="wrap-text">DOR: 15<br>3TC: 5～7<br>TDF: 17</td>
+                    <td class="wrap-text">DOR: 无数据<br>3TC: 15～35<br>TDF: 延长</td>
+                    <td>1片 po q24h</td>
+                    <td class="wrap-text">CrCl≥50: 1片 q24h<br>CrCl＜50: 禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                    <td>禁用</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 底部区域 -->
+    <div class="bottom-section">
+        <!-- 标签 -->
+        <div class="tags-container">
+            <span class="tag">肾功能受损</span>
+            <span class="tag">抗感染药物</span>
+            <span class="tag">抗反转录病毒药物</span>
+            <span class="tag">固定剂量复方制剂</span>
+            <span class="tag">Biktarvy</span>
+            <span class="tag">BIC</span>
+            <span class="tag">FTC</span>
+            <span class="tag">TAF</span>
+            <span class="tag">必妥维</span>
+            <span class="tag">Cabenuva</span>
+            <span class="tag">CAB</span>
+            <span class="tag">RPV</span>
+            <span class="tag">im</span>
+            <span class="tag">Cimduo</span>
+            <span class="tag">3TC</span>
+            <span class="tag">TDF</span>
+            <span class="tag">Combivir</span>
+            <span class="tag">ZDV</span>
+            <span class="tag">Complera</span>
+            <span class="tag">Eviplera</span>
+            <span class="tag">Delstrigo</span>
+            <span class="tag">DOR</span>
+            <span class="tag">血液透析</span>
+            <span class="tag">CAPD</span>
+            <span class="tag">CRRT</span>
+            <span class="tag">SLED</span>
+            <span class="tag">禁用</span>
+            <span class="tag">无数据</span>
+        </div>
+        
+        <!-- 页码 -->
+        <div class="page-number">620</div>
+        
+        <!-- 复制区域 -->
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyText" readonly value="肾功能受损成人患者的抗感染药物剂量调整；抗反转录病毒药物/固定剂量复方制剂（续）；Biktarvy,BIC,FTC,TAF,必妥维,Cabenuva,CAB,RPV,im,Cimduo,3TC,TDF,Combivir,ZDV,Complera,Eviplera,Delstrigo,DOR,血液透析,CAPD,CRRT,SLED,禁用,无数据,肾功能受损=620">
+            <button class="btn btn-copy" onclick="copyText()">📋 复制</button>
+        </div>
+        
+        <!-- 关键词 -->
+        <div class="keywords">
+            关键词：肾功能受损 | 抗感染药物 | 抗反转录病毒药物 | 固定剂量复方制剂 | Biktarvy | BIC | FTC | TAF | 必妥维 | Cabenuva | CAB | RPV | im | Cimduo | 3TC | TDF | Combivir | ZDV | Complera | Eviplera | Delstrigo | DOR | 血液透析 | CAPD | CRRT | SLED | 禁用 | 无数据
+        </div>
+    </div>
+    
+    <!-- 收藏按钮 -->
+    <button class="btn btn-favorite" onclick="addFavorite()" title="点击收藏">⭐ 收藏</button>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="620.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        // 复制功能
+        function copyText() {
+            const copyInput = document.getElementById('copyText');
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(copyInput.value).then(() => {
+                    alert('已复制到剪贴板！');
+                });
+            } else {
+                document.execCommand('copy');
+                alert('已复制到剪贴板！');
+            }
+        }
+        
+        // 收藏功能
+        function addFavorite() {
+            const title = document.querySelector('.main-title').textContent.replace(/~~~~~|*****|/g, '').trim();
+            const url = window.location.href;
+            const pageNum = '620';
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                alert('该页面已在收藏夹中！');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                pageNum: pageNum,
+                category: '肾功能受损抗感染药物',
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('index_favorites_update', JSON.stringify({
+                action: 'add',
+                data: {
+                    title: title,
+                    url: url,
+                    pageNum: pageNum,
+                    category: '肾功能受损抗感染药物'
+                },
+                timestamp: Date.now()
+            }));
+            
+            alert('已添加到收藏！\n标题：' + title + '\n页码：' + pageNum);
+        }
+    </script>
+</body>
+</html>

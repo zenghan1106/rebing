@@ -1,0 +1,669 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~肾功能受损成人患者抗感染药物剂量调整-膦甲酸*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(180deg, #f0f7ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 12px;
+            min-height: 100vh;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 144, 217, 0.3);
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.4);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #6ab04c 0%, #4a9b3a 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(106, 176, 76, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(106, 176, 76, 0.4);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1a5276;
+            margin: 15px 0;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #1565c0;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            transition: background-color 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background-color: #f5f9ff;
+        }
+        
+        tbody td {
+            padding: 10px;
+            border: 1px solid #e0e7ff;
+            font-size: 12px;
+            vertical-align: top;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #fafbff;
+        }
+        
+        tbody tr:nth-child(even):hover {
+            background-color: #f0f5ff;
+        }
+        
+        .drug-name {
+            font-weight: bold;
+            color: #1565c0;
+            font-size: 13px;
+        }
+        
+        .tags-section {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tags-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 12px;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(116, 185, 255, 0.3);
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(116, 185, 255, 0.4);
+        }
+        
+        .bottom-section {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .keywords {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        
+        .keywords strong {
+            color: #1565c0;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 12px 0;
+        }
+        
+        .copy-section {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        .copy-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 2px solid #74b9ff;
+            border-radius: 10px;
+            font-size: 13px;
+            background: white;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(225, 112, 85, 0.3);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(225, 112, 85, 0.4);
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
+            color: white;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 20px rgba(253, 203, 110, 0.5);
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+            z-index: 2000;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+            
+            .title {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            thead th {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+            
+            tbody td {
+                font-size: 11px;
+                padding: 8px;
+            }
+            
+            .back-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+            
+            .favorite-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        <div class="nav-buttons">
+            <a href="606.html" class="nav-btn">上一页</a>
+            <a href="608.html" class="nav-btn">下一页</a>
+        </div>
+    </div>
+    
+    <h1 class="title">~~~~~肾功能受损成人患者抗感染药物剂量调整-膦甲酸*****</h1>
+    
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>抗微生物药</th>
+                    <th>半衰期(h)<br>肾功能正常</th>
+                    <th>半衰期(h)<br>终末期肾病</th>
+                    <th>剂量<br>肾功能正常</th>
+                    <th>肌酐清除率或估计的<br>肾小球滤过率(ml/min)</th>
+                    <th>血液透析</th>
+                    <th>CAPD</th>
+                    <th>CRRT</th>
+                    <th>SLED</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="drug-name">膦甲酸<br>（诱导治疗）<br>特殊剂量估算</span></td>
+                    <td>3<br>（终末半衰期18~88）</td>
+                    <td>非常长</td>
+                    <td>90mg/kg iv q12h<br>或60mg/kg<br>iv q8h（×2~3w）</td>
+                    <td>
+                        CrCl>1.4ml/（min·kg）：<br>
+                        60mg/kg iv q8h<br><br>
+                        1.0ml/（min·kg）<CrCl~<br>
+                        1.4ml/（min·kg）：45mg/kg q8h<br><br>
+                        0.8ml/（min·kg）<CrCl~<br>
+                        1.0ml/（min·kg）：50mg/kg q12h<br><br>
+                        0.6ml/（min·kg）<CrCl~<br>
+                        0.8ml/（min·kg）：40mg/kg q12h<br><br>
+                        0.5ml/（min·kg）<CrCl~<br>
+                        0.6ml/（min·kg）：60mg/kg q24h<br><br>
+                        0.4ml/（min·kg）<CrCl~<br>
+                        0.5ml/（min·kg）：50mg/kg q24h<br><br>
+                        CrCl≤0.4ml/（min·kg）：<br>
+                        不推荐使用
+                    </td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                    <td>无数据</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">膦甲酸</span>
+            <span class="tag">诱导治疗</span>
+            <span class="tag">肾功能受损</span>
+            <span class="tag">终末期肾病</span>
+            <span class="tag">血液透析</span>
+            <span class="tag">CAPD</span>
+            <span class="tag">CRRT</span>
+            <span class="tag">SLED</span>
+            <span class="tag">肌酐清除率</span>
+            <span class="tag">肾小球滤过率</span>
+        </div>
+    </div>
+    
+    <div class="bottom-section">
+        <div class="keywords">
+            <strong>关键词：</strong>膦甲酸；诱导治疗；特殊剂量估算；肾功能受损；终末期肾病；血液透析；CAPD；CRRT；SLED；肌酐清除率；肾小球滤过率；抗病毒药物；剂量调整；肾功能损害；药物半衰期；透析患者用药；不推荐
+        </div>
+        <div class="page-number">607</div>
+        <div class="copy-section">
+            <input type="text" class="copy-input" id="copyInput" value="肾功能受损成人患者抗感染药物剂量调整-膦甲酸；膦甲酸；诱导治疗；特殊剂量估算；肾功能受损；终末期肾病；血液透析；CAPD；CRRT；SLED；肌酐清除率；肾小球滤过率；抗病毒药物；剂量调整；=607" readonly>
+            <button class="copy-btn" onclick="copyToClipboard()">复制</button>
+        </div>
+    </div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">⭐</button>
+    
+    <div class="toast" id="toast"></div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="607.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+        
+        function copyToClipboard() {
+            const input = document.getElementById('copyInput');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast('✓ 已复制到剪贴板');
+                });
+            } else {
+                document.execCommand('copy');
+                showToast('✓ 已复制到剪贴板');
+            }
+        }
+        
+        function addToFavorite() {
+            const title = document.title;
+            const url = window.location.href;
+            
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            const exists = favorites.some(f => f.url === url);
+            if (exists) {
+                showToast('⚠ 已收藏过该页面');
+                return;
+            }
+            
+            favorites.push({
+                title: title,
+                url: url,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            showToast('⭐ 已添加到收藏！');
+            
+            if (window.BroadcastChannel) {
+                const bc = new BroadcastChannel('favorites_channel');
+                bc.postMessage({
+                    action: 'add',
+                    title: title,
+                    url: url
+                });
+            }
+        }
+        
+        window.addEventListener('load', function() {
+            const input = document.getElementById('copyInput');
+            const bodyWidth = document.body.clientWidth;
+            if (bodyWidth > 500) {
+                input.style.width = (bodyWidth - 180) + 'px';
+            }
+        });
+        
+        window.addEventListener('resize', function() {
+            const input = document.getElementById('copyInput');
+            const bodyWidth = document.body.clientWidth;
+            if (bodyWidth > 500) {
+                input.style.width = (bodyWidth - 180) + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

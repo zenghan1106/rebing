@@ -1,0 +1,689 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~~~~~表16（12）儿科剂量（年龄>28日龄）*****</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .home-btn {
+            background: #4a90d9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            font-size: 22px;
+            margin: 15px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e6f1 100%);
+            border-radius: 10px;
+            border-left: 5px solid #2980b9;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background: #2980b9;
+            color: white;
+        }
+        
+        thead th {
+            padding: 14px 10px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fbfd;
+        }
+        
+        tbody tr:hover {
+            background: #e8f4f8;
+        }
+        
+        tbody td {
+            padding: 12px 10px;
+            vertical-align: top;
+        }
+        
+        .drug-name {
+            font-weight: 600;
+            color: #1a5276;
+            white-space: nowrap;
+        }
+        
+        .dose-info {
+            color: #444;
+            line-height: 1.8;
+        }
+        
+        .category-header {
+            background: #5dade2 !important;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .sub-category {
+            background: #aed6f1 !important;
+            color: #154360;
+            font-weight: 600;
+        }
+        
+        .tags-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .tags-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f4f8;
+            color: #2980b9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #aed6f1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: #2980b9;
+            color: white;
+        }
+        
+        .keywords-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .keywords-title {
+            font-size: 16px;
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .page-number {
+            text-align: center;
+            font-size: 18px;
+            color: #1a5276;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .copy-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .copy-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #aed6f1;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .copy-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .favorite-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: none;
+            z-index: 1001;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            table {
+                font-size: 11px;
+            }
+            
+            thead th, tbody td {
+                padding: 8px 6px;
+            }
+            
+            .home-btn, .nav-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .copy-section {
+                flex-direction: column;
+            }
+            
+            .copy-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="index.html" class="home-btn">🏠 返回首页</a>
+        <div class="nav-buttons">
+            <a href="551.html" class="nav-btn">← 上一页</a>
+            <a href="553.html" class="nav-btn">下一页 →</a>
+        </div>
+    </div>
+    
+    <h1>~~~~~表16（12）儿科剂量（年龄>28日龄）*****</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>分类/药物</th>
+                    <th>剂量（>28日龄）</th>
+                    <th>最大日剂量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="category-header">
+                    <td colspan="3">抗反转录病毒药物（续）</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">齐多夫定（ZDV）</td>
+                    <td class="dose-info">
+                        早产儿，估计孕龄<30周：<br>
+                        年龄0～4周龄：2mg/kg q12h<br>
+                        年龄4～8周龄：3mg/kg q12h<br>
+                        年龄>8周龄：12mg/kg po q12h<br><br>
+                        早产儿，估计孕龄30～<35周：<br>
+                        年龄0～2周龄：2mg/kg po q12h<br>
+                        年龄2～6周龄：3mg/kg po q12h<br>
+                        年龄>6周龄：12mg/kg po q12h<br><br>
+                        新生儿，估计孕龄≥35周：<br>
+                        年龄0～4周：4mg/kg q12h<br><br>
+                        婴儿/儿童（估计孕龄≥35周，年龄≥4周龄）：<br>
+                        体重4～<9kg：12mg/kg po q12h<br>
+                        体重9～<30kg：9mg/kg po q12h<br>
+                        体重≥30kg：300mg q12h<br>
+                        根据体表面积计算剂量：180～240mg/m² po q12h
+                    </td>
+                    <td></td>
+                </tr>
+                <tr class="sub-category">
+                    <td colspan="3">抗反转录病毒药物复方制剂</td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Atripla（EFV/FTC/TDF）</td>
+                    <td class="dose-info">≥12岁，体重≥40kg：1片 q24h</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Biktarvy（BIC/FTC/TAF）（必妥维）</td>
+                    <td class="dose-info">
+                        <2岁，体重<14kg：无数据，研究进行中<br>
+                        ≥2岁，体重14～<25kg：BIC 30/FTC 120/TAF 15mg q24h<br>
+                        体重≥25kg：BIC50/FTC200/TAF25mg q24h
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Cabenuva（CAB/RPV）</td>
+                    <td class="dose-info">
+                        ≥12岁，体重≥35kg：<br>
+                        每月注射：<br>
+                        600mg/900mg im，然后400mg/600mg每月1次<br>
+                        每2个月注射：<br>
+                        600mg/900mg im，1个月后重复，然后每2个月1次
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Cimduo, Temixys（3TC/TDF）</td>
+                    <td class="dose-info">体重≥35kg：1片 q24h</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Combivir（3TC/AZT）</td>
+                    <td class="dose-info">≥12岁，体重≥30kg：1片 q12h</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Complera/Eviplera（RPV/FTC/TDF）</td>
+                    <td class="dose-info">≥12岁，体重≥35kg：1片 q24h</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Delstrigo（DOR/3TC/TDF）</td>
+                    <td class="dose-info">体重≥35kg：1片 q24h</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="drug-name">Descovy（FTC/TAF）</td>
+                    <td class="dose-info">
+                        体重14～<25kg：FTC 120mg/TAF 15mg q24h（+NNRTI或INSTI）<br>
+                        体重25～<35kg：FTC 200mg/TAF 25mg q24h（+NNRTI或INSTI）<br>
+                        体重≥35kg：FTC 200mg/TAF25mg q24h（+NNRTI、INSTI或增强的PI）
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="tags-section">
+        <div class="tags-title">🏷️ 特色检索标签</div>
+        <div class="tags-container">
+            <span class="tag">HIV</span>
+            <span class="tag">抗反转录病毒</span>
+            <span class="tag">齐多夫定</span>
+            <span class="tag">必妥维</span>
+            <span class="tag">Biktarvy</span>
+            <span class="tag">Atripla</span>
+            <span class="tag">Cabenuva</span>
+            <span class="tag">Cimduo</span>
+            <span class="tag">Temixys</span>
+            <span class="tag">Combivir</span>
+            <span class="tag">Complera</span>
+            <span class="tag">Eviplera</span>
+            <span class="tag">Delstrigo</span>
+            <span class="tag">Descovy</span>
+            <span class="tag">儿科</span>
+            <span class="tag">早产儿</span>
+            <span class="tag">新生儿</span>
+            <span class="tag">婴儿</span>
+            <span class="tag">儿童</span>
+            <span class="tag">TDF</span>
+            <span class="tag">TAF</span>
+            <span class="tag">FTC</span>
+            <span class="tag">3TC</span>
+            <span class="tag">AZT</span>
+            <span class="tag">BIC</span>
+            <span class="tag">EFV</span>
+            <span class="tag">RPV</span>
+            <span class="tag">DOR</span>
+            <span class="tag">NNRTI</span>
+            <span class="tag">INSTI</span>
+            <span class="tag">PI</span>
+        </div>
+    </div>
+    
+    <div class="page-number">552</div>
+    
+    <div class="keywords-section">
+        <div class="keywords-title">🔍 关键词</div>
+        <p>表16（12）儿科剂量（年龄>28日龄）；抗反转录病毒药物；齐多夫定；必妥维；Biktarvy；Atripla；Cabenuva；Cimduo；Temixys；Combivir；Complera；Eviplera；Delstrigo；Descovy；HIV；儿科剂量；早产儿；新生儿；婴儿；儿童；TDF；TAF；FTC；3TC；AZT；BIC；EFV；RPV；DOR；NNRTI；INSTI；PI</p>
+    </div>
+    
+    <div class="copy-section">
+        <input type="text" class="copy-input" id="copyText" value="表16（12）儿科剂量（年龄>28日龄）；抗反转录病毒药物；齐多夫定；必妥维；Biktarvy；Atripla；Cabenuva；Cimduo；Temixys；Combivir；Complera；Eviplera；Delstrigo；Descovy；HIV；儿科剂量；早产儿；新生儿；婴儿；儿童；TDF；TAF；FTC；3TC；AZT；BIC；EFV；RPV；DOR；NNRTI；INSTI；PI；=552" readonly>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 复制</button>
+    </div>
+    
+    <button class="favorite-btn" onclick="addToFavorite()" title="收藏">⭐</button>
+    <div class="toast" id="toast">已添加到收藏！</div>
+    
+<div class="image-viewer" style="margin: 20px 0; text-align: center;">
+    <div class="image-container" style="position: relative; display: inline-block; max-width: 100%;">
+        <img id="rotatableImage" src="552.jpg" alt="ʾ��ͼ" 
+             style="width: 100%; height: auto; cursor: pointer; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease;"
+             onclick="toggleZoom()">
+        
+        <!-- ������ť -->
+        <div class="image-controls" style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button onclick="rotateImage()" class="btn-control" title="˳ʱ����ת90��">?? ��ת</button>
+            <button onclick="zoomIn()" class="btn-control" title="�Ŵ�">??+ �Ŵ�</button>
+            <button onclick="zoomOut()" class="btn-control" title="��С">??- ��С</button>
+            <button onclick="resetImage()" class="btn-control" title="����">? ����</button>
+        </div>
+        
+        <!-- ������ʾ -->
+        <div id="zoomIndicator" style="margin-top: 10px; font-size: 12px; color: #666; display: none;">
+            ��ǰ����: <span id="zoomLevel">100%</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+        padding: 8px 16px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+    
+    .btn-control:hover {
+        background: #1976D2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-control:active {
+        transform: translateY(0);
+    }
+    
+    /* �Ŵ�ʱ����ʽ */
+    .image-container.zoomed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+    .image-container.zoomed img {
+        max-width: 90%;
+        max-height: 90%;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 0;
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    
+    .image-container.zoomed .image-controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.7);
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+</style>
+
+<script>
+    let rotation = 0;
+    let zoom = 1;
+    let isZoomed = false;
+    const image = document.getElementById('rotatableImage');
+    const container = image.parentElement;
+    
+    // ��תͼƬ
+    function rotateImage() {
+        rotation += 90;
+        if (rotation >= 360) rotation = 0;
+        updateTransform();
+    }
+    
+    // �Ŵ�
+    function zoomIn() {
+        if (zoom < 3) {
+            zoom += 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ��С
+    function zoomOut() {
+        if (zoom > 0.25) {
+            zoom -= 0.25;
+            updateTransform();
+            showZoomIndicator();
+        }
+    }
+    
+    // ����
+    function resetImage() {
+        rotation = 0;
+        zoom = 1;
+        if (isZoomed) toggleZoom();
+        updateTransform();
+        hideZoomIndicator();
+    }
+    
+    // ����ͼƬ�任
+    function updateTransform() {
+        image.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    }
+    
+    // �л��Ŵ�״̬
+    function toggleZoom() {
+        isZoomed = !isZoomed;
+        
+        if (isZoomed) {
+            container.classList.add('zoomed');
+            document.body.style.overflow = 'hidden';
+        } else {
+            container.classList.remove('zoomed');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // ��ʾ����ָʾ��
+    function showZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        const zoomLevel = document.getElementById('zoomLevel');
+        indicator.style.display = 'block';
+        zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+        
+        // 3����Զ�����
+        clearTimeout(window.zoomIndicatorTimeout);
+        window.zoomIndicatorTimeout = setTimeout(hideZoomIndicator, 3000);
+    }
+    
+    // ��������ָʾ��
+    function hideZoomIndicator() {
+        const indicator = document.getElementById('zoomIndicator');
+        indicator.style.display = 'none';
+    }
+    
+    // ����������
+    image.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+    
+    // ���̿�ݼ�
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'r' || e.key === 'R') {
+            rotateImage();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomIn();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOut();
+        } else if (e.key === '0') {
+            resetImage();
+        } else if (e.key === 'Escape' && isZoomed) {
+            toggleZoom();
+        }
+    });
+        function copyToClipboard() {
+            const input = document.getElementById('copyText');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = '✓ 已复制';
+                setTimeout(() => {
+                    btn.textContent = '📋 复制';
+                }, 2000);
+            });
+        }
+        
+        function addToFavorite() {
+            // 获取当前页面信息
+            const title = document.title.replace(/~~~~~|\\\\*\\\\*/g, '');
+            const url = window.location.href;
+            
+            // 尝试添加到localStorage作为收藏记录
+            let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const exists = favorites.some(f => f.url === url);
+            
+            if (!exists) {
+                favorites.push({
+                    title: title,
+                    url: url,
+                    category: '儿科剂量',
+                    date: new Date().toLocaleString('zh-CN')
+                });
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                
+                // 尝试向index.html发送消息（如果同域）
+                try {
+                    if (window.opener && !window.opener.closed) {
+                        window.opener.postMessage({
+                            type: 'addFavorite',
+                            data: {
+                                title: title,
+                                url: url,
+                                category: '儿科剂量'
+                            }
+                        }, '*');
+                    }
+                } catch(e) {}
+            }
+            
+            // 显示提示
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

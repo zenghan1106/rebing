@@ -18,11 +18,20 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .sub-bar button.active{background:linear-gradient(135deg,#00CEC9,#00B894);color:white;box-shadow:0 2px 8px rgba(0,206,201,0.3)}
 .study-bar button.active{background:linear-gradient(135deg,#FDCB6E,#F39C12);color:white}
 .study-bar button.active.today{background:linear-gradient(135deg,#6C5CE7,#4834d4);color:white}
-.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
-.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08);cursor:pointer;transition:transform .12s;padding:6px;user-select:none;border:3px solid transparent}
+.card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:4px}
+.card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08);cursor:pointer;transition:transform .12s;padding:4px;user-select:none;border:3px solid transparent}
 .card:active{transform:scale(.92)}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:#f8f8f8;display:block}
-.card .label{text-align:center;margin-top:3px;font-size:14px;font-weight:700;color:#333;padding:2px 8px;border-radius:6px;background:#f0f0f0;display:none}
+.card .dyn-box{width:100%;aspect-ratio:1/1;border-radius:12px;background:#fafafa;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.card .dyn-grid{position:relative;width:75%;aspect-ratio:1/1;border:2.5px solid #E74C3C;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.88);margin-top:4px}
+.card .dyn-grid .dyn-py{position:absolute;top:-22px;left:4px;font-size:13px;font-weight:700;color:#E74C3C;white-space:nowrap;letter-spacing:1px}
+.card .dyn-grid .dyn-cross-h,.card .dyn-grid .dyn-cross-v{position:absolute;background:rgba(231,76,60,0.15)}
+.card .dyn-grid .dyn-cross-h{left:0;right:0;top:50%;height:1px}
+.card .dyn-grid .dyn-cross-v{top:0;bottom:0;left:50%;width:1px}
+.card .dyn-grid .dyn-char{position:relative;font-size:clamp(36px,8vw,72px);font-weight:900;color:#333;font-family:'KaiTi','STKaiti',serif;transform:translateY(-2px);text-align:center;line-height:1}
+.card .dyn-grid .dyn-char.multi{font-size:clamp(14px,3vw,28px);letter-spacing:2px}
+.card .dyn-words{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;padding:1px 2px 0;max-height:34px;overflow:hidden}
+.card .dyn-word{font-size:8px;background:rgba(0,0,0,0.04);border:1px solid #eee;border-radius:3px;padding:1px 4px;color:#888;font-weight:600}
+.card .label{text-align:center;margin-top:2px;font-size:12px;font-weight:700;color:#333;padding:1px 8px;border-radius:6px;background:#f0f0f0;display:none}
 .show-label .card .label{display:inline-block}
 .card.correct{border-color:#00B894}
 .card.wrong{border-color:#E17055;animation:shake .4s ease}
@@ -44,9 +53,16 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .btn-sm.primary:hover{opacity:.9}
 .read-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);z-index:1000;justify-content:center;align-items:center;flex-direction:column;gap:14px}
 .read-popup.show{display:flex}
-.read-popup .big{font-size:120px;font-weight:900;color:white;text-shadow:0 4px 20px rgba(0,0,0,0.3);background:rgba(255,255,255,0.1);padding:20px 40px;border-radius:24px}
-.read-popup .idom{display:flex;gap:8px;background:rgba(255,255,255,0.1);padding:16px 24px;border-radius:24px}
-.read-popup .idom span{font-size:60px;font-weight:900;color:white;text-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.read-popup .dyn-box{display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(255,255,255,0.12);padding:24px 36px 28px;border-radius:28px}
+.read-popup .dyn-grid{position:relative;width:200px;height:200px;border:3.5px solid #E74C3C;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.9)}
+.read-popup .dyn-grid .dyn-py{position:absolute;top:-28px;left:8px;font-size:20px;font-weight:700;color:#E74C3C;white-space:nowrap;letter-spacing:2px}
+.read-popup .dyn-grid .dyn-cross-h,.read-popup .dyn-grid .dyn-cross-v{position:absolute;background:rgba(231,76,60,0.18)}
+.read-popup .dyn-grid .dyn-cross-h{left:0;right:0;top:50%;height:1.5px}
+.read-popup .dyn-grid .dyn-cross-v{top:0;bottom:0;left:50%;width:1.5px}
+.read-popup .dyn-grid .dyn-char{position:relative;font-size:110px;font-weight:900;color:#333;font-family:'KaiTi','STKaiti',serif;text-align:center;line-height:1}
+.read-popup .dyn-grid .dyn-char.multi{font-size:36px;letter-spacing:4px}
+.read-popup .dyn-words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.read-popup .dyn-word{font-size:22px;background:rgba(255,255,255,0.88);border-radius:8px;padding:6px 16px;color:#333;font-weight:600;font-family:'Microsoft YaHei','PingFang SC',sans-serif}
 .read-popup .sub{font-size:18px;color:rgba(255,255,255,0.7)}
 .toggle-label{display:flex;align-items:center;gap:4px;font-size:12px;color:#888;cursor:pointer;user-select:none}
 .toggle-label input{width:14px;height:14px;accent-color:#6C5CE7;cursor:pointer}
@@ -63,7 +79,12 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .item-opt{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;cursor:pointer;transition:all .15s;border:2px solid #eee;user-select:none}
 .item-opt:hover{border-color:#ccc;background:#fafafa}
 .item-opt.checked{border-color:#6C5CE7;background:rgba(108,92,231,0.08)}
-.item-opt .opt-img{width:30px;height:30px;border-radius:6px;object-fit:cover}
+.opt-dyn{display:inline-block;width:36px;height:36px;vertical-align:middle;margin-right:4px;flex-shrink:0;overflow:hidden}
+.dyn-box.mini{border-radius:5px!important}
+.dyn-box.mini .dyn-grid{border-width:1.5px!important;border-radius:4px!important;width:68%!important}
+.dyn-box.mini .dyn-py{font-size:8px!important;top:-13px!important;left:3px!important}
+.dyn-box.mini .dyn-char{font-size:clamp(16px,3.5vw,26px)!important}
+.dyn-box.mini .dyn-word{font-size:6px!important;padding:0 2px!important}
 .item-opt .opt-char{font-size:22px;font-weight:700;color:#333;min-width:28px;text-align:center}
 .item-opt .opt-py{font-size:11px;color:#aaa}
 .select-actions{display:flex;gap:8px;margin-bottom:12px}
@@ -200,12 +221,21 @@ function shuffle(a){var b=[].concat(a);for(var i=b.length-1;i>0;i--){var j=Math.
 
 function getPool(){var full=(sub==='hanzi'?HANZI:CHENGYU);if(study==='today'){var sel=today[sub];if(sel&&sel.length)return full.filter(function(i){return sel.indexOf(i.c)>=0})}return full}
 
+function makeCharHTML(item,sub,big){
+  var ch=item.c;var py=item.py||'';var isHanzi=(sub==='hanzi');
+  var words=[];if(isHanzi&&ZUCI[ch])words=ZUCI[ch];
+  var multi=!isHanzi&&ch.length>1;
+  var h='<div class="dyn-box"><div class="dyn-grid"><div class="dyn-py">'+py+'</div><div class="dyn-cross-h"></div><div class="dyn-cross-v"></div><div class="dyn-char'+(multi?' multi':'')+'">'+(multi?ch.replace(/(.)/g,'$1<br>'):ch)+'</div></div>';
+  if(words.length){h+='<div class="dyn-words">';for(var wi=0;wi<words.length;wi++){h+='<span class="dyn-word">'+words[wi]+'</span>'}h+='</div>'}
+  h+='</div>';return h;
+}
+
 function renderCards(){
   D.grid.innerHTML='';var pool=getPool();
   if(!pool.length){D.grid.innerHTML='<div class="empty-msg">暂无卡片<br>去「今日学习」勾选一些字吧</div>';return}
   var items=shuffle(pool).slice(0,6);cards=items;
   for(var i=0;i<items.length;i++){var item=items[i];var el=document.createElement('div');el.className='card';el.dataset.i=i;
-    var img=document.createElement('img');img.src=item.img;img.alt=item.c;el.appendChild(img);
+    el.innerHTML=makeCharHTML(item,sub,false);
     var lb=document.createElement('div');lb.className='label';lb.textContent=item.c;el.appendChild(lb);
     if(mode==='read'){el.addEventListener('click',(function(itm){return function(){showReadPopup(itm)}})(item))}
     else{el.addEventListener('click',(function(idx){return function(){onAnswer(idx)}})(i))}
@@ -215,9 +245,7 @@ function renderCards(){
 function updateLabels(){document.getElementById('app').classList.toggle('show-label',showLabel)}
 
 function showReadPopup(item){
-  D.popupBody.innerHTML='';D.readPopup.classList.add('show');
-  if(sub==='hanzi'){var d=document.createElement('div');d.className='big';d.textContent=item.c;D.popupBody.appendChild(d)}
-  else{var w=document.createElement('div');w.className='idom';for(var ci=0;ci<item.c.length;ci++){var s=document.createElement('span');s.textContent=item.c[ci];w.appendChild(s)}D.popupBody.appendChild(w)}
+  D.popupBody.innerHTML=makeCharHTML(item,sub,true);D.readPopup.classList.add('show');
   D.popupPy.textContent=item.py;speak(item.c);
 }
 D.readPopup.addEventListener('click',function(){D.readPopup.classList.remove('show');window.speechSynthesis.cancel()});
@@ -227,7 +255,7 @@ function startListen(){
   D.listenArea.classList.add('show');cards=shuffle(pool).slice(0,6);listenTarget=cards[Math.floor(Math.random()*cards.length)];
   locked=false;D.listenBtn.className='listen-btn';D.grid.innerHTML='';
   for(var i=0;i<cards.length;i++){var it=cards[i];var el=document.createElement('div');el.className='card';el.dataset.i=i;
-    var img=document.createElement('img');img.src=it.img;img.alt=it.c;el.appendChild(img);
+    el.innerHTML=makeCharHTML(it,sub,false);
     var lb=document.createElement('div');lb.className='label';lb.textContent=it.c;el.appendChild(lb);
     el.addEventListener('click',(function(idx){return function(){onAnswer(idx)}})(i));D.grid.appendChild(el);}
   updateLabels();D.fb.innerHTML='<span class="emoji">&#128264;</span><span>听声音，找对的卡片</span>';
@@ -241,7 +269,7 @@ function onAnswer(idx){
     setTimeout(function(){if(!locked)return;speak(listenTarget.c)},800);
     setTimeout(function(){D.grid.querySelectorAll('.card').forEach(function(e){e.style.pointerEvents='';e.classList.remove('wrong')});locked=false},1200);}
 }
-D.listenBtn.addEventListener('click',function(){if(!listenTarget)return;D.listenBtn.className='listen-btn pulse';speak(listenTarget.c,function(){D.listenBtn.className='listen-btn'})});
+D.listenBtn.addEventListener('click',function(){if(!listenTarget)return;D.listenBtn.className='listen-btn pulse';speak(listenTarget.c+' 在哪里',function(){D.listenBtn.className='listen-btn'})});
 
 function switchMode(m){mode=m;D.tabBar.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.val===m)});window.speechSynthesis.cancel();D.readPopup.classList.remove('show');if(m==='read'){D.fb.innerHTML='<span class="emoji">&#128071;</span><span>点图片听发音</span>';D.listenArea.classList.remove('show');renderCards()}else startListen()}
 function switchSub(s){sub=s;D.subBar.querySelectorAll('button').forEach(function(b){b.classList.toggle('active',b.dataset.val===s)});window.speechSynthesis.cancel();D.readPopup.classList.remove('show');if(mode==='read')renderCards();else startListen()}
@@ -255,10 +283,10 @@ D.reshuffleBtn.addEventListener('click',function(){if(mode==='read')renderCards(
 
 function openEditModal(){var pool=(sub==='hanzi'?HANZI:CHENGYU);var sel=today[sub];if(!sel||!sel.length)sel=pool.map(function(i){return i.c});D.editList.innerHTML='';
   for(var i=0;i<pool.length;i++){var item=pool[i];var checked=sel.indexOf(item.c)>=0;var el=document.createElement('label');el.className='item-opt'+(checked?' checked':'');
-    var cb=document.createElement('input');cb.type='checkbox';cb.checked=checked;var img=document.createElement('img');img.className='opt-img';img.src=item.img;
-    var sp=document.createElement('span');sp.className='opt-char';sp.textContent=item.c;var py=document.createElement('span');py.className='opt-py';py.textContent=item.py;
+    var cb=document.createElement('input');cb.type='checkbox';cb.checked=checked;var dc=document.createElement('span');dc.className='opt-dyn';dc.innerHTML=(makeCharHTML(item,sub,false)).replace(/dyn-box/g,'dyn-box mini');
+    var py=document.createElement('span');py.className='opt-py';py.textContent=item.py;var sp=document.createElement('span');sp.className='opt-char';sp.textContent=item.c;
     (function(ee,cc){cb.addEventListener('change',function(){ee.classList.toggle('checked',cc.checked)})})(el,cb);
-    el.appendChild(cb);el.appendChild(img);el.appendChild(sp);el.appendChild(py);D.editList.appendChild(el);}
+    el.appendChild(cb);el.appendChild(dc);el.appendChild(sp);el.appendChild(py);D.editList.appendChild(el);}
   D.editModal.classList.add('show');}
 D.saveEditBtn.addEventListener('click',function(){var items=D.editList.querySelectorAll('.item-opt');var sel=[];items.forEach(function(el){var cb=el.querySelector('input');var txt=el.querySelector('.opt-char').textContent;if(cb.checked)sel.push(txt)});today[sub]=sel;try{localStorage.setItem('todaysStudy',JSON.stringify(today))}catch(e){}updateBadge();D.editModal.classList.remove('show');if(mode==='read')renderCards();else startListen()});
 D.selectAllBtn.addEventListener('click',function(){D.editList.querySelectorAll('.item-opt').forEach(function(el){el.querySelector('input').checked=true;el.classList.add('checked')})});

@@ -21,16 +21,16 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:4px}
 .card{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08);cursor:pointer;transition:transform .12s;padding:4px;user-select:none;border:3px solid transparent}
 .card:active{transform:scale(.92)}
-.card .dyn-box{width:100%;aspect-ratio:1/1;border-radius:12px;background:#fafafa;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.card .dyn-grid{position:relative;width:75%;aspect-ratio:1/1;border:2.5px solid #E74C3C;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.88);margin-top:4px}
-.card .dyn-grid .dyn-py{position:absolute;top:-22px;left:4px;font-size:13px;font-weight:700;color:#E74C3C;white-space:nowrap;letter-spacing:1px}
+.card .dyn-box{width:100%;aspect-ratio:1/1;border-radius:12px;background:#fafafa;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.card .dyn-grid{position:relative;width:80%;aspect-ratio:1/1;border:2.5px solid #E74C3C;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.88);margin-top:4px}
+.card .dyn-grid .dyn-py{position:absolute;top:4px;left:6px;font-size:clamp(11px,3vw,16px);font-weight:700;color:#E74C3C;white-space:nowrap;letter-spacing:1px;z-index:1}
 .card .dyn-grid .dyn-cross-h,.card .dyn-grid .dyn-cross-v{position:absolute;background:rgba(231,76,60,0.15)}
 .card .dyn-grid .dyn-cross-h{left:0;right:0;top:50%;height:1px}
 .card .dyn-grid .dyn-cross-v{top:0;bottom:0;left:50%;width:1px}
-.card .dyn-grid .dyn-char{position:relative;font-size:clamp(36px,8vw,72px);font-weight:900;color:#333;font-family:'KaiTi','STKaiti',serif;transform:translateY(-2px);text-align:center;line-height:1}
-.card .dyn-grid .dyn-char.multi{font-size:clamp(14px,3vw,28px);letter-spacing:2px}
-.card .dyn-words{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;padding:1px 2px 0;max-height:34px;overflow:hidden}
-.card .dyn-word{font-size:8px;background:rgba(0,0,0,0.04);border:1px solid #eee;border-radius:3px;padding:1px 4px;color:#888;font-weight:600}
+.card .dyn-grid .dyn-char{position:relative;font-size:clamp(40px,12vw,80px);font-weight:900;color:#333;font-family:'KaiTi','STKaiti',serif;transform:translateY(-2px);text-align:center;line-height:1}
+.card .dyn-grid .dyn-char.multi{font-size:clamp(16px,4.5vw,32px);letter-spacing:2px}
+.card .dyn-words{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:4px 4px 2px;max-height:56px;overflow:hidden}
+.card .dyn-word{font-size:clamp(14px,3.6vw,18px);background:rgba(0,0,0,0.04);border:1px solid #eee;border-radius:6px;padding:3px 8px;color:#888;font-weight:600}
 .card .label{text-align:center;margin-top:2px;font-size:12px;font-weight:700;color:#333;padding:1px 8px;border-radius:6px;background:#f0f0f0;display:none}
 .show-label .card .label{display:inline-block}
 .card.correct{border-color:#00B894}
@@ -53,6 +53,11 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .btn-sm.primary:hover{opacity:.9}
 .read-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);z-index:1000;justify-content:center;align-items:center;flex-direction:column;gap:14px}
 .read-popup.show{display:flex}
+.ew-area{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:320px;width:80%}
+.ew-row{display:flex;align-items:center;gap:8px}
+.ew-input{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;color:#fff;font-size:15px;width:100%;text-align:center;outline:none;transition:border-color .2s}
+.ew-input:focus{border-color:rgba(255,255,255,0.6)}
+.ew-status{font-size:12px;color:#00E676;margin-left:4px}
 .read-popup .dyn-box{display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(255,255,255,0.12);padding:24px 36px 28px;border-radius:28px}
 .read-popup .dyn-grid{position:relative;width:200px;height:200px;border:3.5px solid #E74C3C;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.9)}
 .read-popup .dyn-grid .dyn-py{position:absolute;top:-28px;left:8px;font-size:20px;font-weight:700;color:#E74C3C;white-space:nowrap;letter-spacing:2px}
@@ -82,7 +87,7 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 .opt-dyn{display:inline-block;width:36px;height:36px;vertical-align:middle;margin-right:4px;flex-shrink:0;overflow:hidden}
 .dyn-box.mini{border-radius:5px!important}
 .dyn-box.mini .dyn-grid{border-width:1.5px!important;border-radius:4px!important;width:68%!important}
-.dyn-box.mini .dyn-py{font-size:8px!important;top:-13px!important;left:3px!important}
+.dyn-box.mini .dyn-py{font-size:8px!important;top:2px!important;left:2px!important}
 .dyn-box.mini .dyn-char{font-size:clamp(16px,3.5vw,26px)!important}
 .dyn-box.mini .dyn-word{font-size:6px!important;padding:0 2px!important}
 .item-opt .opt-char{font-size:22px;font-weight:700;color:#333;min-width:28px;text-align:center}
@@ -154,7 +159,7 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
     </div>
   </div>
 </div>
-<div class="read-popup" id="readPopup"><div id="popupBody"></div><div class="sub" id="popupPy"></div><div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">点击任意处关闭</div></div>
+<div class="read-popup" id="readPopup"><div id="popupBody"></div><div class="sub" id="popupPy"></div><div class="ew-area" id="ewArea" style="display:none"><div class="ew-row"><span style="color:rgba(255,255,255,0.6);font-size:13px">✏️ 编辑组词</span><span style="color:rgba(255,255,255,0.3);font-size:11px">用逗号分隔</span></div><input type="text" class="ew-input" id="ewInput" placeholder="大人,大小,大家…"><div class="ew-row"><button class="btn-sm" id="ewSave" style="background:rgba(255,255,255,0.2);color:#fff">💾 保存</button><span class="ew-status" id="ewStatus"></span></div></div><div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:4px">点击任意处关闭</div></div>
 <div class="modal-overlay" id="editModal"><div class="modal">
   <h2>&#128197; 编辑今日学习</h2>
   <p class="note">勾选今天要学的字/成语</p>
@@ -175,15 +180,16 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
   </div>
 </div></div>
 <div class="modal-overlay" id="genModal"><div class="modal">
-  <h2>🎲 自动生成字卡</h2>
-  <p class="note">输入汉字，自动配组词，生成字卡图片</p>
+  <h2>🎲 生成字卡</h2>
+  <p class="note">输入汉字，自动配组词，添加到 data.json</p>
   <div class="add-form">
-    <div class="row"><div style="flex:2"><label>汉字</label><input type="text" id="genChar" maxlength="5" placeholder="如: 大"></div><div style="flex:1"><label>拼音</label><input type="text" id="genPinyin" placeholder="如: da"></div></div>
+    <div class="row"><div style="flex:2"><label>文字</label><input type="text" id="genChar" maxlength="5" placeholder="如: 大 / 一心一意"></div><div style="flex:1"><label>拼音</label><input type="text" id="genPinyin" placeholder="如: da"></div></div>
     <div><label>组词（用逗号分隔，留空自动匹配）</label><input type="text" id="genWords" placeholder="如: 大人,大小,大家,大声"></div>
+    <div style="margin:4px 0"><label style="font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;color:#6C5CE7;font-weight:600"><input type="checkbox" id="genTextOnly" checked> 📄 纯文字添加（不生成图片）</label></div>
     <div id="genPreview"><div class="gen-card"><div class="grid-box"><div class="big-char"><span class="py-tag">dà</span>大</div></div><div class="words-box"><span>大人</span><span>大小</span><span>大家</span><span>大声</span><span>大学</span></div></div></div>
-    <div class="add-status" id="genStatus">输入汉字，预览会自动更新</div>
-    <div class="row"><button class="btn-sm primary" id="saveGenBtn" style="flex:1;padding:10px;font-size:14px">💾 保存到本地</button><button class="btn-sm" id="clearGenBtn" style="padding:10px">🗑 清空</button></div>
-    <div style="font-size:11px;color:#bbb;text-align:center;line-height:1.6">保存到当前目录并更新 data.json</div>
+    <div class="add-status" id="genStatus">输入文字，留空组词会自动匹配</div>
+    <div class="row"><button class="btn-sm primary" id="saveGenBtn" style="flex:1;padding:10px;font-size:14px">💾 保存到 data.json</button><button class="btn-sm" id="clearGenBtn" style="padding:10px">🗑 清空</button></div>
+    <div style="font-size:11px;color:#bbb;text-align:center;line-height:1.6">纯文字模式直接更新 data.json，无需图片</div>
   </div>
   </div>
 </div></div>
@@ -204,9 +210,9 @@ body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;backgr
 <script>
 (function(){var s=document.getElementById('jsStatus');s.style.display='block';s.style.background='#00B894';s.style.color='white';s.textContent='JS OK';setTimeout(function(){s.style.display='none'},1000)})();
 
-var FALLBACK_DATA={hanzi:[{c:'大',img:'大.svg',py:'da'},{c:'小',img:'小.svg',py:'xiǎo'},{c:'上',img:'上.svg',py:'shàng'},{c:'下',img:'下.svg',py:'xià'},{c:'左',img:'左.svg',py:'zuǒ'},{c:'右',img:'右.svg',py:'yòu'},{c:'中',img:'中.svg',py:'zhōng'}],chengyu:[{c:'一心一意',img:'一心一意.svg',py:'yī xīn yī yì'},{c:'三心二意',img:'三心二意.svg',py:'sān xīn èr yì'},{c:'守株待兔',img:'守株待兔.svg',py:'shǒu zhū dài tù'},{c:'画蛇添足',img:'画蛇添足.svg',py:'huà shé tiān zú'},{c:'亡羊补牢',img:'亡羊补牢.svg',py:'wáng yáng bǔ láo'},{c:'坐井观天',img:'坐井观天.svg',py:'zuò jǐng guān tiān'},{c:'拔苗助长',img:'拔苗助长.svg',py:'bá miáo zhù zhǎng'},{c:'刻舟求剑',img:'刻舟求剑.svg',py:'kè zhōu qiú jiàn'},{c:'根深叶茂',img:'根深叶茂.jpg',py:'gēn shēn yè mào'},{c:'风华正茂',img:'风华正茂.jpg',py:'fēng huá zhèng mào'},{c:'叶落归根',img:'叶落归根.jpg',py:'yè luò guī gēn'},{c:'秋风落叶',img:'秋风落叶.jpg',py:'qiū fēng luò yè'},{c:'危险',img:'危险.jpg',py:'wēi xiǎn'},{c:'恐龙',img:'恐龙.jpg',py:'kǒng lóng'},{c:'摘苹果',img:'摘苹果.jpg',py:'zhāi píng guǒ'},{c:'啸',img:'啸.jpg',py:'xiào'}]};
+var FALLBACK_DATA={hanzi:[{c:'大',img:'大.svg',py:'da',words:['大人','大小','大家','大声','大学','伟大']},{c:'小',img:'小.svg',py:'xiǎo',words:['小心','小孩','小鸟','小时','小学','大小']},{c:'上',img:'上.svg',py:'shàng',words:['上面','上学','上班','早上','马上','晚上']},{c:'下',img:'下.svg',py:'xià',words:['下面','下午','下课','下班','下来','放下']},{c:'左',img:'左.svg',py:'zuǒ',words:['左右','左手','左边','左转','向左']},{c:'右',img:'右.svg',py:'yòu',words:['左右','右手','右边','右转','向右']},{c:'中',img:'中.svg',py:'zhōng',words:['中间','中心','中午','中国','中学','空中']}],chengyu:[{c:'一心一意',img:'一心一意.svg',py:'yī xīn yī yì'},{c:'三心二意',img:'三心二意.svg',py:'sān xīn èr yì'},{c:'守株待兔',img:'守株待兔.svg',py:'shǒu zhū dài tù'},{c:'画蛇添足',img:'画蛇添足.svg',py:'huà shé tiān zú'},{c:'亡羊补牢',img:'亡羊补牢.svg',py:'wáng yáng bǔ láo'},{c:'坐井观天',img:'坐井观天.svg',py:'zuò jǐng guān tiān'},{c:'拔苗助长',img:'拔苗助长.svg',py:'bá miáo zhù zhǎng'},{c:'刻舟求剑',img:'刻舟求剑.svg',py:'kè zhōu qiú jiàn'},{c:'根深叶茂',img:'根深叶茂.jpg',py:'gēn shēn yè mào'},{c:'风华正茂',img:'风华正茂.jpg',py:'fēng huá zhèng mào'},{c:'叶落归根',img:'叶落归根.jpg',py:'yè luò guī gēn'},{c:'秋风落叶',img:'秋风落叶.jpg',py:'qiū fēng luò yè'},{c:'危险',img:'危险.jpg',py:'wēi xiǎn'},{c:'恐龙',img:'恐龙.jpg',py:'kǒng lóng'},{c:'摘苹果',img:'摘苹果.jpg',py:'zhāi píng guǒ'},{c:'啸',img:'啸.jpg',py:'xiào'}]};
 
-var HANZI=[],CHENGYU=[],cards=[],mode='read',sub='hanzi',study='all',locked=false,stars=0,showLabel=false,listenTarget=null,today={hanzi:[],chengyu:[]},dirHandle=null,addImageUrl=null,addImageBlob=null;
+var HANZI=[],CHENGYU=[],cards=[],mode='read',sub='hanzi',study='all',locked=false,stars=0,showLabel=false,listenTarget=null,today={hanzi:[],chengyu:[]},ewOrig=null,dirHandle=null,addImageUrl=null,addImageBlob=null;
 
 function openDB(){return new Promise(function(r,j){var q=indexedDB.open('ShiziFS',1);q.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('h'))d.createObjectStore('h')};q.onsuccess=function(e){r(e.target.result)};q.onerror=function(e){j(e.target.error)}})}
 function dbPut(handle){return openDB().then(function(db){return new Promise(function(r,j){var t=db.transaction('h','readwrite');t.objectStore('h').put(handle,'h');t.oncomplete=function(){r()};t.onerror=function(e){j(e.target.error)}})})}
@@ -214,7 +220,7 @@ function dbGet(){return openDB().then(function(db){return new Promise(function(r
 async function ensureDir(){if(dirHandle)return dirHandle;try{var h=await dbGet();if(h){var p=await h.queryPermission({mode:'readwrite'});if(p==='granted'){dirHandle=h;return dirHandle}p=await h.requestPermission({mode:'readwrite'});if(p==='granted'){dirHandle=h;return dirHandle}}}catch(e){}dirHandle=await window.showDirectoryPicker({mode:'readwrite'});try{await dbPut(dirHandle)}catch(e){}return dirHandle}
 
 function gp(id){return document.getElementById(id)}
-var D={grid:gp('cardGrid'),fb:gp('feedback'),fbText:gp('fbText'),starCount:gp('starCount'),tabBar:gp('tabBar'),subBar:gp('subBar'),studyBar:gp('studyBar'),listenArea:gp('listenArea'),listenBtn:gp('listenBtn'),readPopup:gp('readPopup'),popupBody:gp('popupBody'),popupPy:gp('popupPy'),labelToggle:gp('labelToggle'),reshuffleBtn:gp('reshuffleBtn'),todayBadge:gp('todayBadge'),editTodayBtn:gp('editTodayBtn'),infoBtn:gp('infoBtn'),addCardBtn:gp('addCardBtn'),editModal:gp('editModal'),editList:gp('editList'),saveEditBtn:gp('saveEditBtn'),selectAllBtn:gp('selectAllBtn'),deselectAllBtn:gp('deselectAllBtn'),addModal:gp('addModal'),addText:gp('addText'),addPinyin:gp('addPinyin'),addType:gp('addType'),searchImgBtn:gp('searchImgBtn'),pasteImgBtn:gp('pasteImgBtn'),pasteArea:gp('pasteArea'),pastePreview:gp('pastePreview'),pasteHint:gp('pasteHint'),addStatus:gp('addStatus'),saveImgBtn:gp('saveImgBtn'),clearAddBtn:gp('clearAddBtn'),genCardBtn:gp('genCardBtn'),genModal:gp('genModal'),genChar:gp('genChar'),genPinyin:gp('genPinyin'),genWords:gp('genWords'),genPreview:gp('genPreview'),genStatus:gp('genStatus'),saveGenBtn:gp('saveGenBtn'),clearGenBtn:gp('clearGenBtn')};
+var D={grid:gp('cardGrid'),fb:gp('feedback'),fbText:gp('fbText'),starCount:gp('starCount'),tabBar:gp('tabBar'),subBar:gp('subBar'),studyBar:gp('studyBar'),listenArea:gp('listenArea'),listenBtn:gp('listenBtn'),readPopup:gp('readPopup'),popupBody:gp('popupBody'),popupPy:gp('popupPy'),labelToggle:gp('labelToggle'),reshuffleBtn:gp('reshuffleBtn'),todayBadge:gp('todayBadge'),editTodayBtn:gp('editTodayBtn'),infoBtn:gp('infoBtn'),addCardBtn:gp('addCardBtn'),editModal:gp('editModal'),editList:gp('editList'),saveEditBtn:gp('saveEditBtn'),selectAllBtn:gp('selectAllBtn'),deselectAllBtn:gp('deselectAllBtn'),addModal:gp('addModal'),addText:gp('addText'),addPinyin:gp('addPinyin'),addType:gp('addType'),searchImgBtn:gp('searchImgBtn'),pasteImgBtn:gp('pasteImgBtn'),pasteArea:gp('pasteArea'),pastePreview:gp('pastePreview'),pasteHint:gp('pasteHint'),addStatus:gp('addStatus'),saveImgBtn:gp('saveImgBtn'),clearAddBtn:gp('clearAddBtn'),genCardBtn:gp('genCardBtn'),genModal:gp('genModal'),genChar:gp('genChar'),genPinyin:gp('genPinyin'),genWords:gp('genWords'),genPreview:gp('genPreview'),genStatus:gp('genStatus'),saveGenBtn:gp('saveGenBtn'),clearGenBtn:gp('clearGenBtn'),genTextOnly:gp('genTextOnly'),ewArea:gp('ewArea'),ewInput:gp('ewInput'),ewSave:gp('ewSave'),ewStatus:gp('ewStatus')};
 
 function speak(t,cb){if(!window.speechSynthesis){if(cb)cb();return}window.speechSynthesis.cancel();var m=new SpeechSynthesisUtterance(t);m.lang='zh-CN';m.rate=0.85;m.pitch=1.1;if(cb){m.onend=cb;m.onerror=cb}window.speechSynthesis.speak(m)}
 function shuffle(a){var b=[].concat(a);for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=b[i];b[i]=b[j];b[j]=tmp}return b}
@@ -223,7 +229,11 @@ function getPool(){var full=(sub==='hanzi'?HANZI:CHENGYU);if(study==='today'){va
 
 function makeCharHTML(item,sub,big){
   var ch=item.c;var py=item.py||'';var isHanzi=(sub==='hanzi');
-  var words=[];if(isHanzi&&ZUCI[ch])words=ZUCI[ch];
+  var words=[];
+  if(isHanzi){
+    if(item.words&&item.words.length)words=item.words;
+    else if(ZUCI[ch])words=ZUCI[ch];
+  }
   var multi=!isHanzi&&ch.length>1;
   var h='<div class="dyn-box"><div class="dyn-grid"><div class="dyn-py">'+py+'</div><div class="dyn-cross-h"></div><div class="dyn-cross-v"></div><div class="dyn-char'+(multi?' multi':'')+'">'+(multi?ch.replace(/(.)/g,'$1<br>'):ch)+'</div></div>';
   if(words.length){h+='<div class="dyn-words">';for(var wi=0;wi<words.length;wi++){h+='<span class="dyn-word">'+words[wi]+'</span>'}h+='</div>'}
@@ -247,8 +257,39 @@ function updateLabels(){document.getElementById('app').classList.toggle('show-la
 function showReadPopup(item){
   D.popupBody.innerHTML=makeCharHTML(item,sub,true);D.readPopup.classList.add('show');
   D.popupPy.textContent=item.py;speak(item.c);
+  showEditWords(item);
 }
 D.readPopup.addEventListener('click',function(){D.readPopup.classList.remove('show');window.speechSynthesis.cancel()});
+
+function showEditWords(item){
+  if(sub!=='hanzi'||!item.c||item.c.length>1){D.ewArea.style.display='none';return}
+  D.ewArea.style.display='block';ewOrig=item;
+  var cur=item.words||ZUCI[item.c]||[];
+  D.ewInput.value=cur.join('，');
+}
+D.ewSave.addEventListener('click',function(){
+  if(!ewOrig)return;
+  var txt=D.ewInput.value.trim();
+  var arr=txt?txt.split(/[,，、\s]+/).filter(function(w){return w.trim()}):[];
+  if(arr.length){ewOrig.words=arr;ewOrig.words_update=true}else{delete ewOrig.words;ewOrig.words_update=true}
+  showReadPopup(ewOrig);
+  renderCards();
+  saveWordsToJson();
+  D.ewStatus.textContent='已保存';
+  setTimeout(function(){D.ewStatus.textContent=''},2000);
+});
+function saveWordsToJson(){
+  if(!dirHandle)return;
+  var obj={hanzi:[],chengyu:[],version:'2.4'};
+  function copyItem(it){var o={c:it.c,img:it.img,py:it.py};if(it.words&&it.words.length)o.words=it.words;return o}
+  for(var i=0;i<HANZI.length;i++)obj.hanzi.push(copyItem(HANZI[i]));
+  for(var i=0;i<CHENGYU.length;i++)obj.chengyu.push(copyItem(CHENGYU[i]));
+  persistFullData();
+  try{
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    (async function(){var f=await dirHandle.getFileHandle('data.json',{create:true});var w=await f.createWritable();await w.write(blob);await w.close()})().catch(function(e){console.log('save json err:',e)});
+  }catch(e){console.log('save json err:',e)}
+}
 
 function startListen(){
   var pool=getPool();if(!pool.length){D.listenArea.classList.remove('show');D.grid.innerHTML='<div class="empty-msg">暂无卡片<br>去「今日学习」勾选一些字吧</div>';return}
@@ -264,7 +305,7 @@ function onAnswer(idx){
   if(locked||!listenTarget)return;var clicked=cards[idx];var correct=(clicked.c===listenTarget.c);
   locked=true;D.grid.querySelectorAll('.card').forEach(function(e){e.style.pointerEvents='none'});
   if(correct){stars++;D.starCount.textContent=stars;D.fb.innerHTML='<span class="emoji">&#127775;</span>答对了！';D.grid.children[idx].classList.add('correct');speak('太棒了！');
-    setTimeout(function(){locked=false;D.grid.querySelectorAll('.card').forEach(function(e){e.style.pointerEvents='';e.classList.remove('correct','wrong')});startListen()},1500);}
+    setTimeout(function(){locked=false;D.grid.querySelectorAll('.card').forEach(function(e){e.style.pointerEvents='';e.classList.remove('correct','wrong')});startListen();D.fb.innerHTML='<span class="emoji">&#128264;</span><span>听声音，找对的</span>';D.listenBtn.className='listen-btn pulse';speak(listenTarget.c+' 在哪里',function(){D.listenBtn.className='listen-btn'})},1500);}
   else{D.fb.innerHTML='<span class="emoji">&#10060;</span>不对，再想想';D.grid.children[idx].classList.add('wrong');speak('不对，再想想');
     setTimeout(function(){if(!locked)return;speak(listenTarget.c)},800);
     setTimeout(function(){D.grid.querySelectorAll('.card').forEach(function(e){e.style.pointerEvents='';e.classList.remove('wrong')});locked=false},1200);}
@@ -303,6 +344,26 @@ D.genModal.addEventListener('click',function(e){if(e.target===D.genModal)D.genMo
 D.clearGenBtn.addEventListener('click',function(){D.genChar.value='';D.genPinyin.value='';D.genWords.value='';updateGenPreview();D.genStatus.textContent='输入汉字，预览会自动更新';D.genStatus.className='add-status'});
 
 var PINYIN={"大":"dà","小":"xiǎo","上":"shàng","下":"xià","左":"zuǒ","右":"yòu","中":"zhōng","一":"yī","二":"èr","三":"sān","四":"sì","五":"wǔ","六":"liù","七":"qī","八":"bā","九":"jiǔ","十":"shí","人":"rén","口":"kǒu","手":"shǒu","目":"mù","日":"rì","月":"yuè","水":"shuǐ","火":"huǒ","山":"shān","木":"mù","花":"huā","叶":"yè","鸟":"niǎo","鱼":"yú","马":"mǎ","牛":"niú","羊":"yáng","虫":"chóng","云":"yún","风":"fēng","雨":"yǔ","天":"tiān","地":"dì","田":"tián","石":"shí","金":"jīn","星":"xīng","春":"chūn","夏":"xià","秋":"qiū","冬":"dōng","红":"hóng","绿":"lǜ","蓝":"lán","白":"bái","黑":"hēi","学":"xué","习":"xí","写":"xiě","读":"dú","画":"huà","唱":"chàng","笑":"xiào","哭":"kū","跑":"pǎo","跳":"tiào","走":"zǒu","飞":"fēi","来":"lái","去":"qù","开":"kāi","关":"guān","坐":"zuò","站":"zhàn","看":"kàn","听":"tīng","说":"shuō","吃":"chī","喝":"hē","睡":"shuì","好":"hǎo"};
+// Asynchronously load full pinyin dictionary from pinyin-dict.json (or localStorage cache)
+function loadPinyinFull(){
+  try{
+    var cached=localStorage.getItem('pinyinCache');
+    if(cached){var d=JSON.parse(cached);for(var k in d)PINYIN[k]=d[k];console.log('Pinyin: '+Object.keys(d).length+' chars from cache');return}
+  }catch(e){}
+  var x=new XMLHttpRequest();
+  x.open('GET','pinyin-dict.json?'+Date.now(),true);
+  x.overrideMimeType('text/plain');
+  x.onload=function(){
+    try{
+      var d=JSON.parse(x.responseText);
+      for(var k in d)PINYIN[k]=d[k];
+      console.log('Pinyin: '+Object.keys(d).length+' chars loaded');
+      try{localStorage.setItem('pinyinCache',x.responseText)}catch(e){}
+    }catch(e){console.log('Pinyin load error: '+e.message)}
+  };
+  x.onerror=function(){console.log('Pinyin: fetch failed, using built-in dict')};
+  x.send();
+}
 var ZUCI={"大":["大人","大小","大家","大声","大学","伟大"],"小":["小心","小孩","小鸟","小时","小学","大小"],"上":["上面","上学","上班","早上","马上","晚上"],"下":["下面","下午","下课","下班","下来","放下"],"左":["左右","左手","左边","左转","向左"],"右":["左右","右手","右边","右转","向右","右手"],"中":["中间","中心","中午","中国","中学","空中"],"一":["一心","一样","一起","一边","第一","万一"],"二":["二心","二话","二胡","第二"],"三":["三心","三月","三角","再三"],"四":["四方","四周","四面","四季"],"五":["五官","五月","五谷","五颜"],"六":["六月","六合","六神"],"七":["七月","七色","七夕"],"八":["八月","八方","八成"],"九":["九月","九牛","九霄"],"十":["十分","十月","十足","十全"],"人":["大人","小孩","人们","人生","人民","主人"],"口":["人口","开口","山口","门口","借口"],"手":["小手","左手","右手","手工","手足","手机"],"目":["目光","目前","目的","节目","科目"],"日":["日子","日出","生日","节日","日光"],"月":["月亮","月光","一月","三月","日月"],"水":["水果","水平","开水","河水","口水"],"火":["火车","大火","火花","火苗","火山"],"山":["大山","上山","山下","山水","火山"],"木":["木头","树木","木马","木工","草木"],"花":["花朵","花园","开花","花叶","鲜花"],"叶":["叶子","树叶","花叶","落叶","绿叶"],"鸟":["小鸟","飞鸟","鸟巢","鸟鸣"],"鱼":["小鱼","鱼头","金鱼","河鱼"],"马":["小马","马上","马路","牛马","马车"],"牛":["水牛","牛奶","牛头","九牛"],"羊":["山羊","羊毛","牛羊","亡羊"],"虫":["小虫","虫子","毛虫","飞虫"],"云":["白云","云朵","云彩","风云"],"风":["大风","风车","风光","秋风","风雨"],"雨":["下雨","雨衣","雨水","风雨"],"天":["天空","天上","今天","每天","白天"],"地":["大地","土地","地方","地面","草地"],"田":["田地","水田","农田","田野"],"石":["石头","石子","岩石","宝石"],"金":["金色","金子","金鱼","黄金"],"星":["星星","星光","明星","星空"],"春":["春天","春风","春雨","春光","立春"],"夏":["夏天","夏季","立夏","夏日"],"秋":["秋天","秋风","秋季","立秋","秋叶"],"冬":["冬天","冬季","立冬","冬日"],"红":["红色","红花","红叶","红日"],"绿":["绿色","绿叶","绿草","翠绿"],"蓝":["蓝天","蓝色","蓝花","深蓝"],"白":["白色","白云","白天","白马","明白"],"黑":["黑色","黑夜","黑马","黑白"],"学":["学习","上学","小学","学生","学校"],"习":["学习","练习","自习","习惯"],"写":["写字","书写","写作","描写"],"读":["读书","朗读","阅读","读音"],"画":["画画","画图","画家","笔画"],"唱":["唱歌","合唱","演唱","唱歌"],"笑":["大笑","微笑","笑容","欢笑"],"哭":["大哭","哭声","哭泣"],"跑":["跑步","奔跑","快跑","长跑"],"跳":["跳高","跳远","跳绳","跳跃"],"走":["走路","行走","出走","走廊"],"飞":["飞鸟","飞机","飞翔","起飞"],"来":["出来","回来","上来","下来","起来"],"去":["出去","回去","上去","下去","过去"],"开":["开门","开口","开心","开关","打开"],"关":["关门","开关","关心","关闭"],"坐":["坐下","请坐","乘坐","坐牢"],"站":["站立","车站","站台","站起来"],"看":["看见","看书","观看","好看"],"听":["听见","听话","听力","好听"],"说":["说话","说明","听说","小说"],"吃":["吃饭","小吃","好吃","吃草"],"喝":["喝水","喝茶","喝酒","喝汤"],"睡":["睡觉","入睡","睡眠","睡着"],"好":["好人","好事","好处","好看","好听"]};
 
 function updateGenPreview(){var ch=D.genChar.value.trim();var py=D.genPinyin.value.trim();if(!ch){D.genPreview.innerHTML='<div class="gen-card"><div class="grid-box" style="background:#f5f5f5"><div class="big-char" style="color:#ccc;font-size:60px">?</div></div><div class="words-box"><span style="color:#ccc">输入汉字</span></div></div>';return}var words=D.genWords.value.trim();var wordArr=[];if(words){wordArr=words.split(/[,，、]/).map(function(w){return w.trim()}).filter(function(w){return w})}else{wordArr=ZUCI[ch]||[]}if(!wordArr.length)wordArr=['暂无组词'];var html='<div class="gen-card"><div class="grid-box"><div class="big-char">'+(py?'<span class="py-tag">'+py+'</span>':'')+ch+'</div></div><div class="words-box">';for(var i=0;i<wordArr.length;i++){html+='<span>'+wordArr[i]+'</span>'}html+='</div></div>';D.genPreview.innerHTML=html}
@@ -310,9 +371,24 @@ function updateGenPreview(){var ch=D.genChar.value.trim();var py=D.genPinyin.val
 D.genChar.addEventListener('input',function(){var ch=D.genChar.value.trim();if(PINYIN[ch])D.genPinyin.value=PINYIN[ch];else if(!D.genPinyin.value.trim())D.genPinyin.value='';if(!D.genWords.value.trim())updateGenPreview()});
 D.genWords.addEventListener('input',updateGenPreview);
 
-D.saveGenBtn.addEventListener('click',async function(){var ch=D.genChar.value.trim();if(!ch){D.genStatus.textContent='请先输入汉字';D.genStatus.className='add-status error';return}var py=D.genPinyin.value.trim()||PINYIN[ch]||'';var words=D.genWords.value.trim();var wordArr=[];if(words){wordArr=words.split(/[,，、]/).map(function(w){return w.trim()}).filter(function(w){return w})}else{wordArr=ZUCI[ch]||[]}if(!wordArr.length)wordArr=[ch+'字'];var fg=function(bg){var sz=300;var colors=['#FFF5E6','#E8F8F5','#F5EEF8','#FEF9E7','#EBF5FB','#F2F3F4','#FDEBD0','#D5F5E3','#FADBD8','#E8DAEF','#D6EAF8','#FCF3CF','#F2D7D5','#D4EFDF','#D5E8D4','#FFE0E6','#E0F0FF','#F0E0FF','#FFF0E0','#E0FFF0'];var c=colors[Math.abs(ch.charCodeAt(0))%colors.length];var fontB='STKaiti,KaiTi,SIMKAI,楷体,Noto Serif SC,serif';var fontS='PingFang SC,Microsoft YaHei,SimHei,黑体,sans-serif';var path='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+sz+' '+sz+'" width="'+sz+'" height="'+sz+'">';path+='<defs><linearGradient id="g'+ch.charCodeAt(0)+'"><stop offset="0%" stop-color="'+c+'"/><stop offset="100%" stop-color="white"/></linearGradient></defs>';path+='<rect width="'+sz+'" height="'+sz+'" rx="24" fill="url(#g'+ch.charCodeAt(0)+')"/>';path+='<rect x="14" y="14" width="'+(sz-28)+'" height="'+(sz-28)+'" rx="18" fill="none" stroke="'+c+'" stroke-width="2" stroke-opacity="0.5"/>';var sx=25,sy=8,swh=250;path+='<rect x="'+sx+'" y="'+sy+'" width="'+swh+'" height="'+swh+'" rx="8" fill="white" fill-opacity="0.85" stroke="#E74C3C" stroke-width="2.5"/>';var cx=sx+swh/2,cy=sy+swh/2;path+='<line x1="'+sx+'" y1="'+cy+'" x2="'+(sx+swh)+'" y2="'+cy+'" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>';path+='<line x1="'+cx+'" y1="'+sy+'" x2="'+cx+'" y2="'+(sy+swh)+'" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>';if(py){path+='<text x="'+cx+'" y="'+(sy+24)+'" text-anchor="middle" font-size="16" fill="#888" font-family="'+fontS+'" font-weight="500" letter-spacing="2">'+py+'</text>'}path+='<text x="'+cx+'" y="'+(cy+8)+'" text-anchor="middle" dominant-baseline="central" font-size="150" font-weight="400" fill="#2D3436" font-family="'+fontB+'" letter-spacing="2">'+ch+'</text>';var perRow=Math.min(wordArr.length,10);var wy=swh+sy+16;var bh=Math.max(40,Math.ceil(perRow/3)*30+10);path+='<rect x="20" y="'+wy+'" width="260" height="'+bh+'" rx="10" fill="white" fill-opacity="0.65"/>';var wsw=70;var cols=perRow<=3?1:(perRow<=6?2:3);var gap=(260-cols*wsw)/(cols+1);for(var i=0;i<perRow;i++){var row=Math.floor(i/cols);var col=i%cols;var x=20+gap+col*(wsw+gap);var yy=wy+12+row*30;path+='<rect x="'+x+'" y="'+(yy-10)+'" width="'+wsw+'" height="22" rx="7" fill="white" fill-opacity="0.9" stroke="#e0e0e0" stroke-width="1"/>';path+='<text x="'+(x+wsw/2)+'" y="'+(yy+1)+'" text-anchor="middle" font-size="20" fill="#333" font-family="'+fontS+'" font-weight="500">'+wordArr[i]+'</text>'}path+='</svg>';return path};var svgContent=fg(ch);
-  try{var h=await ensureDir();var subDir;try{subDir=await h.getDirectoryHandle('pictograms')}catch(e){subDir=await h.getDirectoryHandle('pictograms',{create:true})}var filename=ch+'.svg';var fh=await subDir.getFileHandle(filename,{create:true});var w=await fh.createWritable();await w.write(svgContent);await w.close();var newEntry={c:ch,img:''+filename,py:py};HANZI.push(newEntry);var jsonStr=JSON.stringify({hanzi:HANZI,chengyu:CHENGYU,version:'2.4'},null,2);var df=await h.getFileHandle('data.json',{create:true});var dw=await df.createWritable();await dw.write(jsonStr);await dw.close();D.genStatus.textContent='保存成功！字卡 '+ch+' 已保存并更新 data.json';D.genStatus.className='add-status success';if(mode==='read')renderCards();else startListen()}
-  catch(e){if(e.name==='AbortError'||e.name==='SecurityError'){D.genStatus.textContent='授权被取消，请重试'}else{D.genStatus.textContent='保存失败: '+e.message}D.genStatus.className='add-status error';dirHandle=null}});
+D.saveGenBtn.addEventListener('click',async function(){var ch=D.genChar.value.trim();if(!ch){D.genStatus.textContent='请先输入文字';D.genStatus.className='add-status error';return}var isTextOnly=D.genTextOnly.checked;var py=D.genPinyin.value.trim()||PINYIN[ch]||'';var words=D.genWords.value.trim();var wordArr=[];if(words){wordArr=words.split(/[,，、]/).map(function(w){return w.trim()}).filter(function(w){return w})}else{wordArr=ZUCI[ch]||[]}if(!wordArr.length)wordArr=[ch+'字'];var isHanzi=ch.length===1;
+  try{var h=await ensureDir();
+    if(isTextOnly){
+      var newEntry={c:ch,img:ch+'.svg',py:py};if(wordArr.length)newEntry.words=wordArr;
+      if(isHanzi)HANZI.push(newEntry);else CHENGYU.push(newEntry);
+      var jsonStr=JSON.stringify({hanzi:HANZI,chengyu:CHENGYU,version:'2.4'},null,2);
+      var df=await h.getFileHandle('data.json',{create:true});var dw=await df.createWritable();await dw.write(jsonStr);await dw.close();
+      D.genStatus.textContent='已保存！'+ch+' 已添加到 data.json';D.genStatus.className='add-status success';persistFullData();
+      if(mode==='read')renderCards();else startListen()
+    }else{
+      var fg=function(bg){var sz=300;var colors=['#FFF5E6','#E8F8F5','#F5EEF8','#FEF9E7','#EBF5FB','#F2F3F4','#FDEBD0','#D5F5E3','#FADBD8','#E8DAEF','#D6EAF8','#FCF3CF','#F2D7D5','#D4EFDF','#D5E8D4','#FFE0E6','#E0F0FF','#F0E0FF','#FFF0E0','#E0FFF0'];var vc=colors[Math.abs(ch.charCodeAt(0))%colors.length];var fontB='STKaiti,KaiTi,SIMKAI,楷体,Noto Serif SC,serif';var fontS='PingFang SC,Microsoft YaHei,SimHei,黑体,sans-serif';var sp='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">';sp+='<defs><linearGradient id="g'+ch.charCodeAt(0)+'"><stop offset="0%" stop-color="'+vc+'"/><stop offset="100%" stop-color="white"/></linearGradient></defs>';sp+='<rect width="300" height="300" rx="24" fill="url(#g'+ch.charCodeAt(0)+')"/>';sp+='<rect x="14" y="14" width="272" height="272" rx="18" fill="none" stroke="'+vc+'" stroke-width="2" stroke-opacity="0.5"/>';var sx=25,sy=8,swh=250;sp+='<rect x="'+sx+'" y="'+sy+'" width="'+swh+'" height="'+swh+'" rx="8" fill="white" fill-opacity="0.85" stroke="#E74C3C" stroke-width="2.5"/>';var cx=sx+swh/2,cy=sy+swh/2;sp+='<line x1="'+sx+'" y1="'+cy+'" x2="'+(sx+swh)+'" y2="'+cy+'" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>';sp+='<line x1="'+cx+'" y1="'+sy+'" x2="'+cx+'" y2="'+(sy+swh)+'" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,3"/>';if(py){sp+='<text x="'+cx+'" y="'+(sy+24)+'" text-anchor="middle" font-size="16" fill="#888" font-family="'+fontS+'" font-weight="500" letter-spacing="2">'+py+'</text>'}sp+='<text x="'+cx+'" y="'+(cy+8)+'" text-anchor="middle" dominant-baseline="central" font-size="150" font-weight="400" fill="#2D3436" font-family="'+fontB+'" letter-spacing="2">'+ch+'</text>';var perRow=Math.min(wordArr.length,10);var wy=swh+sy+16;var bh=Math.max(40,Math.ceil(perRow/3)*30+10);sp+='<rect x="20" y="'+wy+'" width="260" height="'+bh+'" rx="10" fill="white" fill-opacity="0.65"/>';var wsw2=70;var cols2=perRow<=3?1:(perRow<=6?2:3);var gap2=(260-cols2*wsw2)/(cols2+1);for(var i=0;i<perRow;i++){var row=Math.floor(i/cols2);var col=i%cols2;var x2=20+gap2+col*(wsw2+gap2);var yy2=wy+12+row*30;sp+='<rect x="'+x2+'" y="'+(yy2-10)+'" width="'+wsw2+'" height="22" rx="7" fill="white" fill-opacity="0.9" stroke="#e0e0e0" stroke-width="1"/>';sp+='<text x="'+(x2+wsw2/2)+'" y="'+(yy2+1)+'" text-anchor="middle" font-size="20" fill="#333" font-family="'+fontS+'" font-weight="500">'+wordArr[i]+'</text>'}sp+='</svg>';return sp};var svgContent=fg(ch);
+      var subDir;try{subDir=await h.getDirectoryHandle('pictograms')}catch(e){subDir=await h.getDirectoryHandle('pictograms',{create:true})}var filename=ch+'.svg';var fh=await subDir.getFileHandle(filename,{create:true});var w2=await fh.createWritable();await w2.write(svgContent);await w2.close();
+      var newEntry={c:ch,img:filename,py:py};if(wordArr.length)newEntry.words=wordArr;HANZI.push(newEntry);
+      var jsonStr=JSON.stringify({hanzi:HANZI,chengyu:CHENGYU,version:'2.4'},null,2);var df=await h.getFileHandle('data.json',{create:true});var dw=await df.createWritable();await dw.write(jsonStr);await dw.close();
+      D.genStatus.textContent='保存成功！字卡 '+ch+' 已保存并更新 data.json';D.genStatus.className='add-status success';persistFullData();
+      if(mode==='read')renderCards();else startListen()
+    }
+  }catch(e){if(e.name==='AbortError'||e.name==='SecurityError'){D.genStatus.textContent='授权被取消，请重试'}else{D.genStatus.textContent='保存失败: '+e.message}D.genStatus.className='add-status error';dirHandle=null}});
 
 D.addCardBtn.addEventListener('click',function(){D.addModal.classList.add('show');D.addText.focus()});
 D.addModal.addEventListener('click',function(e){if(e.target===D.addModal){D.addModal.classList.remove('show');clearAddData()}});
@@ -323,11 +399,14 @@ async function pasteImage(){try{var items=await navigator.clipboard.read();for(v
 D.pasteImgBtn.addEventListener('click',pasteImage);document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='v'&&D.addModal.classList.contains('show')){setTimeout(pasteImage,100)}});
 function showImage(blob){addImageBlob=blob;addImageUrl=URL.createObjectURL(blob);D.pastePreview.src=addImageUrl;D.pastePreview.style.display='block';D.pasteHint.style.display='none';D.pasteArea.classList.add('has-img');D.saveImgBtn.disabled=false}
 D.saveImgBtn.addEventListener('click',async function(){var text=D.addText.value.trim();if(!text){D.addStatus.textContent='请先输入文字';D.addStatus.className='add-status error';return}if(!addImageBlob){D.addStatus.textContent='请先粘贴图片';D.addStatus.className='add-status error';return}var pinyin=D.addPinyin.value.trim()||'';var type=D.addType.value;var folder=(type==='hanzi'?'pictograms':'chengyu');var filename=text+'.jpg';
-  try{var h=await ensureDir();var subDir;try{subDir=await h.getDirectoryHandle(folder)}catch(e){subDir=await h.getDirectoryHandle(folder,{create:true})}var fh=await subDir.getFileHandle(filename,{create:true});var w=await fh.createWritable();await w.write(addImageBlob);await w.close();var newEntry={c:text,img:folder+'/'+filename,py:pinyin};if(type==='hanzi'){HANZI.push(newEntry)}else{CHENGYU.push(newEntry)}var jsonStr=JSON.stringify({hanzi:HANZI,chengyu:CHENGYU,version:'2.3'},null,2);var df=await h.getFileHandle('data.json',{create:true});var dw=await df.createWritable();await dw.write(jsonStr);await dw.close();D.addStatus.textContent='保存成功！已写入 '+filename+' 并更新 data.json';D.addStatus.className='add-status success';D.saveImgBtn.disabled=true;if(mode==='read')renderCards();else startListen()}
+  try{var h=await ensureDir();var subDir;try{subDir=await h.getDirectoryHandle(folder)}catch(e){subDir=await h.getDirectoryHandle(folder,{create:true})}var fh=await subDir.getFileHandle(filename,{create:true});var w=await fh.createWritable();await w.write(addImageBlob);await w.close();var newEntry={c:text,img:folder+'/'+filename,py:pinyin};if(type==='hanzi'){HANZI.push(newEntry)}else{CHENGYU.push(newEntry)}var jsonStr=JSON.stringify({hanzi:HANZI,chengyu:CHENGYU,version:'2.3'},null,2);var df=await h.getFileHandle('data.json',{create:true});var dw=await df.createWritable();await dw.write(jsonStr);await dw.close();D.addStatus.textContent='保存成功！已写入 '+filename+' 并更新 data.json';D.addStatus.className='add-status success';D.saveImgBtn.disabled=true;persistFullData();if(mode==='read')renderCards();else startListen()}
   catch(e){if(e.name==='AbortError'||e.name==='SecurityError'){D.addStatus.textContent='授权被取消，请重试'}else{D.addStatus.textContent='保存失败: '+e.message}D.addStatus.className='add-status error';dirHandle=null}});
 
-function loadData(){try{var x=new XMLHttpRequest();x.open('GET','data.json?'+Date.now(),false);x.overrideMimeType('text/plain');x.send();if(x.status>=200&&x.status<300){var d=JSON.parse(x.responseText);HANZI=d.hanzi||FALLBACK_DATA.hanzi;CHENGYU=d.chengyu||FALLBACK_DATA.chengyu}else{HANZI=FALLBACK_DATA.hanzi;CHENGYU=FALLBACK_DATA.chengyu}}catch(e){HANZI=FALLBACK_DATA.hanzi;CHENGYU=FALLBACK_DATA.chengyu}try{var t=localStorage.getItem('todaysStudy');if(t){var p=JSON.parse(t);today.hanzi=p.hanzi||[];today.chengyu=p.chengyu||[]}}catch(e){}}
-(function(){try{loadData();updateBadge();renderCards();var s=document.getElementById('jsStatus');s.textContent='JS OK - 准备就绪';s.style.background='#6C5CE7';setTimeout(function(){s.style.display='none'},1500)}catch(e){var s=document.getElementById('jsStatus');s.style.display='block';s.style.background='#E17055';s.style.color='white';s.textContent='ERROR: '+e.message}})();
+function persistFullData(){try{localStorage.setItem('fullData',JSON.stringify({hanzi:HANZI,chengyu:CHENGYU}))}catch(e){}}
+function loadData(){try{var x=new XMLHttpRequest();x.open('GET','data.json?'+Date.now(),false);x.overrideMimeType('text/plain');x.send();if(x.status>=200&&x.status<300){var d=JSON.parse(x.responseText);HANZI=d.hanzi||FALLBACK_DATA.hanzi;CHENGYU=d.chengyu||FALLBACK_DATA.chengyu}else{HANZI=FALLBACK_DATA.hanzi;CHENGYU=FALLBACK_DATA.chengyu}}catch(e){HANZI=FALLBACK_DATA.hanzi;CHENGYU=FALLBACK_DATA.chengyu}
+  try{var full=localStorage.getItem('fullData');if(full){var d2=JSON.parse(full);if(d2.hanzi&&d2.hanzi.length)HANZI=d2.hanzi;if(d2.chengyu&&d2.chengyu.length)CHENGYU=d2.chengyu}}catch(e){}
+  try{var t=localStorage.getItem('todaysStudy');if(t){var p=JSON.parse(t);today.hanzi=p.hanzi||[];today.chengyu=p.chengyu||[]}}catch(e){}}
+(function(){try{loadData();updateBadge();renderCards();loadPinyinFull();var s=document.getElementById('jsStatus');s.textContent='JS OK - 准备就绪';s.style.background='#6C5CE7';setTimeout(function(){s.style.display='none'},1500)}catch(e){var s=document.getElementById('jsStatus');s.style.display='block';s.style.background='#E17055';s.style.color='white';s.textContent='ERROR: '+e.message}})();
 </script>
 </body>
 </html>
